@@ -15,14 +15,19 @@ const Intro = () => {
         <div className='Input-container'>
           <div className='List-select'>
           <select name="countries" id="countries-id" className='Select-country-container'>
-              <option value="volvo">Volvo</option>
+              <option value="volvo">VolvoVolvoVolvoVolvoVolvoVolvoVolvo</option>
               <option value="saab">Saab</option>
               <option value="mercedes">Mercedes</option>
               <option value="audi">Audi</option>
           </select>
           </div>
           <div className='Movie-date'>
-          
+          <select name="countries" id="countries-id" className='Select-country-container'>
+              <option value="volvo">VolvoVolvoVolvoVolvoVolvoVolvo</option>
+              <option value="saab">Saab</option>
+              <option value="mercedes">Mercedes</option>
+              <option value="audi">Audi</option>
+          </select>
           </div>
 
 

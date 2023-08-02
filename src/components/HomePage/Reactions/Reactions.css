@@ -1,0 +1,32 @@
+.list-icons-container {
+    width: 80%;
+    display: flex;
+    margin:auto;
+    align-items: center;
+    justify-content: space-around;
+    padding: 1%;
+}
+
+.list-icons-container li {
+    list-style: none;
+}
+
+.list-icons-container li img {
+    width: 30%;
+}
+
+.list-icons{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.Icons-container h3 {
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.Icons-container p {
+    font-size: 18px;
+    font-weight: 400;
+}

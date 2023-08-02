@@ -1,7 +1,7 @@
-.Intro-container{
-  
-}
 
+.Intro-container{
+    margin-bottom: 120px;
+}
 .Banner-image{
   width: 100%;
   height: auto;
@@ -39,21 +39,17 @@
     align-items: center;
 }
 
+.List-select{
+    position: relative;
+}
+
 .Select-country-container,
 .Movie-date{ 
-    padding: 8px;
+    padding: 11px;
     border-radius: 4px;
-    border: 1px solid grey;
+    flex-grow: 1;
 }
 
-.Select-country-container{
-    width: 100%;
-}
-
-
-.Movie-date{
-    
-}
 
 .Search-btn {
     outline: none;
@@ -64,4 +60,5 @@
     border-radius: 8px;
     font-size: 18px;
     font-weight: 600;
+    flex-grow: 1;
 }
