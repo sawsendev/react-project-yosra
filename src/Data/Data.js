@@ -8,6 +8,10 @@ import application from "../assets/application.svg";
 import inclusive from "../assets/inclusive.svg";
 import assistance from "../assets/Assistance.svg";
 import flexibility from "../assets/Flexibility.svg";
+import stepOne from "../assets/Step 1.svg";
+import stepTwo from "../assets/Step 2.svg";
+import stepThree from "../assets/Step 3.svg";
+import stepFour from "../assets/Step 4.svg";
 
 
 
@@ -103,5 +107,33 @@ export const ReasonsTable = [
         src: flexibility,
         count: "Flexibility",
         content: "Most of our apartments can be booked for a minimum of just a couple of months"
+    }
+]
+
+// StepsTable
+export const StepsTable = [
+    {
+        id: 0,
+        src: stepOne,
+        count: "Step 1",
+        content: "Find your room"   
+    },
+    {
+        id: 1,
+        src: stepTwo,
+        count: "Step 2",
+        content: "Find your room "
+    },
+    {
+        id: 2,
+        src: stepThree,
+        count: "Step 3",
+        content: "View and sign your tenancy agreement . "
+    },
+    {
+        id: 3,
+        src: stepFour,
+        count: "Step 4",
+        content: "Move in the day and time of your choice"
     }
 ]
