@@ -3,3 +3,19 @@
     width: 80%;
     margin: auto;
 }
+
+.Steps-to-book-container .Reasons-icons-li{
+    border:1px solid grey;
+    border-radius: 10px;
+    width: 20%;
+}
+
+.Steps-to-book-container .Reasons-icons-li img {
+    width: 40px;
+}
+
+.Reasons-icons-container-ul{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}

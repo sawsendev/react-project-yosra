@@ -11,7 +11,7 @@ const StepsToBook = () => {
         like home so that you can just drop your suitcases and have a great time. Simple, as it should be.</p>
         <div className='Steps-container'>
           <div className='Step'>
-          <ul className="list-icons-container-ul">
+          <ul className="Reasons-icons-container-ul">
             {StepsTable.map((icon, index) => {
               return (
                 <>
