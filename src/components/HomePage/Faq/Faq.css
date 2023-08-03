@@ -5,6 +5,7 @@
     text-align:center;
     padding: 40px 0 0 0;
     line-height: 40px;
+    height: 150px;
 }
 
 .Faq-container h3 {
@@ -17,7 +18,8 @@
     font-weight: 400;
 }
 
-.Faq-container button {
+.Faq-btn {
+    position: relative;
     outline: none;
     border: none;
     padding: 10px;
@@ -26,4 +28,11 @@
     font-size: 18px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     z-index: 999;
+    top: -20px;
+    left: 40%;
+}
+
+.Faq-btn img {
+    width: 10%;
+    margin-left: 20px;
 }

@@ -11,13 +11,13 @@ const StepsToBook = () => {
         like home so that you can just drop your suitcases and have a great time. Simple, as it should be.</p>
         <div className='Steps-container'>
           <div className='Step'>
-          <ul className="Reasons-icons-container-ul">
+          <ul className="Steps-icons-container-ul">
             {StepsTable.map((icon, index) => {
               return (
                 <>
-                  <li key={index} className='Reasons-icons-li'>
+                  <li key={index} className='Steps-icons-li'>
                       <img src= {icon.src} alt="icons"/>
-                      <div className='Reasons-icons-container'>
+                      <div className='Steps-icons-container'>
                       <h3>{icon.count}</h3>
                       <p>{icon.content}</p></div>
                   </li>

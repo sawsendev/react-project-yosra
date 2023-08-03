@@ -1,21 +1,44 @@
 .Steps-to-book-container{
-    border: 3px solid red;
     width: 80%;
     margin: auto;
+    margin-bottom: 40px;
 }
 
-.Steps-to-book-container .Reasons-icons-li{
-    border:1px solid grey;
-    border-radius: 10px;
-    width: 20%;
+.Steps-to-book-container h3{
+   font-size: 32px;
+   font-weight: 600;
 }
 
-.Steps-to-book-container .Reasons-icons-li img {
-    width: 40px;
-}
+.Steps-to-book-container p{
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+   }
 
-.Reasons-icons-container-ul{
-    display: flex;
+.Steps-icons-container-ul{
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between; 
+    display: flex;
+    list-style: none;
+    margin-top: 22px;
+}
+
+.Steps-icons-container-ul li {
+    display: flex;
+    border: 1px solid grey;
+    border-radius: 8px;
+    padding: 10px;
+    gap: 18px;
+    width: 24%;
+
+}
+
+.Steps-icons-container h3 {
+    font-size: 16px;
+}
+
+.Steps-icons-container p {
+    font-size: 16px;
+    max-width: 140px;
+    line-height: 17px;
 }
