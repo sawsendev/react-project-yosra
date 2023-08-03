@@ -1,5 +1,33 @@
 .Explore-container{
-    border: 3px solid red;
     width: 80%;
     margin: auto;
+    position: relative;
+}
+
+.Explore-container p{
+    line-height: 40px;
+}
+
+.Explore-more-container-ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    padding: 10px 0;
+}
+
+.Explore-more-container-ul li img{
+    width: 100%;
+}
+
+.Explore-more-icons-content{
+    display: flex;
+    justify-content: space-between;
+}
+
+Explore-more-icons-content li h3{
+    font-size: 18px;
+}
+
+Explore-more-icons-content li p{
+    font-size: 14px;
 }

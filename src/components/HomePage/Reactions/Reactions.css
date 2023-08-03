@@ -3,8 +3,8 @@
     display: flex;
     margin:auto;
     align-items: center;
-    justify-content: space-around;
-    padding: 1%;
+    justify-content: space-between;
+    padding: 40px  0;
 }
 
 .list-icons-container li {
@@ -12,13 +12,14 @@
 }
 
 .list-icons-container li img {
-    width: 30%;
+    width: 61px;
 }
 
 .list-icons{
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
+    gap: 15px;
 }
 
 .Icons-container h3 {

@@ -12,6 +12,14 @@ import stepOne from "../assets/Step 1.svg";
 import stepTwo from "../assets/Step 2.svg";
 import stepThree from "../assets/Step 3.svg";
 import stepFour from "../assets/Step 4.svg";
+import Nice from "../assets/nice.svg";
+import Paris from "../assets/paris.svg";
+import Florence from "../assets/florence.svg";
+import Bologna from "../assets/Rectangle 49.svg";
+import f1 from "../assets/voyageurs-invites-pleins-smileys-2.svg";
+import f2 from "../assets/voyageurs-invites-pleins-smileys-1.svg";
+import f3 from "../assets/voyageurs-invites-pleins-smileys.svg";
+
 
 
 
@@ -136,4 +144,51 @@ export const StepsTable = [
         count: "Step 4",
         content: "Move in the day and time of your choice"
     }
+]
+
+// ExploreCities
+export const ExploreCitiesTable = [
+    {
+        id:0,
+        src: Nice,
+        city:"Nice",
+        count: 12
+    },
+    {
+        id:1,
+        src: Paris,
+        city:"Paris",
+        count: 12
+    }, {
+        id:2,
+        src: Florence,
+        city:"Florence",
+        count: 12
+    }, {
+        id:3,
+        src: Bologna,
+        city:"Bologna",
+        count: 12
+    },
+]
+
+export const FeedbacksTable = [
+    {
+        id:0,
+        src: f1,
+        name:"Nom et prenom",
+        content: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknownprinter "
+    },
+     {
+        id:1,
+        src: f2,
+        name:"Nom et prenom",
+        content: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknownprinter "
+    },
+     {
+        id:2,
+        src: f3,
+        name:"Nom et prenom",
+        content: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknownprinter "
+    },
 ]

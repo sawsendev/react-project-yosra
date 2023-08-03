@@ -15,8 +15,11 @@
 }
 
 .Apartements h3,
-.Useful-links h3 {
+.Useful-links h3,
+.Create-alert h3 {
     font-size: 18px;
+    text-align: start;
+
 }
 
 .Apartements p,
