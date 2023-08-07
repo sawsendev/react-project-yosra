@@ -31,3 +31,20 @@
     font-size: 18px;
     font-weight: 400;
 }
+
+
+@media screen and (min-width: 1900px) {
+    .list-icons-container li img {
+        width: 98px;;
+    }
+
+    .Icons-container h3{
+        font-size: 44px;
+    }
+
+    .Icons-container p{
+        font-size: 22px;
+    }
+  }
+
+

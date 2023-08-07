@@ -1,0 +1,15 @@
+.Search-container{
+    background-color: #F1F2F4;
+    padding: 50px 0 50px 176px;
+    border: 3px solid red;
+}
+
+.Search-container h3 {
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 80px;
+}
+
+.Form-cities Form {
+    display: flex;
+}

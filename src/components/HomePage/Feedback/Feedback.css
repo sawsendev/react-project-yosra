@@ -13,3 +13,15 @@
     display: flex;
     gap: 30px;
 }
+
+
+@media screen and (min-width: 1900px) {
+    .Feedback-container h3{
+        font-size: 44px;
+        line-height: 40px;
+    }
+
+    .feedback-icons-content{
+        font-size: 28px;
+    }
+  }

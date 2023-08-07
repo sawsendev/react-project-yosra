@@ -36,3 +36,19 @@
     width: 10%;
     margin-left: 20px;
 }
+
+@media screen and (min-width: 1900px) {
+    .Faq-container h3{
+        font-size: 44px;
+        line-height: 40px;
+    }
+
+    .Faq-container p{
+        font-size: 25px;
+        line-height: 40px;
+    }
+
+    .Faq-btn{
+        left: 45%;
+    }
+  }

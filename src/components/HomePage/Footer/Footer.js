@@ -35,7 +35,7 @@ const Footer = () => {
       </div>
       <div className='Create-alert'>
         <h3>You don’t find what you are looking for? </h3>
-        <button> <img src={bell}/>Create an alert</button>
+        <button> <img src={bell} alt='bell'/>Create an alert</button>
       </div>
     </div>
     <hr></hr>

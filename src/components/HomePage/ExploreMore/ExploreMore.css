@@ -4,6 +4,11 @@
     position: relative;
 }
 
+.Explore-container h2{
+    font-size: 32px;
+    font-weight: 400;
+}
+
 .Explore-container p{
     line-height: 40px;
 }
@@ -22,6 +27,7 @@
 .Explore-more-icons-content{
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 Explore-more-icons-content li h3{
@@ -31,3 +37,27 @@ Explore-more-icons-content li h3{
 Explore-more-icons-content li p{
     font-size: 14px;
 }
+
+@media screen and (min-width: 1900px) {
+    .Explore-more-container-ul {
+        justify-content: space-between;
+    }
+
+    .Explore-container h2 {
+        font-size: 45px;
+    }
+
+    .Explore-container p {
+        font-size: 20px;
+    }
+
+    .Explore-more-icons-content h3 {
+        font-size: 26px;
+    }
+
+    .Explore-more-icons-content p {
+        font-size: 20px;
+    }
+
+  }
+

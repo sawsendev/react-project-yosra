@@ -9,7 +9,7 @@ const Faq = () => {
       <p>The most common questions that you might have before booking a room with us.</p>
     </div>
     <button className='Faq-btn'>Go to our FAQ page 
-    <img src={arrow}/>
+    <img src={arrow} alt='icon'/>
     </button></>
   )
 }

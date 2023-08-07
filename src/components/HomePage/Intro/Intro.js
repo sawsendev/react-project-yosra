@@ -7,7 +7,7 @@ const Intro = () => {
   return (
     <div className='Intro-container'>
       <div>
-        <img className='Banner-image' src={banner} alt="banner photo"/>
+        <img className='Banner-image' src={banner} alt="banner"/>
       </div>
       <div className='Content-container'>
         <h3>we create beautiful spaces for communal living for you to</h3>
@@ -15,22 +15,15 @@ const Intro = () => {
         <div className='Input-container'>
           <div className='List-select'>
           <select name="countries" id="countries-id" className='Select-country-container'>
-              <option value="volvo">VolvoVolvoVolvoVolvoVolvoVolvoVolvo</option>
+              <option value="" selected>Where will you go ?</option>
               <option value="saab">Saab</option>
               <option value="mercedes">Mercedes</option>
               <option value="audi">Audi</option>
           </select>
           </div>
           <div className='Movie-date'>
-          <select name="countries" id="countries-id" className='Select-country-container'>
-              <option value="volvo">VolvoVolvoVolvoVolvoVolvoVolvo</option>
-              <option value="saab">Saab</option>
-              <option value="mercedes">Mercedes</option>
-              <option value="audi">Audi</option>
-          </select>
+         <input type="date" name="dob" data-placeholder="Move in date" required aria-required="true" className='Select-country-container'/>
           </div>
-
-
           <div>
             <button className='Search-btn'>Search & book</button>
           </div>

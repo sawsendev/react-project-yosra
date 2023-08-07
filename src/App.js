@@ -1,26 +1,26 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import "./App.css"
-import ExploreMore from './components/HomePage/ExploreMore/ExploreMore';
 import Faq from "./components/HomePage/Faq/Faq";
-import Feedback from './components/HomePage/Feedback/Feedback';
 import Footer from "./components/HomePage/Footer/Footer";
-import Intro from './components/HomePage/Intro/Intro';
 import NavBar from './components/HomePage/NavBar/NavBar';
-import Reactions from './components/HomePage/Reactions/Reactions';
-import ReasonToRent from './components/HomePage/ReasonToRent/ReasonToRent';
-import StepsToBook from './components/HomePage/StepsToBook/StepsToBook';
+import Homepage from './components/HomePage/Homepage';
+import SearchCities from './components/SearchCities/SearchCities';
+
+
+
 
 function App() {
   return (
     <div>
-      <NavBar/>
-      <Intro/>
-      <Reactions/>
-      <ExploreMore/>
-      <ReasonToRent/>
-      <StepsToBook/>
-      <Feedback/>
+      <BrowserRouter>
+        <NavBar/>
+      <Routes>
+        <Route path="/" element={<Homepage/>} /> 
+        <Route path="/SearchCities" element={<SearchCities/>} />    
+      </Routes>
       <Faq/>
       <Footer/>
+      </BrowserRouter>
     </div>
   );
 }

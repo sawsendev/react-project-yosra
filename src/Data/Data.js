@@ -19,6 +19,7 @@ import Bologna from "../assets/Rectangle 49.svg";
 import f1 from "../assets/voyageurs-invites-pleins-smileys-2.svg";
 import f2 from "../assets/voyageurs-invites-pleins-smileys-1.svg";
 import f3 from "../assets/voyageurs-invites-pleins-smileys.svg";
+import room_city from "../assets/bacdbb_723fc3ba38f34640b08464a29a8990c9~mv2 1.svg";
 
 
 
@@ -191,4 +192,60 @@ export const FeedbacksTable = [
         name:"Nom et prenom",
         content: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknownprinter "
     },
+]
+
+export const CribesTable =[
+    {
+        id:0,
+        src: room_city,
+        name:"Nom et prenom",
+        content: "12 Villebois Mareuil - Chambre 2 ",
+        adress: "47 rue Pierre Audry, 69009 Lyon",
+        price: "574$"
+    },
+    {
+        id:1,
+        src: room_city,
+        name:"Nom et prenom",
+        content: "12 Villebois Mareuil - Chambre 2 ",
+        adress: "47 rue Pierre Audry, 69009 Lyon",
+        price: "574$"
+
+    },
+    {
+        id:2,
+        src: room_city,
+        name:"Nom et prenom",
+        content: "12 Villebois Mareuil - Chambre 2 ",
+        adress: "47 rue Pierre Audry, 69009 Lyon",
+        price: "574$"
+
+    },
+    {
+        id:3,
+        src: room_city,
+        name:"Nom et prenom",
+        content: "12 Villebois Mareuil - Chambre 2 ",
+        adress: "47 rue Pierre Audry, 69009 Lyon",
+        price: "574$"
+
+    },
+    {
+        id:4,
+        src: room_city,
+        name:"Nom et prenom",
+        content: "12 Villebois Mareuil - Chambre 2 ",
+        adress: "47 rue Pierre Audry, 69009 Lyon",
+        price: "574$"
+    },
+    {
+        id:5,
+        src: room_city,
+        name:"Nom et prenom",
+        content: "12 Villebois Mareuil - Chambre 2 ",
+        adress: "47 rue Pierre Audry, 69009 Lyon",
+        price: "574$"
+
+    },
+
 ]

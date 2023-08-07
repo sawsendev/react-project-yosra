@@ -5,8 +5,8 @@
 }
 
 .Steps-to-book-container h3{
-   font-size: 32px;
-   font-weight: 600;
+    font-size: 32px;
+    font-weight: 400;
 }
 
 .Steps-to-book-container p{
@@ -26,6 +26,7 @@
 .Steps-icons-container-ul li {
     display: flex;
     border: 1px solid grey;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 8px;
     padding: 10px;
     gap: 18px;
@@ -42,3 +43,21 @@
     max-width: 140px;
     line-height: 17px;
 }
+
+@media screen and (min-width: 1900px) {
+    .Steps-to-book-container h3{
+        font-size: 44px;
+        line-height: 40px;
+    }
+
+    .Steps-to-book-container>p{
+        font-size: 22px;
+        line-height: 40px;
+
+    }
+
+    .Steps-icons-container p{
+        font-size: 20px;
+        max-width: 380px;
+    }
+  }
