@@ -16,8 +16,6 @@
 .Explore-more-container-ul {
     display: flex;
     list-style: none;
-    gap: 20px;
-    padding: 10px 0;
 }
 
 .Explore-more-container-ul li img{
@@ -40,8 +38,9 @@ Explore-more-icons-content li p{
 
 @media screen and (min-width: 1900px) {
     .Explore-more-container-ul {
-        justify-content: space-between;
     }
+
+
 
     .Explore-container h2 {
         font-size: 45px;

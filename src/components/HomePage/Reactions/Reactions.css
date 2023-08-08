@@ -9,6 +9,8 @@
 
 .list-icons-container li {
     list-style: none;
+    display: flex;
+    gap: 20px;
 }
 
 .list-icons-container li img {
@@ -16,10 +18,7 @@
 }
 
 .list-icons{
-    display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 15px;
 }
 
 .Icons-container h3 {
@@ -33,9 +32,16 @@
 }
 
 
+
+/* for mobile screens */
+@media only screen and (max-width: 768px) {
+    
+}
+
+/* large screens */
 @media screen and (min-width: 1900px) {
     .list-icons-container li img {
-        width: 98px;;
+        width: 98px;
     }
 
     .Icons-container h3{

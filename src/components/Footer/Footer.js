@@ -1,6 +1,6 @@
 import React from 'react'
 import "./Footer.css"
-import bell from "../../../assets/bell 1.svg"
+import bell from "../../assets/bell 1.svg"
 
 const Footer = () => {
   return (

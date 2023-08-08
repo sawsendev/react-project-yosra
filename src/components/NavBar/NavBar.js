@@ -1,12 +1,12 @@
 import React from 'react'
 import "./NavBar.css"
-import {NavTable} from "../../../Data/Data"
-import logo from "../../../assets/logo.svg"
+import {NavTable} from "../../Data/Data"
+import logo from "../../assets/logo.svg"
 
 const NavBar = () => {
   return (
-    <div>
-      <div className='NavBar-container'>
+      <div className='NavBar-container d-flex
+      container-fluid'>
       <img src={logo} alt="company's logo" />
       <ul className='List-container'>
         {NavTable.map((navItem, index) => {
@@ -18,8 +18,7 @@ const NavBar = () => {
         })}
       </ul>
       </div>
-    </div>
   )
 }
 
-export default NavBar
+export default NavBar;

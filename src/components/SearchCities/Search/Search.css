@@ -2,14 +2,38 @@
     background-color: #F1F2F4;
     padding: 50px 0 50px 176px;
     border: 3px solid red;
+    padding: 30px;
+    border-radius: 4px;
+
 }
 
 .Search-container h3 {
     font-size: 32px;
     font-weight: 400;
     line-height: 80px;
+    width: 78%;
+    margin: auto;
 }
 
 .Form-cities Form {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 79%;
+    margin: auto;
+}
+
+.Form-city{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border: 1px solid linear-gradient(0deg, #DDDDDD, #DDDDDD),
+    linear-gradient(0deg, #FFFFFF, #FFFFFF);
+    ;
+}
+
+.S-btn {
+    height: 35px;
+    text-align: center;
+    padding: 0;
 }

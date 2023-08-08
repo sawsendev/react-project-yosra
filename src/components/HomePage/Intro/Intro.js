@@ -5,10 +5,7 @@ import banner from "../../../assets/banner.svg";
 
 const Intro = () => {
   return (
-    <div className='Intro-container'>
-      <div>
-        <img className='Banner-image' src={banner} alt="banner"/>
-      </div>
+    <div className='Intro-container container-fluid'>
       <div className='Content-container'>
         <h3>we create beautiful spaces for communal living for you to</h3>
         <h2>discover, share, and make new friends</h2>
