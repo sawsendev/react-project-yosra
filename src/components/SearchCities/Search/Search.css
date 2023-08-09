@@ -17,7 +17,7 @@
 
 .Form-cities Form {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-between;
     width: 79%;
     margin: auto;
@@ -33,7 +33,14 @@
 }
 
 .S-btn {
-    height: 35px;
+    height: 29px;
     text-align: center;
     padding: 0;
+    margin-bottom: 8px;
+}
+
+select,
+::placeholder
+{
+   color: #A0A9B2;
 }

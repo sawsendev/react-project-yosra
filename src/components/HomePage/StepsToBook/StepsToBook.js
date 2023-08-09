@@ -15,7 +15,7 @@ const StepsToBook = () => {
             {StepsTable.map((icon, index) => {
               return (
                 <>
-                  <li key={index} className='col-lg-3 col-md-6 col-sm-12 me-2'>
+                 <li key={index}  className='col-lg-3 col-md-6 col-sm-12 m-1'>
                       <img src= {icon.src} alt="icons"/>
                       <div className='Steps-icons-container'>
                       <h3>{icon.count}</h3>

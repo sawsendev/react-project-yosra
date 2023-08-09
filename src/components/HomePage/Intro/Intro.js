@@ -1,7 +1,5 @@
 import React from 'react'
 import "./Intro.css"
-import banner from "../../../assets/banner.svg";
-
 
 const Intro = () => {
   return (

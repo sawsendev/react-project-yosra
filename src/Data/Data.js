@@ -27,6 +27,7 @@ import room_city from "../assets/bacdbb_723fc3ba38f34640b08464a29a8990c9~mv2 1.s
 
 
 
+
 // Navigation
 export const NavTable = [
     {
@@ -197,7 +198,24 @@ export const FeedbacksTable = [
 export const CribesTable =[
     {
         id:0,
-        src: room_city,
+        src: [
+        {
+            id:0,
+            src_room:room_city
+        },
+        {
+            id:1,
+            src_room:room_city
+        },
+        {
+            id:2,
+            src_room:room_city
+        },
+        {
+            id:3,
+            src_room:room_city
+        }
+    ],
         name:"Nom et prenom",
         content: "12 Villebois Mareuil - Chambre 2 ",
         adress: "47 rue Pierre Audry, 69009 Lyon",
@@ -205,7 +223,24 @@ export const CribesTable =[
     },
     {
         id:1,
-        src: room_city,
+        src: [
+            {
+                id:0,
+                src_room:room_city
+            },
+            {
+                id:1,
+                src_room:room_city
+            },
+            {
+                id:2,
+                src_room:room_city
+            },
+            {
+                id:3,
+                src_room:room_city
+            }
+        ],
         name:"Nom et prenom",
         content: "12 Villebois Mareuil - Chambre 2 ",
         adress: "47 rue Pierre Audry, 69009 Lyon",
@@ -214,7 +249,24 @@ export const CribesTable =[
     },
     {
         id:2,
-        src: room_city,
+        src: [
+            {
+                id:0,
+                src_room:room_city
+            },
+            {
+                id:1,
+                src_room:room_city
+            },
+            {
+                id:2,
+                src_room:room_city
+            },
+            {
+                id:3,
+                src_room:room_city
+            }
+        ],
         name:"Nom et prenom",
         content: "12 Villebois Mareuil - Chambre 2 ",
         adress: "47 rue Pierre Audry, 69009 Lyon",
@@ -223,7 +275,24 @@ export const CribesTable =[
     },
     {
         id:3,
-        src: room_city,
+        src: [
+            {
+                id:0,
+                src_room:room_city
+            },
+            {
+                id:1,
+                src_room:room_city
+            },
+            {
+                id:2,
+                src_room:room_city
+            },
+            {
+                id:3,
+                src_room:room_city
+            }
+        ],
         name:"Nom et prenom",
         content: "12 Villebois Mareuil - Chambre 2 ",
         adress: "47 rue Pierre Audry, 69009 Lyon",
@@ -232,7 +301,24 @@ export const CribesTable =[
     },
     {
         id:4,
-        src: room_city,
+        src: [
+            {
+                id:0,
+                src_room:room_city
+            },
+            {
+                id:1,
+                src_room:room_city
+            },
+            {
+                id:2,
+                src_room:room_city
+            },
+            {
+                id:3,
+                src_room:room_city
+            }
+        ],
         name:"Nom et prenom",
         content: "12 Villebois Mareuil - Chambre 2 ",
         adress: "47 rue Pierre Audry, 69009 Lyon",
@@ -240,7 +326,24 @@ export const CribesTable =[
     },
     {
         id:5,
-        src: room_city,
+        src: [
+            {
+                id:0,
+                src_room:room_city
+            },
+            {
+                id:1,
+                src_room:room_city
+            },
+            {
+                id:2,
+                src_room:room_city
+            },
+            {
+                id:3,
+                src_room:room_city
+            }
+        ],
         name:"Nom et prenom",
         content: "12 Villebois Mareuil - Chambre 2 ",
         adress: "47 rue Pierre Audry, 69009 Lyon",

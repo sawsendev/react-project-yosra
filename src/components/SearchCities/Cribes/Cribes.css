@@ -1,18 +1,39 @@
 .Cribes-container{
     border: 2px solid blue;
+    padding: 40px;
 }
 
 .Cribes-icons-container{
-    border: 1px solid green;
     display: flex;
+    margin: 0 20px 0 0;
+
 }
 
 
-.Cribes-icons-container ul{
-    display: grid;
-    grid-template-rows: repeat(2,1fr);
-    grid-template-columns: repeat(3,1fr);
+.Cribes-icons-container ul {
     list-style: none;  
+    gap: 10px;
+}
+
+.Cribes-icons-container ul li img{
+  width: 100%;
+}
+
+
+.Item-badge{
+  margin-bottom: 20px;
+  position: relative;
+}
+
+
+.Cribes-icons-container ul li h3 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.Cribes-icons-container ul li p {
+    font-size: 14px;
+    font-weight: 400;
 }
 
 .Alerte-cribes {
@@ -30,4 +51,21 @@
 .Cribes-btn {
     width: 25%;
     padding: 0;
+}
+
+.Item-badge{
+    position: relative;
+    padding-top:20px;
+}
+
+.notify-badge{
+    position: absolute;
+    left:10px;
+    top:30px;
+    text-align: center;
+    border-radius: 10px;
+    color:white;
+    padding:5px 10px;
+    font-size:14px;
+    font-weight: 400;
 }
