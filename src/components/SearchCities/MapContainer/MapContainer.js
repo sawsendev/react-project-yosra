@@ -4,7 +4,8 @@ import "./MapCountainer.css"
 
 const mapStyles = {
   width: '30%',
-  height: '50%'
+  height: '50%',
+  position: 'relative'
 };
 
 class MapContainer extends Component {
