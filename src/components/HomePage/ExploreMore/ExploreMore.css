@@ -37,11 +37,6 @@ Explore-more-icons-content li p{
 }
 
 @media screen and (min-width: 1900px) {
-    .Explore-more-container-ul {
-    }
-
-
-
     .Explore-container h2 {
         font-size: 45px;
     }
@@ -55,7 +50,7 @@ Explore-more-icons-content li p{
     }
 
     .Explore-more-icons-content p {
-        font-size: 20px;
+        font-size: 25px;
     }
 
   }
