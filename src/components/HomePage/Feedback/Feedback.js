@@ -7,11 +7,11 @@ const Feedback = () => {
   return (
     <div className='Feedback-container container'>
       <h3>Our flatmates talk about their experience with Fine cribs</h3>
-      <ul className="row Feedback-container-ul">
+      <div className="row Feedback-container">
             {FeedbacksTable.map((feedback, index) => {
               return (
                 <>
-                  <li key={index} className='feedback-icons-li col-lg-4 col-md-6 col-sm-12'>
+                  <div key={index} className='feedback-icons-li col-lg-4 col-md-6 col-sm-12'>
                       <img src= {feedback.src} alt="icons" className="image-fluid"/>
                       <div className='feedback-icons-container'>
                         <div className='feedback-icons-content'>                   
@@ -19,11 +19,11 @@ const Feedback = () => {
                            <p>{feedback.content}</p>
                         </div>
                       </div>
-                  </li>
+                  </div>
                 </>
               );
             })}
-          </ul>
+          </div>
     </div>
   )
 }

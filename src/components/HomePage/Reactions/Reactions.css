@@ -26,14 +26,20 @@
 
 /* for mobile screens */
 @media (max-width: 600px) {
-    .Explore-container h2{
-        font-size: 26px;
-        text-align: center;
+    .Icons-container h3{
+        font-size: 18px;
+        font-weight: 600;
     }
 
-    .Explore-container p {
-        line-height: 28px;
-        text-align: center;
+    .Icons-container p {
+        font-size: 14px;
+        font-weight: 400;
+        margin: 0;
+    }
+
+    .list-icons-container img {
+        width: 40%;
+        margin-right: 10px;
     }
     
 }

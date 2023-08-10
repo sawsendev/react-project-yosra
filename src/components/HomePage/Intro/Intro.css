@@ -42,7 +42,6 @@
     padding: 20px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     border-radius: 5px;
-    align-items: center;
 }
 
 .List-select{
@@ -81,28 +80,32 @@ input[type="date"]:valid::before { display: none }
   /* for mobile screens */
   @media (max-width: 600px) {
     .Content-container{
-      width: 90%;
-      margin: auto;
-      padding: 10px;
+      padding: 20px;
     }
 
     .Content-container h3 {
-      font-size: 16px;
+      font-size: 20px;
+      font-weight: 400;
     }
     .Input-container{
       flex-direction: column;
     }
 
     .Content-container h2 {
-      line-height: 42px;
+      font-size: 26px;
+      font-weight: 600;
     }
 
     .Select-country-container, .Movie-date {
-      padding: 0;
+      padding: 10px 0;
       margin: 5px 0;
     }
 
     .Intro-container{
       background-position: right;
+    }
+
+    .Search-btn{
+      width: 100%;
     }
   }

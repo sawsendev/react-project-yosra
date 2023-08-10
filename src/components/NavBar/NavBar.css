@@ -16,7 +16,7 @@
 .List-items {
     list-style: none;
     margin-left: 30px;
-    padding: 9px 27px;
+    padding: 9px;
     color: black;
     font-size: 18px;
     font-weight: 400;
@@ -68,6 +68,7 @@
     transition: all 0.3s ease-in;
     overflow: hidden;
     z-index: 999;
+    width: 0;
   }
 
   .nav-elements.active {

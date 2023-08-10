@@ -33,10 +33,33 @@
 }
 
 
-@media only screen and (max-width: 600px) {
-    .Reasons-icons-li{
-        display: block;
-        text-align: center;
+/* for mobile screens */
+@media (max-width: 600px) {
+    .Reason-to-rent-container h3{
+        font-size: 24px;
+        font-weight: 400;
     }
-}
 
+    .Reason-to-rent-container p{
+        font-size: 14px;
+        font-weight: 400;
+    }
+
+    .Reasons-icons-container h3{
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .Reasons-icons-container p{
+        font-size: 14px;
+        font-weight: 400;
+    }
+
+    .Reasons-icons-li img{
+        width: 52px;
+    }
+
+
+
+
+}

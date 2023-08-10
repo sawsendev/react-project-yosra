@@ -48,3 +48,17 @@
 .Room-content p{
     margin: 0;
 }
+
+/* for mobile screens */
+@media (max-width: 600px) {
+    .Explore-container h2{
+        font-size: 26px;
+        font-weight: 400;
+    }
+
+    .Explore-container p{
+        font-size: 14px;
+        font-weight: 400;
+    }
+
+}

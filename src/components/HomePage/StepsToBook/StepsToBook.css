@@ -21,6 +21,9 @@
     display: flex;
     gap: 24px;
     margin-bottom: 60px;
+    height: 129px;
+    max-height: 80%;
+
 }
 
 .Steps-icons-container-ul img{
@@ -36,3 +39,30 @@
     margin: 0;
 }
 
+/* for mobile screens */
+@media (max-width: 600px) {
+    .Steps-to-book-container h3{
+        font-size: 24px;
+        font-weight: 400;
+    }
+
+    .Steps-to-book-container p{
+        font-size: 14px;
+        font-weight: 400;
+    }
+
+    .teps-icons-container-ul img{
+        width: 50px;
+    }
+
+    .Steps-icons-container h3{
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .Steps-icons-container h3{
+        font-size: 16px;
+        font-weight: 400;
+    }
+    
+}

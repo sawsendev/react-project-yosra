@@ -39,10 +39,6 @@
 
 
   @media (max-width:600px) {
-    .feedback-icons-li {
-        flex-direction: column;
-    }
-
     .Faq-container h3 {
         font-size: 25px;
     }
