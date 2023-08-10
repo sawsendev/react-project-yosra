@@ -4,22 +4,22 @@ import "./Reactions.css"
 
 const Reactions = () => {
   return (
-    <div className='container-fluid'>
-       <ul className="list-icons-container row d-flex">
+    <div className='container'>
+       <div className="list-icons-container row py-3">
             {IconsTable.map((icon, index) => {
               return (
                 <>
-                  <li key={index} className='list-icons col-lg-3 col-md-4 col-6'>
+                  <div key={index} className='col-lg-3 col-md-4 col-sm-6 col-12 p-3 d-flex'>
                       <img src= {icon.src} alt="icons"/>
                       <div></div>
                       <div className='Icons-container'>
                       <h3>{icon.count}</h3>
                       <p>{icon.content}</p></div>
-                  </li>
+                  </div>
                 </>
               );
             })}
-          </ul>
+          </div>
     </div>
   )
 }

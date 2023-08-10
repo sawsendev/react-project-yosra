@@ -1,7 +1,7 @@
 .Intro-container{
     background-image: url("../../../assets//banner.svg");
     background-repeat: no-repeat;
-    background-position: auto;
+    background-position: center;
     background-size: cover;
     display: block;
     padding: 100px 0;
@@ -12,40 +12,37 @@
 .Content-container{
     opacity: 0.9;
     background-color: #00000066;
-    padding: 30px;
+    padding: 50px;
     margin: auto;   
     border-radius: 4px;
     display: block;
-    width: 700px;
+    max-width: 900px;
+    width: 90%;
     text-align: center;
 }
 
-.Content-container h2 {
-    font-size: 33px;
-    font-weight: 600;
-    line-height: 60px;
+.Content-container h3 {
+    font-size: 28px;
+    font-weight: 400;
 }
 
 .Content-container h2,
 .Content-container h3{
     color: white;
-    letter-spacing: 2px;
     text-align:center ;
 }
 
-.Content-container h3{
-  font-size: 18px;
-  font-weight: 400;
+.Content-container h2{
+  font-size: 46px;
+  font-weight: 600;
 }
 
 .Input-container{
     background-color: white;
-    padding: 10px;
+    padding: 20px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     border-radius: 5px;
-    display: flex;
     align-items: center;
-    width: 100%;
 }
 
 .List-select{
@@ -55,7 +52,8 @@
 .Select-country-container,
 .Movie-date{ 
     padding: 7px;
-    width: 100%;
+    border-radius: 7px;
+    border-width: 1px;
 }
 
 input[type="date"]::before { 
@@ -70,42 +68,41 @@ input[type="date"]:valid::before { display: none }
 .Search-btn {
     outline: none;
     border: none;
-    padding: 11px;
+    padding: 9px;
     color: white;
     background-color: black;
     border-radius: 8px;
     font-size: 18px;
     font-weight: 600;
-    width: 100%;
-    height: 43px;
-}
-
-
-.Input-container div {
-    width: 100%;
+    width: 30%;
 }
 
 
   /* for mobile screens */
-  @media only screen and (max-width: 768px) {
-    
-  }
-
-  /* large screens */
-
-  @media screen and (min-width: 1900px) {
-    .Intro-container{
-      height: 80vh;
-    }
-
+  @media (max-width: 600px) {
     .Content-container{
-      width: 900px;
-      margin-top: 5%;
-      padding: 80px auto;
+      width: 90%;
+      margin: auto;
+      padding: 10px;
     }
 
-    .Content-container h2{
-      font-size: 40px;
+    .Content-container h3 {
+      font-size: 16px;
+    }
+    .Input-container{
+      flex-direction: column;
+    }
+
+    .Content-container h2 {
+      line-height: 42px;
+    }
+
+    .Select-country-container, .Movie-date {
+      padding: 0;
+      margin: 5px 0;
+    }
+
+    .Intro-container{
+      background-position: right;
     }
   }
-  

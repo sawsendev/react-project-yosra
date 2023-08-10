@@ -132,7 +132,7 @@ export const StepsTable = [
         id: 1,
         src: stepTwo,
         count: "Step 2",
-        content: "Find your room "
+        content: "Send your booking request which will be reviewed by our team  "
     },
     {
         id: 2,

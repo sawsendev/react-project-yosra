@@ -5,7 +5,6 @@
     align-items: center;
     justify-content: space-evenly;
     margin-bottom: 12px;
-    position: fixed;
 }
 
 .Footer-content{
@@ -55,24 +54,9 @@
     font-weight: 400;
 }
 
-
-@media screen and (min-width: 1900px) {
-    .Apartements p, .Useful-links p {
-        font-size: 25px;
-        line-height: 40px;
+@media (max-width: 600px) {
+    .Footer-container {
+      flex-direction: column;
     }
-
-    .Apartements h3, .Useful-links h3, .Create-alert h3{
-        font-size: 30px;
-    }
-
-    .Create-alert button{
-        font-size: 25px;
-    }
-
-    .Copyright{
-        font-size: 20px;
-    }
-  }
-
+}
 

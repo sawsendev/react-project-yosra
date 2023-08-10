@@ -5,26 +5,26 @@ import "./StepsToBook.css"
 
 const StepsToBook = () => {
   return (
-    <div className='Steps-to-book-container container-fluid'>
+    <div className='Steps-to-book-container container'>
       <h3>The 4 steps to book your room</h3>
       <p>Moving to a new city should be all about new experiences. To make your life easy, we craft beautiful spaces that feel just 
         like home so that you can just drop your suitcases and have a great time. Simple, as it should be.</p>
         <div className='Steps-container'>
           <div className='Step'>
-          <ul className="row  Steps-icons-container-ul">
+          <div className="row flex-nowrap">
             {StepsTable.map((icon, index) => {
               return (
                 <>
-                 <li key={index}  className='col-lg-3 col-md-6 col-sm-12 m-1'>
+                 <div key={index}  className='col-lg-3 col-md-3 col-sm-12 m-3 Steps-icons-container-ul'>
                       <img src= {icon.src} alt="icons"/>
                       <div className='Steps-icons-container'>
                       <h3>{icon.count}</h3>
                       <p>{icon.content}</p></div>
-                  </li>
+                  </div>
                 </>
               );
             })}
-          </ul>
+          </div>
           </div>
         </div>
     </div>

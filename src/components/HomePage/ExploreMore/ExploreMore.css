@@ -1,6 +1,4 @@
 .Explore-container{
-    width: 80%;
-    margin: auto;
     position: relative;
 }
 
@@ -10,48 +8,43 @@
 }
 
 .Explore-container p{
-    line-height: 40px;
+    font-size: 16px;
+    font-weight: 400;
 }
 
-.Explore-more-container-ul {
-    display: flex;
-    list-style: none;
+.Explore-more-container{
+    padding: 0;
 }
 
-.Explore-more-container-ul li img{
-    width: 100%;
-}
-
-.Explore-more-icons-content{
+.Explore-more-countries-content{
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-Explore-more-icons-content li h3{
+.Explore-more-countries-content h3{
     font-size: 18px;
+    font-weight: 600;
 }
 
-Explore-more-icons-content li p{
+.Explore-more-countries-content p{
     font-size: 14px;
+    font-weight: 400;
 }
 
-@media screen and (min-width: 1900px) {
-    .Explore-container h2 {
-        font-size: 45px;
-    }
+.Pictures-countries{
+    position: relative;
+}
 
-    .Explore-container p {
-        font-size: 20px;
-    }
+.Pictures-countries img{
+    width: 100%;
+}
 
-    .Explore-more-icons-content h3 {
-        font-size: 26px;
-    }
+.Room-content{
+    width: 88px;
+    justify-content: space-between;
+}
 
-    .Explore-more-icons-content p {
-        font-size: 25px;
-    }
-
-  }
-
+.Room-content p{
+    margin: 0;
+}

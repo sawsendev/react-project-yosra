@@ -1,20 +1,11 @@
 .list-icons-container {
-    width: 80%;
-    display: flex;
-    margin:auto;
     align-items: center;
-    justify-content: space-between;
-    padding: 40px  0;
 }
 
-.list-icons-container li {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-}
 
-.list-icons-container li img {
+.list-icons-container img {
     width: 61px;
+    margin-right: 28px;
 }
 
 .list-icons{
@@ -34,23 +25,16 @@
 
 
 /* for mobile screens */
-@media only screen and (max-width: 768px) {
+@media (max-width: 600px) {
+    .Explore-container h2{
+        font-size: 26px;
+        text-align: center;
+    }
+
+    .Explore-container p {
+        line-height: 28px;
+        text-align: center;
+    }
     
 }
-
-/* large screens */
-@media screen and (min-width: 1900px) {
-    .list-icons-container li img {
-        width: 98px;
-    }
-
-    .Icons-container h3{
-        font-size: 44px;
-    }
-
-    .Icons-container p{
-        font-size: 22px;
-    }
-  }
-
 

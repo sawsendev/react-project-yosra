@@ -7,21 +7,15 @@ const Intro = () => {
       <div className='Content-container'>
         <h3>we create beautiful spaces for communal living for you to</h3>
         <h2>discover, share, and make new friends</h2>
-        <div className='Input-container'>
-          <div className='List-select'>
-          <select name="countries" id="countries-id" className='Select-country-container'>
+        <div className='Input-container row'>
+          <select name="countries" id="countries-id" className='Select-country-container col-lg-4 me-2'>
               <option value="" selected>Where will you go ?</option>
-              <option value="saab">Saab</option>
-              <option value="mercedes">Mercedes</option>
-              <option value="audi">Audi</option>
+              <option value="saab">Paris</option>
+              <option value="mercedes">Paris</option>
+              <option value="audi">Paris</option>
           </select>
-          </div>
-          <div className='Movie-date'>
-         <input type="date" name="dob" data-placeholder="Move in date" required aria-required="true" className='Select-country-container'/>
-          </div>
-          <div>
-            <button className='Search-btn'>Search & book</button>
-          </div>
+         <input type="date" name="dob" data-placeholder="Move in date" required aria-required="true" className='Select-country-container me-2 col-lg-4'/>
+            <button className='Search-btn col-lg-4'>Search & book</button>
         </div>
       </div>
     </div>

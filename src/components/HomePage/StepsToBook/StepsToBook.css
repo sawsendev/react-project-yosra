@@ -1,53 +1,38 @@
 .Steps-to-book-container{
-    width: 80%;
-    margin: auto;
     margin-bottom: 40px;
 }
 
 .Steps-to-book-container h3{
     font-size: 32px;
-    font-weight: 600;
+    font-weight: 400;
+    margin-bottom: 10px;
 }
 
 .Steps-to-book-container p{
     font-size: 16px;
     font-weight: 400;
-    line-height: 20px;
+    margin-bottom: 40px;
    }
 
-.Steps-icons-container-ul li {
+.Steps-icons-container-ul  {
     border: 1px solid #A0A9B2;
     border-radius: 8px;
-    padding: 10px;
+    padding: 12px;
     display: flex;
     gap: 24px;
-    width: 24%;
+    margin-bottom: 60px;
+}
+
+.Steps-icons-container-ul img{
+    width: 65px;
 }
 
 .Steps-icons-container h3 {
-    font-size: 16px;
+    font-size: 18px;
+    font-weight: 600;
 }
 
-.Steps-icons-container p {
-    font-size: 16px;
-    max-width: 140px;
-    line-height: 17px;
+.Steps-icons-container p{
+    margin: 0;
 }
 
-@media screen and (min-width: 1900px) {
-    .Steps-to-book-container h3{
-        font-size: 44px;
-        line-height: 40px;
-    }
-
-    .Steps-to-book-container>p{
-        font-size: 22px;
-        line-height: 40px;
-
-    }
-
-    .Steps-icons-container p{
-        font-size: 20px;
-        max-width: 380px;
-    }
-  }
