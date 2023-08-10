@@ -1,0 +1,25 @@
+.Error{
+    padding: 100px;
+    align-items: center;
+}
+
+.Error img{
+    width: 210px;
+}
+
+.Error-content {
+    width: 100%;
+    padding: 35px;
+}
+
+/* for mobile screens */
+@media (max-width: 600px) {
+    .Error{
+       flex-direction: column;
+       padding: 10px;
+    }
+
+    .Error img{
+        width: 100px;
+    }
+}
