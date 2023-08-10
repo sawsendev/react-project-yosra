@@ -4,7 +4,7 @@ import "./Cms.css"
 const Cms = () => {
   return (
     <div className='Cms-container'>
-      <div className='container-fluid'>
+      <div className='container'>
        <h1 className='Cms-header'>Content Management System</h1>
        <div className='Cms-content-first'>
         <h3>1. Introduction</h3>
