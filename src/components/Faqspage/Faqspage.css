@@ -38,3 +38,14 @@
 .nav-link:focus{
     color: #A0A9B2;
 }
+
+.nav-pills{
+    width: 40%;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link,
+.tab-content>.active {
+    background-color: #F5F5F5;
+    color: black;
+    padding: 20px;
+}
