@@ -109,3 +109,10 @@ input[type="date"]:valid::before { display: none }
       width: 100%;
     }
   }
+
+   /* for mobile screens */
+   @media (max-width: 808px) {
+    .Input-container{
+      gap: 20px;
+    }
+  }

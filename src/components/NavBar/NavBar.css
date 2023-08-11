@@ -33,14 +33,14 @@
   display: none;
 }
  
-@media (max-width: 600px) {
+@media (max-width: 808px) {
   .NavBar-container {
     padding: 0;
   }
 
-  .NavBar-container>img {
+  /* .NavBar-container>img {
     width: 50%;
-  }
+  } */
 
   .menu-icon {
         display: block;

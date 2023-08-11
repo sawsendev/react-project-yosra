@@ -54,9 +54,13 @@
     font-weight: 400;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 808px) {
     .Footer-container {
       flex-direction: column;
+    }
+
+    .Footer-container{
+        display: none;
     }
 }
 

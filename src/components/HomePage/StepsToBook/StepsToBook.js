@@ -15,7 +15,7 @@ const StepsToBook = () => {
             {StepsTable.map((icon, index) => {
               return (
                 <>
-                 <div key={index}  className='col-md-3 col-sm-12 '>
+                 <div key={index}  className='col-lg-3 col-md-12 '>
                   <div className='Steps-icons-container-ul'>
                   <img src= {icon.src} alt="icons"/>
                       <div className='Steps-icons-container'>

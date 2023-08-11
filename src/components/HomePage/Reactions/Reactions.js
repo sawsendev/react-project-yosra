@@ -9,7 +9,7 @@ const Reactions = () => {
             {IconsTable.map((icon, index) => {
               return (
                 <>
-                  <div key={index} className='col-lg-3 col-md-4 col-6 p-3 d-flex'>
+                  <div key={index} className='col-lg-3 col-md-6 d-flex'>
                       <img src= {icon.src} alt="icons"/>
                       <div></div>
                       <div className='Icons-container'>

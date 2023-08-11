@@ -11,7 +11,7 @@ const Feedback = () => {
             {FeedbacksTable.map((feedback, index) => {
               return (
                 <>
-                  <div key={index} className='feedback-icons-li col-lg-4 col-md-6 col-sm-12'>
+                  <div key={index} className='feedback-icons-li col-lg-4 col-md-12 my-4'>
                       <img src= {feedback.src} alt="icons" className="image-fluid"/>
                       <div className='feedback-icons-container'>
                         <div className='feedback-icons-content'>                   
