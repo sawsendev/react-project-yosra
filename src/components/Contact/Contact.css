@@ -3,9 +3,9 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    display: block;
     padding: 100px 0;
     z-index: -9999;
+    margin: 0;
 }
 
 .Contact-container form {
@@ -30,4 +30,8 @@
 .Contact-container form label {
     font-size: 18px;
     font-weight: 600;
+}
+
+.react-tel-input .form-control {
+    width: 100%;
 }

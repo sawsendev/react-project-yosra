@@ -10,6 +10,7 @@ import ErrorPage from './components/404/ErrorPage';
 import Faqspage from './components/Faqspage/Faqspage';
 import NoRoom from './components/SearchCities/NoRoom/NoRoom';
 import Contact from './components/Contact/Contact';
+import BookingRoom from './components/BookingRoom/BookingRoom';
 
 
 
@@ -29,6 +30,8 @@ function App() {
         <Route path="/Error" element={<ErrorPage/>} /> 
         <Route path="/noRoom" element={<NoRoom/>} /> 
         <Route path="/Contact" element={<Contact/>} /> 
+        <Route path="/BookRoom" element={<BookingRoom/>} /> 
+
 
       </Routes>
       <Faq/>
