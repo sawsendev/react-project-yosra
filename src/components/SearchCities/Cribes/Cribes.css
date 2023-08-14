@@ -3,54 +3,42 @@
     padding: 40px;
 }
 
-.Cribes-icons-container{
-    display: flex;
-    margin: 0 20px 0 0;
-
+.Cribes-container h3{
+    font-size: 28px;
+    font-weight: 400;
 }
 
 
-.Cribes-icons-container ul {
-    list-style: none;  
-    gap: 10px;
+.Rooms-cribes,
+.Rooms-cribes li{
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
-.Cribes-icons-container ul li img{
-  width: 100%;
+.img-fluid {
+    max-width: 90%;
 }
-
 
 .Item-badge{
   margin-bottom: 20px;
   position: relative;
 }
 
-
-.Cribes-icons-container ul li h3 {
+.Rooms-content h3{
     font-size: 16px;
     font-weight: 600;
 }
 
-.Cribes-icons-container ul li p {
+.Rooms-content p{
     font-size: 14px;
     font-weight: 400;
+    margin: 0 0 0 10px;
 }
 
-.Alerte-cribes {
-    text-align: center;
-    padding: 20px 0;
-    margin: 0 auto;
-    width: 60%;
-}
-
-.Alerte-cribes h3 {
-   font-weight: 600;
-   font-size: 20px;   
-}
-
-.Cribes-btn {
-    width: 25%;
-    padding: 0;
+.Rooms-content span{
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .Item-badge{

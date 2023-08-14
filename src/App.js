@@ -8,6 +8,7 @@ import SearchCities from './components/SearchCities/SearchCities';
 import Cms from './components/CMS/Cms';
 import ErrorPage from './components/404/ErrorPage';
 import Faqspage from './components/Faqspage/Faqspage';
+import NoRoom from './components/SearchCities/NoRoom/NoRoom';
 
 
 
@@ -25,6 +26,8 @@ function App() {
         <Route path="/Cms" element={<Cms/>} /> 
         <Route path="/Faq" element={<Faqspage/>} />     
         <Route path="/Error" element={<ErrorPage/>} /> 
+        <Route path="/noRoom" element={<NoRoom/>} /> 
+
       </Routes>
       <Faq/>
       <Footer/>
