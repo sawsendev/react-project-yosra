@@ -1,0 +1,156 @@
+.Booking-content{
+  border: 3px solid red;
+  margin-bottom: 20px;
+  padding: 20px 100px;
+}
+
+.Booking-content h2{
+   font-weight: 600;
+   font-size: 32px;
+}
+
+.Booking-content span {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.Booking-content-application{
+  justify-content: space-between;
+  width: 42%;
+  margin-top: 50px;
+}
+
+.Booking-content-application h3{
+  font-size: 28px;
+  font-weight: 400;
+}
+
+.Input-disabled {
+  outline: none;
+  padding: 12px;
+  border: 1px solid #DFDFDF;
+  font-size: 18px;
+  font-weight: 400;
+  border-radius: 6px;
+  margin-bottom: 22px;
+}
+
+.Booking-content form label,
+.Booking-content-heading {
+   font-size: 18px;
+   font-weight: 600;
+}
+
+.thinking-container{
+  margin-bottom: 80px;
+}
+
+.thinking-container span{
+ font-size: 16px;
+ font-weight: 400;
+}
+
+// Upload Demo
+.uploader {
+  display: block;
+  clear: both;
+  width: 100%;
+  max-width: 600px;
+
+  .Input-upload {
+    float: left;
+    clear: both;
+    width: 100%;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    background: #fff;
+    border-radius: 7px;
+    border: 1px dashed black;
+    transition: all .2s ease;
+    user-select: none;
+    height: 189px;
+
+    &:hover {
+      border-color:  1px dashed #eee;
+    }
+  }
+
+  #response {
+    float: left;
+    clear: both;
+    width: 100%;
+    &.hidden {
+      display: none;
+    }
+    #messages {
+      margin-bottom: .5rem;
+    }
+  }
+
+  #file-image {
+    display: inline;
+    margin: 0 auto .5rem auto;
+    width: auto;
+    height: auto;
+    max-width: 180px;
+    &.hidden {
+      display: none;
+    }
+  }
+  
+  #notimage {
+    display: block;
+    float: left;
+    clear: both;
+    width: 100%;
+    &.hidden {
+      display: none;
+    }
+  }
+
+  progress,
+  .progress {
+    // appearance: none;
+    display: inline;
+    clear: both;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 180px;
+    height: 8px;
+    border: 0;
+    border-radius: 4px;
+    background-color: #eee;
+    overflow: hidden;
+  }
+
+  .progress[value]::-webkit-progress-bar {
+    border-radius: 4px;
+    background-color: #eee;
+  }
+
+
+  input[type="file"] {
+    display: none;
+  }
+
+ 
+  .btn {
+    display: inline-block;
+    margin: .5rem .5rem .5rem .5rem;
+    clear: both;
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    text-transform: initial;
+    border: none;
+    border-radius: .2rem;
+    outline: none;
+    padding: 0 6rem;
+    height: 36px;
+    line-height: 36px;
+    color: #fff;
+    transition: all 0.2s ease-in-out;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+}

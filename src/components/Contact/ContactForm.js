@@ -23,42 +23,41 @@ const ContactForm = () => {
 
     
   return (
-      <form className='container col-lg-5 ms-auto'>
+      <form className='col-md-5 me-auto'>
         <h3>We are here to help</h3>
         <span>Leave a message</span>
         <div class="row mb-4">
-            <div class="col">
-            <div class="form-outline">
-                <label class="form-label" for="form6Example1">First name</label>
-                <input type="text" id="form6Example1" class="form-control" />
+            <div class="col-sm-6">
+                <div class="form-outline">
+                    <label class="form-label" for="form6Example1">First name</label>
+                    <input type="text" id="form6Example1" class="form-control" />
+                </div>
             </div>
-            </div>
-            <div class="col">
-            <div class="form-outline">
-                <label class="form-label" for="form6Example2">Last name</label>
-                <input type="text" id="form6Example2" class="form-control" />
-            </div>
+            <div class="col-sm-6">
+                <div class="form-outline">
+                    <label class="form-label" for="form6Example2">Last name</label>
+                    <input type="text" id="form6Example2" class="form-control" />
+                </div>
             </div>
         </div>
 
         <div className='row'>
-            <div class="form-outline col mb-4">
-                <label class="form-label" for="form6Example3">Email*</label>
-                <input type="email" id="form6Example3" class="form-control" />
-            </div>
+             <div class="form-outline col-sm-6 mb-4">
+                  <label class="form-label" for="form6Example3">Email*</label>
+                  <input type="email" id="form6Example3" class="form-control" />
+             </div>
 
-            <div class="form-outline col mb-4">
-                <label class="form-label" for="phone">Phone</label>
-                <PhoneInput
-                country={'fr'}
-                class="form-control"
-                value={phoneNumber}
-                onChange={handleChange}
-                inputProps={{
-                  required: true,
-                }}/>
-              {!valid && <p>Please enter a valid 10-digit phone number.</p>}
-
+            <div class="form-outline col-sm-6 mb-4">
+                  <label class="form-label" for="phone">Phone</label>
+                  <PhoneInput
+                  country={'fr'}
+                  class="form-control"
+                  value={phoneNumber}
+                  onChange={handleChange}
+                  inputProps={{
+                    required: true,
+                  }}/>
+                {!valid && <p>Please enter a valid 10-digit phone number.</p>}
             </div>
         </div>
 
