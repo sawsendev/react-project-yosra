@@ -1,6 +1,6 @@
 .NavBar-container {
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     padding: 22px;
     width: 100%;
     background-color: white;

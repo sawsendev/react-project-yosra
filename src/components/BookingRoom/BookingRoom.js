@@ -33,7 +33,7 @@ const BookingRoom = () => {
   return (
     <div className='container'>
       <div className='row'>
-          <div className='Booking-content col-md-8 col-sm-12'>
+          <div className='Booking-content my-2 col-md-8 col-sm-12'>
             <h2>52 Rue Vernier, Nice - Room 5</h2>
             <span>Private room in Nice</span>
             <div className='d-flex align-items-center Booking-content-application'>
@@ -154,7 +154,7 @@ const BookingRoom = () => {
                   <label  className='Input-upload' for="file-upload" id="file-drag">
                     <img id="file-image" src={inVoice} alt="Preview"/>
                     <div id="start">
-                      <div>Select a file or drag here</div>
+                      <div id="notimage"> Select a file or drag here</div>
                       <div id="notimage" class="hidden">Your guarantor’s
  last payslip or tax return </div>
                     </div>

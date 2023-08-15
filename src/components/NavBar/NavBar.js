@@ -15,7 +15,7 @@ const NavBar = () => {
   
   return (
       <nav className='NavBar-container d-flex
-      container-fluid'>
+      container'>
            <img src={logo} alt="company's logo" />
 
            <div className="menu-icon" onClick={toggleNavItems}>
