@@ -14,7 +14,7 @@ const StepsToBook = () => {
               return (
                 <>
                  <div key={index}  className='align-items-stretch Steps-icons-container d-flex col-lg-3 col-md-12 '>
-                  <div className='Steps-icons-container-ul d-flex gap-4 p-3 mb-4'>
+                  <div className='Steps-icons-container-ul w-100 d-flex gap-4 p-3 mb-4'>
                   <img src= {icon.src} alt="icons"/>
                       <div className='Steps-icons-container'>
                       <h3>{icon.count}</h3>
