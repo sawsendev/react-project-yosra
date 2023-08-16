@@ -1,12 +1,44 @@
 .Book-container{
-    border: 2px solid red;
     gap: 40px;
+    flex-direction: column;
+    padding: 2rem;
 }
 
 .Book-container .row {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 6px;
+    padding: 1rem;
 }
 
+
+.Book-container-heading {
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.Progress-paragraph p{
+   font-size: 16px;
+   font-weight: 400;
+   margin: 0;
+}
+
+.Payments-steps span{
+    font-size: 16px;
+    font-weight: 600;
+ }
+
+ .Payments-steps p,
+ .Fee p,
+ .Fee span{
+    font-size: 14px;
+    font-weight: 400;
+ }
+
+ .Fee {
+    color: red;
+ }
 
 .progresses{
     display: flex;
@@ -15,9 +47,10 @@
 
 .line{
 
-    width: 120px;
+    width: 20px;
     height: 20px;
-    background: #63d19e;
+    border-right: 2px dashed black;
+    display: block;
 }
 
    
