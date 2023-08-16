@@ -1,5 +1,4 @@
 .Faq-container{
-    width: 100%;
     background-color: #383838;
     color: white;
     text-align:center;
@@ -33,7 +32,6 @@
 
 .Faq-btn img {
     width: 10%;
-    margin-left: 20px;
 }
 
 

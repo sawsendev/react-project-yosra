@@ -1,7 +1,3 @@
-.Reason-to-rent-container{
-    display: block;
-    margin-top: 100px;
-}
 
 .Reason-to-rent-container h3{
     font-size: 32px;
@@ -24,13 +20,6 @@
     font-weight: 400;
 }
 
-
-.Reasons-icons-li{
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 20px;
-}
 
 
 /* for mobile screens */

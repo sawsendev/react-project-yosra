@@ -5,13 +5,13 @@ import {FeedbacksTable} from "../../../Data/Data"
 
 const Feedback = () => {
   return (
-    <div className='Feedback-container container'>
+    <div className='Feedback-container mb-5 container'>
       <h3>Our flatmates talk about their experience with Fine cribs</h3>
       <div className="row Feedback-container">
             {FeedbacksTable.map((feedback, index) => {
               return (
                 <>
-                  <div key={index} className='feedback-icons-li col-lg-4 col-md-12 my-4'>
+                  <div key={index} className='feedback-icons-li d-flex gap-3 col-lg-4 col-md-12 my-4'>
                       <img src= {feedback.src} alt="icons" className="image-fluid"/>
                       <div className='feedback-icons-container'>
                         <div className='feedback-icons-content'>                   

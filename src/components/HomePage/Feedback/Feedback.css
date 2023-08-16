@@ -1,15 +1,6 @@
-.Feedback-container {
-    margin-bottom: 80px;
-}
-
 .Feedback-container h3 {
     font-size: 32px;
     font-weight: 400;
-    margin-bottom: 42px;
-}
-.feedback-icons-li{
-    display: flex;
-    gap: 30px;
 }
 
 .feedback-icons-content span{

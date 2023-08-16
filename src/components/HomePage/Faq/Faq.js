@@ -4,12 +4,12 @@ import arrow from "../../../assets/right-arrow 1.svg"
 
 const Faq = () => {
   return (
-    <><div className='Faq-container container-fluid'> 
+    <><div className='Faq-container w-100 container-fluid'> 
       <h3>Frequently asked questions</h3>
       <p>The most common questions that you might have before booking a room with us.</p>
     </div>
     <button className='Faq-btn'>Go to our FAQ page 
-    <img src={arrow} alt='icon'/>
+    <img  className='ms-2' src={arrow} alt='icon'/>
     </button></>
   )
 }

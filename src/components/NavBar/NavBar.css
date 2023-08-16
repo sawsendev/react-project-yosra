@@ -38,6 +38,9 @@
     padding: 0;
   }
 
+  .List-items {
+    display: block;
+  }
 
   .menu-icon {
         display: block;
@@ -66,14 +69,11 @@
     overflow: hidden;
     z-index: 999;
     width: 0;
+    display: block;
+
   }
 
   .nav-elements.active {
     width: 100%;
-  }
-
-  .nav-elements NavLink {
-    display: flex;
-    flex-direction: column;
   }
 }

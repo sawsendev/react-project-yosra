@@ -11,10 +11,10 @@ const Footer = () => {
   }
   return (
     <>
-    <div className='Footer-container'>
+    <div className='Footer-container p-4 d-flex justify-content-evenly align-items-center mb-2  text-align-center'>
       <div className='Apartements'>
         <h3>Our apartments</h3>
-       <div className='Footer-content'>
+       <div className='d-flex justify-content-start align-items-center gap-3'>
        <div className='First'>
             <p>Our apartments in Nice </p>
             <p>Our apartments in Florence</p>
@@ -27,7 +27,7 @@ const Footer = () => {
       </div>
       <div className='Useful-links'>
       <h3>Useful links</h3>
-      <div className='Footer-content'>
+      <div className='d-flex justify-content-start align-items-center gap-3'>
 
         <div className='First'>
            <p>FAQ</p>
@@ -41,7 +41,7 @@ const Footer = () => {
       </div>
       <div className='Create-alert'>
         <h3>You don’t find what you are looking for? </h3>
-        <button> <img src={bell} alt='bell'/>Create an alert</button>
+        <button className='d-flex align-items-center mt-4 p-3'> <img className='me-2' src={bell} alt='bell'/>Create an alert</button>
       </div>
     </div>
 

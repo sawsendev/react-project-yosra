@@ -5,7 +5,7 @@ import "./Reactions.css"
 const Reactions = () => {
   return (
     <div className='container'>
-       <div className="list-icons-container row py-3">
+       <div className="list-icons-container align-items-center row py-3">
             {IconsTable.map((icon, index) => {
               return (
                 <>

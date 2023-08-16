@@ -12,16 +12,7 @@
     font-weight: 400;
 }
 
-.Explore-more-container{
-    padding: 0;
-}
 
-.Explore-more-countries-content{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
-}
 
 .Explore-more-countries-content h3{
     font-size: 18px;
@@ -37,9 +28,6 @@
     position: relative;
 }
 
-.Pictures-countries img{
-    width: 100%;
-}
 
 .Room-content{
     width: 88px;
