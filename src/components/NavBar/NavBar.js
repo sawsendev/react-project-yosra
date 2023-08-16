@@ -3,6 +3,9 @@ import "./NavBar.css"
 import {NavTable} from "../../Data/Data"
 import logo from "../../assets/logo.svg"
 import hamburger from "../../assets/hamburger.png"
+import { NavLink } from 'react-router-dom'
+
+
 
 
 const NavBar = () => {
@@ -24,14 +27,13 @@ const NavBar = () => {
            </div>
            <div className={`nav-elements  ${showNav && 'active'}`}
             onClick={toggleNavItems}>
-            <ul className='List-container'>
               {NavTable.map((navItem, index) => {
                 return (
-                    <li className= "List-items" key={index}>{navItem.name}</li>
+                    <NavLink key={index} className= "List-items"  to={navItem.href}>{navItem.name}</NavLink>
                 );
               })}
-            </ul>
            </div>
+
       </nav>
   )
 }

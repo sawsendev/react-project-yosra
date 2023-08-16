@@ -32,22 +32,22 @@ import room_city from "../assets/bacdbb_723fc3ba38f34640b08464a29a8990c9~mv2 1.s
 export const NavTable = [
     {
         id: 0,
-        href: "#Home",
+        href: "Home",
         name: "HOME"
     },
     {
         id: 1,
-        href: "#Propose",
+        href: "Propose",
         name: "I PROPOSE AN APARTEMENT"
     },
     {
         id: 2,
-        href: "#Contact",
+        href: "Contact",
         name: "CONTACT"
     },
     {
         id: 3,
-        href: "#Faq",
+        href: "Faq",
         name: "FAQ"
     },
 ]

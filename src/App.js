@@ -11,6 +11,7 @@ import Faqspage from './components/Faqspage/Faqspage';
 import NoRoom from './components/SearchCities/NoRoom/NoRoom';
 import Contact from './components/Contact/Contact';
 import BookingRoom from './components/BookingRoom/BookingRoom';
+import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs';
 
 
 
@@ -22,17 +23,17 @@ function App() {
     <div>
       <BrowserRouter>
         <NavBar/>
+        <Breadcrumbs/>
+
       <Routes>
-        <Route path="/" element={<Homepage/>} /> 
-        <Route path="/SearchCities" element={<SearchCities/>} /> 
-        <Route path="/Cms" element={<Cms/>} /> 
-        <Route path="/Faq" element={<Faqspage/>} />     
-        <Route path="/Error" element={<ErrorPage/>} /> 
+        <Route path='/home' element={<Homepage/>} /> 
+        <Route path="/searchCities" element={<SearchCities/>} /> 
+        <Route path="/cms" element={<Cms/>} /> 
+        <Route path="/faq" element={<Faqspage/>} />     
+        <Route path="*" element={<ErrorPage/>} /> 
         <Route path="/noRoom" element={<NoRoom/>} /> 
-        <Route path="/Contact" element={<Contact/>} /> 
-        <Route path="/BookRoom" element={<BookingRoom/>} /> 
-
-
+        <Route path="/contact" element={<Contact/>} /> 
+        <Route path="/propose" element={<BookingRoom/>} /> 
       </Routes>
       <Faq/>
       <Footer/>

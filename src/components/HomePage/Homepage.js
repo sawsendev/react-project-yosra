@@ -9,7 +9,7 @@ import ExploreMore from './ExploreMore/ExploreMore';
 
 const Homepage = () => {
   return (
-    <div>
+    <div id='Home'>
         <Intro/>
         <Reactions></Reactions>
         <ExploreMore/>

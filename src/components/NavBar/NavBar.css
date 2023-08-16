@@ -38,9 +38,6 @@
     padding: 0;
   }
 
-  /* .NavBar-container>img {
-    width: 50%;
-  } */
 
   .menu-icon {
         display: block;
@@ -75,13 +72,8 @@
     width: 100%;
   }
 
-  .nav-elements ul {
+  .nav-elements NavLink {
     display: flex;
     flex-direction: column;
-  }
-
-  .nav-elements ul li {
-    margin-right: unset;
-    margin-top: 22px;
   }
 }
