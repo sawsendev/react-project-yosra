@@ -58,13 +58,13 @@ const BookingProcess = () => {
         <div className='col-xm-12'>
          <h3 className='Book-container-heading'>Payments</h3>
          <div className='Progress-bar'>
-        <div className='d-flex align-items-baseline justify-content-start'>
+        <div className='d-flex align-items-baseline justify-content-start margin-bottom-min-20'>
           <div class="steps">
             <span><i class="fa fa-check">1</i></span>
           </div>
           <div className='Payments-steps m-2'>
-            <span>Now</span>
-            <p>Nothing to pay</p>
+            <span className='mb-0'>Now</span>
+            <p className='mb-0'>Nothing to pay</p>
           </div>
         </div>
 
@@ -72,15 +72,15 @@ const BookingProcess = () => {
          <span class="line"></span>
             
 
-          <div className='d-flex align-items-baseline justify-content-start'>
+          <div className='d-flex align-items-baseline justify-content-start margin-bottom-min-20'>
             <div class="steps">
               <span><i class="fa fa-check">2</i></span>
             </div>
             <div className='Payments-steps m-2'>
               <span>Upon signing the tenancy agreement </span>
-              <div className='Fee d-flex'>
-                 <p className='me-4'>Administration fee</p>
-                 <span>€250</span>
+              <div className='Fee row'>
+                 <p className=' col-auto mb-0'>Administration fee</p>
+                 <span className='col-auto mb-0'>€250</span>
               </div>
           </div>
           </div>
@@ -89,19 +89,19 @@ const BookingProcess = () => {
 
             <span class="line"></span>
 
-          <div className='d-flex align-items-baseline justify-content-start'>
+          <div className='d-flex align-items-baseline justify-content-start margin-bottom-min-40'>
            <div class="steps">
               <span class="font-weight-bold">3</span>
             </div>
             <div className='Payments-steps m-2'>
               <span>Before check-in</span>
-              <div className='Fee d-flex'>
-                 <p className='me-4'>1° month rent</p>
-                 <span>€542</span>
+              <div className='Fee row'>
+                 <p className='col-auto mb-0'>1° month rent</p>
+                 <span className='col-auto mb-0'>€542</span>
               </div>
-              <div className='Fee d-flex'>
-                 <p className='me-4'>Deposit</p>
-                 <span>€400</span>
+              <div className='Fee row'>
+                 <p className='col-auto mb-0'>Deposit</p>
+                 <span className='col-auto mb-0'>€400</span>
               </div>
             </div>
 
@@ -109,15 +109,15 @@ const BookingProcess = () => {
           <span class="line"></span>
 
 
-          <div className='d-flex align-items-baseline justify-content-start'>
+          <div className='d-flex align-items-baseline justify-content-start margin-bottom-min-40'>
           <div class="steps">
               <span class="font-weight-bold">4</span>
             </div>
             <div className='Payments-steps m-2'>
               <span>During your stay</span>
-              <div className='Fee d-flex'>
-                 <p className='me-4'>Monthly rent</p>
-                 <span>€600</span>
+              <div className='Fee row'>
+                 <p className='col-md-5 mb-0'>Monthly rent</p>
+                 <span className='col-md-5 mb-0'>€600</span>
               </div>
             </div>
           </div>
@@ -125,7 +125,7 @@ const BookingProcess = () => {
           <span class="line"></span>
 
 
-          <div className='d-flex align-items-baseline justify-content-start'>
+          <div className='d-flex align-items-baseline justify-content-start margin-bottom-min-40'>
           <div class="steps">
               <span class="font-weight-bold">5</span>
             </div>

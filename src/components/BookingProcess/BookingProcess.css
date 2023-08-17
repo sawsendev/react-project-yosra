@@ -4,10 +4,10 @@
     padding: 2rem;
 }
 
-.Book-container .row {
+.Book-container>.row {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 6px;
-    padding: 1rem;
+    padding: 2rem 0;
 }
 
 
@@ -34,6 +34,14 @@
  .Fee span{
     font-size: 14px;
     font-weight: 400;
+ }
+
+ .margin-bottom-min-20{
+    margin-bottom: -20px;
+ }
+
+ .margin-bottom-min-40{
+    margin-bottom: -40px;
  }
 
  .Fee {
@@ -66,4 +74,14 @@
     justify-content: center;
     border-radius: 50%;
 
+}
+
+@media (max-width: 600px) {
+    .Payments-steps span {
+        font-size: 11px;
+        font-weight: 800;
+    } 
+    .Progress-paragraph p{
+        font-size: 14px;
+    }
 }
