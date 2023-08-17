@@ -121,7 +121,7 @@ export function ekUpload(){
           };
   
           // Start upload
-          xhr.open('POST', document.getElementById('file-upload-form').action, true);
+          xhr.open('POST', document.getElementById('file-upload-form').action, true );
           xhr.setRequestHeader('X-File-Name', file.name);
           xhr.setRequestHeader('X-File-Size', file.size);
           xhr.setRequestHeader('Content-Type', 'multipart/form-data');
