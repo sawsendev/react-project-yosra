@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
+
+
 import StepsToBook from "../HomePage/StepsToBook/StepsToBook"
 import "./BookingRoom.scss"
+
 import sendImg from "../../assets/send 1.svg"
 import upload from "../../assets/image-gallery.svg"
 import payslip from "../../assets/g2115.svg"
@@ -12,7 +15,10 @@ import thinking from "../../assets/thinking.svg"
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import BookingProcess from '../BookingProcess/BookingProcess';
+
+import {ekUpload} from "./Upload"
 const BookingRoom = () => {
+
 
   const[phoneNumber, setPhoneNumber]=useState("")
   const[valid, setValid]=useState(true)
@@ -93,11 +99,12 @@ const BookingRoom = () => {
                 </div>
               </div>
     
-            <h3 className='Booking-content-heading'>Looking to speed up the booking process?  Save time by completing your file now
+           {/* *********** */}
+           <h3 className='Booking-content-heading'>Looking to speed up the booking process?  Save time by completing your file now
             (optional)</h3>
             {/* Upload  */}
            
-              <input id="file-upload" type="file" name="fileUpload" accept="image/*" />
+              <input id="file-upload" type="file" name="fileUpload" accept="image/*" onClick={ekUpload}/>
               <label className='Input-upload' for="file-upload" id="file-drag">
                 <img id="file-image" src={upload} alt="Preview"/>
                 <div id="start">
@@ -115,12 +122,13 @@ const BookingRoom = () => {
             <div className='row'>
               <div className='col-md-4 col-xs-12'>
                   {/* Upload  */}
-                  <input id="file-upload" type="file" name="fileUpload" accept="image/*" />
+                  <input id="file-upload" type="file" name="fileUpload" accept="image/*" onClick={ekUpload}/>
                   <label  className='Input-upload' for="file-upload" id="file-drag">
                     <img id="file-image" src={certificate} alt="Preview"/>
                     <div id="start">
                       <div id="notimage">Your school enrollment
-                       certificate </div>
+                       certificate 
+                      </div>
                     </div>
                     <div id="response" class="hidden">
                       <div id="messages"></div>
@@ -133,7 +141,7 @@ const BookingRoom = () => {
               <div className='col-md-4 col-xs-12'>
                 {/* Upload  */}
                         
-                <input id="file-upload" type="file" name="fileUpload" accept="image/*" />
+                <input id="file-upload" type="file" name="fileUpload" accept="image/*" onClick={ekUpload}/>
                       <label  className='Input-upload' for="file-upload" id="file-drag">
                         <img id="file-image" src={groupId} alt="Preview"/>
                         <div id="start">
@@ -150,7 +158,7 @@ const BookingRoom = () => {
               <div className='col-md-4 col-xs-12'>
                       {/* Upload  */}
               
-                  <input id="file-upload" type="file" name="fileUpload" accept="image/*" />
+                  <input id="file-upload" type="file" name="fileUpload" accept="image/*" onClick={ekUpload}/>
                   <label  className='Input-upload' for="file-upload" id="file-drag">
                     <img id="file-image" src={inVoice} alt="Preview"/>
                     <div id="start">
@@ -171,7 +179,7 @@ const BookingRoom = () => {
             <h3 className='Booking-content-heading'>Are you a professional ?</h3>
             {/* Upload  */}
            
-              <input id="file-upload" type="file" name="fileUpload" accept="image/*" />
+              <input id="file-upload" type="file" name="fileUpload" accept="image/*" onChange={ekUpload}/>
               <label  className='Input-upload' for="file-upload" id="file-drag">
                 <img id="file-image" src={payslip} alt="Preview"/>
                 <div id="start">
@@ -184,8 +192,12 @@ const BookingRoom = () => {
                   </progress>
                 </div>
               </label>
-              <button type="submit" class="btn btn-primary btn-block mb-4 float-end bg-dark">Apply</button>
+              <button id="file-upload-btn" type="submit" class="btn btn-primary btn-block mb-4 float-end bg-dark">Apply</button>
             
+           
+
+
+           {/* ******************* */}
             </form>
 
           </div>
