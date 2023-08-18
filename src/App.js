@@ -26,7 +26,7 @@ function App() {
         <Breadcrumbs/>
 
       <Routes>
-        <Route path='/' index element={<Homepage/>} /> 
+        <Route path='/home' index element={<Homepage/>} /> 
         <Route path="/searchCities" element={<SearchCities/>} /> 
         <Route path="/cms" element={<Cms/>} /> 
         <Route path="/faq" element={<Faqspage/>} />     

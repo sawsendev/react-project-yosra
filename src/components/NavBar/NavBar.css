@@ -6,6 +6,10 @@
     background-color: white;
 }
 
+.NavBar-container img {
+  cursor: pointer;
+}
+
 
 .List-container {
     display: flex;
@@ -20,9 +24,15 @@
     color: black;
     font-size: 18px;
     font-weight: 400;
+    cursor: pointer;
 }
 
-.List-items:hover {
+.List-items:hover{
+  color: black
+}
+
+
+.List-items.active {
   background-color: black;
   border-radius: 10px;
   color: white;

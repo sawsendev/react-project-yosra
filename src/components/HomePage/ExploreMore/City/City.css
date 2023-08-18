@@ -1,0 +1,10 @@
+.flex-none{
+    flex-wrap: nowrap;
+}
+
+  /* for mobile screens */
+  @media (max-width: 808px) {
+   .Pictures-countries img {
+    width: 100%;
+    }
+  }

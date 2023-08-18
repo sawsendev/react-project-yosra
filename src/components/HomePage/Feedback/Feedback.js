@@ -12,13 +12,17 @@ const Feedback = () => {
               return (
                 <>
                   <div key={index} className='feedback-icons-li d-flex gap-3 col-lg-4 col-md-12 my-4'>
+                     <div className='row'>
+                      <div className='col-auto'>
                       <img src= {feedback.src} alt="icons" className="image-fluid"/>
-                      <div className='feedback-icons-container'>
+                      </div>
+                      <div className='feedback-icons-container col'>
                         <div className='feedback-icons-content'>                   
                            <span>{feedback.name}</span>
                            <p>{feedback.content}</p>
                         </div>
                       </div>
+                     </div>
                   </div>
                 </>
               );

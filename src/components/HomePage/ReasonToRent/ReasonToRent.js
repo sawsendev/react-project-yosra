@@ -14,11 +14,16 @@ const ReasonToRent = () => {
             {ReasonsTable.map((icon, index) => {
               return (
                 <>
-                  <div key={index} className='Reasons-icons-li d-flex justify-content-between align-items-start col-lg-4 gap-3 col-md-6 col-sm-12 pe-4'>
+                  <div key={index} className='align-items-start col-lg-4 gap-3 col-md-6 col-sm-12 '>
+                    <div className='row'>
+                      <div className='col-auto'>
                       <img src= {icon.src} alt="icons"/>
-                      <div className='Reasons-icons-container'>
+                      </div>
+                      <div className='Reasons-icons-container col'>
                       <h3>{icon.count}</h3>
-                      <p>{icon.content}</p></div>
+                      <p>{icon.content}</p>
+                      </div>
+                    </div>
                   </div>
                 </>
               );

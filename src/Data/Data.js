@@ -171,7 +171,7 @@ export const ExploreCitiesTable = [
         src: Bologna,
         city:"Bologna",
         count: 12
-    },
+    }
 ]
 
 export const FeedbacksTable = [
@@ -351,4 +351,30 @@ export const CribesTable =[
 
     },
 
+]
+
+
+export const UploadArray = [
+    {
+        id:0,
+        heading: " Looking to speed up the booking process?  Save time by completing your file now(optional)"
+    },
+
+    {
+        id:1,
+        heading: "Are you a student?"
+    },
+
+    {
+        id:2,
+        heading: ""
+    },
+    {
+        id:3,
+        heading: ""
+    },
+    {
+        id:4,
+        heading: "Are you a professional ?"
+    }
 ]

@@ -3,7 +3,7 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    z-index: -9999;
+    height: 600px;
 }
 
 
@@ -11,7 +11,7 @@
     opacity: 0.9;
     background-color: #00000066;
     padding: 50px;
-    margin: auto;   
+    margin: 100px auto;   
     border-radius: 4px;
     display: block;
     max-width: 900px;
@@ -41,6 +41,7 @@
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     border-radius: 5px;
 }
+
 
 .List-select{
     position: relative;

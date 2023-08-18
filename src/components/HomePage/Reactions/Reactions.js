@@ -5,16 +5,17 @@ import "./Reactions.css"
 const Reactions = () => {
   return (
     <div className='container'>
-       <div className="list-icons-container align-items-center row py-3">
+       <div className="row ms-auto py-2">
             {IconsTable.map((icon, index) => {
               return (
                 <>
-                  <div key={index} className='col-lg-3 col-md-6 d-flex'>
-                      <img src= {icon.src} alt="icons"/>
-                      <div></div>
-                      <div className='Icons-container'>
+                  <div key={index} className='col-lg-3 col-6'>
+                    <div className='row'>
+                      <img className='col-auto' src= {icon.src} alt="icons"/>
+                      <div className='col'>
                       <h3>{icon.count}</h3>
                       <p>{icon.content}</p></div>
+                    </div>
                   </div>
                 </>
               );
