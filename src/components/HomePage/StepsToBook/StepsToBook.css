@@ -1,0 +1,56 @@
+.Steps-to-book-container h3{
+    font-size: 32px;
+    font-weight: 400;
+}
+
+.Steps-to-book-container p{
+    font-size: 16px;
+    font-weight: 400;
+   }
+
+
+.Steps-icons-container-ul  {
+    border: 1px solid #A0A9B2;
+    border-radius: 8px;
+}
+
+.Steps-icons-container-ul img{
+    width: 65px;
+}
+
+.Steps-icons-container h3 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.Steps-icons-container p{
+    margin: 0;
+}
+
+/* for mobile screens */
+@media (max-width: 600px) {
+    .Steps-to-book-container h3{
+        font-size: 24px;
+        font-weight: 400;
+    }
+
+    .Steps-to-book-container p{
+        font-size: 14px;
+        font-weight: 400;
+    }
+
+    .teps-icons-container-ul img{
+        width: 50px;
+    }
+
+    .Steps-icons-container h3{
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .Steps-icons-container h3{
+        font-size: 16px;
+        font-weight: 400;
+    }
+    
+}

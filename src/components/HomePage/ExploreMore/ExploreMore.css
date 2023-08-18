@@ -1,0 +1,53 @@
+.Explore-container{
+    position: relative;
+}
+
+.Explore-container h2{
+    font-size: 32px;
+    font-weight: 400;
+}
+
+.Explore-container p{
+    font-size: 16px;
+    font-weight: 400;
+}
+
+
+
+.Explore-more-countries-content h3{
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.Explore-more-countries-content p{
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.Pictures-countries{
+    position: relative;
+}
+
+
+.Room-content{
+    width: 88px;
+    justify-content: space-between;
+}
+
+.Room-content p{
+    margin: 0;
+}
+
+/* for mobile screens */
+@media (max-width: 600px) {
+    .Explore-container h2{
+        font-size: 26px;
+        font-weight: 400;
+    }
+
+    .Explore-container p{
+        font-size: 14px;
+        font-weight: 400;
+    }
+
+}

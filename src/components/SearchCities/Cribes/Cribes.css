@@ -1,0 +1,59 @@
+.Cribes-container{
+    border: 2px solid blue;
+    padding: 40px;
+}
+
+.Cribes-container h3{
+    font-size: 28px;
+    font-weight: 400;
+}
+
+
+.Rooms-cribes,
+.Rooms-cribes li{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.img-fluid {
+    max-width: 90%;
+}
+
+.Item-badge{
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.Rooms-content h3{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.Rooms-content p{
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0 0 0 10px;
+}
+
+.Rooms-content span{
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.Item-badge{
+    position: relative;
+    padding-top:20px;
+}
+
+.notify-badge{
+    position: absolute;
+    left:10px;
+    top:30px;
+    text-align: center;
+    border-radius: 10px;
+    color:white;
+    padding:5px 10px;
+    font-size:14px;
+    font-weight: 400;
+}

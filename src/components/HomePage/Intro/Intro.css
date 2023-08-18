@@ -1,0 +1,116 @@
+.Intro-container{
+    background-image: url("../../../assets//banner.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    z-index: -9999;
+}
+
+
+.Content-container{
+    opacity: 0.9;
+    background-color: #00000066;
+    padding: 50px;
+    margin: auto;   
+    border-radius: 4px;
+    display: block;
+    max-width: 900px;
+    width: 90%;
+    text-align: center;
+}
+
+.Content-container h3 {
+    font-size: 28px;
+    font-weight: 400;
+}
+
+.Content-container h2,
+.Content-container h3{
+    color: white;
+    text-align:center ;
+}
+
+.Content-container h2{
+  font-size: 46px;
+  font-weight: 600;
+}
+
+.Input-container{
+    background-color: white;
+    padding: 20px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 5px;
+}
+
+.List-select{
+    position: relative;
+}
+
+.Select-country-container,
+.Movie-date{ 
+    padding: 7px;
+    border-radius: 7px;
+    border-width: 1px;
+}
+
+input[type="date"]::before { 
+  content: attr(data-placeholder);
+  width: 100%;
+}
+
+input[type="date"]:focus::before,
+input[type="date"]:valid::before { display: none }
+
+
+.Search-btn {
+    outline: none;
+    border: none;
+    padding: 9px;
+    color: white;
+    background-color: black;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    width: 30%;
+}
+
+
+  /* for mobile screens */
+  @media (max-width: 600px) {
+    .Content-container{
+      padding: 20px;
+    }
+
+    .Content-container h3 {
+      font-size: 20px;
+      font-weight: 400;
+    }
+    .Input-container{
+      flex-direction: column;
+    }
+
+    .Content-container h2 {
+      font-size: 26px;
+      font-weight: 600;
+    }
+
+    .Select-country-container, .Movie-date {
+      padding: 10px 0;
+      margin: 5px 0;
+    }
+
+    .Intro-container{
+      background-position: right;
+    }
+
+    .Search-btn{
+      width: 100%;
+    }
+  }
+
+   /* for mobile screens */
+   @media (max-width: 808px) {
+    .Input-container{
+      gap: 20px;
+    }
+  }

@@ -1,0 +1,43 @@
+.Search-container{
+    background-color: #F1F2F4;
+    border-radius: 4px;
+    padding: 50px 200px;
+}
+
+.Search-container h3 {
+    font-size: 32px;
+    font-weight: 400;
+}
+
+.Form-city {
+    padding: 0;  
+}
+
+.Form-cities Form {
+  align-items: flex-end;
+}
+
+.Form-city select,
+.Form-city input{
+    width: 100%;
+    border: 1px solid #DDDDDD;
+    border-radius: 6px;
+    padding: 10px;
+}
+
+label{
+    display: block;
+    margin-bottom: 10px;
+}
+
+.Search-cribs-btn{
+    padding: 10px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    outline: none;
+    border: none;
+    color: white;
+    background-color: black;
+    border-radius: 6px;
+}

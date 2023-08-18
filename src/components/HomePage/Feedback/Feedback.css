@@ -1,0 +1,36 @@
+.Feedback-container h3 {
+    font-size: 32px;
+    font-weight: 400;
+}
+
+.feedback-icons-content span{
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.feedback-icons-content p{
+    font-size: 16px;
+    font-weight: 400px;
+}
+
+
+/* for mobile screens */
+@media (max-width: 600px) {
+    .Feedback-container h3{
+        font-size: 24px;
+        font-weight: 400;
+    }
+
+    .feedback-icons-li {
+        align-items: start;
+    }
+
+    .feedback-icons-li img {
+        width: 50px;
+    }
+
+    .feedback-icons-container {
+        max-width: 200px;
+        width: 80%;
+    }
+}

@@ -1,0 +1,41 @@
+.list-icons-container img {
+    width: 61px;
+    margin-right: 28px;
+}
+
+.list-icons{
+    align-items: center;
+}
+
+.Icons-container h3 {
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.Icons-container p {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+
+
+/* for mobile screens */
+@media (max-width: 600px) {
+    .Icons-container h3{
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .Icons-container p {
+        font-size: 14px;
+        font-weight: 400;
+        margin: 0;
+    }
+
+    .list-icons-container img {
+        width: 40%;
+        margin-right: 10px;
+    }
+    
+}
+

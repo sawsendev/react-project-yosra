@@ -1,0 +1,52 @@
+.Apartements h3,
+.Useful-links h3,
+.Create-alert h3 {
+    font-size: 18px;
+    text-align: start;
+    font-weight: 600;
+}
+
+.Apartements p,
+.Useful-links p {
+    font-size: 16px;
+    font-weight: 400;
+    text-align: start;
+    line-height: 30px;
+}
+
+.Create-alert button {
+   outline: none;
+   border: none;
+   font-size: 16px;
+   color: white;
+   border-radius: 10px;
+   background-color: black;
+}
+
+
+.Copyright {
+    text-align: center;
+    margin: 12px;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.Footer-container-mobile{
+    display: none;
+}
+
+@media (max-width: 808px) {
+    .Footer-container {
+      flex-direction: column;
+    }
+
+    .Footer-container{
+        display: none;
+    }
+
+    .Footer-container-mobile{
+        display: block;
+    }
+    
+}
+
