@@ -21,6 +21,7 @@
    color: white;
    border-radius: 10px;
    background-color: black;
+   padding: 10px;
 }
 
 
@@ -35,18 +36,19 @@
     display: none;
 }
 
+.Footer-container{
+    display: flex;
+  }
+    
+
 @media (max-width: 808px) {
-    .Footer-container {
-      flex-direction: column;
-    }
+  .Footer-container-mobile {
+    display: block;
+  }
 
-    .Footer-container{
-        display: none;
-    }
-
-    .Footer-container-mobile{
-        display: block;
-    }
+  .Footer-container{
+    display: none;
+  }
     
 }
 
