@@ -1,51 +1,40 @@
-.Faq-content{
-    margin-bottom: 50px;
+.FaqpagesContainer{
+    cursor: pointer;
 }
-
-.Faq-content h1{
-    font-size: 32px;
+.bloc-tabs>div,
+.TitlesRenting h2,
+.subTitlesRenting h4{
+    font-size: 18px;
     font-weight: 400;
-    text-align: center;
-    margin-bottom: 47px;
 }
 
-
-.nav-item{
-    width: 50%;
-    margin-bottom: 20px;
+.active-tabs{
+    border-bottom: 2px solid black;
 }
 
-.nav-link{
-   width: 100%;
-}
-
-.nav-tabs .nav-link.active{
-    border-bottom: 2px solid #000000;
-    width: 100%;
-    border-right: none;
-    border-top: none;
-    border-left: none;
-}
-
-
-.nav-tabs .nav-link:hover{
-    border-right: none;
-    border-top: none;
-    border-left: none;
-}
-
-.nav-tabs:focus,
-.nav-link:focus{
+.tabs{
     color: #A0A9B2;
+    border-bottom: 2px solid #A0A9B2;
 }
 
-.nav-pills{
-    width: 40%;
+
+.content {
+    display: none;
+}
+.content-active{
+    display: block;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link,
-.tab-content>.active {
-    background-color: #F5F5F5;
-    color: black;
-    padding: 20px;
+.TitlesRenting {
+    border: 2px solid #DDDDDD;
+    border-radius: 6px;
 }
+
+.TitlesRenting span{
+    color: #DDDDDD;
+}
+
+.subTitlesRenting {
+   background-color: #F5F5F5
+}
+
