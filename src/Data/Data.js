@@ -20,6 +20,11 @@ import f1 from "../assets/voyageurs-invites-pleins-smileys-2.svg";
 import f2 from "../assets/voyageurs-invites-pleins-smileys-1.svg";
 import f3 from "../assets/voyageurs-invites-pleins-smileys.svg";
 import room_city from "../assets/bacdbb_723fc3ba38f34640b08464a29a8990c9~mv2 1.svg";
+import upload from "../assets/image-gallery.svg"
+import payslip from "../assets/g2115.svg"
+import certificate from "../assets/certificate.svg"
+import groupId from "../assets/Groupe 1178.svg"
+import inVoice from "../assets/invoice.svg"
 
 
 
@@ -360,25 +365,35 @@ export const CribesTable =[
 export const UploadArray = [
     {
         id:0,
-        heading: " Looking to speed up the booking process?  Save time by completing your file now(optional)"
+        heading: " Looking to speed up the booking process?  Save time by completing your file now(optional)",
+        src: upload,
+        content: "Upload identity card"
     },
 
     {
         id:1,
-        heading: "Are you a student?"
+        heading: "Are you a student?",
+        src: certificate,
+        content: "image-gallery.svg"
     },
 
     {
         id:2,
-        heading: ""
+        heading: "",
+        src: groupId,
+        content: "Your guarantor’s ID"
     },
     {
         id:3,
-        heading: ""
+        heading: "",
+        src: payslip,
+        content: "Your guarantor’s last payslip or tax return"
     },
     {
         id:4,
-        heading: "Are you a professional ?"
+        heading: "Are you a professional ?",
+        src: inVoice,
+        content: "Upload your last payslip or tax declaration"
     }
 ]
 
