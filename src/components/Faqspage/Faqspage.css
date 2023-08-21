@@ -1,51 +1,69 @@
-.Faq-content{
-    margin-bottom: 50px;
+.FaqpagesContainer{
+    cursor: pointer;
 }
-
-.Faq-content h1{
-    font-size: 32px;
+.bloc-tabs>div,
+.TitlesRenting h2,
+.subTitlesRenting h4,
+.subTitlesRentingActive h4 {
+    font-size: 18px;
     font-weight: 400;
-    text-align: center;
-    margin-bottom: 47px;
 }
 
-
-.nav-item{
-    width: 50%;
-    margin-bottom: 20px;
+.active-tabs{
+    border-bottom: 2px solid black;
 }
 
-.nav-link{
-   width: 100%;
-}
-
-.nav-tabs .nav-link.active{
-    border-bottom: 2px solid #000000;
-    width: 100%;
-    border-right: none;
-    border-top: none;
-    border-left: none;
-}
-
-
-.nav-tabs .nav-link:hover{
-    border-right: none;
-    border-top: none;
-    border-left: none;
-}
-
-.nav-tabs:focus,
-.nav-link:focus{
+.tabs{
     color: #A0A9B2;
+    border-bottom: 2px solid #A0A9B2;
 }
 
-.nav-pills{
-    width: 40%;
+
+.content {
+    display: none;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link,
-.tab-content>.active {
+.subAnswers{
+    position: relative;
+}
+
+.collapseRenting
+ {
+    border: 2px solid #DDDDDD;
+    border-radius: 6px;
+
+}
+
+
+.subTitlesRentingActive {
+   background-color: #F5F5F5;
+   margin-left: -48px;
+}
+
+.test {
+    position: absolute;
+    right: -48px;
+    top: 0;
+    height: 354px;
     background-color: #F5F5F5;
-    color: black;
-    padding: 20px;
+    max-width: 80%;
+    width: 100%;
+    padding: 10px;
 }
+
+.icon {
+    fill: #DDDDDD;
+  }
+
+.TitlesRenting {
+    background-color: white;
+}
+
+  /* for mobile screens */
+  @media (max-width: 808px) {
+    .test{
+        position: relative;
+        max-width: 100%;
+        right: 0;
+    }
+  }

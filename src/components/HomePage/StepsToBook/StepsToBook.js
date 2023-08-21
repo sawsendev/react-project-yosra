@@ -13,12 +13,17 @@ const StepsToBook = () => {
             {StepsTable.map((icon, index) => {
               return (
                 <>
-                 <div key={index}  className='align-items-stretch Steps-icons-container d-flex col-lg-3 col-md-12 '>
-                  <div className='Steps-icons-container-ul w-100 d-flex gap-4 p-3 mb-4'>
-                  <img src= {icon.src} alt="icons"/>
-                      <div className='Steps-icons-container'>
-                      <h3>{icon.count}</h3>
-                      <p>{icon.content}</p></div>
+                 <div key={index}  className='align-items-start Steps-icons-container py-0 col-lg-3 col-md-12 '>
+                  <div className='row h-100 p-2'>
+                        <div className='Steps-icons-container-ul d-flex p-2 gap-2'>
+                        <div className="col-auto">                  
+                          <img src= {icon.src} alt="icons"/>
+                        </div>
+                      <div className='Steps-icons-container col'>
+                          <h3 className='m-0'>{icon.count}</h3>
+                          <p>{icon.content}</p>
+                      </div>
+                    </div>
                   </div>    
                   </div>
                 </>

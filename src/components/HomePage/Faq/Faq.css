@@ -34,8 +34,6 @@
     width: 10%;
 }
 
-
-
   @media (max-width:600px) {
     .Faq-container h3 {
         font-size: 25px;

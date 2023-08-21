@@ -20,6 +20,11 @@ import f1 from "../assets/voyageurs-invites-pleins-smileys-2.svg";
 import f2 from "../assets/voyageurs-invites-pleins-smileys-1.svg";
 import f3 from "../assets/voyageurs-invites-pleins-smileys.svg";
 import room_city from "../assets/bacdbb_723fc3ba38f34640b08464a29a8990c9~mv2 1.svg";
+import upload from "../assets/image-gallery.svg"
+import payslip from "../assets/g2115.svg"
+import certificate from "../assets/certificate.svg"
+import groupId from "../assets/Groupe 1178.svg"
+import inVoice from "../assets/invoice.svg"
 
 
 
@@ -148,7 +153,7 @@ export const StepsTable = [
     }
 ]
 
-// ExploreCities
+// ExploreCitiesTable
 export const ExploreCitiesTable = [
     {
         id:0,
@@ -171,9 +176,10 @@ export const ExploreCitiesTable = [
         src: Bologna,
         city:"Bologna",
         count: 12
-    },
+    }
 ]
 
+// FeedbackTable
 export const FeedbacksTable = [
     {
         id:0,
@@ -195,6 +201,8 @@ export const FeedbacksTable = [
     },
 ]
 
+
+// CribsTable
 export const CribesTable =[
     {
         id:0,
@@ -351,4 +359,226 @@ export const CribesTable =[
 
     },
 
+]
+
+// UploadTable
+export const UploadArray = [
+    {
+        id:0,
+        heading: " Looking to speed up the booking process?  Save time by completing your file now(optional)",
+        src: upload,
+        content: "Upload identity card"
+    },
+
+    {
+        id:1,
+        heading: "Are you a student?",
+        src: certificate,
+        content: "image-gallery.svg"
+    },
+
+    {
+        id:2,
+        heading: "",
+        src: groupId,
+        content: "Your guarantor’s ID"
+    },
+    {
+        id:3,
+        heading: "",
+        src: payslip,
+        content: "Your guarantor’s last payslip or tax return"
+    },
+    {
+        id:4,
+        heading: "Are you a professional ?",
+        src: inVoice,
+        content: "Upload your last payslip or tax declaration"
+    }
+]
+
+
+// FaqspageTables
+export const FaqspageTableRenting = [
+{
+    id:0,
+    title:"Prepare your move",
+    subTitles:[
+        {
+        id:0,
+        title:"How to sign the tenancy agreement?",
+        answer:"Once your booking is confirmed, you will need to sign the tenancy agreement on “Rentila”, which is the external provider that we use. For more information, please follow the instructions in the video below to view and sign your tenancy agreement, and to prepare your check-in ",  
+        src:"https://www.youtube.com/watch?v=A8KyCMT78MI" 
+    },
+    {
+        id:1,
+        title:"What does the administration fee cover? ", 
+        answer:"Once your booking is confirmed, you will need to sign the tenancy agreement on “Rentila”, which is the external provider that we use. For more information, please follow the instructions in the video below to view and sign your tenancy agreement, and to prepare your check-in ",  
+        src:"https://www.youtube.com/watch?v=A8KyCMT78MI"
+    },
+    {
+        id:2,
+        title:"Can I cancel a booking? ",
+        answer:"Once your booking is confirmed, you will need to sign the tenancy agreement on “Rentila”, which is the external provider that we use. For more information, please follow the instructions in the video below to view and sign your tenancy agreement, and to prepare your check-in ",  
+        src:"https://www.youtube.com/watch?v=A8KyCMT78MI" 
+    },
+    {
+        id:3,
+        title:"What type of furniture and equipment will I find in the apartment? ",
+        answer:"Once your booking is confirmed, you will need to sign the tenancy agreement on “Rentila”, which is the external provider that we use. For more information, please follow the instructions in the video below to view and sign your tenancy agreement, and to prepare your check-in ",  
+        src:"https://www.youtube.com/watch?v=A8KyCMT78MI"
+    },
+    {
+        id:4,
+        title:"Are there any costs related to my  booking?",
+        answer:"Once your booking is confirmed, you will need to sign the tenancy agreement on “Rentila”, which is the external provider that we use. For more information, please follow the instructions in the video below to view and sign your tenancy agreement, and to prepare your check-in ",  
+        src:"https://www.youtube.com/watch?v=A8KyCMT78MI"
+    }
+   ]   
+},
+{
+    id:1,
+    title:"During your stay",
+    subTitles:[
+        {
+        id:0,
+        title:"How to sign the tenancy agreement?",
+        answer:"Once your booking is confirmed, you will need to sign the tenancy agreement on “Rentila”, which is the external provider that we use. For more information, please follow the instructions in the video below to view and sign your tenancy agreement, and to prepare your check-in ",  
+        src:"" 
+    },
+    {
+        id:1,
+        title:"What does the administration fee cover? ", 
+        answer:"Once your booking is confirmed, you will need to sign the tenancy agreement on “Rentila”, which is the external provider that we use. For more information, please follow the instructions in the video below to view and sign your tenancy agreement, and to prepare your check-in ",  
+        src:""
+    },
+    {
+        id:2,
+        title:"Can I cancel a booking? ",
+        answer:"Once your booking is confirmed, you will need to sign the tenancy agreement on “Rentila”, which is the external provider that we use. For more information, please follow the instructions in the video below to view and sign your tenancy agreement, and to prepare your check-in ",  
+        src:"" 
+    },
+    {
+        id:3,
+        title:"What type of furniture and equipment will I find in the apartment? ",
+        answer:"Once your booking is confirmed, you will need to sign the tenancy agreement on “Rentila”, which is the external provider that we use. For more information, please follow the instructions in the video below to view and sign your tenancy agreement, and to prepare your check-in ",  
+        src:""
+    },
+    {
+        id:4,
+        title:"Are there any costs related to my  booking?",
+        answer:"Once your booking is confirmed, you will need to sign the tenancy agreement on “Rentila”, which is the external provider that we use. For more information, please follow the instructions in the video below to view and sign your tenancy agreement, and to prepare your check-in ",  
+        src:""
+    }
+   ]   
+},
+{
+    id:2,
+    title:"Rent queries", 
+    subTitles:[
+        {
+        id:0,
+        title:"How to sign the tenancy agreement?",
+        answer:"Once your booking is confirmed, you will need to sign the tenancy agreement on “Rentila”, which is the external provider that we use. For more information, please follow the instructions in the video below to view and sign your tenancy agreement, and to prepare your check-in ",  
+        src:"" 
+    },
+    {
+        id:1,
+        title:"What does the administration fee cover? ", 
+        answer:"Once your booking is confirmed, you will need to sign the tenancy agreement on “Rentila”, which is the external provider that we use. For more information, please follow the instructions in the video below to view and sign your tenancy agreement, and to prepare your check-in ",  
+        src:""
+    },
+    {
+        id:2,
+        title:"Can I cancel a booking? ",
+        answer:"Once your booking is confirmed, you will need to sign the tenancy agreement on “Rentila”, which is the external provider that we use. For more information, please follow the instructions in the video below to view and sign your tenancy agreement, and to prepare your check-in ",  
+        src:"" 
+    },
+    {
+        id:3,
+        title:"What type of furniture and equipment will I find in the apartment? ",
+        answer:"Once your booking is confirmed, you will need to sign the tenancy agreement on “Rentila”, which is the external provider that we use. For more information, please follow the instructions in the video below to view and sign your tenancy agreement, and to prepare your check-in ",  
+        src:""
+    },
+    {
+        id:4,
+        title:"Are there any costs related to my  booking?",
+        answer:"Once your booking is confirmed, you will need to sign the tenancy agreement on “Rentila”, which is the external provider that we use. For more information, please follow the instructions in the video below to view and sign your tenancy agreement, and to prepare your check-in ",  
+        src:""
+    }
+   ] 
+},
+{
+    id:3,
+    title:"Prepare your check-out", 
+    subTitles:[
+        {
+        id:0,
+        title:"How to sign the tenancy agreement?",
+        answer:"Once your booking is confirmed, you will need to sign the tenancy agreement on “Rentila”, which is the external provider that we use. For more information, please follow the instructions in the video below to view and sign your tenancy agreement, and to prepare your check-in ",  
+        src:"" 
+    },
+    {
+        id:1,
+        title:"What does the administration fee cover? ", 
+        answer:"Once your booking is confirmed, you will need to sign the tenancy agreement on “Rentila”, which is the external provider that we use. For more information, please follow the instructions in the video below to view and sign your tenancy agreement, and to prepare your check-in ",  
+        src:""
+    },
+    {
+        id:2,
+        title:"Can I cancel a booking? ",
+        answer:"Once your booking is confirmed, you will need to sign the tenancy agreement on “Rentila”, which is the external provider that we use. For more information, please follow the instructions in the video below to view and sign your tenancy agreement, and to prepare your check-in ",  
+        src:"" 
+    },
+    {
+        id:3,
+        title:"What type of furniture and equipment will I find in the apartment? ",
+        answer:"Once your booking is confirmed, you will need to sign the tenancy agreement on “Rentila”, which is the external provider that we use. For more information, please follow the instructions in the video below to view and sign your tenancy agreement, and to prepare your check-in ",  
+        src:""
+    },
+    {
+        id:4,
+        title:"Are there any costs related to my  booking?",
+        answer:"Once your booking is confirmed, you will need to sign the tenancy agreement on “Rentila”, which is the external provider that we use. For more information, please follow the instructions in the video below to view and sign your tenancy agreement, and to prepare your check-in ",  
+        src:""
+    }
+   ]  
+  
+},
+{
+    id:4,
+    title:"Before you book", 
+    subTitles:[
+        {
+        id:0,
+        title:"How to sign the tenancy agreement?",
+        answer:"Once your booking is confirmed, you will need to sign the tenancy agreement on “Rentila”, which is the external provider that we use. For more information, please follow the instructions in the video below to view and sign your tenancy agreement, and to prepare your check-in ",  
+        src:"" 
+    },
+    {
+        id:1,
+        title:"What does the administration fee cover? ", 
+        answer:"Once your booking is confirmed, you will need to sign the tenancy agreement on “Rentila”, which is the external provider that we use. For more information, please follow the instructions in the video below to view and sign your tenancy agreement, and to prepare your check-in ",  
+        src:""
+    },
+    {
+        id:2,
+        title:"Can I cancel a booking? ",
+        answer:"Once your booking is confirmed, you will need to sign the tenancy agreement on “Rentila”, which is the external provider that we use. For more information, please follow the instructions in the video below to view and sign your tenancy agreement, and to prepare your check-in ",  
+        src:"" 
+    },
+    {
+        id:3,
+        title:"What type of furniture and equipment will I find in the apartment? ",
+        answer:"Once your booking is confirmed, you will need to sign the tenancy agreement on “Rentila”, which is the external provider that we use. For more information, please follow the instructions in the video below to view and sign your tenancy agreement, and to prepare your check-in ",  
+        src:""
+    },
+    {
+        id:4,
+        title:"Are there any costs related to my  booking?",
+        answer:"Once your booking is confirmed, you will need to sign the tenancy agreement on “Rentila”, which is the external provider that we use. For more information, please follow the instructions in the video below to view and sign your tenancy agreement, and to prepare your check-in ",  
+        src:""
+    }
+   ]   
+}
 ]

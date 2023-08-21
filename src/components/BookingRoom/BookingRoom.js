@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 
 import StepsToBook from "../HomePage/StepsToBook/StepsToBook"
 import "./BookingRoom.scss"
+import {UploadArray} from "../../Data/Data"
 
 import sendImg from "../../assets/send 1.svg"
 import upload from "../../assets/image-gallery.svg"
@@ -16,13 +17,31 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import BookingProcess from '../BookingProcess/BookingProcess';
 
-import {ekUpload} from "./Upload"
 const BookingRoom = () => {
+// ************************
+
+  const [mainFile, setMainFile] = useState(null);
+  const [subFiles, setSubFiles] = useState([ null, null, null]);
+  const [newFile, setNewFile] = useState(null);
+
+  const handleFileChange = (e, index) => {
+    const file = e.target.files[0];
+
+    if (index === 0) {
+      setMainFile(file);
+    } else if (index <= 3) {
+      const newSubFiles = [...subFiles];
+      newSubFiles[index - 1] = file;
+      setSubFiles(newSubFiles);
+    } else if (index === 4) {
+      setNewFile(file);
+    }
+  };
 
 
+  // ***************
   const[phoneNumber, setPhoneNumber]=useState("")
   const[valid, setValid]=useState(true)
-
 
   const handleChange=(value)=>{
    const input = value
@@ -35,15 +54,14 @@ const BookingRoom = () => {
     return phoneNumberPattern.test(phoneNumber);
   }
 
-
   return (
     <div className='container'>
       <div className='row'>
           <div className='Booking-content my-2 col-md-8 col-sm-12'>
             <h2>52 Rue Vernier, Nice - Room 5</h2>
             <span>Private room in Nice</span>
-            <div className='d-flex align-items-center Booking-content-application'>
-              <img src={sendImg} alt='send icon'/>
+            <div className='d-flex justify-content-start align-items-center Booking-content-application'>
+              <img className='me-2' src={sendImg} alt='send icon'/>
               <h3>Send your application</h3>
             </div>
             <form id="file-upload-form" class="uploader">
@@ -100,102 +118,122 @@ const BookingRoom = () => {
               </div>
     
            {/* *********** */}
-           <h3 className='Booking-content-heading'>Looking to speed up the booking process?  Save time by completing your file now
-            (optional)</h3>
-            {/* Upload  */}
-           
-              <input id="file-upload" type="file" name="fileUpload" accept="image/*" onClick={ekUpload}/>
-              <label className='Input-upload' for="file-upload" id="file-drag">
-                <img id="file-image" src={upload} alt="Preview"/>
-                <div id="start">
-                  <div id="notimage">Upload identity card </div>
-                </div>
-                <div id="response" class="hidden">
-                  <div id="messages"></div>
-                  <progress class="progress" id="file-progress" value="0">
-                    <span>0</span>%
-                  </progress>
-                </div>
-              </label>
-            
-            <h3 className='Booking-content-heading'>Are you a student?</h3>
-            <div className='row'>
-              <div className='col-md-4 col-xs-12'>
-                  {/* Upload  */}
-                  <input id="file-upload" type="file" name="fileUpload" accept="image/*" onClick={ekUpload}/>
-                  <label  className='Input-upload' for="file-upload" id="file-drag">
-                    <img id="file-image" src={certificate} alt="Preview"/>
-                    <div id="start">
-                      <div id="notimage">Your school enrollment
-                       certificate 
-                      </div>
-                    </div>
-                    <div id="response" class="hidden">
-                      <div id="messages"></div>
-                      <progress class="progress" id="file-progress" value="0">
-                        <span>0</span>%
-                      </progress>
-                    </div>
-                  </label>
-              </div>
-              <div className='col-md-4 col-xs-12'>
-                {/* Upload  */}
-                        
-                <input id="file-upload" type="file" name="fileUpload" accept="image/*" onClick={ekUpload}/>
-                      <label  className='Input-upload' for="file-upload" id="file-drag">
-                        <img id="file-image" src={groupId} alt="Preview"/>
-                        <div id="start">
-                            <div id="notimage">Your guarantor’s ID </div>
-                          </div>
-                        <div id="response" class="hidden">
-                        <div id="messages"></div>
-                        <progress class="progress" id="file-progress" value="0">
-                        <span>0</span>%
-                        </progress>
-                        </div>
-                      </label>                
-              </div>
-              <div className='col-md-4 col-xs-12'>
-                      {/* Upload  */}
-              
-                  <input id="file-upload" type="file" name="fileUpload" accept="image/*" onClick={ekUpload}/>
-                  <label  className='Input-upload' for="file-upload" id="file-drag">
-                    <img id="file-image" src={inVoice} alt="Preview"/>
-                    <div id="start">
-                      <div id="notimage"> Select a file or drag here</div>
-                      <div id="notimage" class="hidden">Your guarantor’s
- last payslip or tax return </div>
-                    </div>
-                    <div id="response" class="hidden">
-                      <div id="messages"></div>
-                      <progress class="progress" id="file-progress" value="0">
-                        <span>0</span>%
-                      </progress>
-                    </div>
-                  </label>
+            <div className="input-section">
+            {/* Main Input File */}
+            <label className="file-label">
+              Looking to speed up the booking process? Save time by completing your file now (optional)
+            </label>
+            <div className="input-container">
+            <label className="file-label">
+               <img className="d-block" src={upload} alt="upload"/>
+               <span className='first-span'>Upload identity card </span>
+
+            </label>
+              <div className="file-input">
+                <input
+                  type="file"
+                  accept=".pdf, .png, .jpg, .jpeg"
+                  onChange={(e) => handleFileChange(e, 0)}
+                />
+                {mainFile && (
+                  <div className="uploaded-file">
+                    {mainFile.type.startsWith('image/') ? (
+                      <img
+                        src={URL.createObjectURL(mainFile)}
+                        alt="Main File"
+                        className="uploaded-image"
+                      />
+                    ) : (
+                      <p className="uploaded-pdf">PDF File: {mainFile.name}</p>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
 
-            <h3 className='Booking-content-heading'>Are you a professional ?</h3>
-            {/* Upload  */}
-           
-              <input id="file-upload" type="file" name="fileUpload" accept="image/*" onChange={ekUpload}/>
-              <label  className='Input-upload' for="file-upload" id="file-drag">
-                <img id="file-image" src={payslip} alt="Preview"/>
-                <div id="start">
-                  <div id="notimage">Upload your last payslip or tax declaration </div>
+            {/* Sub-Input Files */}
+          
+            <label>Are you a student?</label>
+            <div className='sub-inputs m-0 row'>
+              {[1, 2, 3].map((item, index) => (
+                <div key={`sub-input-${index}`} className="input-container col-sm-4">
+                  <div className="file-input">
+                    <label className="file-label">
+                      {/* Change the title and image for each input */}
+                      {index === 0 && (
+                        <>
+                          <img src={certificate} alt="Certificate" />
+                          <span>Your school enrollment certificate</span>
+                        </>
+                      )}
+                      {index === 1 && (
+                        <>
+                          <img src={groupId} alt="guarantor" />
+                          <span> Your guarantor’s ID</span>
+                        </>
+                      )}
+                      {index === 2 && (
+                        <>
+                          <img src={payslip} alt="payslip" />
+                          <span>Your guarantor’s last payslip or tax return</span>
+                        </>
+                      )}
+                      <input
+                        type="file"
+                        accept=".pdf, .png, .jpg, .jpeg"
+                        onChange={(e) => handleFileChange(e, index)}
+                      />
+                    </label>
+                    {subFiles[index - 1] && (
+                      <div className="uploaded-file">
+                        {subFiles[index - 1].type.startsWith('image/') ? (
+                          <img
+                            src={URL.createObjectURL(subFiles[index - 1])}
+                            alt={`Sub File ${index}`}
+                            className="uploaded-image"
+                          />
+                        ) : (
+                          <p className="uploaded-pdf">PDF File: {subFiles[index - 1].name}</p>
+                        )}
+                      </div>
+                    )}
+                  </div>
                 </div>
-                <div id="response" class="hidden">
-                  <div id="messages"></div>
-                  <progress class="progress" id="file-progress" value="0">
-                    <span>0</span>%
-                  </progress>
-                </div>
-              </label>
-              <button id="file-upload-btn" type="submit" class="btn btn-primary btn-block mb-4 float-end bg-dark">Apply</button>
-            
-           
+              ))}
+            </div>
 
+
+
+
+            {/* Last Input File */}
+            <label className="file-label">Are you a professional ?</label>
+            <div className="input-container">
+              <label className="file-label">
+                <img className="d-block" src={inVoice} alt="invoice" />
+                <span className='last-span'>Upload your last payslip or tax declaration</span>
+              </label>
+              <div className="file-input">
+                <input
+                  type="file"
+                  accept=".pdf, .png, .jpg, .jpeg"
+                  onChange={(e) => handleFileChange(e, 4)}
+                />
+                {newFile && (
+                  <div className="uploaded-file">
+                    {newFile.type.startsWith('image/') ? (
+                      <img
+                        src={URL.createObjectURL(newFile)}
+                        alt="Last File"
+                        className="uploaded-image"
+                      />
+                    ) : (
+                      <p className="uploaded-pdf">PDF File: {newFile.name}</p>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+            </div>
 
            {/* ******************* */}
             </form>

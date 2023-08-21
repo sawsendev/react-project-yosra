@@ -20,17 +20,4 @@
         font-size: 24px;
         font-weight: 400;
     }
-
-    .feedback-icons-li {
-        align-items: start;
-    }
-
-    .feedback-icons-li img {
-        width: 50px;
-    }
-
-    .feedback-icons-container {
-        max-width: 200px;
-        width: 80%;
-    }
 }

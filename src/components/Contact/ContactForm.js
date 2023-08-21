@@ -25,7 +25,7 @@ const ContactForm = () => {
   return (
       <form className='col-md-5 me-auto'>
         <h3>We are here to help</h3>
-        <span>Leave a message</span>
+        <h2 className='contact-heading'>Leave a message</h2>
         <div class="row mb-4">
             <div class="col-sm-6">
                 <div class="form-outline">
