@@ -64,25 +64,14 @@ const BookingRoom = () => {
     return phoneNumberPattern.test(phoneNumber);
   }
 
-
-
-  // const [files, setFiles] = useState(Array(5).fill(null));
-
-  // const handleFileChange = (event, index) => {
-  //   const newFiles = [...files];
-  //   newFiles[index] = event.target.files[0];
-  //   setFiles(newFiles);
-  // };
-
-
   return (
     <div className='container'>
       <div className='row'>
           <div className='Booking-content my-2 col-md-8 col-sm-12'>
             <h2>52 Rue Vernier, Nice - Room 5</h2>
             <span>Private room in Nice</span>
-            <div className='d-flex align-items-center Booking-content-application'>
-              <img src={sendImg} alt='send icon'/>
+            <div className='d-flex align-items-start align-items-center Booking-content-application'>
+              <img className='me-2' src={sendImg} alt='send icon'/>
               <h3>Send your application</h3>
             </div>
             <form id="file-upload-form" class="uploader">

@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import "./Faqspage.css"
 import {FaqspageTableRenting} from "../../Data/Data"
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+
 
 
 const Faqspage = () => {
@@ -39,32 +41,36 @@ const Faqspage = () => {
                <div className={`col-md-6 text-center pb-3 mb-3 ${toggleState === 2 ? "active-tabs" : "tabs"}`}
                onClick={()=>toggleTab(2)}>Partnering with Finecribs</div>
            </div>
-           <div className='tabs-content'>
+           <div className='tabs-content my-4'>
             <div  className={toggleState === 1 ? " active-content" : "content"}
                onClick={()=>toggleTab(1)}>
                     
-               <div className='display-block'>
+               <div className='display-block '>
                {FaqspageTableRenting.map((renting, index) => (
-               <div key={index}>
-                    <div
-                    className='TitlesRenting my-4 pe-4 align-items-center d-flex justify-content-between'
+               <div key={index} className='collapseRenting my-4'>
+                    <div 
+                    className='TitlesRenting pe-4 align-items-center d-flex justify-content-between'
                     onClick={() => toggleSubTabs(index)}
                     >
                     <h2 className='p-3'>{renting.title}</h2>
                     <span
                          dangerouslySetInnerHTML={{
-                         __html: selected === index ? '&#8891;' : '&#8892;',
-                         }}
-                    ></span>
+                          __html: selected === index ? `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" class="icon" viewBox="0 0 32 32"><path d="M16 23.5l-6.178-6.177a1 1 0 0 1 1.414-1.415L16 20.586l5.764-5.778a1 1 0 0 1 1.414 1.415L16 23.5z"/></svg>`
+                          : `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" class="icon" viewBox="0 0 32 32">
+                          <path d="M16 8.5l-6.178 6.177a1 1 0 0 1-1.414-1.415L16 5.414l5.764 5.778a1 1 0 0 1-1.414 1.415L16 8.5z"/>
+                        </svg>
+                        `
+                         }}></span>
+
 
                     </div>
-                    <div className={selected === index ? "active-content" : "content"}>
+                    <div className={`mx-5 subAnswers ${selected === index ? "active-content" : "content"}`}>
                     {renting.subTitles ? (
                          renting.subTitles.map((subTitle, subIndex) => (
-                         <div key={subIndex} className='subTitlesRenting my-2 p-4 row align-items-center justify-content-between'>
+                         <div key={subIndex} className={`my-2 pr-5 py-2 row align-items-baseline justify-content-between ${selectedAnswer === subIndex ? "subTitlesRentingActive" : "subTitlesRenting"}`}>
                          <h4 className='col-lg-3 col-sm-12'
                          onClick={()=>toggleSubTabsAnswers(subIndex)}>{subTitle.title}</h4>
-                         <p className={`col-lg-9 col-sm-12  ${selectedAnswer === subIndex ? "active-content" : "content"}`}>{subTitle.answer}</p>
+                         <p className={`col-lg-9 col-sm-12 test  ${selectedAnswer === subIndex ? "active-content" : "content"}`}>{subTitle.answer}</p>
                          </div>
                          ))
                     ) : (

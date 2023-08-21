@@ -3,7 +3,8 @@
 }
 .bloc-tabs>div,
 .TitlesRenting h2,
-.subTitlesRenting h4{
+.subTitlesRenting h4,
+.subTitlesRentingActive h4 {
     font-size: 18px;
     font-weight: 400;
 }
@@ -21,20 +22,48 @@
 .content {
     display: none;
 }
-.content-active{
-    display: block;
+
+.subAnswers{
+    position: relative;
 }
 
-.TitlesRenting {
+.collapseRenting
+ {
     border: 2px solid #DDDDDD;
     border-radius: 6px;
+
 }
 
-.TitlesRenting span{
-    color: #DDDDDD;
+
+.subTitlesRentingActive {
+   background-color: #F5F5F5;
+   margin-left: -48px;
 }
 
-.subTitlesRenting {
-   background-color: #F5F5F5
+.test {
+    position: absolute;
+    right: -48px;
+    top: 0;
+    height: 354px;
+    background-color: #F5F5F5;
+    max-width: 80%;
+    width: 100%;
+    padding: 10px;
 }
 
+.icon {
+    fill: #DDDDDD;
+  }
+
+.TitlesRenting {
+    background-color: white;
+}
+
+  /* for mobile screens */
+  @media (max-width: 808px) {
+    .test{
+        position: relative;
+        max-width: 100%;
+        right: 0;
+    }
+  }
