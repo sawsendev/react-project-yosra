@@ -59,6 +59,15 @@
   background-color: #fff;
 }
 
+.sub-inputs {
+  display: flex;
+}
+
+.sub-inputs div{
+  width: 33%;
+  margin-right: 5px;
+}
+
 .uploaded-image {
   max-width: 100%;
   height: auto;
@@ -71,5 +80,10 @@
 }
 
 
-
-
+/* Styling the file input text (optional) */
+.file-input input[type="file"] {
+  border: 3px solid red;
+  background-image: url("../../assets//invoice.svg");
+  padding: 2rem;
+  width: 30%;
+}
