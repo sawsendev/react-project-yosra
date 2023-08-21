@@ -60,7 +60,7 @@ const BookingRoom = () => {
           <div className='Booking-content my-2 col-md-8 col-sm-12'>
             <h2>52 Rue Vernier, Nice - Room 5</h2>
             <span>Private room in Nice</span>
-            <div className='d-flex align-items-start align-items-center Booking-content-application'>
+            <div className='d-flex justify-content-start align-items-center Booking-content-application'>
               <img className='me-2' src={sendImg} alt='send icon'/>
               <h3>Send your application</h3>
             </div>
@@ -119,88 +119,121 @@ const BookingRoom = () => {
     
            {/* *********** */}
             <div className="input-section">
-                  {/* Main Input File */}
-                  <label className="file-label">Looking to speed up the booking process?  Save time by completing your file now
-                     (optional)</label>
-                  <div className="input-container">
-                    <div className="file-input">
+            {/* Main Input File */}
+            <label className="file-label">
+              Looking to speed up the booking process? Save time by completing your file now (optional)
+            </label>
+            <div className="input-container">
+            <label className="file-label">
+               <img className="d-block" src={upload} alt="upload"/>
+               <span className='first-span'>Upload identity card </span>
+
+            </label>
+              <div className="file-input">
+                <input
+                  type="file"
+                  accept=".pdf, .png, .jpg, .jpeg"
+                  onChange={(e) => handleFileChange(e, 0)}
+                />
+                {mainFile && (
+                  <div className="uploaded-file">
+                    {mainFile.type.startsWith('image/') ? (
+                      <img
+                        src={URL.createObjectURL(mainFile)}
+                        alt="Main File"
+                        className="uploaded-image"
+                      />
+                    ) : (
+                      <p className="uploaded-pdf">PDF File: {mainFile.name}</p>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Sub-Input Files */}
+          
+            <label>Are you a student?</label>
+            <div className='sub-inputs m-0 row'>
+              {[1, 2, 3].map((item, index) => (
+                <div key={`sub-input-${index}`} className="input-container col-sm-4">
+                  <div className="file-input">
+                    <label className="file-label">
+                      {/* Change the title and image for each input */}
+                      {index === 0 && (
+                        <>
+                          <img src={certificate} alt="Certificate" />
+                          <span>Your school enrollment certificate</span>
+                        </>
+                      )}
+                      {index === 1 && (
+                        <>
+                          <img src={groupId} alt="guarantor" />
+                          <span> Your guarantor’s ID</span>
+                        </>
+                      )}
+                      {index === 2 && (
+                        <>
+                          <img src={payslip} alt="payslip" />
+                          <span>Your guarantor’s last payslip or tax return</span>
+                        </>
+                      )}
                       <input
                         type="file"
                         accept=".pdf, .png, .jpg, .jpeg"
-                        onChange={(e) => handleFileChange(e, 0)}
+                        onChange={(e) => handleFileChange(e, index)}
                       />
-                      {mainFile && (
-                        <div className="uploaded-file">
-                          {mainFile.type.startsWith('image/') ? (
-                            <img
-                              src={URL.createObjectURL(mainFile)}
-                              alt="Main File"
-                              className="uploaded-image"
-                            />
-                          ) : (
-                            <p className="uploaded-pdf">PDF File: {mainFile.name}</p>
-                          )}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Sub-Input Files */}
-                  <label>Are you a student?</label>
-                  <div className='sub-inputs'>
-                  {[1, 2, 3].map((item,index) => (
-                    <div key={`sub-input-${index}`} className="input-container">
-                      <label className="file-label"></label>
-                      <div className="file-input">
-                        <input
-                          type="file"
-                          accept=".pdf, .png, .jpg, .jpeg"
-                          onChange={(e) => handleFileChange(e, index)}
-                        />
-                        {subFiles[index - 1] && (
-                          <div className="uploaded-file">
-                            {subFiles[index - 1].type.startsWith('image/') ? (
-                              <img
-                                src={URL.createObjectURL(subFiles[index - 1])}
-                                alt={`Sub File ${index}`}
-                                className="uploaded-image"
-                              />
-                            ) : (
-                              <p className="uploaded-pdf">PDF File: {subFiles[index - 1].name}</p>
-                            )}
-                          </div>
+                    </label>
+                    {subFiles[index - 1] && (
+                      <div className="uploaded-file">
+                        {subFiles[index - 1].type.startsWith('image/') ? (
+                          <img
+                            src={URL.createObjectURL(subFiles[index - 1])}
+                            alt={`Sub File ${index}`}
+                            className="uploaded-image"
+                          />
+                        ) : (
+                          <p className="uploaded-pdf">PDF File: {subFiles[index - 1].name}</p>
                         )}
                       </div>
-                    </div>
-                  ))}
-                  </div>
-
-                  {/* Last Input File */}
-                  <label className="file-label">Are you a professional ?</label>
-                  <div className="input-container">
-                    <label className="file-label">Upload your last payslip or tax declaration</label>
-                    <div className="file-input">
-                      <input
-                        type="file"
-                        accept=".pdf, .png, .jpg, .jpeg"
-                        onChange={(e) => handleFileChange(e, 4)}
-                      />
-                      {newFile && (
-                        <div className="uploaded-file">
-                          {newFile.type.startsWith('image/') ? (
-                            <img
-                              src={URL.createObjectURL(newFile)}
-                              alt="Last File"
-                              className="uploaded-image"
-                            />
-                          ) : (
-                            <p className="uploaded-pdf">PDF File: {newFile.name}</p>
-                          )}
-                        </div>
-                      )}
-                    </div>
+                    )}
                   </div>
                 </div>
+              ))}
+            </div>
+
+
+
+
+            {/* Last Input File */}
+            <label className="file-label">Are you a professional ?</label>
+            <div className="input-container">
+              <label className="file-label">
+                <img className="d-block" src={inVoice} alt="invoice" />
+                <span className='last-span'>Upload your last payslip or tax declaration</span>
+              </label>
+              <div className="file-input">
+                <input
+                  type="file"
+                  accept=".pdf, .png, .jpg, .jpeg"
+                  onChange={(e) => handleFileChange(e, 4)}
+                />
+                {newFile && (
+                  <div className="uploaded-file">
+                    {newFile.type.startsWith('image/') ? (
+                      <img
+                        src={URL.createObjectURL(newFile)}
+                        alt="Last File"
+                        className="uploaded-image"
+                      />
+                    ) : (
+                      <p className="uploaded-pdf">PDF File: {newFile.name}</p>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+            </div>
 
            {/* ******************* */}
             </form>
