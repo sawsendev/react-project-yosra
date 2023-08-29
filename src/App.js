@@ -11,7 +11,7 @@ import Faqspage from './components/Faqspage/Faqspage';
 import NoRoom from './components/SearchCities/NoRoom/NoRoom';
 import Contact from './components/Contact/Contact';
 import BookingRoom from './components/BookingRoom/BookingRoom';
-import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs';
+
 
 
 
@@ -23,7 +23,7 @@ function App() {
     <div>
       <BrowserRouter>
         <NavBar/>
-        <Breadcrumbs/>
+       
 
       <Routes>
         <Route path='/home' index element={<Homepage/>} /> 

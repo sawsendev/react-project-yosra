@@ -51,3 +51,23 @@
     }
 
 }
+.react-multi-carousel-item {
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    margin: 0 30px;
+}
+.carousel-container button.react-multiple-carousel__arrow {
+    display: none !important;
+  }
+
+  
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; 
+  }
+.arrow-icon {
+    font-size: 32px; 
+    margin: 0 15px; 
+    cursor: pointer;
+  }

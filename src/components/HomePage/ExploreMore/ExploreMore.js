@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useRef } from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import City from "./City/City"
 import {ExploreCitiesTable} from "../../../Data/Data"
 import "./ExploreMore.css"
-
+import { BsArrowRightCircle } from 'react-icons/bs'
+import { BsArrowLeftCircle}  from'react-icons/bs'
 
 
 const ExploreMore = () => {
@@ -29,21 +30,45 @@ const ExploreMore = () => {
   };
 
   const city = ExploreCitiesTable.map(city=><City src={city.src} city={city.city} count={city.count}/>)
+  const carouselRef = useRef(null);
+
+  const onClickPrev = () => {
+    if (carouselRef.current) {
+      carouselRef.current.previous();
+    }
+  };
+
+  const onClickNext = () => {
+    if (carouselRef.current) {
+      carouselRef.current.next();
+    }
+  };
   return (
-    <>
-        <div className='container'>
-        <h2>Explore our cities</h2>
-        <p>Located in several European cities, we offer premium accommodation for you to feel at home wherever you go</p>
-        <Carousel 
-         responsive={responsive}
-         infinite={true}
-         containerClass="carousel-container"
-         swipeable={false}>
-         {city}
-       </Carousel>
+    <div className='container'>
+      <h2>Explore our cities</h2>
+      <p>Located in several European cities, we offer premium accommodation for you to feel at home wherever you go</p>
+      <div>
+      <Carousel
+        ref={carouselRef}
+        responsive={responsive}
+        infinite={true}
+        containerClass="carousel-container"
+        swipeable={false}
+        showDots={false}
+      >
+        {city}
+      </Carousel>
+      <div className="button-container">
+        <div onClick={onClickPrev} className="custom-prev-arrow">
+          <BsArrowLeftCircle className="arrow-icon" />
         </div>
-    </>
-  )
+        <div onClick={onClickNext} className="custom-next-arrow">
+          <BsArrowRightCircle className="arrow-icon"  />
+        </div>
+      </div>
+    </div>
+    </div>
+)
 }
 
 export default ExploreMore

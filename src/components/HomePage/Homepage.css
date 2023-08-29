@@ -1,0 +1,6 @@
+/* Homepage.css */
+
+.homepage-container > *:not(:last-child) {
+    margin-bottom: 20px; /* Ajustez la valeur selon vos préférences */
+  }
+  
