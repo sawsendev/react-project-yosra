@@ -4,7 +4,17 @@
 
   /* for mobile screens */
   @media (max-width: 808px) {
-   .Pictures-countries img {
-    width: 100%;
-    }
+    .Pictures-countries img {
+     width: 100%;
+     }
+   }
+ 
+
+  .infoRoom{
+    position: relative;
+    margin-right: -50px;
   }
+.img-responsive{
+  width:310px;
+  height:347px;
+}

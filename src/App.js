@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import "./App.css"
 import Faq from "./components/HomePage/Faq/Faq";
 import Footer from "./components/Footer/Footer";
@@ -11,19 +11,17 @@ import Faqspage from './components/Faqspage/Faqspage';
 import NoRoom from './components/SearchCities/NoRoom/NoRoom';
 import Contact from './components/Contact/Contact';
 import BookingRoom from './components/BookingRoom/BookingRoom';
-import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs';
-
-
 
 
 
 
 function App() {
+
   return (
     <div>
       <BrowserRouter>
         <NavBar/>
-        <Breadcrumbs/>
+    
 
       <Routes>
         <Route path='/home' index element={<Homepage/>} /> 
@@ -34,9 +32,11 @@ function App() {
         <Route path="/noRoom" element={<NoRoom/>} /> 
         <Route path="/contact" element={<Contact/>} /> 
         <Route path="/propose" element={<BookingRoom/>} /> 
+        
       </Routes>
       <Faq/>
       <Footer/>
+    
       </BrowserRouter>
     </div>
   );

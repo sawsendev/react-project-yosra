@@ -1,8 +1,7 @@
 import React, {useState} from 'react'
 import "./Faqspage.css"
 import {FaqspageTableRenting} from "../../Data/Data"
-import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
-
+import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
 
 
 const Faqspage = () => {
@@ -32,6 +31,7 @@ const Faqspage = () => {
 
      return (
     <div>
+    <Breadcrumbs/>
         <div className='container FaqpagesContainer'>
           <h1 className='text-center my-5'>Frequently asked questions</h1>
           {/* tabs */}
@@ -55,11 +55,9 @@ const Faqspage = () => {
                     <h2 className='p-3'>{renting.title}</h2>
                     <span
                          dangerouslySetInnerHTML={{
-                          __html: selected === index ? `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" class="icon" viewBox="0 0 32 32"><path d="M16 23.5l-6.178-6.177a1 1 0 0 1 1.414-1.415L16 20.586l5.764-5.778a1 1 0 0 1 1.414 1.415L16 23.5z"/></svg>`
-                          : `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" class="icon" viewBox="0 0 32 32">
+                          __html: selected === index ? `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" class="icon" viewBox="0 0 32 32">
                           <path d="M16 8.5l-6.178 6.177a1 1 0 0 1-1.414-1.415L16 5.414l5.764 5.778a1 1 0 0 1-1.414 1.415L16 8.5z"/>
-                        </svg>
-                        `
+                        </svg> ` : `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" class="icon" viewBox="0 0 32 32"><path d="M16 23.5l-6.178-6.177a1 1 0 0 1 1.414-1.415L16 20.586l5.764-5.778a1 1 0 0 1 1.414 1.415L16 23.5z"/></svg>`
                          }}></span>
 
 

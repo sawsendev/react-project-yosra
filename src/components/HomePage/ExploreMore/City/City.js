@@ -11,7 +11,7 @@ const City = (props) => {
     </div>
     
     <div >
-      <div className='d-flex justify-content-between align-items-center pe-4 mt-2 Explore-more-countries-content'>                   
+      <div className='d-flex justify-content-between align-items-center pe-4 mt-2 infoRoom Explore-more-countries-content'>                   
          <h3>{props.city}</h3>
          <div className='d-flex align-items-center Room-content'>
           <img src={room_icon} alt='icon'/>

@@ -1,9 +1,12 @@
 import React from 'react'
 import "./Cms.css"
-
+import Breadcrumbs from "../Breadcrumbs/Breadcrumbs"
 const Cms = () => {
   return (
+    <>
+    <Breadcrumbs/>
     <div className='Cms-container'>
+    
       <div className='container'>
        <h1 className='Cms-header'>Content Management System</h1>
        <div className='Cms-content-first'>
@@ -39,6 +42,7 @@ survived not only five centuries  but also the leap into electronic typesetting,
 
       </div>
     </div>
+    </>
   )
 }
 

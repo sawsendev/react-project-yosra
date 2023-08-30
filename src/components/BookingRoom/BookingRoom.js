@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 
 import StepsToBook from "../HomePage/StepsToBook/StepsToBook"
 import "./BookingRoom.scss"
-import {UploadArray} from "../../Data/Data"
+//import {UploadArray} from "../../Data/Data"
 
 import sendImg from "../../assets/send 1.svg"
 import upload from "../../assets/image-gallery.svg"

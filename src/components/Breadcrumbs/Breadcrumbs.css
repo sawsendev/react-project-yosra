@@ -1,0 +1,50 @@
+/* Assurez-vous d'ajouter ces styles à votre feuille de styles CSS existante */
+
+.breadcrumbs {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    margin-bottom: 10px;
+    margin-left: 140px;
+    margin-top: -10px;
+  }
+  
+  .crumbs-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .crumb {
+    margin-right: 5px;
+    display: flex; 
+    align-items: center; 
+   
+    text-decoration: none; 
+  }
+  
+  .crumb.active {
+    font-weight: bold; 
+  }
+  
+  .crumb-separator {
+    margin: 0 0px;
+    font-size: 15px;
+  }
+  
+  .home-icon {
+    margin-right: 5px;
+    font-size: 20px;
+  }
+  .breadcrumb-link {
+    color: black !important;
+    text-decoration: none;
+    font-size: 18px;
+  }
+  .breadcrumb-link-h {
+    color: black !important;
+    text-decoration: none;
+    font-size: 18px;
+  }
+  .breadcrumb-link-h:hover {
+    text-decoration: underline;
+  }

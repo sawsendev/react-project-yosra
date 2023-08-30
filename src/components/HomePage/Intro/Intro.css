@@ -1,9 +1,11 @@
 .Intro-container{
     background-image: url("../../../assets//banner.svg");
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: center 20px;
     background-size: cover;
     height: 600px;
+   
+
 }
 
 
