@@ -2,7 +2,7 @@ import React from 'react'
 import "./NoRoom.css"
 import noRooms from "../../../assets/Group 24.svg"
 import AlertCribes from '../AlertCribes/AlertCribes'
-import MapContainer from '../MapContainer/MapContainer'
+
 import  Search  from '../Search/Search'
 
 const NoRoom = () => {
@@ -18,7 +18,7 @@ const NoRoom = () => {
                     <button>Show first availabilities</button>
             </div>
             <div className='right col-lg-6 col-12'>
-                    <MapContainer/>
+                    
             </div>
       </div>
     <AlertCribes/>
