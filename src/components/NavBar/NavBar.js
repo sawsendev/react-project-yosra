@@ -4,7 +4,7 @@ import {NavTable} from "../../Data/Data"
 import logo from "../../assets/logo.svg"
 import hamburger from "../../assets/hamburger.png"
 import { NavLink } from 'react-router-dom'
-
+import { useLocation } from 'react-router-dom';
 
 
 
@@ -15,8 +15,11 @@ const NavBar = () => {
   const toggleNavItems = () => {
     setShowNav(!showNav)
   }
+  const location = useLocation();
+  const isHomePage=location.pathname==='/Home' ;
   
   return (
+    <>
       <nav className='NavBar-container d-flex
       container'>
            <img src={logo} alt="company's logo" />
@@ -35,6 +38,12 @@ const NavBar = () => {
            </div>
 
       </nav>
+      <div className={`nav-divider ${isHomePage ? 'hide-on-home' : ''}`}></div>
+
+
+
+
+      </>
   )
 }
 

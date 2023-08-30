@@ -1,14 +1,12 @@
 import React from 'react'
 import "./Faq.css"
 import arrow from "../../../assets/right-arrow 1.svg"
-import { useNavigate } from 'react-router-dom';
+
 
 
 const Faq = () => {
-  const navigate = useNavigate();
-
   const handleFaqButtonClick = () => {
-    navigate('/faq');
+    window.location.href='/faq'
   };
   return (
     <><div className='Faq-container w-100 container-fluid'> 
