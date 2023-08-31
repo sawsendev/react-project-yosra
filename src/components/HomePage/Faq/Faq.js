@@ -9,7 +9,7 @@ const Faq = () => {
     window.location.href='/faq'
   };
   return (
-    <><div className='Faq-container w-100 container-fluid'> 
+    <> <div className='Faq-container row'> 
       <h3>Frequently asked questions</h3>
       <p>The most common questions that you might have before booking a room with us.</p>
     </div>

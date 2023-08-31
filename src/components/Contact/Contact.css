@@ -1,12 +1,17 @@
 .Contact-container{
     background-image: url("../../assets//woman-working-while-sitting-sofa\ 1.svg");
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: 50% center;
     background-size: cover;
     padding: 100px 0;
     z-index: -9999;
-    margin: 0;
+  
 }
+ @media (max-width: 992px){
+    .Contact-container{
+        background-position: 35% center; 
+     }
+} 
 
 .contact-heading{
     font-size: 22px;
@@ -19,12 +24,9 @@
     padding: 50px;
     background-color: white;
     border-radius: 8px;
-    width: 750px; 
-    height:550px; 
-    margin-left: 550px; 
+  
     margin-right: 0; 
-    margin-top: 40px; 
-    margin-bottom: 40px; 
+ 
 }
 
 .Contact-container form h3 {
@@ -52,7 +54,7 @@
     font-size: 16px;
 }
 .Contact-container form .btn-primary {
-    margin-top: -10px; 
+    margin-top: 0px; 
     margin-bottom: 30px; 
     width:35% ;
     border-radius: 6px;
@@ -80,3 +82,17 @@
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
 }
+.custom-button{
+    width: 35% !important;
+  
+}
+@media (max-width: 1200px) and (min-width : 768px){
+    .custom-button {
+      width: 70% !important;
+    }
+  }
+  @media (max-width: 767px) {
+    .custom-button {
+      width: 100% !important;
+    }
+  }
