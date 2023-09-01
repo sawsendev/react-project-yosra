@@ -26,8 +26,13 @@
 
 .Pictures-countries{
     position: relative;
+    width: 100%; 
+    text-align: center; 
 }
-
+.img-responsive {
+    max-width: 100%;
+    height: auto;
+  }
 
 .Room-content{
     width: 88px;
@@ -54,7 +59,7 @@
 .react-multi-carousel-item {
     transform-style: preserve-3d;
     backface-visibility: hidden;
-    margin: 0 30px;
+    margin: 0 0px;
 }
 .carousel-container button.react-multiple-carousel__arrow {
     display: none !important;
@@ -71,4 +76,7 @@
     margin: 0 15px; 
     cursor: pointer;
     color: black;
+  }
+  .carousel-container {
+    max-width: none; 
   }
