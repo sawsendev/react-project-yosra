@@ -21,10 +21,8 @@
     position: relative;
     top: 100%;
     left: 40%;
-   
-    
-    
   } */
+  
 .img-responsive{
   width:310px;
   height:347px;
@@ -50,7 +48,6 @@
   .infoRoom {
     position: relative;
     margin-top: 10px; 
-    text-align: center; 
     margin-left: 20%;
     margin-right: 20%;
   
