@@ -30,7 +30,9 @@
 
 .subAnswers{
     position: relative;
-
+    top: 7px;
+    left: 0;
+    margin-top: 0;
     
 }
 
@@ -88,6 +90,9 @@
         font-size: 24px;
         font-weight: bold;
         color: black;
+    }
+    .subTitlesRentingActive h4{
+        font-weight: bold;
     }
   }
 
