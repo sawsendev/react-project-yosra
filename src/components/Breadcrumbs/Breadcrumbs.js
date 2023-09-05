@@ -33,7 +33,7 @@ function Breadcrumbs() {
     );
 
     return (
-        <div className='breadcrumbs'>
+        <div className='breadcrumbs container'>
             {homeCrumb}
             <div className="crumbs-container">
                 {crumbs}

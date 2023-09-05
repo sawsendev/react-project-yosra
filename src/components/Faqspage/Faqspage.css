@@ -113,7 +113,8 @@
         font-weight: bold;
         color: black;
     }
-    .subTitlesRentingActive h4{
+    .subTitlesRentingActive h4,
+    .subTitlesRenting h4{
         font-weight: bold;
     }
   }
