@@ -17,11 +17,12 @@
 
 .active-tabs{
     border-bottom: 1px solid rgba(0, 0, 0, 1);
+    color: #000!important;
 }
 
 .tabs{
-    color: #A0A9B2;
-    border-bottom: 2px solid #A0A9B2;
+    color: #A0A9B2!important;
+    border-bottom: 1px solid #A0A9B2;
 }
 
 
@@ -31,7 +32,7 @@
 
 .subAnswers{
     position: relative;
-    top: 7px;
+    top: 0;
     left: 0;
     margin-top: 0;
     
@@ -43,23 +44,27 @@
     border: 1px solid #DDDDDD;
     border-radius: 6px;
     background: #ffffff;
+    overflow: hidden;
 }
 
 
-.subTitlesRentingActive {
+.subTitlesRentingActive, .subTitlesRenting.active {
    background-color: #F5F5F5;
    margin-left: -48px;
 }
-
-.test {
+.col-content.active {
+    display: block!important;
+}
+.col-content {
     position: absolute;
     right: -48px;
     top: 0 ;
     height: 100%;
     background-color: #F5F5F5;
-    max-width: 80%;
-    width: 60%;
-    padding: 10px;
+    /* max-width: 80%;
+    width: 60%; */
+    /* padding: 10px; */
+    padding: 25px 25px 25px 35px;
 }
 
 .icon {
@@ -83,17 +88,20 @@
     display:none;
 
 }
+.subTitlesRentingActive h4 {
+    padding-left: 48px;
+}
 @media (max-width: 991px) {
 
   
-    .test {
+    .col-content {
         position: relative;
         right: -48px;
         top: 0 ;
         height: 100%;
         background-color: #F5F5F5;
-        max-width: 80%;
-        width: 60%;
+        /* max-width: 80%;
+        width: 60%; */
         padding: 10px;
     }
     .subTitlesRentingActive {

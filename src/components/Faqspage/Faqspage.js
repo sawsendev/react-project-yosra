@@ -73,11 +73,11 @@ const Faqspage = () => {
                          renting.subTitles.map((subTitle, subIndex) => (
                      
                          
-                         <div key={subIndex} className={`my-2 pr-5 py-2 row align-items-baseline justify-content-between ${selectedAnswer === subIndex ? "subTitlesRentingActive" : "subTitlesRenting"}`}>
-                         <h4 className='col-lg-3 col-sm-12'
+                         <div key={subIndex} className={`pr-5 py-2 row align-items-baseline justify-content-between ${selectedAnswer === subIndex ? "subTitlesRentingActive" : "subTitlesRenting"}`}>
+                         <h4 className='col-lg-5 col-sm-12 mb-0 py-2'
                          onClick={()=>toggleSubTabsAnswers(subIndex)}> <BsArrowRightShort className='fleche'/> {subTitle.title}</h4>
                     
-                         <p className={`col-lg-9 col-sm-12 test  ${selectedAnswer === subIndex ? "active-content" : "content"}`}>{subTitle.answer}</p>
+                         <p className={`col-lg-7 col-sm-12 col-content ${selectedAnswer === subIndex ? "active-content" : "content"}`}>{subTitle.answer}</p>
                          </div>
                          ))
                     ) : (
