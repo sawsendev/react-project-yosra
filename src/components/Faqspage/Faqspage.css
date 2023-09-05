@@ -6,6 +6,7 @@
  {
     font-size: 18px;
     font-weight: 400;
+    color: #000;
 }
 .subTitlesRentingActive h4,
 .subTitlesRenting h4
@@ -41,7 +42,7 @@
     position: relative;
     border: 1px solid #DDDDDD;
     border-radius: 6px;
-
+    background: #ffffff;
 }
 
 
@@ -66,9 +67,22 @@
   }
 
 .TitlesRenting {
-    background-color: white;
+    /* background-color: white; */
 }
+.faq-tabs {
+    max-width: 860px;
+    width: 100%;
+    display: table;
+    margin: 0 auto 140px;
+}
+.arrow{
+    color: #A0A9B2;
+    font-size: 20px;
+}
+.fleche{
+    display:none;
 
+}
 @media (max-width: 991px) {
 
   
@@ -96,10 +110,6 @@
     }
   }
 
-.arrow{
-    color: rgb(162 162 173);
-    font-size: 25px;
-}
 @media (max-width: 767px) {
     .bloc-tabs {
         display: flex;
@@ -114,8 +124,4 @@
         margin: 0;
        
     }
-}
-.fleche{
-    display:none;
-
 }
