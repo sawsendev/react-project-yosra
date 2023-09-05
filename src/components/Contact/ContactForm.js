@@ -69,7 +69,7 @@ const ContactForm = () => {
     };
 
     return (
-        <form className='col-md-5 col-10 offset-md-6 mx-auto'  onSubmit={handleSubmit}>
+        <form className='col-md-5 col-10 mx-auto offset-md-6 '  onSubmit={handleSubmit}>
         <h3>We are here to help</h3>
         <h2 className='contact-heading'>Leave a message</h2>
           

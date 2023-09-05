@@ -7,19 +7,19 @@
     flex-wrap: wrap;
   }
   @media (min-width:992px) {
-    .breadcrumbs{
+    /* .breadcrumbs{
       margin-left: 18%;
-    }
+    } */
   }
   @media (min-width:1200px) and (max-width:1841px) {
-    .breadcrumbs{
+    /* .breadcrumbs{
       margin-left: 15%;
-    }
+    } */
   }
   @media (max-width:1800px) {
-    .breadcrumbs{
+    /* .breadcrumbs{
       margin-left: 18%;
-    }
+    } */
   }
   .crumbs-container {
     display: flex;

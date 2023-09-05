@@ -1,7 +1,7 @@
 .NavBar-container {
     align-items: center;
     justify-content: space-between;
-    padding: 22px;
+    height:80px;
     width: 100%;
     background-color: white;
     margin-bottom: -25px;
@@ -47,49 +47,52 @@
  
 @media (max-width: 991px) {
   .NavBar-container {
-    padding: 0;
+    padding: 0 25px;
+    height: 80px;
   }
 
   .List-items {
     display: block;
+    padding: 25px;
+    margin:25px;
   }
 
   .menu-icon {
     display: block;
     cursor: pointer;
-    width: 80px;
-    height: 80px;
+    width: 40px;
+   
     color: black;
-    position: relative;
+   
       }
-
-  .menu-icon img{
-    width: 50%;
-    margin-top: 20px;
-    margin-left: 50px;
-  }
-  
+      .menu-icon img{
+        width: 40px;
+        height: 40px;
+       
+    
+      }
 
   .nav-elements {
     position: absolute;
     right: 0;
-    top: 92px;
+    top: 61px;
     background-color: white;
-    text-align: left;  
+    text-align: left;
     height: 100vh;
     transition: all 0.3s ease-in;
-    overflow: hidden;
+    overflow:  scroll;
     z-index: 999;
     width: 0;
     display: block;
+}
 
-  }
+  
 
   .nav-elements.active {
     width: 100%;
   }
 }
-@media (max-width: 575px) {
+/* @media (max-width: 575px) {
   .NavBar-container {
     padding: 0;
     display: flex;
@@ -98,7 +101,7 @@
 
   .List-items {
     display: block;
-  }
+  } 
 
   .menu-icon {
         display: block;
@@ -125,16 +128,18 @@
     height: 100vh;
     transition: all 0.3s ease-in;
     overflow: hidden;
-    z-index: 999;
+
     width: 0;
     display: block;
+
 
   }
 
   .nav-elements.active {
     width: 100%;
   }
-}
+  
+} */
 
 .nav-divider {
   width: 100%;
