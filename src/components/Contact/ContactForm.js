@@ -69,18 +69,18 @@ const ContactForm = () => {
     };
 
     return (
-        <form className='col-md-5 me-auto' onSubmit={handleSubmit}>
+        <form className='col-md-5 col-10 offset-md-6 mx-auto'  onSubmit={handleSubmit}>
         <h3>We are here to help</h3>
         <h2 className='contact-heading'>Leave a message</h2>
-        
-            <div class="row mb-4">
-                <div class="col-sm-6">
+          
+            <div class="row mb-8">
+                <div class="col-lg-6">
                     <div class="form-outline">
                         <label class="form-label" for="form6Example1">First name</label>
                         <input type="text" id="form6Example1" class="form-control" value={firstName} onChange={handleFirstNameChange} />
                     </div>
                 </div>
-                <div className="col-sm-6">
+                <div className="col-lg-6">
                     <div className="form-outline">
                         <label className="form-label" for="form6Example2">Last name</label>
                         <input type="text" id="form6Example2" className="form-control" value={lastName} onChange={handleLastNameChange} />
@@ -89,14 +89,14 @@ const ContactForm = () => {
             </div>
 
             <div className='row'>
-                <div className="form-outline col-sm-6 mb-4">
+                <div className="form-outline col-lg-6 mb-4">
                     <label className="form-label" for="form6Example3">Email*</label>
                     <input type="email" id="form6Example3" class="form-control" value={email} onChange={handleEmailChange} />
                     {!emailValid && <p>Please enter a valid email address.</p>}
                 </div>
 
                
-            <div className="form-outline col-sm-6 mb-4">
+            <div className="form-outline col-lg-6 mb-4">
                   <label className="form-label" for="phone">Phone</label>
                   <PhoneInput
                   country={'fr'}
@@ -117,7 +117,7 @@ const ContactForm = () => {
                 <textarea className="form-control" id="form6Example7" rows="2" value={message} onChange={handleMessageChange}></textarea>
             </div>
 
-            <button type="submit" className="btn btn-primary btn-block float-end ">Send message</button>
+            <button type="submit" className="btn btn-primary btn-block float-end custom-button ">Send message</button>
             {showThankYou && (
          <div className="popup-overlay">
           <div className="popup-content">

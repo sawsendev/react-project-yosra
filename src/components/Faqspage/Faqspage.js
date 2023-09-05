@@ -2,7 +2,8 @@ import React, {useState} from 'react'
 import "./Faqspage.css"
 import {FaqspageTableRenting} from "../../Data/Data"
 import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
-
+import {IoIosArrowDown, IoIosArrowUp} from 'react-icons/io'
+import {BsArrowRightShort} from 'react-icons/bs'
 
 const Faqspage = () => {
      const [toggleState, setToggleState]=useState(1)
@@ -53,21 +54,28 @@ const Faqspage = () => {
                     onClick={() => toggleSubTabs(index)}
                     >
                     <h2 className='p-3'>{renting.title}</h2>
-                    <span
-                         dangerouslySetInnerHTML={{
-                          __html: selected === index ? `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" class="icon" viewBox="0 0 32 32">
-                          <path d="M16 8.5l-6.178 6.177a1 1 0 0 1-1.414-1.415L16 5.414l5.764 5.778a1 1 0 0 1-1.414 1.415L16 8.5z"/>
-                        </svg> ` : `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" class="icon" viewBox="0 0 32 32"><path d="M16 23.5l-6.178-6.177a1 1 0 0 1 1.414-1.415L16 20.586l5.764-5.778a1 1 0 0 1 1.414 1.415L16 23.5z"/></svg>`
-                         }}></span>
+                    
+                    <span>
+  {selected === index ? (
+
+    <IoIosArrowUp className='arrow'/>
+  ) : (
+     <IoIosArrowDown className='arrow'/>
+  )}
+</span>
+
 
 
                     </div>
                     <div className={`mx-5 subAnswers ${selected === index ? "active-content" : "content"}`}>
                     {renting.subTitles ? (
                          renting.subTitles.map((subTitle, subIndex) => (
+                     
+                         
                          <div key={subIndex} className={`my-2 pr-5 py-2 row align-items-baseline justify-content-between ${selectedAnswer === subIndex ? "subTitlesRentingActive" : "subTitlesRenting"}`}>
                          <h4 className='col-lg-3 col-sm-12'
-                         onClick={()=>toggleSubTabsAnswers(subIndex)}>{subTitle.title}</h4>
+                         onClick={()=>toggleSubTabsAnswers(subIndex)}> <BsArrowRightShort className='fleche'/> {subTitle.title}</h4>
+                    
                          <p className={`col-lg-9 col-sm-12 test  ${selectedAnswer === subIndex ? "active-content" : "content"}`}>{subTitle.answer}</p>
                          </div>
                          ))

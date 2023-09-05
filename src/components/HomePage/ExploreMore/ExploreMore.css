@@ -26,8 +26,13 @@
 
 .Pictures-countries{
     position: relative;
+    width: 100%; 
+    text-align: center; 
 }
-
+.img-responsive {
+    max-width: 100%;
+    height: auto;
+  }
 
 .Room-content{
     width: 88px;
@@ -54,7 +59,7 @@
 .react-multi-carousel-item {
     transform-style: preserve-3d;
     backface-visibility: hidden;
-    margin: 0 30px;
+    margin: 0 0px;
 }
 .carousel-container button.react-multiple-carousel__arrow {
     display: none !important;
@@ -66,9 +71,31 @@
     justify-content: center;
     margin-top: 20px; 
   }
+  /* Styles pour un bouton désactivé */
+.disabled {
+    pointer-events: none; /* Désactive les événements de clic */
+    opacity: 0.5; /* Rend le bouton partiellement transparent */
+    cursor: not-allowed; /* Change le curseur en "non autorisé" */
+  }
+  
 .arrow-icon {
-    font-size: 32px; 
-    margin: 0 15px; 
+    font-size: 20px; 
+    width: 30px; /* Définissez la largeur souhaitée pour l'icône */
+    height: 30px; /* Définissez la hauteur souhaitée pour l'icône */
+    margin: 0 20px; 
     cursor: pointer;
     color: black;
+    border-radius: 50%;
+    box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.16);
+    transform-origin: center;
+ }
+
+  .carousel-container {
+    max-width: none; 
+  }
+  @media (max-width:1399px)and (min-width:992px){
+    .img-responsive {
+        max-width: 90%;
+        height: auto;
+      }
   }

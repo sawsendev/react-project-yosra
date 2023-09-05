@@ -9,7 +9,7 @@ const NoRoom = () => {
   return (
     <>
     <Search/>
-    <div className='container No-rooms-container'>
+    <div className='container'>
       <div className='No-rooms-content row'>
             <div className='left d-flex col-lg-6 col-12'>
                     <h3>Our cribs in Nice</h3>
