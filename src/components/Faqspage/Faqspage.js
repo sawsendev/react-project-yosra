@@ -35,25 +35,26 @@ const Faqspage = () => {
     <Breadcrumbs/>
         <div className='container FaqpagesContainer'>
           <h1 className='text-center my-5'>Frequently asked questions</h1>
+          <div className='faq-tabs'>
           {/* tabs */}
-           <div className='bloc-tabs row'>
-               <div className={`col-md-6 text-center pb-3 mb-3  ${toggleState === 1 ? "active-tabs" : "tabs"}`}
+           <div className='bloc-tabs row m-0'>
+               <div className={`col-md-6 text-center px-0 pb-3 mb-3  ${toggleState === 1 ? "active-tabs" : "tabs"}`}
                onClick={()=>toggleTab(1)}>Renting with Finecribs</div>
-               <div className={`col-md-6 text-center pb-3 mb-3 ${toggleState === 2 ? "active-tabs" : "tabs"}`}
+               <div className={`col-md-6 text-center px-0 pb-3 mb-3 ${toggleState === 2 ? "active-tabs" : "tabs"}`}
                onClick={()=>toggleTab(2)}>Partnering with Finecribs</div>
            </div>
-           <div className='tabs-content my-4'>
+           <div className='tabs-content my-3'>
             <div  className={toggleState === 1 ? " active-content" : "content"}
                onClick={()=>toggleTab(1)}>
                     
                <div className='display-block '>
                {FaqspageTableRenting.map((renting, index) => (
-               <div key={index} className='collapseRenting my-4'>
+               <div key={index} className='collapseRenting my-3'>
                     <div 
-                    className='TitlesRenting pe-4 align-items-center d-flex justify-content-between'
+                    className='TitlesRenting px-3 py-2 align-items-center d-flex justify-content-between'
                     onClick={() => toggleSubTabs(index)}
                     >
-                    <h2 className='p-3'>{renting.title}</h2>
+                    <h2 className='mb-0'>{renting.title}</h2>
                     
                     <span>
   {selected === index ? (
@@ -100,6 +101,7 @@ const Faqspage = () => {
 
            </div>
         </div>
+    </div>
     </div>
   )
 }
