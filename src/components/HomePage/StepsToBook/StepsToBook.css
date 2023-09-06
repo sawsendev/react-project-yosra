@@ -12,12 +12,13 @@
 .Steps-icons-container-ul  {
     border: 1px solid #A0A9B2;
     border-radius: 8px;
+    padding: 12px!important;
 }
 
-.Steps-icons-container-ul img{
-    width: 65px;
+.Steps-icons-container-ul img {
+    height: 50px;
+    width: auto;
 }
-
 
 .Steps-icons-container h3 {
     font-size: 18px;

@@ -3,11 +3,11 @@ import "./Intro.css"
 
 const Intro = () => {
   return (
-    <div className='Intro-container d-block py-5 my-2 container-fluid'>
+    <div className='Intro-container d-block py-5 container-fluid'>
       <div className='Content-container'>
         <h3>we create beautiful spaces for communal living for you to</h3>
         <h2>discover, share, and make new friends</h2>
-        <div className='Input-container row'>
+        <div className='Input-container d-flex'>
           <select name="countries" id="countries-id" className='Select-country-container col-lg-4 me-2'>
               <option value="" selected>Where will you go ?</option>
               <option value="saab">Paris</option>
