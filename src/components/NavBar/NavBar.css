@@ -1,10 +1,10 @@
 .NavBar-container {
     align-items: center;
     justify-content: space-between;
-    height:80px;
+    height:84px;
     width: 100%;
     background-color: white;
-    margin-bottom: -25px;
+    margin-bottom: 0;
 
 }
 
@@ -22,7 +22,7 @@
 .List-items {
     list-style: none;
     margin-left: 30px;
-    padding: 9px;
+    padding: 8px 28px 7px;
     color: black;
     font-size: 18px;
     font-weight: 400;
@@ -36,7 +36,7 @@
 
 .List-items.active {
   background-color: black;
-  border-radius: 10px;
+  border-radius: 6px;
   color: white;
 }
 
@@ -146,8 +146,8 @@
     height: 1.5px;
     border: 1px;
     background-color: #DEDEDE;
-    margin-bottom: 20px;
-    margin-top: 15px;
+    /* margin-bottom: 20px; */
+    /* margin-top: 15px; */
 }
 
 .nav-divider.hide-on-home {

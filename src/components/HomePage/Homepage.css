@@ -1,8 +1,8 @@
 /* Homepage.css */
 
 .homepage-container > *:not(:last-child) {
-    margin-bottom: 20px; /* Ajustez la valeur selon vos préférences */
-    margin-top: 10px;
+    /* margin-bottom: 20px; */
+    /* margin-top: 10px; */
     width:100%
   }
   
