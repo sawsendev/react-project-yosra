@@ -28,7 +28,7 @@ const Cribes = () => {
                       </div>
                       <div className='Rooms-content'>
                         <h3>{cribe.content}</h3>
-                        <div className='d-flex'>
+                        <div className='d-flex mb-1'>
                           <img src={locationIcon} alt="location icon"></img>
                           <p>{cribe.adress}</p>
                         </div>

@@ -1,19 +1,16 @@
 .alert {
     padding: 20px 0;
     margin: 0 auto;
-    width: 60%;
-
-
 }
-
-.alert h3 {
+.alert h2 {
    font-weight: 600;
-   font-size: 20px;   
+   font-size: 20px; 
+   margin: 0 0 22px;  
 }
 .my-container {
     align-content: flex-start;
     flex-wrap: wrap;
-  }
+}
 .alert button {
     outline: none;
     border: none;
@@ -21,5 +18,4 @@
     color: white;
     border-radius: 6px;
     background-color: black;
-  
- }
+}
