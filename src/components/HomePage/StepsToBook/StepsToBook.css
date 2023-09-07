@@ -1,4 +1,4 @@
-.Steps-to-book-container h3{
+.Steps-to-book-container h2{
     font-size: 32px;
     font-weight: 400;
 }
@@ -31,7 +31,7 @@
 
 /* for mobile screens */
 @media (max-width: 600px) {
-    .Steps-to-book-container h3{
+    .Steps-to-book-container h2{
         font-size: 24px;
         font-weight: 400;
     }

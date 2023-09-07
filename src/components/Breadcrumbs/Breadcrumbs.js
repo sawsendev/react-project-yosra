@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './Breadcrumbs.css'
 import {IoIosHome, IoIosArrowForward } from 'react-icons/io'
-
+import { VscHome, VscChevronRight } from "react-icons/vsc";
 function Breadcrumbs() {
 
     const location = useLocation();
@@ -14,7 +14,7 @@ function Breadcrumbs() {
         const currentLink = `/${array.slice(0, index + 1).join('/')}`;
         return (
           <React.Fragment key={crumb}>
-          <IoIosArrowForward className="crumb-separator" />
+          <VscChevronRight className="crumb-separator" />
           <div className='crumb'>
               <Link to={currentLink} className="breadcrumb-link" >{crumb}</Link>
           </div>
@@ -24,7 +24,7 @@ function Breadcrumbs() {
 
     const homeCrumb = (
       <div className='crumb' key="home">
-      <IoIosHome className="home-icon" />
+      <VscHome className="home-icon" />
     
       <Link to="/home" className="breadcrumb-link-h">
           Home

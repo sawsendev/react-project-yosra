@@ -32,13 +32,18 @@
   z-index: 0;
 }
 
-.Content-container h3 {
+.Content-container h2, .Content-container h1, .Content-container div {
+  position: relative;
+  z-index: 1;
+}
+
+.Content-container h1 {
     font-size: 28px;
     font-weight: 400;
 }
 
 .Content-container h2,
-.Content-container h3{
+.Content-container h1{
     color: white;
     text-align:center ;
 }
@@ -50,18 +55,16 @@
 }
 
 .Input-container{
-    background-color: white;
     padding: 20px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    border-radius: 5px;
-    gap:10px;
+    border-radius: 6px;
+    background: #FFF;
 }
-
-
 .List-select{
     position: relative;
 }
-
+.form-date {
+  position: relative;
+}
 .Select-country-container,
 .Movie-date{ 
     padding: 7px;
@@ -77,27 +80,68 @@ input[type="date"]::before {
 input[type="date"]:focus::before,
 input[type="date"]:valid::before { display: none }
 
-
 .Search-btn {
-    outline: none;
-    border: none;
-    padding: 9px;
-    color: white;
-    background-color: black;
-    border-radius: 8px;
-    font-size: 18px;
-    font-weight: 600;
-    width: 25%;
+  outline: none;
+  border: none;
+  padding: 8px;
+  color: white;
+  background-color: black;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: 600;
+  height: 40px;
+  width: 20%;
 }
-
-
+.input-group {
+  flex: 0 0 auto;
+  width: 38%;
+  position: relative;
+}
+.Select-country-container {
+  padding: 8px 10px!important;
+  height: 40px;
+  color: #000;
+  font-size: 18px;
+  font-weight: 400;border-radius: 6px;
+  border: 1px solid #DDD;
+  background: transparent;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+.input-date:after {
+  position: absolute;
+  content: "";
+  top: 9px;
+  right: 9px;
+  width: 25px;
+  height: 22px;
+  background-image: url("../../../assets//calendar.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 25px;
+  z-index: -1;
+}
+.input-country:after {
+  position: absolute;
+  content: "";
+  top: 16px;
+  right: 9px;
+  width: 13px;
+  height: 8px;
+  background-image: url("../../../assets/select-bottom.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 13px;
+  z-index: -1;
+}
   /* for mobile screens */
   @media (max-width: 991px) {
     .Content-container{
       padding: 20px;
     }
 
-    .Content-container h3 {
+    .Content-container h1 {
       font-size: 20px;
       font-weight: 400;
     }

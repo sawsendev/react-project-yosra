@@ -7,8 +7,8 @@ const Contact = () => {
   return (
     <>
     <Breadcrumbs/>
-    <div className='Contact-container row'>
-      <div className='col-md-6'></div>
+    <div className='Contact-container row m-0'>
+      <div className='col-md-5'></div>
       <ContactForm/>
     </div>
     </>
