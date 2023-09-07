@@ -18,37 +18,40 @@ const Footer = () => {
   
   return (
     <>
-    <div className='Footer-container p-4 justify-content-evenly align-items-center mb-2  text-align-center'>
-      <div className='Apartements'>
-        <h3>Our apartments</h3>
-       <div className='d-flex justify-content-start align-items-center gap-3'>
-       <div className='First'>
-            <p>Our apartments in Nice </p>
-            <p>Our apartments in Florence</p>
+    <div className='Footer-container mb-4 pb-3 pt-3 mt-5'>
+      <div className='container'>
+        <div class="row justify-content-between align-items-center">
+        <div className='Apartements px-3'>
+        <p className='h3'>Our apartments</p>
+          <div className='d-flex justify-content-between align-items-center gap-3'>
+              <div className='First'>
+                  <p><a href="#">Our apartments in Nice</a></p>
+                  <p><a href="#">Our apartments in Paris</a></p>
+              </div>
+              <div className='Second'>
+                  <p><a href="#">Our apartments in Florence</a></p>
+                  <p><a href="#">Our apartments in Bologna</a></p>
+              </div>
+          </div>
         </div>
-        <div className='Second'>
-            <p>Our apartments in Paris</p>
-            <p>Our apartments in Bologna</p>
+        <div className='Useful-links px-3'>
+          <p className='h3'>Useful links</p>
+          <div className='d-flex justify-content-between align-items-center gap-3'>
+            <div className='First'>
+              <p><a href="#">FAQ</a></p>
+              <p><a href="#">Contact us</a></p>
+            </div>
+            <div className='Second'>
+                <p><a href="#">Terms and conditions</a></p>
+                <p><a href="#">Cookies alert</a></p>
+            </div>
+          </div>
         </div>
-       </div>
+        <div className='Create-alert px-3'>
+          <p className='h3'>You don’t find what you are looking for? </p>
+          <button className='btn btn-alert'> <img src={bell} alt='bell'/>Create an alert</button>
+        </div>
       </div>
-      <div className='Useful-links'>
-      <h3>Useful links</h3>
-      <div className='d-flex justify-content-start align-items-center gap-3'>
-
-        <div className='First'>
-           <p>FAQ</p>
-           <p>Terms and conditions</p>
-        </div>
-        <div className='Second'>
-            <p>Contact us</p>
-            <p>Cookies alert</p>
-        </div>
-</div>
-      </div>
-      <div className='Create-alert'>
-        <h3>You don’t find what you are looking for? </h3>
-        <button className='d-flex align-items-center mt-4 p-3'> <img className='me-2' src={bell} alt='bell'/>Create an alert</button>
       </div>
     </div>
 
@@ -117,8 +120,9 @@ const Footer = () => {
       </div>
 
       {/* Horizontal Line and Copyright */}
-      <hr />
-      <p className='Copyright'>Copyright 2022 - Oxton Digital</p>
+      <div className='Copyright'>
+        <p className='m-0 text-center'>Copyright 2022 - Oxton Digital</p>
+      </div>
     </>
   );
 };
