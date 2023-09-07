@@ -13,7 +13,7 @@ const Cribes = () => {
 
   return (
     <div className='Cribes-container container-fluid'>
-      <h3>Our cribs in Nice</h3>
+      <h2>Our cribs in Nice</h2>
       <h5>Nice</h5>
       <div className='row'>
         <div className='col-lg-7'> 
@@ -21,7 +21,7 @@ const Cribes = () => {
               {CribesTable.map((cribe, index) => {
                 return (
                   <li className='col-lg-4 col-md-6 col-12'>
-                    <div key={index}>
+                    <div key={index} className='item-cribe'>
                       <div className='Item-badge'>
                         <Badge className='notify-badge'>Available now</Badge>
                         <img class="img-fluid" src= {cribe.src[0].src_room} alt="photo_fine_cribs"/>

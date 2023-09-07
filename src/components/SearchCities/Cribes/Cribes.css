@@ -1,13 +1,19 @@
-.Cribes-container{
-    
+.Cribes-container {
     padding: 40px;
 }
 
-.Cribes-container h3{
+.Cribes-container h2 {
     font-size: 28px;
     font-weight: 400;
+    color: black;
+    margin: 0 0 12px;
 }
-
+.Cribes-container h3 {
+    font-size: 18px;
+    font-weight: 400;
+    color: black;
+    margin: 0 0 12px;
+}
 
 .Rooms-cribes,
 .Rooms-cribes li{
@@ -20,34 +26,32 @@
     max-width: 90%;
 }
 
-.Item-badge{
+.Item-badge {
   margin-bottom: 20px;
   position: relative;
 }
 
-.Rooms-content h3{
+.Rooms-content h3 {
     font-size: 16px;
     font-weight: 600;
 }
 
-.Rooms-content p{
+.Rooms-content p {
     font-size: 14px;
     font-weight: 400;
     margin: 0 0 0 10px;
 }
 
-.Rooms-content span{
+.Rooms-content span {
     font-size: 14px;
     font-weight: 600;
 }
 
-.Item-badge{
+.Item-badge {
     position: relative;
-    padding-top:20px;
-    
 }
 
-.notify-badge{
+.notify-badge {
     position: absolute;
     left:10px;
     top:30px;
@@ -58,8 +62,8 @@
     font-size:14px;
     font-weight: 400;
     background: rgba(53, 206, 146, 1) !important;
-
 }
+
 .h5{
     font-size:18px;
 }
