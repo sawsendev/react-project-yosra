@@ -6,7 +6,7 @@ import "./StepsToBook.css"
 const StepsToBook = () => {
   return (
     <div className='Steps-to-book-container pb-3 mb-5 container'>
-      <h3 className='mb-2'>The 4 steps to book your room</h3>
+      <h2 className='mb-2'>The 4 steps to book your room</h2>
       <p>Moving to a new city should be all about new experiences. To make your life easy, we craft beautiful spaces that feel just 
         like home so that you can just drop your suitcases and have a great time. Simple, as it should be.</p>
         <div className='row'>

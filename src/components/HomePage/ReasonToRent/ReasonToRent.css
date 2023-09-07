@@ -1,32 +1,39 @@
 
-.Reason-to-rent-container h3{
+.Reason-to-rent-container h2{
     font-size: 32px;
     font-weight: 400;
+    margin: 0 0 10px;
 }
 
 .Reason-to-rent-container p{
     font-size: 16px;
     font-weight: 400;
-    margin-bottom: 40px;
+    margin: 0 0 40px;
 }
 
-.Reasons-icons-container h3{
+.reasons-icons-item {
+    margin: 0 0 50px;
+}
+
+.Reason-to-rent-container .reasons-icons-item p {
+    margin: 0;
+    line-height: 22px;
+}
+.reasons-icons-item h3 {
     font-size: 18px;
-    font-weight: bold;
+    font-weight: 600;
+    margin: 0 0 4px;
 }
-
-.Reasons-icons-container p{
-    font-size: 16px;
-    font-weight: 400;
+.reasons-icons-item img {
+    height: 80px;
+    width: auto;
 }
-
-
-
 /* for mobile screens */
 @media (max-width: 600px) {
-    .Reason-to-rent-container h3{
+
+    .Reason-to-rent-container h2{
         font-size: 24px;
-        font-weight: 400;
+        font-weight: 600;
     }
 
     .Reason-to-rent-container p{
@@ -34,21 +41,8 @@
         font-weight: 400;
     }
 
-    .Reasons-icons-container h3{
-        font-size: 16px;
-        font-weight: 600;
-    }
-
-    .Reasons-icons-container p{
-        font-size: 14px;
-        font-weight: 400;
-    }
-
     .Reasons-icons-li img{
         width: 52px;
     }
-
-
-
 
 }

@@ -1,4 +1,4 @@
-.Feedback-container h3 {
+.Feedback-container h2 {
     font-size: 32px;
     font-weight: 400;
 }
@@ -8,15 +8,16 @@
     font-weight: 600;
 }
 
-.feedback-icons-content p{
+.feedback-icons-content p {
     font-size: 16px;
-    font-weight: 400px;
+    font-weight: 400;
+    margin: 0;
 }
 
 
 /* for mobile screens */
 @media (max-width: 600px) {
-    .Feedback-container h3{
+    .Feedback-container h2{
         font-size: 24px;
         font-weight: 400;
     }

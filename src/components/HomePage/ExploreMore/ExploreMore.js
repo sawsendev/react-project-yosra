@@ -57,9 +57,9 @@ const ExploreMore = () => {
   };
 
   return (
-    <div className='container'>
+    <div className='Explore-container container'>
       <h2>Explore our cities</h2>
-      <p>Located in several European cities, we offer premium accommodation for you to feel at home wherever you go</p>
+      <p className='mb-4'>Located in several European cities, we offer premium accommodation for you to feel at home wherever you go</p>
       <div>
         <Carousel
           ref={carouselRef}

@@ -5,13 +5,13 @@ import "./City.css"
 
 const City = (props) => {
   return (
-<div>
+<div className='city-item'>
     <div className='Pictures-countries'>
     <img className='img-responsive' src= {props.src} alt="countries"/>
     </div>
     
     <div >
-      <div className='d-flex justify-content-between align-items-center pe-4 mt-2 infoRoom Explore-more-countries-content'>                   
+      <div className='d-flex justify-content-between align-items-center mt-2 infoRoom Explore-more-countries-content'>                   
          <h3 >{props.city}</h3>
          <div className='d-flex align-items-center Room-content'>
           <img src={room_icon} alt='icon'/>

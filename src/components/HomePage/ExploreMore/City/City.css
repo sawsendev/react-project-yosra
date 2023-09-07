@@ -8,25 +8,9 @@
 .infoRoom {
   position: relative;
   top: 100%; 
-  left: 5%; 
-
+  left: 0; 
 }
 
-  /* for mobile screens */
-   /* @media (max-width: 808px) {
-    .Pictures-countries img {
-     width: 50%;
-     }
-   }.infoRoom{  
-    position: relative;
-    top: 100%;
-    left: 40%;
-  } */
-  
-.img-responsive{
-  width:310px;
-  height:347px;
-} 
 @media (max-width: 992px){
   .infoRoom {
     position: relative;
