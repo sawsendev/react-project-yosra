@@ -18,6 +18,7 @@ const NavBar = () => {
   const location = useLocation();
   const isHomePage=location.pathname==='/Home' ;
   const isNoRoomPage=location.pathname==='/noRoom'
+  const isSearchPage=location.pathname==='/searchCities';
   
   return (
     <>
@@ -39,7 +40,7 @@ const NavBar = () => {
            </div>
 
       </nav>
-      <div className={`nav-divider ${isHomePage || isNoRoomPage ? 'hide-on-home' : ''}`}></div>
+      <div className={`nav-divider ${isHomePage || isNoRoomPage || isSearchPage ? 'hide-on-home' : ''}`}></div>
 
 
 

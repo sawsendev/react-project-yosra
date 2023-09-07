@@ -8,14 +8,17 @@
 .Search-container h3 {
     font-size: 32px;
     font-weight: 400;
+    
 }
 
 .Form-city {
+   
     padding: 0;  
 }
 
 .Form-cities Form {
   align-items: flex-end;
+  
 }
 
 .Form-city select,
@@ -29,6 +32,8 @@
 label{
     display: block;
     margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: 400px;
 }
 
 .Search-cribs-btn{
@@ -42,3 +47,39 @@ label{
     background-color: black;
     border-radius: 6px;
 }
+.Form-cities{
+    display: inline-block;
+}
+.custom-select {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    background-color: #fff;
+    position: relative;
+    user-select: none;
+  }
+  
+
+  
+
+  .slider-container {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width:278px;
+    height:87px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    z-index: 1; /* Assurez-vous qu'il est au-dessus de l'input */
+    padding: 10px;
+    border-radius: 6px;
+  }
+  
+ .h5{
+    font-size: 16px;
+    font-weight: 400;
+ }
+
+  
+  

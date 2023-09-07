@@ -2,7 +2,7 @@ import React from 'react'
 import {CribesTable} from "../../../Data/Data"
 import "./Cribes.css"
 import Badge from 'react-bootstrap/Badge';
-import MapContainer from '../MapContainer/MapContainer';
+// import MapContainer from '../MapContainer/MapContainer';
 import  locationIcon  from '../../../assets/pin 2.svg';
 import AlertCribes from '../AlertCribes/AlertCribes';
 
@@ -23,7 +23,7 @@ const Cribes = () => {
                   <li className='col-lg-4 col-md-6 col-12'>
                     <div key={index}>
                       <div className='Item-badge'>
-                        <Badge bg="success" className='notify-badge'>Available now</Badge>
+                        <Badge className='notify-badge'>Available now</Badge>
                         <img class="img-fluid" src= {cribe.src[0].src_room} alt="photo_fine_cribs"/>
                       </div>
                       <div className='Rooms-content'>
@@ -41,10 +41,10 @@ const Cribes = () => {
             </ul>
         </div>
         <div className='Maps col-lg-5'>
-          <MapContainer/>
+         
         </div>
       </div>
-      <AlertCribes/>
+      <AlertCribes className="alert"/>
     </div>
   )
 }

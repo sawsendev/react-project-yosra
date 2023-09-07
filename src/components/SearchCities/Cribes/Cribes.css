@@ -1,5 +1,5 @@
 .Cribes-container{
-    border: 2px solid blue;
+    
     padding: 40px;
 }
 
@@ -44,6 +44,7 @@
 .Item-badge{
     position: relative;
     padding-top:20px;
+    
 }
 
 .notify-badge{
@@ -51,9 +52,14 @@
     left:10px;
     top:30px;
     text-align: center;
-    border-radius: 10px;
+    border-radius: 6px;
     color:white;
-    padding:5px 10px;
+    padding:5px 5px;
     font-size:14px;
     font-weight: 400;
+    background: rgba(53, 206, 146, 1) !important;
+
+}
+.h5{
+    font-size:18px;
 }

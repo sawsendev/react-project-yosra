@@ -1,19 +1,48 @@
 import React, {useState} from 'react'
 import "./Search.css"
+import PriceRangeSlider from  './PriceRangeSlider'
+import Select from 'react-select';
 
 
 const Search = () => {
 const [selectedCountry, setselectedCountry]=useState("")
+const [isSliderVisible, setIsSliderVisible] = useState(false);
+
+const handleToggleSlider = () => {
+  setIsSliderVisible(!isSliderVisible);
+};
+
+const customStyles = {
+  control: (provided) => ({
+    ...provided,
+    backgroundColor: '#fff',
+    border: '1px solid #ccc',
+    cursor: 'pointer',
+    margin: '0', // Ajoutez le style margin
+    padding: '0px', // Ajoutez le style padding
+  }),
+  indicatorSeparator: (provided) => ({
+    ...provided,
+    display: 'none',
+  }),
+  dropdownIndicator: (provided) => ({
+    ...provided,
+    cursor: 'pointer',
+  }),
+};
+
+
   const handleSelect=(e)=>{
       setselectedCountry(e.target.value)
       console.log(e.target.value)
   }
 
-
+  const emptyOptions = [];
   return (
     <div className='Search-container'>
+       <div>
       <h3>Refine your search</h3>
-       <div className='Form-cities container'>
+       <div className='Form-cities container-fluid'>
        <form className='row'>
        <div className='Form-city col-lg-3 col-md-6 col-sm-12'>
           <label for="countries">City</label>
@@ -34,10 +63,27 @@ const [selectedCountry, setselectedCountry]=useState("")
 
 
         <div className='Form-city col-lg-2 col-md-6 col-sm-12'>
-          <label for="cars">Price range</label>
-         <input type="text" placeholder='1€ - 500 €' required/>
-         {/* <input type="range" required/> */}
-        </div>
+        <div className='select-wrapper'>
+                <div className='select-container'>
+                  <Select
+                    styles={customStyles}
+                    onMenuOpen={handleToggleSlider}
+                    options={emptyOptions} // Liste vide d'options
+                    isSearchable={false} // Désactiver la recherche
+                  />
+                </div>
+                {isSliderVisible && (
+                  <div className='slider-container container'>
+                   <h5> Price per month</h5>
+                    <PriceRangeSlider />
+                  </div>
+                )}
+              </div>
+    </div>
+
+
+
+
 
 
         <div className='Form-city col-lg-2 col-md-6 col-sm-12 mx-2'>
@@ -54,6 +100,7 @@ const [selectedCountry, setselectedCountry]=useState("")
 
     
        </form>
+       </div>
        </div>
     </div>
   )
