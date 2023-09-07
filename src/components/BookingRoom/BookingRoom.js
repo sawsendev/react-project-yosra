@@ -24,20 +24,40 @@ const BookingRoom = () => {
   const [mainFile, setMainFile] = useState(null);
   const [subFiles, setSubFiles] = useState([ null, null, null]);
   const [newFile, setNewFile] = useState(null);
+  const [fileVisible, setFileVisible] = useState([true, true, true, true, true]);
+
+ 
+  
+
+
+  const handleclick = (index) => {
+    const updatedFileVisible = [...fileVisible];
+    updatedFileVisible[index] = !updatedFileVisible[index];
+    setFileVisible(updatedFileVisible);
+  };
 
   const handleFileChange = (e, index) => {
     const file = e.target.files[0];
+    const updatedFileVisible = [...fileVisible];
 
     if (index === 0) {
       setMainFile(file);
+      updatedFileVisible[0] = true;
     } else if (index <= 3) {
       const newSubFiles = [...subFiles];
       newSubFiles[index - 1] = file;
       setSubFiles(newSubFiles);
+      updatedFileVisible[index] = true;
     } else if (index === 4) {
       setNewFile(file);
+      updatedFileVisible[4] = true;
     }
+    // Mettez à jour l'état fileVisible avec la nouvelle copie mise à jour
+    setFileVisible(updatedFileVisible);
+    // Réinitialiser l'input file
+    e.target.value = '';
   };
+
 
 
   // ***************
@@ -131,21 +151,22 @@ const BookingRoom = () => {
            {/* *********** */}
             <div className="input-section">
             {/* Main Input File */}
-            <label className="file-label">
-              Looking to speed up the booking process? Save time by completing your file now <span className='comment d-block'>(optional)</span>
-            </label>
-            <div className="input-container mb-2">
-            <label className="file-label mb-0">
-               <img className="d-table mx-auto mb-2" src={upload} alt="upload"/>
-               <span className='first-span'>Upload identity card </span>
-            </label>
-                <input
-                  type="file"
-                  accept=".pdf, .png, .jpg, .jpeg"
-                  onChange={(e) => handleFileChange(e, 0)}
-                />
-              </div>
-              <div className="file-input">
+      <label className="file-label">
+        Looking to speed up the booking process? Save time by completing your file now{' '}
+        <span className="comment d-block">(optional)</span>
+      </label>
+      <div className="input-container mb-2">
+        <label className="file-label mb-0">
+          <img className="d-table mx-auto mb-2" src={upload} alt="upload" />
+          <span className="first-span">Upload identity card </span>
+        </label>
+        <input
+          type="file"
+          accept=".pdf, .png, .jpg, .jpeg"
+          onChange={(e) => handleFileChange(e, 0)}
+        />
+      </div>
+      <div className={fileVisible[0] ? "file-input" : "file-input hidden"}>
                 
                       {/* <img
                         src={URL.createObjectURL(mainFile)}
@@ -156,7 +177,7 @@ const BookingRoom = () => {
                   <div className="uploaded-file">
                     {mainFile.type.startsWith('image/') ? (
                       <p className="uploaded-pdf mb-2"><img className='me-2' src={file} alt='file icon'/>Image: {mainFile.name}
-                        <div className='close-file'>
+                        <div className='close-file' onClick={() => handleclick(0)}>
                           <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
                             <path d="M0 0h24v24H0z" fill="none"/>
                             <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" fill="#FF4B55"/>
@@ -165,7 +186,7 @@ const BookingRoom = () => {
                       </p>
                     ) : (
                       <p className="uploaded-pdf mb-2"><img className='me-2' src={file} alt='file icon'/>PDF File: {mainFile.name}
-                        <div className='close-file'>
+                        <div className='close-file' onClick={() => handleclick(0)}>
                           <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
                             <path d="M0 0h24v24H0z" fill="none"/>
                             <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" fill="#FF4B55"/>
@@ -177,55 +198,54 @@ const BookingRoom = () => {
                 )}
               </div>
 
-            {/* Sub-Input Files */}
-          
-            <label className='mt-4'>Are you a student?</label>
-            <div className='sub-inputs row'>
-              {[1, 2, 3].map((item, index) => (
-              <div className='col-sm-4'>
-                <div key={`sub-input-${index}`} className="input-container ">
-                    <label className="file-label m-0">
-                      {/* Change the title and image for each input */}
-                      {index === 0 && (
-                        <>
-                          <img className='d-table mx-auto mb-2' src={certificate} alt="Certificate" />
-                          <span>Your school enrollment certificate</span>
-                        </>
-                      )}
-                      {index === 1 && (
-                        <>
-                          <img className='d-table mx-auto mb-2' src={groupId} alt="guarantor" />
-                          <span> Your guarantor’s ID</span>
-                        </>
-                      )}
-                      {index === 2 && (
-                        <>
-                          <img className='d-table mx-auto mb-2' src={inVoice} alt="invoice" />
-                          <span>Your guarantor’s last payslip or tax return</span>
-                        </>
-                      )}
-                    </label>
-                      <input
-                        type="file"
-                        accept=".pdf, .png, .jpg, .jpeg"
-                        onChange={(e) => handleFileChange(e, index + 1)}
-                      />
-                </div>
-                  <div className="file-input">
+              <label className="mt-4">Are you a student?</label>
+      <div className="sub-inputs row">
+        {[1, 2, 3].map((item, index) => (
+          <div className="col-sm-4" key={`sub-input-${index}`}>
+            <div className="input-container">
+              <label className="file-label m-0">
+                {/* Changez le titre et l'image pour chaque champ */}
+                {index === 0 && (
+                  <>
+                    <img className="d-table mx-auto mb-2" src={certificate} alt="Certificate" />
+                    <span>Your school enrollment certificate</span>
+                  </>
+                )}
+                {index === 1 && (
+                  <>
+                    <img className="d-table mx-auto mb-2" src={groupId} alt="guarantor" />
+                    <span>Your guarantor’s ID</span>
+                  </>
+                )}
+                {index === 2 && (
+                  <>
+                    <img className="d-table mx-auto mb-2" src={inVoice} alt="invoice" />
+                    <span>Your guarantor’s last payslip or tax return</span>
+                  </>
+                )}
+              </label>
+              <input
+                type="file"
+                accept=".pdf, .png, .jpg, .jpeg"
+                onChange={(e) => handleFileChange(e, index + 1)}
+              />
+            </div>
+            <div className={fileVisible[index + 1] ? "file-input" : "file-input hidden"}>
                     {subFiles[index] && (
                       <div className="uploaded-file">
                         {subFiles[index].type.startsWith('image/') ? (
                           <p className="uploaded-pdf mb-2"><img className='me-2' src={file} alt='file icon'/>Image: {subFiles[index].name}
-                            <div className='close-file'>
+                            <div className='close-file' onClick={() => handleclick(index+1)}>
                               <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
                                 <path d="M0 0h24v24H0z" fill="none"/>
                                 <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" fill="#FF4B55"/>
+                              
                               </svg>
                             </div>
                           </p>
                         ) : (
                           <p className="uploaded-pdf mb-2"><img className='me-2' src={file} alt='file icon'/>PDF File: {subFiles[index].name} 
-                            <div className='close-file'>
+                            <div className='close-file' onClick={() => handleclick(index+1)}>
                               <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
                                 <path d="M0 0h24v24H0z" fill="none"/>
                                 <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" fill="#FF4B55"/>
@@ -256,12 +276,12 @@ const BookingRoom = () => {
                   onChange={(e) => handleFileChange(e, 4)}
                 />
             </div>
-              <div className="file-input">
+              <div className={fileVisible[4] ? "file-input" : "file-input hidden"}>
                 {newFile && (
                   <div className="uploaded-file">
                     {newFile.type.startsWith('image/') ? (
                       <p className="uploaded-pdf mb-2"><img className='me-2' src={file} alt='file icon'/>Image: {newFile.name}
-                        <div className='close-file' >
+                        <div className='close-file'onClick={() => handleclick(4)} >
                           <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
                             <path d="M0 0h24v24H0z" fill="none"/>
                             <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" fill="#FF4B55"/>
@@ -270,7 +290,7 @@ const BookingRoom = () => {
                       </p>
                     ) : (
                       <p className="uploaded-pdf mb-2"><img className='me-2' src={file} alt='file icon'/>PDF File: {newFile.name}
-                      <div className='close-file'>
+                      <div className='close-file' onClick={() => handleclick(4)}>
                         <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
                           <path d="M0 0h24v24H0z" fill="none"/>
                           <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" fill="#FF4B55"/>
