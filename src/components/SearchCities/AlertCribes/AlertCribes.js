@@ -1,14 +1,19 @@
 import React from 'react'
 import "./AlertCribes.css"
-import  alertIcon  from '../../../assets/Tracé 166.svg';
+import bell from "../../../assets/bell 1.svg"
 
 
 const AlertCribes = () => {
   return (
-       <div className='Alerte-cribes'>
-          <h3>You don’t find what you are looking for? </h3>
-          <button> <img src={alertIcon} alt='alert icon'/>Create un alert</button>
-      </div>
+    <div className='alert text-center mt-5'>
+    <div className="d-flex flex-column align-items-center my-container">
+      <h3>You don't find what you are looking for? </h3>
+      <button className='mt-2 p-2 px-4'>
+        <img className='me-2' src={bell} alt='bell' />
+        Create an alert
+      </button>
+    </div>
+  </div>
   )
 }
 
