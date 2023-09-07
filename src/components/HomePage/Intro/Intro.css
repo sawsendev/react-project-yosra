@@ -32,18 +32,18 @@
   z-index: 0;
 }
 
-.Content-container h2, .Content-container h3, .Content-container div {
+.Content-container h2, .Content-container h1, .Content-container div {
   position: relative;
   z-index: 1;
 }
 
-.Content-container h3 {
+.Content-container h1 {
     font-size: 28px;
     font-weight: 400;
 }
 
 .Content-container h2,
-.Content-container h3{
+.Content-container h1{
     color: white;
     text-align:center ;
 }
@@ -141,7 +141,7 @@ input[type="date"]:valid::before { display: none }
       padding: 20px;
     }
 
-    .Content-container h3 {
+    .Content-container h1 {
       font-size: 20px;
       font-weight: 400;
     }

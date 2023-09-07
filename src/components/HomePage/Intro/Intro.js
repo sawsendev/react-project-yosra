@@ -5,7 +5,7 @@ const Intro = () => {
   return (
     <div className='Intro-container d-block py-5 container-fluid mb-5'>
       <div className='Content-container'>
-        <h3>we create beautiful spaces for communal living for you to</h3>
+        <h1>we create beautiful spaces for communal living for you to</h1>
         <h2>discover, share, and make new friends</h2>
         <div className='Input-container d-flex justify-content-between'>
           <div className='input-group input-country'>
