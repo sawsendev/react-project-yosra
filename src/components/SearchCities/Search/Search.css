@@ -1,32 +1,30 @@
 .Search-container{
     background-color: #F1F2F4;
     border-radius: 4px;
-    padding: 50px 200px;
-    margin-top: 20px;
+    padding: 50px 0;
 }
 
-.Search-container h3 {
+.Search-container h2 {
     font-size: 32px;
     font-weight: 400;
-    
+    color: #000;
+    margin: 0 0 24px;
 }
 
-.Form-city {
-   
-    padding: 0;  
-}
-
-.Form-cities Form {
-  align-items: flex-end;
-  
-}
-
-.Form-city select,
-.Form-city input{
+.Form-city .form-control {
     width: 100%;
-    border: 1px solid #DDDDDD;
+    padding: 8px 10px;
     border-radius: 6px;
-    padding: 10px;
+    border: 1px solid #DDD;
+    background: transparent;
+    height: 40px;
+    color: #000;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 label{
@@ -36,20 +34,23 @@ label{
     font-weight: 400px;
 }
 
-.Search-cribs-btn{
-    padding: 10px;
+.Search-cribs-btn {
+    padding: 8px 20px;
     text-align: center;
     font-size: 18px;
     font-weight: 600;
+    line-height: 22px;
     outline: none;
     border: none;
     color: white;
     background-color: black;
     border-radius: 6px;
+    height: 40px;
 }
-.Form-cities{
-    display: inline-block;
+.Search-cribs-btn:hover {
+    background-color: #1c1c1c;
 }
+
 .custom-select {
     display: inline-block;
     padding: 10px 20px;
@@ -58,12 +59,9 @@ label{
     background-color: #fff;
     position: relative;
     user-select: none;
-  }
+}
   
-
-  
-
-  .slider-container {
+.slider-container {
     position: absolute;
     left: 0;
     right: 0;
@@ -74,12 +72,82 @@ label{
     z-index: 1; /* Assurez-vous qu'il est au-dessus de l'input */
     padding: 10px;
     border-radius: 6px;
-  }
+}
   
- .h5{
+.h5{
     font-size: 16px;
     font-weight: 400;
- }
-
-  
-  
+}
+.css-1hb7zxy-IndicatorsContainer {
+    height: 38px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.css-1fdsijx-ValueContainer {
+    padding: 0!important;
+}
+.css-2ksxt2-control input {
+    padding: 0!important;
+}
+.css-2ksxt2-control {
+    border-radius: 6px;
+    border: 1px solid #DDD;
+    background: #FFF;
+    height: 40px!important;
+    padding: 8px 8px!important;
+    color: #000;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+}
+.select-wrapper {
+    position: relative;
+}
+.input-select , .input-date {
+    position: relative;
+    background-color: #fff;
+    border-radius: 6px;
+}
+.input-select:after {
+    position: absolute;
+    content: "";
+    top: 16px;
+    right: 9px;
+    width: 13px;
+    height: 8px;
+    background-image: url("../../../assets/select-bottom.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 13px;
+    z-index: 0;
+}
+.input-date:after {
+    z-index: 0;
+}
+@media (min-width: 1400px) {
+    .col-lg-3 {
+        width: 20.7%;
+    }
+    .col-lg-2 {
+        width: 12%;
+    }
+}
+@media  (max-width: 1400px) and (min-width: 1200px) {
+    .col-lg-3 {
+        width: 20%;
+    }
+    .col-lg-2 {
+        width: 14%;
+    }
+}
+@media (max-width: 1200px) and (min-width: 992px) {
+.col-lg-3 {
+    width: 24%;
+}
+}
+@media (max-width: 992px) {
+.Form-city {
+    padding: 0 6px 12px!important;
+}
+}

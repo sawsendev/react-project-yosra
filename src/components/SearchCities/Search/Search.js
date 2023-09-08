@@ -40,29 +40,35 @@ const customStyles = {
   const emptyOptions = [];
   return (
     <div className='Search-container'>
-       <div>
-      <h3>Refine your search</h3>
-       <div className='Form-cities container-fluid'>
-       <form className='row'>
-       <div className='Form-city col-lg-3 col-md-6 col-sm-12'>
+       <div class="container">
+      <h2>Refine your search</h2>
+       <div className='Form-cities'>
+       <form className='row justify-content-between gap-xl-3 gap-lg-2 gap-0 m-0 align-items-end'>
+       <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
           <label for="countries">City</label>
-          <select name="countries" id="countries-id" onChange={handleSelect} value={selectedCountry} >
-              <option value="" selected disabled>Select your country</option>
-              <option value="Nice">Nice</option>
-              <option value="Paris">Paris</option>
-              <option value="Canada">Canada</option>
-              <option value="Tunisia">Tunisia</option>
-          </select>
+          <div className='input-select'>
+            <select name="countries" id="countries-id" className='form-control' onChange={handleSelect} value={selectedCountry} >
+                <option value="" selected disabled>Select your country</option>
+                <option value="Nice">Nice</option>
+                <option value="Paris">Paris</option>
+                <option value="Canada">Canada</option>
+                <option value="Tunisia">Tunisia</option>
+            </select>
+          </div>
         </div>
 
 
-        <div className='Form-city col-lg-2 col-md-6 col-sm-12 mx-2'>
+        <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
           <label for="cars">Move in date</label>
-         <input type="date" name="date" required placeholder='Move in date'/>
+          <div className='input-date'>
+            <input type="date" name="date" className='form-control' required placeholder='Move in date'/>
+          </div>
         </div>
 
 
-        <div className='Form-city col-lg-2 col-md-6 col-sm-12'>
+        <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
+          <label for="cars">Price range</label>
+        
         <div className='select-wrapper'>
                 <div className='select-container'>
                   <Select
@@ -86,18 +92,20 @@ const customStyles = {
 
 
 
-        <div className='Form-city col-lg-2 col-md-6 col-sm-12 mx-2'>
+        <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
           <label for="price">Sort by</label>
-          <select name="price" id="countries-id">
-              <option value="" selected disabled>Sorted by</option>
-              <option value="descending">Descending price</option>
-              <option value="ascending" >Ascending price</option>              
-          </select>
+          <div className='input-select'>
+            <select name="price" id="countries-id" className='form-control'>
+                <option value="" selected disabled>Sorted by</option>
+                <option value="descending">Descending price</option>
+                <option value="ascending" >Ascending price</option>              
+            </select>
+          </div>
         </div>
 
-
-        <button className='Search-cribs-btn col-lg-2 col-md-6 col-sm-12'>Update results</button>
-
+        <div className='col-lg-2 col-md-6 col-sm-12 p-0'>
+          <button className='Search-cribs-btn '>Update results</button>
+        </div>
     
        </form>
        </div>

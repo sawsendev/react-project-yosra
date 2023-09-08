@@ -1,65 +1,78 @@
-.Cribes-container{
-    
+.Cribes-container {
     padding: 40px;
 }
 
-.Cribes-container h3{
+.Cribes-container h2 {
     font-size: 28px;
     font-weight: 400;
+    color: black;
+    margin: 0 0 12px;
 }
-
-
-.Rooms-cribes,
+.Cribes-container h3 {
+    font-size: 18px;
+    font-weight: 400;
+    color: black;
+    margin: 0 0 12px;
+}
+.item-cribe {
+    margin: 0 0 20px;
+}
+.Rooms-cribes {
+    padding: 0;
+    margin: 0 -15px;
+    list-style: none;
+}
 .Rooms-cribes li{
     margin: 0;
-    padding: 0;
+    padding: 0 15px;
     list-style: none;
 }
 
 .img-fluid {
-    max-width: 90%;
+    max-width: 100%;
 }
 
-.Item-badge{
-  margin-bottom: 20px;
+.Item-badge {
+  margin-bottom: 18px;
   position: relative;
 }
 
-.Rooms-content h3{
+.Rooms-content h3 {
     font-size: 16px;
     font-weight: 600;
+    margin: 0 0 8px;
+    color: black;
 }
 
-.Rooms-content p{
+.Rooms-content p {
     font-size: 14px;
     font-weight: 400;
     margin: 0 0 0 10px;
+    color: black;
 }
 
-.Rooms-content span{
+.Rooms-content span {
     font-size: 14px;
     font-weight: 600;
 }
 
-.Item-badge{
+.Item-badge {
     position: relative;
-    padding-top:20px;
-    
 }
 
-.notify-badge{
+.notify-badge {
     position: absolute;
-    left:10px;
-    top:30px;
+    left: 11px;
+    top: 11px;
     text-align: center;
     border-radius: 6px;
-    color:white;
-    padding:5px 5px;
-    font-size:14px;
+    color: white;
+    padding: 3px 4px;
+    font-size: 14px;
     font-weight: 400;
     background: rgba(53, 206, 146, 1) !important;
-
 }
+
 .h5{
     font-size:18px;
 }
