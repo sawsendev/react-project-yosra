@@ -103,7 +103,7 @@ const customStyles = {
           </div>
         </div>
 
-        <div className='col-lg-2 col-md-6 col-sm-12 p-0'>
+        <div className='form-search-btn col-lg-2 col-md-6 col-sm-12 p-0'>
           <button className='Search-cribs-btn '>Update results</button>
         </div>
     
