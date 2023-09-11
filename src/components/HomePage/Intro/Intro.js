@@ -3,7 +3,7 @@ import "./Intro.css"
 
 const Intro = () => {
   return (
-    <div className='Intro-container d-block py-5 container-fluid mb-5'>
+    <div className='Intro-container d-block py-md-5 py-4 container-fluid mb-md-5 mb-4'>
       <div className='Content-container'>
         <h1>we create beautiful spaces for communal living for you to</h1>
         <h2>discover, share, and make new friends</h2>

@@ -51,19 +51,6 @@
     width: 100%;
     height: auto;
 }
-/* for mobile screens */
-@media (max-width: 600px) {
-    .Explore-container h2{
-        font-size: 26px;
-        font-weight: 400;
-    }
-
-    .Explore-container p{
-        font-size: 14px;
-        font-weight: 400;
-    }
-
-}
 .react-multi-carousel-item {
     transform-style: preserve-3d;
     backface-visibility: hidden;
@@ -110,9 +97,34 @@
   .carousel-container {
     max-width: none; 
   }
+  /* for mobile screens */
   @media (max-width:1399px)and (min-width:992px){
     .img-responsive {
         /* max-width: 90%; */
         height: auto;
       }
+  }
+  
+@media (max-width: 992px) {
+    .Explore-container h2{
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 600px) {
+    .Explore-container h2{
+        font-size: 26px;
+        font-weight: 400;
+    }
+
+    .Explore-container p{
+        font-size: 14px;
+        font-weight: 400;
+    }
+
+}
+  @media (max-width: 575px) {
+  .carousel-container {
+    margin-right: -8px;
+}
   }

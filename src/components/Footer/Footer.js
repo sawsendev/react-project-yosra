@@ -60,7 +60,7 @@ const Footer = () => {
         {/* Apartments Section */}
         <div className='Apartements container'>
           <div className='d-flex justify-content-between align-items-center'>
-            <h3>Our apartments</h3>
+            <p className='h3'>Our apartments</p>
             <img src={arrow} alt='arrow' onClick={toggleApartments} />
           </div>
 
@@ -85,7 +85,7 @@ const Footer = () => {
         {/* Useful Links Section */}
         <div className='Useful-links container'>
           <div className='d-flex justify-content-between align-items-center'>
-            <h3>Useful links</h3>
+            <p className='h3'>Useful links</p>
             <img src={arrow} alt='arrow' onClick={toggleUsefulLinks} />
           </div>
 
@@ -95,7 +95,7 @@ const Footer = () => {
               {/* Useful links content */}
               
               <div className='Useful-links'>
-              <h3>Useful links</h3>
+              <p className='h3'>Useful links</p>
               <div className='d-flex justify-content-start align-items-center gap-3'>
 
                 <div className='First'>
@@ -114,8 +114,8 @@ const Footer = () => {
 
         {/* Create Alert Section */}
         <div className='Create-alert container'>
-          <h3>You don’t find what you are looking for? </h3>
-          <button> <img src={bell} alt='bell' />Create an alert</button>
+          <p className='h3'>You don’t find what you are looking for? </p>
+          <button className='btn btn-alert'> <img src={bell} alt='bell'/> Create an alert</button>
         </div>
       </div>
 

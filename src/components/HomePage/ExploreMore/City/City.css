@@ -15,8 +15,6 @@
   .infoRoom {
     position: relative;
     top: 100%;
-    left: 2%;
-    transform: translateX(10px);
   }
 }
  
@@ -32,11 +30,22 @@
   .infoRoom {
     position: relative;
     margin-top: 10px; 
-    margin-left: 20%;
-    margin-right: 20%;
   
   }
   
 }
 
+@media (max-width: 767px) {
+.city-item {
+  width: 96%;
+}
+.button-container {
+  margin-top: 20px!important;
+}
+}
+@media (max-width: 480px) {
+.city-item {
+  width: 96%;
+}
+}
    

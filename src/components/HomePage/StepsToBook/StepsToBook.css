@@ -30,6 +30,11 @@
 }
 
 /* for mobile screens */
+@media (max-width: 992px) {
+    .Steps-to-book-container h2{
+        font-size: 28px;
+    }
+}
 @media (max-width: 600px) {
     .Steps-to-book-container h2{
         font-size: 24px;
@@ -54,5 +59,7 @@
         font-size: 16px;
         font-weight: 400;
     }
-    
+    .Steps-icons-container-ul {
+        gap: 14px!important;
+    }
 }

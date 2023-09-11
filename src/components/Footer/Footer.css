@@ -82,14 +82,65 @@
   flex: 0 0 auto;
   width: 26%;
 }
-@media (max-width: 991px) {
+@media (max-width: 992px) {
   .Footer-container-mobile {
     display: block;
   }
-
+  .Footer-container-mobile {
+    padding: 56px 0 35px;
+}
   .Footer-container{
     display: none;
   }
-    
+  .Apartements, .Useful-links, .Create-alert {
+    width: 60%!important;
+  }
+  .Apartements .h3, .Useful-links .h3, .Create-alert .h3 {
+    margin: 0 0 12px;
+  }
+  .Create-alert .h3 {
+    margin: 0 0 18px;
+}
+}
+
+@media (max-width: 767px) {
+  
+  .Apartements, .Useful-links, .Create-alert {
+    width: 100%!important;
+  }
+  .Footer-container .Faq-container h2 {
+    font-size: 24px;
+  }
+  .Footer-container .Faq-container p {
+    font-size: 16px!important;
+  }
+  .Footer-container .Faq-container {
+    padding: 20px 0 41px;
+  }
+  .Footer-container .Faq-btn {
+    font-size: 16px;
+    padding: 12px 16px 11px 16px;
+    width: 200px;
+    height: 46px;
+  }
+  .Footer-container .Faq-btn img {
+    width: 20px;
+    margin-left: 10px;
+}
+.Footer-container-mobile {
+  padding: 42px 0 30px;
+}
+.Copyright {
+  padding: 9px 0;
+}
+.Apartements .h3, .Useful-links .h3, .Create-alert .h3 {
+  font-size: 16px;
+}
+.Apartements p, .Useful-links p {
+  margin: 0 0 8px;
+}
+.Apartements p, .Useful-links p, .Apartements p a, .Useful-links p a {
+  font-size: 14px;
+}
 }
 
