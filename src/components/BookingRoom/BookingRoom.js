@@ -17,6 +17,7 @@ import file from "../../assets/file.svg"
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import BookingProcess from '../BookingProcess/BookingProcess';
+import Breadcrumbs from '../Breadcrumbs/Breadcrumbs'
 
 const BookingRoom = () => {
 // ************************
@@ -76,6 +77,8 @@ const BookingRoom = () => {
   }
 
   return (
+    <>
+    <Breadcrumbs/>
     <div className='container'>
       <div className='row'>
           <div className='Booking-content my-2 col-md-8 col-sm-12 pe-5'>
@@ -319,6 +322,7 @@ const BookingRoom = () => {
       </div>
       <StepsToBook/>
     </div>
+    </>
   )
 }
 

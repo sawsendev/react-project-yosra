@@ -11,6 +11,7 @@ import Faqspage from './components/Faqspage/Faqspage';
 import NoRoom from './components/SearchCities/NoRoom/NoRoom';
 import Contact from './components/Contact/Contact';
 import BookingRoom from './components/BookingRoom/BookingRoom';
+import ProposeApartment from './components/ProposeApartment/ProposeApartment';
 
 
 
@@ -27,12 +28,14 @@ function App() {
         <Route path='/home' index element={<Homepage/>} /> 
         <Route path="/searchCities" element={<SearchCities/>} /> 
         <Route path="/cms/page/:id" element={<Cms/>} /> 
+        <Route path="/pages/:slug/" element={<Cms />} />
         <Route path="/faq" element={<Faqspage/>} />     
         <Route path="*" element={<ErrorPage/>} /> 
         <Route path="/noRoom" element={<NoRoom/>} /> 
         <Route path="/contact" element={<Contact/>} /> 
-        <Route path="/propose" element={<BookingRoom/>} /> 
-        
+        <Route path="/BookingEnquiry" element={<BookingRoom/>} /> 
+        <Route path="/I propose an apartment" element={<ProposeApartment/>}/>
+       
       </Routes>
       <Faq/>
       <Footer/>
