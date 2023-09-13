@@ -1,0 +1,282 @@
+.page-container {
+    background-image: url('../../assets/propose.svg');
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+    height: 500px;
+    position: relative;
+  }
+  
+  .content-container:after {
+    content: "";
+    position: absolute;
+    left:0;
+    top:0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.6);
+    z-index: 0;
+  } 
+  
+  .content-container {
+    padding: 30px 50px 40px;
+    margin: 177px auto;
+    text-align: center;
+    width: 760px;
+    height: 150px;
+    position: relative;
+    
+  }
+  
+  .content-container h1 {
+    font-size: 46px;
+    font-weight: bold;
+    color: black; /* Couleur du texte (noir) */
+    position: relative;
+    z-index: 1;
+  }
+  
+  .content-container p {
+    font-size: 28px;
+    font-weight: 400;
+    color: black; /* Couleur du texte (noir) */
+    position: relative;
+    z-index: 1;
+  }
+  .container h2{
+    font-size: 32px;
+    font-weight: 600;
+  }
+  .container p{
+    font-size:16px;
+    font-weight:400;
+  }
+  .container h5{
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .container p1{
+    font-size: 20px;
+    font-weight: 400;
+  }
+  .vline {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 550px;
+  }
+  
+  .vertical-line {
+    border-left: 1px solid rgba(160, 169, 178, 1);
+    height: 100%;
+  }
+  
+  .horizontal-lines {
+    display: flex;
+    justify-content: space-around;
+    align-items: baseline;
+    height: 100%;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    height: 100%;
+  }
+  .horizontal-linesr {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    height: 100%;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    height: 100%;
+  }
+  .horizontal-lines-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around; /* Espace autour de chaque ligne horizontale */
+    align-items: center;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  
+  .horizontal-line {
+    width: 100px;
+    height: 1px;
+    background-color: rgba(160, 169, 178, 1);
+    position: relative;
+  }
+  .horizontal-lines::after {
+    content: "";
+    width: 7px; 
+    height: 7px; 
+    background-color: rgba(160, 169, 178, 1);
+    border-radius: 50%;
+    position: absolute;
+    left: -5px;
+    top: 50%; 
+    transform: translateY(-50%); 
+  } 
+  
+  .page2-container {
+    background-image: url('../../assets/Groupe\ 1320\ 2.svg');
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+    height: 400px;
+    position: relative;
+  }
+  .content2-container:after {
+    content: "";
+    position: absolute;
+    left:0;
+    top:0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.6);
+    z-index: 0;
+  } 
+  
+  .content2-container {
+    padding: 40px 40px 40px 40px;
+    margin: 56px 237px;
+    width: 760px;
+    height: 272px;
+    position: relative;
+    border-radius: 6px;
+    box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.16);
+
+    
+  }
+  .content2-container h1 {
+    font-size: 32px;
+    font-weight: 600;
+    color: black; /* Couleur du texte (noir) */
+    position: relative;
+    z-index: 1;
+  }
+  
+  .content2-container p {
+    font-size: 16px;
+    font-weight: 400;
+    color: black; /* Couleur du texte (noir) */
+    position: relative;
+    z-index: 1;
+  }
+  .button-black {
+    background-color: #000 !important; /* Couleur de fond noire */
+    color: #fff; /* Couleur du texte blanche */
+    width: 261px;
+    height: 40px;
+     border-radius: 6px;
+    border: none; /* Supprimer la bordure */
+    cursor: pointer; /* Curseur de souris en forme de main sur le bouton */
+   position: absolute;
+    z-index: 1; /* Augmenter la valeur du z-index */
+  }
+  .badge2{
+    position: relative;
+    left: -5%;
+    top: 94%;
+    text-align: center;
+    border-radius: 6px;
+    color: white;
+    padding: 13px 4px;
+    font-size: 14px;
+    font-weight: 400;
+    width:180px;
+    height: 40px;
+    background-color: black !important;
+    
+}
+.badge3{
+  position: relative;
+  right: -76%;
+  top:5%;
+  text-align: center;
+  border-radius: 6px;
+  color: white;
+  padding: 13px 4px;
+  font-size: 14px;
+  font-weight: 400;
+  width:180px;
+  height: 40px;
+  background-color: black !important;
+}
+
+@media (max-width:1200px){
+  .content2-container{
+    margin: 56px 20px;
+  }
+  .badge3 {
+
+    right:0%;
+  }
+  .badge2{
+    left:0%;
+  }
+
+}
+@media (max-width:808px){
+  .content2-container {
+    margin: 56px 35px;
+    width: 568px;
+    height: 283px;
+}
+}
+@media (max-width:768px){
+  .content2-container {
+    margin: 35px 145px;
+    width: 442px;
+    height: 324px;
+  }
+}
+  @media(max-width:772px){
+   .content-container{
+    margin: 112px auto;
+    width: 584px;
+    height: 265px;
+   }
+  }
+@media(max-width:642px){
+  .content-container{
+    margin: 54px auto;
+    width: 348px;
+    height: 371px;
+  }
+  .content2-container{
+    margin: 7px 1px;
+    width: 306px;
+    height: 371px;
+    padding: 20px 20px 20px 20px;
+  }
+}
+@media(max-width:300px){
+  .content-container{
+    margin: -1px auto;
+    width: 311px;
+    height: 476px;
+  }
+}
+.ellipse {
+  width: 7px; /* Largeur de l'ellipse */
+  height: 7px; /* Hauteur de l'ellipse */
+  border-radius: 50%; /* Border-radius à 50% crée une ellipse */
+   background: rgba(160, 169, 178, 1);
+}
+.el-left{
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    align-items:center;
+}
+.el-right{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
