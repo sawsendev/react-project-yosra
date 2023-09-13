@@ -20,7 +20,7 @@ const Footer = () => {
     <>
     <div className='Footer-container mb-4 pb-3 pt-3 mt-5'>
       <div className='container'>
-        <div class="row justify-content-between align-items-center">
+        <div className="row justify-content-between align-items-center">
         <div className='Apartements px-3'>
         <p className='h3'>Our apartments</p>
           <div className='d-flex justify-content-between align-items-center gap-3'>
