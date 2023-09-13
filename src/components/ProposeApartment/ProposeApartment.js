@@ -74,16 +74,37 @@ const ProposeApartment =()=> {
    
   
      <div className="d-flex align-items-center vline mt-5">
+     <div className='row'>
+      <div className='col-8'>
+        <p> If your apartments meets our criteria, we will make you an offer and explain the terms of the partnership</p>
+      </div>
+     </div>
   <div className="horizontal-lines ">
+   <div className='el-left '>
+   <span className='ellipse'></span>
     <div className="horizontal-line"></div>
+   </div>  
+   <div className='el-left'>
+   <span className='ellipse'></span>
     <div className="horizontal-line"></div>
+    </div>
   </div>
   <div className="vertical-line"></div>
   <div className="horizontal-linesr">
+    <div className='el-right'>
+    <span className='ellipse mt-4'></span>
     <div className="horizontal-line mt-4"></div>
+    </div>
+    <div className='el-right'>
+    <span className='ellipse'></span>
     <div className="horizontal-line"></div>
+     </div>
+    <div className='el-right'>
+    <span className='ellipse mb-4'></span>
     <div className="horizontal-line mb-4"></div>
+    </div>
   </div>
+  <div></div>
 </div>
 
 
@@ -96,20 +117,20 @@ const ProposeApartment =()=> {
      <p> When we rent an apartment, we look for 3 main things</p>
      <div className='row mt-5'>
      <div className='col-md-4'>
-     <div className="row px-4">
-     <div className='col-md-3'>
+     <div className="row">
+     <div className='col-3'>
      <img src={image5} alt="Im5" className="img-fluid"/> </div>
-     <div className='col-md-9 px-0'>
+     <div className='col-9'>
       <h5>Central location</h5>
       <p>Our tenants are looking for centrally located apartments in major European cities. Currently, we provide accommodation in 4 cities in France and Italy but we are constantly looking to expand our offer.</p>
      </div>
      </div>
      </div>
      <div className='col-md-4'>
-     <div className="row px-3">
-     <div className='col-md-3'>
+     <div className="row">
+     <div className='col-3'>
      <img src={image7} alt="Im7" className="img-fluid"/> </div>
-     <div className='col-md-9 px-0'>
+     <div className='col-9'>
       <h5>Minimum surface</h5>
       <p>No rule is set in stone. However, we normally rent apartments with – or the potential to make - at least 3 bedrooms. However, we can rent bigger surfaces, typically up to houses with 10 bedrooms.</p>
      </div>
@@ -118,9 +139,9 @@ const ProposeApartment =()=> {
     
      <div className='col-md-4'>
      <div className='row'>
-     <div className='col-md-3'>
+     <div className='col-3'>
      <img src={image6} alt="Im6" className="img-fluid"/> </div>
-     <div className='col-md-9 px-0'>
+     <div className='col-9'>
       <h5>Good conditions</h5>
       <p >We believe that communal living should be about quality. Therefore, we will only consider spaces in overall good conditions, which can be converted into beautiful spaces with light interventions, smart refurbishing and good decoration.</p>
      </div>
