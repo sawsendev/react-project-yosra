@@ -10,109 +10,137 @@ import image6 from '../../assets/good-quality.svg'
 import image7 from '../../assets/sketch.svg'
 import image8 from '../../assets/Groupe de masques 9.svg'
 import image9 from '../../assets/Rectangle 5932.svg'
+import process1 from '../../assets/process/process1.svg'
+import process2 from '../../assets/process/process2.svg'
+import process3 from '../../assets/process/process3.svg'
+import process4 from '../../assets/process/process4.svg'
+import process5 from '../../assets/process/process5.svg'
 import Feedback from '../HomePage/Feedback/Feedback';
 
 const ProposeApartment =()=> {
   return (
     <>
     <Breadcrumbs />
-    <div className='page-container container-fluid d-block py-2'>
+    <div className='page-container container-fluid d-block'>
       <div className='content-container'>
         <h1>Rent your apartment to Finecribs</h1>
         <p>Finecribs provides landlords with secured rental income</p>
       </div>
     </div>
-    <div className='container py-4'>
-     <h2>Why landlords partner with Finecribs </h2>
-     <div className='row py-4'>
-     <div className='col md-4'>
-          <img
-          src={image1}
-          alt="Im1"
-          className="img-fluid py-3"
-           />
-         <h5 className='py-2'> We guarantee your rental income, without vacancies </h5>
-        <p> Renting your apartment to Finecribs means you can increase the rental income on your apartment. Finecribs will pay you monthly rent even when your apartment is empty, allowing you to passively increase your income.</p>
-     </div>
-     <div className='col-md-4'>
-     <img
-          src={image2}
-          alt="Im2"
-          className="img-fluid py-3"
-           />
-         <h5 className='py-2'> We increase the value of your property</h5>
-        <p>Finecribs increases the value of your apartment by executing smart renovations coordinated by our interior designers (at no cost for landlords) and converting vacant properties into nicely decorated, fully equipped homes.</p>
-     </div>
-     <div className='col-md-4'>
-     <img
-          src={image3}
-          alt="Im3"
-          className="img-fluid py-3"
-           />
-     <h5 className='py-2'> Fully managed professional maintenance</h5>
-        <p>Our property management team takes care of the ongoing maintenance of your apartment so that your property is high standard</p>
-     </div>
-
-     </div>
-     <div className='row'>
-        <div className='col-md-8'>
-            <h2> The Finecribs guarantee </h2>
-            <p className='p1'> We are a landlord, as you are. Finecribs’ expertise lies in purchasing, designing and renovating beautiful spaces
+    <section className='landlords pt-lg-5 pt-4 pb-4'>
+      <div className='container'>
+        <h2 class="mb-lg-4 pb-lg-3 mb-4">Why landlords partner with Finecribs </h2>
+        <div className='row'>
+          <div className='col-md-4'>
+            <img src={image1} alt="Im1" className="img-fluid mb-3"/>
+            <h3 className='mb-2'>We guarantee your rental income, without vacancies </h3>
+            <p>Renting your apartment to Finecribs means you can increase the rental income on your apartment. Finecribs will pay you monthly rent even when your apartment is empty, allowing you to passively increase your income.</p>
+          </div>
+          <div className='col-md-4'>
+            <img src={image2} alt="Im2" className="img-fluid mb-3"/>
+            <h3 className='mb-2'> We increase the value of your property</h3>
+            <p>Finecribs increases the value of your apartment by executing smart renovations coordinated by our interior designers (at no cost for landlords) and converting vacant properties into nicely decorated, fully equipped homes.</p>
+          </div>
+          <div className='col-md-4'>
+            <img src={image3} alt="Im3" className="img-fluid mb-3" />
+            <h3 className='mb-2'> Fully managed professional maintenance</h3>
+            <p>Our property management team takes care of the ongoing maintenance of your apartment so that your property is high standard</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section className='guarantee pt-4 pb-4'>
+      <div className='container'>
+        <div className='row justify-content-between'>
+          <div className='col-md-7'>
+            <h2 class="mb-3">The Finecribs guarantee</h2>
+            <p> We are a landlord, as you are. Finecribs’ expertise lies in purchasing, designing and renovating beautiful spaces
              for communal living. When you rent your apartment to Finecribs, you are guaranteed the we will manage 
             it with the same care that we put into managing our own apartments.</p>
+          </div>
+          <div className='col-md-4 d-flex justify-content-center align-items-center'>
+            <img src={image4} alt="The Finecribs guarantee" className="img-fluid"/>
+          </div>
         </div>
-        <div className='col-md-4 d-flex justify-content-center align-items-center '>
-        <img
-          src={image4}
-          alt="Im3"
-          className="img-fluid py-3"
-           />
-        </div>
-     </div>
-     <h2>Our process in a few simple steps</h2>
-     <div className="d-flex justify-content-center align-items-center vline">
-   
-  
-     <div className="d-flex align-items-center vline mt-5">
-     <div className='row'>
-      <div className='col-8'>
-        <p> If your apartments meets our criteria, we will make you an offer and explain the terms of the partnership</p>
       </div>
-     </div>
-  <div className="horizontal-lines ">
-   <div className='el-left '>
-   <span className='ellipse'></span>
-    <div className="horizontal-line"></div>
-   </div>  
-   <div className='el-left'>
-   <span className='ellipse'></span>
-    <div className="horizontal-line"></div>
-    </div>
-  </div>
-  <div className="vertical-line"></div>
-  <div className="horizontal-linesr">
-    <div className='el-right'>
-    <span className='ellipse mt-4'></span>
-    <div className="horizontal-line mt-4"></div>
-    </div>
-    <div className='el-right'>
-    <span className='ellipse'></span>
-    <div className="horizontal-line"></div>
-     </div>
-    <div className='el-right'>
-    <span className='ellipse mb-4'></span>
-    <div className="horizontal-line mb-4"></div>
-    </div>
-  </div>
-  <div></div>
-</div>
+    </section>
+    <section className='process pt-lg-5 pt-4 pb-4'>
+      <div className='container'>
+        <h2 className='mb-md-5 mb-4'>Our process in a few simple steps</h2>
+        <div className='process-content'>
+          <div className='col-left'> 
+            <div className='box first'>
+            <div className='hline first'><span className='circle'></span></div>
+              <div className='image'>
+                <img src={process1} alt="process 1" className="img-fluid"/>
+              </div>
+              <div className='text'>
+                <h3>Rent your apartment to Finecribs</h3>
+                <p>If your apartments meets our criteria, we will make you
+                an offer and explain the terms of the partnership</p>
+              </div>
+            </div>
+            <div className='box second'>
+              <div className='hline second'><span className='circle'></span></div>
+              <div className='image'>
+                <img src={process2} alt="process 2" className="img-fluid"/>
+              </div>
+              <div className='text'>
+                <h3>We rent your apartment to tenants who match our selective criteria</h3>
+                <p>Our interior designers will furnish and decorate the
+                space. If needed, we will propose and execute some
+                smart renovations (e.g. bathrooms)</p>
+              </div>
+            </div>
+          </div>
+          <div className='vertical-line'></div>
+          <div className='col-right'>
+            <div className='box first'>
+              <div className='hline first'><span className='circle'></span></div>
+              <div className='image'>
+                <img src={process3} alt="process 3" className="img-fluid"/>
+              </div>
+              <div className='text'>
+                <h3>Submit your property for review</h3>
+                <p>Fill out our form and share some details about your 
+                apartment (e.g. photos, location, number of 
+                bedrooms), and leave your contact details </p>
+              </div>
+            </div>
+            <div className='box second'>
+              <div className='hline second'><span className='circle'></span></div>
+              <div className='image'>
+                <img src={process4} alt="process 4" className="img-fluid"/>
+              </div>
+              <div className='text'>
+                <h3>We design, furnish & decorate your space</h3>
+                <p>Our interior designers will furnish and decorate the 
+                space. If needed, we will propose and execute some 
+                smart renovations (e.g. bathrooms)</p>
+              </div>
+            </div>
+            <div className='box third'>
+              <div className='hline third'><span className='circle'></span></div>
+              <div className='image'>
+                <img src={process5} alt="process 5" className="img-fluid"/>
+              </div>
+              <div className='text'>
+                <h3>Our maintenance team take care of your apartment along the way</h3>
+                <p>Our qualified team will ensure the ongoing
+                maintenance of your apartment from the first day, until
+                the end of the tenancy</p>
+              </div>
+            </div>
 
-
-     </div>
+          </div>
+        </div>
+      </div>
+    </section>
     
 
 
 
+     <div className='container'>
      <h2 className='mt-5'> How Finecribs selects the apartments that we rent</h2>
      <p> When we rent an apartment, we look for 3 main things</p>
      <div className='row mt-5'>

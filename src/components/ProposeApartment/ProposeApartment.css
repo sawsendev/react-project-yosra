@@ -5,6 +5,7 @@
     background-size: cover;
     height: 500px;
     position: relative;
+    padding-top: 175px;
   }
   
   .content-container:after {
@@ -20,105 +21,160 @@
   } 
   
   .content-container {
-    padding: 30px 50px 40px;
-    margin: 177px auto;
+    padding: 25px 50px;
+    margin: 0 auto;
     text-align: center;
-    width: 760px;
-    height: 150px;
+    max-width: 760px;
+    height: auto;
     position: relative;
-    
   }
   
   .content-container h1 {
     font-size: 46px;
     font-weight: bold;
-    color: black; /* Couleur du texte (noir) */
+    color: black; 
     position: relative;
     z-index: 1;
+    margin: 0 0 4px;
   }
   
   .content-container p {
     font-size: 28px;
     font-weight: 400;
-    color: black; /* Couleur du texte (noir) */
+    color: black;
     position: relative;
     z-index: 1;
+    margin: 0;
   }
-  .container h2{
+  h2 {
     font-size: 32px;
     font-weight: 600;
   }
-  .container p{
-    font-size:16px;
-    font-weight:400;
+  p {
+    font-size: 16px;
+    font-weight: 400;
   }
-  .container h5{
+
+/**** landlords ******/
+  .landlords h3 {
     font-size: 18px;
     font-weight: 600;
   }
-  .container p1{
-    font-size: 20px;
-    font-weight: 400;
+  .landlords img {
+    height: 59px;
+    width: auto;
   }
-  .vline {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 550px;
-  }
-  
-  .vertical-line {
-    border-left: 1px solid rgba(160, 169, 178, 1);
-    height: 100%;
-  }
-  
-  .horizontal-lines {
-    display: flex;
-    justify-content: space-around;
-    align-items: baseline;
-    height: 100%;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    height: 100%;
-  }
-  .horizontal-linesr {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    height: 100%;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    height: 100%;
-  }
-  .horizontal-lines-left {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around; /* Espace autour de chaque ligne horizontale */
-    align-items: center;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
-  
-  .horizontal-line {
-    width: 100px;
-    height: 1px;
-    background-color: rgba(160, 169, 178, 1);
-    position: relative;
-  }
-  .horizontal-lines::after {
-    content: "";
-    width: 7px; 
-    height: 7px; 
-    background-color: rgba(160, 169, 178, 1);
-    border-radius: 50%;
-    position: absolute;
-    left: -5px;
-    top: 50%; 
-    transform: translateY(-50%); 
-  } 
-  
+  .landlords .row {
+    margin-left: -20px;
+    margin-right: -20px;
+}
+  .landlords .row .col-md-4 {
+    padding-left: 20px;
+    padding-right: 20px!important;
+}
+/**** process *****/
+.process-content {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+.vertical-line {
+  height: 550px;
+  background: #A0A9B2;
+  width: 1px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 15px;
+}
+.col-left {
+  width: calc(50% - 100px);
+  text-align: right;
+  position: relative;
+  padding-left: 75px;
+}
+.col-right {
+  width: calc(50% - 100px);
+  text-align: left;
+  position: relative;
+  padding-right: 75px;
+}
+.process-content .image {
+  border: 1px solid #DDDDDD;
+  height: 94px;
+  width: 94px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.process-content .image img {
+  height: 50px;
+  width: auto;
+}
+.process-content .text {
+  width: calc(100% - 118px);
+}
+.box h3 {
+  color: #000;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 26px;
+  margin: 0 0 6px;
+}
+.box p {
+  color: #000;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+  margin: 0;
+}
+.col-left .box {
+  display: flex;
+  gap: 24px;
+  flex-direction: row-reverse;
+  align-items: center;
+  position: relative;
+}
+.col-right .box {
+  display: flex;
+  gap: 24px;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+}
+.col-left .box.first {
+  margin-top: 100px;
+  margin-bottom: 123px;
+}
+.hline {
+  width: 100px;
+  height: 1px;
+  background: #DDDDDD;
+  position: absolute;
+  right: -100px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.col-right .hline {
+  left: -100px;
+  right: inherit;
+}
+.circle {
+  height: 7px;
+  width: 7px;
+  border-radius: 50%;
+  background: #A0A9B2;
+  position: absolute;
+  margin: -3px -3px;
+}
+.col-right .box.first {
+  margin: -20px 0 123px;
+}
+.col-right .box.second {
+  margin: 0 0 120px;
+}
+/**** *****/
   .page2-container {
     background-image: url('../../assets/Groupe\ 1320\ 2.svg');
     background-repeat: no-repeat;
@@ -259,24 +315,4 @@
     width: 311px;
     height: 476px;
   }
-}
-.ellipse {
-  width: 7px; /* Largeur de l'ellipse */
-  height: 7px; /* Hauteur de l'ellipse */
-  border-radius: 50%; /* Border-radius à 50% crée une ellipse */
-   background: rgba(160, 169, 178, 1);
-}
-.el-left{
-    display: flex;
-    flex-direction: row-reverse;
-    flex-wrap: nowrap;
-    justify-content: space-evenly;
-    align-items:center;
-}
-.el-right{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: center;
 }
