@@ -280,3 +280,7 @@
   justify-content: space-between;
   align-items: center;
 }
+.imRen1,
+.imRen2{
+  padding:10px 15px;
+}
