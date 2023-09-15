@@ -53,6 +53,15 @@
     margin-left: 16px;
 }
 
+@media (max-width:992px) {
+    .Faq-container h2 {
+        font-size: 28px;
+    }
+.Faq-container {
+    padding: 24px 0 42px;
+}
+
+}
   @media (max-width:600px) {
     .Faq-container h2 {
         font-size: 25px;

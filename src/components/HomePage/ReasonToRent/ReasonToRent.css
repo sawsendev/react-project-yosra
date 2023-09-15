@@ -29,20 +29,44 @@
     width: auto;
 }
 /* for mobile screens */
+
+@media (max-width: 992px) {
+    .reasons-icons-item {
+        margin: 0 0 1.5rem;
+    }
+    .reasons-icons-item img {
+        height: 65px;
+        width: auto;
+    }
+    .Reasons-icons-container {
+        margin-top: -2px;
+    }
+    .Reason-to-rent-container h2 {
+        font-size: 28px;
+    }
+}
 @media (max-width: 600px) {
 
     .Reason-to-rent-container h2{
         font-size: 24px;
-        font-weight: 600;
+        font-weight: 400;
     }
 
     .Reason-to-rent-container p{
         font-size: 14px;
         font-weight: 400;
+        margin: 0 0 24px;
     }
 
     .Reasons-icons-li img{
         width: 52px;
+    }
+    .reasons-icons-item img {
+        height: 52px;
+        width: auto;
+    }
+    .reasons-icons-item h3 {
+        font-size: 16px;
     }
 
 }

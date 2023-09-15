@@ -20,12 +20,12 @@ const ExploreMore = () => {
       items: 3
     },
     tablet: {
-      breakpoint: { max: 992, min: 808 },
-      items: 2
+      breakpoint: { max: 992, min: 576 },
+      items: 2.5
     },
     mobile: {
-      breakpoint: { max: 808, min: 0 },
-      items: 1
+      breakpoint: { max: 576, min: 0 },
+      items: 1.8
     }
   };
 

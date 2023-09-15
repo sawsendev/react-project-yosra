@@ -137,17 +137,24 @@ input[type="date"]:valid::before { display: none }
 }
   /* for mobile screens */
   @media (max-width: 991px) {
-    .Content-container{
-      padding: 20px;
-    }
-
+    .Content-container {
+      padding: 20px 15px;
+      margin: 0 auto;
+      max-width: 690px;
+      width: 100%;
+  }
+  .Intro-container {
+    height: auto;
+}
     .Content-container h1 {
       font-size: 20px;
       font-weight: 400;
     }
     .Input-container{
       flex-direction: column;
-    }
+      padding: 0;
+      background: transparent;
+  }
 
     .Content-container h2 {
       font-size: 26px;
@@ -166,11 +173,28 @@ input[type="date"]:valid::before { display: none }
     .Search-btn{
       width: 100%;
     }
+    .Input-container .input-group {
+      width: 100%;
+      background: #fff;
+      border-radius: 6px;
+      margin: 0 0 12px;
+  }
+  .Select-country-container {
+    margin: 0!important;
+}
   }
 
    /* for mobile screens */
-   @media (max-width: 871px) {
-    .Input-container{
-      gap: 10px;
-    }
+@media (max-width: 767px) {
+  .Content-container {
+    max-width: 510px;
+    margin: 0.5rem auto;
   }
+  .Content-container h1 {
+    font-size: 20px;
+    line-height: 28px; 
+  }
+  .Select-country-container {
+    font-size: 16px; 
+  }
+}

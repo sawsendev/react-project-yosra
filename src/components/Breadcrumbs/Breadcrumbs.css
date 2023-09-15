@@ -45,6 +45,8 @@
   .home-icon {
     margin-right: 5px;
     font-size: 20px;
+    position: relative;
+    margin-top: -3px;
   }
   .breadcrumb-link {
     color: black !important;

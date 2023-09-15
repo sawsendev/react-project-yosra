@@ -153,3 +153,59 @@
 .nav-divider.hide-on-home {
   display: none;
 }
+
+ @media (max-width: 991px) {
+.List-items {
+  padding: 13px 14px 13px 34px;
+  margin: 0;
+  border-bottom: 1px solid #DFDFDF;
+  border-radius: 0!important;
+  border-left: 7px solid transparent;
+}
+.nav-elements {
+  padding-top: 45px;
+}
+.List-items.active {
+  background-color: transparent;
+  border-radius: 0!important;
+  color: #000;
+  border-left-color: black;
+}
+.menu-icon.false img.close-nav {
+  display: none;
+}
+.menu-icon.false img.open-nav {
+  display: block;
+}
+.menu-icon.active img.close-nav {
+  display: block;
+}
+.menu-icon.active img.open-nav {
+  display: none;
+}
+.menu-icon img.close-nav {
+  width: 30px;
+  text-align: center;
+}
+.nav-list {
+  max-width: 690px;
+  display: table;
+  margin: 0 auto;
+  width: 100%;
+}
+}
+@media (max-width: 768px) {
+.menu-icon img {
+  width: 32px;
+  height: 32px;
+}
+.menu-icon img.close-nav {
+  width: 24px;
+}
+.nav-list {
+  max-width: 510px;
+  display: table;
+  margin: 0 auto;
+  width: 100%;
+}
+}
