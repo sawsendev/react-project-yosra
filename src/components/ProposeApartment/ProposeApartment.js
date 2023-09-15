@@ -11,6 +11,7 @@ import image7 from '../../assets/sketch.svg'
 import image8 from '../../assets/Groupe de masques 9.svg'
 import image9 from '../../assets/Rectangle 5932.svg'
 import Feedback from '../HomePage/Feedback/Feedback';
+import image10 from '../../assets/Groupe 1262.svg'
 
 const ProposeApartment =()=> {
   return (
@@ -76,8 +77,10 @@ const ProposeApartment =()=> {
      <div className="d-flex align-items-center vline mt-5">
      <div className='row'>
       <div className='col-8'>
+        <h5>Rent your apartment to Finecribs</h5>
         <p> If your apartments meets our criteria, we will make you an offer and explain the terms of the partnership</p>
       </div>
+      <div><img src={image10} alt="Im10" className="img-fluid"/></div>
      </div>
   <div className="horizontal-lines ">
    <div className='el-left '>
@@ -104,7 +107,14 @@ const ProposeApartment =()=> {
     <div className="horizontal-line mb-4"></div>
     </div>
   </div>
-  <div></div>
+  <div>
+  </div>
+  <div className='row'>
+      <div className='col-8'>
+        <h5>Rent your apartment to Finecribs</h5>
+        <p> If your apartments meets our criteria, we will make you an offer and explain the terms of the partnership</p>
+      </div>
+     </div>
 </div>
 
 
@@ -162,12 +172,14 @@ const ProposeApartment =()=> {
     <h2 className='mt-5 pt-3'>Examples of renovation</h2>
     <div className='row py-5 mb-5'>
       <div className='col-md-6'>
-      <span class="badge2 badge bg-dark">Before Finecribs</span>
-      <img src={image8} alt="Im8" className="img-fluid img"/>
+      <span class="badge2 badge bg-dark"> Before Finecribs</span>
+      <div className='imRen1'>
+      <img src={image8} alt="Im8" className="img-fluid img"/></div>
       </div>
       <div className='col-md-6'>
       <span class="badge3 badge bg-dark">After Finecribs</span>
-      <img src={image9} alt="Im9" className="img-fluid"/>
+      <div className='imRen2'>
+      <img src={image9} alt="Im9" className="img-fluid"/></div>
       </div>
     </div>
 
