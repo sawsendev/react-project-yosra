@@ -8,8 +8,7 @@ const Room = () => {
     return (
       <>
       <Breadcrumbs/>
-      <div className='Contact-container row m-0'>
-        <div className='col-md-5'>Room</div>
+      <div className='container'>
         
       </div>
       </>
