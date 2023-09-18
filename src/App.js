@@ -9,6 +9,7 @@ import Cms from './components/CMS/Cms';
 import ErrorPage from './components/404/ErrorPage';
 import Faqspage from './components/Faqspage/Faqspage';
 import NoRoom from './components/SearchCities/NoRoom/NoRoom';
+import Room from './components/Room/Room';
 import Contact from './components/Contact/Contact';
 import BookingRoom from './components/BookingRoom/BookingRoom';
 import ProposeApartment from './components/ProposeApartment/ProposeApartment';
@@ -32,6 +33,7 @@ function App() {
         <Route path="/faq" element={<Faqspage/>} />     
         <Route path="*" element={<ErrorPage/>} /> 
         <Route path="/noRoom" element={<NoRoom/>} /> 
+        <Route path="/Room" element={<Room/>} /> 
         <Route path="/contact" element={<Contact/>} /> 
         <Route path="/BookingEnquiry" element={<BookingRoom/>} /> 
         <Route path="/I propose an apartment" element={<ProposeApartment/>}/>
