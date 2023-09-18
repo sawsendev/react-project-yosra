@@ -17,7 +17,7 @@ const NavBar = () => {
     setShowNav(!showNav)
   }
   const location = useLocation();
-  const isHomePage=location.pathname==='/Home' ;
+  const isHomePage=location.pathname==='/' ;
   const isNoRoomPage=location.pathname==='/noRoom'
   const isSearchPage=location.pathname==='/searchCities';
   

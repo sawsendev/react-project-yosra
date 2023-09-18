@@ -25,7 +25,7 @@ function Breadcrumbs() {
   const homeCrumb = (
     <div className='crumb' key="home">
       <VscHome className="home-icon" />
-      <Link to="/home" className="breadcrumb-link-h">
+      <Link to="..\" className="breadcrumb-link-h">
         Home
       </Link>
     </div>

@@ -26,7 +26,7 @@ function App() {
     
 
       <Routes>
-        <Route path='/home' index element={<Homepage/>} /> 
+        <Route path='/' index element={<Homepage/>} /> 
         <Route path="/searchCities" element={<SearchCities/>} /> 
         <Route path="/cms/page/:id" element={<Cms/>} /> 
         <Route path="/pages/:slug/" element={<Cms />} />

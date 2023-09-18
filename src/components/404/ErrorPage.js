@@ -9,7 +9,7 @@ const ErrorPage = () => {
        <div className='Error-content'>
         <h3>Oops ! There is nothing here</h3>
         <p>Page not found</p>
-        <button className='Search-btn' onClick={()=>window.location.href='/Home'}>Go to the home page</button>
+        <button className='Search-btn' onClick={()=>window.location.href='/'}>Go to the home page</button>
        </div>
     </div>
   )
