@@ -1,9 +1,10 @@
 import React from 'react'
 import "./Room.css"
+import CarrouselImages from "./RoomImages"
 import "../SearchCities/Cribes/Cribes.css"
 import Badge from 'react-bootstrap/Badge';
 import {CribesTable} from "../../Data/Data";
-import  locationIcon  from '../../assets/pin 2.svg';
+import locationIcon  from '../../assets/pin 2.svg';
 import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
 import iconimgs from '../../assets/room/imgs.svg'
 import iconvideos from '../../assets/room/videos.svg'
@@ -45,7 +46,7 @@ import insurance from '../../assets/room/widget/insurance.svg'
 import wifi from '../../assets/room/widget/wifi.svg'
 import cable from '../../assets/room/widget/cable-tv.svg'
 import wipe from '../../assets/room/widget/wipe.svg'
-import room from '../../assets/room/room.jpg';
+
 import { PiInfo } from "react-icons/pi";
 
 
@@ -58,12 +59,13 @@ const Room = () => {
         <div className='container'>
           <div className='row'>
             <div className='col-large col-lg-8'>
-              <div className='image'>
-                <img src={room} alt="room" className="img-fluid"/>
+              <div className='carousel-images'>
+                {/* <img src={room} alt="room" className="img-fluid"/> */}
+                <CarrouselImages />
                 <div className='medias'>
-                  <div className='btn-media'><img src={iconimgs} alt="photos"/>photos</div>
-                  <div className='btn-media'><img src={iconvideos} alt="videos"/>video</div>
-                  <div className='btn-media'><img src={iconvisit} alt="visit"/>360° visit</div>
+                  <button type='button' className='btn-media'><img src={iconimgs} alt="photos"/>photos</button>
+                  <button type='button' className='btn-media'><img src={iconvideos} alt="videos"/>video</button>
+                  <button type='button' className='btn-media'><img src={iconvisit} alt="visit"/>360° visit</button>
                 </div>
               </div>
               <div className='title mt-4'>
@@ -180,7 +182,7 @@ const Room = () => {
                         <div key={index} className='item-cribe'>
                           <div className='Item-badge'>
                             <Badge className='notify-badge'>Available now</Badge>
-                            <img class="img-fluid" src= {cribe.src[0].src_room} alt="photo_fine_cribs"/>
+                            <img className="img-fluid" src= {cribe.src[0].src_room} alt="photo_fine_cribs"/>
                           </div>
                           <div className='Rooms-content'>
                             <h3>{cribe.content}</h3>
@@ -228,7 +230,7 @@ const Room = () => {
                           <div key={index} className='item-cribe'>
                             <div className='Item-badge'>
                               <Badge className='notify-badge'>Available now</Badge>
-                              <img class="img-fluid" src= {cribe.src[0].src_room} alt="photo_fine_cribs"/>
+                              <img className="img-fluid" src= {cribe.src[0].src_room} alt="photo_fine_cribs"/>
                             </div>
                             <div className='Rooms-content'>
                               <h3>{cribe.content}</h3>

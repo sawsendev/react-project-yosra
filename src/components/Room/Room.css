@@ -8,20 +8,51 @@
     padding: 0 0 0 15px;
 }
 }
-.pageroom-container .image {
+.pageroom-container .carousel-images {
     position: relative;
 }
-.pageroom-container .image img {
+.pageroom-container .carousel-images img {
     height: 503px;
     width: 100%;
     border-radius: 10px;
 }
-.pageroom-container .image .medias {
+.pageroom-container .carousel-images .medias {
     position: absolute;
     right: 12px;
     bottom: 12px;
     display: flex;
     gap: 10px;
+}
+.pageroom-container .carousel-images .button-container {
+    margin: 20px 0 0!important;
+}
+.pageroom-container .carousel-images .custom-next-arrow , .pageroom-container .carousel-images .custom-prev-arrow {
+    border: none;
+    background: rgba(255, 255, 255, .6);
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.16);
+    line-height: 38px;
+}
+.pageroom-container .carousel-images .custom-next-arrow:hover, .pageroom-container .carousel-images .custom-prev-arrow:hover {
+    color: black;
+    background: #fff;
+}
+
+@media (min-width: 768px) {
+    .pageroom-container .carousel-images .button-container {
+        margin: 0!important;
+    }
+    .pageroom-container .carousel-images .custom-prev-arrow {
+        position: absolute;
+        left: 26px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .pageroom-container .carousel-images .custom-next-arrow {
+        position: absolute;
+        right: 26px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
 }
 .pageroom-container .btn-media img {
     width: auto;
@@ -39,6 +70,8 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
+    border: none!important;
+    outline: 0!important;
 }
 .title h1 {
     color: #000;
@@ -322,7 +355,7 @@
         padding: 6px 8px;
         min-width: 112px;
     }
-    .pageroom-container .image img {
+    .pageroom-container .carousel-images img {
         height: 380px;
     }
     .title h1 {
@@ -336,11 +369,11 @@
     }
 }
 @media(max-width:768px) {
-    .pageroom-container .image img {
+    .pageroom-container .carousel-images img {
         height: 200px;
         object-fit: cover;
     }
-    .pageroom-container .image .medias {
+    .pageroom-container .carousel-images .medias {
         bottom: inherit;
         top: 12px;
     }
