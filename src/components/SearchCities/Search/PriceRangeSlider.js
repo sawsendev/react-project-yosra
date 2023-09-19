@@ -11,6 +11,8 @@ const PriceRangeSlider = () => {
   const sliderStyle = {
     trackStyle: {  background: 'rgba(0, 0, 0, 1)',height:'2px',borderWidth: 1}, // Couleur de la piste
     handleStyle: [{ border: '1px solid rgba(0, 0, 0, 1)',borderWidth: 1}, { border: '1px solid rgba(0, 0, 0, 1)',borderWidth: 1 }], // Couleur du curseur
+      
+  
   };
 
 
@@ -18,15 +20,15 @@ const PriceRangeSlider = () => {
     <div>
       <Slider
         range
-        min={0}
+        min={1}
         max={1000} // Remplacez par votre valeur maximale
         value={value}
         onChange={handleSliderChange}
         {...sliderStyle}
       />
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <span>{value[0]}</span>
-        <span>{value[1]}</span>
+        <span>{value[0]}€</span>
+        <span>{value[1]}€</span>
       </div>
     </div>
   );

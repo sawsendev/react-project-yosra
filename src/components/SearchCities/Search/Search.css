@@ -67,7 +67,7 @@ label{
     position: absolute;
     left: 0;
     right: 0;
-    width:278px;
+    width:100%;
     height:87px;
     background-color: #fff;
     border: 1px solid #ccc;
@@ -76,7 +76,7 @@ label{
     border-radius: 6px;
 }
   
-.h5{
+.slider-container h5{
     font-size: 16px;
     font-weight: 400;
 }
@@ -152,4 +152,21 @@ label{
 .Form-city {
     padding: 0 6px 12px!important;
 }
+}
+.clear-icon{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: stretch;
+    justify-content: space-evenly;
+    align-items: baseline;
+    color: lightslategray;
+}
+.price{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: stretch;
+    justify-content: space-between;
+
 }
