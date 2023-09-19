@@ -57,7 +57,7 @@ const Room = () => {
       <div className='pageroom-container'>
         <div className='container'>
           <div className='row'>
-            <div className='col-large col-md-8'>
+            <div className='col-large col-lg-8'>
               <div className='image'>
                 <img src={room} alt="room" className="img-fluid"/>
                 <div className='medias'>
@@ -125,7 +125,7 @@ const Room = () => {
               <div className='flatmates'>
                 <h2 className='mb-3'>Flatmates</h2>
                 <div className='row'>
-                  <div className='col-lg-4'>
+                  <div className='col-md-4'>
                     <div className='panel mb-3'>
                       <div className='icon'>
                         <img src={block} alt="Bedroom 1"/>
@@ -136,7 +136,7 @@ const Room = () => {
                       </div>
                     </div>
                   </div>
-                  <div className='col-lg-4'>
+                  <div className='col-md-4'>
                     <div className='panel mb-3'>
                       <div className='icon'>
                         <img src={woman} alt="Bedroom 2"/>
@@ -147,7 +147,7 @@ const Room = () => {
                       </div>
                     </div>
                   </div>
-                  <div className='col-lg-4'>
+                  <div className='col-md-4'>
                     <div className='panel mb-3'>
                       <div className='icon'>
                         <img src={man} alt="Bedroom 3"/>
@@ -171,12 +171,12 @@ const Room = () => {
                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
                 standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to</p>
               </div>
-              <div className='recommandation mt-3 mb-lg-5 pb-4'>
+              <div className='recommandation mt-3 mb-lg-5 pb-4 d-md-block d-none'>
                 <h2 className='mb-3'>You might also be interested in the following properties</h2>
                 <ul className='row Rooms-cribes'>
                   {CribesTable.slice(0, 3).map((cribe, index) => {
                     return (
-                      <li className='col-lg-4 col-md-6 col-12'>
+                      <li className='col-lg-4 col-md-4 col-12'>
                         <div key={index} className='item-cribe'>
                           <div className='Item-badge'>
                             <Badge className='notify-badge'>Available now</Badge>
@@ -197,7 +197,7 @@ const Room = () => {
                 </ul>
               </div>
             </div>
-            <div className='col-widget col-md-4'>
+            <div className='col-widget col-lg-4'>
                 <div className='widget mb-3'>
                   <p className='head-widget'><img src={check} alt="Available"/>Available now</p>
                   <hr/>
@@ -219,6 +219,33 @@ const Room = () => {
                   experience of design, comfort and uparallefled
                   services.</p>
                 </div>
+                <div className='recommandation mt-3 mb-lg-5 pb-4 d-md-none'>
+                  <h2 className='mb-3'>You might also be interested in the following properties</h2>
+                  <ul className='row Rooms-cribes'>
+                    {CribesTable.slice(0, 2).map((cribe, index) => {
+                      return (
+                        <li className='col-lg-4 col-md-4 col-12'>
+                          <div key={index} className='item-cribe'>
+                            <div className='Item-badge'>
+                              <Badge className='notify-badge'>Available now</Badge>
+                              <img class="img-fluid" src= {cribe.src[0].src_room} alt="photo_fine_cribs"/>
+                            </div>
+                            <div className='Rooms-content'>
+                              <h3>{cribe.content}</h3>
+                              <div className='d-flex mb-1'>
+                                <img src={locationIcon} alt="location icon"></img>
+                                <p>{cribe.adress}</p>
+                              </div>
+                              <span> {cribe.price}/ month</span>
+                            </div>
+                          </div>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+
+
             </div>
           </div>
         </div>
