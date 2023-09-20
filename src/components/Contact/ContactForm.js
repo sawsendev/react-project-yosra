@@ -13,7 +13,7 @@ const ContactForm = () => {
     const [message, setMessage] = useState('');
     const [emailValid, setEmailValid] = useState(true);
     const [showThankYou, setShowThankYou] = useState(false);
-
+    const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
     const handleChange = (value) => {
         const input = value;
         setPhoneNumber(input);
@@ -47,26 +47,53 @@ const ContactForm = () => {
     const handleMessageChange = (event) => {
         setMessage(event.target.value);
     }
-    const handleSubmit = (event) => {
-        event.preventDefault(); 
-        
-        
-        if (
-            firstName && lastName && emailValid && valid && message
-        ) {
-            
-            // alert('Thank you for your message! We will get in touch soon.');
-            setShowThankYou(true)
-            
-            setFirstName('');
-            setLastName('');
-            setEmail('');
-            setPhoneNumber('');
-            setMessage('');
-            setEmailValid(true);
-            setValid(true);
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+      
+        if (firstName && lastName && emailValid && valid && message) {
+          // Créez l'objet de données à envoyer à votre API
+          const data = {
+            email: email,
+            phone: phoneNumber,
+            message: message,
+            objet: "contact : " + firstName + " " + lastName
+          };
+      
+          try {
+            const response = await fetch('http://dev.niceroom.sofis-info.com/api/contact', {
+              method: 'POST',
+              mode: 'cors',  
+              headers: {
+                'Content-Type': 'application/json',
+                'apiKey': API_KEY, // Assurez-vous que votre clé API est correctement définie
+              },
+              body: JSON.stringify(data),
+            });
+      
+            if (response.ok) {
+              // Si la requête réussit, affichez un message de remerciement ou effectuez d'autres actions nécessaires
+              setShowThankYou(true);
+              console.log("Requête effectuée avec succès");
+      
+              // Réinitialisez les états du formulaire
+              setFirstName('');
+              setLastName('');
+              setEmail('');
+              setPhoneNumber('');
+              setMessage('');
+              setEmailValid(true);
+              setValid(true);
+            } else {
+              // Gérez les erreurs de la requête si nécessaire
+              console.error('Erreur de la requête vers l\'API');
+            }
+          } catch (error) {
+            console.error('Erreur lors de la requête vers l\'API :', error);
+          }
         }
-    };
+      };
+      
+      
 
     return (
         <form className='col-md-6 col-10 mx-auto offset-md-6 '  onSubmit={handleSubmit}>
