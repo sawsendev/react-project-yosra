@@ -42,7 +42,7 @@ export const NavTable = [
     },
     {
         id: 1,
-        href: "I propose an apartment",
+        href: "i-propose-an-apartment",
         name: "I PROPOSE AN APARTEMENT"
     },
     {

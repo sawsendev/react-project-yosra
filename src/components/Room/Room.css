@@ -1,0 +1,435 @@
+@media (min-width: 1400px) {
+.pageroom-container .col-widget {
+    width: 380px!important;
+    padding: 0 15px;
+}
+.pageroom-container .col-large {
+    width: calc(100% - 380px)!important;
+    padding: 0 0 0 15px;
+}
+}
+.pageroom-container .carousel-images {
+    position: relative;
+}
+.pageroom-container .carousel-images img {
+    height: 503px;
+    width: 100%;
+    border-radius: 10px;
+}
+.pageroom-container .carousel-images .medias {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    display: flex;
+    gap: 10px;
+}
+.pageroom-container .carousel-images .button-container {
+    margin: 20px 0 0!important;
+}
+.pageroom-container .carousel-images .custom-next-arrow , .pageroom-container .carousel-images .custom-prev-arrow {
+    border: none;
+    background: rgba(255, 255, 255, .6);
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.16);
+    line-height: 38px;
+}
+.pageroom-container .carousel-images .custom-next-arrow:hover, .pageroom-container .carousel-images .custom-prev-arrow:hover {
+    color: black;
+    background: #fff;
+}
+
+@media (min-width: 768px) {
+    .pageroom-container .carousel-images .button-container {
+        margin: 0!important;
+    }
+    .pageroom-container .carousel-images .custom-prev-arrow {
+        position: absolute;
+        left: 26px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .pageroom-container .carousel-images .custom-next-arrow {
+        position: absolute;
+        right: 26px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
+.pageroom-container .btn-media img {
+    width: auto;
+    height: 28px!important;
+}
+.pageroom-container .btn-media {
+    height: 40px;
+    font-size: 16px;
+    color: #000;
+    font-weight: 400;
+    padding: 8px 12px;
+    border-radius: 6px;
+    background: #FFF;
+    min-width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border: none!important;
+    outline: 0!important;
+}
+.title h1 {
+    color: #000;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 600;
+    margin: 0 0 4px;
+}
+.title h2 {
+    color: #000;
+    font-size: 18px;
+    font-weight: 400;
+}
+.pageroom-container h2 {
+    color: #000;
+    font-size: 28px;
+    font-weight: 600;
+    margin: 0 0 10px;
+}
+.pageroom-container h3 {
+    color: #000;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 8px;
+}
+.characteristics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+.btn-char {
+    border-radius: 6px;
+    border: 1px solid #DDD;
+    background: #F5F5F5;
+    height: 40px;
+    min-width: 170px;
+    text-align: left;
+    padding: 7px 12px;
+    font-size: 15px;
+}
+.btn-char img {
+    height: 22px;
+    width: auto;
+    margin-right: 12px;
+}
+.amenities .btn-char img {
+    margin-right: 6px;
+}
+.amenities .btn-char {
+    /* width: 175px; */
+    padding: 7px 2px 7px 8px;
+}
+.panel .icon {
+    width: 58px;
+    height: 58px;
+    background: #F5F5F5;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-visit {
+    color: #FFF;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 6px;
+    background: #35CE92;
+    border: none;
+    padding: 6px 7px;
+    height: 32px;
+    outline: 0;
+    box-shadow: none;
+    line-height: 22px;
+}
+.btn-visit:hover {
+    box-shadow: 0 3px 6px rgba(53, 206, 146, 0.5);
+}
+.panel {
+    display: flex;
+    justify-content: flex-start;
+}
+.panel .icon {
+    width: 58px;
+    height: 58px;
+    background: #F5F5F5;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: -24px;
+    z-index: 1;
+}
+.panel .text {
+    width: calc(100% - 34px);
+    border-radius: 6px;
+    border: 1px solid #DDD;
+    background: #FFF;
+    height: 60px;
+    padding: 8px 12px 8px 38px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.panel .text p {
+    margin: 0;
+    color: #000;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+}
+.panel .text .status {
+    border-radius: 24px;
+    background: var(--grey, #DFDFDF);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    color: #000;
+    padding: 3px 10px 4px;
+}
+.flatmates .row {
+    margin: 0 -10px;
+}
+.flatmates .row>* {
+    padding: 0 10px;
+}
+.map-local .map iframe {
+    height: 340px;
+    width: 100%;
+    border-radius: 10px;
+}
+.description p, .local-desc p {
+    color: #000;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+}
+.widget {
+    border-radius: 10px;
+    border: 1px solid #DFDFDF;
+    background: #FFF;
+    padding: 0 24px 20px;
+}
+.widget .head-widget {
+    margin: 0;
+    color: #35CE92;
+    font-size: 20px;
+    font-weight: 400;
+    padding: 13px 12px 0;
+    text-align: center;
+}
+.widget hr {
+    margin: 12px 0;
+}
+.widget .head-widget img {
+    height: 23px;
+    width: auto;
+    margin-right: 14px;
+    margin-top: -2px;
+}
+.widget .price {
+    color: #000;
+    font-size: 32px;
+    font-weight: 600;
+    margin: 0 0 8px;
+}
+.widget .price small {
+    font-size: 18px;
+}
+.widget .assistance {
+    color: #000;
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0 0 20px;
+}
+.widget .assistance .info {
+    width: 20px;
+    height: 20px;
+    margin: 0 8px;
+}
+.widget .assistance .green {
+    color: #35CE92;
+}
+.widget .h4.status {
+    color: #000;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 12px;
+}
+.widget .status img {
+    margin-right: 13px;
+}
+.widget .status {
+    color: #000;
+    font-size: 16px;
+    font-weight: 400;
+}
+.widget .btn-submit {
+    margin: 5px 0 0;
+    width: 100%;
+    height: 40px;
+    border-radius: 6px;
+    background: #000;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 7px 12px 7px;
+    border: none;
+    outline: 0;
+}
+.widget .btn-submit:hover {
+    background: #1c1c1c;
+    color: #fff;
+}
+.widget-info {
+    border-radius: 10px;
+    background: #DDD;
+    padding: 16px;
+}
+.widget-info h5 {
+    color: #000;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 26px;
+    margin: 0 0 4px;
+}
+.widget-info p {
+    margin: 0;
+    color: #000;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+}
+
+/****** Responsive ******/
+@media(max-width:1400px) {
+    .panel {
+        align-items: center;
+    }
+    .panel .text {
+        height: auto;
+        font-size: 14px;
+        padding: 8px 8px 8px 35px;
+    }
+    .panel .text p {
+        font-size: 14px;
+    }
+    .widget .btn-submit {
+        font-size: 16px;
+    }
+    .widget {
+        padding: 0 20px 16px;
+    }
+    .widget .price {
+        font-size: 30px;
+    }
+}
+
+@media(max-width:1200px) {
+    .widget .price {
+        font-size: 28px;
+    }
+}
+@media(max-width:992px) {
+    .btn-char img {
+        height: 22px;
+    }
+    .btn-char {
+        min-width: 162px;
+        padding: 7px 2px 7px 8px;
+        font-size: 14px;
+    }
+    .pageroom-container .btn-media img {
+        height: 22px!important;
+    }
+    .pageroom-container .btn-media {
+        height: 34px;
+        font-size: 14px;
+        padding: 6px 8px;
+        min-width: 112px;
+    }
+    .pageroom-container .carousel-images img {
+        height: 380px;
+    }
+    .title h1 {
+        font-size: 30px;
+    }
+    .pageroom-container h2 {
+        font-size: 26px;
+    }
+    .pageroom-container .col-widget {
+        margin: 0 0 60px;
+    }
+}
+@media(max-width:768px) {
+    .pageroom-container .carousel-images img {
+        height: 200px;
+        object-fit: cover;
+    }
+    .pageroom-container .carousel-images .medias {
+        bottom: inherit;
+        top: 12px;
+    }
+    .pageroom-container .btn-media {
+        height: 40px;
+        width: 40px;
+        font-size: 0;
+        padding: 6px;
+        border-radius: 6px;
+        background: #FFF;
+        min-width: inherit;
+    }
+    .pageroom-container .btn-media img {
+        height: 28px!important;
+    }
+    .title h1 {
+        font-size: 24px;
+    }
+    .pageroom-container .title  h2 {
+        font-size: 16px;
+        font-weight: 400;
+    }
+    .pageroom-container h2 {
+        font-size: 20px;
+    }
+    .pageroom-container h3 {
+        font-size: 16px;
+    }
+    .btn-char img {
+        height: 18px;
+    }
+    .description p, .local-desc p {
+        font-size: 14px;
+    }
+    .panel .text {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        min-height: 67px;
+    }
+    .panel .text .status {
+        padding: 2px 8px;
+        line-height: 18px;
+        margin-left: 10px;
+    }
+    .col-md-4:first-child .panel .text {
+        flex-direction: row;
+        align-items: center;
+    }
+    .btn-char {
+        height: 34px;
+    }
+    .pageroom-container .col-widget .item-cribe .Item-badge .img-fluid {
+        border-radius: 6px;
+        width: 100%;
+        height: 286px;
+        object-fit: cover;
+    }
+}
