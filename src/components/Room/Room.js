@@ -1,44 +1,45 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import "./Room.css"
 import CarrouselImages from "./RoomImages"
+import RoomModal from "./RoomModal/RoomModal"
 import "../SearchCities/Cribes/Cribes.css"
 import Badge from 'react-bootstrap/Badge';
 import {CribesTable} from "../../Data/Data";
 import locationIcon  from '../../assets/pin 2.svg';
 import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
-import iconimgs from '../../assets/room/imgs.svg'
-import iconvideos from '../../assets/room/videos.svg'
-import iconvisit from '../../assets/room/visits.svg'
-import plan from '../../assets/room/plan.svg'
-import bedroom from '../../assets/room/bedroom.svg'
-import roomies from '../../assets/room/roomies.svg'
-import elevator from '../../assets/room/elevator.svg'
-import energy from '../../assets/room/energy.svg'
-import doublebed from '../../assets/room/doublebed.svg'
-import workspace from '../../assets/room/workspace.svg'
-import wardrobe from '../../assets/room/wardrobe.svg'
-import sofa from '../../assets/room/sofa.svg'
-import terrace from '../../assets/room/terrace.svg'
-import airconditioner from '../../assets/room/air-conditioner.svg'
-import location from '../../assets/room/pin.svg'
-import elevator1 from '../../assets/room/elevator1.svg'
-import view from '../../assets/room/view.svg'
-import cleaning from '../../assets/room/cleaning.svg'
-import fkitchen from '../../assets/room/fkitchen.svg'
-import kitchenware from '../../assets/room/kitchenware.svg'
-import dishes from '../../assets/room/dishes.svg'
-import dishwasher from '../../assets/room/dishwasher.svg'
-import microwave from '../../assets/room/microwave.svg'
-import shower from '../../assets/room/shower.svg'
-import washer from '../../assets/room/washer.svg'
-import pillow from '../../assets/room/pillow.svg'
-import dryer from '../../assets/room/dryer.svg'
-import vacuum from '../../assets/room/vacuum.svg'
-import ironing from '../../assets/room/ironing.svg'
-import tools from '../../assets/room/tools.svg'
-import block from '../../assets/room/block.svg'
-import woman from '../../assets/room/woman.svg'
-import man from '../../assets/room/man.svg'
+import iconimgs from '../../assets/room/icons/imgs.svg'
+import iconvideos from '../../assets/room/icons/videos.svg'
+import iconvisit from '../../assets/room/icons/visits.svg'
+import plan from '../../assets/room/icons/plan.svg'
+import bedroom from '../../assets/room/icons/bedroom.svg'
+import roomies from '../../assets/room/icons/roomies.svg'
+import elevator from '../../assets/room/icons/elevator.svg'
+import energy from '../../assets/room/icons/energy.svg'
+import doublebed from '../../assets/room/icons/doublebed.svg'
+import workspace from '../../assets/room/icons/workspace.svg'
+import wardrobe from '../../assets/room/icons/wardrobe.svg'
+import sofa from '../../assets/room/icons/sofa.svg'
+import terrace from '../../assets/room/icons/terrace.svg'
+import airconditioner from '../../assets/room/icons/air-conditioner.svg'
+import location from '../../assets/room/icons/pin.svg'
+import elevator1 from '../../assets/room/icons/elevator1.svg'
+import view from '../../assets/room/icons/view.svg'
+import cleaning from '../../assets/room/icons/cleaning.svg'
+import fkitchen from '../../assets/room/icons/fkitchen.svg'
+import kitchenware from '../../assets/room/icons/kitchenware.svg'
+import dishes from '../../assets/room/icons/dishes.svg'
+import dishwasher from '../../assets/room/icons/dishwasher.svg'
+import microwave from '../../assets/room/icons/microwave.svg'
+import shower from '../../assets/room/icons/shower.svg'
+import washer from '../../assets/room/icons/washer.svg'
+import pillow from '../../assets/room/icons/pillow.svg'
+import dryer from '../../assets/room/icons/dryer.svg'
+import vacuum from '../../assets/room/icons/vacuum.svg'
+import ironing from '../../assets/room/icons/ironing.svg'
+import tools from '../../assets/room/icons/tools.svg'
+import block from '../../assets/room/icons/block.svg'
+import woman from '../../assets/room/icons/woman.svg'
+import man from '../../assets/room/icons/man.svg'
 import check from '../../assets/room/widget/check.svg'
 import water from '../../assets/room/widget/water.svg'
 import plug from '../../assets/room/widget/plug.svg'
@@ -52,10 +53,12 @@ import { PiInfo } from "react-icons/pi";
 
 
 const Room = () => {
+
     return (
       <>
       <Breadcrumbs/>
       <div className='pageroom-container'>
+        <RoomModal />
         <div className='container'>
           <div className='row'>
             <div className='col-large col-lg-8'>
@@ -63,9 +66,9 @@ const Room = () => {
                 {/* <img src={room} alt="room" className="img-fluid"/> */}
                 <CarrouselImages />
                 <div className='medias'>
-                  <button type='button' className='btn-media'><img src={iconimgs} alt="photos"/>photos</button>
-                  <button type='button' className='btn-media'><img src={iconvideos} alt="videos"/>video</button>
-                  <button type='button' className='btn-media'><img src={iconvisit} alt="visit"/>360° visit</button>
+                  <button type='button' className='btn-media' data-bs-toggle="modal" data-bs-target="#RoomMedia" data-tab="photos"><img src={iconimgs} alt="photos"/> photos</button>
+                  <button type='button' className='btn-media' data-bs-toggle="modal" data-bs-target="#RoomMedia" data-tab="video"><img src={iconvideos} alt="videos"/> video</button>
+                  <button type='button' className='btn-media' data-bs-toggle="modal" data-bs-target="#RoomMedia" data-tab="visit"><img src={iconvisit} alt="visit"/> 360° visit</button>
                 </div>
               </div>
               <div className='title mt-4'>
