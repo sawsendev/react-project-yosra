@@ -99,7 +99,7 @@ body.ReactModal__Body--open {
     width: 26px;
 }
 .nav-steps li.sup {
-    width: calc(32.1% - 26px);
+    width: calc(32% - 26px);
     position: relative;
 }
 .nav-steps .n-step {
@@ -241,4 +241,19 @@ button.box-input img {
 }
 .reactmodal-container .input-group {
     width: 100%;
+}
+
+@media (max-width: 768px) {
+.nav-steps li.sup {
+    width: calc(31% - 26px);
+}
+.reactmodal-header nav.nav-steps ul {
+    flex-wrap: nowrap;
+}
+.reactmodal-header {
+    margin: 0 0 40px;
+}
+.ReactModalPortal .reactmodal-head {
+    padding: 30px 0;
+}
 }
