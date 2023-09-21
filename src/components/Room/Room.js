@@ -58,18 +58,13 @@ const Room = () => {
       <>
       <Breadcrumbs/>
       <div className='pageroom-container'>
-        <RoomModal />
         <div className='container'>
           <div className='row'>
             <div className='col-large col-lg-8'>
               <div className='carousel-images'>
                 {/* <img src={room} alt="room" className="img-fluid"/> */}
                 <CarrouselImages />
-                <div className='medias'>
-                  <button type='button' className='btn-media' data-bs-toggle="modal" data-bs-target="#RoomMedia" data-tab="photos"><img src={iconimgs} alt="photos"/> photos</button>
-                  <button type='button' className='btn-media' data-bs-toggle="modal" data-bs-target="#RoomMedia" data-tab="video"><img src={iconvideos} alt="videos"/> video</button>
-                  <button type='button' className='btn-media' data-bs-toggle="modal" data-bs-target="#RoomMedia" data-tab="visit"><img src={iconvisit} alt="visit"/> 360° visit</button>
-                </div>
+                <RoomModal />
               </div>
               <div className='title mt-4'>
                 <h1>52 Rue Vernier, Nice - Room 5</h1>

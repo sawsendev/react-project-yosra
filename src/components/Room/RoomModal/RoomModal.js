@@ -14,8 +14,26 @@ import room3 from '../../../assets/room/room-3.jpg';
 import { IoCloseOutline } from "react-icons/io5";
 
 const RoomModal = () => {
+    const [isVideoActive, setIsVideoActive] = useState(false);
+    // const videoRef = useRef(null);
+    const videoRef = document.getElementById('video');
+
+  const openTabvideo = () => {
+    setIsVideoActive(true);
+    
+    videoRef.current.classList.add('active');
+    
+    // videotab.classList.add('active', 'show');
+  };
     return (
       <>
+      
+        <div className='medias'>
+            <button type='button' className='btn-media' onClick={openTabvideo} data-bs-toggle="modal" data-bs-target="#RoomMedia" data-tab="photos"><img src={iconimgs} alt="photos"/> photos</button>
+            <button type='button' className='btn-media' data-bs-toggle="modal" data-bs-target="#RoomMedia" id="video-btn" data-tab="video"><img src={iconvideos} alt="videos"/> video</button>
+            <button type='button' className='btn-media' data-bs-toggle="modal" data-bs-target="#RoomMedia" data-tab="visit"><img src={iconvisit} alt="visit"/> 360° visit</button>
+        </div>
+
         <div className='modal modal-fullscreen fade' id='RoomMedia' tabindex="-1" aria-labelledby='RoomMediaLabel' aria-hidden="true">
             <div className='modal-dialog'>
                 <div className='modal-content'>
@@ -45,7 +63,7 @@ const RoomModal = () => {
                                         <li className='itm-img col-md-12 p-0'><img src={room3} alt='Room' className='img-fluid'/></li>
                                     </ul>
                                 </div>
-                                <div className='tab-pane fade' id='video' role='tabpanel' aria-labelledby='video-tab'>
+                                <div className='tab-pane fade' id='video' ref={videoRef} role='tabpanel' aria-labelledby='video-tab'>
                                     <ul className='gallery-videos row m-0'>
                                         <li className='itm-video col-md-12 p-0'><iframe src="https://www.youtube.com/embed/6stlCkUDG_s?si=GWF5FnS0cExHwJNT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></li>
                                         <li className='itm-video col-md-6 p-0'><iframe src="https://www.youtube.com/embed/6stlCkUDG_s?si=GWF5FnS0cExHwJNT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></li>
