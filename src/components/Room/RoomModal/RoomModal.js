@@ -21,7 +21,7 @@ const RoomModal = () => {
   const openTabvideo = () => {
     setIsVideoActive(true);
     
-    videoRef.current.classList.add('active');
+    // videoRef.current.classList.add('active');
     
     // videotab.classList.add('active', 'show');
   };

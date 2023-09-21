@@ -111,3 +111,36 @@
 .modal-header .btn-close span {
     margin-right: 6px;
 }
+@media (max-width: 768px) {
+    .modal-header .btn-close {
+        top: 8px;
+        transform: none;
+    }
+    .nav-tabs .nav-item .nav-link {
+        padding: 12px 16px;
+        font-size: 18px;
+        min-width: 110px;
+    }
+    .gallery-imgs img, .gallery-videos iframe {
+        height: auto;
+        min-height: 200px;
+    }
+    .gallery-imgs, .gallery-videos {
+        gap: 16px;
+    }
+}
+@media (max-width: 460px) {
+    .nav-tabs .nav-item {
+        width: 100%;
+    }
+    .nav-tabs .nav-item .nav-link {
+        min-width: initial;
+        width: 100%;
+    }
+    .modal-fullscreen .modal-header {
+        border-radius: 0;
+        width: 100%;
+        margin: 0;
+        display: block;
+    }
+}
