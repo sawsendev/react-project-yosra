@@ -23,36 +23,46 @@ const ProposeModal = ({ isOpen, closeModal }) => {
       medias: '',
       message: '',
     });
-  
+
+    const requiredFields = ['email', 'phone', 'address', 'quality', 'surface', 'availability'];
+
     const handleInputChange = (e) => {
       const { name, value } = e.target;
       setFormData({ ...formData, [name]: value });
     };
   
-    const nextStep = () => {
-      setStep(step + 1);
+    const nextStep = (e) => {
+        e.preventDefault(); 
+        setStep(step + 1);
     };
   
     const prevStep = () => {
       setStep(step - 1);
     };
   
-    const handleSubmit = () => {
-        setFormData({
-            firstName: '',
-            lastName: '',
-            email: '',
-            phone: '',
-            quality: '',
-            location: '',
-            address: '',
-            surface: '',
-            availability: '',
-            medias: '',
-            message: '',
-          });
-        setStep(1);
-        closeModal();
+    const handleSubmit = (e) => {
+        e.preventDefault(); 
+        const allFieldsFilled = requiredFields.every((field) => formData[field].trim() !== '');
+    
+        if (allFieldsFilled) {
+            setFormData({
+                firstName: '',
+                lastName: '',
+                email: '',
+                phone: '',
+                quality: '',
+                location: '',
+                address: '',
+                surface: '',
+                availability: '',
+                medias: '',
+                message: '',
+            });
+            setStep(1);
+            closeModal();
+        } else {
+            alert('Please fill in all required fields.');
+        }
     };
   
     const renderStep = () => {
@@ -104,6 +114,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
                         value={formData.quality}
                         onChange={handleInputChange}
                         required>
+                        <option value=""></option>
                         <option value="individual">Individual</option>
                         <option value="company">Company</option>
                         <option value="association">Association</option>
@@ -124,6 +135,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
                         value={formData.location}
                         onChange={handleInputChange}
                         required>
+                        <option value=""></option>
                         <option value="paris">Paris</option>
                         <option value="nice">Nice</option>
                         <option value="lilles">Lilles</option>
@@ -142,7 +154,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
             <div className='form-group'>
                 <label className='form-label'>What is the surface? *</label>
                 <input className='form-control'
-                    type="text"
+                    type="number"
                     name="surface"
                     value={formData.surface}
                     onChange={handleInputChange}
@@ -159,7 +171,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
                     required/>
                 </div>
             </div>
-              <button className='btn btn-accept' onClick={nextStep}>OK</button>
+            <button className='btn btn-accept' onClick={nextStep}>OK</button>
             </>
           );
         case 3:
@@ -232,9 +244,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
         </div>
         <div className='reactmodal-body'>
             <div className='reactmodal-container'>
-                <form method='get' className='quiz-form'>
                     {renderStep()}
-                </form>
             </div>
         </div> 
         </div>
