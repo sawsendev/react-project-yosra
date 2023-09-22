@@ -59,26 +59,27 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 .nav-tabs .nav-item .nav-link img {
     margin-right: 16px;
     height: 28px;
     width: auto;
 }
-.nav-tabs .nav-item .nav-link.active {
+.nav-tabs .nav-item.active .nav-link {
     border-bottom-color: #35CE92!important;
     color: #35CE92;
 }
 .nav-tabs .nav-item .nav-link .icon-hover {
     display: none;
 }
-.nav-tabs .nav-item .nav-link.active .icon-hover {
+.nav-tabs .nav-item.active .nav-link .icon-hover {
     display: block;
 }
 .nav-tabs .nav-item .nav-link .icon {
     display: block;
 }
-.nav-tabs .nav-item .nav-link.active .icon {
+.nav-tabs .nav-item.active .nav-link .icon {
     display: none;
 }
 .modal-body {

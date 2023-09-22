@@ -219,7 +219,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
       <Modal
         isOpen={isOpen}
         onRequestClose={closeModal}
-        contentLabel="Example Modal"
+        contentLabel="Propose Modal"
       >
         <div className='container'>
        <div className='reactmodal-head'>

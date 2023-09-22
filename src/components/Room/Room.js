@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import "./Room.css"
 import CarrouselImages from "./RoomImages"
-import RoomModal from "./RoomModal/RoomModal"
+import RoomModalMedia from "./RoomModal/RoomModalMedia"
 import "../SearchCities/Cribes/Cribes.css"
 import Badge from 'react-bootstrap/Badge';
 import {CribesTable} from "../../Data/Data";
@@ -54,6 +54,32 @@ import { PiInfo } from "react-icons/pi";
 
 const Room = () => {
 
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState('tab1');
+
+  const openModalWithTab1 = () => {
+    setActiveTab('tab1');
+    setModalIsOpen(true);
+  };
+
+  const openModalWithTab2 = () => {
+    setActiveTab('tab2');
+    setModalIsOpen(true);
+  };
+
+  const openModalWithTab3 = () => {
+    setActiveTab('tab3');
+    setModalIsOpen(true);
+  };
+
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+  
     return (
       <>
       <Breadcrumbs/>
@@ -63,9 +89,20 @@ const Room = () => {
             <div className='col-large col-lg-8'>
               <div className='carousel-images'>
                 {/* <img src={room} alt="room" className="img-fluid"/> */}
+
                 <CarrouselImages />
-                <RoomModal />
+                
+                <div className='medias'>
+                  <button type='button' className='btn-media' onClick={openModalWithTab1} id="photos-btn"><img src={iconimgs} alt="photos"/> photos</button>
+                  <button type='button' className='btn-media' onClick={openModalWithTab2} id="video-btn"><img src={iconvideos} alt="videos"/> video</button>
+                  <button type='button' className='btn-media' onClick={openModalWithTab3} id="visit-btn"><img src={iconvisit} alt="visit"/> 360° visit</button>
+                  {/* <button type='button' className='btn-media' onClick={openModal} id="media-btn"><img src={iconimgs} alt="media"/> Medias</button> */}
+                </div>
+
               </div>
+
+              <RoomModalMedia isOpen={modalIsOpen} closeModal={closeModal} activeTab={activeTab} setActiveTab={setActiveTab} />
+
               <div className='title mt-4'>
                 <h1>52 Rue Vernier, Nice - Room 5</h1>
                 <h2>Private room in Nice</h2>
