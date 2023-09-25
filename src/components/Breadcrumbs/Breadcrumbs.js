@@ -11,12 +11,13 @@ function Breadcrumbs() {
     .filter(crumb => crumb !== '')
     .map((crumb, index, array) => {
       const currentLink = `/${array.slice(0, index + 1).join('/')}`;
-      const decodedCrumb = decodeURIComponent(crumb); // Décodez le crumb
+      const decodedCrumb = decodeURIComponent(crumb).replace(/-/g, ' '); // Décodez le crumb
+      const formattedCrumb = decodedCrumb.charAt(0).toUpperCase() + decodedCrumb.slice(1).toLowerCase();
       return (
         <React.Fragment key={crumb}>
           <VscChevronRight className="crumb-separator" />
           <div className='crumb'>
-            <Link to={currentLink} className="breadcrumb-link">{decodedCrumb}</Link>
+            <Link to={currentLink} className="breadcrumb-link">{formattedCrumb}</Link>
           </div>
         </React.Fragment>
       );

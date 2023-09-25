@@ -4,13 +4,21 @@ import "./ErrorPage.css"
 
 const ErrorPage = () => {
   return (
-    <div className='container d-flex Error'>
-       <img src={error} alt='oups'></img>
-       <div className='Error-content'>
-        <h3>Oops ! There is nothing here</h3>
-        <p>Page not found</p>
-        <button className='Search-btn' onClick={()=>window.location.href='/'}>Go to the home page</button>
-       </div>
+    <div className='container'>
+      <div className='row justify-content-center'>
+        <div className='col-xl-10 col-md-12'>
+
+          <div className='Error d-flex justify-content-center align-items-center flex-md-nowrap flex-wrap'>
+            <img src={error} alt='oups'></img>
+            <div className='Error-content'>
+              <h1>Oops ! There is nothing here</h1>
+              <p>Page not found</p>
+              <button className='Search-btn' onClick={()=>window.location.href='/'}>Go to the home page</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </div>
   )
 }

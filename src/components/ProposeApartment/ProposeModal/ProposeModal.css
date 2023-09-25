@@ -1,0 +1,259 @@
+.ReactModalPortal {
+    z-index: 9;
+    position: relative;
+}
+.ReactModal__Overlay {
+    background-color: rgba(0,0,0,0.4);
+}
+body.ReactModal__Body--open {
+    overflow: hidden;
+    padding-right: 0px;
+}
+.ReactModalPortal .ReactModal__Content.ReactModal__Content--after-open {
+    inset: 0!important;
+    position: fixed!important;
+    top: 0!important;
+    left: 0!important;
+    z-index: 1060;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden!important;
+    overflow-y: auto!important;
+    outline: 0;
+    min-height: 100vh;
+    padding: 0!important;
+    border: none!important;
+    border-radius: 0!important;
+}
+.ReactModalPortal .reactmodal-head {
+    padding: 38px 0;
+    height: 120px;
+}
+.reactmodal-head .btn-flex {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.reactmodal-head .btn-close, .reactmodal-head .btn-back {
+    background: transparent!important;
+    padding: 0.5rem 0;
+    width: auto;
+    height: auto;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 30px;
+    color: #000;
+    opacity: 1;
+    outline: 0!important;
+    border: none!important;
+    box-shadow: none!important;
+    margin: 0 0 0 auto;
+}
+.reactmodal-head .btn-back {
+    margin: 0 auto 0 0;
+}
+.reactmodal-head .btn-close svg {
+    width: 34px;
+    height: 30px;
+    margin-top: -2px;
+}
+.reactmodal-head .btn-back svg {
+    width: 22px;
+    height: 20px;
+    margin-top: -1px;
+    margin-right: 6px;
+}
+.reactmodal-header {
+    position: relative;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 0 60px;
+}
+.reactmodal-header .img-logo {
+    width: 100%;
+    margin: 0 0 56px;
+    max-width: 720px;
+}
+.reactmodal-header .img-logo img {
+    height: 30px;
+    width: auto;
+}
+.reactmodal-header nav.nav-steps {
+    max-width: 720px;
+    width: 100%;
+}
+.reactmodal-header nav.nav-steps ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+.nav-steps li.num {
+    width: 26px;
+}
+.nav-steps li.sup {
+    width: calc(32% - 26px);
+    position: relative;
+}
+.nav-steps .n-step {
+    width: 26px;
+    height: 26px;
+    display: block;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    color: #DDD;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 26px;
+    background: #fff;
+}
+.nav-steps li.sup .border {
+    display: block;
+    border-right: none!important;
+    border-top: none!important;
+    border-left: none!important;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    z-index: 99;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 1px;
+    border-color: #DDDDDD!important;
+}
+.nav-steps li.sup.active-step .border {
+    border-color: #35CE92!important;
+}
+.nav-steps .done .n-step, .nav-steps .active-step .n-step {
+    color: #35CE92;
+    border-color: #35CE92;
+}
+.num .number {
+    display: block;
+}
+.num .check {
+    display: none;
+}
+.num .check svg {
+    width: 20px;
+    height: 16px;
+}
+.num.done .number {
+    display: none;
+}
+.num.done .check {
+    display: block;
+}
+.reactmodal-container {
+    max-width: 720px;
+    width: 100%;
+    display: table;
+    margin: 0 auto 80px;
+}
+.reactmodal-container .form-group {
+    margin: 0 0 28px;
+}
+.reactmodal-container label {
+    color: #000;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 6px;
+}
+.btn-accept, .btn-send {
+    color: #FFF;
+    font-size: 18px;
+    font-weight: 400;
+    border-radius: 6px;
+    background: #000;
+    padding: 9px 38px 8px;
+    height: 40px;
+    line-height: 22px;
+    display: table;
+    margin: 0 0 0 auto;
+    outline: 0!important;
+    border: none!important;
+}
+.btn-send {
+    padding: 9px 22px 8px 18px;
+}
+.btn-send svg {
+    margin-right: 10px;
+    margin-top: -4px;
+}
+.btn-accept:hover, .btn-send:hover {
+    background: #1c1c1c;
+    color: #FFF;
+}
+button.box-input {
+    position: relative;
+    width: 100%;
+    border-radius: 6px;
+    border: 2px dashed #000;
+    padding: 25px 12px 12px;
+    background: #fff!important;
+    outline: 0!important;
+    box-shadow: none!important;
+}
+button.box-input .upload-medias {
+    position: absolute;
+    opacity: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 6px;
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+}
+button.box-input label {
+    color: #000;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 26px;
+    margin: 0;
+}
+button.box-input img {
+    height: 48px;
+    margin: 0 0 8px;
+}
+.message-form-group label {
+    margin: 0;
+}
+.message-form-group .note {
+    font-size: 16px;
+    font-weight: 400;
+    color: #000;
+    margin-bottom: 20px;
+}
+.message-form-group textarea.form-control {
+    border-radius: 6px;
+    border: 1px solid #DDD;
+    background: #FFF;
+    height: 122px!important;
+}
+.reactmodal-container .input-group {
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+.nav-steps li.sup {
+    width: calc(31% - 26px);
+}
+.reactmodal-header nav.nav-steps ul {
+    flex-wrap: nowrap;
+}
+.reactmodal-header {
+    margin: 0 0 40px;
+}
+.ReactModalPortal .reactmodal-head {
+    padding: 30px 0;
+}
+}

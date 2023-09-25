@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useRef, useState } from 'react';
 import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
 import './ProposeApartment.css'
+import ProposeModal from "./ProposeModal/ProposeModal"
 import image1 from '../../assets/XMLID_287_.svg'
 import image2 from '../../assets/businessman.svg'
 import image3 from '../../assets/Groupe 1261.svg'
@@ -18,6 +19,15 @@ import process5 from '../../assets/process/process5.svg'
 import Feedback from '../HomePage/Feedback/Feedback';
 import { LiaEnvelope } from "react-icons/lia";
 const ProposeApartment =()=> {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
   return (
     <>
     <Breadcrumbs />
@@ -264,11 +274,12 @@ const ProposeApartment =()=> {
           <p>We are constantly looking for apartments to buy and transform into beautiful 
           spaces for communal living. If you are uncertain about renting or selling your 
             apartment, it’s worth having a chat.</p>
-          <button className='btn btn-primary button-black'><LiaEnvelope className='icon-envelop'/>  I would like to get in touch</button>
+            
+          <button className='btn btn-primary button-black' onClick={openModal} ><LiaEnvelope className='icon-envelop'/>  I would like to get in touch</button>
         </div>
       </div>
     </section>
-
+    <ProposeModal isOpen={modalIsOpen} closeModal={closeModal} />
     <section className='renovation pt-lg-5 pt-3 mb-md-5 pb-md-5 pb-4'>
       <div className='container'>
         <h2 className='mb-md-4 pb-2'>Examples of renovation</h2>
