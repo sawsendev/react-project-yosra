@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import "./Room.css"
 import CarrouselImages from "./RoomImages"
+import RoomModalMedia from "./RoomModal/RoomModalMedia"
 import "../SearchCities/Cribes/Cribes.css"
 import Breadcrumbs from '../Breadcrumbs/Breadcrumbs'
 import iconimgs from '../../assets/room/imgs.svg'
@@ -36,6 +37,10 @@ import tools from '../../assets/room/tools.svg'
 import block from '../../assets/room/block.svg'
 import woman from '../../assets/room/woman.svg'
 import man from '../../assets/room/man.svg'
+import Badge from 'react-bootstrap/Badge';
+
+import locationIcon  from '../../assets/pin 2.svg';
+
 import check from '../../assets/room/widget/check.svg'
 import water from '../../assets/room/widget/water.svg'
 import plug from '../../assets/room/widget/plug.svg'
@@ -48,7 +53,7 @@ import { PiInfo } from "react-icons/pi";
 import Crib from '../Crib/Crib';
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useState } from 'react';
+
 
 
 
@@ -79,6 +84,33 @@ const Room = () => {
   },[API_URL,API_KEY])
    
 
+
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState('tab1');
+
+  const openModalWithTab1 = () => {
+    setActiveTab('tab1');
+    setModalIsOpen(true);
+  };
+
+  const openModalWithTab2 = () => {
+    setActiveTab('tab2');
+    setModalIsOpen(true);
+  };
+
+  const openModalWithTab3 = () => {
+    setActiveTab('tab3');
+    setModalIsOpen(true);
+  };
+
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+  
     return (
       <>
       <Breadcrumbs/>
@@ -88,13 +120,20 @@ const Room = () => {
             <div className='col-large col-lg-8'>
               <div className='carousel-images'>
                 {/* <img src={room} alt="room" className="img-fluid"/> */}
+
                 <CarrouselImages />
+                
                 <div className='medias'>
-                  <button type='button' className='btn-media'><img src={iconimgs} alt="photos"/>photos</button>
-                  <button type='button' className='btn-media'><img src={iconvideos} alt="videos"/>video</button>
-                  <button type='button' className='btn-media'><img src={iconvisit} alt="visit"/>360° visit</button>
+                  <button type='button' className='btn-media' onClick={openModalWithTab1} id="photos-btn"><img src={iconimgs} alt="photos"/> photos</button>
+                  <button type='button' className='btn-media' onClick={openModalWithTab2} id="video-btn"><img src={iconvideos} alt="videos"/> video</button>
+                  <button type='button' className='btn-media' onClick={openModalWithTab3} id="visit-btn"><img src={iconvisit} alt="visit"/> 360° visit</button>
+                  {/* <button type='button' className='btn-media' onClick={openModal} id="media-btn"><img src={iconimgs} alt="media"/> Medias</button> */}
                 </div>
+
               </div>
+
+              <RoomModalMedia isOpen={modalIsOpen} closeModal={closeModal} activeTab={activeTab} setActiveTab={setActiveTab} />
+
               <div className='title mt-4'>
               {lotData && lotData.apartment && lotData.apartment.title && lotData.title && (
                <h1>{lotData.apartment.title} - {lotData.title}</h1>

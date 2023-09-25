@@ -1,25 +1,95 @@
-.Error{
-    padding: 100px;
-    align-items: center;
+.Error {
+    padding: 106px 0 136px;
 }
-
 .Error img{
-    width: 210px;
+    height: 276px;
+    width: auto;
 }
-
 .Error-content {
-    width: 100%;
-    padding: 35px;
+    padding: 0 0 0 53px;
 }
-
-/* for mobile screens */
-@media (max-width: 600px) {
-    .Error{
-       flex-direction: column;
-       padding: 10px;
+.Error-content h1 {
+    color: #000;
+    font-size: 45px;
+    font-weight: 400;
+}
+.Error-content p {
+    color: #000;
+    font-size: 28px;
+    font-weight: 400;
+    margin: 0 0 37px;
+}
+.Error-content .Search-btn {
+    outline: 0!important;
+    border: none!important;
+    padding: 8px 20px;
+    background-color: black;
+    border-radius: 6px;
+    height: 40px;
+    color: #FFF;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+    width: auto!important;
+}
+.Error-content .Search-btn:hover {
+    background-color: #1c1c1c;
+    color: #FFF;
+}
+/* mobile */
+@media (max-width: 992px) {
+    .Error img {
+        height: 250px;
     }
-
-    .Error img{
-        width: 100px;
+    .Error-content h1 {
+        font-size: 32px;
+        font-weight: 600;
+    }
+    .Error-content {
+        padding: 0 0 0 42px;
+    }
+    .Error-content p {
+        font-size: 24px;
+        margin: 0 0 28px;
+    }
+    .Error {
+        padding: 86px 0 106px;
+    }
+}
+@media (max-width: 768px) {
+    .Error-content {
+        padding: 28px 0 0;
+        text-align: center;
+        width: 100%;
+    }
+    .Error img {
+        height: 150px;
+        display: block;
+    }
+    .Error {
+        padding: 40px 0 86px;
+    }
+}
+@media (max-width: 576px) {
+    .Error img {
+        height: 120px;
+    }
+    .Error {
+        padding: 40px 15px 86px;
+    }
+    .Error-content {
+        padding: 24px 0 0;
+    }
+    .Error-content h1 {
+        font-size: 24px;
+        font-weight: 600;
+    }
+    .Error-content p {
+        font-size: 18px;
+        margin: 0 0 24px;
+    }
+    .Error-content .Search-btn {
+        font-size: 16px;
     }
 }
