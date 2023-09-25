@@ -190,3 +190,15 @@ p.uploaded-pdf {
 .hidden{
  display: none;
 }
+.thank{
+  display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: stretch;
+    justify-content: flex-start;
+    align-items: center;
+}
+.thank p{
+  font-size: 18px;
+  font-weight: 400;
+}

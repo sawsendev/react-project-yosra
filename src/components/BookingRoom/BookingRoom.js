@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import image from '../../assets/animation_500_lj4c3zmw 1.svg'
 
 import StepsToBook from "../HomePage/StepsToBook/StepsToBook"
 import "./BookingRoom.scss"
@@ -18,6 +18,8 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import BookingProcess from '../BookingProcess/BookingProcess';
 import Breadcrumbs from '../Breadcrumbs/Breadcrumbs'
+import { useParams } from 'react-router-dom'
+import { useEffect } from 'react'
 
 const BookingRoom = () => {
 // ************************
@@ -26,6 +28,37 @@ const BookingRoom = () => {
   const [subFiles, setSubFiles] = useState([ null, null, null]);
   const [newFile, setNewFile] = useState(null);
   const [fileVisible, setFileVisible] = useState([true, true, true, true, true]);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const{id}=useParams();
+  const[lotData,setLotData]=useState({});
+  const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
+  const API_URL = `http://dev.niceroom.sofis-info.com/api/lot/${id}`;
+
+
+  useEffect(()=>{
+    
+      const headers = {
+        'apiKey': `${API_KEY}`,
+      };
+  
+      fetch(API_URL, { method: 'GET', mode: 'cors', headers })
+        .then(response => response.json())
+        .then(data => {
+        
+            setLotData(data.data.lot);
+            console.log(data.data.lot)        
+        })
+        .catch(error => {
+          console.error('Erreur lors de la récupération des données :', error);
+        });
+    
+  },[API_URL,API_KEY])
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Traitez le formulaire ici (envoyez-le au serveur, etc.)
+    setFormSubmitted(true);
+  };
+  
 
  
   
@@ -78,22 +111,29 @@ const BookingRoom = () => {
 
   return (
     <>
-    <Breadcrumbs/>
-    <div className='container'>
+  <Breadcrumbs />
+  <div className='container'>
+    <div className="Booking-title mt-4 mb-5">
+    {lotData && lotData.apartment && lotData.apartment.title && lotData.title && (
+               <h2>{lotData.apartment.title} - {lotData.title}</h2>
+                )}
+      <span>Private room in Nice</span>
+    </div>
+
+    {/* Contenu du formulaire */}
+    {!formSubmitted ? (
       <div className='row'>
-          <div className='Booking-content my-2 col-md-8 col-sm-12 pe-5'>
-            <div className="Booking-title mt-4 mb-5">
-              <h2>52 Rue Vernier, Nice - Room 5</h2>
-              <span>Private room in Nice</span>
-            </div>
-            <div className='d-flex justify-content-start align-items-center Booking-content-application mb-3'>
-              <img className='me-2' src={sendImg} alt='send icon'/>
-              <h3 className='m-0'>Send your application</h3>
-            </div>
-            <form id="file-upload-form" class="uploader">
+        <div className='Booking-content my-2 col-md-8 col-sm-12 pe-5'>
+          <div className='d-flex justify-content-start align-items-center Booking-content-application mb-3'>
+            <img className='me-2' src={sendImg} alt='send icon' />
+            <h3 className='m-0'>Send your application</h3>
+          </div>
+          <form id="file-upload-form" class="uploader">
               <div class="row mb-4">
                 <div class="col-md-6 col-12">
-                  <input type='text' value="Room [53 Boulevard Sola – Room 1]" disabled className='w-100 Input-disabled'/>
+                {lotData && lotData.apartment && lotData.apartment.title && lotData.title && (
+                  <input type='text' value={`Room[${lotData.apartment.title} - ${lotData.title}]`}
+                                              disabled className='w-100 Input-disabled'/>)}
                 </div>
               </div>
               <div class="row mb-4">
@@ -307,22 +347,31 @@ const BookingRoom = () => {
             </div>
 
            {/* ******************* */}
-           <button type="submit" class="btn btn-primary float-end submit-button">Apply</button>
+           <button type="submit" onClick={handleSubmit} class="btn btn-primary float-end submit-button">Apply</button>
             </form>
-
-          </div>
           
+        </div>
         <div className='col-md-4 col-sm-12'>
-          <BookingProcess/>
+          <BookingProcess />
         </div>
       </div>
-      <div className='thinking-container'>
-              <img className="me-2" src={thinking} alt='thinking icon'/>
-              <span>What’s next? Our team will review your application and get back to you within 48 hours</span>
+    ) : (
+      // Afficher un message de confirmation une fois le formulaire soumis
+      <div className='row'>
+        <div className='col-md-8 col-sm-12 thank'>
+         <img src={image} alt="description" />
+          <p className='text-center mt-3 px-3 mx-5'>
+            Thank you [Name], we have received your application. Our team is currently reviewing your file. We will get back to you shortly. Please check your email address [email address]
+          </p>
+        </div>
+        <div className='col-md-4 col-sm-12'>
+          <BookingProcess />
+        </div>
       </div>
-      <StepsToBook/>
-    </div>
-    </>
+    )}
+  </div>
+</>
+    
   )
 }
 

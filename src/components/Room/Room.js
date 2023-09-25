@@ -3,43 +3,44 @@ import "./Room.css"
 import CarrouselImages from "./RoomImages"
 import RoomModalMedia from "./RoomModal/RoomModalMedia"
 import "../SearchCities/Cribes/Cribes.css"
+import Breadcrumbs from '../Breadcrumbs/Breadcrumbs'
+import iconimgs from '../../assets/room/imgs.svg'
+import iconvideos from '../../assets/room/videos.svg'
+import iconvisit from '../../assets/room/visits.svg'
+import plan from '../../assets/room/plan.svg'
+import bedroom from '../../assets/room/bedroom.svg'
+import roomies from '../../assets/room/roomies.svg'
+import elevator from '../../assets/room/elevator.svg'
+import energy from '../../assets/room/energy.svg'
+import doublebed from '../../assets/room/doublebed.svg'
+import workspace from '../../assets/room/workspace.svg'
+import wardrobe from '../../assets/room/wardrobe.svg'
+import sofa from '../../assets/room/sofa.svg'
+import terrace from '../../assets/room/terrace.svg'
+import airconditioner from '../../assets/room/air-conditioner.svg'
+import location from '../../assets/room/pin.svg'
+import elevator1 from '../../assets/room/elevator1.svg'
+import view from '../../assets/room/view.svg'
+import cleaning from '../../assets/room/cleaning.svg'
+import fkitchen from '../../assets/room/fkitchen.svg'
+import kitchenware from '../../assets/room/kitchenware.svg'
+import dishes from '../../assets/room/dishes.svg'
+import dishwasher from '../../assets/room/dishwasher.svg'
+import microwave from '../../assets/room/microwave.svg'
+import shower from '../../assets/room/shower.svg'
+import washer from '../../assets/room/washer.svg'
+import pillow from '../../assets/room/pillow.svg'
+import dryer from '../../assets/room/dryer.svg'
+import vacuum from '../../assets/room/vacuum.svg'
+import ironing from '../../assets/room/ironing.svg'
+import tools from '../../assets/room/tools.svg'
+import block from '../../assets/room/block.svg'
+import woman from '../../assets/room/woman.svg'
+import man from '../../assets/room/man.svg'
 import Badge from 'react-bootstrap/Badge';
-import {CribesTable} from "../../Data/Data";
+
 import locationIcon  from '../../assets/pin 2.svg';
-import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
-import iconimgs from '../../assets/room/icons/imgs.svg'
-import iconvideos from '../../assets/room/icons/videos.svg'
-import iconvisit from '../../assets/room/icons/visits.svg'
-import plan from '../../assets/room/icons/plan.svg'
-import bedroom from '../../assets/room/icons/bedroom.svg'
-import roomies from '../../assets/room/icons/roomies.svg'
-import elevator from '../../assets/room/icons/elevator.svg'
-import energy from '../../assets/room/icons/energy.svg'
-import doublebed from '../../assets/room/icons/doublebed.svg'
-import workspace from '../../assets/room/icons/workspace.svg'
-import wardrobe from '../../assets/room/icons/wardrobe.svg'
-import sofa from '../../assets/room/icons/sofa.svg'
-import terrace from '../../assets/room/icons/terrace.svg'
-import airconditioner from '../../assets/room/icons/air-conditioner.svg'
-import location from '../../assets/room/icons/pin.svg'
-import elevator1 from '../../assets/room/icons/elevator1.svg'
-import view from '../../assets/room/icons/view.svg'
-import cleaning from '../../assets/room/icons/cleaning.svg'
-import fkitchen from '../../assets/room/icons/fkitchen.svg'
-import kitchenware from '../../assets/room/icons/kitchenware.svg'
-import dishes from '../../assets/room/icons/dishes.svg'
-import dishwasher from '../../assets/room/icons/dishwasher.svg'
-import microwave from '../../assets/room/icons/microwave.svg'
-import shower from '../../assets/room/icons/shower.svg'
-import washer from '../../assets/room/icons/washer.svg'
-import pillow from '../../assets/room/icons/pillow.svg'
-import dryer from '../../assets/room/icons/dryer.svg'
-import vacuum from '../../assets/room/icons/vacuum.svg'
-import ironing from '../../assets/room/icons/ironing.svg'
-import tools from '../../assets/room/icons/tools.svg'
-import block from '../../assets/room/icons/block.svg'
-import woman from '../../assets/room/icons/woman.svg'
-import man from '../../assets/room/icons/man.svg'
+
 import check from '../../assets/room/widget/check.svg'
 import water from '../../assets/room/widget/water.svg'
 import plug from '../../assets/room/widget/plug.svg'
@@ -49,10 +50,40 @@ import cable from '../../assets/room/widget/cable-tv.svg'
 import wipe from '../../assets/room/widget/wipe.svg'
 
 import { PiInfo } from "react-icons/pi";
+import Crib from '../Crib/Crib';
+import { useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+
 
 
 
 const Room = () => {
+  const{id}=useParams();
+  const[lotData,setLotData]=useState({});
+  const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
+  const API_URL = `http://dev.niceroom.sofis-info.com/api/lot/${id}`;
+  const navigate= useNavigate();
+
+  useEffect(()=>{
+    
+      const headers = {
+        'apiKey': `${API_KEY}`,
+      };
+  
+      fetch(API_URL, { method: 'GET', mode: 'cors', headers })
+        .then(response => response.json())
+        .then(data => {
+        
+            setLotData(data.data.lot);
+            console.log(data.data.lot)        
+        })
+        .catch(error => {
+          console.error('Erreur lors de la récupération des données :', error);
+        });
+    
+  },[API_URL,API_KEY])
+   
+
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('tab1');
@@ -104,7 +135,9 @@ const Room = () => {
               <RoomModalMedia isOpen={modalIsOpen} closeModal={closeModal} activeTab={activeTab} setActiveTab={setActiveTab} />
 
               <div className='title mt-4'>
-                <h1>52 Rue Vernier, Nice - Room 5</h1>
+              {lotData && lotData.apartment && lotData.apartment.title && lotData.title && (
+               <h1>{lotData.apartment.title} - {lotData.title}</h1>
+                )}
                 <h2>Private room in Nice</h2>
               </div>
               <div className='characteristics mt-3 mb-4'>
@@ -210,28 +243,7 @@ const Room = () => {
               </div>
               <div className='recommandation mt-3 mb-lg-5 pb-4 d-md-block d-none'>
                 <h2 className='mb-3'>You might also be interested in the following properties</h2>
-                <ul className='row Rooms-cribes'>
-                  {CribesTable.slice(0, 3).map((cribe, index) => {
-                    return (
-                      <li className='col-lg-4 col-md-4 col-12'>
-                        <div key={index} className='item-cribe'>
-                          <div className='Item-badge'>
-                            <Badge className='notify-badge'>Available now</Badge>
-                            <img className="img-fluid" src= {cribe.src[0].src_room} alt="photo_fine_cribs"/>
-                          </div>
-                          <div className='Rooms-content'>
-                            <h3>{cribe.content}</h3>
-                            <div className='d-flex mb-1'>
-                              <img src={locationIcon} alt="location icon"></img>
-                              <p>{cribe.adress}</p>
-                            </div>
-                            <span> {cribe.price}/ month</span>
-                          </div>
-                        </div>
-                      </li>
-                    );
-                  })}
-                </ul>
+                {/* <Crib cribs={3}/> */}
               </div>
             </div>
             <div className='col-widget col-lg-4'>
@@ -244,10 +256,12 @@ const Room = () => {
                   <p className='status'><img src={water} alt="Water"/> Water</p>
                   <p className='status'><img src={plug} alt="plug"/> Electricity,gas</p>
                   <p className='status'><img src={insurance} alt="insurance"/> Housing insurance</p>
-                  <p className='status'><img src={wifi} alt="wifi"/> Wi - Fi</p>
+                  {lotData.wi_fi !== 0 &&(<p className='status'><img src={wifi} alt="wifi"/> Wi - Fi</p>)}
                   <p className='status'><img src={cable} alt="cable tv"/> Cable tv</p>
                   <p className='status'><img src={wipe} alt="wipe"/> Cleaning</p>
-                  <button className='btn btn-submit'>Apply for this room</button>
+                  <button className='btn btn-submit' onClick={()=>{navigate(`/BookingEnquiry/${id}`)}}>
+
+                  Apply for this room</button>
                 </div>
                 <div className='widget-info mb-3'>
                   <h5>Fine cribs promise</h5>
@@ -258,28 +272,7 @@ const Room = () => {
                 </div>
                 <div className='recommandation mt-3 mb-lg-5 pb-4 d-md-none'>
                   <h2 className='mb-3'>You might also be interested in the following properties</h2>
-                  <ul className='row Rooms-cribes'>
-                    {CribesTable.slice(0, 2).map((cribe, index) => {
-                      return (
-                        <li className='col-lg-4 col-md-4 col-12'>
-                          <div key={index} className='item-cribe'>
-                            <div className='Item-badge'>
-                              <Badge className='notify-badge'>Available now</Badge>
-                              <img className="img-fluid" src= {cribe.src[0].src_room} alt="photo_fine_cribs"/>
-                            </div>
-                            <div className='Rooms-content'>
-                              <h3>{cribe.content}</h3>
-                              <div className='d-flex mb-1'>
-                                <img src={locationIcon} alt="location icon"></img>
-                                <p>{cribe.adress}</p>
-                              </div>
-                              <span> {cribe.price}/ month</span>
-                            </div>
-                          </div>
-                        </li>
-                      );
-                    })}
-                  </ul>
+                  {/* <Crib cribs={2}/> */}
                 </div>
 
 
