@@ -2,10 +2,7 @@ import React from 'react'
 import "./Room.css"
 import CarrouselImages from "./RoomImages"
 import "../SearchCities/Cribes/Cribes.css"
-import Badge from 'react-bootstrap/Badge';
-import {CribesTable} from "../../Data/Data";
-import locationIcon  from '../../assets/pin 2.svg';
-import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
+import Breadcrumbs from '../Breadcrumbs/Breadcrumbs'
 import iconimgs from '../../assets/room/imgs.svg'
 import iconvideos from '../../assets/room/videos.svg'
 import iconvisit from '../../assets/room/visits.svg'
@@ -48,10 +45,40 @@ import cable from '../../assets/room/widget/cable-tv.svg'
 import wipe from '../../assets/room/widget/wipe.svg'
 
 import { PiInfo } from "react-icons/pi";
+import Crib from '../Crib/Crib';
+import { useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useState } from 'react';
 
 
 
 const Room = () => {
+  const{id}=useParams();
+  const[lotData,setLotData]=useState({});
+  const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
+  const API_URL = `http://dev.niceroom.sofis-info.com/api/lot/${id}`;
+  const navigate= useNavigate();
+
+  useEffect(()=>{
+    
+      const headers = {
+        'apiKey': `${API_KEY}`,
+      };
+  
+      fetch(API_URL, { method: 'GET', mode: 'cors', headers })
+        .then(response => response.json())
+        .then(data => {
+        
+            setLotData(data.data.lot);
+            console.log(data.data.lot)        
+        })
+        .catch(error => {
+          console.error('Erreur lors de la récupération des données :', error);
+        });
+    
+  },[API_URL,API_KEY])
+   
+
     return (
       <>
       <Breadcrumbs/>
@@ -69,7 +96,9 @@ const Room = () => {
                 </div>
               </div>
               <div className='title mt-4'>
-                <h1>52 Rue Vernier, Nice - Room 5</h1>
+              {lotData && lotData.apartment && lotData.apartment.title && lotData.title && (
+               <h1>{lotData.apartment.title} - {lotData.title}</h1>
+                )}
                 <h2>Private room in Nice</h2>
               </div>
               <div className='characteristics mt-3 mb-4'>
@@ -175,28 +204,7 @@ const Room = () => {
               </div>
               <div className='recommandation mt-3 mb-lg-5 pb-4 d-md-block d-none'>
                 <h2 className='mb-3'>You might also be interested in the following properties</h2>
-                <ul className='row Rooms-cribes'>
-                  {CribesTable.slice(0, 3).map((cribe, index) => {
-                    return (
-                      <li className='col-lg-4 col-md-4 col-12'>
-                        <div key={index} className='item-cribe'>
-                          <div className='Item-badge'>
-                            <Badge className='notify-badge'>Available now</Badge>
-                            <img className="img-fluid" src= {cribe.src[0].src_room} alt="photo_fine_cribs"/>
-                          </div>
-                          <div className='Rooms-content'>
-                            <h3>{cribe.content}</h3>
-                            <div className='d-flex mb-1'>
-                              <img src={locationIcon} alt="location icon"></img>
-                              <p>{cribe.adress}</p>
-                            </div>
-                            <span> {cribe.price}/ month</span>
-                          </div>
-                        </div>
-                      </li>
-                    );
-                  })}
-                </ul>
+                {/* <Crib cribs={3}/> */}
               </div>
             </div>
             <div className='col-widget col-lg-4'>
@@ -209,10 +217,12 @@ const Room = () => {
                   <p className='status'><img src={water} alt="Water"/> Water</p>
                   <p className='status'><img src={plug} alt="plug"/> Electricity,gas</p>
                   <p className='status'><img src={insurance} alt="insurance"/> Housing insurance</p>
-                  <p className='status'><img src={wifi} alt="wifi"/> Wi - Fi</p>
+                  {lotData.wi_fi !== 0 &&(<p className='status'><img src={wifi} alt="wifi"/> Wi - Fi</p>)}
                   <p className='status'><img src={cable} alt="cable tv"/> Cable tv</p>
                   <p className='status'><img src={wipe} alt="wipe"/> Cleaning</p>
-                  <button className='btn btn-submit'>Apply for this room</button>
+                  <button className='btn btn-submit' onClick={()=>{navigate(`/BookingEnquiry/${id}`)}}>
+
+                  Apply for this room</button>
                 </div>
                 <div className='widget-info mb-3'>
                   <h5>Fine cribs promise</h5>
@@ -223,28 +233,7 @@ const Room = () => {
                 </div>
                 <div className='recommandation mt-3 mb-lg-5 pb-4 d-md-none'>
                   <h2 className='mb-3'>You might also be interested in the following properties</h2>
-                  <ul className='row Rooms-cribes'>
-                    {CribesTable.slice(0, 2).map((cribe, index) => {
-                      return (
-                        <li className='col-lg-4 col-md-4 col-12'>
-                          <div key={index} className='item-cribe'>
-                            <div className='Item-badge'>
-                              <Badge className='notify-badge'>Available now</Badge>
-                              <img className="img-fluid" src= {cribe.src[0].src_room} alt="photo_fine_cribs"/>
-                            </div>
-                            <div className='Rooms-content'>
-                              <h3>{cribe.content}</h3>
-                              <div className='d-flex mb-1'>
-                                <img src={locationIcon} alt="location icon"></img>
-                                <p>{cribe.adress}</p>
-                              </div>
-                              <span> {cribe.price}/ month</span>
-                            </div>
-                          </div>
-                        </li>
-                      );
-                    })}
-                  </ul>
+                  {/* <Crib cribs={2}/> */}
                 </div>
 
 

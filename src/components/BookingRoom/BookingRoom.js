@@ -18,6 +18,8 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import BookingProcess from '../BookingProcess/BookingProcess';
 import Breadcrumbs from '../Breadcrumbs/Breadcrumbs'
+import { useParams } from 'react-router-dom'
+import { useEffect } from 'react'
 
 const BookingRoom = () => {
 // ************************
@@ -27,6 +29,30 @@ const BookingRoom = () => {
   const [newFile, setNewFile] = useState(null);
   const [fileVisible, setFileVisible] = useState([true, true, true, true, true]);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const{id}=useParams();
+  const[lotData,setLotData]=useState({});
+  const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
+  const API_URL = `http://dev.niceroom.sofis-info.com/api/lot/${id}`;
+
+
+  useEffect(()=>{
+    
+      const headers = {
+        'apiKey': `${API_KEY}`,
+      };
+  
+      fetch(API_URL, { method: 'GET', mode: 'cors', headers })
+        .then(response => response.json())
+        .then(data => {
+        
+            setLotData(data.data.lot);
+            console.log(data.data.lot)        
+        })
+        .catch(error => {
+          console.error('Erreur lors de la récupération des données :', error);
+        });
+    
+  },[API_URL,API_KEY])
   const handleSubmit = (e) => {
     e.preventDefault();
     // Traitez le formulaire ici (envoyez-le au serveur, etc.)
@@ -88,7 +114,9 @@ const BookingRoom = () => {
   <Breadcrumbs />
   <div className='container'>
     <div className="Booking-title mt-4 mb-5">
-      <h2>52 Rue Vernier, Nice - Room 5</h2>
+    {lotData && lotData.apartment && lotData.apartment.title && lotData.title && (
+               <h2>{lotData.apartment.title} - {lotData.title}</h2>
+                )}
       <span>Private room in Nice</span>
     </div>
 
@@ -103,7 +131,9 @@ const BookingRoom = () => {
           <form id="file-upload-form" class="uploader">
               <div class="row mb-4">
                 <div class="col-md-6 col-12">
-                  <input type='text' value="Room [53 Boulevard Sola – Room 1]" disabled className='w-100 Input-disabled'/>
+                {lotData && lotData.apartment && lotData.apartment.title && lotData.title && (
+                  <input type='text' value={`Room[${lotData.apartment.title} - ${lotData.title}]`}
+                                              disabled className='w-100 Input-disabled'/>)}
                 </div>
               </div>
               <div class="row mb-4">

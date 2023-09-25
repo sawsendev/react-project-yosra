@@ -70,7 +70,7 @@ const ContactForm = () => {
               body: JSON.stringify(data),
             });
       
-            if (response.ok) {
+            if (response.status === 200) {
               // Si la requête réussit, affichez un message de remerciement ou effectuez d'autres actions nécessaires
               setShowThankYou(true);
               console.log("Requête effectuée avec succès");
