@@ -33,9 +33,9 @@ function App() {
         <Route path="/faq" element={<Faqspage/>} />     
         <Route path="*" element={<ErrorPage/>} /> 
         <Route path="/noRoom" element={<NoRoom/>} /> 
-        <Route path="/Room" element={<Room/>} /> 
+        <Route path="/Room/:id" element={<Room/>} /> 
         <Route path="/contact" element={<Contact/>} /> 
-        <Route path="/BookingEnquiry" element={<BookingRoom/>} /> 
+        <Route path="/BookingEnquiry/:id" element={<BookingRoom/>} /> 
         <Route path="/i-propose-an-apartment" element={<ProposeApartment/>}/>
        
       </Routes>

@@ -1,0 +1,14 @@
+/* Crib.css */
+
+.image-container {
+    display: flex; /* Afficher les images en ligne */
+  }
+  
+  .image-item {
+    margin-right: 10px; /* Marge entre les images (ajustez selon vos préférences) */
+  }
+  
+  .image-item:last-child {
+    margin-right: 0; /* Supprimez la marge de la dernière image */
+  }
+  

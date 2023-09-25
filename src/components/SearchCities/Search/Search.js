@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import "./Search.css"
 import PriceRangeSlider from  './PriceRangeSlider'
 import Select from 'react-select';
@@ -7,11 +7,42 @@ import Select from 'react-select';
 const Search = () => {
 const [selectedCountry, setselectedCountry]=useState("")
 const [isSliderVisible, setIsSliderVisible] = useState(false);
-
+const [isMenuOpen, setIsMenuOpen] = useState(false);
+const [options, setOptions] = useState([]);
+const [selectedOption, setSelectedOption] = useState(null);
+const [priceRange, setPriceRange] = useState([1, 500]);
 const handleToggleSlider = () => {
   setIsSliderVisible(!isSliderVisible);
 };
+const handleChange = (option) => {
+  setSelectedOption(option);
+};
 
+const updateSelectedOption = (range) => {
+  setSelectedOption({
+    label: `${range[0]}€ - ${range[1]}€`, // Mise à jour de l'étiquette directement
+    value: range.join('-')
+  });
+};
+const handlePriceRangeChange = (newValue) => {
+  setPriceRange(newValue);
+  updateSelectedOption(newValue);
+};
+
+
+const updatePlaceholderText = () => {
+  if (selectedOption) {
+    return selectedOption.label; // Utilisez l'étiquette de l'option sélectionnée comme placeholder
+  } else {
+    return 'Select a price range';
+  }
+};
+
+useEffect(() => {
+  // Mettre à jour le placeholder chaque fois que selectedOption change
+  const placeholderText = updatePlaceholderText();
+  setSelectedOption({ ...selectedOption, placeholder: placeholderText });
+}, [selectedOption]);
 const customStyles = {
   control: (provided) => ({
     ...provided,
@@ -29,6 +60,10 @@ const customStyles = {
     ...provided,
     cursor: 'pointer',
   }),
+  noOptionsMessage: (base) => ({
+    ...base,
+    display: 'none' // Masquer le message "No options"
+  }),
 };
 
 
@@ -36,8 +71,13 @@ const customStyles = {
       setselectedCountry(e.target.value)
       console.log(e.target.value)
   }
+  const handleClearAll = () => {
+    // Réinitialiser l'intervalle choisi à sa valeur par défaut
+    setPriceRange([1, 500]);
+    // Réinitialiser l'option sélectionnée à null
+    setSelectedOption(null);
+  };
 
-  const emptyOptions = [];
   return (
     <div className='Search-container'>
        <div class="container">
@@ -71,17 +111,36 @@ const customStyles = {
         
         <div className='select-wrapper'>
                 <div className='select-container'>
-                  <Select
-                    styles={customStyles}
-                    onMenuOpen={handleToggleSlider}
-                    options={emptyOptions} // Liste vide d'options
-                    isSearchable={false} // Désactiver la recherche
-                  />
+                <Select
+  styles={customStyles}
+  onMenuOpen={handleToggleSlider}
+  options={options}
+  onChange={handleChange}
+  value={selectedOption} // Utilisez directement selectedOption ici
+  menuIsOpen={isMenuOpen}
+  isSearchable={false}
+  placeholder={updateSelectedOption}  // Utilisez directement selectedOption ici
+
+/>
+
                 </div>
                 {isSliderVisible && (
                   <div className='slider-container container'>
-                   <h5> Price per month</h5>
-                    <PriceRangeSlider />
+                  <div className='price'>
+                  <h5> Price per month</h5>
+                  <div className='clear-icon' onClick={handleClearAll}>
+                  <h6>Clear all</h6>
+                  <svg xmlns="http://www.w3.org/2000/svg" height="11" viewBox="0 0 20 20" width="11">
+                            <path d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" fill="rgba(160, 169, 178, 1)"/>
+                          </svg>
+              </div>
+              </div>
+                    <PriceRangeSlider
+                     value={priceRange}
+                     onChange={handlePriceRangeChange} 
+              />
+        
                   </div>
                 )}
               </div>
