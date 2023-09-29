@@ -32,8 +32,28 @@ const ProposeModal = ({ isOpen, closeModal }) => {
     };
   
     const nextStep = (e) => {
-        e.preventDefault(); 
+        // e.preventDefault(); 
+        // setStep(step + 1);
+        e.preventDefault();
+    // Define required fields for each step
+    const requiredFieldsByStep = {
+        1: ['email', 'phone', 'quality'],
+        2: ['address', 'surface', 'availability'],
+        3: [],
+        4: ['message'],
+    };
+
+    // Get the required fields for the current step
+    const currentStepRequiredFields = requiredFieldsByStep[step];
+
+    // Check if all required fields for the current step are filled out
+    const allFieldsFilled = currentStepRequiredFields.every(field => formData[field].trim() !== '');
+
+    if (allFieldsFilled) {
         setStep(step + 1);
+    } else {
+        alert('Please fill in all required fields before proceeding.');
+    }
     };
   
     const prevStep = () => {
@@ -42,9 +62,15 @@ const ProposeModal = ({ isOpen, closeModal }) => {
   
     const handleSubmit = (e) => {
         e.preventDefault(); 
-        const allFieldsFilled = requiredFields.every((field) => formData[field].trim() !== '');
+        const requiredFieldsByStep4 = {
+            4: ['message'],
+        };
+        
+        const currentStepRequiredFieldsin = requiredFieldsByStep4[step];
+        const allFieldsFilledin = currentStepRequiredFieldsin.every(field => formData[field].trim() !== '');
+        // const allFieldsFilled = requiredFields.every((field) => formData[field].trim() !== '');
     
-        if (allFieldsFilled) {
+        if (allFieldsFilledin) {
             setFormData({
                 firstName: '',
                 lastName: '',
@@ -61,7 +87,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
             setStep(1);
             closeModal();
         } else {
-            alert('Please fill in all required fields.');
+            alert('Please fill in message field.');
         }
     };
   
@@ -70,142 +96,150 @@ const ProposeModal = ({ isOpen, closeModal }) => {
         case 1:
           return (
             <>
-            <div className='form-group'>
-                <label className='form-label'>First name</label>
-                <input className='form-control'
-                    type="text"
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleInputChange}
-                />
-            </div>
-            <div className='form-group'>
-                <label className='form-label'>Surname</label>
-                <input className='form-control'
-                    type="text"
-                    name="lastName"
-                    value={formData.lastName}
-                    onChange={handleInputChange}
-                />
-            </div> 
-            <div className='form-group'>
-                <label className='form-label'>Email *</label>
-                <input className='form-control'
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                required/>
-            </div>
-            <div className='form-group'>
-                <label className='form-label'>Phone number *</label>
-                <input className='form-control'
-                    type="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                required/>
-            </div>  
-            <div className='form-group'>
-                <label className='form-label'>Are you *</label>
-                <div className='input-group input-select'>
-                    <select className='form-control'
-                        name="quality"
-                        value={formData.quality}
+            <div className='step1-form'>
+                <div className='form-group'>
+                    <label className='form-label'>First name</label>
+                    <input className='form-control'
+                        type="text"
+                        name="firstName"
+                        value={formData.firstName}
                         onChange={handleInputChange}
-                        required>
-                        <option value=""></option>
-                        <option value="individual">Individual</option>
-                        <option value="company">Company</option>
-                        <option value="association">Association</option>
-                    </select>
+                    />
                 </div>
-            </div>  
-            <button className='btn btn-accept' onClick={nextStep}>OK</button>
+                <div className='form-group'>
+                    <label className='form-label'>Surname</label>
+                    <input className='form-control'
+                        type="text"
+                        name="lastName"
+                        value={formData.lastName}
+                        onChange={handleInputChange}
+                    />
+                </div> 
+                <div className='form-group'>
+                    <label className='form-label'>Email *</label>
+                    <input className='form-control'
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                    required/>
+                </div>
+                <div className='form-group'>
+                    <label className='form-label'>Phone number *</label>
+                    <input className='form-control'
+                        type="phone"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                    required/>
+                </div>  
+                <div className='form-group'>
+                    <label className='form-label'>Are you *</label>
+                    <div className='input-group input-select'>
+                        <select className='form-control'
+                            name="quality"
+                            value={formData.quality}
+                            onChange={handleInputChange}
+                            required>
+                            <option value=""></option>
+                            <option value="individual">Individual</option>
+                            <option value="company">Company</option>
+                            <option value="association">Association</option>
+                        </select>
+                    </div>
+                </div>  
+                <button className='btn btn-accept' onClick={nextStep}>OK</button>
+            </div>
             </>
           );
         case 2:
           return (
             <>
-            <div className='form-group'>
-                <label className='form-label'>In which city is the property located</label>
-                <div className='input-group input-select'>
-                    <select className='form-control'
-                        name="location"
-                        value={formData.location}
-                        onChange={handleInputChange}
-                        required>
-                        <option value=""></option>
-                        <option value="paris">Paris</option>
-                        <option value="nice">Nice</option>
-                        <option value="lilles">Lilles</option>
-                    </select>
-                </div>
-            </div>  
-            <div className='form-group'>
-                <label className='form-label'>What is the adress ? *</label>
-                <input className='form-control'
-                    type="text"
-                    name="address"
-                    value={formData.address}
-                    onChange={handleInputChange}
-                required/>
-            </div> 
-            <div className='form-group'>
-                <label className='form-label'>What is the surface? *</label>
-                <input className='form-control'
-                    type="number"
-                    name="surface"
-                    value={formData.surface}
-                    onChange={handleInputChange}
-                required/>
-            </div>
-            <div className='form-group'>
-                <label className='form-label'>Date of availability *</label>
-                <div className='input-group input-date'>
+            <div className='step2-form'>
+                <div className='form-group'>
+                    <label className='form-label'>In which city is the property located</label>
+                    <div className='input-group input-select'>
+                        <select className='form-control'
+                            name="location"
+                            value={formData.location}
+                            onChange={handleInputChange}
+                            >
+                            <option value=""></option>
+                            <option value="paris">Paris</option>
+                            <option value="nice">Nice</option>
+                            <option value="lilles">Lilles</option>
+                        </select>
+                    </div>
+                </div>  
+                <div className='form-group'>
+                    <label className='form-label'>What is the adress ? *</label>
                     <input className='form-control'
-                        type="date"
-                        name="availability"
-                        value={formData.availability}
+                        type="text"
+                        name="address"
+                        value={formData.address}
+                        onChange={handleInputChange}
+                    required/>
+                </div> 
+                <div className='form-group'>
+                    <label className='form-label'>What is the surface? *</label>
+                    <input className='form-control'
+                        type="number"
+                        name="surface"
+                        value={formData.surface}
                         onChange={handleInputChange}
                     required/>
                 </div>
+                <div className='form-group'>
+                    <label className='form-label'>Date of availability *</label>
+                    <div className='input-group input-date'>
+                        <input className='form-control'
+                            type="date"
+                            name="availability"
+                            value={formData.availability}
+                            onChange={handleInputChange}
+                        required/>
+                    </div>
+                </div>
+                <button className='btn btn-accept' onClick={nextStep}>OK</button>
             </div>
-            <button className='btn btn-accept' onClick={nextStep}>OK</button>
             </>
           );
         case 3:
           return (
             <>
-                <div className='form-group'>
-                    <label className='form-label'>Do you have photos, videos or a floorplan?</label>
-                    <button type="button" className="box-input">
-                        <img src={upload} alt='photos' />
-						<label>Choose files</label>
-						<input type="file"
-                        name="medias"
-                        value={formData.medias}
-                        onChange={handleInputChange} 
-                        className="form-control upload-medias" multiple/>
-					</button>
+                <div className='step3-form'>
+                    <div className='form-group'>
+                        <label className='form-label'>Do you have photos, videos or a floorplan?</label>
+                        <button type="button" className="box-input">
+                            <img src={upload} alt='photos' />
+                            <label>Choose files</label>
+                            <input type="file"
+                            name="medias"
+                            value={formData.medias}
+                            onChange={handleInputChange} 
+                            className="form-control upload-medias" multiple/>
+                        </button>
+                    </div>
+                    <button className='btn btn-accept' onClick={nextStep}>OK</button>
                 </div>
-              <button className='btn btn-accept' onClick={nextStep}>OK</button>
             </>
           );
         case 4:
             return (
               <>
-              <div className='form-group message-form-group'>
-                  <label className='form-label'>Other information (e.g. condition, need for refurbishment)</label>
-                  <div className='note'>Date of availability, desired rent, condition of the property, possible work to be planned….</div>
-                  <textarea className='form-control'
-                      type="text"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleInputChange}
-                  required></textarea>
-              </div>
-                <button className='btn btn-send' onClick={handleSubmit}><BsSend /> Send</button>
+                <div className='step4-form'>
+                    <div className='form-group message-form-group'>
+                        <label className='form-label'>Other information (e.g. condition, need for refurbishment)</label>
+                        <div className='note'>Date of availability, desired rent, condition of the property, possible work to be planned….</div>
+                        <textarea className='form-control'
+                            type="text"
+                            name="message"
+                            value={formData.message}
+                            onChange={handleInputChange}
+                        required></textarea>
+                    </div>
+                    <button className='btn btn-send' onClick={handleSubmit}><BsSend /> Send</button>
+                </div>
               </>
             );
         default:
