@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams} from 'react-router-dom';
+import {  useParams} from 'react-router-dom';
 import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
 //import { Helmet } from 'react-helmet-async';
 
 const Cms =()=> {
-  const { id } = useParams();
+  const { slug } = useParams();
 
   const [data, setData] = useState(null);
-  const navigate=useNavigate();
+
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
-  const API_URL = `http://dev.niceroom.sofis-info.com/api/cms/page/${id}`; // Use the slug in the API URL
+  const API_URL = `http://dev.niceroom.sofis-info.com/api/cms/page/${slug}`; // Use the slug in the API URL
 
   useEffect(() => {
     // Define headers with the API key
@@ -30,13 +30,13 @@ const Cms =()=> {
         console.log(data)
         const slug = data && data.data && data.data.page && data.data.page.slug;
         console.log(slug)
-        navigate(`/pages/${slug}`);
+      
 
       })
       .catch((error) => {
         console.error('Error:', error);
       });
-  }, [API_URL,navigate,id]);
+  }, [API_URL]);
 console.log(data)
   const titre = data && data.data && data.data.page && data.data.page.titre;
 
@@ -59,7 +59,8 @@ console.log(data)
     //   {description &&  <meta name="description" content={description} />}
     //   <meta name="og:description" content={metaDescription} />
     // </Helmet> */}
-    <Breadcrumbs/>
+    
+    <Breadcrumbs path={`/page/${slug}`}/>
     <div className='Cms-container'>
       <div className='container'>
         {titre ? (
