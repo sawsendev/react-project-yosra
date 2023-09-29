@@ -28,8 +28,7 @@ function App() {
       <Routes>
         <Route path='/' index element={<Homepage/>} /> 
         <Route path="/searchCities" element={<SearchCities/>} /> 
-        <Route path="/cms/page/:id" element={<Cms/>} /> 
-        <Route path="/pages/:slug/" element={<Cms />} />
+        <Route path="/cms/page/:slug" element={<Cms/>} /> 
         <Route path="/faq" element={<Faqspage/>} />     
         <Route path="*" element={<ErrorPage/>} /> 
         <Route path="/noRoom" element={<NoRoom/>} /> 

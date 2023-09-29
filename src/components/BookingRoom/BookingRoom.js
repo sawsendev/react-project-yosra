@@ -111,8 +111,9 @@ const BookingRoom = () => {
 
   return (
     <>
-  <Breadcrumbs />
-  <div className='container'>
+    {lotData && lotData.apartment && lotData.apartment.title && lotData.title && (
+  <Breadcrumbs path={`/Booking enquiry/${lotData.apartment.title} - ${lotData.title}`}/>)}
+   <div className='container'>
     <div className="Booking-title mt-4 mb-5">
     {lotData && lotData.apartment && lotData.apartment.title && lotData.title && (
                <h2>{lotData.apartment.title} - {lotData.title}</h2>
