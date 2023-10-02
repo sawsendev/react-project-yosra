@@ -8,7 +8,7 @@ stages:
   - deploy
 
 build-dev:
-  image: node:20
+  image: node:17
   stage: build
   before_script:
     - export http_proxy=$HTTP_PROXY
