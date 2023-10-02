@@ -1,0 +1,90 @@
+variables:
+  GIT_STRATEGY: clone
+
+stages:
+  - build
+  - base
+  - release
+  - deploy
+
+build-dev:
+  image: node:16
+  stage: build
+  before_script:
+    - export http_proxy=$HTTP_PROXY
+    - export https_proxy=$HTTPS_PROXY
+  script:
+    - npm install --force
+    - npm run sitemap
+    - npm run build
+  artifacts:
+    name: '$CI_PROJECT_NAME-$CI_COMMIT_REF_NAME'
+    paths:
+      - build
+    expire_in: 1 mos
+  only:
+    - main
+
+## Build base Release
+.updateContainerRelease:
+  stage: base
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: ['']
+  script:
+    - export http_proxy=$HTTP_PROXY
+    - export https_proxy=$HTTPS_PROXY
+    - |-
+      KANIKOPROXYBUILDARGS=""
+      KANIKOCFG="{ \"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}"
+      if [ "x${http_proxy}" != "x" -o "x${https_proxy}" != "x" ]; then
+        KANIKOCFG="${KANIKOCFG}, \"proxies\": { \"default\": { \"httpProxy\": \"$HTTP_PROXY\", \"httpsProxy\": \"$HTTP_PROXY\"}}"
+        KANIKOPROXYBUILDARGS="--build-arg http_proxy=$HTTP_PROXY --build-arg https_proxy=$HTTP_PROXY"
+      fi
+      KANIKOCFG="${KANIKOCFG} }"
+      echo "${KANIKOCFG}" > /kaniko/.docker/config.json
+    - /kaniko/executor --build-arg http_proxy=$HTTP_PROXY --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/deploy/Dockerfile --destination $CI_REGISTRY_IMAGE/build:releasebase
+
+updateReleaseBase:
+  extends: .updateContainerRelease
+  only:
+    changes:
+      - deploy/*
+
+release:
+  stage: release
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: ['']
+  script:
+    - export http_proxy=$HTTP_PROXY
+    - export https_proxy=$HTTPS_PROXY
+    - |-
+      KANIKOPROXYBUILDARGS=""
+      KANIKOCFG="{ \"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}"
+      if [ "x${http_proxy}" != "x" -o "x${https_proxy}" != "x" ]; then
+        KANIKOCFG="${KANIKOCFG}, \"proxies\": { \"default\": { \"httpProxy\": \"$HTTP_PROXY\", \"httpsProxy\": \"$HTTP_PROXY\"}}"
+        KANIKOPROXYBUILDARGS="--build-arg http_proxy=$HTTP_PROXY --build-arg https_proxy=$HTTP_PROXY"
+      fi
+      KANIKOCFG="${KANIKOCFG} }"
+      echo "${KANIKOCFG}" > /kaniko/.docker/config.json
+    - /kaniko/executor --build-arg http_proxy=$HTTP_PROXY --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+  only:
+    - main
+
+deploy-sibdev:
+  stage: deploy
+  image: registry.gitlab.com/sib-group/docker-img/deploy:latest
+  before_script:
+    - mkdir -p ~/.ssh
+    - echo -e "$DEPLOY_KEY" > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  script:
+    - ssh root@ns333567.ip-188-165-235.eu "
+      kubectl  --insecure-skip-tls-verify -n default rollout restart deployment niceroomfo
+      "
+  only:
+    - main
+
+
