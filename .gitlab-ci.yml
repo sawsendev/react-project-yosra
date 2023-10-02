@@ -15,7 +15,6 @@ build-dev:
     - export https_proxy=$HTTPS_PROXY
   script:
     - npm install --force
-    - npm run sitemap
     - npm run build
   artifacts:
     name: '$CI_PROJECT_NAME-$CI_COMMIT_REF_NAME'
