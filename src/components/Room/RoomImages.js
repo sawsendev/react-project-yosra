@@ -1,10 +1,31 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { BsArrowRight, BsArrowLeft } from 'react-icons/bs';
-import room from '../../assets/room/room.jpg';
+import { useParams } from 'react-router-dom';
 
 const CarrouselImages = () => {
+  const { id } = useParams();
+  const [lotData, setLotData] = useState({});
+  const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
+  const API_URL = `http://dev.niceroom.sofis-info.com/api/lot/${id}`;
+
+  useEffect(() => {
+    const headers = {
+      'apiKey': `${API_KEY}`,
+    };
+
+    fetch(API_URL, { method: 'GET', mode: 'cors', headers })
+      .then(response => response.json())
+      .then(data => {
+        setLotData(data.data.lot);
+        console.log(data.data.lot);
+      })
+      .catch(error => {
+        console.error('Erreur lors de la récupération des données :', error);
+      });
+
+  }, [API_URL, API_KEY])
 
   const responsive = {
     superLargeDesktop: {
@@ -23,25 +44,6 @@ const CarrouselImages = () => {
       breakpoint: { max: 576, min: 0 },
       items: 1
     }
-  };
-
-  const imageItems = () => {
-    const images = [
-      {
-        src: room,
-        alt: 'room 1',
-      },
-      {
-        src: room,
-        alt: 'room 2',
-      },
-    ];
-  
-    return images.map((image, index) => (
-      <div key={index} className='item-img'>
-        <img src={image.src} alt={image.alt} className="img-fluid" />
-      </div>
-    ));
   };
 
   const [isPrevActive, setIsPrevActive] = useState(true);
@@ -70,32 +72,42 @@ const CarrouselImages = () => {
   };
 
   return (
-        <div className='img-items'>
-            <Carousel
-            ref={carouselRef}
-            responsive={responsive}
-            infinite={true}
-            containerClass="carousel-container"
-            >
-                {imageItems()}
-            </Carousel>
-            <div className="button-container">
-                <div
-                    onClick={onClickPrev}
-                    onMouseUp={onMouseUp}
-                    className={`custom-prev-arrow ${isPrevActive ? '' : 'disabled'}`}
-                >
-                    <BsArrowLeft className="arrow-icon" />
-                </div>
-                <div
-                    onClick={onClickNext}
-                    onMouseUp={onMouseUp}
-                    className={`custom-next-arrow ${isNextActive ? '' : 'disabled'}`}
-                >
-                    <BsArrowRight className="arrow-icon" />
-                </div>
+  
+    <div className='img-items'>
+      {lotData.media && lotData.media.length > 0 ? (
+        <Carousel
+          ref={carouselRef}
+          responsive={responsive}
+          infinite={true}
+          containerClass="carousel-container"
+        >
+          {lotData.media.map((image, index) => (
+            <div key={index} className='item-img'>
+              <img src={image.original_url} alt={image.name} className="img-fluid" />
             </div>
+          ))}
+        </Carousel>
+      ) : (
+        <p>Pas d'images disponibles.</p>
+      )}
+  
+      <div className="button-container">
+        <div
+          onClick={onClickPrev}
+          onMouseUp={onMouseUp}
+          className={`custom-prev-arrow ${isPrevActive ? '' : 'disabled'}`}
+        >
+          <BsArrowLeft className="arrow-icon" />
         </div>
+        <div
+          onClick={onClickNext}
+          onMouseUp={onMouseUp}
+          className={`custom-next-arrow ${isNextActive ? '' : 'disabled'}`}
+        >
+          <BsArrowRight className="arrow-icon" />
+        </div>
+      </div>
+    </div>
   );
 };
 

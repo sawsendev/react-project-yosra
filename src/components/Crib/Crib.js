@@ -2,7 +2,6 @@ import React from 'react'
 import room from '../../assets/bacdbb_723fc3ba38f34640b08464a29a8990c9~mv2 1.svg'
 import { Badge } from 'react-bootstrap';
 import  locationIcon  from '../../assets/pin 2.svg';
-
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Link } from 'react-router-dom';
 
@@ -10,7 +9,6 @@ const Crib = ({ cribs }) => {
   if (!cribs || cribs.length === 0) {
     return <p>No cribs available</p>;
   }
-  
 
   return (
     <div>
@@ -30,7 +28,7 @@ const Crib = ({ cribs }) => {
                   <img src={locationIcon} alt="location icon"/>
                   <p>{crib.apartment.building.address}</p>
                 </div>
-                <span> 547€/ month</span>
+                <span>{crib.loyer_hc}€/ month</span>
               </div>
             </div>
           </li>
