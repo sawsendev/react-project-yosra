@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react'
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import "./Room.css"
 import CarrouselImages from "./RoomImages"
 import RoomModalMedia from "./RoomModal/RoomModalMedia"
@@ -53,7 +54,6 @@ import { PiInfo } from "react-icons/pi";
 import Crib from '../Crib/Crib';
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-
 
 
 
