@@ -89,3 +89,11 @@
     top: 0;
     width: 41.66666667%;
 }
+.crib-container {
+    width: 33.33%; /* Une largeur d'environ 33% pour chaque conteneur */
+    display: inline-block; /* Aligner horizontalement */
+    box-sizing: border-box; /* Inclure la bordure et le rembourrage dans la largeur */
+    padding: 10px; /* Ajustez le rembourrage selon vos préférences */
+    border: 1px solid #ccc; /* Ajoutez une bordure pour séparer les cribs */
+  }
+  

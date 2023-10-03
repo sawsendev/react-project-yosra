@@ -4,6 +4,7 @@ import AlertCribes from '../AlertCribes/AlertCribes';
 import Crib from '../../Crib/Crib';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import MapWithMarker from '../../MapWithMarker/MapWithMarker';
+import { useSearch } from '../Search/SearchContext';
 
 const Cribes = () => {
   const [cribsData, setCribsData] = useState([]);
@@ -18,8 +19,7 @@ const Cribes = () => {
     [43.704, 7.166],
     
   ];
-  
-
+  const { searchResults, isUpdateResultsClicked } = useSearch();
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
   const API_URL = 'http://dev.niceroom.sofis-info.com/api/lots/list';
 
@@ -52,7 +52,19 @@ const Cribes = () => {
         if (filteredNewCribs.length === 0) {
           setHasMore(false); // Plus de cribs à charger
         } else {
-          setCribsData((prevData) => [...prevData, ...filteredNewCribs]);
+          // Utilisez isUpdateResultsClicked pour décider quel ensemble de données afficher
+          if (isUpdateResultsClicked) {
+            if (searchResults.length > 0) {
+              // Affichez les résultats de la recherche
+              setCribsData((prevData) => [...prevData, ...filteredNewCribs]);
+            } else {
+              setHasMore(false); // Plus de cribs à charger car les résultats de recherche sont vides
+            }
+          } else {
+            // Affichez cribsData
+            setCribsData((prevData) => [...prevData, ...filteredNewCribs]);
+          }
+  
           setCurrentPage(page + 1);
         }
       }
@@ -60,7 +72,8 @@ const Cribes = () => {
       console.error('Erreur lors de la récupération des données :', error);
     }
   };
-  
+  console.log('le resultat est',searchResults)
+ 
 
   useEffect(() => {
     fetchDataFromAPI(currentPage);
@@ -73,31 +86,39 @@ const Cribes = () => {
       <div className='content-page'>
         <div className='row'>
           <div className='col-lg-7'>
-            <InfiniteScroll
-              dataLength={cribsData.length}
-              next={() => fetchDataFromAPI(currentPage)}
-              hasMore={hasMore}
-            >
-              {cribsData.length > 0 ? (
-                <Crib cribs={cribsData} />
-              ) : (
-                <p>Loading...</p>
-              )}
-            </InfiniteScroll>
+          <InfiniteScroll
+  dataLength={
+    isUpdateResultsClicked && searchResults
+      ? searchResults.length
+      : cribsData.length
+  }
+  next={() => fetchDataFromAPI(currentPage)}
+  hasMore={hasMore}
+>
+ <script>console.log(searchResults)</script>
+{searchResults && searchResults.length > 0 ? (
+  <Crib cribs={searchResults} />
+) : (
+  (searchResults.length === 0 ? (
+    <Crib cribs={cribsData} />
+  ) : (
+    <p>Loading...</p>
+  ))
+)}
+
+</InfiniteScroll>
+
           </div>
           <div className='Maps col-lg-5'>
             <div className='maps-block'>
-            <MapWithMarker coordinates={staticCoordinates} />
-
-
+              <MapWithMarker coordinates={staticCoordinates}/>
             </div>
           </div>
         </div>
       </div>
-
-      <AlertCribes className="alert" />
+  
+      <AlertCribes className='alert'/>
     </div>
   );
-}
-
+}  
 export default Cribes;

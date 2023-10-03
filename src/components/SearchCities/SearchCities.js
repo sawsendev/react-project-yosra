@@ -1,14 +1,19 @@
 import React from 'react'
 import Search from './Search/Search'
  import Cribes from './Cribes/Cribes'
+ import { SearchProvider } from './Search/SearchContext'
 
 const SearchCities = () => {
   return (
-    <div>
-      <Search/>
-      <Cribes/>
+   
+    <SearchProvider>
+      <div>
+        <Search />
+        <Cribes />
+      </div>
+    </SearchProvider>
      
-    </div>
+
   )
 }
 
