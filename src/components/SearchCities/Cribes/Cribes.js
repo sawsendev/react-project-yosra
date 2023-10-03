@@ -9,7 +9,7 @@ const Cribes = () => {
   const [cribsData, setCribsData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
-  const hasMore = true; // Vous pouvez définir cette valeur en fonction de votre logique de pagination
+  const [hasMore,setHasMore]=useState(true); // Vous pouvez définir cette valeur en fonction de votre logique de pagination
   const staticCoordinates = [
     [43.70328975790311, 7.1704107912588055],
     [43.705, 7.175],
@@ -28,29 +28,39 @@ const Cribes = () => {
       const headers = {
         'apiKey': `${API_KEY}`,
       };
-
+  
       const response = await fetch(`${API_URL}?page=${page}&limit=${itemsPerPage}`, {
         method: 'GET',
         mode: 'cors',
         headers
       });
-
+  
       const data = await response.json();
       console.log(data)
-      
+  
       if (data && data.data && data.data.lots) {
         // Utilisez currentPage pour déterminer la position de départ des éléments à afficher
         const startIndex = (currentPage - 1) * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
         const newCribs = data.data.lots.slice(startIndex, endIndex);
-
-        setCribsData((prevData) => [...prevData, ...newCribs]);
-        setCurrentPage(page + 1);
+  
+        // Vérifiez si les nouveaux cribs ne sont pas déjà présents dans cribsData
+        const filteredNewCribs = newCribs.filter((newCrib) => {
+          return !cribsData.some((existingCrib) => existingCrib.id === newCrib.id);
+        });
+  
+        if (filteredNewCribs.length === 0) {
+          setHasMore(false); // Plus de cribs à charger
+        } else {
+          setCribsData((prevData) => [...prevData, ...filteredNewCribs]);
+          setCurrentPage(page + 1);
+        }
       }
     } catch (error) {
       console.error('Erreur lors de la récupération des données :', error);
     }
   };
+  
 
   useEffect(() => {
     fetchDataFromAPI(currentPage);
@@ -67,7 +77,6 @@ const Cribes = () => {
               dataLength={cribsData.length}
               next={() => fetchDataFromAPI(currentPage)}
               hasMore={hasMore}
-              endMessage={<p>No more cribs available</p>}
             >
               {cribsData.length > 0 ? (
                 <Crib cribs={cribsData} />

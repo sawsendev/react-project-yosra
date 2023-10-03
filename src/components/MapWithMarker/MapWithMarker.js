@@ -32,8 +32,8 @@ const MapWithMarker = ({ coordinates }) => {
         L.circle(coord, {
           color: 'black',
           fillColor: 'black',
-          fillOpacity: 0.5,
-          radius: 250, // Rayon du cercle en mètres
+          fillOpacity: 1,
+          radius: 150, // Rayon du cercle en mètres
         }).addTo(map);
       });
     }

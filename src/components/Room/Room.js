@@ -75,7 +75,7 @@ const Room = () => {
         .then(data => {
         
             setLotData(data.data.lot);
-            console.log(data.data.lot)        
+            console.log(data.data.lot);        
         })
         .catch(error => {
           console.error('Erreur lors de la récupération des données :', error);
@@ -109,7 +109,17 @@ const Room = () => {
 
   const closeModal = () => {
     setModalIsOpen(false);
-  };
+  };  const showElectricity = lotData.electricity !== 0;
+  const showGas = lotData.gaz !== 0;
+  let electricityAndGas = '';
+
+  if (showElectricity && showGas) {
+    electricityAndGas = 'Electricity, Gas';
+  } else if (showElectricity) {
+    electricityAndGas = 'Electricity';
+  } else if (showGas) {
+    electricityAndGas = 'Gas';
+  }
   
     return (
       <>
@@ -143,66 +153,77 @@ const Room = () => {
               </div>
               <div className='characteristics mt-3 mb-4'>
                 <div className='btn-char'><img src={plan} alt="plan"/>Apartement (76m2)</div>
-                <div className='btn-char'><img src={bedroom} alt="bedroom"/>Room (12m2)</div>
-                <div className='btn-char'><img src={roomies} alt="roomies"/>4 Roomies</div>
+                {lotData && lotData.area &&  (
+                <div className='btn-char'><img src={bedroom} alt="bedroom"/>Room ({lotData.area}m2)</div>)}
+                {lotData && lotData.apartment && lotData.apartment.rooms &&  (
+                <div className='btn-char'><img src={roomies} alt="roomies"/>{lotData.apartment.rooms} Roomies</div>)}
                 <div className='btn-char'><img src={elevator} alt="floor"/>2ndFloor</div>
-                <div className='btn-char'><img src={energy} alt="energy"/> A+++</div>
+                {lotData && lotData.apartment && lotData.apartment.energy_rating &&  (
+                <div className='btn-char'><img src={energy} alt="energy"/>{lotData.apartment.energy_rating}+++</div>)}
               </div>
               <div className='description pt-2 mb-4'>
                 <h2>The crib</h2>
-                <p>Located in the lovely neighbourhood of Riquier, in the immediate vicinity of the Riquier train station, 53 Bd Pierre 
-                Sola is the ideal location for those commuting to Monaco daily, or for those wanting a central but quiet location. The 
-                apartment is only 10-minute walk from the port, the old city and Place Garibaldi where you will find plenty of bars and 
-                restaurants…</p>
+                {lotData.description && (
+                <p>{lotData.description}</p>)}
               </div>
               <div className='amenities'>
                 <h2>Amenities</h2>
                 <h3>Room</h3>
                 {lotData.options && (
-  <div className='characteristics pieces mb-4'>
-    {[
-      { title: "Double bed", icon: doublebed },
-      { title: "Workspace", icon: workspace },
-      { title: "Wardrobe", icon: wardrobe },
-      { title: "Sofa", icon: sofa },
-      { title: "Terrace", icon: terrace },
-      { title: "A/C", icon: airconditioner },
-    ].map((option) => (
-      lotData.options.some((opt) => opt.title_en === option.title) && (
-        <div className='btn-char' key={option.title}>
-          <img src={option.icon} alt={option.title} />
-          {option.title}
-        </div>
-      )
-    ))}
-  </div>
-)}
+               <div className='characteristics pieces mb-4'>
+                {[
+                 { title: "Double bed", icon: doublebed },
+                 { title: "Workspace", icon: workspace },
+                 { title: "Wardrobe", icon: wardrobe },
+                 { title: "Sofa", icon: sofa },
+                 { title: "Terrace", icon: terrace },
+                 { title: "A/C", icon: airconditioner },
+                 ].map((option) => (
+                 lotData.options.some((opt) => opt.title_en === option.title) && (
+                 <div className='btn-char' key={option.title}>
+                 <img src={option.icon} alt={option.title} />
+                 {option.title}
+                 </div>
+                 )
+                 ))}
+                 </div>
+                 )}
 
-                <h3>Apartment level</h3>
-                <div className='characteristics pieces mb-4'>
-                  <div className='btn-char'><img src={location} alt="Central location"/>Central location</div>
-                  <div className='btn-char'><img src={sofa} alt="Fully furnished"/>Fully furnished</div>
-                  <div className='btn-char'><img src={airconditioner} alt="Air-conditioner"/>A/C</div>
-                  <div className='btn-char'><img src={elevator1} alt="Elevator"/>Elevator</div>
-                  <div className='btn-char'><img src={view} alt="Beautiful view"/>Beautiful view</div>
+                 <h3>Apartment level</h3>
+                 {lotData.apartment && lotData.apartment.options && (
+                 <div className='characteristics pieces mb-4'>
+                 {[
+                 { title: "Central location", icon: location },
+                 { title: "Fully furnished", icon: sofa },
+                 { title: " A/C", icon: airconditioner },
+                 { title: "Elevator", icon: elevator1 },
+                 { title: "Beautiful view", icon: view },
+                 { title: "Cleaning", icon: cleaning },
+                 { title: "Balcony", icon: terrace },
+                 { title: "Furnished kitchen", icon: fkitchen },
+                 { title: "Kitchenware", icon: kitchenware },
+                 { title: "Dishes and cutlery", icon: dishes },
+                 { title: "Dishwasher", icon: dishwasher },
+                 { title: "Microwave", icon: microwave },
+                 { title: "Shower", icon: shower },
+                 { title: "Washing machine", icon: washer },
+                 { title: "Blanket & Pillows", icon: pillow },
+                 { title: "Dryer", icon: dryer },
+                 { title: "Vacuum cleaner", icon: vacuum },
+                 { title: "Ironing set", icon: ironing },
+                 { title: "Cleaning tools", icon: tools },
+                 ].map((char) => (
+                 lotData.apartment.options.some((option) => option.title_en === char.title) && (
+                 <div className='btn-char' key={char.title}>
+                 <img src={char.icon} alt={char.title} />
+                 {char.title}
+                 </div>
+                 )
+                 ))}
+                 </div>
+                 )}
 
-                  <div className='btn-char'><img src={cleaning} alt="Cleaning"/>Cleaning</div>
-                  <div className='btn-char'><img src={terrace} alt="Balcony"/>Balcony</div>
-                  <div className='btn-char'><img src={fkitchen} alt="Furnished kitchen"/>Furnished kitchen</div>
-                  <div className='btn-char'><img src={kitchenware} alt="Kitchenware"/>Kitchenware</div>
-                  <div className='btn-char'><img src={dishes} alt="Dishes and cutlery"/>Dishes and cutlery</div>
 
-                  <div className='btn-char'><img src={dishwasher} alt="Dishwasher"/>Dishwasher</div>
-                  <div className='btn-char'><img src={microwave} alt="Microwave"/>Microwave</div>
-                  <div className='btn-char'><img src={shower} alt="Shower"/>Shower</div>
-                  <div className='btn-char'><img src={washer} alt="Washing machine"/>Washing machine</div>
-                  <div className='btn-char'><img src={pillow} alt="Blanket & Pillows"/>Blanket & Pillows</div>
-
-                  <div className='btn-char'><img src={dryer} alt="Dryer"/>Dryer</div>
-                  <div className='btn-char'><img src={vacuum} alt="Vacuum"/>Vacuum cleaner</div>
-                  <div className='btn-char'><img src={ironing} alt="Ironing set"/>Ironing set</div>
-                  <div className='btn-char'><img src={tools} alt="Cleaning tools"/>Cleaning tools</div>
-                </div>
               </div>
               <div className='flatmates'>
                 <h2 className='mb-3'>Flatmates</h2>
@@ -265,12 +286,14 @@ const Room = () => {
                   <p className='text-center price'>650€/<small> month</small></p>
                   <div className='text-center assistance'>CAF assistance <PiInfo className='info'/> <span className='green'>( up to -258€ )</span></div>
                   <p className='h4 status'>Rent is all inclusive</p>
-                  <p className='status'><img src={water} alt="Water"/> Water</p>
-                  <p className='status'><img src={plug} alt="plug"/> Electricity,gas</p>
-                  <p className='status'><img src={insurance} alt="insurance"/> Housing insurance</p>
+                  {lotData.water !== 0 &&(<p className='status'><img src={water} alt="Water"/> Water</p>)}
+                  {electricityAndGas && (
+                  <p className='status'><img src={plug} alt="plug"/> {electricityAndGas}</p>
+                  )}
+                  {lotData.home_insurance !== 0 &&(<p className='status'><img src={insurance} alt="insurance"/> Housing insurance</p>)}
                   {lotData.wi_fi !== 0 &&(<p className='status'><img src={wifi} alt="wifi"/> Wi - Fi</p>)}
-                  <p className='status'><img src={cable} alt="cable tv"/> Cable tv</p>
-                  <p className='status'><img src={wipe} alt="wipe"/> Cleaning</p>
+                  {lotData.cable_tv !== 0 &&(<p className='status'><img src={cable} alt="cable tv"/> Cable tv</p>)}
+                  {lotData.cleaning !== 0 &&(<p className='status'><img src={wipe} alt="wipe"/> Cleaning</p>)}
                   <button className='btn btn-submit' onClick={()=>{navigate(`/BookingEnquiry/${id}`)}}>
 
                   Apply for this room</button>
