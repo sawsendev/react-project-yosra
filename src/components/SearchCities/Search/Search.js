@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import "./Search.css";
-import PriceRangeSlider from './PriceRangeSlider';
 import Select from 'react-select';
+import { useSearch } from './SearchContext';
 
 const Search = () => {
   const [selectedCountry, setselectedCountry] = useState("");
-  const [isSliderVisible, setIsSliderVisible] = useState(false);
   const [priceRange, setPriceRange] = useState([1, 500]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isUpdateResultsClicked, setIsUpdateResultsClicked] = useState(false);
 
-  // Nouveau state pour gérer la valeur de l'input du Select
-  const [selectedPriceRangeLabel, setSelectedPriceRangeLabel] = useState("1€ - 500€");
+  const { setSearchResults } = useSearch();
+  const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
 
   const customStyles = {
     control: (provided) => ({
@@ -35,35 +35,44 @@ const Search = () => {
     }),
   };
 
-  const handleToggleSlider = () => {
-    setIsSliderVisible(!isSliderVisible);
-  };
-
   const handlePriceRangeChange = (newValue) => {
     setPriceRange(newValue);
-
-    // Mise à jour de la valeur de l'input du Select lorsque la plage de prix change
-    const priceRangeLabel = `${newValue[0]}€ - ${newValue[1]}€`;
-    setSelectedPriceRangeLabel(priceRangeLabel);
   };
 
-  const handleSelectChange = (selectedOption) => {
-    // Lorsque l'utilisateur sélectionne une option dans le Select,
-    // nous ne faisons rien ici, nous laissons React Select gérer la sélection de l'option.
+  const formatPriceRangeLabel = (priceRange) => {
+    return `${priceRange[0]}€ - ${priceRange[1]}€`;
   };
 
-  useEffect(() => {
-    // Mettre à jour la valeur de l'input du Select lorsque la plage de prix change
-    const priceRangeLabel = `${priceRange[0]}€ - ${priceRange[1]}€`;
-    setSelectedPriceRangeLabel(priceRangeLabel);
-  }, [priceRange]);
+  const selectValue = { label: formatPriceRangeLabel(priceRange), value: `${priceRange[0]}-${priceRange[1]}` };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Formulaire soumis avec les valeurs suivantes :');
-    console.log('Selected Country:', selectedCountry);
-    console.log('Selected Price Range:', priceRange);
+    try {
+      // Extraire les valeurs des champs du formulaire
+      const formData = {
+        city: selectedCountry, 
+      };
+  
+      
+      const response = await fetch('http://dev.niceroom.sofis-info.com/api/lots/search', {
+        method: 'POST',
+        headers: {
+          'apiKey': `${API_KEY}`,
+          'Content-Type': 'application/json', 
+        },
+        body: JSON.stringify(formData), 
+      });
+      const searchResults = await response.json();
+      setSearchResults(searchResults);
+      setIsUpdateResultsClicked(true);
+      console.log('successful')
+      console.log(searchResults)
+    } catch (error) {
+      console.error('Erreur lors de la recherche :', error);
+    }
   };
+  
+
 
   return (
     <div className='Search-container'>
@@ -97,27 +106,29 @@ const Search = () => {
                 <div className='select-container'>
                   <Select
                     styles={customStyles}
-                    onMenuOpen={handleToggleSlider}
-                    onMenuClose={handleToggleSlider}
+                    onMenuOpen={() => setIsMenuOpen(true)}
+                    onMenuClose={() => setIsMenuOpen(false)}
                     options={[]}
-                    onChange={handleSelectChange}
+                    onChange={() => {}}
                     menuIsOpen={isMenuOpen}
-                    value={{ label: selectedPriceRangeLabel, value: priceRange.join('-') }}
+                    value={selectValue}
                     isSearchable={false}
                     placeholder="Select a price range"
                   />
                 </div>
-                {isSliderVisible && (
-                  <div className='slider-container container'>
-                    <div className='price'>
-                      <h5> Price per month</h5>
-                      <PriceRangeSlider
-                        value={priceRange}
-                        onChange={handlePriceRangeChange}
-                      />
-                    </div>
+                <div className='slider-container container'>
+                  <div className='price'>
+                    <h5> Price per month</h5>
+                    <input
+                      type="range"
+                      min={1}
+                      max={500}
+                      value={priceRange[1]}
+                      onChange={(e) => handlePriceRangeChange([priceRange[0], Number(e.target.value)])}
+                    />
+                    <span>{formatPriceRangeLabel(priceRange)}</span>
                   </div>
-                )}
+                </div>
               </div>
             </div>
 
