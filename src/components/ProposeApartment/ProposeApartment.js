@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
 import './ProposeApartment.css'
 import ProposeModal from "./ProposeModal/ProposeModal"

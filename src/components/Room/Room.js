@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import "./Room.css"
 import CarrouselImages from "./RoomImages"
 import RoomModalMedia from "./RoomModal/RoomModalMedia"
@@ -37,10 +37,6 @@ import tools from '../../assets/room/icons/tools.svg'
 import block from '../../assets/room/icons/block.svg'
 import woman from '../../assets/room/icons/woman.svg'
 import man from '../../assets/room/icons/man.svg'
-import Badge from 'react-bootstrap/Badge';
-
-import locationIcon  from '../../assets/pin 2.svg';
-
 import check from '../../assets/room/widget/check.svg'
 import water from '../../assets/room/widget/water.svg'
 import plug from '../../assets/room/widget/plug.svg'
@@ -48,9 +44,7 @@ import insurance from '../../assets/room/widget/insurance.svg'
 import wifi from '../../assets/room/widget/wifi.svg'
 import cable from '../../assets/room/widget/cable-tv.svg'
 import wipe from '../../assets/room/widget/wipe.svg'
-
 import { PiInfo } from "react-icons/pi";
-import Crib from '../Crib/Crib';
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -109,7 +103,8 @@ const Room = () => {
 
   const closeModal = () => {
     setModalIsOpen(false);
-  };  const showElectricity = lotData.electricity !== 0;
+  };  
+  const showElectricity = lotData.electricity !== 0;
   const showGas = lotData.gaz !== 0;
   let electricityAndGas = '';
 
@@ -143,7 +138,7 @@ const Room = () => {
 
               </div>
 
-              <RoomModalMedia isOpen={modalIsOpen} closeModal={closeModal} activeTab={activeTab} setActiveTab={setActiveTab} />
+              <RoomModalMedia isOpen={modalIsOpen} closeModal={closeModal} activeTab={activeTab} setActiveTab={setActiveTab} lotData={lotData}/>
 
               <div className='title mt-4'>
               {lotData && lotData.apartment && lotData.apartment.title && lotData.title && (

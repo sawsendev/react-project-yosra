@@ -8,7 +8,8 @@ const Search = () => {
   const [priceRange, setPriceRange] = useState([1, 500]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUpdateResultsClicked, setIsUpdateResultsClicked] = useState(false);
-
+  const [date, setDate] = useState("");
+  const [sortBy, setSortBy] = useState(""); 
   const { setSearchResults } = useSearch();
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
 
@@ -50,10 +51,12 @@ const Search = () => {
     try {
       // Extraire les valeurs des champs du formulaire
       const formData = {
+        price_min:priceRange[0],
+        price_max:priceRange[1],
         city: selectedCountry, 
+        date:date,
+        sortBy:sortBy
       };
-  
-      
       const response = await fetch('http://dev.niceroom.sofis-info.com/api/lots/search', {
         method: 'POST',
         headers: {
@@ -65,14 +68,18 @@ const Search = () => {
       const searchResults = await response.json();
       setSearchResults(searchResults);
       setIsUpdateResultsClicked(true);
+      console.log(isUpdateResultsClicked)
       console.log('successful')
-      console.log(searchResults)
     } catch (error) {
       console.error('Erreur lors de la recherche :', error);
     }
   };
-  
-
+  const handleChangeDate = (e) => {
+    setDate(e.target.value);
+  };
+  const handleChangeSortBy = (e) => {
+    setSortBy(e.target.value);
+  };
 
   return (
     <div className='Search-container'>
@@ -96,7 +103,7 @@ const Search = () => {
             <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
               <label htmlFor="cars">Move in date</label>
               <div className='input-date'>
-                <input type="date" name="date" className='form-control' required placeholder='Move in date' />
+                <input type="date" name="date" className='form-control' required placeholder='Move in date'  onChange={handleChangeDate} />
               </div>
             </div>
 
@@ -122,7 +129,7 @@ const Search = () => {
                     <input
                       type="range"
                       min={1}
-                      max={500}
+                      max={1000}
                       value={priceRange[1]}
                       onChange={(e) => handlePriceRangeChange([priceRange[0], Number(e.target.value)])}
                     />
@@ -135,10 +142,10 @@ const Search = () => {
             <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
               <label htmlFor="price">Sort by</label>
               <div className='input-select'>
-                <select name="price" id="countries-id" className='form-control'>
+                <select name="price" id="countries-id" className='form-control' onChange={handleChangeSortBy}>
                   <option value="" disabled>Sorted by</option>
-                  <option value="descending">Descending price</option>
-                  <option value="ascending">Ascending price</option>
+                  <option value="desc">Descending price</option>
+                  <option value="asc">Ascending price</option>
                 </select>
               </div>
             </div>

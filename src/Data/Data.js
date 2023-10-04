@@ -16,9 +16,9 @@ import Nice from "../assets/nice.svg";
 import Paris from "../assets/paris.svg";
 import Florence from "../assets/florence.svg";
 import Bologna from "../assets/Rectangle 49.svg";
-import f1 from "../assets/voyageurs-invites-pleins-smileys-2.svg";
-import f2 from "../assets/voyageurs-invites-pleins-smileys-1.svg";
-import f3 from "../assets/voyageurs-invites-pleins-smileys.svg";
+import f1 from "../assets/voyageurs-invites-pleins-smileys-2.jpg";
+import f2 from "../assets/voyageurs-invites-pleins-smileys-1.jpg";
+import f3 from "../assets/voyageurs-invites-pleins-smileys.jpg";
 import room_city from "../assets/bacdbb_723fc3ba38f34640b08464a29a8990c9~mv2 1.svg";
 import upload from "../assets/image-gallery.svg"
 import payslip from "../assets/g2115.svg"
