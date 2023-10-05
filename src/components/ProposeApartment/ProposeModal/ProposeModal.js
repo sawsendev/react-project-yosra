@@ -1,95 +1,100 @@
-import React, { useRef, useState } from 'react';
-import "./ProposeModal.css"
-import logo from "../../../assets/logo.svg"
-import upload from "../../../assets/room/icons/upload.svg"
+import React, { useState } from 'react';
+import "./ProposeModal.css";
+import logo from "../../../assets/logo.svg";
+import upload from "../../../assets/room/icons/upload.svg";
 import { IoCloseOutline, IoArrowBackOutline } from "react-icons/io5";
 import { GiCheckMark } from "react-icons/gi";
 import { BsSend } from "react-icons/bs";
 import Modal from 'react-modal';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProposeModal = ({ isOpen, closeModal }) => {
+  const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    quality: '',
+    location: '',
+    address: '',
+    surface: '',
+    availability: '',
+    medias: '',
+    message: '',
+  });
+  
+  const [validationErrors, setValidationErrors] = useState({});
 
-    const [step, setStep] = useState(1);
-    const [formData, setFormData] = useState({
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
-      quality: '',
-      location: '',
-      address: '',
-      surface: '',
-      availability: '',
-      medias: '',
-      message: '',
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+//   const phoneRegex = /^\d{8}$/;
+  const phoneRegex = /^[\d-]{6,20}$/;
+
+  const requiredFieldsByStep = {
+    1: ['email', 'phone', 'quality'],
+    2: ['address', 'surface', 'availability'],
+    3: [],
+    4: ['message'],
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = () => {
+    const currentStepRequiredFields = requiredFieldsByStep[step];
+    const errors = {};
+
+    if (!emailRegex.test(formData.email)) {
+      errors.email = 'Invalid email format';
+    }
+
+    if (!phoneRegex.test(formData.phone)) {
+      errors.phone = 'Invalid phone format (e.g., 00112233)';
+    }
+
+    currentStepRequiredFields.forEach((field) => {
+      if (!formData[field].trim()) {
+        errors[field] = 'This field is required';
+      }
     });
 
-    const requiredFields = ['email', 'phone', 'address', 'quality', 'surface', 'availability'];
-
-    const handleInputChange = (e) => {
-      const { name, value } = e.target;
-      setFormData({ ...formData, [name]: value });
-    };
-  
-    const nextStep = (e) => {
-        // e.preventDefault(); 
-        // setStep(step + 1);
-        e.preventDefault();
-    // Define required fields for each step
-    const requiredFieldsByStep = {
-        1: ['email', 'phone', 'quality'],
-        2: ['address', 'surface', 'availability'],
-        3: [],
-        4: ['message'],
-    };
-
-    // Get the required fields for the current step
-    const currentStepRequiredFields = requiredFieldsByStep[step];
-
-    // Check if all required fields for the current step are filled out
-    const allFieldsFilled = currentStepRequiredFields.every(field => formData[field].trim() !== '');
-
-    if (allFieldsFilled) {
+    if (Object.keys(errors).length === 0) {
+      if (step < 4) {
         setStep(step + 1);
+      } else {
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '',
+          quality: '',
+          location: '',
+          address: '',
+          surface: '',
+          availability: '',
+          medias: '',
+          message: '',
+        });
+        setStep(1);
+        closeModal();
+              // Show success toast message
+        toast.success('Form successfully submitted!', {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 3000, // Adjust the duration of the toast as needed (in milliseconds)
+        });
+      }
+      setValidationErrors({});
     } else {
-        alert('Please fill in all required fields before proceeding.');
+      setValidationErrors(errors);
     }
-    };
-  
-    const prevStep = () => {
-      setStep(step - 1);
-    };
-  
-    const handleSubmit = (e) => {
-        e.preventDefault(); 
-        const requiredFieldsByStep4 = {
-            4: ['message'],
-        };
-        
-        const currentStepRequiredFieldsin = requiredFieldsByStep4[step];
-        const allFieldsFilledin = currentStepRequiredFieldsin.every(field => formData[field].trim() !== '');
-        // const allFieldsFilled = requiredFields.every((field) => formData[field].trim() !== '');
-    
-        if (allFieldsFilledin) {
-            setFormData({
-                firstName: '',
-                lastName: '',
-                email: '',
-                phone: '',
-                quality: '',
-                location: '',
-                address: '',
-                surface: '',
-                availability: '',
-                medias: '',
-                message: '',
-            });
-            setStep(1);
-            closeModal();
-        } else {
-            alert('Please fill in message field.');
-        }
-    };
+  };
+
+  const prevStep = () => {
+    setStep(step - 1);
+  };
   
     const renderStep = () => {
       switch (step) {
@@ -123,6 +128,9 @@ const ProposeModal = ({ isOpen, closeModal }) => {
                         value={formData.email}
                         onChange={handleInputChange}
                     required/>
+                    {validationErrors.email && (
+                      <div className="validation-error">{validationErrors.email}</div>
+                    )}
                 </div>
                 <div className='form-group'>
                     <label className='form-label'>Phone number *</label>
@@ -132,6 +140,10 @@ const ProposeModal = ({ isOpen, closeModal }) => {
                         value={formData.phone}
                         onChange={handleInputChange}
                     required/>
+                    
+                {validationErrors.phone && (
+                  <div className="validation-error">{validationErrors.phone}</div>
+                )}
                 </div>  
                 <div className='form-group'>
                     <label className='form-label'>Are you *</label>
@@ -147,8 +159,11 @@ const ProposeModal = ({ isOpen, closeModal }) => {
                             <option value="association">Association</option>
                         </select>
                     </div>
+                    {validationErrors.quality && (
+                      <div className="validation-error">{validationErrors.quality}</div>
+                    )}
                 </div>  
-                <button className='btn btn-accept' onClick={nextStep}>OK</button>
+                <button className='btn btn-accept' onClick={handleSubmit}>OK</button>
             </div>
             </>
           );
@@ -179,6 +194,9 @@ const ProposeModal = ({ isOpen, closeModal }) => {
                         value={formData.address}
                         onChange={handleInputChange}
                     required/>
+                    {validationErrors.address && (
+                      <div className="validation-error">{validationErrors.address}</div>
+                    )}
                 </div> 
                 <div className='form-group'>
                     <label className='form-label'>What is the surface? *</label>
@@ -188,6 +206,9 @@ const ProposeModal = ({ isOpen, closeModal }) => {
                         value={formData.surface}
                         onChange={handleInputChange}
                     required/>
+                    {validationErrors.surface && (
+                      <div className="validation-error">{validationErrors.surface}</div>
+                    )}
                 </div>
                 <div className='form-group'>
                     <label className='form-label'>Date of availability *</label>
@@ -199,8 +220,11 @@ const ProposeModal = ({ isOpen, closeModal }) => {
                             onChange={handleInputChange}
                         required/>
                     </div>
+                        {validationErrors.availability && (
+                          <div className="validation-error">{validationErrors.availability}</div>
+                        )}
                 </div>
-                <button className='btn btn-accept' onClick={nextStep}>OK</button>
+                <button className='btn btn-accept' onClick={handleSubmit}>OK</button>
             </div>
             </>
           );
@@ -220,7 +244,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
                             className="form-control upload-medias" multiple/>
                         </button>
                     </div>
-                    <button className='btn btn-accept' onClick={nextStep}>OK</button>
+                    <button className='btn btn-accept' onClick={handleSubmit}>OK</button>
                 </div>
             </>
           );
@@ -229,7 +253,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
               <>
                 <div className='step4-form'>
                     <div className='form-group message-form-group'>
-                        <label className='form-label'>Other information (e.g. condition, need for refurbishment)</label>
+                        <label className='form-label'>Other information (e.g. condition, need for refurbishment) *</label>
                         <div className='note'>Date of availability, desired rent, condition of the property, possible work to be planned….</div>
                         <textarea className='form-control'
                             type="text"
@@ -237,6 +261,9 @@ const ProposeModal = ({ isOpen, closeModal }) => {
                             value={formData.message}
                             onChange={handleInputChange}
                         required></textarea>
+                        {validationErrors.message && (
+                          <div className="validation-error">{validationErrors.message}</div>
+                        )}
                     </div>
                     <button className='btn btn-send' onClick={handleSubmit}><BsSend /> Send</button>
                 </div>
@@ -283,6 +310,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
         </div> 
         </div>
       </Modal>
+      <ToastContainer />
       </>
       )
     }

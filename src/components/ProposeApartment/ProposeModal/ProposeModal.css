@@ -257,3 +257,9 @@ button.box-input img {
     padding: 30px 0;
 }
 }
+.validation-error {
+    font-size: 14px;
+    margin: 5px 0;
+    color: #E41F13;
+    font-weight: 400;
+}
