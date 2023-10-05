@@ -50,7 +50,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 
 
-
 const Room = () => {
   const{id}=useParams();
   const[lotData,setLotData]=useState({});
