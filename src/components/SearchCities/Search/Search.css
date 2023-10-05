@@ -170,3 +170,30 @@ label{
     justify-content: space-between;
 
 }
+.rc-slider-track {
+    height: 2px!important;
+    background-color: #000000!important;
+}
+.rc-slider-rail {
+    height: 2px!important;
+    background-color: #DDDDDD!important;
+}
+.rc-slider-step { 
+    height: 2px!important;
+}
+.rc-slider-handle {
+    width: 12px!important;
+    height: 12px!important;
+    background: #fff!important;
+    border: solid 2px #000!important;
+    opacity: 1!important;
+}
+.rc-slider-handle:active, .rc-slider-handle:hover, .rc-slider-handle:focus-visible {
+    border-color: #000!important;
+    box-shadow: 0 0 5px #000!important;
+}
+.rc-slider-handle-dragging {
+    box-shadow: 0 0 0 5px #000!important;
+    background: #000!important;
+
+}

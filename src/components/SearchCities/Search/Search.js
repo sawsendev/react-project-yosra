@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import "./Search.css";
+import './Search.css';
 import Select from 'react-select';
 import { useSearch } from './SearchContext';
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
 
 const Search = () => {
   const [selectedCountry, setselectedCountry] = useState("");
@@ -35,44 +37,37 @@ const Search = () => {
     }),
   };
 
-  const handlePriceRangeChange = (newValue) => {
-    setPriceRange(newValue);
+  const handlePriceRangeChange = (newPriceRange) => {
+    setPriceRange(newPriceRange);
   };
-
-  const formatPriceRangeLabel = (priceRange) => {
-    return `${priceRange[0]}€ - ${priceRange[1]}€`;
-  };
-
-  const selectValue = { label: formatPriceRangeLabel(priceRange), value: `${priceRange[0]}-${priceRange[1]}` };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Extraire les valeurs des champs du formulaire
+      // Extract the values from the form fields
       const formData = {
-        city: selectedCountry, 
+        city: selectedCountry,
+        minPrice: priceRange[0],
+        maxPrice: priceRange[1],
       };
-  
-      
+
       const response = await fetch('http://dev.niceroom.sofis-info.com/api/lots/search', {
         method: 'POST',
         headers: {
           'apiKey': `${API_KEY}`,
-          'Content-Type': 'application/json', 
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData), 
+        body: JSON.stringify(formData),
       });
       const searchResults = await response.json();
       setSearchResults(searchResults);
       setIsUpdateResultsClicked(true);
-      console.log('successful')
-      console.log(searchResults)
+      console.log('successful');
+      console.log(searchResults);
     } catch (error) {
-      console.error('Erreur lors de la recherche :', error);
+      console.error('Error during search:', error);
     }
   };
-  
-
 
   return (
     <div className='Search-container'>
@@ -111,27 +106,27 @@ const Search = () => {
                     options={[]}
                     onChange={() => {}}
                     menuIsOpen={isMenuOpen}
-                    value={selectValue}
+                    value={null} // Change this if you have a default value
                     isSearchable={false}
                     placeholder="Select a price range"
                   />
                 </div>
                 <div className='slider-container container'>
                   <div className='price'>
-                    <h5> Price per month</h5>
-                    <input
-                      type="range"
+                    <h5>Price per month</h5>
+                    <Slider
                       min={1}
                       max={500}
-                      value={priceRange[1]}
-                      onChange={(e) => handlePriceRangeChange([priceRange[0], Number(e.target.value)])}
+                      value={priceRange}
+                      onChange={handlePriceRangeChange}
+                      range
                     />
-                    <span>{formatPriceRangeLabel(priceRange)}</span>
+                    <span>Min: {priceRange[0]}€ - Max: {priceRange[1]}€</span>
                   </div>
                 </div>
               </div>
             </div>
-
+            
             <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
               <label htmlFor="price">Sort by</label>
               <div className='input-select'>
