@@ -1,6 +1,6 @@
 import React from 'react'
 import "./BookingProcess.css"
-import RoomProcessPic from '../../assets/bacdbb_eaa5dabd9a4a4182871bd934709fb0be~mv2 1.svg'
+import RoomProcessPic from '../../assets/bacdbb_eaa5dabd9a4a4182871bd934709fb0be_mv2-1.jpg'
 
 const BookingProcess = () => {
   return (

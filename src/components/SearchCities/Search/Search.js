@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import "./Search.css";
 import Select from 'react-select';
-import { useSearch } from './SearchContext';
+
+import { useNavigate } from 'react-router-dom';
 
 const Search = () => {
   const [selectedCountry, setselectedCountry] = useState("");
   const [priceRange, setPriceRange] = useState([1, 500]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isUpdateResultsClicked, setIsUpdateResultsClicked] = useState(false);
+
   const [date, setDate] = useState("");
   const [sortBy, setSortBy] = useState(""); 
-  const { setSearchResults } = useSearch();
-  const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
+
+
+  const navigate=useNavigate()
 
   const customStyles = {
     control: (provided) => ({
@@ -46,34 +48,19 @@ const Search = () => {
 
   const selectValue = { label: formatPriceRangeLabel(priceRange), value: `${priceRange[0]}-${priceRange[1]}` };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      // Extraire les valeurs des champs du formulaire
-      const formData = {
-        price_min:priceRange[0],
-        price_max:priceRange[1],
-        city: selectedCountry, 
-        date:date,
-        sortBy:sortBy
-      };
-      const response = await fetch('http://dev.niceroom.sofis-info.com/api/lots/search', {
-        method: 'POST',
-        headers: {
-          'apiKey': `${API_KEY}`,
-          'Content-Type': 'application/json', 
-        },
-        body: JSON.stringify(formData), 
-      });
-      const searchResults = await response.json();
-      setSearchResults(searchResults);
-      setIsUpdateResultsClicked(true);
-      console.log(isUpdateResultsClicked)
-      console.log('successful')
-    } catch (error) {
-      console.error('Erreur lors de la recherche :', error);
-    }
+    const searchParams = new URLSearchParams();
+    searchParams.append('city', selectedCountry);
+    searchParams.append('date', date);
+    searchParams.append('sortBy', sortBy);
+    searchParams.append('priceMin', priceRange[0]); // Ajout de priceMin
+    searchParams.append('priceMax', priceRange[1]); // Ajout de priceMax
+  
+    const url = `/searchcities?${searchParams.toString()}`;
+    navigate(url);
   };
+  
   const handleChangeDate = (e) => {
     setDate(e.target.value);
   };
@@ -103,7 +90,7 @@ const Search = () => {
             <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
               <label htmlFor="cars">Move in date</label>
               <div className='input-date'>
-                <input type="date" name="date" className='form-control' required placeholder='Move in date'  onChange={handleChangeDate} />
+                <input type="date" name="date" className='form-control' placeholder='Move in date'  onChange={handleChangeDate} />
               </div>
             </div>
 

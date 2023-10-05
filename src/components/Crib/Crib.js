@@ -1,5 +1,5 @@
 import React from 'react'
-import room from '../../assets/bacdbb_723fc3ba38f34640b08464a29a8990c9~mv2 1.svg'
+import room from '../../assets/bacdbb_723fc3ba38f34640b08464a29a8990c9_mv2-1.jpg'
 import { Badge } from 'react-bootstrap';
 import  locationIcon  from '../../assets/pin 2.svg';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';

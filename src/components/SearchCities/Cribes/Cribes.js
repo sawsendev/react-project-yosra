@@ -4,27 +4,34 @@ import AlertCribes from '../AlertCribes/AlertCribes';
 import Crib from '../../Crib/Crib';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import MapWithMarker from '../../MapWithMarker/MapWithMarker';
-import { useSearch } from '../Search/SearchContext';
-import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const Cribes = () => {
   const [cribsData, setCribsData] = useState([]);
+  const [searchResult, setSearchResult] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
-  const [hasMore,setHasMore]=useState(true); // Vous pouvez définir cette valeur en fonction de votre logique de pagination
+  const [hasMore, setHasMore] = useState(true);
   const staticCoordinates = [
     [43.70328975790311, 7.1704107912588055],
     [43.705, 7.175],
-    [43.706, 7.178], 
-    [43.701, 7,300], 
+    [43.706, 7.178],
+    [43.701, 7, 300],
     [43.704, 7.166],
-    
   ];
-  const [isFirstLoad,setIsFirstLoad]=useState(true)
-  const { searchResults, isUpdateResultsClicked } = useSearch();
+
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
   const API_URL = 'http://dev.niceroom.sofis-info.com/api/lots/list';
-  const navigate=useNavigate()
+
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+
+  const cityParam = searchParams.get('city');
+  const dateParam = searchParams.get('date');
+  const priceMinParam = searchParams.get('price_min');
+  const priceMaxParam = searchParams.get('price_max');
+  const sortByParam = searchParams.get('sort_by');
+  const searchParamsExist = cityParam || dateParam || priceMinParam || priceMaxParam || sortByParam;
 
   const fetchDataFromAPI = async (page) => {
     try {
@@ -55,19 +62,8 @@ const Cribes = () => {
         if (filteredNewCribs.length === 0) {
           setHasMore(false); // Plus de cribs à charger
         } else {
-          // Utilisez isUpdateResultsClicked pour décider quel ensemble de données afficher
-          if (isUpdateResultsClicked) {
-            if (searchResults.length > 0) {
-              // Affichez les résultats de la recherche
-              setCribsData((prevData) => [...prevData, ...filteredNewCribs]);
-            } else {
-              setHasMore(false); // Plus de cribs à charger car les résultats de recherche sont vides
-            }
-          } else {
-            // Affichez cribsData
-            setCribsData((prevData) => [...prevData, ...filteredNewCribs]);
-          }
-  
+          // Affichez cribsData
+          setCribsData((prevData) => [...prevData, ...filteredNewCribs]);
           setCurrentPage(page + 1);
         }
       }
@@ -75,18 +71,44 @@ const Cribes = () => {
       console.error('Erreur lors de la récupération des données :', error);
     }
   };
-  console.log('le resultat est',searchResults)
- 
+  
+
 
   useEffect(() => {
-    fetchDataFromAPI(currentPage);
-    setIsFirstLoad(false);
-  }, [currentPage]);
-  
-  const redirectToNoRoom = () => {
-    navigate('/noRoom');
-  };
-  console.log(isUpdateResultsClicked)
+    if (!searchParamsExist) {
+      fetchDataFromAPI(currentPage);
+    }
+  }, [currentPage, searchParamsExist]);
+
+  useEffect(() => {
+    if (searchParamsExist) {
+      const formData = {
+        city: cityParam,
+        date: dateParam,
+        price_min: priceMinParam,
+        price_max: priceMaxParam,
+        sort_by: sortByParam,
+      };
+
+      fetch('http://dev.niceroom.sofis-info.com/api/lots/search', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apiKey': API_KEY,
+        },
+        body: JSON.stringify(formData),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(formData);
+          setSearchResult(data.data.lots);
+          console.log(searchResult);
+        })
+        .catch((error) => {
+          console.error('Erreur lors de la requête POST :', error);
+        });
+    }
+  }, [searchParamsExist, cityParam, dateParam, priceMinParam, priceMaxParam, sortByParam]);
 
   return (
     <div className='Cribes-container container-fluid'>
@@ -95,35 +117,32 @@ const Cribes = () => {
       <div className='content-page'>
         <div className='row'>
           <div className='col-lg-7'>
-          <InfiniteScroll
-  dataLength={
-    isUpdateResultsClicked && searchResults
-      ? searchResults.length
-      : cribsData.length
-  }
-  next={() => fetchDataFromAPI(currentPage)}
-  hasMore={hasMore}
->
-{searchResults && searchResults.data && searchResults.data.lots && searchResults.data.lots.length > 0 ? (
-              <Crib cribs={searchResults.data.lots} />
-            ) : (
-              isFirstLoad ? redirectToNoRoom() : <Crib cribs={cribsData} />
-            )}
-
-
-</InfiniteScroll>
-
+            <InfiniteScroll
+              dataLength={searchParamsExist ? searchResult.length : cribsData.length}
+              next={() => fetchDataFromAPI(currentPage)}
+              hasMore={hasMore}
+            >
+              {searchParamsExist ? (
+                <Crib cribs={searchResult} />
+              ) : (
+                cribsData.length > 0 ? (
+                  <Crib cribs={cribsData} />
+                ) : (
+                  <p>No cribs available</p>
+                )
+              )}
+            </InfiniteScroll>
           </div>
           <div className='Maps col-lg-5'>
             <div className='maps-block'>
-              <MapWithMarker coordinates={staticCoordinates}/>
+              <MapWithMarker coordinates={staticCoordinates} />
             </div>
           </div>
         </div>
       </div>
-  
-      <AlertCribes className='alert'/>
+      <AlertCribes className='alert' />
     </div>
   );
-}  
+}
+
 export default Cribes;
