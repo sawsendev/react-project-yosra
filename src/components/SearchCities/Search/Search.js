@@ -1,44 +1,28 @@
 import React, { useState } from 'react';
 import './Search.css';
-import Select from 'react-select';
 import { useSearch } from './SearchContext';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
+import { HiChevronDown } from "react-icons/hi2";
+import { HiChevronUp } from "react-icons/hi2";
+import { HiXMark } from "react-icons/hi2";
+
 
 const Search = () => {
   const [selectedCountry, setselectedCountry] = useState("");
   const [priceRange, setPriceRange] = useState([1, 500]);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSliderVisible, setIsSliderVisible] = useState(false);
   const [isUpdateResultsClicked, setIsUpdateResultsClicked] = useState(false);
 
   const { setSearchResults } = useSearch();
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
 
-  const customStyles = {
-    control: (provided) => ({
-      ...provided,
-      backgroundColor: '#fff',
-      border: '1px solid #ccc',
-      cursor: 'pointer',
-      margin: '0',
-      padding: '0px',
-    }),
-    indicatorSeparator: (provided) => ({
-      ...provided,
-      display: 'none',
-    }),
-    dropdownIndicator: (provided) => ({
-      ...provided,
-      cursor: 'pointer',
-    }),
-    noOptionsMessage: (base) => ({
-      ...base,
-      display: 'none'
-    }),
-  };
-
   const handlePriceRangeChange = (newPriceRange) => {
     setPriceRange(newPriceRange);
+  };
+
+  const toggleSliderVisibility = () => {
+    setIsSliderVisible(!isSliderVisible);
   };
 
   const handleSubmit = async (e) => {
@@ -97,33 +81,39 @@ const Search = () => {
 
             <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
               <label htmlFor="price">Price range</label>
+              
               <div className='select-wrapper'>
                 <div className='select-container'>
-                  <Select
-                    styles={customStyles}
-                    onMenuOpen={() => setIsMenuOpen(true)}
-                    onMenuClose={() => setIsMenuOpen(false)}
-                    options={[]}
-                    onChange={() => {}}
-                    menuIsOpen={isMenuOpen}
-                    value={null} // Change this if you have a default value
-                    isSearchable={false}
-                    placeholder="Select a price range"
-                  />
-                </div>
-                <div className='slider-container container'>
-                  <div className='price'>
-                    <h5>Price per month</h5>
-                    <Slider
-                      min={1}
-                      max={500}
-                      value={priceRange}
-                      onChange={handlePriceRangeChange}
-                      range
-                    />
-                    <span>Min: {priceRange[0]}€ - Max: {priceRange[1]}€</span>
+                  <div className='custom-select' onClick={toggleSliderVisibility}>
+                    {isSliderVisible ? (
+                      <>
+                        <span>Price Range: {priceRange[0]}€ - {priceRange[1]}€</span>
+                        <HiChevronUp />
+                      </>
+                    ) : (
+                      <>
+                        <span>Select a price range</span>
+                        <HiChevronDown />
+                      </>
+                    )}
                   </div>
                 </div>
+                {isSliderVisible && (
+                  <div className='slider-container container'>
+                    <button className="close-price-slide" onClick={toggleSliderVisibility}>Clear All <HiXMark/></button>
+                    <div className='price'>
+                      <h5>Price per month</h5>
+                      <Slider
+                        min={1}
+                        max={500}
+                        value={priceRange}
+                        onChange={handlePriceRangeChange}
+                        range
+                      />
+                      <span className='price-range-input'><label>{priceRange[0]}€</label> <label>{priceRange[1]}€</label></span>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
             
