@@ -84,16 +84,56 @@
     height: 650px;
 }
 .maps-block {
-    position: absolute;
-    right: -40px;
+    position: relative;
+    right: 0;
     top: 0;
-    width: 41.66666667%;
+    width: calc(100% + 40px);
 }
 .crib-container {
-    width: 33.33%; /* Une largeur d'environ 33% pour chaque conteneur */
-    display: inline-block; /* Aligner horizontalement */
-    box-sizing: border-box; /* Inclure la bordure et le rembourrage dans la largeur */
-    padding: 10px; /* Ajustez le rembourrage selon vos préférences */
-    border: 1px solid #ccc; /* Ajoutez une bordure pour séparer les cribs */
-  }
-  
+    width: 33.33%;
+    display: inline-block; 
+    box-sizing: border-box;
+    padding: 10px; 
+    border: 1px solid #ccc;
+}
+.marker-label {
+    background: #000;
+    display: block;
+    width: 44px;
+    height: 45px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 24px;
+    text-align: center;
+    color: #fff;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+}
+.marker-label:before {
+    content: "";
+    position: absolute;
+    width: calc(100% + 12px);
+    height: calc(100% + 12px);
+    border: 2px solid #000;
+    left: -6px;
+    top: -6px;
+    border-radius: 50%;
+}
+.marker-label:after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    margin-left: -6px;
+    bottom: -13px;
+    width: 5px;
+    height: 5px;
+    border-style: solid;
+    border-width: 8px 7px 0px 7px;
+    border-color: #000 transparent transparent transparent;
+    z-index: 1;
+}

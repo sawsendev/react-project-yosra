@@ -5,19 +5,25 @@ import Crib from '../../Crib/Crib';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import MapWithMarker from '../../MapWithMarker/MapWithMarker';
 import { useSearch } from '../Search/SearchContext';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import L from 'leaflet';
 
 const Cribes = () => {
+  // Define customIcon here
+  const customIcon = new L.divIcon({
+    className: 'custom-icon',
+    html: '<div class="marker-label">400$</div>',
+  });
   const [cribsData, setCribsData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
-  const [hasMore,setHasMore]=useState(true); // Vous pouvez définir cette valeur en fonction de votre logique de pagination
+  const [hasMore, setHasMore] = useState(true);
   const staticCoordinates = [
     [43.70328975790311, 7.1704107912588055],
     [43.705, 7.175],
-    [43.706, 7.178], 
-    [43.701, 7,300], 
+    [43.706, 7.178],
+    [43.701, 7.300],
     [43.704, 7.166],
-    
   ];
   const { searchResults, isUpdateResultsClicked } = useSearch();
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
@@ -28,43 +34,38 @@ const Cribes = () => {
       const headers = {
         'apiKey': `${API_KEY}`,
       };
-  
+
       const response = await fetch(`${API_URL}?page=${page}&limit=${itemsPerPage}`, {
         method: 'GET',
         mode: 'cors',
         headers
       });
-  
+
       const data = await response.json();
-      console.log(data)
-  
+      console.log(data);
+
       if (data && data.data && data.data.lots) {
-        // Utilisez currentPage pour déterminer la position de départ des éléments à afficher
         const startIndex = (currentPage - 1) * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
         const newCribs = data.data.lots.slice(startIndex, endIndex);
-  
-        // Vérifiez si les nouveaux cribs ne sont pas déjà présents dans cribsData
+
         const filteredNewCribs = newCribs.filter((newCrib) => {
           return !cribsData.some((existingCrib) => existingCrib.id === newCrib.id);
         });
-  
+
         if (filteredNewCribs.length === 0) {
-          setHasMore(false); // Plus de cribs à charger
+          setHasMore(false);
         } else {
-          // Utilisez isUpdateResultsClicked pour décider quel ensemble de données afficher
           if (isUpdateResultsClicked) {
             if (searchResults.length > 0) {
-              // Affichez les résultats de la recherche
               setCribsData((prevData) => [...prevData, ...filteredNewCribs]);
             } else {
-              setHasMore(false); // Plus de cribs à charger car les résultats de recherche sont vides
+              setHasMore(false);
             }
           } else {
-            // Affichez cribsData
             setCribsData((prevData) => [...prevData, ...filteredNewCribs]);
           }
-  
+
           setCurrentPage(page + 1);
         }
       }
@@ -72,8 +73,6 @@ const Cribes = () => {
       console.error('Erreur lors de la récupération des données :', error);
     }
   };
-  console.log('le resultat est',searchResults)
- 
 
   useEffect(() => {
     fetchDataFromAPI(currentPage);
@@ -87,38 +86,50 @@ const Cribes = () => {
         <div className='row'>
           <div className='col-lg-7'>
           <InfiniteScroll
-  dataLength={
-    isUpdateResultsClicked && searchResults
-      ? searchResults.length
-      : cribsData.length
-  }
-  next={() => fetchDataFromAPI(currentPage)}
-  hasMore={hasMore}
->
- <script>console.log(searchResults)</script>
-{searchResults && searchResults.length > 0 ? (
-  <Crib cribs={searchResults} />
-) : (
-  (searchResults.length === 0 ? (
-    <Crib cribs={cribsData} />
-  ) : (
-    <p>Loading...</p>
-  ))
-)}
-
-</InfiniteScroll>
-
+            dataLength={
+              isUpdateResultsClicked && searchResults
+                ? searchResults.length
+                : cribsData.length
+            }
+            next={() => fetchDataFromAPI(currentPage)}
+            hasMore={hasMore}
+          >
+          <script>console.log(searchResults)</script>
+          {searchResults && searchResults.length > 0 ? (
+            <Crib cribs={searchResults} />
+          ) : (
+            (searchResults.length === 0 ? (
+              <Crib cribs={cribsData} />
+            ) : (
+              <p>Loading...</p>
+            ))
+          )}
+          </InfiniteScroll>
           </div>
           <div className='Maps col-lg-5'>
             <div className='maps-block'>
-              <MapWithMarker coordinates={staticCoordinates}/>
+              <MapContainer
+                center={[43.70328975790311, 7.1704107912588055]}
+                zoom={13}
+                style={{ height: '500px', width: '100%' }}
+              >
+                <TileLayer
+                  url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                />
+                {staticCoordinates.map((coord, index) => (
+                  <Marker key={index} position={coord} icon={customIcon}>
+                    <Popup>400$</Popup>
+                  </Marker>
+                ))}
+              </MapContainer>
             </div>
           </div>
         </div>
       </div>
-  
-      <AlertCribes className='alert'/>
+      <AlertCribes className='alert' />
     </div>
   );
-}  
+};
+
 export default Cribes;
