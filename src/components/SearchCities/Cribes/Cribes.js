@@ -5,6 +5,7 @@ import Crib from '../../Crib/Crib';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import MapWithMarker from '../../MapWithMarker/MapWithMarker';
 import { useSearch } from '../Search/SearchContext';
+import { useNavigate } from 'react-router-dom';
 
 const Cribes = () => {
   const [cribsData, setCribsData] = useState([]);
@@ -19,9 +20,11 @@ const Cribes = () => {
     [43.704, 7.166],
     
   ];
+  const [isFirstLoad,setIsFirstLoad]=useState(true)
   const { searchResults, isUpdateResultsClicked } = useSearch();
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
   const API_URL = 'http://dev.niceroom.sofis-info.com/api/lots/list';
+  const navigate=useNavigate()
 
   const fetchDataFromAPI = async (page) => {
     try {
@@ -77,7 +80,13 @@ const Cribes = () => {
 
   useEffect(() => {
     fetchDataFromAPI(currentPage);
+    setIsFirstLoad(false);
   }, [currentPage]);
+  
+  const redirectToNoRoom = () => {
+    navigate('/noRoom');
+  };
+  console.log(isUpdateResultsClicked)
 
   return (
     <div className='Cribes-container container-fluid'>
@@ -95,16 +104,12 @@ const Cribes = () => {
   next={() => fetchDataFromAPI(currentPage)}
   hasMore={hasMore}
 >
- <script>console.log(searchResults)</script>
-{searchResults && searchResults.length > 0 ? (
-  <Crib cribs={searchResults} />
-) : (
-  (searchResults.length === 0 ? (
-    <Crib cribs={cribsData} />
-  ) : (
-    <p>Loading...</p>
-  ))
-)}
+{searchResults && searchResults.data && searchResults.data.lots && searchResults.data.lots.length > 0 ? (
+              <Crib cribs={searchResults.data.lots} />
+            ) : (
+              isFirstLoad ? redirectToNoRoom() : <Crib cribs={cribsData} />
+            )}
+
 
 </InfiniteScroll>
 

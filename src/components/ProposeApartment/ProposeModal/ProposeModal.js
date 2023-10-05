@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import "./ProposeModal.css"
 import logo from "../../../assets/logo.svg"
 import upload from "../../../assets/room/icons/upload.svg"

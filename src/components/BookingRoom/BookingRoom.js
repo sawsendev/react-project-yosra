@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import image from '../../assets/animation_500_lj4c3zmw 1.svg'
 
-import StepsToBook from "../HomePage/StepsToBook/StepsToBook"
+
 import "./BookingRoom.scss"
 //import {UploadArray} from "../../Data/Data"
 
@@ -11,7 +11,7 @@ import payslip from "../../assets/g2115.svg"
 import certificate from "../../assets/certificate.svg"
 import groupId from "../../assets/Groupe 1178.svg"
 import inVoice from "../../assets/invoice.svg"
-import thinking from "../../assets/thinking.svg"
+
 import file from "../../assets/file.svg"
 
 import PhoneInput from 'react-phone-input-2';
