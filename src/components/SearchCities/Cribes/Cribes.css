@@ -96,4 +96,45 @@
     padding: 10px; /* Ajustez le rembourrage selon vos préférences */
     border: 1px solid #ccc; /* Ajoutez une bordure pour séparer les cribs */
   }
-  
+  .No-rooms-container{
+    padding: 80px 0;
+}
+
+.No-rooms-content{
+    justify-content: space-between;
+    margin-left: 0px;
+}
+
+.left {
+    text-align: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.left h3{
+    font-size: 28px;
+    font-weight: 400;
+}
+
+.left span {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.ImageNoRooms{
+    width: 10%;
+    margin: 0 auto;
+}
+
+.left button {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 9px;
+    background-color: #35CE92;
+    outline: none;
+    border: none;
+    width: 30%;
+    border-radius: 8px;
+    color: white;
+    margin: 0 auto;
+}
