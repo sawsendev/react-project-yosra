@@ -19,7 +19,7 @@ import Bologna from "../assets/Rectangle 49.svg";
 import f1 from "../assets/voyageurs-invites-pleins-smileys-2.jpg";
 import f2 from "../assets/voyageurs-invites-pleins-smileys-1.jpg";
 import f3 from "../assets/voyageurs-invites-pleins-smileys.jpg";
-import room_city from "../assets/bacdbb_723fc3ba38f34640b08464a29a8990c9~mv2 1.svg";
+import room_city from "../assets/bacdbb_723fc3ba38f34640b08464a29a8990c9_mv2-1.jpg"
 import upload from "../assets/image-gallery.svg"
 import payslip from "../assets/g2115.svg"
 import certificate from "../assets/certificate.svg"
