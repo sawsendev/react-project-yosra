@@ -1,4 +1,3 @@
-import React, { useRef, useState } from 'react';
 import "./RoomModalMedia.css"
 import { IoCloseOutline } from "react-icons/io5";
 import iconimgs from '../../../assets/room/icons/imgs.svg'
@@ -7,15 +6,11 @@ import iconvisit from '../../../assets/room/icons/visits.svg'
 import iconimgshover from '../../../assets/room/icons/imgs-hover.svg'
 import iconvideoshover from '../../../assets/room/icons/videos-hover.svg'
 import iconvisithover from '../../../assets/room/icons/visits-hover.svg'
-import room1 from '../../../assets/room/room-1.jpg'
-import room21 from '../../../assets/room/room-21.jpg'
-import room22 from '../../../assets/room/room-22.jpg'
-import room3 from '../../../assets/room/room-3.jpg';
 import Modal from 'react-modal';
 
 Modal.setAppElement('#root');
 
-const RoomModalMedia = ({ isOpen, closeModal, activeTab, setActiveTab }) => {
+const RoomModalMedia = ({ isOpen, closeModal, activeTab, setActiveTab , lotData }) => {
 
     return (
       <>
@@ -60,26 +55,42 @@ const RoomModalMedia = ({ isOpen, closeModal, activeTab, setActiveTab }) => {
                 <div className='modal-tabs'>
 
                     <div className="tab-content">
-                        {activeTab === 'tab1' && (
-                            <div className='tab-panel'>
-                                <ul className='gallery-imgs row m-0'>
-                                    <li className='itm-img col-md-12 p-0'><img src={room1} alt='Room' className='img-fluid'/></li>
-                                    <li className='itm-img col-md-6 p-0'><img src={room21} alt='Room' className='img-fluid'/></li>
-                                    <li className='itm-img col-md-6 p-0'><img src={room22} alt='Room' className='img-fluid'/></li>
-                                    <li className='itm-img col-md-12 p-0'><img src={room3} alt='Room' className='img-fluid'/></li>
-                                </ul>
-                            </div>
-                        )}
-                        {activeTab === 'tab2' && (
-                            <div className='tab-panel'>
-                                <ul className='gallery-videos row m-0'>
-                                    <li className='itm-video col-md-12 p-0'><iframe src="https://www.youtube.com/embed/6stlCkUDG_s?si=GWF5FnS0cExHwJNT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></li>
-                                    <li className='itm-video col-md-6 p-0'><iframe src="https://www.youtube.com/embed/6stlCkUDG_s?si=GWF5FnS0cExHwJNT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></li>
-                                    <li className='itm-video col-md-6 p-0'><iframe src="https://www.youtube.com/embed/6stlCkUDG_s?si=GWF5FnS0cExHwJNT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></li>
-                                    <li className='itm-video col-md-12 p-0'><iframe src="https://www.youtube.com/embed/6stlCkUDG_s?si=GWF5FnS0cExHwJNT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></li>
-                                </ul>
-                            </div>
-                        )}
+                    {activeTab === 'tab1' && (
+  <div className='tab-panel'>
+    <ul className='gallery-imgs row m-0'>
+      {lotData && lotData.media && lotData.media
+        .filter((media) => media.mime_type.startsWith('image'))
+        .map((image, index) => (
+          <li key={index} className='itm-img col-md-12 p-0'>
+            <img src={image.original_url} alt={`Room ${index}`} className='img-fluid' />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+)}
+
+{activeTab === 'tab2' && (
+  <div className='tab-panel'>
+    <ul className='gallery-videos row m-0'>
+      {lotData && lotData.media && lotData.media
+        .filter((media) => media.mime_type.startsWith('video'))
+        .map((video, index) => (
+          <li key={index} className='itm-video col-md-12 p-0'>
+            <video
+              src={video.original_url}
+              title={`Video ${index}`}
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></video>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+)}
+
                         {activeTab === 'tab3' && (
                             <div className='tab-panel'>
                                 <ul className='gallery-videos row m-0'>

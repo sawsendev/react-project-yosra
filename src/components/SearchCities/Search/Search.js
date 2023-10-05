@@ -14,8 +14,11 @@ const Search = () => {
   const [isSliderVisible, setIsSliderVisible] = useState(false);
   const [isUpdateResultsClicked, setIsUpdateResultsClicked] = useState(false);
 
-  const { setSearchResults } = useSearch();
-  const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
+  const [date, setDate] = useState("");
+  const [sortBy, setSortBy] = useState(""); 
+
+
+  const navigate=useNavigate()
 
   const handlePriceRangeChange = (newPriceRange) => {
     setPriceRange(newPriceRange);
@@ -75,7 +78,7 @@ const Search = () => {
             <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
               <label htmlFor="cars">Move in date</label>
               <div className='input-date'>
-                <input type="date" name="date" className='form-control' required placeholder='Move in date' />
+                <input type="date" name="date" className='form-control' placeholder='Move in date'  onChange={handleChangeDate} />
               </div>
             </div>
 
@@ -120,10 +123,10 @@ const Search = () => {
             <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
               <label htmlFor="price">Sort by</label>
               <div className='input-select'>
-                <select name="price" id="countries-id" className='form-control'>
+                <select name="price" id="countries-id" className='form-control' onChange={handleChangeSortBy}>
                   <option value="" disabled>Sorted by</option>
-                  <option value="descending">Descending price</option>
-                  <option value="ascending">Ascending price</option>
+                  <option value="desc">Descending price</option>
+                  <option value="asc">Ascending price</option>
                 </select>
               </div>
             </div>

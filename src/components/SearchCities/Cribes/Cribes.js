@@ -15,6 +15,7 @@ const Cribes = () => {
     html: '<div class="marker-label">400$</div>',
   });
   const [cribsData, setCribsData] = useState([]);
+  const [searchResult, setSearchResult] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
   const [hasMore, setHasMore] = useState(true);
@@ -25,9 +26,19 @@ const Cribes = () => {
     [43.701, 7.300],
     [43.704, 7.166],
   ];
-  const { searchResults, isUpdateResultsClicked } = useSearch();
+
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
   const API_URL = 'http://dev.niceroom.sofis-info.com/api/lots/list';
+
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+
+  const cityParam = searchParams.get('city');
+  const dateParam = searchParams.get('date');
+  const priceMinParam = searchParams.get('price_min');
+  const priceMaxParam = searchParams.get('price_max');
+  const sortByParam = searchParams.get('sort_by');
+  const searchParamsExist = cityParam || dateParam || priceMinParam || priceMaxParam || sortByParam;
 
   const fetchDataFromAPI = async (page) => {
     try {
@@ -75,8 +86,40 @@ const Cribes = () => {
   };
 
   useEffect(() => {
-    fetchDataFromAPI(currentPage);
-  }, [currentPage]);
+    if (!searchParamsExist) {
+      fetchDataFromAPI(currentPage);
+    }
+  }, [currentPage, searchParamsExist]);
+
+  useEffect(() => {
+    if (searchParamsExist) {
+      const formData = {
+        city: cityParam,
+        date: dateParam,
+        price_min: priceMinParam,
+        price_max: priceMaxParam,
+        sort_by: sortByParam,
+      };
+
+      fetch('http://dev.niceroom.sofis-info.com/api/lots/search', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apiKey': API_KEY,
+        },
+        body: JSON.stringify(formData),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(formData);
+          setSearchResult(data.data.lots);
+          console.log(searchResult);
+        })
+        .catch((error) => {
+          console.error('Erreur lors de la requête POST :', error);
+        });
+    }
+  }, [searchParamsExist, cityParam, dateParam, priceMinParam, priceMaxParam, sortByParam]);
 
   return (
     <div className='Cribes-container container-fluid'>
