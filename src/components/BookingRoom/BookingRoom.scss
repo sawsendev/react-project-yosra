@@ -52,20 +52,21 @@ input[type="date"]::-webkit-calendar-picker-indicator {
  position: relative;
 }
 .form-date:after {
+  content: "";
  position: absolute;
- content: "";
  top: 9px;
  right: 9px;
  width: 25px;
  height: 22px;
- background-image: url("../../assets//calendar.svg");
+ background-image: url("../../assets/calendar.svg");
+ background-color: #fff;
  background-repeat: no-repeat;
  background-position: center;
  background-size: 25px;
  z-index: 9;
 }
 .form-date .input-date {
- padding-right: 42px; 
+//  padding-right: 42px; 
 }
 .react-tel-input .flag-dropdown {
  background-color: #fff;
