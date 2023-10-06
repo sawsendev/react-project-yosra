@@ -46,7 +46,7 @@ const BookingRoom = () => {
         .then(data => {
         
             setLotData(data.data.lot);
-            console.log(data.data.lot)        
+            console.log(data.data.lot);      
         })
         .catch(error => {
           console.error('Erreur lors de la récupération des données :', error);

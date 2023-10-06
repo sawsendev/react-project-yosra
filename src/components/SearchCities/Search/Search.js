@@ -16,6 +16,7 @@ const Search = () => {
   const [date, setDate] = useState("");
   const [sortBy, setSortBy] = useState(""); 
   const location = useLocation();
+  const [isSliderOpen,setIsSliderOpen]=useState(false)
  
   useEffect(() => {
     // Parsez les paramètres de l'URL ici
@@ -31,7 +32,7 @@ const Search = () => {
     setDate(dateParam || "");
     setSortBy(sortByParam || "");
 
-    // Mise à jour de l'état priceRange si priceMinParam et priceMaxParam existent
+ // Mise à jour de l'état priceRange si priceMinParam et priceMaxParam existent
     if (priceMinParam && priceMaxParam) {
       setPriceRange([parseInt(priceMinParam), parseInt(priceMaxParam)]);
     }
@@ -126,29 +127,31 @@ const Search = () => {
                 <div className='select-container'>
                   <Select
                     styles={customStyles}
-                    onMenuOpen={() => setIsMenuOpen(true)}
-                    onMenuClose={() => setIsMenuOpen(false)}
+                    onMenuOpen={() => {setIsMenuOpen(true)
+                     setIsSliderOpen(true)}}
+                    onMenuClose={() =>{setIsMenuOpen(false)
+                    setIsSliderOpen(false)}}
                     options={[]}
                     onChange={() => {}}
                     menuIsOpen={isMenuOpen}
                     value={selectValue}
                     isSearchable={false}
-                    placeholder="Select a price range"
-                  />
+                    placeholder="Select a price range" />
                 </div>
+                 { isSliderOpen===true &&  
                   <div className='slider-container container'>
                     <div className='price'>
                       <h5>Price per month</h5>
                       <Slider
                         min={1}
-                        max={500}
+                        max={1000}
                         value={priceRange}
                         onChange={handlePriceRangeChange}
                         range
                       />
                       <span className='price-range-input'><label>{priceRange[0]}€</label> <label>{priceRange[1]}€</label></span>
                     </div>
-                  </div>
+                  </div>}
               </div>
 
 

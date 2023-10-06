@@ -280,7 +280,7 @@ const Room = () => {
                 <div className='widget mb-3'>
                   <p className='head-widget'><img src={check} alt="Available"/>Available now</p>
                   <hr/>
-                  <p className='text-center price'>650€/<small> month</small></p>
+                {(lotData.loyer_hc && <p className='text-center price'>{lotData.loyer_hc}€/<small> month</small></p>)}
                   <div className='text-center assistance'>CAF assistance <PiInfo className='info'/> <span className='green'>( up to -258€ )</span></div>
                   <p className='h4 status'>Rent is all inclusive</p>
                   {lotData.water !== 0 &&(<p className='status'><img src={water} alt="Water"/> Water</p>)}
