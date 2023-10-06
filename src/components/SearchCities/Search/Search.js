@@ -109,6 +109,8 @@ const Search = () => {
                   <option value="Paris">Paris</option>
                   <option value="Canada">Canada</option>
                   <option value="Tunisia">Tunisia</option>
+                  <option value="Florence">Florence</option>
+                  <option value="Bologna">Bologna</option>
                 </select>
               </div>
             </div>

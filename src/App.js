@@ -8,7 +8,6 @@ import SearchCities from './components/SearchCities/SearchCities';
 import Cms from './components/CMS/Cms';
 import ErrorPage from './components/404/ErrorPage';
 import Faqspage from './components/Faqspage/Faqspage';
-import NoRoom from './components/SearchCities/NoRoom/NoRoom';
 import Room from './components/Room/Room';
 import Contact from './components/Contact/Contact';
 import BookingRoom from './components/BookingRoom/BookingRoom';

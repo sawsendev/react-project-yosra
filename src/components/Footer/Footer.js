@@ -3,9 +3,21 @@ import "./Footer.css"
 import bell from "../../assets/bell 1.svg"
 import arrow from '../../assets/arrow.svg'
 
+
 const Footer = () => {
   const [showApartments, setShowApartments] = useState(false);
   const [showUsefulLinks, setShowUsefulLinks] = useState(false);
+  const searchParams = new URLSearchParams();
+  searchParams.append("city", "Nice");
+  
+  const searchParamsParis = new URLSearchParams();
+  searchParamsParis.append("city", "Paris");
+
+  const searchParamsFlorence = new URLSearchParams();
+  searchParamsFlorence.append("city", "Florence");
+
+  const searchParamsBologna = new URLSearchParams();
+  searchParamsBologna.append("city", "Bologna");
 
   const toggleApartments = () => {
     setShowApartments(!showApartments);
@@ -25,12 +37,12 @@ const Footer = () => {
         <p className='h3'>Our apartments</p>
           <div className='d-flex justify-content-between align-items-center gap-3'>
               <div className='First'>
-                  <p><a href="#">Our apartments in Nice</a></p>
-                  <p><a href="#">Our apartments in Paris</a></p>
+                  <p><a href={`/search-cities?${searchParams.toString()}`}>Our apartments in Nice</a></p>
+                  <p><a href={`/search-cities?${searchParamsParis.toString()}`}>Our apartments in Paris</a></p>
               </div>
               <div className='Second'>
-                  <p><a href="#">Our apartments in Florence</a></p>
-                  <p><a href="#">Our apartments in Bologna</a></p>
+                  <p><a href={`/search-cities?${searchParamsFlorence.toString()}`}>Our apartments in Florence</a></p>
+                  <p><a href={`/search-cities?${searchParamsBologna.toString()}`}>Our apartments in Bologna</a></p>
               </div>
           </div>
         </div>
@@ -38,12 +50,12 @@ const Footer = () => {
           <p className='h3'>Useful links</p>
           <div className='d-flex justify-content-between align-items-center gap-3'>
             <div className='First'>
-              <p><a href="#">FAQ</a></p>
-              <p><a href="#">Contact us</a></p>
+            <p><a href={'/faq'}>FAQ</a></p>
+              <p><a href={'/contact'}>Contact us</a></p>
             </div>
             <div className='Second'>
-                <p><a href="#">Terms and conditions</a></p>
-                <p><a href="#">Cookies alert</a></p>
+                <p><a href="/cms/page/cgu">Terms and conditions</a></p>
+                <p>Cookies alert</p>
             </div>
           </div>
         </div>
@@ -70,12 +82,12 @@ const Footer = () => {
               {/* Apartments content */}
             <div className='Footer-content'>
               <div className='First'>
-                    <p>Our apartments in Nice </p>
-                    <p>Our apartments in Florence</p>
+              <p><a href={`/search-cities?${searchParams.toString()}`}>Our apartments in Nice</a></p>
+              <p><a href={`/search-cities?${searchParamsParis.toString()}`}>Our apartments in Paris</a></p>
                 </div>
                 <div className='Second'>
-                    <p>Our apartments in Paris</p>
-                    <p>Our apartments in Bologna</p>
+                <p><a href={`/search-cities?${searchParamsFlorence.toString()}`}>Our apartments in Florence</a></p>
+                <p><a href={`/search-cities?${searchParamsBologna.toString()}`}>Our apartments in Bologna</a></p>
                 </div>
               </div>
             </div>
@@ -99,11 +111,12 @@ const Footer = () => {
               <div className='d-flex justify-content-start align-items-center gap-3'>
 
                 <div className='First'>
-                  <p>FAQ</p>
-                  <p>Terms and conditions</p>
+                <p><a href={'/faq'}>FAQ</a></p>
+                <p><a href={'/contact'}>Contact us</a></p>
                 </div>
                 <div className='Second'>
-                    <p>Contact us</p>
+               
+                <p><a href="/cms/page/cgu">Terms and conditions</a></p>
                     <p>Cookies alert</p>
                 </div>
                </div>
