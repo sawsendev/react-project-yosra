@@ -6,7 +6,15 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import MapWithMarker from '../../MapWithMarker/MapWithMarker';
 import { useLocation } from 'react-router-dom';
 
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import L from 'leaflet';
+
 const Cribes = () => {
+  // Define customIcon here
+  const customIcon = new L.divIcon({
+    className: 'custom-icon',
+    html: '<div class="marker-label">400$</div>',
+  });
   const [cribsData, setCribsData] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -19,6 +27,7 @@ const Cribes = () => {
     [43.701, 7, 300],
     [43.704, 7.166],
   ];
+
 
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
   const API_URL = 'http://dev.niceroom.sofis-info.com/api/lots/list';
@@ -71,7 +80,13 @@ const Cribes = () => {
       console.error('Erreur lors de la récupération des données :', error);
     }
   };
-  
+
+
+  useEffect(() => {
+    if (!searchParamsExist) {
+      fetchDataFromAPI(currentPage);
+    }
+  }, [currentPage, searchParamsExist]);
 
 
   useEffect(() => {
@@ -110,6 +125,7 @@ const Cribes = () => {
     }
   }, [searchParamsExist, cityParam, dateParam, priceMinParam, priceMaxParam, sortByParam]);
 
+
   return (
     <div className='Cribes-container container-fluid'>
       <h2>Our cribs in Nice</h2>
@@ -133,9 +149,24 @@ const Cribes = () => {
               )}
             </InfiniteScroll>
           </div>
+
           <div className='Maps col-lg-5'>
             <div className='maps-block'>
-              <MapWithMarker coordinates={staticCoordinates} />
+              <MapContainer
+                center={[43.70328975790311, 7.1704107912588055]}
+                zoom={13}
+                style={{ height: '500px', width: '100%' }}
+              >
+                <TileLayer
+                  url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                />
+                {staticCoordinates.map((coord, index) => (
+                  <Marker key={index} position={coord} icon={customIcon}>
+                    <Popup>400$</Popup>
+                  </Marker>
+                ))}
+              </MapContainer>
             </div>
           </div>
         </div>
@@ -143,6 +174,6 @@ const Cribes = () => {
       <AlertCribes className='alert' />
     </div>
   );
-}
+};
 
 export default Cribes;
