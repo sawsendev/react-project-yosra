@@ -4,7 +4,8 @@ import AlertCribes from '../AlertCribes/AlertCribes';
 import Crib from '../../Crib/Crib';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import MapWithMarker from '../../MapWithMarker/MapWithMarker';
-import { useSearch } from '../Search/SearchContext';
+import { useLocation } from 'react-router-dom';
+
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 
@@ -23,9 +24,10 @@ const Cribes = () => {
     [43.70328975790311, 7.1704107912588055],
     [43.705, 7.175],
     [43.706, 7.178],
-    [43.701, 7.300],
+    [43.701, 7, 300],
     [43.704, 7.166],
   ];
+
 
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
   const API_URL = 'http://dev.niceroom.sofis-info.com/api/lots/list';
@@ -45,38 +47,32 @@ const Cribes = () => {
       const headers = {
         'apiKey': `${API_KEY}`,
       };
-
+  
       const response = await fetch(`${API_URL}?page=${page}&limit=${itemsPerPage}`, {
         method: 'GET',
         mode: 'cors',
         headers
       });
-
+  
       const data = await response.json();
-      console.log(data);
-
+      console.log(data)
+  
       if (data && data.data && data.data.lots) {
+        // Utilisez currentPage pour déterminer la position de départ des éléments à afficher
         const startIndex = (currentPage - 1) * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
         const newCribs = data.data.lots.slice(startIndex, endIndex);
-
+  
+        // Vérifiez si les nouveaux cribs ne sont pas déjà présents dans cribsData
         const filteredNewCribs = newCribs.filter((newCrib) => {
           return !cribsData.some((existingCrib) => existingCrib.id === newCrib.id);
         });
-
+  
         if (filteredNewCribs.length === 0) {
-          setHasMore(false);
+          setHasMore(false); // Plus de cribs à charger
         } else {
-          if (isUpdateResultsClicked) {
-            if (searchResults.length > 0) {
-              setCribsData((prevData) => [...prevData, ...filteredNewCribs]);
-            } else {
-              setHasMore(false);
-            }
-          } else {
-            setCribsData((prevData) => [...prevData, ...filteredNewCribs]);
-          }
-
+          // Affichez cribsData
+          setCribsData((prevData) => [...prevData, ...filteredNewCribs]);
           setCurrentPage(page + 1);
         }
       }
@@ -84,6 +80,14 @@ const Cribes = () => {
       console.error('Erreur lors de la récupération des données :', error);
     }
   };
+
+
+  useEffect(() => {
+    if (!searchParamsExist) {
+      fetchDataFromAPI(currentPage);
+    }
+  }, [currentPage, searchParamsExist]);
+
 
   useEffect(() => {
     if (!searchParamsExist) {
@@ -121,6 +125,7 @@ const Cribes = () => {
     }
   }, [searchParamsExist, cityParam, dateParam, priceMinParam, priceMaxParam, sortByParam]);
 
+
   return (
     <div className='Cribes-container container-fluid'>
       <h2>Our cribs in Nice</h2>
@@ -128,27 +133,23 @@ const Cribes = () => {
       <div className='content-page'>
         <div className='row'>
           <div className='col-lg-7'>
-          <InfiniteScroll
-            dataLength={
-              isUpdateResultsClicked && searchResults
-                ? searchResults.length
-                : cribsData.length
-            }
-            next={() => fetchDataFromAPI(currentPage)}
-            hasMore={hasMore}
-          >
-          <script>console.log(searchResults)</script>
-          {searchResults && searchResults.length > 0 ? (
-            <Crib cribs={searchResults} />
-          ) : (
-            (searchResults.length === 0 ? (
-              <Crib cribs={cribsData} />
-            ) : (
-              <p>Loading...</p>
-            ))
-          )}
-          </InfiniteScroll>
+            <InfiniteScroll
+              dataLength={searchParamsExist ? searchResult.length : cribsData.length}
+              next={() => fetchDataFromAPI(currentPage)}
+              hasMore={hasMore}
+            >
+              {searchParamsExist ? (
+                <Crib cribs={searchResult} />
+              ) : (
+                cribsData.length > 0 ? (
+                  <Crib cribs={cribsData} />
+                ) : (
+                  <p>No cribs available</p>
+                )
+              )}
+            </InfiniteScroll>
           </div>
+
           <div className='Maps col-lg-5'>
             <div className='maps-block'>
               <MapContainer

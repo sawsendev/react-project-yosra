@@ -1,60 +1,76 @@
 import React, { useState } from 'react';
-import './Search.css';
-import { useSearch } from './SearchContext';
+import "./Search.css";
+import Select from 'react-select';
+
+import { useNavigate } from 'react-router-dom';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import { HiChevronDown } from "react-icons/hi2";
-import { HiChevronUp } from "react-icons/hi2";
-import { HiXMark } from "react-icons/hi2";
+
 
 
 const Search = () => {
   const [selectedCountry, setselectedCountry] = useState("");
   const [priceRange, setPriceRange] = useState([1, 500]);
-  const [isSliderVisible, setIsSliderVisible] = useState(false);
-  const [isUpdateResultsClicked, setIsUpdateResultsClicked] = useState(false);
-
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [date, setDate] = useState("");
   const [sortBy, setSortBy] = useState(""); 
 
-
   const navigate=useNavigate()
 
-  const handlePriceRangeChange = (newPriceRange) => {
-    setPriceRange(newPriceRange);
+  const customStyles = {
+    control: (provided) => ({
+      ...provided,
+      backgroundColor: '#fff',
+      border: '1px solid #ccc',
+      cursor: 'pointer',
+      margin: '0',
+      padding: '0px',
+    }),
+    indicatorSeparator: (provided) => ({
+      ...provided,
+      display: 'none',
+    }),
+    dropdownIndicator: (provided) => ({
+      ...provided,
+      cursor: 'pointer',
+    }),
+    noOptionsMessage: (base) => ({
+      ...base,
+      display: 'none'
+    }),
   };
 
-  const toggleSliderVisibility = () => {
-    setIsSliderVisible(!isSliderVisible);
+
+  const handlePriceRangeChange = (newValue) => {
+    setPriceRange(newValue);
   };
 
-  const handleSubmit = async (e) => {
+  const formatPriceRangeLabel = (priceRange) => {
+    return `${priceRange[0]}€ - ${priceRange[1]}€`;
+  };
+
+  const selectValue = { label: formatPriceRangeLabel(priceRange), value: `${priceRange[0]}-${priceRange[1]}` };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      // Extract the values from the form fields
-      const formData = {
-        city: selectedCountry,
-        minPrice: priceRange[0],
-        maxPrice: priceRange[1],
-      };
-
-      const response = await fetch('http://dev.niceroom.sofis-info.com/api/lots/search', {
-        method: 'POST',
-        headers: {
-          'apiKey': `${API_KEY}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-      const searchResults = await response.json();
-      setSearchResults(searchResults);
-      setIsUpdateResultsClicked(true);
-      console.log('successful');
-      console.log(searchResults);
-    } catch (error) {
-      console.error('Error during search:', error);
-    }
+    const searchParams = new URLSearchParams();
+    searchParams.append('city', selectedCountry);
+    searchParams.append('date', date);
+    searchParams.append('sortBy', sortBy);
+    searchParams.append('priceMin', priceRange[0]); // Ajout de priceMin
+    searchParams.append('priceMax', priceRange[1]); // Ajout de priceMax
+  
+    const url = `/searchcities?${searchParams.toString()}`;
+    navigate(url);
   };
+  
+  const handleChangeDate = (e) => {
+    setDate(e.target.value);
+  };
+  const handleChangeSortBy = (e) => {
+    setSortBy(e.target.value);
+  };
+
 
   return (
     <div className='Search-container'>
@@ -78,7 +94,7 @@ const Search = () => {
             <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
               <label htmlFor="cars">Move in date</label>
               <div className='input-date'>
-                <input type="date" name="date" className='form-control' placeholder='Move in date'  onChange={handleChangeDate} />
+                <input type="date" name="date" className='form-control' required placeholder='Move in date' />
               </div>
             </div>
 
@@ -87,23 +103,19 @@ const Search = () => {
               
               <div className='select-wrapper'>
                 <div className='select-container'>
-                  <div className='custom-select' onClick={toggleSliderVisibility}>
-                    {isSliderVisible ? (
-                      <>
-                        <span>Price Range: {priceRange[0]}€ - {priceRange[1]}€</span>
-                        <HiChevronUp />
-                      </>
-                    ) : (
-                      <>
-                        <span>Select a price range</span>
-                        <HiChevronDown />
-                      </>
-                    )}
-                  </div>
+                  <Select
+                    styles={customStyles}
+                    onMenuOpen={() => setIsMenuOpen(true)}
+                    onMenuClose={() => setIsMenuOpen(false)}
+                    options={[]}
+                    onChange={() => {}}
+                    menuIsOpen={isMenuOpen}
+                    value={selectValue}
+                    isSearchable={false}
+                    placeholder="Select a price range"
+                  />
                 </div>
-                {isSliderVisible && (
                   <div className='slider-container container'>
-                    <button className="close-price-slide" onClick={toggleSliderVisibility}>Clear All <HiXMark/></button>
                     <div className='price'>
                       <h5>Price per month</h5>
                       <Slider
@@ -116,17 +128,20 @@ const Search = () => {
                       <span className='price-range-input'><label>{priceRange[0]}€</label> <label>{priceRange[1]}€</label></span>
                     </div>
                   </div>
-                )}
               </div>
+
+
+
+
             </div>
             
             <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
               <label htmlFor="price">Sort by</label>
               <div className='input-select'>
-                <select name="price" id="countries-id" className='form-control' onChange={handleChangeSortBy}>
+                <select name="price" id="countries-id" className='form-control'>
                   <option value="" disabled>Sorted by</option>
-                  <option value="desc">Descending price</option>
-                  <option value="asc">Ascending price</option>
+                  <option value="descending">Descending price</option>
+                  <option value="ascending">Ascending price</option>
                 </select>
               </div>
             </div>
