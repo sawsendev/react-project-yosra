@@ -18,7 +18,7 @@ const Crib = ({ cribs }) => {
             <div className='item-cribe'>
               <div className='Item-badge'>
               {crib.rent_status && crib.rent_status === true && <Badge className='notify-badge'>Available now</Badge>}
-                <Link to={`/Room/${crib.id}`}>
+                <Link to={`/room/${crib.id}`}>
                 <img className="img-fluid" src={room} alt="photo_fine_cribs" />
                 </Link>
               </div>

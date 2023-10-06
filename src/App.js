@@ -27,14 +27,13 @@ function App() {
 
       <Routes>
         <Route path='/' index element={<Homepage/>} /> 
-        <Route path="/searchCities" element={<SearchCities/>} /> 
+        <Route path="/search-cities" element={<SearchCities/>} /> 
         <Route path="/cms/page/:slug" element={<Cms/>} /> 
         <Route path="/faq" element={<Faqspage/>} />     
         <Route path="*" element={<ErrorPage/>} /> 
-        <Route path="/noRoom" element={<NoRoom/>} /> 
-        <Route path="/Room/:id" element={<Room/>} /> 
+        <Route path="/room/:id" element={<Room/>} /> 
         <Route path="/contact" element={<Contact/>} /> 
-        <Route path="/BookingEnquiry/:id" element={<BookingRoom/>} /> 
+        <Route path="/booking-enquiry/:id" element={<BookingRoom/>} /> 
         <Route path="/i-propose-an-apartment" element={<ProposeApartment/>}/>
        
       </Routes>

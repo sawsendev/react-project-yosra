@@ -82,7 +82,7 @@ const Search = () => {
     searchParams.append('priceMin', priceRange[0]); // Ajout de priceMin
     searchParams.append('priceMax', priceRange[1]); // Ajout de priceMax
   
-    const url = `/searchcities?${searchParams.toString()}`;
+    const url = `/search-cities?${searchParams.toString()}`;
     navigate(url);
   };
   
