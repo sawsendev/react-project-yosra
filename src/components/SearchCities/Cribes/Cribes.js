@@ -10,7 +10,6 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 
 const Cribes = () => {
-  // Define customIcon here
   const customIcon = new L.divIcon({
     className: 'custom-icon',
     html: '<div class="marker-label">400$</div>',
@@ -125,6 +124,23 @@ const Cribes = () => {
     }
   }, [searchParamsExist, cityParam, dateParam, priceMinParam, priceMaxParam, sortByParam]);
 
+  
+  const [isFixed, setIsFixed] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 700) {
+        setIsFixed(true); // Add the "fixed" class when scrolled down 100px
+      } else {
+        setIsFixed(false); // Remove the "fixed" class when scrolled back up
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []); 
 
   return (
     <div className='Cribes-container container-fluid'>
@@ -151,11 +167,11 @@ const Cribes = () => {
           </div>
 
           <div className='Maps col-lg-5'>
-            <div className='maps-block'>
+            <div className={`maps-block ${isFixed ? 'fixed' : ''}`}>
               <MapContainer
                 center={[43.70328975790311, 7.1704107912588055]}
                 zoom={13}
-                style={{ height: '500px', width: '100%' }}
+                style={{ height: '765px', width: '100%' }}
               >
                 <TileLayer
                   url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'

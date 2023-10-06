@@ -137,3 +137,17 @@
     border-color: #000 transparent transparent transparent;
     z-index: 1;
 }
+.Cribes-container .Maps {
+    position: relative;
+}
+.Cribes-container .Maps .maps-block.fixed {
+    position: fixed;
+    right: -40px;
+    top: 20px;
+    bottom: 20px;
+    height: calc(100vh - 40px)!important;
+    width: 41.66666667%;
+}
+.Cribes-container .Maps .maps-block.fixed .leaflet-container.leaflet-touch {
+    height: calc(100vh - 40px)!important;
+}
