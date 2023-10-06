@@ -4,6 +4,10 @@ import Select from 'react-select';
 
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
+
+
 
 const Search = () => {
   const [selectedCountry, setSelectedCountry] = useState("");
@@ -12,8 +16,7 @@ const Search = () => {
   const [date, setDate] = useState("");
   const [sortBy, setSortBy] = useState(""); 
   const location = useLocation();
-  const navigate = useNavigate();
-
+ 
   useEffect(() => {
     // Parsez les paramètres de l'URL ici
     const searchParams = new URLSearchParams(location.search);
@@ -33,6 +36,7 @@ const Search = () => {
       setPriceRange([parseInt(priceMinParam), parseInt(priceMaxParam)]);
     }
   }, [location.search]);
+  const navigate=useNavigate()
 
   const customStyles = {
     control: (provided) => ({
@@ -56,6 +60,7 @@ const Search = () => {
       display: 'none'
     }),
   };
+
 
   const handlePriceRangeChange = (newValue) => {
     setPriceRange(newValue);
@@ -87,6 +92,7 @@ const Search = () => {
     setSortBy(e.target.value);
   };
 
+
   return (
     <div className='Search-container'>
       <div className="container">
@@ -115,6 +121,7 @@ const Search = () => {
 
             <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
               <label htmlFor="price">Price range</label>
+              
               <div className='select-wrapper'>
                 <div className='select-container'>
                   <Select
@@ -129,29 +136,33 @@ const Search = () => {
                     placeholder="Select a price range"
                   />
                 </div>
-                <div className='slider-container container'>
-                  <div className='price'>
-                    <h5> Price per month</h5>
-                    <input
-                      type="range"
-                      min={1}
-                      max={1000}
-                      value={priceRange[1]}
-                      onChange={(e) => handlePriceRangeChange([priceRange[0], Number(e.target.value)])}
-                    />
-                    <span>{formatPriceRangeLabel(priceRange)}</span>
+                  <div className='slider-container container'>
+                    <div className='price'>
+                      <h5>Price per month</h5>
+                      <Slider
+                        min={1}
+                        max={500}
+                        value={priceRange}
+                        onChange={handlePriceRangeChange}
+                        range
+                      />
+                      <span className='price-range-input'><label>{priceRange[0]}€</label> <label>{priceRange[1]}€</label></span>
+                    </div>
                   </div>
-                </div>
               </div>
-            </div>
 
+
+
+
+            </div>
+            
             <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
               <label htmlFor="price">Sort by</label>
               <div className='input-select'>
                 <select name="price" id="countries-id" className='form-control' onChange={handleChangeSortBy} value={sortBy}>
                   <option value="" disabled>Sorted by</option>
-                  <option value="desc">Descending price</option>
-                  <option value="asc">Ascending price</option>
+                  <option value="descending">Descending price</option>
+                  <option value="ascending">Ascending price</option>
                 </select>
               </div>
             </div>
