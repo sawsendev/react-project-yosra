@@ -73,6 +73,21 @@ const Search = () => {
   };
 
 
+  const [selectedDate, setSelectedDate] = useState(null);
+  const CustomInput = ({ value, onClick }) => (
+    <div className="input-datepicker" onClick={onClick}>
+      <input
+        type="text"
+        name="date"
+        className="form-control"
+        value={value}
+        placeholder="Move in date"
+      />
+      <span className="calendar-icon">
+        <img src={calendarIcon} alt="Calendar" />
+      </span>
+    </div>
+  );
 
   return (
     <div className='Search-container'>
@@ -95,9 +110,12 @@ const Search = () => {
 
             <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
               <label htmlFor="cars">Move in date</label>
-              <div className='input-date'>
-                <input type="date" name="date" className='form-control' required placeholder='Move in date' />
-              </div>
+              
+                <DatePicker
+                  selected={selectedDate}
+                  onChange={(date) => setSelectedDate(date)}
+                  customInput={<CustomInput />}
+                />
             </div>
 
             <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>

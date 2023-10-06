@@ -134,6 +134,9 @@ input[type="date"]:valid::before { display: none }
   background-size: 13px;
   z-index: -1;
 }
+.Select-country-container::placeholder {
+  color: #000;
+}
   /* for mobile screens */
   @media (max-width: 991px) {
     .Content-container {
