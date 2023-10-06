@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import "./Search.css";
 import Select from 'react-select';
-
 import { useNavigate } from 'react-router-dom';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-
+import calendarIcon from '../../../assets/calendar.svg'; 
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 
 const Search = () => {
@@ -70,6 +71,7 @@ const Search = () => {
   const handleChangeSortBy = (e) => {
     setSortBy(e.target.value);
   };
+
 
 
   return (
