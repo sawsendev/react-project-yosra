@@ -68,6 +68,22 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .form-date .input-date {
 //  padding-right: 42px; 
 }
+
+.input-datepicker {
+  position: relative;
+  width: 100%;
+}
+.input-datepicker .form-control {
+  position: relative;
+  width: 100%!important;
+  background: #fff;
+}
+.input-datepicker .form-control::placeholder, .input-datepicker .form-control::-moz-placeholder, .input-datepicker .form-control::-webkit-input-placeholder {
+  color: #000;
+} 
+.form-control::placeholder {
+  color: #000;
+}
 .react-tel-input .flag-dropdown {
  background-color: #fff;
  border: 1px solid var(--grey, #DFDFDF);
