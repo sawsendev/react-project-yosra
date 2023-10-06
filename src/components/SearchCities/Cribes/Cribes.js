@@ -175,26 +175,29 @@ const Cribes = () => {
 
             </InfiniteScroll>
           </div>
-           
-          <div className='Maps col-lg-5'>
-            <div className='maps-block'>
-              <MapContainer
-                center={[43.70328975790311, 7.1704107912588055]}
-                zoom={13}
-                style={{ height: '500px', width: '100%' }}
-              >
-                <TileLayer
-                  url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                />
-                {staticCoordinates.map((coord, index) => (
-                  <Marker key={index} position={coord} icon={customIcon}>
-                    <Popup>400$</Popup>
-                  </Marker>
-                ))}
-              </MapContainer>
-            </div>
-          </div> 
+
+          {!(searchParamsExist && searchResult.length === 0) ? (
+  <div className='Maps col-lg-5'>
+    <div className='maps-block'>
+      <MapContainer
+        center={[43.70328975790311, 7.1704107912588055]}
+        zoom={13}
+        style={{ height: '500px', width: '100%' }}
+      >
+        <TileLayer
+          url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        />
+        {staticCoordinates.map((coord, index) => (
+          <Marker key={index} position={coord} icon={customIcon}>
+            <Popup>400$</Popup>
+          </Marker>
+        ))}
+      </MapContainer>
+    </div>
+  </div>
+) : null}
+
         </div>
       </div>
       <AlertCribes className='alert' />
