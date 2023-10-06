@@ -147,7 +147,7 @@ const Cribes = () => {
       <h2>Our cribs in Nice</h2>
       <h5>Nice</h5>
       <div className='content-page'>
-        <div className='row'>
+        <div className='row row-cribes'>
           <div className='col-lg-7'>
             <InfiniteScroll
               dataLength={searchParamsExist ? searchResult.length : cribsData.length}
