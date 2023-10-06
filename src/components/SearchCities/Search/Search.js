@@ -2,19 +2,40 @@ import React, { useState } from 'react';
 import "./Search.css";
 import Select from 'react-select';
 
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
 
 
 const Search = () => {
-  const [selectedCountry, setselectedCountry] = useState("");
-  const [priceRange, setPriceRange] = useState([1, 500]);
+  const [selectedCountry, setSelectedCountry] = useState("");
+  const [priceRange, setPriceRange] = useState([1, 1000]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [date, setDate] = useState("");
   const [sortBy, setSortBy] = useState(""); 
+  const location = useLocation();
+ 
+  useEffect(() => {
+    // Parsez les paramètres de l'URL ici
+    const searchParams = new URLSearchParams(location.search);
+    const cityParam = searchParams.get('city');
+    const dateParam = searchParams.get('date');
+    const priceMinParam = searchParams.get('priceMin');
+    const priceMaxParam = searchParams.get('priceMax');
+    const sortByParam = searchParams.get('sortBy');
 
+    // Mettez à jour l'état local avec les valeurs des paramètres de l'URL
+    setSelectedCountry(cityParam || "");
+    setDate(dateParam || "");
+    setSortBy(sortByParam || "");
+
+    // Mise à jour de l'état priceRange si priceMinParam et priceMaxParam existent
+    if (priceMinParam && priceMaxParam) {
+      setPriceRange([parseInt(priceMinParam), parseInt(priceMaxParam)]);
+    }
+  }, [location.search]);
   const navigate=useNavigate()
 
   const customStyles = {
@@ -81,7 +102,7 @@ const Search = () => {
             <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
               <label htmlFor="countries">City</label>
               <div className='input-select'>
-                <select name="countries" id="countries-id" className='form-control' onChange={(e) => setselectedCountry(e.target.value)} value={selectedCountry}>
+                <select name="countries" id="countries-id" className='form-control' onChange={(e) => setSelectedCountry(e.target.value)} value={selectedCountry}>
                   <option value="" disabled>Select your country</option>
                   <option value="Nice">Nice</option>
                   <option value="Paris">Paris</option>
@@ -94,7 +115,7 @@ const Search = () => {
             <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
               <label htmlFor="cars">Move in date</label>
               <div className='input-date'>
-                <input type="date" name="date" className='form-control' required placeholder='Move in date' />
+                <input type="date" name="date" className='form-control' placeholder='Move in date' value={date} onChange={handleChangeDate} />
               </div>
             </div>
 
@@ -138,7 +159,7 @@ const Search = () => {
             <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
               <label htmlFor="price">Sort by</label>
               <div className='input-select'>
-                <select name="price" id="countries-id" className='form-control'>
+                <select name="price" id="countries-id" className='form-control' onChange={handleChangeSortBy} value={sortBy}>
                   <option value="" disabled>Sorted by</option>
                   <option value="descending">Descending price</option>
                   <option value="ascending">Ascending price</option>

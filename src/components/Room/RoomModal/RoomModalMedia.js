@@ -77,13 +77,15 @@ const RoomModalMedia = ({ isOpen, closeModal, activeTab, setActiveTab , lotData 
         .filter((media) => media.mime_type.startsWith('video'))
         .map((video, index) => (
           <li key={index} className='itm-video col-md-12 p-0'>
-            <video
-              src={video.original_url}
-              title={`Video ${index}`}
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen
-            ></video>
+          <video
+           src={video.original_url}
+           title={`Video ${index}`}
+           controls
+           frameborder="0"
+           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+           allowfullscreen
+          ></video>
+
           </li>
         ))
       }
