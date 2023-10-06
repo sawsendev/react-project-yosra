@@ -153,11 +153,6 @@ const Cribes = () => {
  {searchParamsExist && searchResult.length > 0 ? (
   <>
     <Crib cribs={searchResult} />
-    <div className='Maps col-lg-5'>
-      <div className='maps-block'>
-        <MapWithMarker coordinates={staticCoordinates} />
-      </div>
-    </div>
   </>
 ) : (
   searchParamsExist && searchResult.length === 0 ? (
@@ -173,11 +168,6 @@ const Cribes = () => {
   ) : (
     <>
     <Crib cribs={cribsData} />
-    <div className='Maps col-lg-5'>
-      <div className='maps-block'>
-        <MapWithMarker coordinates={staticCoordinates} />
-      </div>
-    </div>
   </>
   )
 )}
@@ -185,8 +175,7 @@ const Cribes = () => {
 
             </InfiniteScroll>
           </div>
-          {/* <div className='Maps col-lg-5'>
-
+           
           <div className='Maps col-lg-5'>
             <div className='maps-block'>
               <MapContainer
@@ -205,11 +194,12 @@ const Cribes = () => {
                 ))}
               </MapContainer>
             </div>
-          </div> */}
+          </div> 
         </div>
       </div>
       <AlertCribes className='alert' />
     </div>
+  
   );
 };
 
