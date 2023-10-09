@@ -184,3 +184,47 @@
     border-color: #000 transparent transparent transparent;
     z-index: 1;
 }
+.Cribes-container .Maps {
+    position: relative;
+}
+.Cribes-container .Maps .maps-block.fixed {
+    position: fixed;
+    right: -40px;
+    top: 20px;
+    bottom: 20px;
+    height: calc(100vh - 40px)!important;
+    width: calc( 41.66666667% + 30px);
+}
+.Cribes-container .Maps .maps-block.fixed .leaflet-container.leaflet-touch {
+    height: calc(100vh - 40px)!important;
+}
+
+@media (max-width: 992px) {
+.maps-block {
+    position: relative;
+    right: 40px;
+    top: inherit;
+    width: calc(100% - 80px);
+}
+.row-cribes {
+    display: flex;
+    flex-direction: column-reverse;
+}
+.Cribes-container .Maps .maps-block.fixed, .maps-block {
+    position: relative!important;
+    right: inherit;
+    top: inherit;
+    bottom: inherit;
+    width: 100%;
+    height: 100%!important;
+    margin: 0 0 20px;
+}
+.Cribes-container .Maps .maps-block.fixed .leaflet-container.leaflet-touch, .Cribes-container .Maps .maps-block .leaflet-container.leaflet-touch {
+    height: 400px!important;
+}
+}
+@media (max-width: 768px) {
+.Cribes-container .Maps .maps-block.fixed .leaflet-container.leaflet-touch, .Cribes-container .Maps .maps-block .leaflet-container.leaflet-touch {
+    height: 240px!important;
+}
+}
