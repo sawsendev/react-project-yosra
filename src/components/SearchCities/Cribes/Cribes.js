@@ -4,7 +4,9 @@ import AlertCribes from '../AlertCribes/AlertCribes';
 import Crib from '../../Crib/Crib';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import MapWithMarker from '../../MapWithMarker/MapWithMarker';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import noRooms from "../../../assets/Group 24.svg"
+
 
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
@@ -33,12 +35,13 @@ const Cribes = () => {
 
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
+  const navigate=useNavigate()
 
   const cityParam = searchParams.get('city');
   const dateParam = searchParams.get('date');
-  const priceMinParam = searchParams.get('price_min');
-  const priceMaxParam = searchParams.get('price_max');
-  const sortByParam = searchParams.get('sort_by');
+  const priceMinParam = searchParams.get('priceMin');
+  const priceMaxParam = searchParams.get('priceMax');
+  const sortByParam = searchParams.get('sortBy');
   const searchParamsExist = cityParam || dateParam || priceMinParam || priceMaxParam || sortByParam;
 
   const fetchDataFromAPI = async (page) => {
@@ -90,8 +93,15 @@ const Cribes = () => {
 
   useEffect(() => {
     if (!searchParamsExist) {
+      navigate('/searchCities');
+      
       fetchDataFromAPI(currentPage);
+    
+  
     }
+    
+    
+    
   }, [currentPage, searchParamsExist]);
 
   useEffect(() => {
@@ -103,7 +113,7 @@ const Cribes = () => {
         price_max: priceMaxParam,
         sort_by: sortByParam,
       };
-
+  
       fetch('http://dev.niceroom.sofis-info.com/api/lots/search', {
         method: 'POST',
         headers: {
@@ -114,15 +124,16 @@ const Cribes = () => {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(formData);
           setSearchResult(data.data.lots);
-          console.log(searchResult);
-        })
+          })
         .catch((error) => {
           console.error('Erreur lors de la requête POST :', error);
         });
     }
   }, [searchParamsExist, cityParam, dateParam, priceMinParam, priceMaxParam, sortByParam]);
+  useEffect(() => {
+    console.log(searchResult); 
+  }, [searchResult]);
 
   
   const [isFixed, setIsFixed] = useState(false);
@@ -153,42 +164,61 @@ const Cribes = () => {
               dataLength={searchParamsExist ? searchResult.length : cribsData.length}
               next={() => fetchDataFromAPI(currentPage)}
               hasMore={hasMore}
+              style={{ overflowX: 'hidden' }}
             >
-              {searchParamsExist ? (
-                <Crib cribs={searchResult} />
-              ) : (
-                cribsData.length > 0 ? (
-                  <Crib cribs={cribsData} />
-                ) : (
-                  <p>No cribs available</p>
-                )
-              )}
+ {searchParamsExist && searchResult.length > 0 ? (
+  <>
+    <Crib cribs={searchResult} />
+  </>
+) : (
+  searchParamsExist && searchResult.length === 0 ? (
+    <div className='container'>
+    <div className='No-rooms-content'>
+      <div className='left d-flex '>
+        <img className='ImageNoRooms' src={noRooms} alt='no rooms icon'/>
+        <span>No rooms available</span>
+        <button className='button'>Show first availabilities</button>
+      </div>
+    </div>
+    </div>
+  ) : (
+    <>
+    <Crib cribs={cribsData} />
+  </>
+  )
+)}
+
+
             </InfiniteScroll>
           </div>
 
-          <div className='Maps col-lg-5'>
-            <div className={`maps-block ${isFixed ? 'fixed' : ''}`}>
-              <MapContainer
-                center={[43.70328975790311, 7.1704107912588055]}
-                zoom={13}
-                style={{ height: '765px', width: '100%' }}
-              >
-                <TileLayer
-                  url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                />
-                {staticCoordinates.map((coord, index) => (
-                  <Marker key={index} position={coord} icon={customIcon}>
-                    <Popup>400$</Popup>
-                  </Marker>
-                ))}
-              </MapContainer>
-            </div>
-          </div>
+          {!(searchParamsExist && searchResult.length === 0) ? (
+  <div className='Maps col-lg-5'>
+    <div className='maps-block'>
+      <MapContainer
+        center={[43.70328975790311, 7.1704107912588055]}
+        zoom={13}
+        style={{ height: '500px', width: '100%' }}
+      >
+        <TileLayer
+          url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        />
+        {staticCoordinates.map((coord, index) => (
+          <Marker key={index} position={coord} icon={customIcon}>
+            <Popup>400$</Popup>
+          </Marker>
+        ))}
+      </MapContainer>
+    </div>
+  </div>
+) : null}
+
         </div>
       </div>
       <AlertCribes className='alert' />
     </div>
+  
   );
 };
 

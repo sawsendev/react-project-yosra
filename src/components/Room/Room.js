@@ -47,6 +47,7 @@ import wipe from '../../assets/room/widget/wipe.svg'
 import { PiInfo } from "react-icons/pi";
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import MapWithMarker from '../MapWithMarker/MapWithMarker'
 
 
 
@@ -56,7 +57,9 @@ const Room = () => {
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
   const API_URL = `http://dev.niceroom.sofis-info.com/api/lot/${id}`;
   const navigate= useNavigate();
-
+  const staticCoordinates = [
+    [43.70328975790311, 7.1704107912588055],
+    [43.705, 7.175],]
   useEffect(()=>{
     
       const headers = {
@@ -260,7 +263,7 @@ const Room = () => {
               <div className='map-local mt-3 mb-3 pb-3'>
                 <h2 className='mb-3'>Where is the accommodation located</h2>
                 <div className='map'>
-                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d92299.17724850951!2d7.1704107912588055!3d43.70328975790311!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12cdd0106a852d31%3A0x40819a5fd979a70!2sNice%2C%20France!5e0!3m2!1sen!2stn!4v1694711910064!5m2!1sen!2stn" width="920" height="340" style={{border:0}} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <MapWithMarker coordinates={staticCoordinates} />
                 </div>
               </div>
               <div className='local-desc mt-3 mb-4 pb-3'>
