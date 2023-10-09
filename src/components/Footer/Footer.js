@@ -2,12 +2,15 @@ import React, {useState} from 'react'
 import "./Footer.css"
 import bell from "../../assets/bell 1.svg"
 import arrow from '../../assets/arrow.svg'
-
+import PopupAlert from '../PopupAlert/PopupAlert'
 
 const Footer = () => {
   const [showApartments, setShowApartments] = useState(false);
   const [showUsefulLinks, setShowUsefulLinks] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
   const searchParams = new URLSearchParams();
+
+
   searchParams.append("city", "Nice");
   
   const searchParamsParis = new URLSearchParams();
@@ -26,7 +29,13 @@ const Footer = () => {
   const toggleUsefulLinks = () => {
     setShowUsefulLinks(!showUsefulLinks);
   };
+  const openPopup = () => {
+    setIsPopupOpen(true);
+  };
 
+  const closePopup = () => {
+    setIsPopupOpen(false);
+  };
   
   return (
     <>
@@ -61,7 +70,8 @@ const Footer = () => {
         </div>
         <div className='Create-alert px-3'>
           <p className='h3'>You don’t find what you are looking for? </p>
-          <button className='btn btn-alert'> <img src={bell} alt='bell'/>Create an alert</button>
+          <PopupAlert isPopupOpen={isPopupOpen}/>
+          <button className='btn btn-alert' onClick={openPopup}> <img src={bell} alt='bell'/>Create an alert</button>
         </div>
       </div>
       </div>
@@ -128,7 +138,8 @@ const Footer = () => {
         {/* Create Alert Section */}
         <div className='Create-alert container'>
           <p className='h3'>You don’t find what you are looking for? </p>
-          <button className='btn btn-alert'> <img src={bell} alt='bell'/> Create an alert</button>
+          <PopupAlert/>
+          <button className='btn btn-alert' onClick={openPopup}> <img src={bell} alt='bell'/> Create an alert</button>
         </div>
       </div>
 
@@ -136,6 +147,9 @@ const Footer = () => {
       <div className='Copyright'>
         <p className='m-0 text-center'>Copyright 2022 - Oxton Digital</p>
       </div>
+      {/* PopupAlert */}
+   
+        <PopupAlert />
     </>
   );
 };

@@ -91,7 +91,7 @@ const Cribes = () => {
 
   useEffect(() => {
     if (!searchParamsExist) {
-      navigate('/searchCities');
+      navigate('/search-cities');
       
       fetchDataFromAPI(currentPage);
     

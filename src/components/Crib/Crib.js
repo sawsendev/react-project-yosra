@@ -4,7 +4,7 @@ import { Badge } from 'react-bootstrap';
 import  locationIcon  from '../../assets/pin 2.svg';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Link } from 'react-router-dom';
-
+import promoImage from '../../assets/Group 104.svg'
 const Crib = ({ cribs }) => {
   if (!cribs || cribs.length === 0) {
     return <p>No cribs available</p>;
@@ -18,9 +18,13 @@ const Crib = ({ cribs }) => {
             <div className='item-cribe'>
               <div className='Item-badge'>
               {crib.rent_status && crib.rent_status === true && <Badge className='notify-badge'>Available now</Badge>}
+              {crib.promo && crib.promo === 1 && (
+                  <img src={promoImage} alt='Promo' className='promo-image' />
+                )}
                 <Link to={`/room/${crib.id}`}>
                 <img className="img-fluid" src={room} alt="photo_fine_cribs" />
                 </Link>
+
               </div>
               <div className='Rooms-content'>
                 <h3>{crib.apartment.title}-{crib.title}</h3>
