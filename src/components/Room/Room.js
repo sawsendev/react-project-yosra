@@ -280,7 +280,7 @@ const Room = () => {
                 <div className='widget mb-3'>
                   <p className='head-widget'><img src={check} alt="Available"/>Available now</p>
                   <hr/>
-                  <p className='text-center price'>650€/<small> month</small></p>
+                {(lotData.loyer_hc && <p className='text-center price'>{lotData.loyer_hc}€/<small> month</small></p>)}
                   <div className='text-center assistance'>CAF assistance <PiInfo className='info'/> <span className='green'>( up to -258€ )</span></div>
                   <p className='h4 status'>Rent is all inclusive</p>
                   {lotData.water !== 0 &&(<p className='status'><img src={water} alt="Water"/> Water</p>)}
@@ -291,7 +291,7 @@ const Room = () => {
                   {lotData.wi_fi !== 0 &&(<p className='status'><img src={wifi} alt="wifi"/> Wi - Fi</p>)}
                   {lotData.cable_tv !== 0 &&(<p className='status'><img src={cable} alt="cable tv"/> Cable tv</p>)}
                   {lotData.cleaning !== 0 &&(<p className='status'><img src={wipe} alt="wipe"/> Cleaning</p>)}
-                  <button className='btn btn-submit' onClick={()=>{navigate(`/BookingEnquiry/${id}`)}}>
+                  <button className='btn btn-submit' onClick={()=>{navigate(`/booking-enquiry/${id}`)}}>
 
                   Apply for this room</button>
                 </div>

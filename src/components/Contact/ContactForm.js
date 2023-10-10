@@ -51,7 +51,7 @@ const ContactForm = () => {
         event.preventDefault();
       
         if (firstName && lastName && emailValid && valid && message) {
-          // Créez l'objet de données à envoyer à votre API
+
           const data = {
             email: email,
             phone: phoneNumber,

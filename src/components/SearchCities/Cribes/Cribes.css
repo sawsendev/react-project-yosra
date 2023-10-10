@@ -72,6 +72,16 @@
     font-weight: 400;
     background: rgba(53, 206, 146, 1) !important;
 }
+.promo-image {
+    position: absolute;
+    right: 11px;
+    top: -3px;
+    text-align: center;
+    padding: 3px 4px;
+    font-size: 14px;
+    font-weight: 400;
+    
+}
 
 .h5{
     font-size:18px;

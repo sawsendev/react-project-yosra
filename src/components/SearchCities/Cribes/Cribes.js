@@ -3,11 +3,8 @@ import './Cribes.css';
 import AlertCribes from '../AlertCribes/AlertCribes';
 import Crib from '../../Crib/Crib';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import MapWithMarker from '../../MapWithMarker/MapWithMarker';
 import { useLocation, useNavigate } from 'react-router-dom';
 import noRooms from "../../../assets/Group 24.svg"
-
-
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 
@@ -93,7 +90,7 @@ const Cribes = () => {
 
   useEffect(() => {
     if (!searchParamsExist) {
-      navigate('/searchCities');
+      navigate('/search-cities');
       
       fetchDataFromAPI(currentPage);
     

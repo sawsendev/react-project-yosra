@@ -8,7 +8,6 @@ import SearchCities from './components/SearchCities/SearchCities';
 import Cms from './components/CMS/Cms';
 import ErrorPage from './components/404/ErrorPage';
 import Faqspage from './components/Faqspage/Faqspage';
-import NoRoom from './components/SearchCities/NoRoom/NoRoom';
 import Room from './components/Room/Room';
 import Contact from './components/Contact/Contact';
 import BookingRoom from './components/BookingRoom/BookingRoom';
@@ -27,14 +26,13 @@ function App() {
 
       <Routes>
         <Route path='/' index element={<Homepage/>} /> 
-        <Route path="/searchCities" element={<SearchCities/>} /> 
+        <Route path="/search-cities" element={<SearchCities/>} /> 
         <Route path="/cms/page/:slug" element={<Cms/>} /> 
         <Route path="/faq" element={<Faqspage/>} />     
         <Route path="*" element={<ErrorPage/>} /> 
-        <Route path="/noRoom" element={<NoRoom/>} /> 
-        <Route path="/Room/:id" element={<Room/>} /> 
+        <Route path="/room/:id" element={<Room/>} /> 
         <Route path="/contact" element={<Contact/>} /> 
-        <Route path="/BookingEnquiry/:id" element={<BookingRoom/>} /> 
+        <Route path="/booking-enquiry/:id" element={<BookingRoom/>} /> 
         <Route path="/i-propose-an-apartment" element={<ProposeApartment/>}/>
        
       </Routes>
