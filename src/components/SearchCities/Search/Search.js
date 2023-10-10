@@ -6,7 +6,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-
+import calendarIcon from '../../../assets/calendar.svg'; 
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 
 const Search = () => {
@@ -94,6 +96,22 @@ const Search = () => {
   };
 
 
+  const [selectedDate, setSelectedDate] = useState(null);
+  const CustomInput = ({ value, onClick }) => (
+    <div className="input-datepicker" onClick={onClick}>
+      <input
+        type="text"
+        name="date"
+        className="form-control"
+        value={value}
+        placeholder="Move in date"
+      />
+      <span className="calendar-icon">
+        <img src={calendarIcon} alt="Calendar" />
+      </span>
+    </div>
+  );
+
   return (
     <div className='Search-container'>
       <div className="container">
@@ -117,9 +135,12 @@ const Search = () => {
 
             <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
               <label htmlFor="cars">Move in date</label>
-              <div className='input-date'>
-                <input type="date" name="date" className='form-control' placeholder='Move in date' value={date} onChange={handleChangeDate} />
-              </div>
+              
+                <DatePicker
+                  selected={selectedDate}
+                  onChange={(date) => setSelectedDate(date)}
+                  customInput={<CustomInput />}
+                />
             </div>
 
             <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>

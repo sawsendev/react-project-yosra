@@ -9,7 +9,6 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 
 const Cribes = () => {
-  // Define customIcon here
   const customIcon = new L.divIcon({
     className: 'custom-icon',
     html: '<div class="marker-label">400$</div>',
@@ -58,20 +57,20 @@ const Cribes = () => {
       console.log(data)
   
       if (data && data.data && data.data.lots) {
-        // Utilisez currentPage pour déterminer la position de départ des éléments à afficher
+        // Use currentPage to determine the starting position of elements to display
         const startIndex = (currentPage - 1) * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
         const newCribs = data.data.lots.slice(startIndex, endIndex);
   
-        // Vérifiez si les nouveaux cribs ne sont pas déjà présents dans cribsData
+        // Check if the new cribs are not already present in cribsData
         const filteredNewCribs = newCribs.filter((newCrib) => {
           return !cribsData.some((existingCrib) => existingCrib.id === newCrib.id);
         });
   
         if (filteredNewCribs.length === 0) {
-          setHasMore(false); // Plus de cribs à charger
+          setHasMore(false); // No more cribs to load
         } else {
-          // Affichez cribsData
+          // Show cribsData
           setCribsData((prevData) => [...prevData, ...filteredNewCribs]);
           setCurrentPage(page + 1);
         }
@@ -133,13 +132,30 @@ const Cribes = () => {
     console.log(searchResult); 
   }, [searchResult]);
 
+  
+  const [isFixed, setIsFixed] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 700) {
+        setIsFixed(true); 
+      } else {
+        setIsFixed(false); 
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []); 
 
   return (
     <div className='Cribes-container container-fluid'>
       <h2>Our cribs in Nice</h2>
       <h5>Nice</h5>
       <div className='content-page'>
-        <div className='row'>
+        <div className='row row-cribes'>
           <div className='col-lg-7'>
             <InfiniteScroll
               dataLength={searchParamsExist ? searchResult.length : cribsData.length}

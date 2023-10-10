@@ -135,6 +135,30 @@ label{
 .input-date:after {
     z-index: 0;
 }
+.react-datepicker-wrapper {
+    width: 100%;
+}
+.input-datepicker {
+    position: relative;
+    width: 100%;
+}
+.input-datepicker .form-control {
+    position: relative;
+    width: 100%!important;
+    background: #fff;
+}
+.input-datepicker .form-control::placeholder, .input-datepicker .form-control::-moz-placeholder, .input-datepicker .form-control::-webkit-input-placeholder {
+    color: #000;
+} 
+.form-control::placeholder {
+    color: #000;
+}
+span.calendar-icon {
+    position: absolute;
+    right: 9px;
+    top: 6px;
+    z-index: 1;
+}
 @media (min-width: 1400px) {
     .Form-city.col-lg-3 {
         width: 20.7%;
