@@ -20,7 +20,7 @@ const Intro = () => {
   
   const handleClick=()=>{
     const searchParams = new URLSearchParams({ city, date }).toString();
-    const url = `/SearchCities?${searchParams}`;
+    const url = `/search-cities?${searchParams}`;
     navigate(url)
   }
   
