@@ -133,13 +133,23 @@ const Cribes = () => {
   }, [searchResult]);
 
   
-  const [isFixed, setIsFixed] = useState(false);
+  const [isOuterDivFixed, setIsOuterDivFixed] = useState(false);
+
+  // Add a scroll event listener to monitor the scroll position
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 700) {
-        setIsFixed(true); 
-      } else {
-        setIsFixed(false); 
+      const outerDiv = document.querySelector('.infinite-scroll-component__outerdiv');
+
+      if (outerDiv) {
+        const scrollY = window.scrollY;
+        const outerDivHeight = outerDiv.clientHeight;
+
+        // Check if the conditions are met to add the "fixed" class
+        if (outerDivHeight > 800 && scrollY > 700) {
+          setIsOuterDivFixed(true);
+        } else {
+          setIsOuterDivFixed(false);
+        }
       }
     };
 
@@ -148,7 +158,8 @@ const Cribes = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []); 
+  }, []);
+
 
   return (
     <div className='Cribes-container container-fluid'>
@@ -191,11 +202,11 @@ const Cribes = () => {
 
           {!(searchParamsExist && searchResult.length === 0) ? (
   <div className='Maps col-lg-5'>
-    <div className='maps-block'>
+    <div className={`maps-block ${isOuterDivFixed ? 'fixed' : ''}`}>
       <MapContainer
         center={[43.70328975790311, 7.1704107912588055]}
         zoom={13}
-        style={{ height: '500px', width: '100%' }}
+        style={{ height: '765px', width: '100%' }}
       >
         <TileLayer
           url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
