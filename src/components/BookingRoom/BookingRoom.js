@@ -29,12 +29,23 @@ const BookingRoom = () => {
   const [newFile, setNewFile] = useState(null);
   const [fileVisible, setFileVisible] = useState([true, true, true, true, true]);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [emailValid, setEmailValid] = useState(true);
   const{id}=useParams();
   const[lotData,setLotData]=useState({});
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
   const API_URL = `http://dev.niceroom.sofis-info.com/api/lot/${id}`;
-
-
+  const [email,setEmail]=useState('')
+  
+  
+  const handleEmailChange = (event) => {
+    const emailValue = event.target.value;
+    setEmail(emailValue);
+    setEmailValid(validateEmail(emailValue));
+}
+const validateEmail = (email) => {
+  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  return emailPattern.test(email);
+}
   useEffect(()=>{
     
       const headers = {
@@ -53,17 +64,86 @@ const BookingRoom = () => {
         });
     
   },[API_URL,API_KEY])
-  const handleSubmit = (e) => {
+
+
+  //envoie des données du formulaire 
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Traitez le formulaire ici (envoyez-le au serveur, etc.)
-    setFormSubmitted(true);
-  };
+    console.log('handleSubmit called');
+  
+    if (!validateForm()) {
+      console.log('form validé');
+      const formData = new FormData();
+  
+      // Ajoutez les champs de texte au FormData
+      formData.append('first_name', formData.firstName);
+      formData.append('last_name', formData.surname);
+      formData.append('email', formData.email);
+      formData.append('phone_number', phoneNumber);
+      formData.append('phone_country_name', 'nice'); // Remplacez par la valeur appropriée
+      formData.append('availability_date', formData.moveInDate); // Utilisez le champ approprié depuis formDat
+      // Récupérez les champs de type fichier (input file)
+      const fileInputs = document.querySelectorAll('input[type="file"]');
+  
+      // Parcourez les champs de type fichier et ajoutez les fichiers au FormData
+      fileInputs.forEach((fileInput) => {
+        const files = fileInput.files;
+        for (let i = 0; i < files.length; i++) {
+          formData.append('medias', files[i]);
+        }
+      });
+  
+      try {
+        const response = await fetch('http://dev.niceroom.sofis-info.com/api/apartment_request/post', {
+          method: 'POST',
+          mode: 'cors',
+          headers: {
+            'Content-Type': 'application/json',
+            'apiKey': `${API_KEY}`,
+          },
+          body: JSON.stringify(formData),// Utilisez le FormData pour envoyer les fichiers
+        });
+  
+       
+      if (response.status === 200) {
+       
+        console.log("Requête effectuée avec succès");
+        setFormSubmitted(true);
+        console.log(formSubmitted)
+
+        setFormData({
+          firstName: '',
+          surname: '',
+          email: '', 
+          moveInDate: '',
+          moveOutDate: '',
+        });
+        setPhoneNumber('');
+        setFormErrors({
+          firstName: '',
+          surname: '',
+          email: '',
+          moveInDate: '',
+          moveOutDate: '',
+        });
+        setEmailValid(true);
+        setValid(true);
+      } else {
+        // Gérez les erreurs de la requête ici (pour tous les statuts autres que 200)
+        console.error('Erreur lors de la requête vers l\'API :', response.status);
+      }
+    } catch (error) {
+      console.error('Erreur lors de la requête vers l\'API :', error);
+    }
+  }}
+  
+  // Utilisez useEffect pour observer les changements de formSubmitted
+  useEffect(() => {
+    console.log("formSubmitted mis à jour :", formSubmitted);
+  }, [formSubmitted]);
   
 
- 
   
-
-
   const handleclick = (index) => {
     const updatedFileVisible = [...fileVisible];
     updatedFileVisible[index] = !updatedFileVisible[index];
@@ -98,7 +178,7 @@ const BookingRoom = () => {
   const[phoneNumber, setPhoneNumber]=useState("")
   const[valid, setValid]=useState(true)
 
-  const handleChange=(value)=>{
+  const handleChangephone=(value)=>{
    const input = value
    setPhoneNumber(input)
    setValid(validatePhoneNumber(input))
@@ -108,6 +188,62 @@ const BookingRoom = () => {
     const phoneNumberPattern= /^\d{10}$/
     return phoneNumberPattern.test(phoneNumber);
   }
+  const [formErrors, setFormErrors] = useState({
+    firstName: '',
+    surname: '',
+    email: '',
+    moveInDate: '',
+    moveOutDate: '',
+  });
+  const [formData, setFormData] = useState({
+    firstName: '',
+    surname: '',
+    email: '',
+    moveInDate: '',
+    moveOutDate: '',
+  }); 
+  
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+  
+  const validateForm = () => {
+    const errors = {};
+    let isValid = true;
+  
+    if (!formData.firstName.trim()) {
+      errors.firstName = 'First name is required';
+      isValid = false;
+    }
+  
+    if (!formData.surname.trim()) {
+      errors.surname = 'Surname is required';
+      isValid = false;
+    }
+  
+    if (!formData.email.trim()) {
+      errors.email = 'Email is required';
+      isValid = false;
+    }
+  
+    if (!formData.moveInDate.trim()) {
+      errors.moveInDate = 'Move In Date is required';
+      isValid = false;
+    }
+  
+    if (!formData.moveOutDate.trim()) {
+      errors.moveOutDate = 'Move Out Date is required';
+      isValid = false;
+    }
+  
+    setFormErrors(errors);
+    return isValid;
+  };
+  
 
   return (
     <>
@@ -129,7 +265,7 @@ const BookingRoom = () => {
             <img className='me-2' src={sendImg} alt='send icon' />
             <h3 className='m-0'>Send your application</h3>
           </div>
-          <form id="file-upload-form" class="uploader">
+          <form id="file-upload-form" onSubmit={handleSubmit} class="uploader">
               <div class="row mb-4">
                 <div class="col-md-6 col-12">
                 {lotData && lotData.apartment && lotData.apartment.title && lotData.title && (
@@ -141,13 +277,16 @@ const BookingRoom = () => {
                 <div class="col">
                 <div class="form-outline">
                     <label class="form-label mb-1" for="form6Example1" >First name *</label>
-                    <input type="text" id="form6Example1" class="form-control" placeholder='First name'/>
+                    <input type="text" id="form6Example1" name='firstName' class="form-control" placeholder='First name' onChange={handleChange}/>
+                    {formErrors.firstName !==''&&
+                    <div className="error-message">{formErrors.firstName}</div>}
                 </div>
                 </div>
                 <div class="col">
                 <div class="form-outline">
                     <label class="form-label mb-1" for="form6Example2" >Surname *</label>
-                    <input type="text" id="form6Example2" class="form-control" placeholder='Surname'/>
+                    <input type="text" id="form6Example2" class="form-control" name='surname' placeholder='Surname' onChange={handleChange}/>
+                    {formErrors.surname !=='' && <div className="error-message">{formErrors.surname}</div>}
                 </div>
                 </div>
                 </div>
@@ -157,7 +296,8 @@ const BookingRoom = () => {
                 <div class="form-outline">
                     <label class="form-label mb-1" for="form6Example1">Move in date *</label>
                     <div class="form-date">
-                      <input type="date" id="form6Example1" class="form-control input-date" required/>
+                      <input type="date" id="form6Example1" class="form-control input-date" name='moveInDate' required onChange={handleChange}/>
+                      {formErrors.moveInDate !==''&&<div className="error-message">{formErrors.moveInDate}</div>}
                     </div>
                 </div>
                 </div>
@@ -165,17 +305,32 @@ const BookingRoom = () => {
                 <div class="form-outline">
                     <label class="form-label mb-1" for="form6Example2">Move out date *</label>
                     <div class="form-date">
-                      <input type="date" id="form6Example2" class="form-control input-date" required/>
+                      <input type="date" id="form6Example2" class="form-control input-date" name='moveOutDate' required onChange={handleChange}/>
+                      {formErrors.moveOutDate !=='' && <div className="error-message">{formErrors.moveOutDate}</div>}
                     </div>
                 </div>
                 </div>
                 </div>
 
               <div className='row'>
-                <div class="form-outline col-md-6 col-xs-12 mb-4">
-                    <label class="form-label mb-1" for="form6Example3">Email*</label>
-                    <input type="email" id="form6Example3" class="form-control" placeholder='exemple@gmail.com' required/>
-                </div>
+              <div class="form-outline col-md-6 col-xs-12 mb-4">
+  <label class="form-label mb-1" for="form6Example3">
+    Email*
+  </label>
+  <input
+    type="email"
+    id="form6Example3"
+    class="form-control"
+    name='email'
+    placeholder="exemple@gmail.com"
+    onChange={handleEmailChange}
+    required
+  />
+  {!emailValid && <p>Please enter a valid email address.</p>}
+  {/* {formErrors.email !== '' && <div className="error-message">{formErrors.email}</div>} */}
+</div>
+
+
 
                 <div class="form-outline col-md-6 col-xs-12 mb-4">
                     <label class="form-label mb-1" for="phone">Phone</label>
@@ -183,12 +338,11 @@ const BookingRoom = () => {
                     country={'fr'}
                     class="form-control"
                     value={phoneNumber}
-                    onChange={handleChange}
+                    onChange={handleChangephone}
                     inputProps={{
                       required: true,
                     }}/>
                   {!valid && <p>Please enter a valid 10-digit phone number.</p>}
-
                 </div>
               </div>
     
@@ -348,7 +502,7 @@ const BookingRoom = () => {
             </div>
 
            {/* ******************* */}
-           <button type="submit" onClick={handleSubmit} class="btn btn-primary float-end submit-button">Apply</button>
+           <button type="submit" class="btn btn-primary float-end submit-button">Apply</button>
             </form>
           
         </div>
@@ -362,7 +516,8 @@ const BookingRoom = () => {
         <div className='col-md-8 col-sm-12 thank'>
          <img src={image} alt="description" />
           <p className='text-center mt-3 px-3 mx-5'>
-            Thank you [Name], we have received your application. Our team is currently reviewing your file. We will get back to you shortly. Please check your email address [email address]
+          
+           Thank you [{formData.surname}], we have received your application. Our team is currently reviewing your file. We will get back to you shortly. Please check your email address [email address]
           </p>
         </div>
         <div className='col-md-4 col-sm-12'>
