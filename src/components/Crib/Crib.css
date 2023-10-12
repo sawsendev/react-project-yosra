@@ -11,4 +11,7 @@
   .image-item:last-child {
     margin-right: 0; /* Supprimez la marge de la dernière image */
   }
-   
+.Rooms-cribes .carousel li {
+    margin: 0;
+    padding: 0;
+}

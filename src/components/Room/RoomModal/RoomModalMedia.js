@@ -3,6 +3,7 @@ import { IoCloseOutline } from "react-icons/io5";
 import iconimgs from '../../../assets/room/icons/imgs.svg'
 import iconvideos from '../../../assets/room/icons/videos.svg'
 import iconvisit from '../../../assets/room/icons/visits.svg'
+import iconfloorplan from '../../../assets/room/icons/floorplan.svg'
 import iconimgshover from '../../../assets/room/icons/imgs-hover.svg'
 import iconvideoshover from '../../../assets/room/icons/videos-hover.svg'
 import iconvisithover from '../../../assets/room/icons/visits-hover.svg'
@@ -48,6 +49,14 @@ const RoomModalMedia = ({ isOpen, closeModal, activeTab, setActiveTab , lotData 
                             <img src={iconvisit} className='icon' alt="Visit"/><img src={iconvisithover} className='icon-hover' alt="Visit"/> 360° visit
                         </span>
                     </li>
+                    <li
+                        className={activeTab === 'tab4' ? 'nav-item active' : 'nav-item'}
+                        onClick={() => setActiveTab('tab4')}
+                    >
+                        <span className='nav-link'>
+                            <img src={iconfloorplan} className='icon' alt="floorplan"/><img src={iconfloorplan} className='icon-hover' alt="floorplan"/> floorplan
+                        </span>
+                    </li>
                 </ul>
             
             </div>
@@ -56,47 +65,54 @@ const RoomModalMedia = ({ isOpen, closeModal, activeTab, setActiveTab , lotData 
 
                     <div className="tab-content">
                     {activeTab === 'tab1' && (
-  <div className='tab-panel'>
-    <ul className='gallery-imgs row m-0'>
-      {lotData && lotData.media && lotData.media
-        .filter((media) => media.mime_type.startsWith('image'))
-        .map((image, index) => (
-          <li key={index} className='itm-img col-md-12 p-0'>
-            <img src={image.original_url} alt={`Room ${index}`} className='img-fluid' />
-          </li>
-        ))
-      }
-    </ul>
-  </div>
-)}
+                      <div className='tab-panel'>
+                        <ul className='gallery-imgs row m-0'>
+                          {lotData && lotData.media && lotData.media
+                            .filter((media) => media.mime_type.startsWith('image'))
+                            .map((image, index) => (
+                              <li key={index} className='itm-img col-md-12 p-0'>
+                                <img src={image.original_url} alt={`Room ${index}`} className='img-fluid' />
+                              </li>
+                            ))
+                          }
+                        </ul>
+                      </div>
+                    )}
 
-{activeTab === 'tab2' && (
-  <div className='tab-panel'>
-    <ul className='gallery-videos row m-0'>
-      {lotData && lotData.media && lotData.media
-        .filter((media) => media.mime_type.startsWith('video'))
-        .map((video, index) => (
-          <li key={index} className='itm-video col-md-12 p-0'>
-          <video
-           src={video.original_url}
-           title={`Video ${index}`}
-           controls
-           frameborder="0"
-           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-           allowfullscreen
-          ></video>
+                    {activeTab === 'tab2' && (
+                      <div className='tab-panel'>
+                        <ul className='gallery-videos row m-0'>
+                          {lotData && lotData.media && lotData.media
+                            .filter((media) => media.mime_type.startsWith('video'))
+                            .map((video, index) => (
+                              <li key={index} className='itm-video col-md-12 p-0'>
+                              <video
+                              src={video.original_url}
+                              title={`Video ${index}`}
+                              controls
+                              frameborder="0"
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                              allowfullscreen
+                              ></video>
 
-          </li>
-        ))
-      }
-    </ul>
-  </div>
-)}
+                              </li>
+                            ))
+                          }
+                        </ul>
+                      </div>
+                    )}
 
                         {activeTab === 'tab3' && (
                             <div className='tab-panel'>
                                 <ul className='gallery-videos row m-0'>
                                     <li className='itm-video col-md-12 p-0'><iframe width='853' height='480' src='https://my.matterport.com/show/?m=xtS2JPoUHQi' frameborder='0' allowfullscreen allow='xr-spatial-tracking'></iframe></li>
+                                </ul>
+                            </div>
+                        )}
+                        {activeTab === 'tab4' && (
+                            <div className='tab-panel'>
+                                <ul className='gallery-videos row m-0'>
+                                    <li className='itm-video col-md-12 p-0'><iframe src="https://www.youtube.com/embed/aarWe5yf6i8?si=SU6Jvd8K0RgRKs7-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></li>
                                 </ul>
                             </div>
                         )}

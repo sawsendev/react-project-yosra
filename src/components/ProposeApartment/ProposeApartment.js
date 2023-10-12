@@ -18,6 +18,7 @@ import process4 from '../../assets/process/process4.svg'
 import process5 from '../../assets/process/process5.svg'
 import Feedback from '../HomePage/Feedback/Feedback';
 import { LiaEnvelope } from "react-icons/lia";
+import { useNavigate } from 'react-router-dom';
 const ProposeApartment =()=> {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -28,6 +29,8 @@ const ProposeApartment =()=> {
   const closeModal = () => {
     setModalIsOpen(false);
   };
+  
+  const navigate=useNavigate();
   return (
     <>
     <Breadcrumbs />
@@ -220,7 +223,7 @@ const ProposeApartment =()=> {
       </div>
     </section>
     
-    <section className='selection pt-lg-5 pt-md-4 pb-md-5 pb-4 mb-lg-4'>
+    <section className='selection pt-lg-5 pt-md-4 pb-4 mb-lg-4'>
       <div className='container'>
         <div className='mb-md-5 mb-4'>
           <h2 className='mt-1'> How Finecribs selects the apartments that we rent</h2>
@@ -266,7 +269,13 @@ const ProposeApartment =()=> {
         </div>
       </div>
     </section>
-
+    <section className='btn_proposemodal mb-lg-5 mb-lg-4'>
+      <div className='container'>
+        <div className='d-table mx-auto'>
+          <button className='btn btn-primary button-black' onClick={openModal} ><LiaEnvelope className='icon-envelop'/>I propose for rent</button>
+        </div>
+      </div>
+    </section>
     <section className='page2-container mb-lg-5 mb-4'>
       <div className='container'>
         <div className='content2-container'>
@@ -274,8 +283,7 @@ const ProposeApartment =()=> {
           <p>We are constantly looking for apartments to buy and transform into beautiful 
           spaces for communal living. If you are uncertain about renting or selling your 
             apartment, it’s worth having a chat.</p>
-            
-          <button className='btn btn-primary button-black' onClick={openModal} ><LiaEnvelope className='icon-envelop'/>  I would like to get in touch</button>
+          <button className='btn btn-primary button-black' onClick={()=>{navigate(`/contact`)}}><LiaEnvelope className='icon-envelop'/>  I would like to get in touch</button>
         </div>
       </div>
     </section>

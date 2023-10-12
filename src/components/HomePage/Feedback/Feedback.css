@@ -16,7 +16,7 @@
 
 
 /* for mobile screens */
-@media (max-width: 600px) {
+@media (max-width: 576px) {
     .Feedback-container h2{
         font-size: 24px;
         font-weight: 400;
@@ -25,7 +25,7 @@
         margin: -5px 0 0;
     }
     .Feedback-container .feedback-icons-li img {
-        height: 60px;
+        max-height: 90px;
         width: auto;
     }
     .feedback-icons-content span {

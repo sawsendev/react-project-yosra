@@ -7,6 +7,7 @@ import Breadcrumbs from '../Breadcrumbs/Breadcrumbs'
 import iconimgs from '../../assets/room/icons/bedroom.svg'
 import iconvideos from '../../assets/room/icons/videos.svg'
 import iconvisit from '../../assets/room/icons/visits.svg'
+import iconfloorplan from '../../assets/room/icons/floorplan.svg'
 import plan from '../../assets/room/icons/plan.svg'
 import bedroom from '../../assets/room/icons/bedroom.svg'
 import roomies from '../../assets/room/icons/roomies.svg'
@@ -110,6 +111,11 @@ const Room = () => {
     setModalIsOpen(true);
   };
 
+  const openModalWithTab4 = () => {
+    setActiveTab('tab4');
+    setModalIsOpen(true);
+  };
+
   const openModal = () => {
     setModalIsOpen(true);
   };
@@ -146,6 +152,7 @@ const Room = () => {
                   <button type='button' className='btn-media' onClick={openModalWithTab1} id="photos-btn"><img src={iconimgs} alt="photos"/> photos</button>
                   <button type='button' className='btn-media' onClick={openModalWithTab2} id="video-btn"><img src={iconvideos} alt="videos"/> video</button>
                   <button type='button' className='btn-media' onClick={openModalWithTab3} id="visit-btn"><img src={iconvisit} alt="visit"/> 360° visit</button>
+                  <button type='button' className='btn-media' onClick={openModalWithTab4} id="floorplan-btn"><img src={iconfloorplan} alt="floorplan"/> flooplan</button>
                   {/* <button type='button' className='btn-media' onClick={openModal} id="media-btn"><img src={iconimgs} alt="media"/> Medias</button> */}
                 </div>
 
