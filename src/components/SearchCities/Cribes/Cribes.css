@@ -57,6 +57,8 @@
 
 .Item-badge {
     position: relative;
+    border-radius: 6px;
+    overflow: hidden;
 }
 
 .notify-badge {
