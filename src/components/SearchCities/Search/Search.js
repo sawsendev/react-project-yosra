@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import "./Search.css";
 import Select from 'react-select';
+import SelectCity from '../../SelectCity/SelectCity';
 
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -10,7 +11,7 @@ import 'rc-slider/assets/index.css';
 
 
 const Search = () => {
-  const [selectedCountry, setSelectedCountry] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState(null);
   const [priceRange, setPriceRange] = useState([1, 1000]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [date, setDate] = useState("");
@@ -31,6 +32,9 @@ const Search = () => {
     setSelectedCountry(cityParam || "");
     setDate(dateParam || "");
     setSortBy(sortByParam || "");
+    if (cityParam) {
+      setSelectedCountry(cityParam);
+    }
 
  // Mise à jour de l'état priceRange si priceMinParam et priceMaxParam existent
     if (priceMinParam && priceMaxParam) {
@@ -76,7 +80,7 @@ const Search = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const searchParams = new URLSearchParams();
-    searchParams.append('city', selectedCountry);
+    searchParams.append('city',selectedCountry);
     searchParams.append('date', date);
     searchParams.append('sortBy', sortBy);
     searchParams.append('priceMin', priceRange[0]); // Ajout de priceMin
@@ -85,7 +89,7 @@ const Search = () => {
     const url = `/search-cities?${searchParams.toString()}`;
     navigate(url);
   };
-  
+   
   const handleChangeDate = (e) => {
     setDate(e.target.value);
   };
@@ -103,16 +107,9 @@ const Search = () => {
             <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
               <label htmlFor="countries">City</label>
               <div className='input-select'>
-                <select name="countries" id="countries-id" className='form-control' onChange={(e) => setSelectedCountry(e.target.value)} value={selectedCountry}>
-                  <option value="" disabled>Select your country</option>
-                  <option value="Nice">Nice</option>
-                  <option value="Paris">Paris</option>
-                  <option value="Canada">Canada</option>
-                  <option value="Tunisia">Tunisia</option>
-                  <option value="Florence">Florence</option>
-                  <option value="Bologna">Bologna</option>
-                </select>
-              </div>
+              <SelectCity onChange={(selectedValue) => setSelectedCountry(selectedValue)}/>
+
+          </div>
             </div>
 
             <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>

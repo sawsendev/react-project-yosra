@@ -225,6 +225,14 @@
     padding: 13px 12px 0;
     text-align: center;
 }
+.widget .head-widgett {
+    margin: 0;
+    color: red;
+    font-size: 20px;
+    font-weight: 400;
+    padding: 13px 12px 0;
+    text-align: center;
+}
 .widget hr {
     margin: 12px 0;
 }

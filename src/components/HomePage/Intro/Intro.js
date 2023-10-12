@@ -1,14 +1,12 @@
 import React, { useState } from 'react'
 import "./Intro.css"
 import { useNavigate } from 'react-router-dom'
+import SelectCity from '../../SelectCity/SelectCity';
 
 const Intro = () => {
   const[city,setCity]=useState('');
   const[date,setDate]=useState('');
   
-  const handleCityChange=(e)=>{
-   setCity(e.target.value);
-  };
   const handleDateChange = (e) => {
     setDate(e.target.value);
   };
@@ -27,12 +25,7 @@ const Intro = () => {
         <h2>discover, share, and make new friends</h2>
         <div className='Input-container d-flex justify-content-between'>
           <div className='input-group input-country'>
-            <select name="countries" id="countries-id" className='Select-country-container w-100'onChange={handleCityChange}>
-                <option value="" selected>Where will you go ?</option>
-                <option value="Paris">Paris</option>
-                <option value="Nice">Nice</option>
-                
-            </select>
+          <SelectCity onChange={(selectedValue) => setCity(selectedValue.value)} />
           </div>
           <div className='input-group input-date'>
             <input type="date" name="dob" data-placeholder="Move in date" required aria-required="true" className='Select-country-container w-100'onChange={handleDateChange}/>

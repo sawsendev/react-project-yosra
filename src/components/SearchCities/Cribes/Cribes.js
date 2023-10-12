@@ -17,7 +17,7 @@ const Cribes = () => {
   const [cribsData, setCribsData] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
+ 
   const [hasMore, setHasMore] = useState(true);
   const staticCoordinates = [
     [43.70328975790311, 7.1704107912588055],
@@ -41,48 +41,47 @@ const Cribes = () => {
   const priceMaxParam = searchParams.get('priceMax');
   const sortByParam = searchParams.get('sortBy');
   const searchParamsExist = cityParam || dateParam || priceMinParam || priceMaxParam || sortByParam;
-
+  const itemsPerPage = 6; // 2 lignes x 3 lots par ligne
+  const [lastLoadedPage, setLastLoadedPage] = useState(0);
   const fetchDataFromAPI = async (page) => {
     try {
-      const headers = {
-        'apiKey': `${API_KEY}`,
-      };
+      if (page !== lastLoadedPage) {
+        setLastLoadedPage(page);
   
-      const response = await fetch(`${API_URL}?page=${page}&limit=${itemsPerPage}`, {
-        method: 'GET',
-        mode: 'cors',
-        headers
-      });
+        const headers = {
+          'apiKey': `${API_KEY}`,
+        };
   
-      const data = await response.json();
-      console.log(data)
-  
-      if (data && data.data && data.data.lots) {
-        // Utilisez currentPage pour déterminer la position de départ des éléments à afficher
-        const startIndex = (currentPage - 1) * itemsPerPage;
-        const endIndex = startIndex + itemsPerPage;
-        const newCribs = data.data.lots.slice(startIndex, endIndex);
-  
-        // Vérifiez si les nouveaux cribs ne sont pas déjà présents dans cribsData
-        const filteredNewCribs = newCribs.filter((newCrib) => {
-          return !cribsData.some((existingCrib) => existingCrib.id === newCrib.id);
+        const response = await fetch(`${API_URL}?page=${page}&limit=${itemsPerPage}`, {
+          method: 'GET',
+          mode: 'cors',
+          headers
         });
   
-        if (filteredNewCribs.length === 0) {
-          setHasMore(false); // Plus de cribs à charger
-        } else {
-          // Affichez cribsData
-          setCribsData((prevData) => [...prevData, ...filteredNewCribs]);
-          setCurrentPage(page + 1);
+        const data = await response.json();
+        console.log(data);
+  
+        if (data && data.data && data.data.lots) {
+          if (page === 1) {
+            // Si c'est la première page, remplacez les données existantes
+            setCribsData(data.data.lots);
+          } else {
+            // Sinon, ajoutez les nouveaux lots à la fin de la liste existante
+            setCribsData(prevCribs => [...prevCribs, ...data.data.lots]);
+          }
+  
+          if (data.data.lots.length < itemsPerPage) {
+            setHasMore(false);
+          }
         }
       }
     } catch (error) {
       console.error('Erreur lors de la récupération des données :', error);
     }
   };
-
-
-  useEffect(() => {
+  
+  
+useEffect(() => {
     if (!searchParamsExist) {
       fetchDataFromAPI(currentPage);
     }
