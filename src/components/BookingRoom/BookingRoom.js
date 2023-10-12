@@ -38,6 +38,22 @@ const BookingRoom = () => {
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
   const API_URL = `http://dev.niceroom.sofis-info.com/api/lot/${id}`;
   const [email,setEmail]=useState('')
+  const [formData, setFormData] = useState({
+    firstName: '',
+    surname: '',
+    email: '',
+    moveInDate: '',
+    moveOutDate: '',
+  }); 
+  
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+    console.log(value)
+  };
   
   
   const handleEmailChange = (event) => {
@@ -69,78 +85,53 @@ const validateEmail = (email) => {
   },[API_URL,API_KEY])
 
 
-  //envoie des données du formulaire 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('handleSubmit called');
+    console.log('Start Date:', formData.moveInDate);
   
     if (!validateForm()) {
-      console.log('form validé');
-      const formData = new FormData();
+      const formDataToSend = new FormData();
   
-      // Ajoutez les champs de texte au FormData
-      formData.append('first_name', formData.firstName);
-      formData.append('last_name', formData.surname);
-      formData.append('email', formData.email);
-      formData.append('phone_number', phoneNumber);
-      formData.append('phone_country_name', 'nice'); // Remplacez par la valeur appropriée
-      formData.append('availability_date', formData.moveInDate); // Utilisez le champ approprié depuis formDat
-      // Récupérez les champs de type fichier (input file)
-      const fileInputs = document.querySelectorAll('input[type="file"]');
-  
-      // Parcourez les champs de type fichier et ajoutez les fichiers au FormData
-      fileInputs.forEach((fileInput) => {
-        const files = fileInput.files;
-        for (let i = 0; i < files.length; i++) {
-          formData.append('medias', files[i]);
-        }
-      });
+      formDataToSend.append('lot_id', id);
+      formDataToSend.append('first_name', formData.firstName);
+      formDataToSend.append('last_name', formData.surname);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('start_date', formData.moveInDate);
+      formDataToSend.append('end_date', formData.moveOutDate);
+    
+      // Ajoutez ici la logique pour ajouter les fichiers au formData (voir ci-dessous)
   
       try {
-        const response = await fetch('http://dev.niceroom.sofis-info.com/api/apartment_request/post', {
+        const response = await fetch('http://dev.niceroom.sofis-info.com/api/rentatl_request/post', {
           method: 'POST',
           mode: 'cors',
           headers: {
+            'apiKey': API_KEY,
             'Content-Type': 'application/json',
-            'apiKey': `${API_KEY}`,
           },
-          body: JSON.stringify(formData),// Utilisez le FormData pour envoyer les fichiers
+          body: JSON.stringify(formDataToSend),
         });
-  
-       
-      if (response.status === 200) {
-       
-        console.log("Requête effectuée avec succès");
-        setFormSubmitted(true);
-        console.log(formSubmitted)
-
-        setFormData({
-          firstName: '',
-          surname: '',
-          email: '', 
-          moveInDate: '',
-          moveOutDate: '',
-        });
-        setPhoneNumber('');
-        setFormErrors({
-          firstName: '',
-          surname: '',
-          email: '',
-          moveInDate: '',
-          moveOutDate: '',
-        });
-        setEmailValid(true);
-        setValid(true);
-      } else {
-        // Gérez les erreurs de la requête ici (pour tous les statuts autres que 200)
-        console.error('Erreur lors de la requête vers l\'API :', response.status);
+      
+        if (response.status === 200) {
+          console.log("Requête effectuée avec succès. Réponse de l'API :");
+          // Vous pouvez également traiter la réponse ici si nécessaire
+        } else if (response.status === 422) {
+          try {
+            const errorData = await response.json();
+            console.error('Erreur lors de la requête vers l\'API :', errorData);
+          } catch (error) {
+            console.error('Erreur lors de la conversion de la réponse JSON :', error);
+          }
+        } else {
+          console.error('Erreur lors de la requête vers l\'API :', response.status);
+        }
+      } catch (error) {
+        console.error('Erreur lors de la requête vers l\'API :', error.message);
       }
-    } catch (error) {
-      console.error('Erreur lors de la requête vers l\'API :', error);
+      
     }
-  }}
+  };
   
-  // Utilisez useEffect pour observer les changements de formSubmitted
   useEffect(() => {
     console.log("formSubmitted mis à jour :", formSubmitted);
   }, [formSubmitted]);
@@ -198,22 +189,7 @@ const validateEmail = (email) => {
     moveInDate: '',
     moveOutDate: '',
   });
-  const [formData, setFormData] = useState({
-    firstName: '',
-    surname: '',
-    email: '',
-    moveInDate: '',
-    moveOutDate: '',
-  }); 
-  
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-  
+
   const validateForm = () => {
     const errors = {};
     let isValid = true;
@@ -246,7 +222,7 @@ const validateEmail = (email) => {
     setFormErrors(errors);
     return isValid;
   };
-  
+ 
 
   const [moveInDate, setMoveInDate] = useState(null);
   const [moveOutDate, setMoveOutDate] = useState(null);
@@ -313,16 +289,16 @@ const validateEmail = (email) => {
               <div class="row mb-4">
                 <div class="col">
                 <div class="form-outline">
-                    <label class="form-label mb-1" for="form6Example1" >First name *</label>
-                    <input type="text" id="form6Example1" name='firstName' class="form-control" placeholder='First name' onChange={handleChange}/>
+                    <label class="form-label mb-1" for="firstname" >First name *</label>
+                    <input type="text"  name='firstName' class="form-control" placeholder='First name' onChange={handleChange}/>
                     {formErrors.firstName !==''&&
                     <div className="error-message">{formErrors.firstName}</div>}
                 </div>
                 </div>
                 <div class="col">
                 <div class="form-outline">
-                    <label class="form-label mb-1" for="form6Example2" >Surname *</label>
-                    <input type="text" id="form6Example2" class="form-control" name='surname' placeholder='Surname' onChange={handleChange}/>
+                    <label class="form-label mb-1" for="surname" >Surname *</label>
+                    <input type="text"  class="form-control" name='surname' placeholder='Surname' onChange={handleChange}/>
                     {formErrors.surname !=='' && <div className="error-message">{formErrors.surname}</div>}
                 </div>
                 </div>
@@ -331,14 +307,16 @@ const validateEmail = (email) => {
                 <div class="row mb-4">
                 <div class="col">
                 <div class="form-outline">
-                    <label class="form-label mb-1" for="datein">Move in date *</label>
+                      <label class="form-label mb-1" for="datein">Move in date *</label>
                     <div class="input-datepicker">
                       <DatePicker
                         selected={moveInDate}
-                        onChange={date => setMoveInDate(date)}
+                        onChange={handleChange}
+                        name='moveIntDate' 
                         customInput={<CustomInputIn />}
                       />
                     </div>
+                    {formErrors.moveInDate !=='' && <div className="error-message">{formErrors.moveInDate}</div>}
                 </div>
                 </div>
                 <div class="col">
@@ -347,10 +325,12 @@ const validateEmail = (email) => {
                     <div class="input-datepicker">
                       <DatePicker
                         selected={moveOutDate}
-                        onChange={date => setMoveOutDate(date)}
+                        onChange={handleChange}
+                        name='moveOutDate' 
                         customInput={<CustomInputOut />}
                       />
                     </div>
+                    {formErrors.moveOutDate !=='' && <div className="error-message">{formErrors.moveOutDate}</div>}
                 </div>
                 </div>
                 </div>

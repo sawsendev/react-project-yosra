@@ -29,7 +29,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
     medias: '',
     message: '',
   });
-  
+  const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
   const [validationErrors, setValidationErrors] = useState({});
 
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -41,7 +41,58 @@ const ProposeModal = ({ isOpen, closeModal }) => {
     3: [],
     4: ['message'],
   };
-
+  const submitFormData = () => {
+    const formDataToSend = new FormData();
+    formDataToSend.append('first_name', formData.firstName);
+    formDataToSend.append('last_name', formData.lastName);
+    formDataToSend.append('email', formData.email);
+    formDataToSend.append('phone_number', formData.phone);
+    formDataToSend.append('surface', formData.surface);
+    formDataToSend.append('availability_date', formData.availability);
+    formDataToSend.append('medias', formData.medias);
+    formDataToSend.append('message', formData.message);
+    
+    fetch('http://dev.niceroom.sofis-info.com/api/apartment_request/post', {
+      method: 'POST',
+      headers: {
+        'apiKey': API_KEY,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formDataToSend),
+    })
+      .then((data) => {
+        // Traitez la réponse de l'API si nécessaire
+        console.log('Réponse de l\'API :', data);
+  
+        // Réinitialisez le formulaire après soumission
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '',
+          quality: '',
+          location: '',
+          address: '',
+          surface: '',
+          availability: '',
+          medias: '',
+          message: '',
+        });
+        setStep(1);
+        closeModal();
+  
+        // Affichez un message de réussite
+        toast.success('Form successfully submitted!', {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 3000, // Ajustez la durée du message toast selon vos besoins (en millisecondes)
+        });
+      })
+      .catch((error) => {
+        console.error('Erreur lors de la soumission du formulaire :', error);
+        // Gérez les erreurs de soumission ici
+      });
+  };
+  
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -296,7 +347,8 @@ const ProposeModal = ({ isOpen, closeModal }) => {
                           <div className="validation-error">{validationErrors.message}</div>
                         )}
                     </div>
-                    <button className='btn btn-send' onClick={handleSubmit}><BsSend /> Send</button>
+                    <button className='btn btn-send' onClick={() => { handleSubmit(); submitFormData(); }}><BsSend /> Send</button>
+
                 </div>
               </>
             );

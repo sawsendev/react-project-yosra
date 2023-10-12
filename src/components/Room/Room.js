@@ -39,6 +39,7 @@ import block from '../../assets/room/icons/block.svg'
 import woman from '../../assets/room/icons/woman.svg'
 import man from '../../assets/room/icons/man.svg'
 import check from '../../assets/room/widget/check.svg'
+import check2 from '../../assets/room/widget/check2.svg'
 import water from '../../assets/room/widget/water.svg'
 import plug from '../../assets/room/widget/plug.svg'
 import insurance from '../../assets/room/widget/insurance.svg'
@@ -72,14 +73,24 @@ const Room = () => {
         .then(data => {
         
             setLotData(data.data.lot);
-            console.log(data.data.lot);        
+            console.log(data.data.lot);     
+            console.log(data.data.lot.rent_status)   
         })
         .catch(error => {
           console.error('Erreur lors de la récupération des données :', error);
         });
     
   },[API_URL,API_KEY])
-   
+  
+  const calculateAge=(dateOfBirth)=> {
+    const dob = new Date(dateOfBirth);
+    const today = new Date();
+    const ageDiff = today - dob;
+    const ageDate = new Date(ageDiff);
+  
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
+  }
+  
 
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -157,7 +168,7 @@ const Room = () => {
               </div>
               <div className='characteristics mt-3 mb-4'>
                 <div className='btn-char'><img src={plan} alt="plan"/>Apartement (76m2)</div>
-                {lotData && lotData.area &&  (
+                {lotData && lotData.area!==0 &&  (
                 <div className='btn-char'><img src={bedroom} alt="bedroom"/>Room ({lotData.area}m2)</div>)}
                 {lotData && lotData.apartment && lotData.apartment.rooms &&  (
                 <div className='btn-char'><img src={roomies} alt="roomies"/>{lotData.apartment.rooms} Roomies</div>)}
@@ -230,43 +241,59 @@ const Room = () => {
 
               </div>
               <div className='flatmates'>
-                <h2 className='mb-3'>Flatmates</h2>
-                <div className='row'>
-                  <div className='col-md-4'>
-                    <div className='panel mb-3'>
-                      <div className='icon'>
-                        <img src={block} alt="Bedroom 1"/>
-                      </div>
-                      <div className='text'>
-                        <p>Bedroom 1</p>
-                        <button type='button' className='btn-visit'>Visit</button>
-                      </div>
-                    </div>
-                  </div>
-                  <div className='col-md-4'>
-                    <div className='panel mb-3'>
-                      <div className='icon'>
-                        <img src={woman} alt="Bedroom 2"/>
-                      </div>
-                      <div className='text'>
-                        <p>Bedroom 2 <span className='status'>Booked</span></p>
-                        <p>Name last name | 25 yrs.</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className='col-md-4'>
-                    <div className='panel mb-3'>
-                      <div className='icon'>
-                        <img src={man} alt="Bedroom 3"/>
-                      </div>
-                      <div className='text'>
-                        <p>Bedroom 3 <span className='status'>Booked</span></p>
-                        <p>Name last name | 20 yrs.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+             <h2 className='mb-3'>Flatmates</h2>
+              <div className='row'>
+              {lotData &&lotData.rent_status ? (
+  <div className='col-md-4'>
+    <div className='panel mb-3'>
+      <div className='icon'>
+        <img src={block} alt="Bedroom 1"/>
+      </div>
+      <div className='text'>
+        <p>{lotData.title.replace('Room', 'Bedroom')}</p>
+        <button type='button' className='btn-visit'>Visit</button>
+      </div>
+    </div>
+  </div>
+) : null}
+
+                  {lotData &&
+  lotData.apartment &&
+  lotData.apartment.flat_mates_infos &&
+  Array.isArray(lotData.apartment.flat_mates_infos) &&
+  lotData.apartment.flat_mates_infos
+.map((locataire, index) => (
+  <div className='col-md-4' key={index}>
+    <div className='panel mb-3'>
+      <div className='icon'>
+        {locataire.locataire_info &&locataire.locataire_info.genre === 0 ? (
+          <img src={man} alt={index} />
+        ) : (
+          <img src={woman} alt={index} />
+        )}
+      </div>
+      <div className='text'>
+     {locataire.title.replace('Room', 'Bedroom')} <span className='status'> Booked</span>
+     
+      <p>
+  
+      {locataire.locataire_info&&locataire.locataire_info.date_of_birth && (
+        <span> | {calculateAge(locataire.locataire_info.date_of_birth)} yrs.</span>
+      )}
+    </p>
+  
+  
+
+      </div>
+    </div>
+  </div>
+))}
+
+  </div>
+</div>
+
+              
+
               <div className='map-local mt-3 mb-3 pb-3'>
                 <h2 className='mb-3'>Where is the accommodation located</h2>
                 <div className='map'>
@@ -285,7 +312,11 @@ const Room = () => {
             </div>
             <div className='col-widget col-lg-4'>
                 <div className='widget mb-3'>
-                  <p className='head-widget'><img src={check} alt="Available"/>Available now</p>
+                {lotData.rent_status ? (
+               <p className='head-widget'><img src={check} alt="Available"/> Available now</p>
+                 ) : (
+                    <p className='head-widgett'><img src={check2} alt="Available"/> Not available</p>
+                    )}
                   <hr/>
                 {(lotData.loyer_hc && <p className='text-center price'>{lotData.loyer_hc}€/<small> month</small></p>)}
                   <div className='text-center assistance'>CAF assistance <PiInfo className='info'/> <span className='green'>( up to -258€ )</span></div>

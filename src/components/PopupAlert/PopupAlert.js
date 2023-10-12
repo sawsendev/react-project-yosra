@@ -21,6 +21,7 @@ const PopupAlert = ({isPopupOpen,closeModal }) => {
     event.preventDefault();
     // Appelez la fonction de gestion du formulaire et transmettez les données
    setClosePopup(true)
+  
 };
 
   return (

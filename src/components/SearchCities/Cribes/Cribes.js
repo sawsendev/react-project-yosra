@@ -9,6 +9,23 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 
 const Cribes = () => {
+  const [isFixed, setIsFixed] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 700) {
+        setIsFixed(true);
+      } else {
+        setIsFixed(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []); 
+
   const customIcon = new L.divIcon({
     className: 'custom-icon',
     html: '<div class="marker-label">400$</div>',
@@ -16,7 +33,6 @@ const Cribes = () => {
   const [cribsData, setCribsData] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
   const [hasMore, setHasMore] = useState(true);
   const staticCoordinates = [
     [43.70328975790311, 7.1704107912588055],
@@ -26,13 +42,12 @@ const Cribes = () => {
     [43.704, 7.166],
   ];
 
-
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
   const API_URL = 'http://dev.niceroom.sofis-info.com/api/lots/list';
 
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
   const cityParam = searchParams.get('city');
   const dateParam = searchParams.get('date');
@@ -40,39 +55,36 @@ const Cribes = () => {
   const priceMaxParam = searchParams.get('priceMax');
   const sortByParam = searchParams.get('sortBy');
   const searchParamsExist = cityParam || dateParam || priceMinParam || priceMaxParam || sortByParam;
-
+  const itemsPerPage = 6; // 2 lignes x 3 lots par ligne
+  const [lastLoadedPage, setLastLoadedPage] = useState(0);
+  
   const fetchDataFromAPI = async (page) => {
     try {
-      const headers = {
-        'apiKey': `${API_KEY}`,
-      };
-  
-      const response = await fetch(`${API_URL}?page=${page}&limit=${itemsPerPage}`, {
-        method: 'GET',
-        mode: 'cors',
-        headers
-      });
-  
-      const data = await response.json();
-      console.log(data)
-  
-      if (data && data.data && data.data.lots) {
-        // Use currentPage to determine the starting position of elements to display
-        const startIndex = (currentPage - 1) * itemsPerPage;
-        const endIndex = startIndex + itemsPerPage;
-        const newCribs = data.data.lots.slice(startIndex, endIndex);
-  
-        // Check if the new cribs are not already present in cribsData
-        const filteredNewCribs = newCribs.filter((newCrib) => {
-          return !cribsData.some((existingCrib) => existingCrib.id === newCrib.id);
+      if (page !== lastLoadedPage) {
+        setLastLoadedPage(page);
+        const headers = {
+          'apiKey': `${API_KEY}`,
+        };
+
+        const response = await fetch(`${API_URL}?page=${page}&limit=${itemsPerPage}`, {
+          method: 'GET',
+          mode: 'cors',
+          headers
         });
-  
-        if (filteredNewCribs.length === 0) {
-          setHasMore(false); // No more cribs to load
-        } else {
-          // Show cribsData
-          setCribsData((prevData) => [...prevData, ...filteredNewCribs]);
-          setCurrentPage(page + 1);
+
+        const data = await response.json();
+        console.log(data);
+
+        if (data && data.data && data.data.lots) {
+          if (page === 1) {
+            setCribsData(data.data.lots);
+          } else {
+            setCribsData(prevCribs => [...prevCribs, ...data.data.lots]);
+          }
+
+          if (data.data.lots.length < itemsPerPage) {
+            setHasMore(false);
+          }
         }
       }
     } catch (error) {
@@ -80,25 +92,17 @@ const Cribes = () => {
     }
   };
 
-
   useEffect(() => {
     if (!searchParamsExist) {
       fetchDataFromAPI(currentPage);
     }
   }, [currentPage, searchParamsExist]);
 
-
   useEffect(() => {
     if (!searchParamsExist) {
       navigate('/search-cities');
-      
       fetchDataFromAPI(currentPage);
-    
-  
     }
-    
-    
-    
   }, [currentPage, searchParamsExist]);
 
   useEffect(() => {
@@ -110,7 +114,7 @@ const Cribes = () => {
         price_max: priceMaxParam,
         sort_by: sortByParam,
       };
-  
+
       fetch('http://dev.niceroom.sofis-info.com/api/lots/search', {
         method: 'POST',
         headers: {
@@ -119,47 +123,19 @@ const Cribes = () => {
         },
         body: JSON.stringify(formData),
       })
-        .then((response) => response.json())
-        .then((data) => {
-          setSearchResult(data.data.lots);
-          })
-        .catch((error) => {
-          console.error('Erreur lors de la requête POST :', error);
-        });
+      .then((response) => response.json())
+      .then((data) => {
+        setSearchResult(data.data.lots);
+      })
+      .catch((error) => {
+        console.error('Erreur lors de la requête POST :', error);
+      });
     }
   }, [searchParamsExist, cityParam, dateParam, priceMinParam, priceMaxParam, sortByParam]);
+
   useEffect(() => {
     console.log(searchResult); 
-  }, [searchResult]);
-
-  
-  const [isOuterDivFixed, setIsOuterDivFixed] = useState(false);
-
-  // Add a scroll event listener to monitor the scroll position
-  useEffect(() => {
-    const handleScroll = () => {
-      const outerDiv = document.querySelector('.infinite-scroll-component__outerdiv');
-
-      if (outerDiv) {
-        const scrollY = window.scrollY;
-        const outerDivHeight = outerDiv.clientHeight;
-
-        // Check if the conditions are met to add the "fixed" class
-        if (outerDivHeight > 800 && scrollY > 700) {
-          setIsOuterDivFixed(true);
-        } else {
-          setIsOuterDivFixed(false);
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
+  }, [searchResult]); 
 
   return (
     <div className='Cribes-container container-fluid'>
@@ -169,7 +145,7 @@ const Cribes = () => {
         <div className='row row-cribes'>
           <div className='col-lg-7'>
             <InfiniteScroll
-              dataLength={searchParamsExist ? searchResult.length : cribsData.length}
+              dataLength={searchParamsExist ? (searchResult ? searchResult.length : 0) : (cribsData ? cribsData.length : 0)}
               next={() => fetchDataFromAPI(currentPage)}
               hasMore={hasMore}
               style={{ overflowX: 'hidden' }}

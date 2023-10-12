@@ -6,9 +6,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import calendarIcon from '../../../assets/calendar.svg'; 
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import SelectCity from '../../SelectCity/SelectCity';
+
 
 
 const Search = () => {
@@ -19,7 +18,7 @@ const Search = () => {
   const [sortBy, setSortBy] = useState(""); 
   const location = useLocation();
   const [isSliderOpen,setIsSliderOpen]=useState(false)
- 
+  const[city,setCity]=useState("")
   useEffect(() => {
     // Parsez les paramètres de l'URL ici
     const searchParams = new URLSearchParams(location.search);
@@ -96,22 +95,6 @@ const Search = () => {
   };
 
 
-  const [selectedDate, setSelectedDate] = useState(null);
-  const CustomInput = ({ value, onClick }) => (
-    <div className="input-datepicker" onClick={onClick}>
-      <input
-        type="text"
-        name="date"
-        className="form-control"
-        value={value}
-        placeholder="Move in date"
-      />
-      <span className="calendar-icon">
-        <img src={calendarIcon} alt="Calendar" />
-      </span>
-    </div>
-  );
-
   return (
     <div className='Search-container'>
       <div className="container">
@@ -121,26 +104,15 @@ const Search = () => {
             <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
               <label htmlFor="countries">City</label>
               <div className='input-select'>
-                <select name="countries" id="countries-id" className='form-control' onChange={(e) => setSelectedCountry(e.target.value)} value={selectedCountry}>
-                  <option value="" disabled>Select your country</option>
-                  <option value="Nice">Nice</option>
-                  <option value="Paris">Paris</option>
-                  <option value="Canada">Canada</option>
-                  <option value="Tunisia">Tunisia</option>
-                  <option value="Florence">Florence</option>
-                  <option value="Bologna">Bologna</option>
-                </select>
+              <SelectCity onChange={(selectedValue) => setCity(selectedValue.value)} />
               </div>
             </div>
 
             <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
               <label htmlFor="cars">Move in date</label>
-              
-                <DatePicker
-                  selected={selectedDate}
-                  onChange={(date) => setSelectedDate(date)}
-                  customInput={<CustomInput />}
-                />
+              <div className='input-date'>
+                <input type="date" name="date" className='form-control' placeholder='Move in date' value={date} onChange={handleChangeDate} />
+              </div>
             </div>
 
             <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
