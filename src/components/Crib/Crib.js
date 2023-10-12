@@ -22,7 +22,7 @@ const Crib = ({ cribs }) => {
                   <img src={promoImage} alt='Promo' className='promo-image' />
                 )}
                 <Link to={`/room/${crib.id}`}>
-                <img className="img-fluid" src={room} alt="photo_fine_cribs" />
+                  <img className="img-fluid" src={room} alt="photo_fine_cribs" />
                 </Link>
 
               </div>

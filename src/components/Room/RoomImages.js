@@ -75,45 +75,45 @@ const CarrouselImages = () => {
   };
 
   return (
-  
-    <div className='img-items'>
-      {lotData.media && lotData.media.length > 0 ? (
-        <Carousel
-          ref={carouselRef}
-          responsive={responsive}
-          infinite={true}
-          containerClass="carousel-container"
-        >
-          {lotData.media.map((image, index) => (
-            <div key={index} className='item-img'>
-              <img src={image.original_url} alt={image.name} className="img-fluid" />
-            </div>
-          ))}
-        </Carousel>
-      ) : (
-        <div className='default-img'>
-          <img src={default_img} alt="default image" className="img-fluid" />
-        </div> 
-        // <p>Pas d'images disponibles.</p>
-      )}
-  
-      <div className="button-container">
-        <div
-          onClick={onClickPrev}
-          onMouseUp={onMouseUp}
-          className={`custom-prev-arrow ${isPrevActive ? '' : 'disabled'}`}
-        >
-          <BsArrowLeft className="arrow-icon" />
+  <div className='img-items'>
+  {lotData.media && lotData.media.length > 0 ? (
+    <Carousel
+      ref={carouselRef}
+      responsive={responsive}
+      infinite={true}
+      containerClass="carousel-container"
+    >
+      {lotData.media.map((image, index) => (
+        <div key={index} className='item-img'>
+          <img src={image.original_url} alt={image.name} className="img-fluid" />
         </div>
-        <div
-          onClick={onClickNext}
-          onMouseUp={onMouseUp}
-          className={`custom-next-arrow ${isNextActive ? '' : 'disabled'}`}
-        >
-          <BsArrowRight className="arrow-icon" />
-        </div>
+      ))}
+    </Carousel>
+  ) : (
+    <div className='default-img'>
+      <img src={default_img} alt="default image" className="img-fluid" />
+    </div>
+  )}
+
+  {lotData.media && lotData.media.length > 1 && (
+    <div className="button-container">
+      <div
+        onClick={onClickPrev}
+        onMouseUp={onMouseUp}
+        className={`custom-prev-arrow ${isPrevActive ? '' : 'disabled'}`}
+      >
+        <BsArrowLeft className="arrow-icon" />
+      </div>
+      <div
+        onClick={onClickNext}
+        onMouseUp={onMouseUp}
+        className={`custom-next-arrow ${isNextActive ? '' : 'disabled'}`}
+      >
+        <BsArrowRight className="arrow-icon" />
       </div>
     </div>
+  )}
+</div>
   );
 };
 
