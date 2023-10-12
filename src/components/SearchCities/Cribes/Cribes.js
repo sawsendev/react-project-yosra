@@ -178,11 +178,11 @@ const Cribes = () => {
 
           {!(searchParamsExist && searchResult.length === 0) ? (
   <div className='Maps col-lg-5'>
-    <div className='maps-block'>
+    <div className={`maps-block ${isOuterDivFixed ? 'fixed' : ''}`}>
       <MapContainer
         center={[43.70328975790311, 7.1704107912588055]}
         zoom={13}
-        style={{ height: '500px', width: '100%' }}
+        style={{ height: '765px', width: '100%' }}
       >
         <TileLayer
           url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'

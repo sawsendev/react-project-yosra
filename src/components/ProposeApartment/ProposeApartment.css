@@ -242,7 +242,7 @@
     position: relative;
     z-index: 1;
   }
-  .content2-container .button-black {
+  .content2-container .button-black , .btn_proposemodal .button-black{
     background-color: #000;
     color: #fff;
     height: 40px;
@@ -258,7 +258,8 @@
     box-shadow: none;
     border: none!important;
 }
-.content2-container .button-black:hover, .content2-container .button-black:focus {
+.content2-container .button-black:hover, .content2-container .button-black:focus,
+.btn_proposemodal .button-black:hover, .btn_proposemodal .button-black:focus {
   background-color: #1c1c1c;
 }
 .button-black .icon-envelop {
