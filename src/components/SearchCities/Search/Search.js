@@ -1,26 +1,24 @@
 import React, { useState } from 'react';
 import "./Search.css";
 import Select from 'react-select';
-import SelectCity from '../../SelectCity/SelectCity';
 
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import calendarIcon from '../../../assets/calendar.svg'; 
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import SelectCity from '../../SelectCity/SelectCity';
+
 
 
 const Search = () => {
-  const [selectedCountry, setSelectedCountry] = useState(null);
+  const [selectedCountry, setSelectedCountry] = useState("");
   const [priceRange, setPriceRange] = useState([1, 1000]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [date, setDate] = useState("");
   const [sortBy, setSortBy] = useState(""); 
   const location = useLocation();
   const [isSliderOpen,setIsSliderOpen]=useState(false)
- 
+  const[city,setCity]=useState("")
   useEffect(() => {
     // Parsez les paramètres de l'URL ici
     const searchParams = new URLSearchParams(location.search);
@@ -34,9 +32,6 @@ const Search = () => {
     setSelectedCountry(cityParam || "");
     setDate(dateParam || "");
     setSortBy(sortByParam || "");
-    if (cityParam) {
-      setSelectedCountry(cityParam);
-    }
 
  // Mise à jour de l'état priceRange si priceMinParam et priceMaxParam existent
     if (priceMinParam && priceMaxParam) {
@@ -82,7 +77,7 @@ const Search = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const searchParams = new URLSearchParams();
-    searchParams.append('city',selectedCountry);
+    searchParams.append('city', selectedCountry);
     searchParams.append('date', date);
     searchParams.append('sortBy', sortBy);
     searchParams.append('priceMin', priceRange[0]); // Ajout de priceMin
@@ -91,7 +86,7 @@ const Search = () => {
     const url = `/search-cities?${searchParams.toString()}`;
     navigate(url);
   };
-   
+  
   const handleChangeDate = (e) => {
     setDate(e.target.value);
   };
@@ -99,22 +94,6 @@ const Search = () => {
     setSortBy(e.target.value);
   };
 
-
-  const [selectedDate, setSelectedDate] = useState(null);
-  const CustomInput = ({ value, onClick }) => (
-    <div className="input-datepicker" onClick={onClick}>
-      <input
-        type="text"
-        name="date"
-        className="form-control"
-        value={value}
-        placeholder="Move in date"
-      />
-      <span className="calendar-icon">
-        <img src={calendarIcon} alt="Calendar" />
-      </span>
-    </div>
-  );
 
   return (
     <div className='Search-container'>
@@ -125,19 +104,15 @@ const Search = () => {
             <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
               <label htmlFor="countries">City</label>
               <div className='input-select'>
-              <SelectCity onChange={(selectedValue) => setSelectedCountry(selectedValue)}/>
-
-          </div>
+              <SelectCity onChange={(selectedValue) => setCity(selectedValue.value)} />
+              </div>
             </div>
 
             <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
               <label htmlFor="cars">Move in date</label>
-              
-                <DatePicker
-                  selected={selectedDate}
-                  onChange={(date) => setSelectedDate(date)}
-                  customInput={<CustomInput />}
-                />
+              <div className='input-date'>
+                <input type="date" name="date" className='form-control' placeholder='Move in date' value={date} onChange={handleChangeDate} />
+              </div>
             </div>
 
             <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
