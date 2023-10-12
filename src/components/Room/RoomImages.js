@@ -3,6 +3,9 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { BsArrowRight, BsArrowLeft } from 'react-icons/bs';
 import { useParams } from 'react-router-dom';
+// import default_img from '../../assets/room/default_image.jpg';
+import default_img from '../../assets/noimage-197x197.svg';
+
 
 const CarrouselImages = () => {
   const { id } = useParams();
@@ -88,7 +91,10 @@ const CarrouselImages = () => {
           ))}
         </Carousel>
       ) : (
-        <p>Pas d'images disponibles.</p>
+        <div className='default-img'>
+          <img src={default_img} alt="default image" className="img-fluid" />
+        </div> 
+        // <p>Pas d'images disponibles.</p>
       )}
   
       <div className="button-container">

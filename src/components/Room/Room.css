@@ -310,7 +310,20 @@
     font-weight: 400;
     line-height: 26px;
 }
-
+.default-img {
+    background: #DCDCDC;
+    height: 503px;
+    width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+.pageroom-container .carousel-images .default-img img {
+    width: auto;
+    height: auto;
+}
 /****** Responsive ******/
 @media(max-width:1400px) {
     .panel {
