@@ -19,7 +19,10 @@ import 'react-phone-input-2/lib/style.css';
 import BookingProcess from '../BookingProcess/BookingProcess';
 import Breadcrumbs from '../Breadcrumbs/Breadcrumbs'
 import { useParams } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import calendarIcon from '../../assets/calendar.svg'; 
 
 const BookingRoom = () => {
 // ************************
@@ -221,6 +224,40 @@ const validateEmail = (email) => {
   };
  
 
+  const [moveInDate, setMoveInDate] = useState(null);
+  const [moveOutDate, setMoveOutDate] = useState(null);
+  const CustomInputIn = ({ value, onClick }) => (
+    <div className="input-datepicker" onClick={onClick}>
+      <input
+        type="text"
+        name="datein"
+        className="form-control"
+        value={value}
+        placeholder=""
+        required
+      />
+      <span className="calendar-icon">
+        <img src={calendarIcon} alt="Calendar" />
+      </span>
+    </div>
+  );
+
+  const CustomInputOut = ({ value, onClick }) => (
+    <div className="input-datepicker" onClick={onClick}>
+      <input
+        type="text"
+        name="dateout"
+        className="form-control"
+        value={value}
+        placeholder=""
+        required
+      />
+      <span className="calendar-icon">
+        <img src={calendarIcon} alt="Calendar" />
+      </span>
+    </div>
+  );
+
   return (
     <>
     {lotData && lotData.apartment && lotData.apartment.title && lotData.title && (
@@ -270,27 +307,30 @@ const validateEmail = (email) => {
                 <div class="row mb-4">
                 <div class="col">
                 <div class="form-outline">
-                    <label class="form-label mb-1" for="moveInDate">Move in date *</label>
-                    <div class="form-date">
-                      <input type="date"   class="form-control input-date" 
-                      name='moveInDate' required onChange={handleChange}/>
-
-                      {formErrors.moveInDate !=='' && <div className="error-message">{formErrors.moveInDate}</div>}
-                      
+                      <label class="form-label mb-1" for="datein">Move in date *</label>
+                    <div class="input-datepicker">
+                      <DatePicker
+                        selected={moveInDate}
+                        onChange={handleChange}
+                        name='moveIntDate' 
+                        customInput={<CustomInputIn />}
+                      />
                     </div>
+                    {formErrors.moveInDate !=='' && <div className="error-message">{formErrors.moveInDate}</div>}
                 </div>
                 </div>
                 <div class="col">
                 <div class="form-outline">
-                    <label class="form-label mb-1" for="moveOutDate">Move out date *</label>
-                    <div class="form-date">
-                      <input type="date" 
-                      class="form-control input-date" 
-                      name='moveOutDate' 
-                      required 
-                      onChange={handleChange}/>
-                      {formErrors.moveOutDate !=='' && <div className="error-message">{formErrors.moveOutDate}</div>}
+                    <label class="form-label mb-1" for="dateout">Move out date *</label>
+                    <div class="input-datepicker">
+                      <DatePicker
+                        selected={moveOutDate}
+                        onChange={handleChange}
+                        name='moveOutDate' 
+                        customInput={<CustomInputOut />}
+                      />
                     </div>
+                    {formErrors.moveOutDate !=='' && <div className="error-message">{formErrors.moveOutDate}</div>}
                 </div>
                 </div>
                 </div>

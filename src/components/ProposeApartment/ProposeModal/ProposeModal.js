@@ -8,6 +8,11 @@ import { BsSend } from "react-icons/bs";
 import Modal from 'react-modal';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import calendarIcon from '../../../assets/calendar.svg'; 
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
+
 
 const ProposeModal = ({ isOpen, closeModal }) => {
   const [step, setStep] = useState(1);
@@ -20,7 +25,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
     location: '',
     address: '',
     surface: '',
-    availability: '',
+    date: null, // Define selectedDate here
     medias: '',
     message: '',
   });
@@ -28,12 +33,11 @@ const ProposeModal = ({ isOpen, closeModal }) => {
   const [validationErrors, setValidationErrors] = useState({});
 
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-//   const phoneRegex = /^\d{8}$/;
   const phoneRegex = /^[\d-]{6,20}$/;
 
   const requiredFieldsByStep = {
     1: ['email', 'phone', 'quality'],
-    2: ['address', 'surface', 'availability'],
+    2: ['address', 'surface', 'date'],
     3: [],
     4: ['message'],
   };
@@ -107,10 +111,16 @@ const ProposeModal = ({ isOpen, closeModal }) => {
     }
 
     currentStepRequiredFields.forEach((field) => {
-      if (!formData[field].trim()) {
-        errors[field] = 'This field is required';
+        // Check if formData[field] is a string before calling trim()
+        if (typeof formData[field] === 'string' && !formData[field].trim()) {
+          errors[field] = 'This field is required';
+        }
+      });
+    
+      // Check if date is empty
+      if (step === 2 && formData.date === null) {
+        errors.date = 'Date of availability is required';
       }
-    });
 
     if (Object.keys(errors).length === 0) {
       if (step < 4) {
@@ -125,16 +135,16 @@ const ProposeModal = ({ isOpen, closeModal }) => {
           location: '',
           address: '',
           surface: '',
-          availability: '',
+          date: null,
           medias: '',
           message: '',
         });
         setStep(1);
         closeModal();
-              // Show success toast message
+        // Show success toast message
         toast.success('Form successfully submitted!', {
-            position: toast.POSITION.TOP_CENTER,
-            autoClose: 3000, // Adjust the duration of the toast as needed (in milliseconds)
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 3000,
         });
       }
       setValidationErrors({});
@@ -146,7 +156,26 @@ const ProposeModal = ({ isOpen, closeModal }) => {
   const prevStep = () => {
     setStep(step - 1);
   };
-  
+
+
+  const [selectedDate, setSelectedDate] = useState(null);
+  const CustomInput = ({ value, onClick }) => (
+    <div className="input-datepicker" onClick={onClick}>
+      <input
+        type="text"
+        name="date"
+        className="form-control"
+        value={value}
+        placeholder=""
+      required/>
+      <span className="calendar-icon">
+        <img src={calendarIcon} alt="Calendar" />
+      </span>
+    </div>
+  );
+  const handleDateSelect = (date) => {
+    setFormData({ ...formData, date }); // Update the date in formData
+  };
     const renderStep = () => {
       switch (step) {
         case 1:
@@ -263,16 +292,18 @@ const ProposeModal = ({ isOpen, closeModal }) => {
                 </div>
                 <div className='form-group'>
                     <label className='form-label'>Date of availability *</label>
-                    <div className='input-group input-date'>
-                        <input className='form-control'
-                            type="date"
-                            name="availability"
-                            value={formData.availability}
-                            onChange={handleInputChange}
-                        required/>
+                    <div className='input-group'>
+
+                            
+                   
+                        <DatePicker
+  selected={formData.date} 
+  onChange={handleDateSelect}
+  customInput={<CustomInput />}
+/>
                     </div>
-                        {validationErrors.availability && (
-                          <div className="validation-error">{validationErrors.availability}</div>
+                        {validationErrors.date && (
+                          <div className="validation-error">{validationErrors.date}</div>
                         )}
                 </div>
                 <button className='btn btn-accept' onClick={handleSubmit}>OK</button>
@@ -367,4 +398,4 @@ const ProposeModal = ({ isOpen, closeModal }) => {
       )
     }
   
-export default ProposeModal
+export default ProposeModal;

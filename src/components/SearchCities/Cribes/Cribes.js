@@ -9,7 +9,6 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 
 const Cribes = () => {
-  // Define customIcon here
   const customIcon = new L.divIcon({
     className: 'custom-icon',
     html: '<div class="marker-label">400$</div>',
@@ -132,13 +131,30 @@ useEffect(() => {
     console.log(searchResult); 
   }, [searchResult]);
 
+  
+  const [isFixed, setIsFixed] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 700) {
+        setIsFixed(true); 
+      } else {
+        setIsFixed(false); 
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []); 
 
   return (
     <div className='Cribes-container container-fluid'>
       <h2>Our cribs in Nice</h2>
       <h5>Nice</h5>
       <div className='content-page'>
-        <div className='row'>
+        <div className='row row-cribes'>
           <div className='col-lg-7'>
             <InfiniteScroll
               dataLength={searchParamsExist ? searchResult.length : cribsData.length}
