@@ -178,7 +178,7 @@ const Cribes = () => {
 
           {!(searchParamsExist && searchResult.length === 0) ? (
   <div className='Maps col-lg-5'>
-    <div className={`maps-block ${isOuterDivFixed ? 'fixed' : ''}`}>
+    <div>
       <MapContainer
         center={[43.70328975790311, 7.1704107912588055]}
         zoom={13}

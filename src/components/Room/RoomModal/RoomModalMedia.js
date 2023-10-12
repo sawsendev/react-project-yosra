@@ -105,7 +105,7 @@ const RoomModalMedia = ({ isOpen, closeModal, activeTab, setActiveTab , lotData 
                         {activeTab === 'tab3' && (
                             <div className='tab-panel'>
                                 <ul className='gallery-videos row m-0'>
-                                    <li className='itm-video col-md-12 p-0'><iframe src="https://www.youtube.com/embed/aarWe5yf6i8?si=SU6Jvd8K0RgRKs7-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></li>
+                                    <li className='itm-video col-md-12 p-0'><iframe width='853' height='480' src='https://my.matterport.com/show/?m=xtS2JPoUHQi' frameborder='0' allowfullscreen allow='xr-spatial-tracking'></iframe></li>
                                 </ul>
                             </div>
                         )}
