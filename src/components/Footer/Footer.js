@@ -29,6 +29,7 @@ const Footer = () => {
   const toggleUsefulLinks = () => {
     setShowUsefulLinks(!showUsefulLinks);
   };
+
   const openPopup = () => {
     setIsPopupOpen(true);
   };
@@ -70,8 +71,11 @@ const Footer = () => {
         </div>
         <div className='Create-alert px-3'>
           <p className='h3'>You don’t find what you are looking for? </p>
-          <PopupAlert isPopupOpen={isPopupOpen}/>
-          <button className='btn btn-alert' onClick={openPopup}> <img src={bell} alt='bell'/>Create an alert</button>
+          
+          <button className='btn btn-alert' onClick={openPopup}>
+            <img src={bell} alt='bell' />Create an alert
+          </button>
+
         </div>
       </div>
       </div>
@@ -138,8 +142,10 @@ const Footer = () => {
         {/* Create Alert Section */}
         <div className='Create-alert container'>
           <p className='h3'>You don’t find what you are looking for? </p>
-          <PopupAlert/>
-          <button className='btn btn-alert' onClick={openPopup}> <img src={bell} alt='bell'/> Create an alert</button>
+          
+          <button className='btn btn-alert' onClick={openPopup}>
+            <img src={bell} alt='bell' />Create an alert
+          </button>
         </div>
       </div>
 
@@ -148,8 +154,9 @@ const Footer = () => {
         <p className='m-0 text-center'>Copyright 2022 - Oxton Digital</p>
       </div>
       {/* PopupAlert */}
-   
-        <PopupAlert />
+
+      <PopupAlert isPopupOpen={isPopupOpen} onClose={closePopup}/>
+
     </>
   );
 };
