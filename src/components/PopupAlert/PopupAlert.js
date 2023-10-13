@@ -62,7 +62,7 @@ const PopupAlert =  (props) => {
           ) : (
           <form onSubmit={handleFormSubmit}>
             <div className='row'>
-              <div className='col-lg-6'>
+              <div className='col-md-6'>
                 <div className="form-outline">
                   <label htmlFor="firstName" className='form-label'>Name</label>
                   <input
@@ -75,7 +75,7 @@ const PopupAlert =  (props) => {
                   />
                 </div>
               </div>
-              <div className='col-lg-6'>
+              <div className='col-md-6'>
                 <div className="form-outline">
                   <label htmlFor="lastName" className='form-label'>Surname</label>
                   <input
@@ -90,7 +90,7 @@ const PopupAlert =  (props) => {
               </div>
             </div>
             <div className='row'>
-              <div className='col-lg-6'>
+              <div className='col-md-6'>
                 <div className="form-outline">
                   <label htmlFor="email" className='form-label'>Email address</label>
                   <input
@@ -103,7 +103,7 @@ const PopupAlert =  (props) => {
                   />
                 </div>
               </div>
-              <div className='col-lg-6'>
+              <div className='col-md-6'>
                 <div className="form-outline">
                   <label htmlFor="phoneNumber" className='form-label'>Phone number</label>
                   <PhoneInput
@@ -118,7 +118,7 @@ const PopupAlert =  (props) => {
               </div>
             </div>
             <div className='row'>
-              <div className='col-lg-6'>
+              <div className='col-md-6'>
                 <div className="form-outline">
                   <label htmlFor="city" className='form-label'>City</label>
                   <div className='input-select'>
@@ -133,7 +133,7 @@ const PopupAlert =  (props) => {
                   </div>
                 </div>
               </div>
-              <div className='col-lg-6'>
+              <div className='col-md-6'>
                 <div className="form-outline">
                   <label htmlFor="moveInDate" className='form-label'>Move in date</label>
                   <div className='input-date'>
@@ -150,7 +150,7 @@ const PopupAlert =  (props) => {
               </div>
             </div>
             <div className='row'>
-              <div className='col-lg-6'>
+              <div className='col-md-6'>
                 <div className="form-outline">
                   <label htmlFor="maxBudget" className='form-label'>Max budget</label>
                   <div className='input-price'>

@@ -135,3 +135,28 @@ body.popup-open {
   justify-content: center;
   align-items: center;
 }
+@media (max-width: 576px) {
+  .popupalert .circle {
+    width: 60px;
+    height: 60px;
+    top: -30px;
+  }
+  .popupalert .circle img {
+    width: 27px;
+    height: auto;
+  }
+  .popupalert .popup-content {
+    padding: 0 12px;
+  }
+  .popupalert .popup-content h2 {
+    font-size: 18px;
+  }
+  .popupalert .popup-body {
+    padding: 14px 6px 20px;
+  }
+  .popupalert .popup-body button {
+    padding: 4px 40px;
+    font-size: 16px;
+    margin: 0;
+  }
+}
