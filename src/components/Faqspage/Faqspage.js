@@ -1,43 +1,36 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import "./Faqspage.css"
 import {FaqspageTableRenting, FaqspageTablePartnering} from "../../Data/Data"
 import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
 import {IoIosArrowDown, IoIosArrowUp} from 'react-icons/io'
 import {BsArrowRightShort} from 'react-icons/bs'
-import PopupAlert from '../PopupAlert/PopupAlert'
 
 const Faqspage = () => {
-     const [toggleState, setToggleState]=useState(1)
-     const [selected, setSelected]=useState(null)
-     const [selectedAnswer, setSelectedAnswer] =useState(null)
-     const [isPopupOpen, setIsPopupOpen] = useState(false);
+     const [toggleState, setToggleState] = useState(1);
+     const [selected, setSelected] = useState(null);
+     const [selectedAnswer, setSelectedAnswer] = useState(null);
 
-  
-     const toggleTab=(index)=>{
-       setToggleState(index)
+
+     const toggleTab = (index) => {
+       setToggleState(index);
+     }
+   
+     const toggleSubTabs = (index) => {
+       if (selected === index) {
+         setSelected(null);
+       } else {
+         setSelected(index);
+       }
+     }
+   
+     const toggleSubTabsAnswers = (index) => {
+       if (selectedAnswer === index) {
+         setSelectedAnswer(null);
+       } else {
+         setSelectedAnswer(index);
+       }
      }
 
-     const toggleSubTabs=(index)=>{
-          if(selected === index) {
-             return  setSelected(null)
-          }
-          return setSelected(index)
-     }
-
-     const toggleSubTabsAnswers=(index)=>{
-          if(selectedAnswer === index) {
-               return  setSelectedAnswer(null)
-            }
-           return setSelectedAnswer(index)
-     }
-
-     const openPopup = () => {
-          setIsPopupOpen(true);
-        };
-      
-        const closePopup = () => {
-          setIsPopupOpen(false);
-        };
         
 
 return (
@@ -62,16 +55,16 @@ return (
                                         <h2 className='mb-0'>{renting.title}</h2>
                                         <span>{selected === index ? ( <IoIosArrowUp className='arrow'/> ) : ( <IoIosArrowDown className='arrow'/> )}</span>
                                    </div>
-                                   <div className={`mx-5 subAnswers ${selected === index ? "active-content" : "content"}`}>
+                                   <div className={`subAnswers ${selected === index ? "active-content" : "content"}`} >
                                         {renting.subTitles ? (
                                              renting.subTitles.map((subTitle, subIndex) => (
                                         
                                              
                                              <div key={subIndex} className={`pr-5 py-2 row align-items-baseline justify-content-between ${selectedAnswer === subIndex ? "subTitlesRentingActive" : "subTitlesRenting"}`}>
-                                             <h4 className='col-lg-5 col-sm-12 mb-0 py-2'
-                                             onClick={()=>toggleSubTabsAnswers(subIndex)}> <BsArrowRightShort className='fleche'/> {subTitle.title}</h4>
+                                             <h3 className='subtitle col-lg-5 col-sm-12 mb-0 py-3'
+                                             onClick={()=>toggleSubTabsAnswers(subIndex)}> <BsArrowRightShort className='fleche'/> {subTitle.title}</h3>
                                         
-                                             <p className={`col-lg-7 col-sm-12 col-content ${selectedAnswer === subIndex ? "active-content" : "content"}`}>
+                                             <p className={`col-lg-7 col-sm-12 col-content py-3 ${selectedAnswer === subIndex ? "active-content" : "content"}`} >
                                                   {/* {subTitle.answer}  */}
                                                   <div dangerouslySetInnerHTML={{ __html: subTitle.answer }} />
                                              </p>
@@ -90,16 +83,16 @@ return (
                <div  className={toggleState === 2 ? " active-content" : "content"} onClick={()=>toggleTab(2)}>
                     <div className='display-block '>
                          {FaqspageTablePartnering.map((renting, index) => (
-                                   <div className={`mx-5 subAnswers `}>
+                                   <div className={` subAnswers `}>
                                         {renting.subTitles ? (
                                              renting.subTitles.map((subTitle, subIndex) => (
                                         
                                              
                                              <div key={subIndex} className={`pr-5 py-2 row align-items-baseline justify-content-between ${selectedAnswer === subIndex ? "subTitlesRentingActive" : "subTitlesRenting"}`}>
-                                             <h4 className='col-lg-5 col-sm-12 mb-0 py-2'
-                                             onClick={()=>toggleSubTabsAnswers(subIndex)}> <BsArrowRightShort className='fleche'/> {subTitle.title}</h4>
+                                             <h2 className='subtitle col-lg-5 col-sm-12 mb-0 py-3'
+                                             onClick={()=>toggleSubTabsAnswers(subIndex)}> <BsArrowRightShort className='fleche'/> {subTitle.title}</h2>
                                         
-                                             <p className={`col-lg-7 col-sm-12 col-content ${selectedAnswer === subIndex ? "active-content" : "content"}`}>
+                                             <p className={`col-lg-7 col-sm-12 col-content py-3 ${selectedAnswer === subIndex ? "active-content" : "content"}`}>
                                                   {/* {subTitle.answer}  */}
                                                   <div dangerouslySetInnerHTML={{ __html: subTitle.answer }} />
                                              </p>
@@ -122,7 +115,6 @@ return (
 
         </div>
     </div>
-      <PopupAlert isPopupOpen={isPopupOpen} onClose={closePopup}/>
     </div>
     
   )

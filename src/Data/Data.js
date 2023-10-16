@@ -407,7 +407,7 @@ export const FaqspageTableRenting = [
         {
         id:0,
         title:"I could not find availabilities for my dates, what should I do?",
-        answer:"<p>You can  <a class='link' href='#'>create an alert</a> specifying your ideal move-in date and we will keep you informed as soon as we will have availabilities. Please consider that we typically get a good visibility on availabilities 2-3 months in advance, which means that if you are looking to move in in let’s say 6 months and that there are no availabilities listed on the website, chances are that we will be able to confirm you new availabilities as they arise 2-3 months before your move-in date.</p>",  
+        answer:"<p>You can  <a class='link' href='#create_alert'>create an alert</a> specifying your ideal move-in date and we will keep you informed as soon as we will have availabilities. Please consider that we typically get a good visibility on availabilities 2-3 months in advance, which means that if you are looking to move in in let’s say 6 months and that there are no availabilities listed on the website, chances are that we will be able to confirm you new availabilities as they arise 2-3 months before your move-in date.</p>",  
         src:""
     },
     {
@@ -570,12 +570,22 @@ export const FaqspageTableRenting = [
         id:0,
         title:"Plumbing",
         answer:`
-        <h5>The bathroom or kitchen sinks are clogged<h5>
-        <p>If the water in your sink drains slowly or can't drain at all, your sink drain is probably clogged. This is most certainly due to hair or food, It is imperative that you remove anything that can clog your drain, for example by using a plunger.<br/> To unclog your sink:</p><ul> <li>Free the space under the siphon</li><li>Place a basin under the siphon</li><li>Unscrew the lower part of the siphon: to unscrew the plastic siphon, there is no need to use specific tools: your hands are enough. Hold the upper part firmly with your second hand so as not to disturb the piping when unscrewing</li><li>Check to see if any debris is still stuck: If there is still debris clogging your drain, use a small wire hook or an old toothbrush to free the drain</li><li>Screw it back on by replacing the seal: screw the elements of your siphon back on and don't forget to put the seals back inside your siphon! Attention, it is very important to keep this seal. If it is lost or thrown away, the siphon will have to be completely replaced.</li> <li>Check for leaks , tighten if necessary. Perform a short test: run the water to inspect for leaks. If so, tighten the pipes and the siphon a little more.</li></ul> <p>If the problem persists, contact our technical department at <a href='mailto:contact@finecribs.com'>contact@finecribs.com</a></p>
-        <h5>The shower is clogged</h5>
-        <p>Shower traps (system in the shower where water drains) can become clogged mostly due to hair, obstructing objects, and soap. It is imperative that you systematically use a shower drain cover (grid that prevents hair obstructing objects from falling into the drain) and that you clean systematically after your shower. The methods below are intended to help you unclog your shower drain.</p> <ul><li><strong>Method 1</strong><br/> Check that nothing is blocking the water outlet. Otherwise, remove what is clogging the siphon with your fingers or with an iron rod if the clog is deeper.</li> <li><strong>Method 2</strong><br/> Pour boiling water down the drain. Very hot water can help dissolve the clog.</li> <li><strong>Method 3</strong><br/> Pour baking soda mixed with white vinegar down the drain. Wait 30 minutes then pour boiling water which should remove the clog (there is a foam reaction which is normal).</li></ul> <p>If the problem persists, contact our technical team at <a href='mailto:contact@finecribs.com'>contact@finecribs.com</a></p>
-        <h5>The toilet is clogged</h5>
-        <p>The toilets usually get clogged because of too much toilet paper, sanitary tampons, cotton swabs, baby wipes... We therefore ask you not to throw anything down the toilet except paper. Several methods can solve your problem:</p><ul><li><strong>Method 1: Baking Soda and Vinegar</strong><br>Pour baking soda into the bowl. Then slowly pour in the contents of one medium-sized bottle of vinegar (any type). A chemical reaction takes place and the mixture foams. Let stand for a few minutes Add 3 or 4 liters of hot tap water to the toilet bowl. This makes the baking soda and vinegar mixture work better. Warning: this mixture causes foam so we advise you to wear a mask during the operation.</li><li><strong>Method 2: Hanger</strong><br>This method usually works when the clog is a few inches down the drain. Undo the hanger. Unroll both ends of the hanger until they are no longer connected. Push the end into the pipe. Once the coat hanger is in the pipe, twist it, push it down, and wiggle it in circles to clear the pipe.</li><li><strong>Method 3: Plunger</strong><br>Make sure the plunger completely covers the hole. Submerge the plunger fully in the water so that you can push and pull water through the opening, not air. Add water from the bathroom sink to the bowl if there isn’t enough water to cover the plunger. Running the plunger under hot water can soften it, which can help it create a better seal.<br>Push down gently at first, since the first plunge will push air into the bowl and could splash back. Then pull up sharply to disturb the clog and loosen it. Continue vigorously pushing and pulling until the water begins to drain. It may take 15 to 20 cycles before the toilet unclogs.</li></ul><p>If the problem persists, contact our technical team at<a href='mailto:contact@finecribs.com'>contact@finecribs.com</a></p>
+        <h4>The bathroom or kitchen sinks are clogged<h4>
+        <p>If the water in your sink drains slowly or can't drain at all, your sink drain is probably clogged. This is most certainly due to hair or food, It is imperative that you remove anything that can clog your drain, for example by using a plunger.<br/> To unclog your sink:</p>
+        <ul><li>Free the space under the siphon</li><li>Place a basin under the siphon</li><li>Unscrew the lower part of the siphon: to unscrew the plastic siphon, there is no need to use specific tools: your hands are enough. Hold the upper part firmly with your second hand so as not to disturb the piping when unscrewing</li><li>Check to see if any debris is still stuck: If there is still debris clogging your drain, use a small wire hook or an old toothbrush to free the drain</li><li>Screw it back on by replacing the seal: screw the elements of your siphon back on and don't forget to put the seals back inside your siphon! Attention, it is very important to keep this seal. If it is lost or thrown away, the siphon will have to be completely replaced.</li> <li>Check for leaks , tighten if necessary. Perform a short test: run the water to inspect for leaks. If so, tighten the pipes and the siphon a little more.</li></ul>
+        <p>If the problem persists, contact our technical department at <a href='mailto:contact@finecribs.com'>contact@finecribs.com</a></p>
+        <h4>The shower is clogged</h4>
+        <p>Shower traps (system in the shower where water drains) can become clogged mostly due to hair, obstructing objects, and soap. It is imperative that you systematically use a shower drain cover (grid that prevents hair obstructing objects from falling into the drain) and that you clean systematically after your shower. The methods below are intended to help you unclog your shower drain.</p>
+        <ul><li><strong>Method 1</strong><br/> Check that nothing is blocking the water outlet. Otherwise, remove what is clogging the siphon with your fingers or with an iron rod if the clog is deeper.</li>
+        <li><strong>Method 2</strong><br/> Pour boiling water down the drain. Very hot water can help dissolve the clog.</li>
+        <li><strong>Method 3</strong><br/> Pour baking soda mixed with white vinegar down the drain. Wait 30 minutes then pour boiling water which should remove the clog (there is a foam reaction which is normal).</li></ul>
+        <p>If the problem persists, contact our technical team at <a href='mailto:contact@finecribs.com'>contact@finecribs.com</a></p>
+        <h4>The toilet is clogged</h4>
+        <p>The toilets usually get clogged because of too much toilet paper, sanitary tampons, cotton swabs, baby wipes... We therefore ask you not to throw anything down the toilet except paper. Several methods can solve your problem:</p>
+        <ul><li><strong>Method 1: Baking Soda and Vinegar</strong><br>Pour baking soda into the bowl. Then slowly pour in the contents of one medium-sized bottle of vinegar (any type). A chemical reaction takes place and the mixture foams. Let stand for a few minutes Add 3 or 4 liters of hot tap water to the toilet bowl. This makes the baking soda and vinegar mixture work better. Warning: this mixture causes foam so we advise you to wear a mask during the operation.</li>
+        <li><strong>Method 2: Hanger</strong><br>This method usually works when the clog is a few inches down the drain. Undo the hanger. Unroll both ends of the hanger until they are no longer connected. Push the end into the pipe. Once the coat hanger is in the pipe, twist it, push it down, and wiggle it in circles to clear the pipe.</li>
+        <li><strong>Method 3: Plunger</strong><br>Make sure the plunger completely covers the hole. Submerge the plunger fully in the water so that you can push and pull water through the opening, not air. Add water from the bathroom sink to the bowl if there isn’t enough water to cover the plunger. Running the plunger under hot water can soften it, which can help it create a better seal.<br>Push down gently at first, since the first plunge will push air into the bowl and could splash back. Then pull up sharply to disturb the clog and loosen it. Continue vigorously pushing and pulling until the water begins to drain. It may take 15 to 20 cycles before the toilet unclogs.</li></ul>
+        <p>If the problem persists, contact our technical team at<a href='mailto:contact@finecribs.com'>contact@finecribs.com</a></p>
         `,  
         src:"" 
     },
@@ -583,8 +593,8 @@ export const FaqspageTableRenting = [
         id:1,
         title:"Water",
         answer:`
-        <h5>I don’t have hot water</h5>
-        <p>In order to solve a hot water problem, you must determine how your apartment is supplied with hot water. There are 2 possibilities:</p><ol><li><strong>Communal hot water</strong><br>If your hot water is common to the whole building, you can't do anything but wait. This may be due to external works or to an intervention in progress (a word may be displayed in the commons of the building).</li><ol><li><strong>Electric water heater</strong><br>It is possible that the electricity is cut off and no longer supplies the electric water heater. It may also be due to the capacity of the water heater, for example if many showers have been taken one after the other. Last, it might be due to limescale having damaged the internal resistance of the electric water heater</li></ol><p>If the problem persists, please inform our technical team at<a href="mailto:contact@finecribs.com">contact@finecribs.com</a></p>
+        <h4>I don’t have hot water</h4>
+        <p>In order to solve a hot water problem, you must determine how your apartment is supplied with hot water. There are 2 possibilities:</p><ol><li><strong>Communal hot water</strong><br>If your hot water is common to the whole building, you can't do anything but wait. This may be due to external works or to an intervention in progress (a word may be displayed in the commons of the building).</li><ol><li><strong>Electric water heater</strong><br>It is possible that the electricity is cut off and no longer supplies the electric water heater. It may also be due to the capacity of the water heater, for example if many showers have been taken one after the other. Last, it might be due to limescale having damaged the internal resistance of the electric water heater</li></ol><p>If the problem persists, please inform our technical team at <a href="mailto:contact@finecribs.com">contact@finecribs.com</a></p>
         `,  
         src:"" 
     },
@@ -592,8 +602,8 @@ export const FaqspageTableRenting = [
         id:2,
         title:"Internet",
         answer:`
-        <h5>I have a problem with internet</h5>
-        <p>It is important to check that the box is correctly connected and that the lights are on. Make sure you do the following checks:</p><ul><li>Internet is slow or not working at all? If it is slow, you can try unplugging and then plugging your box back</li><li>If the lights on your box are red, you should first unplug (wait a few seconds) then reconnect your box.</li><li>Are you connected to a wifi repeater? If that’s the case, try to connect to the main box instead, and check if it is working</li><li>If you can access the network, but the connection is slow or non-existent, you can do a speed test (follow this link<a href="https://www.speedtest.net/fr" target="_blank">https://www.speedtest.net/fr</a>) and send us a screenshot.</li><p>If the problem persists, please send an email to<a href="mailto:contact@finecribs.com">contact@finecribs.com</a>as we might need to check with the internet provider</p>
+        <h4>I have a problem with internet</h4>
+        <p>It is important to check that the box is correctly connected and that the lights are on. Make sure you do the following checks:</p><ul><li>Internet is slow or not working at all? If it is slow, you can try unplugging and then plugging your box back</li><li>If the lights on your box are red, you should first unplug (wait a few seconds) then reconnect your box.</li><li>Are you connected to a wifi repeater? If that’s the case, try to connect to the main box instead, and check if it is working</li><li>If you can access the network, but the connection is slow or non-existent, you can do a speed test (follow this link<a href="https://www.speedtest.net/fr" target="_blank">https://www.speedtest.net/fr</a>) and send us a screenshot.</li><p>If the problem persists, please send an email to <a href="mailto:contact@finecribs.com">contact@finecribs.com</a>as we might need to check with the internet provider</p>
         `,  
         src:"" 
     },
@@ -601,11 +611,11 @@ export const FaqspageTableRenting = [
         id:3,
         title:"Bugs",
         answer:`
-        <h5>I have cockroaches in the apartment</h5>
-        <p>The best way to eliminate cockroaches is by applying a gel like Magnum Gel specifically for cockroaches (which you can find on Amazon) to the areas that need treatment.<br>If the problem persists, please send an email to<a href="mailto:contact@finecribs.com">contact@finecribs.com</a></p>
-        <h5>I have ants in the apartment</h5>
-        <p>The best way to eliminate cockroaches is by applying a gel like Magnum Gel specifically for ants (which you can find on Amazon) to the areas that need treatment.<br>If the problem persists, please send an email to<a href="mailto:contact@finecribs.com">contact@finecribs.com</a></p>
-        <h5>I have bed bugs in the apartment</h5>
+        <h4>I have cockroaches in the apartment</h4>
+        <p>The best way to eliminate cockroaches is by applying a gel like Magnum Gel specifically for cockroaches (which you can find on Amazon) to the areas that need treatment.<br>If the problem persists, please send an email to <a href="mailto:contact@finecribs.com">contact@finecribs.com</a></p>
+        <h4>I have ants in the apartment</h4>
+        <p>The best way to eliminate cockroaches is by applying a gel like Magnum Gel specifically for ants (which you can find on Amazon) to the areas that need treatment.<br>If the problem persists, please send an email to <a href="mailto:contact@finecribs.com">contact@finecribs.com</a></p>
+        <h4>I have bed bugs in the apartment</h4>
         <p>In case you spot bed bugs, please send an email to <a href='mailto:contact@finecribs.com'>contact@finecribs.com</a> as we will need to coordinate a prompt intervention realized by a qualified professional</p>
         `,  
         src:"" 
@@ -648,23 +658,23 @@ export const FaqspageTablePartnering = [
             id:0,
             title:"Help you decide",
             answer:`
-            <h5>Why should I trust Finecribs?</h5>
+            <h3>Why should I trust Finecribs?</h3>
             <p>First because we are also landlords, as you are. We put the exact same care and attention into managing your property as we put into managing our own properties. Second, we are very selective when it comes to finding tenants. Third, because we have teams of qualified professionals who ensure ongoing maintenance of your apartment. Fourth, because you will receive a steady rental payment regardless of whether your apartment is rented or not.</p>
-            <h5>How long will Finecribs rent my property?</h5>
+            <h3>How long will Finecribs rent my property?</h3>
             <p>In general, Finecribs is looking to sign a long-term lease with each of our individual property owners. We prefer to take possession of properties for at least 6 years, but we would ideally favor longer periods.</p>
-            <h5>Who will stay in my apartment?</h5>
+            <h3>Who will stay in my apartment?</h3>
             <p>We provide quality accommodation to an audience of selected international tenants, mostly composed of young professionals. We carefully review the applications to make sure only the best profiles are accepted. Your interests are always aligned with our interests.</p>
-            <h5>Should my apartment be furnished or unfurnished?</h5>
+            <h3>Should my apartment be furnished or unfurnished?</h3>
             <p>Typically, we would be looking for at least a kitchen to be installed. We prefer unfurnished lettings as they give our interior designers the opportunity to design the space in accordance with our standards, but a minimum level of furnishing is also accepted.</p>
-            <h5>What happens if Finecribs finds no tenants?</h5>
+            <h3>What happens if Finecribs finds no tenants?</h3>
             <p>You will still receive a monthly rent from Finecribs, which means that there is no real change for you.</p>
-            <h5>What happens if a tenant damages the property?</h5>
+            <h3>What happens if a tenant damages the property?</h3>
             <p>Finecribs, as tenant, is liable to the property owner for any damage caused by a tenant. Of course, we also get insurance, and we request all our tenants to do the same.</p>
-            <h5>What do you mean by «smart refurbishment»?</h5>
+            <h3>What do you mean by «smart refurbishment»?</h3>
             <p>In case your property needs some light refurbishment, e.g. repainting, renovating a bathroom or building a plastered wall, our teams can take care at no extra cost for you. The need for such initiatives will be considered in the offer that we will submit to you.</p>
-            <h5>How do I know if my proerty qualifies?</h5>
+            <h3>How do I know if my proerty qualifies?</h3>
             <p>You should submit a request through the form and our team will contact you to assess together whether your property qualifies. Typically, we look for properties in central locations, with at least three bedrooms and in overall good conditions.</p>
-            <h5>Do you rent of also buy properties?</h5>
+            <h3>Do you rent of also buy properties?</h3>
             <p>Our core expertise lies in acquiring, designing and managing beautiful spaces. In case you are uncertain whether to rent or sell your property we would be happy to discuss and possibly make an offer for acquiring the property instead of renting it.</p>
             `,  
             src:"" 

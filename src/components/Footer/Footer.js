@@ -69,7 +69,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className='Create-alert px-3'>
+        <div className='Create-alert px-3' id='create_alert'>
           <p className='h3'>You don’t find what you are looking for? </p>
           
           <button className='btn btn-alert' onClick={openPopup}>
@@ -140,7 +140,7 @@ const Footer = () => {
         </div>
 
         {/* Create Alert Section */}
-        <div className='Create-alert container'>
+        <div className='Create-alert container'  id='create_alert'>
           <p className='h3'>You don’t find what you are looking for? </p>
           
           <button className='btn btn-alert' onClick={openPopup}>

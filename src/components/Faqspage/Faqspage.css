@@ -1,6 +1,23 @@
 .FaqpagesContainer{
     cursor: pointer;
 }
+.faq-tabs h4 {
+    font-size: 18px;
+    font-weight: 700;
+}
+.faq-tabs a {
+    color: #000;
+    text-decoration: underline;
+}
+.faq-tabs a:hover , .faq-tabs a:focus {
+    text-decoration: none;
+}
+.faq-tabs p, .faq-tabs ul li {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #000;
+}
 .bloc-tabs>div,
 .TitlesRenting h2
  {
@@ -8,11 +25,12 @@
     font-weight: 400;
     color: #000;
 }
-.subTitlesRentingActive h4,
-.subTitlesRenting h4
+.subTitlesRentingActive .subtitle,
+.subTitlesRenting .subtitle
 {
     font-size: 16px;
     font-weight: 400;
+    padding-left: 48px;
 }
 
 .active-tabs{
@@ -35,7 +53,7 @@
     top: 0;
     left: 0;
     margin-top: 0;
-    
+    margin: 0!important;
 }
 
 .collapseRenting
@@ -49,21 +67,17 @@
 
 
 .subTitlesRentingActive, .subTitlesRenting.active {
-   background-color: #F5F5F5;
-   margin-left: -48px;
+   /* background-color: #F5F5F5; */
 }
 .col-content.active {
     display: block!important;
 }
 .col-content {
-    position: absolute;
-    right: -48px;
-    top: 0 ;
+    position: relative;
+    /* right: -48px;
+    top: 0 ; */
     height: 100%;
     background-color: #F5F5F5;
-    /* max-width: 80%;
-    width: 60%; */
-    /* padding: 10px; */
     padding: 25px 25px 25px 35px;
 }
 
@@ -88,8 +102,8 @@
     display:none;
 
 }
-.subTitlesRentingActive h4 {
-    padding-left: 48px;
+.subTitlesRentingActive .subtitle {
+    background-color: #F5F5F5;
 }
 @media (max-width: 991px) {
 
@@ -113,8 +127,8 @@
         font-weight: bold;
         color: black;
     }
-    .subTitlesRentingActive h4,
-    .subTitlesRenting h4{
+    .subTitlesRentingActive h2,
+    .subTitlesRenting h2{
         font-weight: bold;
     }
   }
