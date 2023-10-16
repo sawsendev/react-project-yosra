@@ -116,9 +116,6 @@ const Room = () => {
     setModalIsOpen(true);
   };
 
-  const openModal = () => {
-    setModalIsOpen(true);
-  };
 
   const closeModal = () => {
     setModalIsOpen(false);
