@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import City from "./City/City";
@@ -6,10 +6,32 @@ import { ExploreCitiesTable } from "../../../Data/Data";
 import "./ExploreMore.css";
 import { BsArrowRight} from 'react-icons/bs';
 import { BsArrowLeft } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom';
 
 const ExploreMore = () => {
-  // ... Autre code
+  const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
+  const API_URL = 'http://dev.niceroom.sofis-info.com/api/lots/list';
+  const navigate= useNavigate();
+  const [lotData, setLotData] = useState([]);
+ 
+  useEffect(() => {
+    const headers = {
+      'apiKey': `${API_KEY}`,
+    };
 
+    fetch(API_URL, { method: 'GET', mode: 'cors', headers })
+      .then(response => response.json())
+      .then(data => {
+        setLotData(data.data.lots);
+        console.log(data.data.lots);
+      })
+      .catch(error => {
+        console.error('Erreur lors de la récupération des données :', error);
+      });
+  }, [API_URL, API_KEY]);
+ 
+  
+  
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 1200 },
@@ -28,8 +50,31 @@ const ExploreMore = () => {
       items: 1.8
     }
   };
+ 
+  
+  const handleClick = (city) => {
+    const searchParams = new URLSearchParams({ city }).toString();
+    const url = `/search-cities?${searchParams}`;
+    navigate(url);
+  };
+  
+  const city = ExploreCitiesTable.map(city => {
+    
+      // Trouvez le nombre de chambres correspondant à la ville actuelle
+      const filteredRooms = lotData.filter(room => {
+        if (room.apartment && room.apartment.building && room.apartment.building.city) {
+          return room.apartment.building.city === city.city;
+        }
+        return false; // Retourner false si les données ne sont pas disponibles
+      });
+        console.log(city.src)
+        console.log(city.city)
+      return <City src={city.src} city={city.city} count={filteredRooms.length} handleClick={() => handleClick(city.city)}/>;
+    });
+    
+   
 
-  const city = ExploreCitiesTable.map(city => <City src={city.src} city={city.city} count={city.count} />);
+
   const carouselRef = useRef(null);
 
   const [isPrevActive, setIsPrevActive] = useState(true); // Initialement actif
@@ -63,11 +108,9 @@ const ExploreMore = () => {
       <div>
         <Carousel
           ref={carouselRef}
-          responsive={responsive}
+          responsive={responsive} 
           infinite={true}
           containerClass="carousel-container"
-          // swipeable={false}
-          // showDots={false}
         >
           {city}
         </Carousel>

@@ -3,19 +3,21 @@ import room_icon from "../../../../assets/Union 4 2.svg"
 import "./City.css"
 
 
-const City = (props) => {
+
+const City = ({src,city,count,handleClick}) => {
+
   return (
-<div className='city-item'>
+<div className='city-item' onClick={handleClick}>
     <div className='Pictures-countries'>
-    <img className='img-responsive' src= {props.src} alt="countries"/>
+    <img className='img-responsive' src= {src} alt="countries"/>
     </div>
     
     <div >
       <div className='d-flex justify-content-between align-items-center mt-2 infoRoom Explore-more-countries-content'>                   
-         <h3 >{props.city}</h3>
+         <h3 >{city}</h3>
          <div className='d-flex align-items-center Room-content'>
           <img src={room_icon} alt='icon'/>
-         <p>{props.count} rooms</p>
+         <p>{count} rooms</p>
          </div>
       </div>
     </div>

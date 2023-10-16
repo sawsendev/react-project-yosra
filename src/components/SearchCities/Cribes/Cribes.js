@@ -8,6 +8,7 @@ import noRooms from "../../../assets/Group 24.svg"
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 
+
 const Cribes = () => {
   const [isFixed, setIsFixed] = useState(false);
   useEffect(() => {
@@ -36,7 +37,7 @@ const Cribes = () => {
   const [hasMore, setHasMore] = useState(true);
   const staticCoordinates = [
     [43.70328975790311, 7.1704107912588055],
-    [43.705, 7.175],
+    [43.705, 7.175], 
     [43.706, 7.178],
     [43.701, 7, 300],
     [43.704, 7.166],
@@ -55,7 +56,7 @@ const Cribes = () => {
   const priceMaxParam = searchParams.get('priceMax');
   const sortByParam = searchParams.get('sortBy');
   const searchParamsExist = cityParam || dateParam || priceMinParam || priceMaxParam || sortByParam;
-  const itemsPerPage = 6; // 2 lignes x 3 lots par ligne
+  const itemsPerPage = 6; 
   const [lastLoadedPage, setLastLoadedPage] = useState(0);
   
   const fetchDataFromAPI = async (page) => {

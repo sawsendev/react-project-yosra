@@ -2,25 +2,49 @@ import React, { useState } from 'react'
 import "./Intro.css"
 import { useNavigate } from 'react-router-dom'
 import SelectCity from '../../SelectCity/SelectCity';
-
+import calendarIcon from '../../../assets/calendar.svg'
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { format } from 'date-fns';
 const Intro = () => {
   const[city,setCity]=useState('');
   const[date,setDate]=useState('');
   
-  const handleCityChange=(e)=>{
-   setCity(e.target.value);
+  const handleCustomInputInChange = (date) => {
+    setDate(date);
   };
-  const handleDateChange = (e) => {
-    setDate(e.target.value);
+  const handleMoveInDateChange = (date) => {
+    if (date) {
+      setDate(date); // Stockez la date telle quelle
+    }
   };
+  const CustomInput = ({ value, onClick, onChange, name }) => (
+    <div className="input-datepicker" onClick={onClick}>
+      <input
+        type="text"
+        name={name}
+        className='Select-country-container w-100'
+        value={value}
+        placeholder="Move in date"
+        required
+        readOnly
+        onChange={onChange}
+      />
+      <span className="calendar-icon">
+        <img src={calendarIcon} alt="Calendar" />
+      </span>
+    </div>
+  );
 
   const navigate=useNavigate()
   
-  const handleClick=()=>{
-    const searchParams = new URLSearchParams({ city, date }).toString();
+   
+  const handleClick = () => {
+    const formattedDate = date ? format(new Date(date), 'dd-MM-yyyy') : '';
+    const searchParams = new URLSearchParams({ city, date: formattedDate }).toString();
     const url = `/search-cities?${searchParams}`;
-    navigate(url)
-  }
+    navigate(url);
+  };
   return (
     <div className='Intro-container d-block py-md-5 py-4 container-fluid mb-md-5 mb-4'>
       <div className='Content-container'>
@@ -31,7 +55,19 @@ const Intro = () => {
           <SelectCity onChange={(selectedValue) => setCity(selectedValue.value)} />
           </div>
           <div className='input-group input-date'>
-            <input type="date" name="dob" data-placeholder="Move in date" required aria-required="true" className='Select-country-container w-100'onChange={handleDateChange}/>
+          <DatePicker
+  selected={date}
+  name="date"
+  dateFormat="dd/MM/yyyy"
+  onChange={handleMoveInDateChange}
+  customInput={
+    <CustomInput
+      value={date}
+      onChange={handleCustomInputInChange}
+      name="date"
+    />
+  }
+/>
           </div>
           <button className='Search-btn' onClick={handleClick}>Search & book</button>
         </div>

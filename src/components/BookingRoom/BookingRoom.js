@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import image from '../../assets/animation_500_lj4c3zmw 1.svg'
+import { format } from 'date-fns';
 
 
 import "./BookingRoom.scss"
@@ -41,9 +42,7 @@ const BookingRoom = () => {
   const [formData, setFormData] = useState({
     firstName: '',
     surname: '',
-    email: '',
-    moveInDate: '',
-    moveOutDate: '',
+   
   }); 
   
   const handleChange = (e) => {
@@ -62,9 +61,10 @@ const BookingRoom = () => {
     setEmailValid(validateEmail(emailValue));
 }
 const validateEmail = (email) => {
-  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
   return emailPattern.test(email);
-}
+};
+
   useEffect(()=>{
     
       const headers = {
@@ -85,21 +85,42 @@ const validateEmail = (email) => {
   },[API_URL,API_KEY])
 
 
+  
+  const handleCustomInputInChange = (date) => {
+    setMoveInDate(date);
+  };
+  
+  const handleCustomInputOutChange = (date) => {
+    setMoveOutDate(date);
+    console.log(date)
+  };
+  
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Start Date:', formData.moveInDate);
   
-    if (!validateForm()) {
-      const formDataToSend = new FormData();
+    if (validateForm()) {
+      const formDataToSend = new FormData(); // Utilisez FormData pour envoyer des fichiers
   
       formDataToSend.append('lot_id', id);
       formDataToSend.append('first_name', formData.firstName);
       formDataToSend.append('last_name', formData.surname);
-      formDataToSend.append('email', formData.email);
-      formDataToSend.append('start_date', formData.moveInDate);
-      formDataToSend.append('end_date', formData.moveOutDate);
-    
-      // Ajoutez ici la logique pour ajouter les fichiers au formData (voir ci-dessous)
+      formDataToSend.append('email', email);
+      formDataToSend.append('start_date', format(moveInDate, 'dd-MM-yyyy'));
+      formDataToSend.append('end_date', format(moveOutDate, 'dd-MM-yyyy'));
+  
+      // Ajoutez ici la logique pour ajouter les fichiers au formData
+      if (mainFile) {
+        formDataToSend.append('identity', mainFile);
+      } // Ajoutez le fichier principal
+      if (subFiles[0]){
+      formDataToSend.append('school_certificate', subFiles[0]);} 
+      if(subFiles[1]){
+      formDataToSend.append('guarantor_id', subFiles[1]); }
+      if(subFiles[2]){
+      formDataToSend.append('guarantor_tax_declaration', subFiles[2]); }
+      if(newFile){
+      formDataToSend.append('professional_tax_declaration', newFile);} 
   
       try {
         const response = await fetch('http://dev.niceroom.sofis-info.com/api/rentatl_request/post', {
@@ -107,30 +128,24 @@ const validateEmail = (email) => {
           mode: 'cors',
           headers: {
             'apiKey': API_KEY,
-            'Content-Type': 'application/json',
           },
-          body: JSON.stringify(formDataToSend),
+          body: formDataToSend, // Utilisez formDataToSend comme corps de la requête
         });
-      
+  
         if (response.status === 200) {
-          console.log("Requête effectuée avec succès. Réponse de l'API :");
-          // Vous pouvez également traiter la réponse ici si nécessaire
-        } else if (response.status === 422) {
-          try {
-            const errorData = await response.json();
-            console.error('Erreur lors de la requête vers l\'API :', errorData);
-          } catch (error) {
-            console.error('Erreur lors de la conversion de la réponse JSON :', error);
-          }
+          setFormSubmitted(true);
+          console.log("Request successfully sent. API Response:", response);
         } else {
-          console.error('Erreur lors de la requête vers l\'API :', response.status);
+          console.error("Error sending the request. API Response:", response.status);
+          const errorData = await response.json();
+          console.error('Error Data:', errorData);
         }
       } catch (error) {
-        console.error('Erreur lors de la requête vers l\'API :', error.message);
+        console.error('Error making the request:', error.message);
       }
-      
     }
   };
+  
   
   useEffect(() => {
     console.log("formSubmitted mis à jour :", formSubmitted);
@@ -204,17 +219,17 @@ const validateEmail = (email) => {
       isValid = false;
     }
   
-    if (!formData.email.trim()) {
+    if (!email.trim()) {
       errors.email = 'Email is required';
       isValid = false;
     }
   
-    if (!formData.moveInDate.trim()) {
+    if (!format(moveInDate, 'yyyy-MM-dd').trim()) {
       errors.moveInDate = 'Move In Date is required';
       isValid = false;
     }
   
-    if (!formData.moveOutDate.trim()) {
+    if (!format(moveOutDate, 'yyyy-MM-dd').trim()) {
       errors.moveOutDate = 'Move Out Date is required';
       isValid = false;
     }
@@ -226,37 +241,57 @@ const validateEmail = (email) => {
 
   const [moveInDate, setMoveInDate] = useState(null);
   const [moveOutDate, setMoveOutDate] = useState(null);
-  const CustomInputIn = ({ value, onClick }) => (
+  const CustomInputIn = ({ value, onClick, onChange, name }) => (
     <div className="input-datepicker" onClick={onClick}>
       <input
         type="text"
-        name="datein"
+        name={name}
         className="form-control"
         value={value}
         placeholder=""
         required
+        readOnly
+        onChange={onChange}
       />
       <span className="calendar-icon">
         <img src={calendarIcon} alt="Calendar" />
       </span>
     </div>
   );
-
-  const CustomInputOut = ({ value, onClick }) => (
+  
+  const CustomInputOut = ({ value, onClick, onChange, name }) => (
     <div className="input-datepicker" onClick={onClick}>
       <input
         type="text"
-        name="dateout"
+        name={name}
         className="form-control"
         value={value}
         placeholder=""
         required
+        readOnly
+        onChange={onChange}
       />
       <span className="calendar-icon">
         <img src={calendarIcon} alt="Calendar" />
       </span>
     </div>
   );
+  const handleMoveInDateChange = (date) => {
+    if (date) {
+      setMoveInDate(date); // Stockez la date telle quelle
+    }
+  };
+  
+  const handleMoveOutDateChange = (date) => {
+    if (date) {
+      setMoveOutDate(date);
+      console.log(date) // Stockez la date telle quelle
+    }
+  };
+  
+  
+  
+  
 
   return (
     <>
@@ -308,13 +343,19 @@ const validateEmail = (email) => {
                 <div class="col">
                 <div class="form-outline">
                       <label class="form-label mb-1" for="datein">Move in date *</label>
-                    <div class="input-datepicker">
                       <DatePicker
-                        selected={moveInDate}
-                        onChange={handleChange}
-                        name='moveIntDate' 
-                        customInput={<CustomInputIn />}
-                      />
+  selected={moveInDate}
+  name="moveInDate"
+  dateFormat="dd/MM/yyyy"
+  onChange={handleMoveInDateChange}
+  customInput={
+    <CustomInputIn
+      value={moveInDate}
+      onChange={handleCustomInputInChange}
+      name="moveInDate"
+    />
+  }
+/>
                     </div>
                     {formErrors.moveInDate !=='' && <div className="error-message">{formErrors.moveInDate}</div>}
                 </div>
@@ -323,17 +364,24 @@ const validateEmail = (email) => {
                 <div class="form-outline">
                     <label class="form-label mb-1" for="dateout">Move out date *</label>
                     <div class="input-datepicker">
-                      <DatePicker
-                        selected={moveOutDate}
-                        onChange={handleChange}
-                        name='moveOutDate' 
-                        customInput={<CustomInputOut />}
-                      />
+                    <DatePicker
+  selected={moveOutDate}
+  name="moveOutDate"
+  dateFormat="dd/MM/yyyy"
+  onChange={handleMoveOutDateChange}
+  customInput={
+    <CustomInputOut
+      value={moveOutDate}
+      onChange={handleCustomInputOutChange}
+      name="moveOutDate"
+    />
+  }
+/>
                     </div>
                     {formErrors.moveOutDate !=='' && <div className="error-message">{formErrors.moveOutDate}</div>}
                 </div>
                 </div>
-                </div>
+                
 
               <div className='row'>
               <div class="form-outline col-md-6 col-xs-12 mb-4">
@@ -343,6 +391,7 @@ const validateEmail = (email) => {
   <input
     type="email"
     id="form6Example3"
+    value={email}
     class="form-control"
     name='email'
     placeholder="exemple@gmail.com"
@@ -383,12 +432,13 @@ const validateEmail = (email) => {
         </label>
         <input
           type="file"
+          name="mainFile"
           accept=".pdf, .png, .jpg, .jpeg"
           onChange={(e) => handleFileChange(e, 0)}
         />
       </div>
       <div className={fileVisible[0] ? "file-input" : "file-input hidden"}>
-                
+      
                       {/* <img
                         src={URL.createObjectURL(mainFile)}
                         alt="Main File"
@@ -530,17 +580,17 @@ const validateEmail = (email) => {
           
         </div>
         <div className='col-md-4 col-sm-12'>
-          <BookingProcess />
+          <BookingProcess cribs={lotData} />
         </div>
       </div>
     ) : (
-      // Afficher un message de confirmation une fois le formulaire soumis
+      //Afficher un message de confirmation une fois le formulaire soumis
       <div className='row'>
         <div className='col-md-8 col-sm-12 thank'>
          <img src={image} alt="description" />
           <p className='text-center mt-3 px-3 mx-5'>
           
-           Thank you [{formData.surname}], we have received your application. Our team is currently reviewing your file. We will get back to you shortly. Please check your email address [email address]
+           Thank you [{formData.surname}], we have received your application. Our team is currently reviewing your file. We will get back to you shortly. Please check your email address [{email}]
           </p>
         </div>
         <div className='col-md-4 col-sm-12'>
