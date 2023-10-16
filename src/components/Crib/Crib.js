@@ -1,6 +1,4 @@
 import React from 'react'
-import room1 from '../../assets/img-room-1.jpg'
-import room2 from '../../assets/img-room-2.jpg'
 import { Badge } from 'react-bootstrap';
 import  locationIcon  from '../../assets/pin 2.svg';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
@@ -8,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import promoImage from '../../assets/Group 104.svg';
+import imageParDefaut from '../../assets/room/Group 116.svg'
 const Crib = ({ cribs }) => {
   if (!cribs || cribs.length === 0) {
     return <p>No cribs available</p>;
@@ -20,25 +19,47 @@ const Crib = ({ cribs }) => {
           <li className='col-lg-4 col-md-6 col-12' key={index}>
             <div className='item-cribe'>
               <div className='Item-badge'>
-                {crib.rent_status && crib.rent_status === true && <Badge className='notify-badge'>Available now</Badge>}
+                {crib.rent_status && crib.rent_status === false && <Badge className='notify-badge'>Available now</Badge>}
                 {crib.promo && crib.promo === 1 && (
                   <img src={promoImage} alt='Promo' className='promo-image' />
                 )}
 
                 <div className="custom-carousel-container">
-                  <Carousel showStatus={false} showArrows={false} showThumbs={true} dynamicHeight={false} useKeyboardArrows={false}>
-                    <Link to={`/room/${crib.id}`}>
-                      <div>
-                        <img className="img-fluid" src={room1} alt="photo_fine_cribs" />
-                      </div>
-                    </Link>
-                    <Link to={`/room/${crib.id}`}>
-                      <div>
-                        <img className="img-fluid" src={room2} alt="photo_fine_cribs" />
-                      </div>
-                    </Link>
-                    {/* Add more images here as needed */}
-                  </Carousel>
+                <Carousel showStatus={false} showArrows={false} showThumbs={false} dynamicHeight={false} useKeyboardArrows={false}>
+  {crib && crib.media && crib.media.some((media) => media.mime_type.startsWith('image')) ? (
+    crib.media
+      .filter((media) => media.mime_type.startsWith('image'))
+      .map((image, index) => (
+        <Link to={`/room/${crib.id}`} key={index}>
+          <div>
+            <img
+              className="img-fluid"
+              src={image.original_url}
+              alt={`Room ${index}`}
+              style={{ width: '100%', height: '100%' }}
+            />
+          </div>
+        </Link>
+      ))
+  ) : (
+    // L'image par défaut avec le lien
+    <Link to={`/room/${crib.id}`}>
+      <div>
+        <img
+          className="img-fluid"
+          src={imageParDefaut}
+          alt="Im"
+          style={{ width: '100%', height: '100%' }}
+        />
+      </div>
+    </Link>
+  )}
+</Carousel>
+
+
+
+
+
                 </div>
               </div>
               <div className='Rooms-content'>

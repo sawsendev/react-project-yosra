@@ -197,11 +197,11 @@ span.calendar-icon {
 .price{
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    align-content: stretch;
-    justify-content: space-between;
-
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: baseline;
 }
+
 .rc-slider-track {
     height: 2px!important;
     background-color: #000000!important;

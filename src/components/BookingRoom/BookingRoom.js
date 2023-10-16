@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import image from '../../assets/animation_500_lj4c3zmw 1.svg'
 import { format } from 'date-fns';
-import { parse } from 'date-fns';
+
 
 import "./BookingRoom.scss"
 //import {UploadArray} from "../../Data/Data"
@@ -580,11 +580,11 @@ const validateEmail = (email) => {
           
         </div>
         <div className='col-md-4 col-sm-12'>
-          <BookingProcess />
+          <BookingProcess cribs={lotData} />
         </div>
       </div>
     ) : (
-      // Afficher un message de confirmation une fois le formulaire soumis
+      //Afficher un message de confirmation une fois le formulaire soumis
       <div className='row'>
         <div className='col-md-8 col-sm-12 thank'>
          <img src={image} alt="description" />

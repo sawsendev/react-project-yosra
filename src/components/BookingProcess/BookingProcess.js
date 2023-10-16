@@ -2,12 +2,17 @@ import React from 'react'
 import "./BookingProcess.css"
 import RoomProcessPic from '../../assets/bacdbb_eaa5dabd9a4a4182871bd934709fb0be_mv2-1.jpg'
 
-const BookingProcess = () => {
+const BookingProcess = ({cribs}) => {
+  
+  const images = cribs && cribs.media ? cribs.media.filter(item => item.mime_type.startsWith('image')) : [];
+  console.log("les images",images)
   return (
     <div className='Book-container d-flex container'>
        <div className='row'>
         <div className='col-xm-12'>
-         <img className='img-responsive w-100' src={RoomProcessPic} alt="room processPic"/>
+        {images.length > 0 ? (
+            <img className='img-responsive w-100' src={images[0].original_url} alt="room processPic" />
+          ) : null}
          <h3 className='Book-container-heading'>Booking process</h3>
          <div className='Progress-bar'>
         <div className='d-flex align-items-center justify-content-start Progress-paragraph'>
