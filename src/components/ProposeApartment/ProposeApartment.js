@@ -11,6 +11,7 @@ import image6 from '../../assets/good-quality.svg'
 import image7 from '../../assets/sketch.svg'
 import image8 from '../../assets/img-left.png'
 import image9 from '../../assets/img-right.png'
+import build from '../../assets/build.svg'
 import process1 from '../../assets/process/process1.svg'
 import process2 from '../../assets/process/process2.svg'
 import process3 from '../../assets/process/process3.svg'
@@ -269,13 +270,14 @@ const ProposeApartment =()=> {
         </div>
       </div>
     </section>
-    <section className='btn_proposemodal mb-lg-5 mb-lg-4'>
-      <div className='container'>
-        <div className='d-table mx-auto'>
-          <button className='btn btn-primary button-black' onClick={openModal} ><LiaEnvelope className='icon-envelop'/>I propose for rent</button>
+
+        <div className='block-btn-propose'>
+          <button className='btn-propose' onClick={openModal} >
+            <span className='btn-icon'><img src={build} alt='icon building' /></span>
+            <span className='btn-txt'>I propose an apartement</span>
+          </button>
         </div>
-      </div>
-    </section>
+
     <section className='page2-container mb-lg-5 mb-4'>
       <div className='container'>
         <div className='content2-container'>

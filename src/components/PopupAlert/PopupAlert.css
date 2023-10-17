@@ -1,76 +1,162 @@
 /* Styles pour le PopupAlert */
-.popup-container.open {
+
+.popup-container.popupalert.closed {
+  display: none; 
+}
+.popup-container.popupalert.open {
+  display: block;
+  overflow-y: auto;
+}
+body.popup-open {
+  overflow: hidden;
+}
+.popup-container.popupalert.open .popup-content {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+.popup-container.popupalert.open {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000; /* Assurez-vous qu'il est au-dessus des autres éléments */
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000; 
 }
-
-.popup-content {
-  width: 774px; /* Largeur souhaitée */
-  height: 544px; /* Hauteur souhaitée */
+.popupalert .popup-content {
+  display: table;
+  margin: 2.75rem auto;
+  max-width: 774px;
+  height: auto;
+  width: 100%;
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 6px;
-  padding: 20px;
+  padding: 0 26px;
   text-align: left !important;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: none;
+  position: relative;
 }
-
-.popup-content h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
+.popupalert .popup-header {
+  position: relative;
+  padding: 26px 0 14px;
+  border-bottom: 1px solid #DDDDDD;
 }
-
-.popup-content p {
+.popupalert .popup-body {
+  padding: 20px 6px 28px;
+}
+.popupalert .popup-content h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0;
+}
+.popupalert .popup-header button.close-button {
+  background: transparent;
+  color: #000;
+  border: none;
+  top: 20px;
+  right: 2px;
+  padding: 0!important;
+  font-size: 28px;
+  position: absolute;
+  height: 28px;
+  width: 28px;
+  line-height: 28px;
+}
+.popupalert p {
   font-size: 16px;
   margin-bottom: 20px;
 }
-
-.popup-content button {
-  background-color:black;
+.popupalert .popup-body button {
+  background: black;
   color: white;
   border: none;
   border-radius: 6px;
-  padding: 8px 52px;
+  padding: 6px 50px;
   cursor: pointer;
-}
-
-
-.form-label{
+  margin: 1rem 0 0;
   font-size: 18px;
+  line-height: 25px;
+  font-weight: 400;
+  outline: 0!important;
+  box-shadow: none!important;
+  border: 2px solid #000!important;
+  transition: all .3s ease;
+}
+.popupalert .popup-body button:hover {
+  background: white;
+  color: #000;
+  font-weight: 600;
+}
+.popupalert .popup-body .img-right {
+  display: table;
+  margin: 14px 0 0 auto;
+}
+.popupalert .form-label{
+  font-size: 16px;
   font-weight: 600;
   color: #000;
+  margin: 0 0 6px;
+  line-height: 20px;
 }
-/* PopupAlert.css */
-.circle {
+.input-price {
+  position: relative;
+  background-color: #fff;
+  border-radius: 6px;
+}
+.input-price:after {
+  position: absolute;
+  content: "€";
+  top: 0;
+  font-size: 22px;
+  right: 0;
+  text-align: center;
+  line-height: 40px;
+  width: 40px;
+  height: 40px;
+  background: #F5F5F5;
+  border: 1px solid #DFDFDF;
+  z-index: 1;
+  border-radius: 0 6px 6px 0;
+  color: #A0A9B2;
+  font-weight: 500;
+}
+.popupalert .circle {
   width: 80px;
   height: 80px;
-  background-color:white; /* Couleur de fond du cercle */
-  border-radius: 50%; /* Crée un cercle en arrondissant les coins */
+  background-color:white;
+  border-radius: 50%;
   position: absolute;
-  top:5%;
-  left: 50%; /* Déplace le cercle à mi-chemin horizontalement */
-  transform: translateX(-50%); /* Ajuste la position horizontale au milieu */
-  z-index: 1; /* Place le cercle au-dessus du contenu */
+  top: -40px;
+  left: 50%; 
+  transform: translateX(-50%); 
+  z-index: 1;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-/* PopupAlert.css */
-.popup-container {
-
-  display: none;
-
-}
-
-
-.popup-container.closed {
-  display: none; /* Masquez le popup lorsque isPopupOpen est faux */
+@media (max-width: 576px) {
+  .popupalert .circle {
+    width: 60px;
+    height: 60px;
+    top: -30px;
+  }
+  .popupalert .circle img {
+    width: 27px;
+    height: auto;
+  }
+  .popupalert .popup-content {
+    padding: 0 12px;
+  }
+  .popupalert .popup-content h2 {
+    font-size: 18px;
+  }
+  .popupalert .popup-body {
+    padding: 14px 6px 20px;
+  }
+  .popupalert .popup-body button {
+    padding: 4px 40px;
+    font-size: 16px;
+    margin: 0;
+  }
 }

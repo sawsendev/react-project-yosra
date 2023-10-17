@@ -318,6 +318,45 @@
 .process-content.mobile {
   display: none;
 }
+.block-btn-propose {
+  position: fixed;
+  right: 2%;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 9;
+}
+button.btn-propose {
+  background: transparent;
+  border: none!important;
+  outline: 0!important;
+  box-shadow: none!important;
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
+button.btn-propose span.btn-txt {
+  padding: 9px 12px 9px 32px;
+  color: #FFF;
+  font-size: 18px;
+  font-weight: 700;
+  border-radius: 6px;
+  background: #35CE92;
+  transition: all .3s ease;
+}
+button.btn-propose span.btn-icon {
+  width: 54px;
+  height: 54px;
+  padding: 9px;
+  background: #35CE92;
+  border-radius: 50%;
+  margin-right: -29px;
+  z-index: 1;
+  transition: all .3s ease;
+}
+button.btn-propose:hover span.btn-txt , 
+button.btn-propose:hover span.btn-icon {
+  background: #000;
+}
 /****** *******/
 @media(max-width:1200px){
   .content-container h1 {
@@ -577,5 +616,26 @@ h3 {
 .renovation img {
   height: auto!important;
   min-height: 200px;
+}
+button.btn-propose span.btn-txt {
+  padding: 6px 9px 6px 26px;
+  font-size: 14px;
+  font-weight: 600;
+}
+button.btn-propose span.btn-icon {
+  width: 42px;
+  height: 42px;
+  padding: 7px;
+  margin-right: -20px;
+}
+button.btn-propose span.btn-icon img {
+  width: 28px;
+  height: 28px;
+}
+.block-btn-propose {
+  right: 20px;
+  bottom: 40px;
+  top: inherit;
+  transform: none;
 }
 }
