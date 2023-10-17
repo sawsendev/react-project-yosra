@@ -53,6 +53,7 @@ const ContactForm = () => {
         if (firstName && lastName && emailValid && valid && message) {
 
           const data = {
+            name: firstName + " " + lastName,
             email: email,
             phone: phoneNumber,
             message: message,

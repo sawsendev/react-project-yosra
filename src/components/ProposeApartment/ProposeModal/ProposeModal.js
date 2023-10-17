@@ -11,22 +11,22 @@ import 'react-toastify/dist/ReactToastify.css';
 import calendarIcon from '../../../assets/calendar.svg'; 
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-
+import { format } from 'date-fns';
+import PhoneInput from 'react-phone-input-2';
 
 
 const ProposeModal = ({ isOpen, closeModal }) => {
   const [step, setStep] = useState(1);
+  const[date,setDate]=useState('')
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
-    phone: '',
-    quality: '',
+    
+  quality: '',
     location: '',
     address: '',
     surface: '',
-    date: null, // Define selectedDate here
-    medias: '',
     message: '',
   });
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
@@ -41,57 +41,52 @@ const ProposeModal = ({ isOpen, closeModal }) => {
     3: [],
     4: ['message'],
   };
+  const [selectedFiles, setSelectedFiles] = useState([]);
+
   const submitFormData = () => {
     const formDataToSend = new FormData();
     formDataToSend.append('first_name', formData.firstName);
     formDataToSend.append('last_name', formData.lastName);
     formDataToSend.append('email', formData.email);
-    formDataToSend.append('phone_number', formData.phone);
+    formDataToSend.append('phone_number',phoneNumber);
+    formDataToSend.append('phone_country_name',country);
     formDataToSend.append('surface', formData.surface);
-    formDataToSend.append('availability_date', formData.availability);
-    formDataToSend.append('medias', formData.medias);
-    formDataToSend.append('message', formData.message);
+    formDataToSend.append('are_you',formData.quality);
+    formDataToSend.append('availability_date', format(date,'dd-MM-yyyy'));
+    formDataToSend.append('adress',formData.address);
+    selectedFiles.forEach((file, index) => {
+      formDataToSend.append(`medias[${index}]`, file);
+    });
+    formDataToSend.append('other_informations', formData.message);
+    for (const [key, value] of formDataToSend.entries()) {
+      console.log(`${key}: ${value}`);
+    }
     
     fetch('http://dev.niceroom.sofis-info.com/api/apartment_request/post', {
       method: 'POST',
       headers: {
         'apiKey': API_KEY,
-        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(formDataToSend),
+      body:formDataToSend,
     })
-      .then((data) => {
-        // Traitez la réponse de l'API si nécessaire
-        console.log('Réponse de l\'API :', data);
-  
-        // Réinitialisez le formulaire après soumission
-        setFormData({
-          firstName: '',
-          lastName: '',
-          email: '',
-          phone: '',
-          quality: '',
-          location: '',
-          address: '',
-          surface: '',
-          availability: '',
-          medias: '',
-          message: '',
-        });
-        setStep(1);
-        closeModal();
-  
-        // Affichez un message de réussite
-        toast.success('Form successfully submitted!', {
-          position: toast.POSITION.TOP_CENTER,
-          autoClose: 3000, // Ajustez la durée du message toast selon vos besoins (en millisecondes)
-        });
-      })
-      .catch((error) => {
-        console.error('Erreur lors de la soumission du formulaire :', error);
-        // Gérez les erreurs de soumission ici
+    .then((data) => {
+    
+      console.log('Réponse de l\'API :', data);
+     
+      setStep(1);
+      closeModal();
+
+     
+      toast.success('Form successfully submitted!', {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 3000,
       });
-  };
+    })
+    .catch((error) => {
+      console.error('Erreur lors de la soumission du formulaire :', error.m);
+   
+    });
+};
   
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -106,10 +101,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
       errors.email = 'Invalid email format';
     }
 
-    if (!phoneRegex.test(formData.phone)) {
-      errors.phone = 'Invalid phone format (e.g., 00112233)';
-    }
-
+ 
     currentStepRequiredFields.forEach((field) => {
         // Check if formData[field] is a string before calling trim()
         if (typeof formData[field] === 'string' && !formData[field].trim()) {
@@ -118,7 +110,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
       });
     
       // Check if date is empty
-      if (step === 2 && formData.date === null) {
+      if (step === 2 && date === null) {
         errors.date = 'Date of availability is required';
       }
 
@@ -135,8 +127,6 @@ const ProposeModal = ({ isOpen, closeModal }) => {
           location: '',
           address: '',
           surface: '',
-          date: null,
-          medias: '',
           message: '',
         });
         setStep(1);
@@ -156,26 +146,51 @@ const ProposeModal = ({ isOpen, closeModal }) => {
   const prevStep = () => {
     setStep(step - 1);
   };
+  const handleCustomInputChange = (date) => {
+    setDate(date);
+    console.log(date)
+  };
+  const handleFileChange = (e) => {
+    const files = e.target.files;
+    if (files && files.length > 0) {
+      // Utilisez la méthode `FileList` pour convertir les fichiers en un tableau
+      const selectedFilesArray = Array.from(files);
+      setSelectedFiles(selectedFilesArray);
+    }
+  };
+  
 
-
-  const [selectedDate, setSelectedDate] = useState(null);
-  const CustomInput = ({ value, onClick }) => (
+ 
+  const CustomInput = ({ value, onClick, onChange, name }) => (
     <div className="input-datepicker" onClick={onClick}>
       <input
         type="text"
-        name="date"
+        name={name}
         className="form-control"
         value={value}
         placeholder=""
-      required/>
+        required
+        readOnly
+        onChange={onChange}
+      />
       <span className="calendar-icon">
         <img src={calendarIcon} alt="Calendar" />
       </span>
     </div>
   );
-  const handleDateSelect = (date) => {
-    setFormData({ ...formData, date }); // Update the date in formData
+  const handleMoveInDateChange = (date) => {
+    if (date) {
+      setDate(date); // Stockez la date telle quelle
+    }
   };
+  const [country, setCountry] = useState('fr');
+  const[phoneNumber, setPhoneNumber]=useState("")
+  const handleChangephone=(value)=>{
+    const input = value
+    setPhoneNumber(input)
+   
+   }
+
     const renderStep = () => {
       switch (step) {
         case 1:
@@ -214,12 +229,14 @@ const ProposeModal = ({ isOpen, closeModal }) => {
                 </div>
                 <div className='form-group'>
                     <label className='form-label'>Phone number *</label>
-                    <input className='form-control'
-                        type="phone"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                    required/>
+                    <PhoneInput
+                    country={country}
+                    class="form-control"
+                    value={phoneNumber}
+                    onChange={handleChangephone}
+                    inputProps={{
+                      required: true,
+                    }}/>
                     
                 {validationErrors.phone && (
                   <div className="validation-error">{validationErrors.phone}</div>
@@ -295,11 +312,18 @@ const ProposeModal = ({ isOpen, closeModal }) => {
                     <div className='input-group'>
 
                             
-                   
-                        <DatePicker
-  selected={formData.date} 
-  onChange={handleDateSelect}
-  customInput={<CustomInput />}
+                    <DatePicker
+  selected={date}
+  name="moveInDate"
+  dateFormat="dd/MM/yyyy"
+  onChange={handleMoveInDateChange}
+  customInput={
+    <CustomInput
+      value={date}
+      onChange={handleCustomInputChange}
+      name="moveInDate"
+    />
+  }
 />
                     </div>
                         {validationErrors.date && (
@@ -321,9 +345,10 @@ const ProposeModal = ({ isOpen, closeModal }) => {
                             <label>Choose files</label>
                             <input type="file"
                             name="medias"
-                            value={formData.medias}
-                            onChange={handleInputChange} 
-                            className="form-control upload-medias" multiple/>
+                            
+                            onChange={handleFileChange} 
+                            className="form-control upload-medias"
+                             multiple/>
                         </button>
                     </div>
                     <button className='btn btn-accept' onClick={handleSubmit}>OK</button>
@@ -347,7 +372,15 @@ const ProposeModal = ({ isOpen, closeModal }) => {
                           <div className="validation-error">{validationErrors.message}</div>
                         )}
                     </div>
-                    <button className='btn btn-send' onClick={() => { handleSubmit(); submitFormData(); }}><BsSend /> Send</button>
+                    <button
+   className='btn btn-send'
+  onClick={() => {
+      handleSubmit();
+      submitFormData();
+    } }
+>
+  <BsSend /> Send
+</button>
 
                 </div>
               </>

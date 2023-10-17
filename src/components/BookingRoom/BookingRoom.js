@@ -200,9 +200,7 @@ const validateEmail = (email) => {
   // }
   const [country, setCountry] = useState('fr');
 
-  const handleCountryChange = (newCountry) => {
-    setCountry(newCountry);
-  };
+
   const [formErrors, setFormErrors] = useState({
     firstName: '',
     surname: '',
