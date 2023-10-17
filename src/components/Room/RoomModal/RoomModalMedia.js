@@ -9,6 +9,7 @@ import iconvideoshover from '../../../assets/room/icons/videos-hover.svg'
 import iconvisithover from '../../../assets/room/icons/visits-hover.svg'
 import Modal from 'react-modal';
 
+
 Modal.setAppElement('#root');
 
 const RoomModalMedia = ({ isOpen, closeModal, activeTab, setActiveTab , lotData }) => {
@@ -105,14 +106,22 @@ const RoomModalMedia = ({ isOpen, closeModal, activeTab, setActiveTab , lotData 
                         {activeTab === 'tab3' && (
                             <div className='tab-panel'>
                                 <ul className='gallery-videos row m-0'>
-                                    <li className='itm-video col-md-12 p-0'><iframe width='853' height='480' src='https://my.matterport.com/show/?m=xtS2JPoUHQi' frameborder='0' allowfullscreen allow='xr-spatial-tracking'></iframe></li>
+                                    <li className='itm-video col-md-12 p-0'><video width='853' height='480' src='https://my.matterport.com/show/?m=xtS2JPoUHQi' frameborder='0' allowfullscreen allow='xr-spatial-tracking'></video></li>
                                 </ul>
                             </div>
                         )}
                         {activeTab === 'tab4' && (
                             <div className='tab-panel'>
                                 <ul className='gallery-videos row m-0'>
-                                    <li className='itm-video col-md-12 p-0'><iframe src="https://www.youtube.com/embed/aarWe5yf6i8?si=SU6Jvd8K0RgRKs7-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></li>
+                                {lotData && lotData.media && lotData.media
+                            .filter((media) =>media.collection_name === 'floorpan')
+                            .map((image, index) => (
+                              <li key={index} className='itm-video col-md-12 p-0'>
+                              <img src={image.original_url} alt={`Room ${index}`} className='img-fluid' />
+
+                              </li>
+                            ))
+                          }
                                 </ul>
                             </div>
                         )}

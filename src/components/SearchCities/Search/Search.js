@@ -82,7 +82,7 @@ const Search = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const searchParams = new URLSearchParams();
-    searchParams.append('city', selectedCountry);
+    searchParams.append('city', city);
     searchParams.append('date', format(date, 'dd-MM-yyyy'));
     searchParams.append('sortBy', sortBy);
     searchParams.append('priceMin', priceRange[0]); // Ajout de priceMin
