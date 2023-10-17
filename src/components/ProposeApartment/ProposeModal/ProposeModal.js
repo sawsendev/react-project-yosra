@@ -253,18 +253,12 @@ const ProposeModal = ({ isOpen, closeModal }) => {
             <div className='step2-form'>
                 <div className='form-group'>
                     <label className='form-label'>In which city is the property located</label>
-                    <div className='input-group input-select'>
-                        <select className='form-control'
-                            name="location"
-                            value={formData.location}
-                            onChange={handleInputChange}
-                            >
-                            <option value=""></option>
-                            <option value="paris">Paris</option>
-                            <option value="nice">Nice</option>
-                            <option value="lilles">Lilles</option>
-                        </select>
-                    </div>
+                      <input className='form-control'
+                          type="text"
+                          name="location"
+                          value={formData.location}
+                          onChange={handleInputChange}
+                      />
                 </div>  
                 <div className='form-group'>
                     <label className='form-label'>What is the adress ? *</label>
