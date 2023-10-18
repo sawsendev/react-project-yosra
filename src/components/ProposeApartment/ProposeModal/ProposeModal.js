@@ -132,10 +132,10 @@ const ProposeModal = ({ isOpen, closeModal }) => {
         setStep(1);
         closeModal();
         // Show success toast message
-        toast.success('Form successfully submitted!', {
-          position: toast.POSITION.TOP_CENTER,
-          autoClose: 3000,
-        });
+        // toast.success('Form successfully submitted!', {
+        //   position: toast.POSITION.TOP_CENTER,
+        //   autoClose: 3000,
+        // });
       }
       setValidationErrors({});
     } else {
