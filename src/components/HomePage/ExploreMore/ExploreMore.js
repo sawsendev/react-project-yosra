@@ -63,10 +63,13 @@ const ExploreMore = () => {
       // Trouvez le nombre de chambres correspondant à la ville actuelle
       const filteredRooms = lotData.filter(room => {
         if (room.apartment && room.apartment.building && room.apartment.building.city) {
-          return room.apartment.building.city === city.city;
+          return room.apartment.building.city.toLowerCase() === city.city.toLowerCase();
+        
         }
+       
         return false; // Retourner false si les données ne sont pas disponibles
       });
+      console.log(filteredRooms)
         console.log(city.src)
         console.log(city.city)
       return <City src={city.src} city={city.city} count={filteredRooms.length} handleClick={() => handleClick(city.city)}/>;

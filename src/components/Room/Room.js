@@ -50,6 +50,7 @@ import { PiInfo } from "react-icons/pi";
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import MapWithMarker from '../MapWithMarker/MapWithMarker'
+import Crib from '../Crib/Crib'
 
 
 
@@ -58,7 +59,25 @@ const Room = () => {
   const[lotData,setLotData]=useState({});
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
   const API_URL = `http://dev.niceroom.sofis-info.com/api/lot/${id}`;
+  const API_URL2 = 'http://dev.niceroom.sofis-info.com/api/lots/list';
   const navigate= useNavigate();
+  const [cribData, setCribData] = useState([]);
+ 
+  useEffect(() => {
+    const headers = {
+      'apiKey': `${API_KEY}`,
+    };
+
+    fetch(API_URL2, { method: 'GET', mode: 'cors', headers })
+      .then(response => response.json())
+      .then(data => {
+        setCribData(data.data.lots);
+        console.log(data.data.lots);
+      })
+      .catch(error => {
+        console.error('Erreur lors de la récupération des données :', error);
+      });
+  }, [API_URL, API_KEY]);
   const staticCoordinates = [
     [43.70328975790311, 7.1704107912588055],
     [43.705, 7.175],]
@@ -265,9 +284,9 @@ const Room = () => {
       <div className='icon'>
         {locataire.locataire_info &&locataire.locataire_info.genre === 0 ? (
           <img src={man} alt={index} />
-        ) : (
+        ) : locataire.locataire_info &&locataire.locataire_info.genre === 1? (
           <img src={woman} alt={index} />
-        )}
+        ): null}
       </div>
       <div className='text'>
      {locataire.title.replace('Room', 'Bedroom')} <span className='status'> Booked</span>
@@ -340,7 +359,7 @@ const Room = () => {
                 </div>
                 <div className='recommandation mt-3 mb-lg-5 pb-4 d-md-none'>
                   <h2 className='mb-3'>You might also be interested in the following properties</h2>
-                  {/* <Crib cribs={2}/> */}
+                  {/* <Crib cribs={cribData}/> */}
                 </div>
 
 

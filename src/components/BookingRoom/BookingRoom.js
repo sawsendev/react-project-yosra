@@ -108,8 +108,9 @@ const validateEmail = (email) => {
       formDataToSend.append('email', email);
       formDataToSend.append('start_date', format(moveInDate, 'dd-MM-yyyy'));
       formDataToSend.append('end_date', format(moveOutDate, 'dd-MM-yyyy'));
-  
-      // Ajoutez ici la logique pour ajouter les fichiers au formData
+      formDataToSend.append('phone_number',phoneNumber);
+      formDataToSend.append('phone_country_name',country);
+
       if (mainFile) {
         formDataToSend.append('identity', mainFile);
       } // Ajoutez le fichier principal
@@ -190,13 +191,16 @@ const validateEmail = (email) => {
   const handleChangephone=(value)=>{
    const input = value
    setPhoneNumber(input)
-   setValid(validatePhoneNumber(input))
+  //  setValid(validatePhoneNumber(input))
   }
 
-  const validatePhoneNumber=(phoneNumber)=>{
-    const phoneNumberPattern= /^\d{10}$/
-    return phoneNumberPattern.test(phoneNumber);
-  }
+  // const validatePhoneNumber=(phoneNumber)=>{
+  //   const phoneNumberPattern= /^\d{10}$/
+  //   return phoneNumberPattern.test(phoneNumber);
+  // }
+  const [country, setCountry] = useState('fr');
+
+
   const [formErrors, setFormErrors] = useState({
     firstName: '',
     surname: '',
@@ -407,14 +411,14 @@ const validateEmail = (email) => {
                 <div class="form-outline col-md-6 col-xs-12 mb-4">
                     <label class="form-label mb-1" for="phone">Phone</label>
                     <PhoneInput
-                    country={'fr'}
+                    country={country}
                     class="form-control"
                     value={phoneNumber}
                     onChange={handleChangephone}
                     inputProps={{
                       required: true,
                     }}/>
-                  {!valid && <p>Please enter a valid 10-digit phone number.</p>}
+                  {/* {!valid && <p>Please enter a valid 10-digit phone number.</p>} */}
                 </div>
               </div>
     

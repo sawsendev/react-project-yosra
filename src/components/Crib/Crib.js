@@ -19,7 +19,7 @@ const Crib = ({ cribs }) => {
           <li className='col-lg-4 col-md-6 col-12' key={index}>
             <div className='item-cribe'>
               <div className='Item-badge'>
-                {crib.rent_status && crib.rent_status === false && <Badge className='notify-badge'>Available now</Badge>}
+                { crib.rent_status === false && (<Badge className='notify-badge'>Available now</Badge>)}
                 {crib.promo && crib.promo === 1 && (
                   <img src={promoImage} alt='Promo' className='promo-image' />
                 )}
@@ -36,13 +36,12 @@ const Crib = ({ cribs }) => {
               className="img-fluid"
               src={image.original_url}
               alt={`Room ${index}`}
-              style={{ width: '100%', height: '100%' }}
-            />
+              />
           </div>
         </Link>
       ))
   ) : (
-    // L'image par défaut avec le lien
+   
     <Link to={`/room/${crib.id}`}>
       <div>
         <img
