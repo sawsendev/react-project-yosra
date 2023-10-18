@@ -13,18 +13,20 @@ const ContactForm = () => {
     const [message, setMessage] = useState('');
     const [emailValid, setEmailValid] = useState(true);
     const [showThankYou, setShowThankYou] = useState(false);
+    const [country,setCountry]=useState('fr');
     const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
-    const handleChange = (value) => {
-        const input = value;
-        setPhoneNumber(input);
-        setValid(validatePhoneNumber(input));
-    }
-
-    const validatePhoneNumber = (phoneNumber) => {
-        const phoneNumberPattern = /^\d{10}$/;
-        return phoneNumberPattern.test(phoneNumber);
-    }
-
+    const handleChangephone=(value)=>{
+      const input = value
+      setPhoneNumber(input)
+     
+     }
+    // const validatePhoneNumber = (phoneNumber) => {
+    //     const phoneNumberPattern = /^\d{10}$/;
+    //     return phoneNumberPattern.test(phoneNumber);
+    // }
+    const handlePhoneCountryChange = (value) => {
+      setCountry(value);
+    };
     const handleFirstNameChange = (event) => {
         setFirstName(event.target.value);
     }
@@ -81,6 +83,7 @@ const ContactForm = () => {
               setLastName('');
               setEmail('');
               setPhoneNumber('');
+              setCountry('fr')
               setMessage('');
               setEmailValid(true);
               setValid(true);
@@ -127,14 +130,15 @@ const ContactForm = () => {
             <div className="form-outline col-lg-6 mb-4">
                   <label className="form-label" for="phone">Phone</label>
                   <PhoneInput
-                  country={'fr'}
+                  country={country}
                   class="form-control"
                   value={phoneNumber}
-                  onChange={handleChange}
+                  onChange={handleChangephone}
+                  onChangeCountry={handlePhoneCountryChange}
                   inputProps={{
                   required: true,
                   }}/>
-                {!valid && <p>Please enter a valid 10-digit phone number.</p>}
+                {/* {!valid && <p>Please enter a valid 10-digit phone number.</p>} */}
             </div>
         </div>
 

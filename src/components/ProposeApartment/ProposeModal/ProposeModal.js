@@ -23,7 +23,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
     lastName: '',
     email: '',
     
-  quality: '',
+    quality: '',
     location: '',
     address: '',
     surface: '',
@@ -48,45 +48,67 @@ const ProposeModal = ({ isOpen, closeModal }) => {
     formDataToSend.append('first_name', formData.firstName);
     formDataToSend.append('last_name', formData.lastName);
     formDataToSend.append('email', formData.email);
-    formDataToSend.append('phone_number',phoneNumber);
-    formDataToSend.append('phone_country_name',country);
+    formDataToSend.append('city', formData.location);
+    formDataToSend.append('phone_number', phoneNumber);
+    formDataToSend.append('phone_country_name', country);
     formDataToSend.append('surface', formData.surface);
-    formDataToSend.append('are_you',formData.quality);
-    formDataToSend.append('availability_date', format(date,'dd-MM-yyyy'));
-    formDataToSend.append('adress',formData.address);
+    formDataToSend.append('are_you', formData.quality);
+    formDataToSend.append('availability_date', format(date, 'dd-MM-yyyy'));
+    formDataToSend.append('adress', formData.address);
     selectedFiles.forEach((file, index) => {
       formDataToSend.append(`medias[${index}]`, file);
     });
     formDataToSend.append('other_informations', formData.message);
-    for (const [key, value] of formDataToSend.entries()) {
-      console.log(`${key}: ${value}`);
-    }
-    
+  
     fetch('http://dev.niceroom.sofis-info.com/api/apartment_request/post', {
       method: 'POST',
       headers: {
         'apiKey': API_KEY,
       },
-      body:formDataToSend,
+      body: formDataToSend,
     })
-    .then((data) => {
-    
-      console.log('Réponse de l\'API :', data);
-     
-      setStep(1);
-      closeModal();
-
-     
-      toast.success('Form successfully submitted!', {
-        position: toast.POSITION.TOP_CENTER,
-        autoClose: 3000,
+      .then((response) => {
+        if (!response.ok) {
+          // Gérez ici les erreurs de réponse de l'API
+          return response.text().then((data) => {
+            if (response.status === 422) {
+              // Gérer les erreurs de validation (statut 422)
+              console.error('API Error - Status 422:', data);
+              throw new Error(data); // Lancez l'erreur avec la réponse complète
+            } else {
+              // Gérer d'autres erreurs de réponse
+              console.error('API Error - Status ' + response.status + ':', data);
+              throw new Error('API Error - Status ' + response.status);
+            }
+          });
+        }
+        // Traitement normal si la réponse est OK
+        return response.text();
+      })
+      .then(() => {
+        setStep(1);
+        closeModal();
+        toast.success('Form successfully submitted!', {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 5000,
+        });
+      })
+      .catch((error) => {
+        // Gérez ici les erreurs de promesse
+        console.error('Erreur lors de la soumission du formulaire:', error);
+        if (error && error.message) {
+          toast.error(error.message, {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 5000,
+          });
+        } else {
+          toast.error('Error, please try again', {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 5000,
+          });
+        }
       });
-    })
-    .catch((error) => {
-      console.error('Erreur lors de la soumission du formulaire :', error.m);
-   
-    });
-};
+  };
   
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -96,24 +118,27 @@ const ProposeModal = ({ isOpen, closeModal }) => {
   const handleSubmit = () => {
     const currentStepRequiredFields = requiredFieldsByStep[step];
     const errors = {};
-
+  
     if (!emailRegex.test(formData.email)) {
       errors.email = 'Invalid email format';
     }
-
- 
+  
     currentStepRequiredFields.forEach((field) => {
-        // Check if formData[field] is a string before calling trim()
-        if (typeof formData[field] === 'string' && !formData[field].trim()) {
+      // Check if formData[field] is a string before calling trim()
+      if (field === 'phoneNumber') {
+        if (phoneNumber === '') {
           errors[field] = 'This field is required';
         }
-      });
-    
-      // Check if date is empty
-      if (step === 2 && date === null) {
-        errors.date = 'Date of availability is required';
+      } else if (typeof formData[field] === 'string' && !formData[field].trim()) {
+        errors[field] = 'This field is required';
       }
-
+    });
+  
+    // Check if date is empty
+    if (step === 2 && date === null) {
+      errors.date = 'Date of availability is required';
+    }
+  
     if (Object.keys(errors).length === 0) {
       if (step < 4) {
         setStep(step + 1);
@@ -122,27 +147,23 @@ const ProposeModal = ({ isOpen, closeModal }) => {
           firstName: '',
           lastName: '',
           email: '',
-          phone: '',
           quality: '',
           location: '',
           address: '',
           surface: '',
           message: '',
         });
+        setPhoneNumber('');
+        setDate('');
         setStep(1);
         closeModal();
-        // Show success toast message
-        toast.success('Form successfully submitted!', {
-          position: toast.POSITION.TOP_CENTER,
-          autoClose: 3000,
-        });
       }
       setValidationErrors({});
     } else {
       setValidationErrors(errors);
     }
   };
-
+  
   const prevStep = () => {
     setStep(step - 1);
   };
@@ -190,6 +211,9 @@ const ProposeModal = ({ isOpen, closeModal }) => {
     setPhoneNumber(input)
    
    }
+   const handlePhoneCountryChange = (value) => {
+    setCountry(value);
+  };
 
     const renderStep = () => {
       switch (step) {
@@ -234,9 +258,12 @@ const ProposeModal = ({ isOpen, closeModal }) => {
                     class="form-control"
                     value={phoneNumber}
                     onChange={handleChangephone}
+                    onCountryChange={handlePhoneCountryChange}
                     inputProps={{
                       required: true,
-                    }}/>
+                    }}
+                   
+                    />
                     
                 {validationErrors.phone && (
                   <div className="validation-error">{validationErrors.phone}</div>
