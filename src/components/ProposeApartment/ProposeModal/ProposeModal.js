@@ -191,6 +191,8 @@ const ProposeModal = ({ isOpen, closeModal }) => {
    
    }
 
+
+
     const renderStep = () => {
       switch (step) {
         case 1:
@@ -345,6 +347,16 @@ const ProposeModal = ({ isOpen, closeModal }) => {
                              multiple/>
                         </button>
                     </div>
+                    {selectedFiles.length > 0 && (
+                      <ul className="selected-files mb-3">
+                        {selectedFiles.map((file, index) => (
+                          <li key={index} className="selected-file">
+                            {file.name}
+                          </li>
+                          
+                        ))}
+                      </ul>
+                    )}
                     <button className='btn btn-accept' onClick={handleSubmit}>OK</button>
                 </div>
             </>
