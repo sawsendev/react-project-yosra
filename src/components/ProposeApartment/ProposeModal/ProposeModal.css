@@ -263,25 +263,12 @@ button.box-input img {
     color: #E41F13;
     font-weight: 400;
 }
-ul.selected-files {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+
+.reactmodal-container .uploaded-pdf {
+    min-width: 110px;
+    padding: 6px 12px;
+    margin-right: 8px;
 }
-ul.selected-files li:not(:last-child) {
-    padding-right: 10px;
-    margin-right: 10px;
-    position: relative;
-}
-ul.selected-files li:not(:last-child):after {
-    content: "–";
-    right: -10px;
-    position: relative;
-    font-size: 14px;
-    font-weight: 700;
-}
-ul.selected-files li {
-    font-size: 16px;
-    font-weight: 600;
+.reactmodal-container .uploaded-pdf img {
+    height: 16px;
 }
