@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import "./Faqspage.css"
 import {FaqspageTableRenting, FaqspageTablePartnering} from "../../Data/Data"
 import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
@@ -8,9 +8,8 @@ import {BsArrowRightShort} from 'react-icons/bs'
 const Faqspage = () => {
      const [toggleState, setToggleState] = useState(1);
      const [selected, setSelected] = useState(null);
-     const [selectedAnswer, setSelectedAnswer] = useState(null);
 
-
+ 
      const toggleTab = (index) => {
        setToggleState(index);
      }
@@ -23,15 +22,7 @@ const Faqspage = () => {
        }
      }
    
-     const toggleSubTabsAnswers = (index) => {
-       if (selectedAnswer === index) {
-         setSelectedAnswer(null);
-       } else {
-         setSelectedAnswer(index);
-       }
-     }
 
-        
 
 return (
     <div>
@@ -48,6 +39,7 @@ return (
           </div>
           <div className='tabs-content my-3'>
                <div  className={toggleState === 1 ? " active-content" : "content"} onClick={()=>toggleTab(1)}>
+
                     <div className='display-block '>
                          {FaqspageTableRenting.map((renting, index) => (
                               <div key={index} className='collapseRenting my-3'>
@@ -56,23 +48,28 @@ return (
                                         <span>{selected === index ? ( <IoIosArrowUp className='arrow'/> ) : ( <IoIosArrowDown className='arrow'/> )}</span>
                                    </div>
                                    <div className={`subAnswers ${selected === index ? "active-content" : "content"}`} >
-                                        {renting.subTitles ? (
-                                             renting.subTitles.map((subTitle, subIndex) => (
                                         
-                                             
-                                             <div key={subIndex} className={`pr-5 py-2 row align-items-baseline justify-content-between ${selectedAnswer === subIndex ? "subTitlesRentingActive" : "subTitlesRenting"}`}>
-                                             <h3 className='subtitle col-lg-5 col-sm-12 mb-0 py-3'
-                                             onClick={()=>toggleSubTabsAnswers(subIndex)}> <BsArrowRightShort className='fleche'/> {subTitle.title}</h3>
-                                        
-                                             <p className={`col-lg-7 col-sm-12 col-content py-3 ${selectedAnswer === subIndex ? "active-content" : "content"}`} >
-                                                  {/* {subTitle.answer}  */}
-                                                  <div dangerouslySetInnerHTML={{ __html: subTitle.answer }} />
-                                             </p>
+                                        <div className='d-flex align-items-stretch faq_tabspills'>
+                                             <div className='nav flex-column nav-pills' id='v-pills-tab' role="tablist" aria-orientation="vertical">
+                                                  {renting.subTitles ? (         
+                                                       renting.subTitles.map((subTitle, subIndex) => (
+                                                            <button className={`nav-link ${subIndex === 0 ? 'active' : ''}`} id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target={`#pills-${subIndex}${index}`} type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">{subTitle.title}</button>
+                                                       ))                                   
+                                                  ) : (
+                                                       <div>No subTitles available</div>
+                                                  )}
                                              </div>
-                                             ))
-                                        ) : (
-                                             <div>No subTitles available</div>
-                                        )}
+                                             <div className='tab-content' id='v-pills-tabContent'>
+                                                  {renting.subTitles ? (         
+                                                       renting.subTitles.map((subTitle, subIndex) => (
+                                                            <div className={`tab-pane fade ${subIndex === 0 ? 'show active' : ''}`} id={`pills-${subIndex}${index}`} role="tabpanel" aria-labelledby="v-pills-home-tab"> <div dangerouslySetInnerHTML={{ __html: subTitle.answer }} /></div>
+                                                       ))                                   
+                                                  ) : (
+                                                       <div>No subTitles available</div>
+                                                  )}
+                                             </div>
+                                        </div>
+
                                    </div>
                               </div>
                          ))}
@@ -84,23 +81,27 @@ return (
                     <div className='display-block '>
                          {FaqspageTablePartnering.map((renting, index) => (
                                    <div className={` subAnswers `}>
-                                        {renting.subTitles ? (
-                                             renting.subTitles.map((subTitle, subIndex) => (
                                         
-                                             
-                                             <div key={subIndex} className={`pr-5 py-2 row align-items-baseline justify-content-between ${selectedAnswer === subIndex ? "subTitlesRentingActive" : "subTitlesRenting"}`}>
-                                             <h2 className='subtitle col-lg-5 col-sm-12 mb-0 py-3'
-                                             onClick={()=>toggleSubTabsAnswers(subIndex)}> <BsArrowRightShort className='fleche'/> {subTitle.title}</h2>
-                                        
-                                             <p className={`col-lg-7 col-sm-12 col-content py-3 ${selectedAnswer === subIndex ? "active-content" : "content"}`}>
-                                                  {/* {subTitle.answer}  */}
-                                                  <div dangerouslySetInnerHTML={{ __html: subTitle.answer }} />
-                                             </p>
+                                        <div className='d-flex align-items-stretch faq_tabspills'>
+                                             <div className='nav flex-column nav-pills' id='v-pills-tab' role="tablist" aria-orientation="vertical">
+                                                  {renting.subTitles ? (         
+                                                       renting.subTitles.map((subTitle, subIndex) => (
+                                                            <button className={`nav-link ${subIndex === 0 ? 'active' : ''}`} id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target={`#pills-${subIndex}${index}`} type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">{subTitle.title}</button>
+                                                       ))                                   
+                                                  ) : (
+                                                       <div>No subTitles available</div>
+                                                  )}
                                              </div>
-                                             ))
-                                        ) : (
-                                             <div>No content available</div>
-                                        )}
+                                             <div className='tab-content' id='v-pills-tabContent'>
+                                                  {renting.subTitles ? (         
+                                                       renting.subTitles.map((subTitle, subIndex) => (
+                                                            <div className={`tab-pane fade ${subIndex === 0 ? 'show active' : ''}`} id={`pills-${subIndex}${index}`} role="tabpanel" aria-labelledby="v-pills-home-tab"> <div dangerouslySetInnerHTML={{ __html: subTitle.answer }} /></div>
+                                                       ))                                   
+                                                  ) : (
+                                                       <div>No subTitles available</div>
+                                                  )}
+                                             </div>
+                                        </div>
                                    </div>
                          ))}
                     </div>

@@ -263,3 +263,12 @@ button.box-input img {
     color: #E41F13;
     font-weight: 400;
 }
+
+.reactmodal-container .uploaded-pdf {
+    min-width: 110px;
+    padding: 6px 12px;
+    margin-right: 8px;
+}
+.reactmodal-container .uploaded-pdf img {
+    height: 16px;
+}
