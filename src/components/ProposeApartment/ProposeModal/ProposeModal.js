@@ -13,6 +13,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { format } from 'date-fns';
 import PhoneInput from 'react-phone-input-2';
+import iconfile from "../../../assets/file.svg";
 
 
 const ProposeModal = ({ isOpen, closeModal }) => {
@@ -215,6 +216,8 @@ const ProposeModal = ({ isOpen, closeModal }) => {
     setCountry(value);
   };
 
+
+
     const renderStep = () => {
       switch (step) {
         case 1:
@@ -372,6 +375,17 @@ const ProposeModal = ({ isOpen, closeModal }) => {
                              multiple/>
                         </button>
                     </div>
+                    {selectedFiles.length > 0 && (
+                      <div className="uploaded-file d-flex flex-wrap mb-3">
+                        {selectedFiles.map((file, index) => (
+                          <p key={index} className="uploaded-pdf mb-2">
+                            <img className='me-2' src={iconfile} alt='file icon'/>
+                            {file.name}
+                          </p>
+                          
+                        ))}
+                      </div>
+                    )}
                     <button className='btn btn-accept' onClick={handleSubmit}>OK</button>
                 </div>
             </>
