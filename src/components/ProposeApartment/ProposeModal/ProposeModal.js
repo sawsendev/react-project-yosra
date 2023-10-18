@@ -99,7 +99,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
         if (error && error.message) {
           toast.error(error.message, {
             position: toast.POSITION.TOP_CENTER,
-            autoClose: 5000,
+            autoClose: 5000, 
           });
         } else {
           toast.error('Error, please try again', {
