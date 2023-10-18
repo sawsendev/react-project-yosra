@@ -149,31 +149,30 @@ const Cribes = () => {
               dataLength={searchParamsExist ? (searchResult ? searchResult.length : 0) : (cribsData ? cribsData.length : 0)}
               next={() => fetchDataFromAPI(currentPage)}
               hasMore={hasMore}
+              loader={<h4>loading....</h4>}
               style={{ overflowX: 'hidden' }}
             >
- {searchParamsExist && searchResult.length > 0 ? (
-  <>
-    <Crib cribs={searchResult} />
-  </>
-) : (
-  searchParamsExist && searchResult.length === 0 ? (
-    <div className='container'>
-    <div className='No-rooms-content'>
-      <div className='left d-flex '>
-        <img className='ImageNoRooms' src={noRooms} alt='no rooms icon'/>
-        <span>No rooms available</span>
-        <button className='button'>Show first availabilities</button>
-      </div>
-    </div>
-    </div>
-  ) : (
-    <>
-    <Crib cribs={cribsData} />
-  </>
-  )
-)}
-
-
+            {searchParamsExist && searchResult.length > 0 ? (
+              <>
+                <Crib cribs={searchResult} />
+              </>
+            ) : (
+              searchParamsExist && searchResult.length === 0 ? (
+                <div className='container'>
+                <div className='No-rooms-content'>
+                  <div className='left d-flex '>
+                    <img className='ImageNoRooms' src={noRooms} alt='no rooms icon'/>
+                    <span>No rooms available</span>
+                    <button className='button'>Show first availabilities</button>
+                  </div>
+                </div>
+                </div>
+              ) : (
+                <>
+                <Crib cribs={cribsData} />
+              </>
+              )
+            )}
             </InfiniteScroll>
           </div>
 
