@@ -45,7 +45,7 @@ const BookingRoom = () => {
     surname: '',
    
   }); 
-  const [errorMessage, setErrorMessage] = useState('');
+  
   
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -202,7 +202,7 @@ const validateEmail = (email) => {
 
   // ***************
   const[phoneNumber, setPhoneNumber]=useState("")
-  const[valid, setValid]=useState(true)
+  // const[valid, setValid]=useState(true)
 
   const handleChangephone=(value)=>{
     const input = value
@@ -608,12 +608,7 @@ const validateEmail = (email) => {
           <BookingProcess cribs={lotData} />
         </div>
       </div>
-      ) : errorMessage ? (
- 
-  <div className="error-message">
-    {errorMessage}
-  </div>
-) : (
+      ) : (
 
   <div className='row'>
     <div className='col-md-8 col-sm-12 thank'>
