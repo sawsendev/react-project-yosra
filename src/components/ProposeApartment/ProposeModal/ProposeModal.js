@@ -13,6 +13,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { format } from 'date-fns';
 import PhoneInput from 'react-phone-input-2';
+import iconfile from "../../../assets/file.svg";
 
 
 const ProposeModal = ({ isOpen, closeModal }) => {
@@ -215,6 +216,8 @@ const ProposeModal = ({ isOpen, closeModal }) => {
     setCountry(value);
   };
 
+
+
     const renderStep = () => {
       switch (step) {
         case 1:
@@ -297,18 +300,12 @@ const ProposeModal = ({ isOpen, closeModal }) => {
             <div className='step2-form'>
                 <div className='form-group'>
                     <label className='form-label'>In which city is the property located</label>
-                    <div className='input-group input-select'>
-                        <select className='form-control'
-                            name="location"
-                            value={formData.location}
-                            onChange={handleInputChange}
-                            >
-                            <option value=""></option>
-                            <option value="paris">Paris</option>
-                            <option value="nice">Nice</option>
-                            <option value="lilles">Lilles</option>
-                        </select>
-                    </div>
+                      <input className='form-control'
+                          type="text"
+                          name="location"
+                          value={formData.location}
+                          onChange={handleInputChange}
+                      />
                 </div>  
                 <div className='form-group'>
                     <label className='form-label'>What is the adress ? *</label>
@@ -378,6 +375,17 @@ const ProposeModal = ({ isOpen, closeModal }) => {
                              multiple/>
                         </button>
                     </div>
+                    {selectedFiles.length > 0 && (
+                      <div className="uploaded-file d-flex flex-wrap mb-3">
+                        {selectedFiles.map((file, index) => (
+                          <p key={index} className="uploaded-pdf mb-2">
+                            <img className='me-2' src={iconfile} alt='file icon'/>
+                            {file.name}
+                          </p>
+                          
+                        ))}
+                      </div>
+                    )}
                     <button className='btn btn-accept' onClick={handleSubmit}>OK</button>
                 </div>
             </>

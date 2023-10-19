@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import LazyLoad from 'react-lazyload';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { BsArrowRight, BsArrowLeft } from 'react-icons/bs';
@@ -87,8 +88,11 @@ const CarrouselImages = () => {
   
   (image.mime_type.startsWith('image') && image.collection_name !== 'floorpan') && (
     <div key={index} className='item-img'>
+    <LazyLoad height={500} offset={900}>
       <img src={image.original_url} alt={image.name} className="img-fluid" />
+      </LazyLoad>
     </div>
+  
   )
 ))}
 
