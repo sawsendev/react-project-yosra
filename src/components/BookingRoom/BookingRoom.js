@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import image from '../../assets/animation_500_lj4c3zmw 1.svg'
 import { format } from 'date-fns';
 
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "./BookingRoom.scss"
 //import {UploadArray} from "../../Data/Data"
 
@@ -44,6 +45,7 @@ const BookingRoom = () => {
     surname: '',
    
   }); 
+  
   
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -95,12 +97,11 @@ const validateEmail = (email) => {
     console.log(date)
   };
   
-  
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
   
     if (validateForm()) {
-      const formDataToSend = new FormData(); // Utilisez FormData pour envoyer des fichiers
+      const formDataToSend = new FormData();
   
       formDataToSend.append('lot_id', id);
       formDataToSend.append('first_name', formData.firstName);
@@ -108,44 +109,59 @@ const validateEmail = (email) => {
       formDataToSend.append('email', email);
       formDataToSend.append('start_date', format(moveInDate, 'dd-MM-yyyy'));
       formDataToSend.append('end_date', format(moveOutDate, 'dd-MM-yyyy'));
-      formDataToSend.append('phone_number',phoneNumber);
-      formDataToSend.append('phone_country_name',country);
-
+      formDataToSend.append('phone_number', phoneNumber);
+      formDataToSend.append('phone_country_name', country);
+  
       if (mainFile) {
         formDataToSend.append('identity', mainFile);
-      } // Ajoutez le fichier principal
-      if (subFiles[0]){
-      formDataToSend.append('school_certificate', subFiles[0]);} 
-      if(subFiles[1]){
-      formDataToSend.append('guarantor_id', subFiles[1]); }
-      if(subFiles[2]){
-      formDataToSend.append('guarantor_tax_declaration', subFiles[2]); }
-      if(newFile){
-      formDataToSend.append('professional_tax_declaration', newFile);} 
-  
-      try {
-        const response = await fetch('http://dev.niceroom.sofis-info.com/api/rentatl_request/post', {
-          method: 'POST',
-          mode: 'cors',
-          headers: {
-            'apiKey': API_KEY,
-          },
-          body: formDataToSend, // Utilisez formDataToSend comme corps de la requête
-        });
-  
-        if (response.status === 200) {
-          setFormSubmitted(true);
-          console.log("Request successfully sent. API Response:", response);
-        } else {
-          console.error("Error sending the request. API Response:", response.status);
-          const errorData = await response.json();
-          console.error('Error Data:', errorData);
-        }
-      } catch (error) {
-        console.error('Error making the request:', error.message);
       }
+      if (subFiles[0]) {
+        formDataToSend.append('school_certificate', subFiles[0]);
+      }
+      if (subFiles[1]) {
+        formDataToSend.append('guarantor_id', subFiles[1]);
+      }
+      if (subFiles[2]) {
+        formDataToSend.append('guarantor_tax_declaration', subFiles[2]);
+      }
+      if (newFile) {
+        formDataToSend.append('professional_tax_declaration', newFile);
+      }
+  
+      fetch('http://dev.niceroom.sofis-info.com/api/rentatl_request/post', {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'apiKey': API_KEY,
+        },
+        body: formDataToSend,
+      })
+        .then((response) => {
+          if (response.ok) {
+            setFormSubmitted(true);
+            console.log("Request successfully sent. API Response:", response);
+          } else {
+            if (response.status === 422) {
+              toast.error('Validation Error, please check your input', {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 3000,
+              });
+            } else {
+              toast.error('Error, please try again', {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 3000,
+              });
+            }
+          }
+        })
+        .catch((error) => {
+          console.error('Error making the request:', error.message);
+        });
     }
   };
+      
+  
+    
   
   
   useEffect(() => {
@@ -186,13 +202,13 @@ const validateEmail = (email) => {
 
   // ***************
   const[phoneNumber, setPhoneNumber]=useState("")
-  const[valid, setValid]=useState(true)
+  // const[valid, setValid]=useState(true)
 
   const handleChangephone=(value)=>{
-   const input = value
-   setPhoneNumber(input)
-  //  setValid(validatePhoneNumber(input))
-  }
+    const input = value
+    setPhoneNumber(input)
+   
+   }
 
   // const validatePhoneNumber=(phoneNumber)=>{
   //   const phoneNumberPattern= /^\d{10}$/
@@ -292,13 +308,17 @@ const validateEmail = (email) => {
       console.log(date) // Stockez la date telle quelle
     }
   };
-  
+  const handlePhoneCountryChange = (value) => {
+    setCountry(value);
+  };
+
   
   
   
 
   return (
     <>
+   
     {lotData && lotData.apartment && lotData.apartment.title && lotData.title && (
   <Breadcrumbs path={`/Booking enquiry/${lotData.apartment.title} - ${lotData.title}`}/>)}
    <div className='container'>
@@ -415,6 +435,7 @@ const validateEmail = (email) => {
                     class="form-control"
                     value={phoneNumber}
                     onChange={handleChangephone}
+                    onChangeCountry={handlePhoneCountryChange}
                     inputProps={{
                       required: true,
                     }}/>
@@ -587,22 +608,22 @@ const validateEmail = (email) => {
           <BookingProcess cribs={lotData} />
         </div>
       </div>
-    ) : (
-      //Afficher un message de confirmation une fois le formulaire soumis
-      <div className='row'>
-        <div className='col-md-8 col-sm-12 thank'>
-         <img src={image} alt="description" />
-          <p className='text-center mt-3 px-3 mx-5'>
-          
-           Thank you [{formData.surname}], we have received your application. Our team is currently reviewing your file. We will get back to you shortly. Please check your email address [{email}]
-          </p>
-        </div>
-        <div className='col-md-4 col-sm-12'>
-          <BookingProcess />
-        </div>
-      </div>
-    )}
+      ) : (
+
+  <div className='row'>
+    <div className='col-md-8 col-sm-12 thank'>
+      <img src={image} alt="description" />
+      <p className='text-center mt-3 px-3 mx-5'>
+        Thank you {formData.surname}, we have received your application. Our team is currently reviewing your file. We will get back to you shortly. Please check your email address {email}.
+      </p>
+    </div>
+    <div className='col-md-4 col-sm-12'>
+      <BookingProcess />
+    </div>
   </div>
+)}
+  </div>
+  <ToastContainer/>
 </>
     
   )

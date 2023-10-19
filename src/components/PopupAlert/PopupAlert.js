@@ -14,15 +14,64 @@ const PopupAlert =  (props) => {
   const [maxBudget, setMaxBudget] = useState('');
   const [moveInDate, setMoveInDate] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
-    const handleChange = (value) => {
-    const input = value;
-    setPhoneNumber(input);
-  }
+  const [country,setCountry]=useState('fr');
+  const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
+  const API_URL = 'http://dev.niceroom.sofis-info.com/api/alert_request/post';
+  const handleChangephone=(value)=>{
+    const input = value
+    setPhoneNumber(input)
+   
+   }
+  const handlePhoneCountryChange = (value) => {
+    setCountry(value);
+  };
   
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    setIsSubmitted(true);
-  }
+  
+    // Créer un objet contenant les données du formulaire
+    const formData = {
+      first_name: firstName,
+      last_name: lastName,
+      email: email,
+      city: city,
+      date: moveInDate,
+      max_budget: parseInt(maxBudget),
+      phone_number: phoneNumber,
+      phone_country_name:country
+    };
+  
+    fetch(`${API_URL}`, { 
+      method: 'POST',
+      headers: {
+        'apiKey': `${API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+    console.log(formData)
+      .then((response) => {
+        if (response.ok) {
+          return response.json(); // Vous pouvez gérer la réponse du serveur ici
+        } else if (response.status === 422) {
+          return response.json().then((errorData) => {
+            throw new Error(errorData.message); // Gérer le message d'erreur précis
+          });
+        } else {
+          throw new Error('Error, please try again'); // Gérer d'autres erreurs de réponse
+        }
+      })
+      .then((data) => {
+        setIsSubmitted(true);
+      })
+      .catch((error) => {
+        // Gérer ici les erreurs de promesse
+        console.error('Erreur lors de la soumission du formulaire:', error);
+        alert('Erreur: ' + error.message); // Afficher le message d'erreur précis
+      });
+  };
+  
+  
   useEffect(() => {
     if (isSubmitted) {
       setTimeout(() => {
@@ -107,13 +156,14 @@ const PopupAlert =  (props) => {
                 <div className="form-outline">
                   <label htmlFor="phoneNumber" className='form-label'>Phone number</label>
                   <PhoneInput
-                    country={'fr'}
+                    country={country}
                     class="form-control"
                     value={phoneNumber}
-                    onChange={handleChange}
+                    onChange={handleChangephone}
+                    onChangeCountry={handlePhoneCountryChange}
                     inputProps={{
                       required: true,
-                    }} />
+                    }}/>
                 </div>
               </div>
             </div>

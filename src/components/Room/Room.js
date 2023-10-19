@@ -62,22 +62,51 @@ const Room = () => {
   const API_URL2 = 'http://dev.niceroom.sofis-info.com/api/lots/list';
   const navigate= useNavigate();
   const [cribData, setCribData] = useState([]);
+  const [randomCribData, setRandomCribData] = useState([]);
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+  
  
   useEffect(() => {
     const headers = {
       'apiKey': `${API_KEY}`,
     };
-
+  
     fetch(API_URL2, { method: 'GET', mode: 'cors', headers })
       .then(response => response.json())
       .then(data => {
-        setCribData(data.data.lots);
-        console.log(data.data.lots);
+        const allCribs = data.data.lots;
+        
+        // Vérifiez si lotData.apartment et lotData.apartment.building sont définis
+        const cribsInSameCity = allCribs.filter(crib => 
+          lotData.apartment && lotData.apartment.building &&
+          crib.apartment && crib.apartment.building &&
+          crib.apartment.building.city === lotData.apartment.building.city
+        );
+        
+        // Utilisez la fonction de mélange pour mélanger les "cribs"
+        shuffleArray(cribsInSameCity);
+        
+        // Sélectionnez les 3 premiers "cribs" aléatoires (ou moins si la liste est plus courte)
+        const randomCribs = cribsInSameCity.slice(0, 3);
+        setRandomCribData(randomCribs);
+  
+        console.log('Random Cribs:', randomCribs);
+        console.log(randomCribData)
       })
       .catch(error => {
         console.error('Erreur lors de la récupération des données :', error);
       });
-  }, [API_URL, API_KEY]);
+  }, [API_URL, API_KEY, lotData.apartment]);
+
+
+
+  
   const staticCoordinates = [
     [43.70328975790311, 7.1704107912588055],
     [43.705, 7.175],]
@@ -323,7 +352,7 @@ const Room = () => {
               </div>
               <div className='recommandation mt-3 mb-lg-5 pb-4 d-md-block d-none'>
                 <h2 className='mb-3'>You might also be interested in the following properties</h2>
-                {/* <Crib cribs={3}/> */}
+                {randomCribData&&<Crib cribs={randomCribData} /> }
               </div>
             </div>
             <div className='col-widget col-lg-4'>
@@ -359,7 +388,7 @@ const Room = () => {
                 </div>
                 <div className='recommandation mt-3 mb-lg-5 pb-4 d-md-none'>
                   <h2 className='mb-3'>You might also be interested in the following properties</h2>
-                  {/* <Crib cribs={cribData}/> */}
+                 {randomCribData&&<Crib cribs={randomCribData}/> }
                 </div>
 
 
