@@ -179,6 +179,17 @@ const Room = () => {
   } else if (showGas) {
     electricityAndGas = 'Gas';
   }
+  const getFloorSuffix = (floorNumber) => {
+    if (floorNumber === 1) {
+      return "st";
+    } else if (floorNumber === 2) {
+      return "nd";
+    } else if (floorNumber === 3) {
+      return "rd";
+    } else {
+      return "th";
+    }
+  };
   
     return (
       <>
@@ -194,10 +205,21 @@ const Room = () => {
                 <CarrouselImages />
                 
                 <div className='medias'>
-                  <button type='button' className='btn-media' onClick={openModalWithTab1} id="photos-btn"><img src={iconimgs} alt="photos"/> photos</button>
-                  <button type='button' className='btn-media' onClick={openModalWithTab2} id="video-btn"><img src={iconvideos} alt="videos"/> video</button>
-                  <button type='button' className='btn-media' onClick={openModalWithTab3} id="visit-btn"><img src={iconvisit} alt="visit"/> 360° visit</button>
-                  <button type='button' className='btn-media' onClick={openModalWithTab4} id="floorplan-btn"><img src={iconfloorplan} alt="floorplan"/> flooplan</button>
+                {lotData && lotData.media && lotData.media
+                 .filter((media) => media.mime_type.startsWith('image')&&
+                  media.collection_name !== 'floorpan') && (
+                 <button type='button' className='btn-media' onClick={openModalWithTab1} id="photos-btn">
+                 <img src={iconimgs} alt="photos"/> photos</button>)}
+                 {lotData && lotData.media.some((media) => media.mime_type.startsWith('video')) &&(
+                  <button type='button' className='btn-media' onClick={openModalWithTab2} id="video-btn">
+                  <img src={iconvideos} alt="videos"/> video</button>)}
+                  
+                  <button type='button' className='btn-media' onClick={openModalWithTab3} id="visit-btn">
+                  <img src={iconvisit} alt="visit"/> 360° visit</button>
+                  {lotData && lotData.media && lotData.media 
+                            .filter((media) =>media.collection_name === 'floorpan').length >0 && (
+                  <button type='button' className='btn-media' onClick={openModalWithTab4} id="floorplan-btn">
+                  <img src={iconfloorplan} alt="floorplan"/> flooplan</button>)}
                   {/* <button type='button' className='btn-media' onClick={openModal} id="media-btn"><img src={iconimgs} alt="media"/> Medias</button> */}
                 </div>
 
@@ -217,7 +239,9 @@ const Room = () => {
                 <div className='btn-char'><img src={bedroom} alt="bedroom"/>Room ({lotData.area}m2)</div>)}
                 {lotData && lotData.apartment && lotData.apartment.rooms &&  (
                 <div className='btn-char'><img src={roomies} alt="roomies"/>{lotData.apartment.rooms} Roomies</div>)}
-                <div className='btn-char'><img src={elevator} alt="floor"/>2ndFloor</div>
+                {lotData && lotData.apartment && lotData.apartment.floor &&  (
+                <div className='btn-char'><img src={elevator} alt="floor"/>{lotData.apartment.floor}
+                  {getFloorSuffix(lotData.apartment.floor)}</div>)}
                 {lotData && lotData.apartment && lotData.apartment.energy_rating &&  (
                 <div className='btn-char'><img src={energy} alt="energy"/>{lotData.apartment.energy_rating}+++</div>)}
               </div>
@@ -318,7 +342,7 @@ const Room = () => {
     <img src={man} alt={index} />
   ) : locataire.locataire_info && locataire.locataire_info.genre === 1 ? (
     <img src={woman} alt={index} />
-  ) : locataire.title && locataire.title === lotData.title ? (
+  ) :((locataire.title && locataire.title === lotData.title) || locataire.rent_status === false) ? (
     <img src={block} alt={index} />
   ) : null}
 </div>

@@ -24,41 +24,50 @@ const RoomModalMedia = ({ isOpen, closeModal, activeTab, setActiveTab , lotData 
         <div className='container'>
             <div className='modal-header'>
                 <button onClick={closeModal} className='btn btn-close'>Close <IoCloseOutline/></button>
-                
+                {lotData &&
                 <ul className="nav nav-tabs">
-                    <li
-                        className={activeTab === 'tab1' ? 'nav-item active' : 'nav-item '}
-                        onClick={() => setActiveTab('tab1')}
-                    >
-                        <span className='nav-link'>
-                            <img src={iconimgs} className='icon' alt="photos"/><img src={iconimgshover} className='icon-hover' alt="photos"/> photos
-                        </span>
-                    </li>
-                    <li
-                        className={activeTab === 'tab2' ? 'nav-item active' : 'nav-item'}
-                        onClick={() => setActiveTab('tab2')}
-                    >
-                        <span className='nav-link'>
-                            <img src={iconvideos} className='icon' alt="video"/><img src={iconvideoshover} className='icon-hover' alt="video"/> video
-                        </span> 
-                    </li>
-                    <li
-                        className={activeTab === 'tab3' ? 'nav-item active' : 'nav-item'}
-                        onClick={() => setActiveTab('tab3')}
-                    >
-                        <span className='nav-link'>
-                            <img src={iconvisit} className='icon' alt="Visit"/><img src={iconvisithover} className='icon-hover' alt="Visit"/> 360° visit
-                        </span>
-                    </li>
-                    <li
-                        className={activeTab === 'tab4' ? 'nav-item active' : 'nav-item'}
-                        onClick={() => setActiveTab('tab4')}
-                    >
-                        <span className='nav-link'>
-                            <img src={iconfloorplan} className='icon' alt="floorplan"/><img src={iconfloorplan} className='icon-hover' alt="floorplan"/> floorplan
-                        </span>
-                    </li>
-                </ul>
+  {lotData && lotData.media && lotData.media
+    .filter((media) => media.mime_type.startsWith('image')&& media.collection_name !== 'floorpan') && (
+  <li
+    className={activeTab === 'tab1' ? 'nav-item active' : 'nav-item '}
+    onClick={() => setActiveTab('tab1')}
+  >
+    <span className='nav-link'>
+      <img src={iconimgs} className='icon' alt="photos"/><img src={iconimgshover} className='icon-hover' alt="photos"/> photos
+    </span>
+  </li> )}
+
+  {lotData && lotData.media.some((media) => media.mime_type.startsWith('video')) && (
+    <li
+      className={activeTab === 'tab2' ? 'nav-item active' : 'nav-item'}
+      onClick={() => setActiveTab('tab2')}
+    >
+      <span className='nav-link'>
+        <img src={iconvideos} className='icon' alt="video"/><img src={iconvideoshover} className='icon-hover' alt="video"/> video
+      </span>
+    </li>
+  )}
+
+  <li
+    className={activeTab === 'tab3' ? 'nav-item active' : 'nav-item'}
+    onClick={() => setActiveTab('tab3')}
+  >
+    <span className='nav-link'>
+      <img src={iconvisit} className='icon' alt="Visit"/><img src={iconvisithover} className='icon-hover' alt="Visit"/> 360° visit
+    </span>
+  </li>
+{lotData && lotData.media && lotData.media 
+                            .filter((media) =>media.collection_name === 'floorpan').length >0 && (
+  <li
+    className={activeTab === 'tab4' ? 'nav-item active' : 'nav-item'}
+    onClick={() => setActiveTab('tab4')}
+  >
+    <span className='nav-link'>
+      <img src={iconfloorplan} className='icon' alt="floorplan"/><img src={iconfloorplan} className='icon-hover' alt="floorplan"/> floorplan
+    </span>
+  </li> )}
+</ul>}
+
             
             </div>
             <div className='modal-body'>
@@ -106,7 +115,7 @@ const RoomModalMedia = ({ isOpen, closeModal, activeTab, setActiveTab , lotData 
                         {activeTab === 'tab3' && (
                             <div className='tab-panel'>
                                 <ul className='gallery-videos row m-0'>
-                                    <li className='itm-video col-md-12 p-0'><video width='853' height='480' src='https://my.matterport.com/show/?m=xtS2JPoUHQi' frameborder='0' allowfullscreen allow='xr-spatial-tracking'></video></li>
+                                    <li className='itm-video col-md-12 p-0'><iframe width='853' title='360' height='480' src='https://my.matterport.com/show/?m=xtS2JPoUHQi' frameborder='0' allowfullscreen allow='xr-spatial-tracking'></iframe></li>
                                 </ul>
                             </div>
                         )}

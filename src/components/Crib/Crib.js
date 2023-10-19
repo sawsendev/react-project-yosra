@@ -33,11 +33,13 @@ const Crib = ({ cribs }) => {
       .map((image, index) => (
         <Link to={`/room/${crib.id}`} key={index}>
           <div>
+          <LazyLoad height={200} offset={100}>
             <img
               className="img-fluid"
               src={image.original_url}
               alt={`Room ${index}`}
               />
+              </LazyLoad>
           </div>
         </Link>
       )
@@ -45,52 +47,18 @@ const Crib = ({ cribs }) => {
    
     <Link to={`/room/${crib.id}`}>
       <div>
+      <LazyLoad height={200} offset={100}>
         <img
           className="img-fluid"
           src={imageParDefaut}
           alt="Im"
           style={{ width: '100%', height: '100%' }}
         />
+        </LazyLoad>
       </div>
     </Link>
   )}
 </Carousel>
-
-
-
-
-
-                  <Carousel showStatus={false} showArrows={false} showThumbs={false} dynamicHeight={false} useKeyboardArrows={false}>
-                  {crib && crib.media && crib.media.some((media) => media.mime_type.startsWith('image')) ? (
-                    crib.media
-                      .filter((media) => media.mime_type.startsWith('image'))
-                      .map((image, index) => (
-                        <Link to={`/room/${crib.id}`} key={index}>
-                          <div>
-                            <LazyLoad height={200} offset={100}>
-                              <img
-                                className="img-fluid"
-                                src={image.original_url}
-                                alt={`Room ${index}`}
-                                />
-                              </LazyLoad>
-                          </div>
-                        </Link>
-                      ))
-                  ) : (
-                  
-                    <Link to={`/room/${crib.id}`}>
-                      <div>
-                        <img
-                          className="img-fluid"
-                          src={imageParDefaut}
-                          alt="Im"
-                          style={{ width: '100%', height: '100%' }}
-                        />
-                      </div>
-                    </Link>
-                  )}
-                </Carousel>
                 </div>
               </div>
               <div className='Rooms-content'>
