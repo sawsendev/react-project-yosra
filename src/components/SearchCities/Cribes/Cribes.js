@@ -19,23 +19,8 @@ import { Link } from 'react-router-dom';
 import { Carousel } from 'react-responsive-carousel';
 
 const Cribes = () => {
-  const [isFixed, setIsFixed] = useState(false);
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 700) {
-        setIsFixed(true);
-      } else {
-        setIsFixed(false);
-      }
-    };
 
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []); 
-
+ 
   const customIcon = new L.divIcon({
     className: 'custom-icon',
     html: '<div class="marker-label">400$</div>',
@@ -147,6 +132,9 @@ const Cribes = () => {
     console.log(searchResult); 
   }, [searchResult]); 
 
+
+
+
   return (
     <div className='Cribes-container container-fluid'>
       <h2>Our cribs in Nice</h2>
@@ -187,7 +175,7 @@ const Cribes = () => {
 
           {!(searchParamsExist && searchResult.length === 0) ? (
   <div className='Maps col-lg-5'>
-    <div className='maps-block'>
+     <div className={`maps-block `}>
       <MapContainer
         center={[43.70328975790311, 7.1704107912588055]}
         zoom={13}
