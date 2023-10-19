@@ -84,14 +84,18 @@ const CarrouselImages = () => {
       containerClass="carousel-container"
     >
       {lotData.media.map((image, index) => (
-        <div key={index} className='item-img'>
-          <img src={image.original_url} alt={image.name} className="img-fluid" />
-        </div>
-      ))}
+  
+  (image.mime_type.startsWith('image') && image.collection_name !== 'floorpan') && (
+    <div key={index} className='item-img'>
+      <img src={image.original_url} alt={image.name} className="img-fluid" />
+    </div>
+  )
+))}
+
     </Carousel>
   ) : (
     <div className='default-img'>
-      <img src={default_img} alt="default image" className="img-fluid" />
+      <img src={default_img} alt="default" className="img-fluid" />
     </div>
   )}
 

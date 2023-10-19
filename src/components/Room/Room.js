@@ -288,19 +288,22 @@ const Room = () => {
               <div className='flatmates'>
              <h2 className='mb-3'>Flatmates</h2>
               <div className='row'>
-              {lotData &&lotData.rent_status ? (
+              {/* {lotData ? (
   <div className='col-md-4'>
     <div className='panel mb-3'>
       <div className='icon'>
         <img src={block} alt="Bedroom 1"/>
       </div>
       <div className='text'>
-        <p>{lotData.title.replace('Room', 'Bedroom')}</p>
-        <button type='button' className='btn-visit'>Visit</button>
+        <p>{lotData.title &&lotData.title.replace('Room', 'Bedroom')}</p>
+       {lotData &&lotData.rent_status===false && (<button type='button' className='btn-visit'>Visit</button>)}
+       
+        {lotData &&lotData.rent_status===true &&(<span className='status'> Booked</span>)}
+       
       </div>
     </div>
   </div>
-) : null}
+) : null} */}
 
                   {lotData &&
   lotData.apartment &&
@@ -310,23 +313,34 @@ const Room = () => {
 .map((locataire, index) => (
   <div className='col-md-4' key={index}>
     <div className='panel mb-3'>
-      <div className='icon'>
-        {locataire.locataire_info &&locataire.locataire_info.genre === 0 ? (
-          <img src={man} alt={index} />
-        ) : locataire.locataire_info &&locataire.locataire_info.genre === 1? (
-          <img src={woman} alt={index} />
-        ): null}
-      </div>
+    <div className='icon'>
+  {locataire.locataire_info && locataire.locataire_info.genre === 0 ? (
+    <img src={man} alt={index} />
+  ) : locataire.locataire_info && locataire.locataire_info.genre === 1 ? (
+    <img src={woman} alt={index} />
+  ) : locataire.title && locataire.title === lotData.title ? (
+    <img src={block} alt={index} />
+  ) : null}
+</div>
+
       <div className='text'>
-     {locataire.title.replace('Room', 'Bedroom')} <span className='status'> Booked</span>
-     
-      <p>
-  
-      {locataire.locataire_info&&locataire.locataire_info.date_of_birth && (
-        <span> | {calculateAge(locataire.locataire_info.date_of_birth)} yrs.</span>
-      )}
-    </p>
-  
+     {locataire.title &&locataire.title.replace('Room', 'Bedroom')} 
+    
+      {locataire.rent_status === true ? (
+            <span className='status'>Booked</span>
+          ) : (
+            <button type='button' className='btn-visit'>Visit</button>
+          )}
+
+     <p>
+  {locataire.locataire_info && locataire.locataire_info.name && (
+    <span>{locataire.locataire_info.name}  </span>
+  )}
+  {locataire.locataire_info && locataire.locataire_info.date_of_birth && (
+    <span> | {calculateAge(locataire.locataire_info.date_of_birth)} yrs.</span>
+  )}
+</p>
+
   
 
       </div>

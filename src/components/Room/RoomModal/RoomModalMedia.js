@@ -69,10 +69,10 @@ const RoomModalMedia = ({ isOpen, closeModal, activeTab, setActiveTab , lotData 
                       <div className='tab-panel'>
                         <ul className='gallery-imgs row m-0'>
                           {lotData && lotData.media && lotData.media
-                            .filter((media) => media.mime_type.startsWith('image'))
+                            .filter((media) => media.mime_type.startsWith('image')&& media.collection_name !== 'floorpan')
                             .map((image, index) => (
                               <li key={index} className='itm-img col-md-12 p-0'>
-                                <img src={image.original_url} alt={`Room ${index}`} className='img-fluid' />
+                                <img src={image.original_url} alt={`Room ${index}`} className='img-fluid'/>
                               </li>
                             ))
                           }

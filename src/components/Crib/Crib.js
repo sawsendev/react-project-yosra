@@ -28,7 +28,7 @@ const Crib = ({ cribs }) => {
                 <Carousel showStatus={false} showArrows={false} showThumbs={false} dynamicHeight={false} useKeyboardArrows={false}>
   {crib && crib.media && crib.media.some((media) => media.mime_type.startsWith('image')) ? (
     crib.media
-      .filter((media) => media.mime_type.startsWith('image'))
+      .filter((media) => media.mime_type.startsWith('image') && media.collection_name !== 'floorpan'))
       .map((image, index) => (
         <Link to={`/room/${crib.id}`} key={index}>
           <div>
@@ -39,7 +39,7 @@ const Crib = ({ cribs }) => {
               />
           </div>
         </Link>
-      ))
+      )
   ) : (
    
     <Link to={`/room/${crib.id}`}>
