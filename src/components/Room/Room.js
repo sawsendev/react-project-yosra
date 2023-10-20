@@ -312,8 +312,8 @@ const Room = () => {
 
               </div>
               <div className='flatmates'>
-             <h2 className='mb-3'>Flatmates</h2>
-              <div className='row'>
+                <h2 className='mb-3'>Flatmates</h2>
+                  <div className='row'>
               {/* {lotData ? (
   <div className='col-md-4'>
     <div className='panel mb-3'>
@@ -351,11 +351,12 @@ const Room = () => {
 
       <div className='text'>
      {locataire.title &&locataire.title.replace('Room', 'Bedroom')} 
+     
     
       {locataire.rent_status === true ? (
             <span className='status'>Booked</span>
           ) : (
-            <button type='button' className='btn-visit'>Visit</button>
+            <button type='button' className='btn-visit' onClick={()=>{navigate(`../room/${locataire.id}`)}}>Visit</button>
           )}
 
      <p>
