@@ -93,7 +93,7 @@ const Cribes = () => {
     if (!searchParamsExist) {
       fetchDataFromAPI(currentPage);
     }
-  }, []);
+  }, [currentPage,searchParamsExist]);
 
   useEffect(() => {
     if (!searchParamsExist) {
