@@ -167,7 +167,7 @@ const Cribes = () => {
                   <div className='left d-flex '>
                     <img className='ImageNoRooms' src={noRooms} alt='no rooms icon'/>
                     <span>No rooms available</span>
-                    <button className='button'>Show first availabilities</button>
+                    {/* <button className='button'>Show first availabilities</button> */}
                   </div>
                 </div>
                 </div>
