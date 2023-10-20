@@ -311,8 +311,9 @@
   position: absolute;
   right: 0;
   top: 0;
+  top: 16px;
   bottom: 0;
-  height: 100%;
+  height: calc(100% - 24px);
   border-right: 1px dashed #A0A9B2;
 }
 .process-content.mobile {
@@ -637,5 +638,10 @@ button.btn-propose span.btn-icon img {
   bottom: 40px;
   top: inherit;
   transform: none;
+}
+.row.before-after {
+  padding-bottom: 16px;
+  margin-bottom: 0px;
+  border-bottom: 1px dashed #A0A9B2;
 }
 }

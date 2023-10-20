@@ -305,7 +305,7 @@ const ProposeApartment =()=> {
     <section className='renovation pt-lg-5 pt-3 mb-md-5 pb-md-5 pb-4'>
       <div className='container'>
         <h2 className='mb-md-2 pb-2'>Examples of renovation</h2>
-        <div className='row'>
+        <div className='row before-after'>
           <div className='col-md-6'>
             <div className='image-left'>
               <span class="badge badge-left">Before Finecribs</span>
@@ -319,7 +319,7 @@ const ProposeApartment =()=> {
             </div>
           </div>
         </div>
-        <div className='row'>
+        <div className='row before-after'>
           <div className='col-md-6'>
             <div className='image-left'>
               <span class="badge badge-left">Before Finecribs</span>
@@ -333,7 +333,7 @@ const ProposeApartment =()=> {
             </div>
           </div>
         </div>
-        <div className='row'>
+        <div className='row before-after'>
           <div className='col-md-6'>
             <div className='image-left'>
               <span class="badge badge-left">Before Finecribs</span>
@@ -347,7 +347,7 @@ const ProposeApartment =()=> {
             </div>
           </div>
         </div>
-        <div className='row'>
+        <div className='row before-after'>
           <div className='col-md-6'>
             <div className='image-left'>
               <span class="badge badge-left">Before Finecribs</span>
@@ -361,7 +361,7 @@ const ProposeApartment =()=> {
             </div>
           </div>
         </div>
-        <div className='row'>
+        <div className='row before-after'>
           <div className='col-md-6'>
             <div className='image-left'>
               <span class="badge badge-left">Before Finecribs</span>
