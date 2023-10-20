@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import LazyLoad from 'react-lazyload';
 import './Cribes.css';
 import AlertCribes from '../AlertCribes/AlertCribes';
 import Crib from '../../Crib/Crib';
@@ -8,25 +9,18 @@ import noRooms from "../../../assets/Group 24.svg"
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 
+import { Badge } from 'react-bootstrap';
+import  locationIcon  from '../../../assets/pin 2.svg';
+import promoImage from '../../../assets/Group 104.svg';
+import imageParDefaut from '../../../assets/room/Group 116.svg';
+import room1 from '../../../assets/room/room-21.jpg'
+import room2 from '../../../assets/room/room-22.jpg'
+import { Link } from 'react-router-dom';
+import { Carousel } from 'react-responsive-carousel';
 
 const Cribes = () => {
-  const [isFixed, setIsFixed] = useState(false);
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 700) {
-        setIsFixed(true);
-      } else {
-        setIsFixed(false);
-      }
-    };
 
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []); 
-
+ 
   const customIcon = new L.divIcon({
     className: 'custom-icon',
     html: '<div class="marker-label">400$</div>',
@@ -138,6 +132,9 @@ const Cribes = () => {
     console.log(searchResult); 
   }, [searchResult]); 
 
+
+
+
   return (
     <div className='Cribes-container container-fluid'>
       <h2>Our cribs in Nice</h2>
@@ -178,7 +175,7 @@ const Cribes = () => {
 
           {!(searchParamsExist && searchResult.length === 0) ? (
   <div className='Maps col-lg-5'>
-    <div>
+     <div className={`maps-block `}>
       <MapContainer
         center={[43.70328975790311, 7.1704107912588055]}
         zoom={13}
@@ -190,7 +187,56 @@ const Cribes = () => {
         />
         {staticCoordinates.map((coord, index) => (
           <Marker key={index} position={coord} icon={customIcon}>
-            <Popup>400$</Popup>
+            <Popup>
+
+              <div className='popup_itemcribe'>
+                <div className='item-cribe'>
+                  <div className='Item-badge'>
+                    <Badge className='notify-badge'>Available now</Badge>
+                    <img src={promoImage} alt='Promo' className='promo-image' />
+                    
+                      <div className="custom-carousel-container">
+                        <Carousel showStatus={false} showArrows={false} showThumbs={false} dynamicHeight={false} useKeyboardArrows={false}>
+
+                            <Link to='#'>
+                              <div>
+                                <LazyLoad height={200} offset={100}>
+                                <img className="img-fluid" src={room1} alt="Im" style={{ width: '100%', height: '100%' }} />
+                                </LazyLoad>
+                              </div>
+                            </Link>
+
+                            <Link to='#'>
+                              <div>
+                                <LazyLoad height={200} offset={100}>
+                                <img className="img-fluid" src={imageParDefaut} alt="Im" style={{ width: '100%', height: '100%' }} />
+                                </LazyLoad>
+                              </div>
+                            </Link>
+                            
+                            <Link to='#'>
+                              <div>
+                                <LazyLoad height={200} offset={100}>
+                                <img className="img-fluid" src={room2} alt="Im" style={{ width: '100%', height: '100%' }} />
+                                </LazyLoad>
+                              </div>
+                            </Link>
+
+                        </Carousel>
+                      </div>
+                  </div>
+                  <div className='Rooms-content'>
+                    <h3>17 Récamier - #room 5</h3>
+                    <div className='d-flex mb-1'>
+                      <img src={locationIcon} alt="location icon"/>
+                      <p>47 rue Pierre Audry, 69009 Lyon</p>
+                    </div>
+                    <span className='pricecrib'>400€/ month</span>
+                  </div>
+                </div>
+              </div>
+
+            </Popup>
           </Marker>
         ))}
       </MapContainer>

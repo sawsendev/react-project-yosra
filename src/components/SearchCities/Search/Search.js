@@ -122,6 +122,8 @@ const Search = () => {
     setSortBy(e.target.value);
   };
 
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
 
   return (
     <div className='Search-container'>
@@ -151,7 +153,9 @@ const Search = () => {
                name="date"
                />
                }
-/>
+               minDate={tomorrow}
+               />
+
               </div>
             </div>
 

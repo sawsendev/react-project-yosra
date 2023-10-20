@@ -52,6 +52,8 @@ label{
 }
 .item-cribe .Item-badge .img-fluid {
     border-radius: 6px;
+    height: 200px!important;
+    object-fit: cover;
 }
 .custom-select {
     display: inline-block;
