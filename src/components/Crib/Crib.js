@@ -67,7 +67,7 @@ const Crib = ({ cribs }) => {
                   <img src={locationIcon} alt="location icon"/>
                   <p>{crib.apartment.building.address}</p>
                 </div>
-                <span>{crib.loyer_hc}€/ month</span>
+                <span>{crib.loyer_hc} € /month</span>
               </div>
             </div>
           </li>

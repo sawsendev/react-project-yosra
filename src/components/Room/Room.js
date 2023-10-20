@@ -409,7 +409,7 @@ const Room = () => {
                     )}
                   <hr/>
                   {lotData.loyer_hc ? (
-                  <p className='text-center price'>{lotData.loyer_hc}€/<small> month</small></p>
+                  <p className='text-center price'>{lotData.loyer_hc} € /<small>month</small></p>
                   ) : null}
                   {lotData.max_benefit ? (
                   <div className='text-center assistance'>
