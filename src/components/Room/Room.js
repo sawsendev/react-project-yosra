@@ -61,7 +61,7 @@ const Room = () => {
   const API_URL = `http://dev.niceroom.sofis-info.com/api/lot/${id}`;
   const API_URL2 = 'http://dev.niceroom.sofis-info.com/api/lots/list';
   const navigate= useNavigate();
-  const [cribData, setCribData] = useState([]);
+
   const [randomCribData, setRandomCribData] = useState([]);
   function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -82,7 +82,6 @@ const Room = () => {
       .then(data => {
         const allCribs = data.data.lots;
         
-        // Vérifiez si lotData.apartment et lotData.apartment.building sont définis
         const cribsInSameCity = allCribs.filter(crib => 
           lotData.apartment && lotData.apartment.building &&
           crib.apartment && crib.apartment.building &&
@@ -207,13 +206,15 @@ const Room = () => {
                 <div className='medias'>
                 {lotData && lotData.media && lotData.media
                  .filter((media) => media.mime_type.startsWith('image')&&
-                  media.collection_name !== 'floorpan') && (
+                  media.collection_name !== 'floorpan').length >0 && (
                  <button type='button' className='btn-media' onClick={openModalWithTab1} id="photos-btn">
                  <img src={iconimgs} alt="photos"/> photos</button>)}
-                 {lotData && lotData.media.some((media) => media.mime_type.startsWith('video')) &&(
-                  <button type='button' className='btn-media' onClick={openModalWithTab2} id="video-btn">
-                  <img src={iconvideos} alt="videos"/> video</button>)}
-                  
+                 {lotData && lotData.media && lotData.media.some((media) => media.mime_type.startsWith('video')) && (
+    <button type='button' className='btn-media' onClick={openModalWithTab2} id="video-btn">
+        <img src={iconvideos} alt="videos"/> video
+    </button>
+)}
+
                   <button type='button' className='btn-media' onClick={openModalWithTab3} id="visit-btn">
                   <img src={iconvisit} alt="visit"/> 360° visit</button>
                   {lotData && lotData.media && lotData.media 
@@ -231,7 +232,8 @@ const Room = () => {
               {lotData && lotData.apartment && lotData.apartment.title && lotData.title && (
                <h1>{lotData.apartment.title} - {lotData.title}</h1>
                 )}
-                <h2>Private room in Nice</h2>
+                {lotData && lotData.apartment && lotData.apartment.building&&lotData.apartment.building.city&&(
+                <h2>Private room in {lotData.apartment.building.city}</h2>)}
               </div>
               <div className='characteristics mt-3 mb-4'>
                 <div className='btn-char'><img src={plan} alt="plan"/>Apartement (76m2)</div>
@@ -401,9 +403,15 @@ const Room = () => {
                     <p className='head-widgett'><img src={check2} alt="Available"/> Not available</p>
                     )}
                   <hr/>
-                {(lotData.loyer_hc && <p className='text-center price'>{lotData.loyer_hc}€/<small> month</small></p>)}
-                {lotData.max_benefit &&
-                <div className='text-center assistance'>CAF assistance <PiInfo className='info'/> <span className='green'>( up to -{lotData.max_benefit}€ )</span></div>}
+                  {lotData.loyer_hc ? (
+                  <p className='text-center price'>{lotData.loyer_hc}€/<small> month</small></p>
+                  ) : null}
+                  {lotData.max_benefit ? (
+                  <div className='text-center assistance'>
+                   CAF assistance <PiInfo className='info' />
+                   <span className='green'>( up to -{lotData.max_benefit}€ )</span>
+                   </div>
+                  ) : null}
                   <p className='h4 status'>Rent is all inclusive</p>
                   {lotData.water !== 0 &&(<p className='status'><img src={water} alt="Water"/> Water</p>)}
                   {electricityAndGas && (

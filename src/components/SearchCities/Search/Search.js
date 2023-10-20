@@ -11,38 +11,24 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { format } from 'date-fns';
 import { parse } from 'date-fns';
+import { useMemo } from 'react';
 
 
 
 const Search = () => {
+  const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
+  const API_URL = `http://dev.niceroom.sofis-info.com/api/lots/list`;
+  const[lotData,setLotData]=useState([]);
   const [selectedCountry, setSelectedCountry] = useState("");
-  const [priceRange, setPriceRange] = useState([1, 1000]);
+ 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [date, setDate] = useState("");
   const [sortBy, setSortBy] = useState(""); 
   const location = useLocation();
   const [isSliderOpen,setIsSliderOpen]=useState(false)
   const[city,setCity]=useState("")
-  useEffect(() => {
-    // Parsez les paramètres de l'URL ici
-    const searchParams = new URLSearchParams(location.search);
-    const cityParam = searchParams.get('city');
-    const dateParam = searchParams.get('date');
-    
-    const priceMinParam = searchParams.get('priceMin');
-    const priceMaxParam = searchParams.get('priceMax');
-    const sortByParam = searchParams.get('sortBy');
 
-    // Mettez à jour l'état local avec les valeurs des paramètres de l'URL
-    setSelectedCountry(cityParam || "");
-    setDate(dateParam ? parse(dateParam, 'dd-MM-yyyy', new Date()) : "");
-    setSortBy(sortByParam || "");
-
- // Mise à jour de l'état priceRange si priceMinParam et priceMaxParam existent
-    if (priceMinParam && priceMaxParam) {
-      setPriceRange([parseInt(priceMinParam), parseInt(priceMaxParam)]);
-    }
-  }, [location.search]);
+ 
   const navigate=useNavigate()
 
   const customStyles = {
@@ -68,38 +54,6 @@ const Search = () => {
     }),
   };
 
-
-  const handlePriceRangeChange = (newValue) => {
-    setPriceRange(newValue);
-  };
-
-  const formatPriceRangeLabel = (priceRange) => {
-    return `${priceRange[0]}€ - ${priceRange[1]}€`;
-  };
-
-  const selectValue = { label: formatPriceRangeLabel(priceRange), value: `${priceRange[0]}-${priceRange[1]}` };
- 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const searchParams = new URLSearchParams();
-    searchParams.append('city', city);
-    searchParams.append('date', format(date, 'dd-MM-yyyy'));
-    searchParams.append('sortBy', sortBy);
-    searchParams.append('priceMin', priceRange[0]); // Ajout de priceMin
-    searchParams.append('priceMax', priceRange[1]); // Ajout de priceMax
-  
-    const url = `/search-cities?${searchParams.toString()}`;
-    navigate(url);
-  };
-
-  const handleCustomInputInChange = (date) => {
-    setDate(date);
-  };
-  const handleMoveInDateChange = (date) => {
-    if (date) {
-      setDate(date); // Stockez la date telle quelle
-    }
-  };
   const CustomInput = ({ value, onClick, onChange, name }) => (
     <div className="input-datepicker" onClick={onClick}>
       <input
@@ -120,6 +74,105 @@ const Search = () => {
   );
   const handleChangeSortBy = (e) => {
     setSortBy(e.target.value);
+  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const headers = {
+          'apiKey': API_KEY,
+        };
+
+        const response = await fetch(API_URL, { method: 'GET', mode: 'cors', headers });
+        if (!response.ok) {
+          throw new Error('Response not OK');
+        }
+
+        const data = await response.json();
+        setLotData(data.data.lots);
+        console.log(data.data.lots)
+      } catch (error) {
+        console.error('Erreur lors de la récupération des données :', error);
+      }
+    };
+
+    fetchData();
+  }, [API_URL, API_KEY]);
+  const [min,setMin]=useState(1)
+  const[max,setMax]=useState(1000)
+  
+  useEffect(() => {
+    if (lotData.length > 0) {
+      let minLoyerHC = lotData[0].loyer_hc;
+      let maxLoyerHC = lotData[0].loyer_hc;
+
+      for (let i = 1; i < lotData.length; i++) {
+        const currentLoyerHC = lotData[i].loyer_hc;
+        if (currentLoyerHC < minLoyerHC) {
+          minLoyerHC = currentLoyerHC;
+        }
+        if (currentLoyerHC > maxLoyerHC) {
+          maxLoyerHC = currentLoyerHC;
+        }
+      }
+
+      setMin(minLoyerHC);
+      setMax(maxLoyerHC);
+    }
+  }, [lotData]);
+  const [priceRange, setPriceRange] = useState([min, max]);
+
+  
+  useEffect(() => {
+    // Parsez les paramètres de l'URL ici
+    const searchParams = new URLSearchParams(location.search);
+    const cityParam = searchParams.get('city');
+    const dateParam = searchParams.get('date');
+    
+    const priceMinParam = searchParams.get('priceMin');
+    const priceMaxParam = searchParams.get('priceMax');
+    const sortByParam = searchParams.get('sortBy');
+
+    // Mettez à jour l'état local avec les valeurs des paramètres de l'URL
+    setSelectedCountry(cityParam || "");
+    setDate(dateParam ? parse(dateParam, 'dd-MM-yyyy', new Date()) : "");
+    setSortBy(sortByParam || "");
+
+ // Mise à jour de l'état priceRange si priceMinParam et priceMaxParam existent
+    if (priceMinParam && priceMaxParam) {
+      setPriceRange([parseInt(priceMinParam), parseInt(priceMaxParam)]);
+    }
+  }, [location.search]);
+  const handlePriceRangeChange = (newValue) => {
+    setPriceRange(newValue);
+  };
+
+  const formatPriceRangeLabel = (priceRange) => {
+    return `${priceRange[0]}€ - ${priceRange[1]}€`;
+  };
+
+  const selectValue = { label: formatPriceRangeLabel(priceRange), value: `${priceRange[0]}-${priceRange[1]}` };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const searchParams = new URLSearchParams();
+    searchParams.append('city', city);
+    if (date) {
+      searchParams.append('date', format(date, 'dd-MM-yyyy'));
+    }
+    searchParams.append('sortBy', sortBy);
+    searchParams.append('priceMin', priceRange[0]); // Ajout de priceMin
+    searchParams.append('priceMax', priceRange[1]); // Ajout de priceMax
+  
+    const url = `/search-cities?${searchParams.toString()}`;
+    navigate(url);
+  };
+
+  const handleCustomInputInChange = (date) => {
+    setDate(date);
+  };
+  const handleMoveInDateChange = (date) => {
+    if (date) {
+      setDate(date); 
+    }
   };
 
   const tomorrow = new Date();
@@ -182,8 +235,8 @@ const Search = () => {
                     <div className='price'>
                       <h5>Price per month</h5>
                       <Slider
-                        min={1}
-                        max={1000}
+                        min={min} 
+                        max={max}
                         value={priceRange}
                         onChange={handlePriceRangeChange}
                         range
