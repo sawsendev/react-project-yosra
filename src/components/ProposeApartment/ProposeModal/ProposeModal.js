@@ -225,6 +225,8 @@ const ProposeModal = ({ isOpen, closeModal }) => {
   };
 
 
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
 
     const renderStep = () => {
       switch (step) {
@@ -356,6 +358,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
       name="moveInDate"
     />
   }
+  minDate={tomorrow}
 />
                     </div>
                         {validationErrors.date && (

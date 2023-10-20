@@ -45,6 +45,10 @@ const Intro = () => {
     const url = `/search-cities?${searchParams}`;
     navigate(url);
   };
+  
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
   return (
     <div className='Intro-container d-block py-md-5 py-4 container-fluid mb-md-5 mb-4'>
       <div className='Content-container'>
@@ -54,7 +58,7 @@ const Intro = () => {
           <div className='input-group input-country'>
           <SelectCity onChange={(selectedValue) => setCity(selectedValue.value)} />
           </div>
-          <div className='input-group input-date'>
+          <div className='input-group'>
           <DatePicker
   selected={date}
   name="date"
@@ -67,6 +71,7 @@ const Intro = () => {
       name="date"
     />
   }
+  minDate={tomorrow}
 />
           </div>
           <button className='Search-btn' onClick={handleClick}>Search & book</button>

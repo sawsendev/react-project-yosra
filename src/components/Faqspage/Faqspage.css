@@ -102,16 +102,16 @@
     background-color: #F5F5F5;
 }
 /*** tabs ***/
-.tab-content {
+.faq_tabspills .tab-content {
     width: 58%!important;
     background-color: #F5F5F5;
 }
-.nav-pills {
+.faq_tabspills .nav-pills {
     width: 42%!important;
     background: #ffffff; 
 }
-.nav-pills,
-.tab-content {
+.faq_tabspills .nav-pills,
+.faq_tabspills .tab-content {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -120,7 +120,7 @@
   flex-flow: 1!important;
   flex-basis: auto!important;
 }
-.nav-pills .nav-link {
+.faq_tabspills .nav-pills .nav-link {
     color: #000!important;
     background: #fff!important;
     font-size: 16px;
@@ -131,14 +131,14 @@
     outline: 0!important;
     box-shadow: none!important;
 }
-.nav-pills .nav-link.active {
+.faq_tabspills .nav-pills .nav-link.active {
     background: #F5F5F5!important;
     color: #000!important;
 }
-.tab-content .tab-pane {
+.faq_tabspills .tab-content .tab-pane {
     padding: 14px 30px 25px 35px;
 }
-.tab-content .tab-pane.active {
+.faq_tabspills .tab-content .tab-pane.active {
     background: #F5F5F5;
 }
 /**** responsive ***/
@@ -195,10 +195,10 @@
     }
 }
 @media (max-width: 576px) {
-.nav-pills .nav-link {
+    .faq_tabspills .nav-pills .nav-link {
     padding: 10px 10px 10px 16px; 
 }
-.tab-content .tab-pane {
+.faq_tabspills .tab-content .tab-pane {
     padding: 12px 12px 16px 16px;
 }
 }
