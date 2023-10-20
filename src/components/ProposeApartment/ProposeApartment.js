@@ -11,7 +11,17 @@ import image6 from '../../assets/good-quality.svg'
 import image7 from '../../assets/sketch.svg'
 import image8 from '../../assets/img-left.png'
 import image9 from '../../assets/img-right.png'
+import after1 from '../../assets/before-after/after1.jpg';
+import after2 from '../../assets/before-after/after2.jpg';
+import after3 from '../../assets/before-after/after3.jpg';
+import after4 from '../../assets/before-after/after4.jpg';
+import after5 from '../../assets/before-after/after5.jpg';
 import build from '../../assets/build.svg'
+import before1 from '../../assets/before-after/before1.jpg';
+import before2 from '../../assets/before-after/before2.jpg';
+import before3 from '../../assets/before-after/before3.jpg';
+import before4 from '../../assets/before-after/before4.jpg';
+import before5 from '../../assets/before-after/before5.jpg';
 import process1 from '../../assets/process/process1.svg'
 import process2 from '../../assets/process/process2.svg'
 import process3 from '../../assets/process/process3.svg'
@@ -20,6 +30,8 @@ import process5 from '../../assets/process/process5.svg'
 import Feedback from '../HomePage/Feedback/Feedback';
 import { LiaEnvelope } from "react-icons/lia";
 import { useNavigate } from 'react-router-dom';
+
+
 const ProposeApartment =()=> {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -292,21 +304,78 @@ const ProposeApartment =()=> {
     <ProposeModal isOpen={modalIsOpen} closeModal={closeModal} />
     <section className='renovation pt-lg-5 pt-3 mb-md-5 pb-md-5 pb-4'>
       <div className='container'>
-        <h2 className='mb-md-4 pb-2'>Examples of renovation</h2>
+        <h2 className='mb-md-2 pb-2'>Examples of renovation</h2>
         <div className='row'>
           <div className='col-md-6'>
             <div className='image-left'>
               <span class="badge badge-left">Before Finecribs</span>
-              <img src={image8} alt="Im8" className="img-fluid img"/>
+              <img src={before1} alt="Im8" className="img-fluid img"/>
             </div>
           </div>
           <div className='col-md-6'>
             <div className='image-right'>
               <span class="badge badge-right">After Finecribs</span>
-              <img src={image9} alt="Im9" className="img-fluid"/>
+              <img src={after1} alt="Im9" className="img-fluid"/>
             </div>
           </div>
         </div>
+        <div className='row'>
+          <div className='col-md-6'>
+            <div className='image-left'>
+              <span class="badge badge-left">Before Finecribs</span>
+              <img src={before2} alt="Im8" className="img-fluid img"/>
+            </div>
+          </div>
+          <div className='col-md-6'>
+            <div className='image-right'>
+              <span class="badge badge-right">After Finecribs</span>
+              <img src={after2} alt="Im9" className="img-fluid"/>
+            </div>
+          </div>
+        </div>
+        <div className='row'>
+          <div className='col-md-6'>
+            <div className='image-left'>
+              <span class="badge badge-left">Before Finecribs</span>
+              <img src={before3} alt="Im8" className="img-fluid img"/>
+            </div>
+          </div>
+          <div className='col-md-6'>
+            <div className='image-right'>
+              <span class="badge badge-right">After Finecribs</span>
+              <img src={after3} alt="Im9" className="img-fluid"/>
+            </div>
+          </div>
+        </div>
+        <div className='row'>
+          <div className='col-md-6'>
+            <div className='image-left'>
+              <span class="badge badge-left">Before Finecribs</span>
+              <img src={before4} alt="Im8" className="img-fluid img"/>
+            </div>
+          </div>
+          <div className='col-md-6'>
+            <div className='image-right'>
+              <span class="badge badge-right">After Finecribs</span>
+              <img src={after4} alt="Im9" className="img-fluid"/>
+            </div>
+          </div>
+        </div>
+        <div className='row'>
+          <div className='col-md-6'>
+            <div className='image-left'>
+              <span class="badge badge-left">Before Finecribs</span>
+              <img src={before5} alt="Im8" className="img-fluid img"/>
+            </div>
+          </div>
+          <div className='col-md-6'>
+            <div className='image-right'>
+              <span class="badge badge-right">After Finecribs</span>
+              <img src={after5} alt="Im9" className="img-fluid"/>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
