@@ -248,9 +248,11 @@ const Room = () => {
                 <div className='btn-char'><img src={energy} alt="energy"/>{lotData.apartment.energy_rating}+++</div>)}
               </div>
               <div className='description pt-2 mb-4'>
-                <h2>The crib</h2>
                 {lotData.description && (
-                <p>{lotData.description}</p>)}
+                  <div>
+                    <h2>The crib</h2>
+                    <p>{lotData.description}</p>
+                  </div>)}
               </div>
               <div className='amenities'>
                 <h2>Amenities</h2>
@@ -387,9 +389,11 @@ const Room = () => {
                 </div>
               </div>
               <div className='local-desc mt-3 mb-4 pb-3'>
-                <h2>Neighborhood description</h2>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
-                standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to</p>
+                {lotData.description_quartier && (
+                  <div>
+                    <h2>Neighborhood description</h2>
+                    <p>{lotData.description_quartier}</p>
+                  </div>)}
               </div>
               <div className='recommandation mt-3 mb-lg-5 pb-4 d-md-block d-none'>
                 <h2 className='mb-3'>You might also be interested in the following properties</h2>
