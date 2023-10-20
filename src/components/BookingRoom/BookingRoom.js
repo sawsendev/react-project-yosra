@@ -336,6 +336,10 @@ const validateEmail = (email) => {
   };
 
   
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const mindate_moveout = new Date();
+  mindate_moveout.setDate(mindate_moveout.getDate() + 2);
   
   
 
@@ -363,91 +367,85 @@ const validateEmail = (email) => {
           <form id="file-upload-form" onSubmit={handleSubmit} class="uploader">
               <div class="row mb-4">
                 <div class="col-md-6 col-12">
-                {lotData && lotData.apartment && lotData.apartment.title && lotData.title && (
+                  {lotData && lotData.apartment && lotData.apartment.title && lotData.title && (
                   <input type='text' value={`Room[${lotData.apartment.title} - ${lotData.title}]`}
                                               disabled className='w-100 Input-disabled'/>)}
                 </div>
               </div>
-              <div class="row mb-4">
-                <div class="col">
-                <div class="form-outline">
-                    <label class="form-label mb-1" for="firstname" >First name *</label>
-                    <input type="text"  name='firstName' class="form-control" placeholder='First name' onChange={handleChange}/>
-                    {formErrors.firstName !==''&&
-                    <div className="error-message">{formErrors.firstName}</div>}
+              <div class="row">
+                <div class="col-md-6 col-12">
+                  <div class="form-outline">
+                      <label class="form-label mb-1" for="firstname" >First name *</label>
+                      <input type="text"  name='firstName' class="form-control" placeholder='First name' onChange={handleChange}/>
+                      {formErrors.firstName !==''&&
+                      <div className="error-message">{formErrors.firstName}</div>}
+                  </div>
                 </div>
+                <div class="col-md-6 col-12">
+                  <div class="form-outline">
+                      <label class="form-label mb-1" for="surname" >Surname *</label>
+                      <input type="text"  class="form-control" name='surname' placeholder='Surname' onChange={handleChange}/>
+                      {formErrors.surname !=='' && <div className="error-message">{formErrors.surname}</div>}
+                  </div>
                 </div>
-                <div class="col">
-                <div class="form-outline">
-                    <label class="form-label mb-1" for="surname" >Surname *</label>
-                    <input type="text"  class="form-control" name='surname' placeholder='Surname' onChange={handleChange}/>
-                    {formErrors.surname !=='' && <div className="error-message">{formErrors.surname}</div>}
-                </div>
-                </div>
-                </div>
+              </div>
 
-                <div class="row mb-4">
-                <div class="col">
-                <div class="form-outline">
-                      <label class="form-label mb-1" for="datein">Move in date *</label>
-                      <DatePicker
-  selected={moveInDate}
-  name="moveInDate"
-  dateFormat="dd/MM/yyyy"
-  onChange={handleMoveInDateChange}
-  customInput={
-    <CustomInputIn
-      value={moveInDate}
-      onChange={handleCustomInputInChange}
-      name="moveInDate"
-    />
-  }
-/>
+                  <div class="row">
+                    <div class="col-md-6 col-12">
+                      <div class="form-outline">
+                        <label class="form-label mb-1" for="datein">Move in date *</label>
+                          <DatePicker
+                            selected={moveInDate}
+                            name="moveInDate"
+                            dateFormat="dd/MM/yyyy"
+                            onChange={handleMoveInDateChange}
+                            customInput={
+                              <CustomInputIn
+                                value={moveInDate}
+                                onChange={handleCustomInputInChange}
+                                name="moveInDate"
+                              />
+                            } minDate={tomorrow} />
+                        {formErrors.moveInDate !=='' && <div className="error-message">{formErrors.moveInDate}</div>}
+                      </div>
                     </div>
-                    {formErrors.moveInDate !=='' && <div className="error-message">{formErrors.moveInDate}</div>}
-                </div>
-                </div>
-                <div class="col">
-                <div class="form-outline">
-                    <label class="form-label mb-1" for="dateout">Move out date *</label>
-                    <div class="input-datepicker">
-                    <DatePicker
-  selected={moveOutDate}
-  name="moveOutDate"
-  dateFormat="dd/MM/yyyy"
-  onChange={handleMoveOutDateChange}
-  customInput={
-    <CustomInputOut
-      value={moveOutDate}
-      onChange={handleCustomInputOutChange}
-      name="moveOutDate"
-    />
-  }
-/>
+                    <div class="col-md-6 col-12">
+                      <div class="form-outline">
+                        <label class="form-label mb-1" for="dateout">Move out date *</label>
+                          <DatePicker
+                            selected={moveOutDate}
+                            name="moveOutDate"
+                            dateFormat="dd/MM/yyyy"
+                            onChange={handleMoveOutDateChange}
+                            customInput={
+                              <CustomInputOut
+                                value={moveOutDate}
+                                onChange={handleCustomInputOutChange}
+                                name="moveOutDate"
+                              />
+                            } minDate={mindate_moveout}/>
+                        {formErrors.moveOutDate !=='' && <div className="error-message">{formErrors.moveOutDate}</div>}
+                      </div>
                     </div>
-                    {formErrors.moveOutDate !=='' && <div className="error-message">{formErrors.moveOutDate}</div>}
-                </div>
-                </div>
+                  </div>
                 
-
-              <div className='row'>
-              <div class="form-outline col-md-6 col-xs-12 mb-4">
-  <label class="form-label mb-1" for="form6Example3">
-    Email*
-  </label>
-  <input
-    type="email"
-    id="form6Example3"
-    value={email}
-    class="form-control"
-    name='email'
-    placeholder="exemple@gmail.com"
-    onChange={handleEmailChange}
-    required
-  />
-  {!emailValid && <p>Please enter a valid email address.</p>}
-  {/* {formErrors.email !== '' && <div className="error-message">{formErrors.email}</div>} */}
-</div>
+<div></div>
+              <div className='row mb-4'>
+                <div class="form-outline col-md-6 col-xs-12 mb-4">
+                  <label class="form-label mb-1" for="form6Example3">Email*</label>
+                  <input
+                    type="email"
+                    id="form6Example3"
+                    value={email}
+                    class="form-control"
+                    name='email'
+                    placeholder="exemple@gmail.com"
+                    onChange={handleEmailChange}
+                    required
+                  />
+                  {!emailValid && <p>Please enter a valid email address.</p>}
+                  {/* {formErrors.email !== '' && <div className="error-message">{formErrors.email}</div>} */}
+                </div>
 
 
 
