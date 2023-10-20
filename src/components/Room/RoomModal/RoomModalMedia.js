@@ -37,7 +37,7 @@ const RoomModalMedia = ({ isOpen, closeModal, activeTab, setActiveTab , lotData 
     </span>
   </li> )}
 
-  {lotData && lotData.media.some((media) => media.mime_type.startsWith('video')) && (
+  {lotData&& lotData.media && lotData.media.some((media) => media.mime_type.startsWith('video')) && (
     <li
       className={activeTab === 'tab2' ? 'nav-item active' : 'nav-item'}
       onClick={() => setActiveTab('tab2')}

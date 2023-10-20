@@ -69,9 +69,6 @@ const ExploreMore = () => {
        
         return false; // Retourner false si les données ne sont pas disponibles
       });
-      console.log(filteredRooms)
-        console.log(city.src)
-        console.log(city.city)
       return <City src={city.src} city={city.city} count={filteredRooms.length} handleClick={() => handleClick(city.city)}/>;
     });
     

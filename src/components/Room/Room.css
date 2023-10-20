@@ -135,13 +135,14 @@
     justify-content: center;
 }
 .btn-visit {
+    margin-left: auto;
     color: #FFF;
     font-size: 16px;
     font-weight: 400;
     border-radius: 6px;
     background: #35CE92;
     border: none;
-    padding: 6px 7px;
+    padding: 6px 10px;
     height: 32px;
     outline: 0;
     box-shadow: none;

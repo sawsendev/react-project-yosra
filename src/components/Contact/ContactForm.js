@@ -3,6 +3,9 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import "./Contact.css"
 import {FaRegFaceSmileBeam} from 'react-icons/fa6'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const ContactForm = () => {
     const [phoneNumber, setPhoneNumber] = useState("");
@@ -50,57 +53,72 @@ const ContactForm = () => {
         setMessage(event.target.value);
     }
     const handleSubmit = async (event) => {
-        event.preventDefault();
-      
-        if (firstName && lastName && emailValid && valid && message) {
-
-          const data = {
-            name: firstName + " " + lastName,
-            email: email,
-            phone: phoneNumber,
-            message: message,
-            objet: "contact : " + firstName + " " + lastName
-          };
-      
-          try {
-            const response = await fetch('http://dev.niceroom.sofis-info.com/api/contact', {
-              method: 'POST',
-              mode: 'cors',  
-              headers: {
-                'Content-Type': 'application/json',
-                'apiKey': API_KEY, // Assurez-vous que votre clé API est correctement définie
-              },
-              body: JSON.stringify(data),
-            });
-      
-            if (response.status === 200) {
-              // Si la requête réussit, affichez un message de remerciement ou effectuez d'autres actions nécessaires
-              setShowThankYou(true);
-              console.log("Requête effectuée avec succès");
-      
-              // Réinitialisez les états du formulaire
-              setFirstName('');
-              setLastName('');
-              setEmail('');
-              setPhoneNumber('');
-              setCountry('fr')
-              setMessage('');
-              setEmailValid(true);
-              setValid(true);
-            } else {
-              // Gérez les erreurs de la requête si nécessaire
-              console.error('Erreur de la requête vers l\'API');
-            }
-          } catch (error) {
-            console.error('Erreur lors de la requête vers l\'API :', error);
+      event.preventDefault();
+    
+      if (firstName && lastName && emailValid && valid && message) {
+        const data = {
+          name: firstName + " " + lastName,
+          email: email,
+          phone: phoneNumber,
+          phone_country_name: country,
+          message: message,
+          objet: "contact : " + firstName + " " + lastName
+        };
+    
+        try {
+          const response = await fetch('http://dev.niceroom.sofis-info.com/api/contact', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+              'Content-Type': 'application/json',
+              'apiKey': API_KEY, // Assurez-vous que votre clé API est correctement définie
+            },
+            body: JSON.stringify(data),
+          });
+    
+          if (response.status === 200) {
+            // Si la requête réussit, affichez un message de remerciement ou effectuez d'autres actions nécessaires
+            setShowThankYou(true);
+            console.log("Requête effectuée avec succès");
+    
+            // Réinitialisez les états du formulaire
+            setFirstName('');
+            setLastName('');
+            setEmail('');
+            setPhoneNumber('');
+            setCountry('fr');
+            setMessage('');
+            setEmailValid(true);
+            setValid(true);
+          } else {
+            // Gérez les erreurs de la requête si nécessaire
+            const errorData = await response.json();
+            console.error('Erreur de la requête vers l\'API :', errorData.message);
+    
+            // Vous pouvez également afficher l'erreur au besoin
+            alert('Erreur de la requête vers l\'API : ' + errorData.message);
           }
+        } catch (error) {
+          console.error('Erreur lors de la requête vers l\'API :', error);
+          toast.error('Erreur lors de la requête vers l\'API. Veuillez réessayer.', {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 3000, // Vous pouvez définir la durée d'affichage du toast (en millisecondes)
+          });
         }
-      };
+      }
+    };
+    
+      
+    
+    
       
       
 
     return (
+      
+  
         <form className='col-md-6 col-10 mx-auto offset-md-6 '  onSubmit={handleSubmit}>
+        <ToastContainer/>
         <h2>We are here to help</h2>
         <h3 className='contact-heading'>Leave a message</h3>
           
@@ -160,6 +178,7 @@ const ContactForm = () => {
     </div>
 )}
         </form>
+        
         
     )
 }
