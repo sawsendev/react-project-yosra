@@ -198,4 +198,7 @@
 .nav-pills .nav-link {
     padding: 10px 10px 10px 16px; 
 }
+.tab-content .tab-pane {
+    padding: 12px 12px 16px 16px;
+}
 }
