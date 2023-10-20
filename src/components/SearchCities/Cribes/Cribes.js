@@ -146,18 +146,25 @@ const Cribes = () => {
         <div className='row row-cribes'>
           <div className='col-lg-7'>
             <InfiniteScroll
-              dataLength={searchParamsExist ? (searchResult ? searchResult.length : 0) : (cribsData ? cribsData.length : 0)}
+          dataLength={
+  searchParamsExist ? 
+  (searchResult && Array.isArray(searchResult) ? (searchResult.length || 0) : 0) : 
+  (cribsData && Array.isArray(cribsData) ? (cribsData.length || 0) : 0)
+}
+
+
               next={() => fetchDataFromAPI(currentPage)}
               hasMore={hasMore}
               loader={<h4>loading....</h4>}
               style={{ overflowX: 'hidden' }}
             >
-            {searchParamsExist && searchResult.length > 0 ? (
-              <>
-                <Crib cribs={searchResult} />
-              </>
-            ) : (
-              searchParamsExist && searchResult.length === 0 ? (
+            {searchParamsExist && Array.isArray(searchResult) && searchResult.length > 0 ? (
+  <>
+    <Crib cribs={searchResult} />
+  </>
+) 
+: (
+  searchParamsExist && Array.isArray(searchResult) && searchResult.length === 0 ? (
                 <div className='container'>
                 <div className='No-rooms-content'>
                   <div className='left d-flex '>
@@ -176,7 +183,7 @@ const Cribes = () => {
             </InfiniteScroll>
           </div>
 
-          {!(searchParamsExist && searchResult.length === 0) ? (
+          {!(searchParamsExist && Array.isArray(searchResult) && searchResult.length === 0) ? (
   <div className='Maps col-lg-5'>
     <div>
       <MapContainer

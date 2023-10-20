@@ -4,6 +4,8 @@ import PhoneInput from 'react-phone-input-2';
 import logo_popup from '../../assets/img-logo-popupalert.png';
 import icon from '../../assets/alert-bull.svg';
 import { IoCloseOutline } from "react-icons/io5";
+import { ToastContainer,toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // Assurez-vous d'importer également les styles
 
 const PopupAlert =  (props) => {
   const [firstName, setFirstName] = useState('');
@@ -26,6 +28,8 @@ const PopupAlert =  (props) => {
     setCountry(value);
   };
   
+
+
   const handleFormSubmit = (event) => {
     event.preventDefault();
   
@@ -38,10 +42,10 @@ const PopupAlert =  (props) => {
       date: moveInDate,
       max_budget: parseInt(maxBudget),
       phone_number: phoneNumber,
-      phone_country_name:country
+      phone_country_name: country
     };
   
-    fetch(`${API_URL}`, { 
+    fetch(`${API_URL}`, {
       method: 'POST',
       headers: {
         'apiKey': `${API_KEY}`,
@@ -49,7 +53,6 @@ const PopupAlert =  (props) => {
       },
       body: JSON.stringify(formData),
     })
-    console.log(formData)
       .then((response) => {
         if (response.ok) {
           return response.json(); // Vous pouvez gérer la réponse du serveur ici
@@ -65,10 +68,17 @@ const PopupAlert =  (props) => {
         setIsSubmitted(true);
       })
       .catch((error) => {
-        // Gérer ici les erreurs de promesse
         console.error('Erreur lors de la soumission du formulaire:', error);
-        alert('Erreur: ' + error.message); // Afficher le message d'erreur précis
+        toast.error('Error try again ' + error.message, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
       });
+      
   };
   
   
@@ -94,6 +104,7 @@ const PopupAlert =  (props) => {
   }, [props.isPopupOpen]);
   return (
     <div className={`popup-container popupalert ${props.isPopupOpen ? 'open' : 'closed'}`}>
+     <ToastContainer/>
       <div className="popup-content">
         <div className='popup-header'>
           <div className="circle">

@@ -136,27 +136,50 @@ const validateEmail = (email) => {
         },
         body: formDataToSend,
       })
-        .then((response) => {
-          if (response.ok) {
-            setFormSubmitted(true);
-            console.log("Request successfully sent. API Response:", response);
+      .then((response) => {
+        if (response.ok) {
+          setFormSubmitted(true);
+          console.log("Request successfully sent. API Response:", response);
+        } else {
+          if (response.status === 422) {
+            response.json()
+              .then((errorData) => {
+                if (errorData.errors) {
+                  // Si des erreurs spécifiques sont renvoyées par l'API, affichez-les
+                  Object.values(errorData.errors).forEach((error) => {
+                    toast.error(error, {
+                      position: toast.POSITION.TOP_CENTER,
+                      autoClose: 3000,
+                    });
+                  });
+                } else {
+                  // Sinon, affichez un message générique
+                  toast.error('Validation Error, please check your input', {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 3000,
+                  });
+                }
+              })
+              .catch((error) => {
+                // En cas d'erreur de parsing JSON
+                console.error("Error parsing error response:", error);
+                toast.error('Validation Error, please check your input', {
+                  position: toast.POSITION.TOP_CENTER,
+                  autoClose: 3000,
+                });
+              });
           } else {
-            if (response.status === 422) {
-              toast.error('Validation Error, please check your input', {
-                position: toast.POSITION.TOP_CENTER,
-                autoClose: 3000,
-              });
-            } else {
-              toast.error('Error, please try again', {
-                position: toast.POSITION.TOP_CENTER,
-                autoClose: 3000,
-              });
-            }
+            toast.error('Error, please try again', {
+              position: toast.POSITION.TOP_CENTER,
+              autoClose: 3000,
+            });
           }
-        })
-        .catch((error) => {
-          console.error('Error making the request:', error.message);
-        });
+        }
+      })
+      .catch((error) => {
+        console.error('Error making the request:', error.message);
+      });
+      
     }
   };
       

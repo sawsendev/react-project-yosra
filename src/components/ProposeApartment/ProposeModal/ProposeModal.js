@@ -98,10 +98,18 @@ const ProposeModal = ({ isOpen, closeModal }) => {
         // Gérez ici les erreurs de promesse
         console.error('Erreur lors de la soumission du formulaire:', error);
         if (error && error.message) {
-          toast.error(error.message, {
-            position: toast.POSITION.TOP_CENTER,
-            autoClose: 5000, 
-          });
+          try {
+            const errorMessage = JSON.parse(error.message);
+            if (errorMessage.data && errorMessage.data.message) {
+              const message = errorMessage.data.message;
+              toast.error(message, {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 5000,
+              });
+            }
+          } catch (parseError) {
+            console.error('Erreur d\'analyse JSON :', parseError);
+          }
         } else {
           toast.error('Error, please try again', {
             position: toast.POSITION.TOP_CENTER,
