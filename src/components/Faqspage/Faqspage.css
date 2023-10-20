@@ -170,7 +170,7 @@
     }
   }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
     .bloc-tabs {
         display: flex;
         flex-direction: row;
@@ -184,4 +184,21 @@
         margin: 0;
        
     }
+    .faq_tabspills {
+        flex-wrap: wrap;
+    }
+    .faq_tabspills .nav-pills {
+        width: 100%!important;
+    }
+    .faq_tabspills .tab-content {
+        width: 100%!important; 
+    }
+}
+@media (max-width: 576px) {
+.nav-pills .nav-link {
+    padding: 10px 10px 10px 16px; 
+}
+.tab-content .tab-pane {
+    padding: 12px 12px 16px 16px;
+}
 }
