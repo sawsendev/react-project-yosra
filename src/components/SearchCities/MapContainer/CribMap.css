@@ -1,6 +1,116 @@
-.Map-countainer{
-    width: 600px;
-    height: 600px;
-    border: 2px solid red;
-    
+/* Styles spécifiques pour CribMap */
+
+.custom-icon {
+  background: #000;
+  display: block;
+  width: 44px;
+  height: 45px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 24px;
+  text-align: center;
+  color: #fff;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
 }
+
+.custom-icon:before {
+  content: "";
+  position: absolute;
+  width: calc(100% + 12px);
+  height: calc(100% + 12px);
+  border: 2px solid #000;
+  left: -6px;
+  top: -6px;
+  border-radius: 50%;
+}
+
+.custom-icon:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  margin-left: -6px;
+  bottom: -13px;
+  width: 5px;
+  height: 5px;
+  border-style: solid;
+  border-width: 8px 7px 0 7px;
+  border-color: #000 transparent transparent transparent;
+}
+
+.popup_itemcribe {
+  margin: 0;
+  padding: 0;
+  width: 270px!important;
+}
+
+.popup_itemcribe .leaflet-popup {
+  border-radius: 10px;
+  border: none!important;
+  padding: 0!important;
+}
+
+.popup_itemcribe a.leaflet-popup-close-button {
+  z-index: 2;
+  background: #fff;
+  font-size: 24px;
+  font-weight: 500;
+  color: #000;
+  border-radius: 0 10px 0 10px;
+  line-height: 20px;
+}
+
+.popup_itemcribe .img-fluid {
+  height: 130px!important;
+  border-radius: 10px 10px 0 0;
+}
+
+.popup_itemcribe .item-cribe {
+  margin: 0;
+  width: 270px;
+}
+
+.popup_itemcribe .item-cribe .Rooms-content {
+  padding: 12px 12px 17px;
+}
+
+.popup_itemcribe .Item-badge {
+  border-radius: 10px 10px 0 0;
+  margin-bottom: 0;
+}
+
+.popup_itemcribe .item-cribe .Rooms-content p {
+  margin: 0;
+  color: #000;
+}
+
+.popup_itemcribe .item-cribe .Rooms-content .d-flex {
+  margin: 0 0 8px!important;
+}
+
+.popup_itemcribe .item-cribe .Rooms-content .d-flex img {
+  margin-right: 6px;
+}
+
+.popup_itemcribe .leaflet-popup-content-wrapper {
+  padding: 0;
+  border-radius: 10px;
+}
+
+.popup_itemcribe .item-cribe .Rooms-content .pricecrib {
+  text-align: left;
+  font-weight: 600;
+  font-size: 16px;
+  color: #000;
+}
+
+.popup_itemcribe .item-cribe .promo-image {
+  right: 24px;
+}
+
+/* Vous pouvez ajouter d'autres styles personnalisés selon vos besoins */

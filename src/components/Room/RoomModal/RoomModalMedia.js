@@ -8,13 +8,13 @@ import iconimgshover from '../../../assets/room/icons/imgs-hover.svg'
 import iconvideoshover from '../../../assets/room/icons/videos-hover.svg'
 import iconvisithover from '../../../assets/room/icons/visits-hover.svg'
 import Modal from 'react-modal';
-import PanoramaViewer from "../PanoramaViewer/PanoramaViewer";
+
 
 
 Modal.setAppElement('#root');
 
 const RoomModalMedia = ({ isOpen, closeModal, activeTab, setActiveTab , lotData }) => {
-  const panoramaUrl = 'https://my.matterport.com/show/?m=xtS2JPoUHQi' ;
+
     return (
       <>
       <Modal
@@ -117,7 +117,7 @@ const RoomModalMedia = ({ isOpen, closeModal, activeTab, setActiveTab , lotData 
                             <div className='tab-panel'>
                                 <ul className='gallery-videos row m-0'>
                                     <li className='itm-video col-md-12 p-0'>
-                                    <PanoramaViewer imageUrl={panoramaUrl} />
+                                  
 </li>
                                 </ul>
                             </div>
