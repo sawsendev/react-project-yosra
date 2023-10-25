@@ -13,6 +13,8 @@ const Cribes = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [hasMore, setHasMore] = useState(true); // Initialisez hasMore à true pour permettre le chargement initial.
   const [staticCoordinates, setStaticCoordinates] = useState([]);
+  const [totalDataCount, setTotalDataCount] = useState(0);
+
 
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
   const API_URL = 'http://dev.niceroom.sofis-info.com/api/lots/list';
@@ -34,29 +36,30 @@ const Cribes = () => {
       const headers = {
         'apiKey': `${API_KEY}`,
       };
-
+  
       const response = await fetch(`${API_URL}?page=${page}&limit=${itemsPerPage}`, {
         method: 'GET',
         mode: 'cors',
         headers
       });
-
+  
       const data = await response.json();
       console.log(data);
-
+  
       if (data && data.data && data.data.lots) {
         if (data.data.lots.length > 0) {
           // Si de nouvelles données sont disponibles, mettez à jour la liste cribsData
           setCribsData(prevCribs => [...prevCribs, ...data.data.lots]);
+          const totalCount = data.data.lots.length ;
+          setTotalDataCount(totalCount);
         } 
-
         // Extraction des coordonnées et mise à jour de staticCoordinates
         const extractedCoordinates = data.data.lots.map(crib => {
           const latitude = crib.apartment.building.latitude;
           const longitude = crib.apartment.building.longitude;
           return [latitude, longitude];
         });
-
+  
         setStaticCoordinates(extractedCoordinates);
       }
     } catch (error) {
@@ -72,7 +75,7 @@ const Cribes = () => {
       fetchDataFromAPI(currentPage);
     }
   }, [cribsData]);
-
+  
   useEffect(() => {
     if (searchParamsExist) {
       const formData = {
@@ -82,7 +85,9 @@ const Cribes = () => {
         price_max: priceMaxParam,
         sort_by: sortByParam,
       };
-
+  
+    
+  
       fetch('http://dev.niceroom.sofis-info.com/api/lots/search', {
         method: 'POST',
         headers: {
@@ -94,28 +99,38 @@ const Cribes = () => {
         .then((response) => response.json())
         .then((data) => {
           setSearchResult(data.data.lots);
-
+          const totalCount = data.data.lots.length ;
+          setTotalDataCount(totalCount);
+  
           // Extraction des coordonnées et mise à jour de staticCoordinates
           const extractedCoordinates = data.data.lots.map(crib => {
             const latitude = crib.apartment.building.latitude;
             const longitude = crib.apartment.building.longitude;
             return [latitude, longitude];
           });
-
+  
           setStaticCoordinates(extractedCoordinates);
+  
+          
+          
+  
+         
         })
         .catch((error) => {
           console.error('Erreur lors de la requête POST :', error);
+        
         });
     }
-  }, [searchParamsExist, cityParam, dateParam, priceMinParam, priceMaxParam, sortByParam]);
-
+  }, [searchParamsExist,cityParam, dateParam, priceMinParam, priceMaxParam, sortByParam]);
 
 
   console.log(staticCoordinates);
   const validStaticCoordinates = staticCoordinates.filter(coord => coord !== null && Array.isArray(coord) && coord.length === 2);
-  const totalDataCount = searchParamsExist ? searchResult.length : cribsData.length;
+ 
+ 
+ 
   const dataDisplayedCount = currentPage * itemsPerPage;
+  console.log(dataDisplayedCount)
   console.log(totalDataCount)
   
   return (
@@ -126,9 +141,9 @@ const Cribes = () => {
         <div className='row row-cribes'>
           <div className='col-lg-7'>
             <InfiniteScroll
-              dataLength={searchParamsExist ? searchResult.length : cribsData.length}
-              next={() => setCurrentPage(currentPage + 1)}
-              hasMore={()=> setHasMore(dataDisplayedCount < totalDataCount)}
+              dataLength={totalDataCount}
+              next={() => setCurrentPage( prevPage => prevPage + 1)}
+              hasMore={dataDisplayedCount < totalDataCount}
               loader={<h4>loading....</h4>}
               style={{ overflowX: 'hidden' }}
             >
