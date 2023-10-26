@@ -202,13 +202,15 @@ const Cribes = () => {
 
           </div>
 
-          {!(searchParamsExist && searchResult.length === 0) ? (
+         
             <div className='Maps col-lg-5'>
               <div className={`maps-block`}>
-                <CribMap coordinates={validStaticCoordinates} showPopup={true} />
+                <CribMap coordinates={validStaticCoordinates} showPopup={true} 
+                    data={searchParamsExist ? searchResult : cribsData}
+                />
               </div>
             </div>
-          ) : null}
+         
         </div>
       </div>
       <AlertCribes className='alert' />
