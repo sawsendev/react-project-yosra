@@ -49,6 +49,7 @@ import wipe from '../../assets/room/widget/wipe.svg'
 import { PiInfo } from "react-icons/pi";
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import MapWithMarker from '../MapWithMarker/MapWithMarker'
 import Crib from '../Crib/Crib'
 import CribMap from '../SearchCities/MapContainer/CribMap'
 
@@ -81,67 +82,53 @@ const Room = () => {
       .then(response => response.json())
       .then(data => {
         const allCribs = data.data.lots;
-  
-        // Filtrer les cribs avec la même ville
-        const cribsInSameCity = allCribs.filter(crib =>
+        
+        const cribsInSameCity = allCribs.filter(crib => 
           lotData.apartment && lotData.apartment.building &&
           crib.apartment && crib.apartment.building &&
           crib.apartment.building.city === lotData.apartment.building.city
         );
+        
+        // Utilisez la fonction de mélange pour mélanger les "cribs"
+        shuffleArray(cribsInSameCity);
+        
+        // Sélectionnez les 3 premiers "cribs" aléatoires (ou moins si la liste est plus courte)
+        const randomCribs = cribsInSameCity.slice(0, 3);
+        setRandomCribData(randomCribs);
   
-        // Sélectionner les cribs avec rent_status égal à false
-        const cribsWithRentStatusFalse = cribsInSameCity.filter(crib => crib.rent_status === false);
-  
-        // Si des cribs avec rent_status false existent, utilisez-les
-        if (cribsWithRentStatusFalse.length > 0) {
-          // Utilisez la fonction de mélange pour mélanger les "cribs"
-          shuffleArray(cribsWithRentStatusFalse);
-  
-          // Sélectionnez les 3 premiers "cribs" aléatoires (ou moins si la liste est plus courte)
-          const randomCribs = cribsWithRentStatusFalse.slice(0, 3);
-          setRandomCribData(randomCribs);
-        } else {
-          // S'il n'y a pas de cribs avec rent_status false, sélectionnez au hasard parmi tous les cribs dans la même ville
-          shuffleArray(cribsInSameCity);
-          const randomCribs = cribsInSameCity.slice(0, 3);
-          setRandomCribData(randomCribs);
-        }
-        console.log(randomCribData);
+        console.log('Random Cribs:', randomCribs);
+        console.log(randomCribData)
       })
       .catch(error => {
         console.error('Erreur lors de la récupération des données :', error);
       });
-  }, [API_URL2, API_KEY]);
-  
+  }, [API_URL, API_KEY, lotData.apartment]);
 
 
 
   
-  const [staticCoordinates, setStaticCoordinates] = useState([]);
-
-  useEffect(() => {
-    const headers = {
-      'apiKey': `${API_KEY}`,
-    };
+  const staticCoordinates = [
+    [43.70328975790311, 7.1704107912588055],
+    [43.705, 7.175],]
+  useEffect(()=>{
+    
+      const headers = {
+        'apiKey': `${API_KEY}`,
+      };
   
-    fetch(API_URL, { method: 'GET', mode: 'cors', headers })
-      .then(response => response.json())
-      .then(data => {
-        setLotData(data.data.lot);
-        console.log(data.data.lot);     
-        console.log(data.data.lot.rent_status);
-        const latitude = data.data.lot.apartment.building.latitude;
-        const longitude = data.data.lot.apartment.building.longitude;
-  
-        if (!isNaN(latitude) && !isNaN(longitude)) {
-          const newCoordinates = [[latitude, longitude]];
-          setStaticCoordinates(newCoordinates);
-        }   
-      })
-      .catch(error => {
-        console.error('Erreur lors de la récupération des données :', error);
-      });
-  }, [API_URL, API_KEY]);
+      fetch(API_URL, { method: 'GET', mode: 'cors', headers })
+        .then(response => response.json())
+        .then(data => {
+        
+            setLotData(data.data.lot);
+            console.log(data.data.lot);     
+            console.log(data.data.lot.rent_status)   
+        })
+        .catch(error => {
+          console.error('Erreur lors de la récupération des données :', error);
+        });
+    
+  },[API_URL,API_KEY])
   
   const calculateAge=(dateOfBirth)=> {
     const dob = new Date(dateOfBirth);
@@ -261,11 +248,13 @@ const Room = () => {
                 {lotData && lotData.apartment && lotData.apartment.energy_rating &&  (
                 <div className='btn-char'><img src={energy} alt="energy"/>{lotData.apartment.energy_rating}+++</div>)}
               </div>
-              {lotData.description && (
               <div className='description pt-2 mb-4'>
-                <h2>The crib</h2>
-               <p>{lotData.description}</p>
-              </div>)}
+                {lotData.description && (
+                  <div>
+                    <h2>The crib</h2>
+                    <p>{lotData.description}</p>
+                  </div>)}
+              </div>
               <div className='amenities'>
                 <h2>Amenities</h2>
                 <h3>Room</h3>
@@ -397,7 +386,7 @@ const Room = () => {
               <div className='map-local mt-3 mb-3 pb-3'>
                 <h2 className='mb-3'>Where is the accommodation located</h2>
                 <div className='map'>
-               <CribMap coordinates={staticCoordinates} showPopup={false} /> 
+                <CribMap coordinates={staticCoordinates} showPopup={false} /> 
                 </div>
               </div>
               <div className='local-desc mt-3 mb-4 pb-3'>

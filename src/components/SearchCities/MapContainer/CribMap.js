@@ -10,30 +10,14 @@ import room1 from '../../../assets/room/room-21.jpg';
 import { Badge } from 'react-bootstrap';
 import room2 from '../../../assets/room/room-22.jpg';
 import imageParDefaut from '../../../assets/room/Group 116.svg';
+
 const customIcon = new L.divIcon({
   className: 'custom-icon',
   html: '<div class="marker-label">400€</div>',
 });
 
 const CribMap = ({ coordinates , showPopup }) => {
-    // function calculateCenter(coordinates) {
-    //     if (coordinates.length === 0) {
-    //       return [0, 0]; // Centre par défaut s'il n'y a pas de coordonnées
-    //     } else if (coordinates.length === 1) {
-    //       return coordinates[0]; // Si un seul élément, utilisez-le comme centre
-    //     } else {
-    //       const totalLat = coordinates.reduce((sum, coord) => sum + parseFloat(coord[0]), 0);
-    //       const totalLng = coordinates.reduce((sum, coord) => sum + parseFloat(coord[1]), 0);
-      
-    //       const centerLat = totalLat / coordinates.length;
-    //       const centerLng = totalLng / coordinates.length;
-      
-    //       return [centerLat, centerLng];
-    //     }
-    //   }
-      
-      
-    //   const center = calculateCenter(coordinates);
+  
   return (
     <MapContainer
       center={[43.70328975790311,7.1704107912588055]}
