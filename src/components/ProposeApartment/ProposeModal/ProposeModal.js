@@ -14,9 +14,23 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { format } from 'date-fns';
 import PhoneInput from 'react-phone-input-2';
 import iconfile from "../../../assets/file.svg";
+import Popup from '../../Popupmsg/popup';
 
 
 const ProposeModal = ({ isOpen, closeModal }) => {
+  
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState('');
+
+  const handlePopupClose = () => {
+    setShowPopup(false);
+  };
+
+  const displayPopup = (message) => {
+    setPopupMessage(message);
+    setShowPopup(true);
+  };
+
   const [step, setStep] = useState(1);
   const[date,setDate]=useState('')
   const [formData, setFormData] = useState({
@@ -93,6 +107,10 @@ const ProposeModal = ({ isOpen, closeModal }) => {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 5000,
         });
+        displayPopup('Form successfully submitted!', {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 5000,
+        });
       })
       .catch((error) => {
         // Gérez ici les erreurs de promesse
@@ -106,6 +124,10 @@ const ProposeModal = ({ isOpen, closeModal }) => {
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 5000,
               });
+              displayPopup('Error, please try again', {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 5000,
+              });
             }
           } catch (parseError) {
             console.error('Erreur d\'analyse JSON :', parseError);
@@ -115,7 +137,12 @@ const ProposeModal = ({ isOpen, closeModal }) => {
             position: toast.POSITION.TOP_CENTER,
             autoClose: 5000,
           });
+          displayPopup('Error, please try again', {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 5000,
+          });
         }
+        
       });
   };
   
@@ -473,6 +500,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
         </div>
       </Modal>
       <ToastContainer />
+      {showPopup && <Popup message={popupMessage} onClose={handlePopupClose} />}
       </>
       )
     }
