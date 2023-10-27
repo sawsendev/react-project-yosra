@@ -38,7 +38,7 @@ const Crib = ({ cribs }) => {
           media.mime_type.startsWith('image') &&
           media.collection_name !== 'floorpan'
       )
-      .slice(0, 4) // Obtenir au maximum 4 images
+      .slice(0, 6) // Obtenir au maximum 4 images
       .map((image, index) => (
         <Link to={`/room/${crib.id}`} key={index}>
           <div>
@@ -61,7 +61,7 @@ const Crib = ({ cribs }) => {
             className="img-fluid"
             src={imageParDefaut}
             alt="Im"
-            style={{ width: '100%', height: '100%' }}
+            
           />
         </LazyLoad>
       </div>

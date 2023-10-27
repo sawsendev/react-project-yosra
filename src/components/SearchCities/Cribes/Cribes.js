@@ -13,8 +13,7 @@ const Cribes = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [staticCoordinates, setStaticCoordinates] = useState([]);
   const [itemsToDisplay, setItemsToDisplay] = useState(9);
-
-
+  const [dataLoaded,setDataLoaded]=useState(false)
  
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
   const API_URL = 'http://dev.niceroom.sofis-info.com/api/lots/list';
@@ -94,6 +93,8 @@ const Cribes = () => {
   
             // Mettre à jour searchResult
             setSearchResult(data.data.lots);
+            setDataLoaded(true);
+            console.log(dataLoaded);
   
             const extractedCoordinates = data.data.lots.map(crib => {
               const latitude = crib.apartment.building.latitude;
@@ -147,45 +148,66 @@ const Cribes = () => {
 
   return (
     <div className='Cribes-container container-fluid'>
-      <h2>Our cribs in Nice</h2>
-      <h5>Nice</h5>
+    {searchResult.length > 0 && (
+  <h2>
+    {searchParamsExist
+      ? `Our cribs in ${searchResult[0].apartment.building.city}`
+      : 'All our cribs'}
+  </h2>
+)}
+
+  
+{!dataLoaded && (
+  <div>
+  <iframe src="https://giphy.com/embed/uIJBFZoOaifHf52MER" width="480" height="439"  class="giphy-embed" allowFullScreen></iframe>
+  <p>
+  <a href="https://giphy.com/gifs/UniversalMusicIndia-elvish-dg-immortals-bawli-uIJBFZoOaifHf52MER">via GIPHY</a></p>
+  </div>
+  )}
+
       <div className='content-page'>
         <div className='row row-cribes'>
           <div className='col-lg-7'>
           <InfiniteScroll
-              dataLength={(itemsToDisplay)}
-              next={() => setItemsToDisplay(prevItems => prevItems + itemsPerPage)}
-              hasMore={itemsToDisplay < (searchParamsExist ? searchResult.length : cribsData.length)}
-              loader={<h4>loading....</h4>}
-              style={{ overflowX: 'hidden' }}
-            >
-              {searchParamsExist && searchResult.length > 0 ? (
-                <Crib cribs={searchResult.slice(0, itemsToDisplay)} />
-              ) : (
-                searchParamsExist && searchResult.length === 0 ? (
-                  <div className='container'>
-                    <div className='No-rooms-content'>
-                      <div className='left d-flex '>
-                        <img className='ImageNoRooms' src={noRooms} alt='no rooms icon' />
-                        <span>No rooms available</span>
-                        <button className='button'>Show first availabilities</button>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <Crib cribs={cribsData.slice(0, itemsToDisplay)} />
-                )
-              )}
-            </InfiniteScroll>
+  dataLength={itemsToDisplay}
+  next={() => setItemsToDisplay(prevItems => prevItems + itemsPerPage)}
+  hasMore={itemsToDisplay < (searchParamsExist ? searchResult.length : cribsData.length)}
+  loader={null}
+  style={{ overflowX: 'hidden' }}
+>
+  {searchParamsExist && searchResult.length > 0 ? (
+    <Crib cribs={searchResult.slice(0, itemsToDisplay)} />
+  ) : (
+    searchResult.length === 0 && dataLoaded && (
+      <div className='container'>
+        <div className='No-rooms-content'>
+          <div className='left d-flex '>
+            <img className='ImageNoRooms' src={noRooms} alt='no rooms icon' />
+            <span>No rooms available</span>
+            <button className='button'>Show first availabilities</button>
+          </div>
+        </div>
+      </div>
+    ))
+  }
+</InfiniteScroll>
+
+
+
+
+
+
           </div>
 
-          {!(searchParamsExist && searchResult.length === 0) ? (
+         
             <div className='Maps col-lg-5'>
               <div className={`maps-block`}>
-                <CribMap coordinates={validStaticCoordinates} showPopup={true} />
+                <CribMap coordinates={validStaticCoordinates} showPopup={true} 
+                    data={searchParamsExist ? searchResult : cribsData}
+                />
               </div>
             </div>
-          ) : null}
+         
         </div>
       </div>
       <AlertCribes className='alert' />
