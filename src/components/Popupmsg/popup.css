@@ -9,27 +9,52 @@
     justify-content: center;
     align-items: center;
     z-index: 999;
-  }
-  
-  .popup-content {
-    background: white;
-    padding: 20px;
-    border-radius: 5px;
-    text-align: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  }
-  
-  .close-button {
-    background: #ff5c5c;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  
-  .message {
-    margin: 20px 0;
-  }
+}
+.popup-content {
+  background: white;
+  padding: 30px 20px 30px;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 420px;
+  width: 100%;
+}
+.popup-body {
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.close-btn {
+  min-width: 130px;
+  border: 2px solid #000!important;
+  border-radius: 6px;
+  background: #000!important;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 4px 12px;
+  box-shadow: none!important;
+  outline: 0!important;
+  display: table;
+  margin: 0 auto;
+  transition: all .3s ease;
+}
+.close-btn:hover, .close-btn:focus {
+  color: #000;
+  background: #fff!important;
+}
+.icon-msg {
+  font-size: 42px;
+  color: #000;
+  line-height: 42px;
+}
+.message {
+  margin: 16px 0 16px;
+  font-size: 22px;
+  font-weight: 600;
+  color: #000;
+  line-height: 30px;
+}
   

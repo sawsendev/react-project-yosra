@@ -21,12 +21,14 @@ const ProposeModal = ({ isOpen, closeModal }) => {
   
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
-
+  const [status, setStatus] = useState('');
+  
   const handlePopupClose = () => {
     setShowPopup(false);
   };
 
   const displayPopup = (message) => {
+    setStatus(status);
     setPopupMessage(message);
     setShowPopup(true);
   };
@@ -95,7 +97,10 @@ const ProposeModal = ({ isOpen, closeModal }) => {
               console.error('API Error - Status ' + response.status + ':', data);
               throw new Error('API Error - Status ' + response.status);
             }
+            
           });
+          setStatus('error');
+
         }
         // Traitement normal si la réponse est OK
         return response.text();
@@ -111,6 +116,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 5000,
         });
+        setStatus('success');
       })
       .catch((error) => {
         // Gérez ici les erreurs de promesse
@@ -141,6 +147,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
             position: toast.POSITION.TOP_CENTER,
             autoClose: 5000,
           });
+          
         }
         
       });
@@ -500,7 +507,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
         </div>
       </Modal>
       <ToastContainer />
-      {showPopup && <Popup message={popupMessage} onClose={handlePopupClose} />}
+      {showPopup && <Popup message={popupMessage} status={status} onClose={handlePopupClose} />}
       </>
       )
     }
