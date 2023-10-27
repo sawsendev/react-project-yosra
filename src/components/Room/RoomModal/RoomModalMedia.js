@@ -11,6 +11,7 @@ import Modal from 'react-modal';
 
 
 
+
 Modal.setAppElement('#root');
 
 const RoomModalMedia = ({ isOpen, closeModal, activeTab, setActiveTab , lotData }) => {
@@ -48,7 +49,7 @@ const RoomModalMedia = ({ isOpen, closeModal, activeTab, setActiveTab , lotData 
       </span>
     </li>
   )}
-
+ {lotData && lotData.image_360 &&(
   <li
     className={activeTab === 'tab3' ? 'nav-item active' : 'nav-item'}
     onClick={() => setActiveTab('tab3')}
@@ -57,6 +58,8 @@ const RoomModalMedia = ({ isOpen, closeModal, activeTab, setActiveTab , lotData 
       <img src={iconvisit} className='icon' alt="Visit"/><img src={iconvisithover} className='icon-hover' alt="Visit"/> 360° visit
     </span>
   </li>
+  )}
+
 {lotData && lotData.media && lotData.media 
                             .filter((media) =>media.collection_name === 'floorpan').length >0 && (
   <li
@@ -113,15 +116,24 @@ const RoomModalMedia = ({ isOpen, closeModal, activeTab, setActiveTab , lotData 
                       </div>
                     )}
 
-                        {activeTab === 'tab3' && (
-                            <div className='tab-panel'>
-                                <ul className='gallery-videos row m-0'>
-                                    <li className='itm-video col-md-12 p-0'>
-                                  
-</li>
-                                </ul>
-                            </div>
-                        )}
+                    {activeTab === 'tab3' && (
+    <div className='tab-panel'>
+        <ul className='gallery-videos row m-0'>
+            {lotData && lotData.image_360 &&(
+                <li  className='itm-video col-md-12 p-0'>
+                
+                     <iframe
+                        title="Room360"
+                        width='853'
+                        height='480'
+                        src={lotData.image_360}
+                        ></iframe>
+                </li>)}
+            
+        </ul>
+    </div>
+)}
+
                         {activeTab === 'tab4' && (
                             <div className='tab-panel'>
                                 <ul className='gallery-videos row m-0'>
