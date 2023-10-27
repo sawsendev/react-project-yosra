@@ -156,9 +156,6 @@ const Cribes = () => {
   </h2>
 )}
 
-{searchParamsExist && searchResult.length > 0 && (
-  <h5>{searchResult[0].apartment.building.city}</h5>
-)}
   
 {!dataLoaded && (
   <div>

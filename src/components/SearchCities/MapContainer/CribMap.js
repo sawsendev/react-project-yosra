@@ -40,9 +40,12 @@ const CribMap = ({ coordinates , showPopup ,data }) => {
   {data[0] && (
     <div className='popup_itemcribe'>
       <div className='item-cribe'>
-        <div className='Item-badge'>
-          <Badge className='notify-badge'>Available now</Badge>
-          <img src={promoImage} alt='Promo' className='promo-image' />
+      <div className='Item-badge'>
+                { data[0].rent_status === false && (<Badge className='notify-badge'>Available now</Badge>)}
+                {data[0].promo && data[0].promo === 1 && (
+                  <img src={promoImage} alt='Promo' className='promo-image' />
+                )}
+
           <div className="custom-carousel-container">
             {data[0].media &&
               <Carousel showStatus={false} showArrows={false} showThumbs={false} dynamicHeight={false} useKeyboardArrows={false}>
@@ -52,12 +55,12 @@ const CribMap = ({ coordinates , showPopup ,data }) => {
                       media.mime_type.startsWith('image') &&
                       media.collection_name !== 'floorpan'
                   )
-                  .slice(0, 2) // Obtenir au maximum 4 images
+                  .slice(0, 2) 
                   .map((image, index) => (
                     <Link to={`/room/${data[0].id}`} key={index}>
                       <div>
                         <LazyLoad height={200} offset={100}>
-                          <img className="img-fluid" src={image.url} alt="Im"  />
+                          <img className="img-fluid" src={image.original_url} alt="Im"  />
                         </LazyLoad>
                       </div>
                     </Link>
