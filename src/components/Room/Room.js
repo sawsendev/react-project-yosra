@@ -62,7 +62,7 @@ const Room = () => {
   const API_URL = `http://dev.niceroom.sofis-info.com/api/lot/${id}`;
   const API_URL2 = 'http://dev.niceroom.sofis-info.com/api/lots/list';
   const navigate= useNavigate();
-  const [coordinates,setCoordinates]=useState([])
+  const [price,setPrice]=useState('')
 
   const [randomCribData, setRandomCribData] = useState([]);
   function shuffleArray(array) {
@@ -123,7 +123,7 @@ const Room = () => {
         console.log(data.data.lot.rent_status);
         const latitude = data.data.lot.apartment.building.latitude;
         const longitude = data.data.lot.apartment.building.longitude;
-  
+        setPrice(data.data.lot.loyer_hc)
         if (!isNaN(latitude) && !isNaN(longitude)) {
           const newCoordinates = [[latitude, longitude]];
           setStaticCoordinates(newCoordinates);
@@ -392,7 +392,7 @@ const Room = () => {
               <div className='map-local mt-3 mb-3 pb-3'>
                 <h2 className='mb-3'>Where is the accommodation located</h2>
                 <div className='map'>
-                <CribMap coordinates={staticCoordinates} showPopup={false} /> 
+                <CribMap coordinates={staticCoordinates} showPopup={false} price={price} /> 
                 </div>
               </div>
               <div className='local-desc mt-3 mb-4 pb-3'>
