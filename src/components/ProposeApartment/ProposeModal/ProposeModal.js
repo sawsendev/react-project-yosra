@@ -99,9 +99,8 @@ const ProposeModal = ({ isOpen, closeModal }) => {
             }
             
           });
-          setStatus('error');
-
         }
+        setStatus('error');
         // Traitement normal si la réponse est OK
         return response.text();
       })
@@ -130,10 +129,11 @@ const ProposeModal = ({ isOpen, closeModal }) => {
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 5000,
               });
-              displayPopup('Error, please try again', {
+              displayPopup(message, {
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 5000,
               });
+              setStatus('error');
             }
           } catch (parseError) {
             console.error('Erreur d\'analyse JSON :', parseError);
@@ -147,7 +147,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
             position: toast.POSITION.TOP_CENTER,
             autoClose: 5000,
           });
-          
+          setStatus('error');
         }
         
       });
@@ -506,7 +506,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
         </div> 
         </div>
       </Modal>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
       {showPopup && <Popup message={popupMessage} status={status} onClose={handlePopupClose} />}
       </>
       )
