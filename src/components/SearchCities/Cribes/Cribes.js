@@ -50,7 +50,8 @@ const Cribes = () => {
       if (data && data.data && data.data.lots) {
         if (data.data.lots.length > 0) {
           setCribsData(data.data.lots);
-       
+          setDataLoaded(true);
+          console.log(dataLoaded);
         }
         
         const extractedCoordinates = data.data.lots.map(crib => {
@@ -176,10 +177,10 @@ const Cribes = () => {
   loader={null}
   style={{ overflowX: 'hidden' }}
 >
-  {searchParamsExist && searchResult.length > 0 ? (
-    <Crib cribs={searchResult.slice(0, itemsToDisplay)} />
-  ) : (
-    searchResult.length === 0 && dataLoaded && (
+  {searchParamsExist && dataLoaded ? (
+    searchResult.length > 0 ? (
+      <Crib cribs={searchResult.slice(0, itemsToDisplay)} />
+    ) : (
       <div className='container'>
         <div className='No-rooms-content'>
           <div className='left d-flex '>
@@ -189,9 +190,14 @@ const Cribes = () => {
           </div>
         </div>
       </div>
-    ))
-  }
+    )
+  ) : (
+    dataLoaded && (
+      <Crib cribs={cribsData.slice(0, itemsToDisplay)} />
+    )
+  )}
 </InfiniteScroll>
+
 
 
 
