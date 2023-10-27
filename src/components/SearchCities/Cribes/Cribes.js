@@ -158,11 +158,12 @@ const Cribes = () => {
 
   
 {!dataLoaded && (
-  <div>
-  <iframe src="https://giphy.com/embed/uIJBFZoOaifHf52MER" width="480" height="439"  class="giphy-embed" allowFullScreen></iframe>
+
+ 
   <p>
-  <a href="https://giphy.com/gifs/UniversalMusicIndia-elvish-dg-immortals-bawli-uIJBFZoOaifHf52MER">via GIPHY</a></p>
-  </div>
+  Loading ...
+  </p>
+
   )}
 
       <div className='content-page'>
