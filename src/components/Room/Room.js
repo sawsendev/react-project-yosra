@@ -62,6 +62,7 @@ const Room = () => {
   const API_URL = `http://dev.niceroom.sofis-info.com/api/lot/${id}`;
   const API_URL2 = 'http://dev.niceroom.sofis-info.com/api/lots/list';
   const navigate= useNavigate();
+  const [price,setPrice]=useState('')
 
   const [randomCribData, setRandomCribData] = useState([]);
   function shuffleArray(array) {
@@ -98,6 +99,7 @@ const Room = () => {
   
         console.log('Random Cribs:', randomCribs);
         console.log(randomCribData)
+       
       })
       .catch(error => {
         console.error('Erreur lors de la récupération des données :', error);
@@ -105,30 +107,33 @@ const Room = () => {
   }, [API_URL, API_KEY, lotData.apartment]);
 
 
+  const [staticCoordinates, setStaticCoordinates] = useState([]);
+  
 
+  useEffect(() => {
+    const headers = {
+      'apiKey': `${API_KEY}`,
+    };
   
-  const staticCoordinates = [
-    [43.70328975790311, 7.1704107912588055],
-    [43.705, 7.175],]
-  useEffect(()=>{
-    
-      const headers = {
-        'apiKey': `${API_KEY}`,
-      };
-  
-      fetch(API_URL, { method: 'GET', mode: 'cors', headers })
-        .then(response => response.json())
-        .then(data => {
-        
-            setLotData(data.data.lot);
-            console.log(data.data.lot);     
-            console.log(data.data.lot.rent_status)   
-        })
-        .catch(error => {
-          console.error('Erreur lors de la récupération des données :', error);
-        });
-    
-  },[API_URL,API_KEY])
+    fetch(API_URL, { method: 'GET', mode: 'cors', headers })
+      .then(response => response.json())
+      .then(data => {
+        setLotData(data.data.lot);
+        console.log(data.data.lot);     
+        console.log(data.data.lot.rent_status);
+        const latitude = data.data.lot.apartment.building.latitude;
+        const longitude = data.data.lot.apartment.building.longitude;
+        setPrice(data.data.lot.loyer_hc)
+        if (!isNaN(latitude) && !isNaN(longitude)) {
+          const newCoordinates = [[latitude, longitude]];
+          setStaticCoordinates(newCoordinates);
+        }   
+      })
+      .catch(error => {
+        console.error('Erreur lors de la récupération des données :', error);
+      });
+  }, [API_URL, API_KEY]);
+
   
   const calculateAge=(dateOfBirth)=> {
     const dob = new Date(dateOfBirth);
@@ -215,9 +220,10 @@ const Room = () => {
         <img src={iconvideos} alt="videos"/> video
     </button>
 )}
-
+                  {lotData && lotData.image_360 && (
                   <button type='button' className='btn-media' onClick={openModalWithTab3} id="visit-btn">
-                  <img src={iconvisit} alt="visit"/> 360° visit</button>
+                  <img src={iconvisit} alt="visit"/> 360° visit</button>)}
+
                   {lotData && lotData.media && lotData.media 
                             .filter((media) =>media.collection_name === 'floorpan').length >0 && (
                   <button type='button' className='btn-media' onClick={openModalWithTab4} id="floorplan-btn">
@@ -386,7 +392,7 @@ const Room = () => {
               <div className='map-local mt-3 mb-3 pb-3'>
                 <h2 className='mb-3'>Where is the accommodation located</h2>
                 <div className='map'>
-                <CribMap coordinates={staticCoordinates} showPopup={false} /> 
+                <CribMap coordinates={staticCoordinates} showPopup={false} price={price} /> 
                 </div>
               </div>
               <div className='local-desc mt-3 mb-4 pb-3'>

@@ -158,11 +158,12 @@ const Cribes = () => {
 
   
 {!dataLoaded && (
-  <div>
-  <iframe src="https://giphy.com/embed/uIJBFZoOaifHf52MER" width="480" height="439"  class="giphy-embed" allowFullScreen></iframe>
+
+ 
   <p>
-  <a href="https://giphy.com/gifs/UniversalMusicIndia-elvish-dg-immortals-bawli-uIJBFZoOaifHf52MER">via GIPHY</a></p>
-  </div>
+  Loading ...
+  </p>
+
   )}
 
       <div className='content-page'>
@@ -202,9 +203,13 @@ const Cribes = () => {
          
             <div className='Maps col-lg-5'>
               <div className={`maps-block`}>
-                <CribMap coordinates={validStaticCoordinates} showPopup={true} 
-                    data={searchParamsExist ? searchResult : cribsData}
-                />
+              <CribMap
+  coordinates={validStaticCoordinates}
+  showPopup={true}
+  data={searchParamsExist ? searchResult : cribsData}
+  price={searchParamsExist ? (searchResult[0] ? searchResult[0].loyer_hc : null) : (cribsData[0] ? cribsData[0].loyer_hc : null)}
+/>
+
               </div>
             </div>
          
