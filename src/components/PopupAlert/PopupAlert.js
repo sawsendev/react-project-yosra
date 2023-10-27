@@ -5,9 +5,25 @@ import logo_popup from '../../assets/img-logo-popupalert.png';
 import icon from '../../assets/alert-bull.svg';
 import { IoCloseOutline } from "react-icons/io5";
 import { ToastContainer,toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; // Assurez-vous d'importer également les styles
+import 'react-toastify/dist/ReactToastify.css';
+import Popup from '../Popupmsg/popup';
 
 const PopupAlert =  (props) => {
+  
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState('');
+  const [status, setStatus] = useState('');
+  
+  const handlePopupClose = () => {
+    setShowPopup(false);
+  };
+
+  const displayPopup = (message) => {
+    setStatus(status);
+    setPopupMessage(message);
+    setShowPopup(true);
+  };
+
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -60,23 +76,33 @@ const PopupAlert =  (props) => {
           return response.json().then((errorData) => {
             throw new Error(errorData.message); // Gérer le message d'erreur précis
           });
+          
         } else {
           throw new Error('Error, please try again'); // Gérer d'autres erreurs de réponse
         }
+        
       })
       .then((data) => {
         setIsSubmitted(true);
+        
+        displayPopup('Thank you for your message! We will get in touch soon.');
+        setStatus('success');
+
       })
       .catch((error) => {
         console.error('Erreur lors de la soumission du formulaire:', error);
-        toast.error('Error try again ' + error.message, {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        // toast.error('Error try again ' + error.message, {
+        //   position: "top-right",
+        //   autoClose: 3000,
+        //   hideProgressBar: false,
+        //   closeOnClick: true,
+        //   pauseOnHover: true,
+        //   draggable: true,
+        // });
+        
+        displayPopup('Error try again ' + error.message);
+        setStatus('error');
+
       });
       
   };
@@ -103,8 +129,11 @@ const PopupAlert =  (props) => {
     }
   }, [props.isPopupOpen]);
   return (
+    <>
+    
     <div className={`popup-container popupalert ${props.isPopupOpen ? 'open' : 'closed'}`}>
-     <ToastContainer/>
+     {/* <ToastContainer/> */}
+    {showPopup && <Popup message={popupMessage} status={status} onClose={handlePopupClose} />}
       <div className="popup-content">
         <div className='popup-header'>
           <div className="circle">
@@ -238,6 +267,7 @@ const PopupAlert =  (props) => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

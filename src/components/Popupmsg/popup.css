@@ -1,4 +1,4 @@
-.popup {
+.popup.popup-msg-alert {
     position: fixed;
     top: 0;
     left: 0;
@@ -10,7 +10,7 @@
     align-items: center;
     z-index: 999;
 }
-.popup-content {
+.popup-msg-alert .popup-content {
   background: white;
   padding: 30px 20px 30px;
   border-radius: 5px;
@@ -19,14 +19,14 @@
   max-width: 420px;
   width: 100%;
 }
-.popup-body {
+.popup-msg-alert .popup-body {
   min-height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
 }
-.close-btn {
+.popup-msg-alert .close-btn {
   min-width: 130px;
   border: 2px solid #000!important;
   border-radius: 6px;
@@ -41,16 +41,16 @@
   margin: 0 auto;
   transition: all .3s ease;
 }
-.close-btn:hover, .close-btn:focus {
+.popup-msg-alert .close-btn:hover, .popup-msg-alert .close-btn:focus {
   color: #000;
   background: #fff!important;
 }
-.icon-msg {
+.popup-msg-alert .icon-msg {
   font-size: 42px;
   color: #000;
   line-height: 42px;
 }
-.message {
+.popup-msg-alert .message {
   margin: 16px 0 16px;
   font-size: 22px;
   font-weight: 600;
