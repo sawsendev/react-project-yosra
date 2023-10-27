@@ -14,9 +14,25 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { format } from 'date-fns';
 import PhoneInput from 'react-phone-input-2';
 import iconfile from "../../../assets/file.svg";
+import Popup from '../../Popupmsg/popup';
 
 
 const ProposeModal = ({ isOpen, closeModal }) => {
+  
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState('');
+  const [status, setStatus] = useState('');
+  
+  const handlePopupClose = () => {
+    setShowPopup(false);
+  };
+
+  const displayPopup = (message) => {
+    setStatus(status);
+    setPopupMessage(message);
+    setShowPopup(true);
+  };
+
   const [step, setStep] = useState(1);
   const[date,setDate]=useState('')
   const [formData, setFormData] = useState({
@@ -81,8 +97,10 @@ const ProposeModal = ({ isOpen, closeModal }) => {
               console.error('API Error - Status ' + response.status + ':', data);
               throw new Error('API Error - Status ' + response.status);
             }
+            
           });
         }
+        setStatus('error');
         // Traitement normal si la réponse est OK
         return response.text();
       })
@@ -93,6 +111,11 @@ const ProposeModal = ({ isOpen, closeModal }) => {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 5000,
         });
+        displayPopup('Form successfully submitted!', {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 5000,
+        });
+        setStatus('success');
       })
       .catch((error) => {
         // Gérez ici les erreurs de promesse
@@ -106,6 +129,11 @@ const ProposeModal = ({ isOpen, closeModal }) => {
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 5000,
               });
+              displayPopup(message, {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 5000,
+              });
+              setStatus('error');
             }
           } catch (parseError) {
             console.error('Erreur d\'analyse JSON :', parseError);
@@ -115,7 +143,13 @@ const ProposeModal = ({ isOpen, closeModal }) => {
             position: toast.POSITION.TOP_CENTER,
             autoClose: 5000,
           });
+          displayPopup('Error, please try again', {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 5000,
+          });
+          setStatus('error');
         }
+        
       });
   };
   
@@ -472,7 +506,8 @@ const ProposeModal = ({ isOpen, closeModal }) => {
         </div> 
         </div>
       </Modal>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
+      {showPopup && <Popup message={popupMessage} status={status} onClose={handlePopupClose} />}
       </>
       )
     }

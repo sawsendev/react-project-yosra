@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import "./Contact.css"
-import {FaRegFaceSmileBeam} from 'react-icons/fa6'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Popup from '../Popupmsg/popup';
 
 
 const ContactForm = () => {
@@ -15,7 +15,6 @@ const ContactForm = () => {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const [emailValid, setEmailValid] = useState(true);
-    const [showThankYou, setShowThankYou] = useState(false);
     const [country,setCountry]=useState('fr');
     const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
     const handleChangephone=(value)=>{
@@ -23,6 +22,21 @@ const ContactForm = () => {
       setPhoneNumber(input)
      
      }
+    
+      //popup msg alert
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState('');
+  const [status, setStatus] = useState('');
+  
+  const handlePopupClose = () => {
+    setShowPopup(false);
+  };
+
+  const displayPopup = (message) => {
+    setStatus(status);
+    setPopupMessage(message);
+    setShowPopup(true);
+  };
     // const validatePhoneNumber = (phoneNumber) => {
     //     const phoneNumberPattern = /^\d{10}$/;
     //     return phoneNumberPattern.test(phoneNumber);
@@ -77,8 +91,10 @@ const ContactForm = () => {
           });
     
           if (response.status === 200) {
-            // Si la requête réussit, affichez un message de remerciement ou effectuez d'autres actions nécessaires
-            setShowThankYou(true);
+
+            displayPopup('Thank you for your message! We will get in touch soon.');
+            setStatus('success');
+  
             console.log("Requête effectuée avec succès");
     
             // Réinitialisez les états du formulaire
@@ -93,30 +109,35 @@ const ContactForm = () => {
           } else {
             // Gérez les erreurs de la requête si nécessaire
             const errorData = await response.json();
+
             console.error('Erreur de la requête vers l\'API :', errorData.message);
     
-            // Vous pouvez également afficher l'erreur au besoin
-            alert('Erreur de la requête vers l\'API : ' + errorData.message);
+ 
+            // alert('Erreur de la requête vers l\'API : ' + errorData.message);
+
+            displayPopup('Erreur de la requête vers l\'API : ' + errorData.message );
+            setStatus('error');
+
           }
         } catch (error) {
           console.error('Erreur lors de la requête vers l\'API :', error);
-          toast.error('Erreur lors de la requête vers l\'API. Veuillez réessayer.', {
-            position: toast.POSITION.TOP_CENTER,
-            autoClose: 3000, // Vous pouvez définir la durée d'affichage du toast (en millisecondes)
-          });
+
+          // toast.error('Erreur lors de la requête vers l\'API. Veuillez réessayer.', {
+          //   position: toast.POSITION.TOP_CENTER,
+          //   autoClose: 3000, 
+          // });
+          
+          displayPopup('Erreur lors de la requête vers l\'API. Veuillez réessayer.');
+          setStatus('error');
+
         }
       }
     };
     
       
-    
-    
-      
-      
-
     return (
-      
   
+      <>
         <form className='col-md-6 col-10 mx-auto offset-md-6 '  onSubmit={handleSubmit}>
         <ToastContainer/>
         <h2>We are here to help</h2>
@@ -168,18 +189,11 @@ const ContactForm = () => {
             </div>
 
             <button type="submit" className="btn btn-primary btn-block float-end custom-button ">Send message</button>
-            {showThankYou && (
-         <div className="popup-overlay">
-          <div className="popup-content">
-            <p>Thank you for your message! We will get in touch soon.</p>
-                <span style={{ display: 'block', marginBottom: '5px',marginTop:'-10px',fontSize:'25px' }}><FaRegFaceSmileBeam/></span>
-            <button className='btn btn-primary' onClick={() => setShowThankYou(false)}>Close</button>
-        </div>
-    </div>
-)}
+
         </form>
         
-        
+      {showPopup && <Popup message={popupMessage} status={status} onClose={handlePopupClose} />}
+    </>
     )
 }
 
