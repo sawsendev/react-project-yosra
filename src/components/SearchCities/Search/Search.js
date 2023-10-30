@@ -89,7 +89,7 @@ const Search = () => {
 
         const data = await response.json();
         setLotData(data.data.lots);
-        console.log(data.data.lots)
+       
       } catch (error) {
         console.error('Erreur lors de la récupération des données :', error);
       }

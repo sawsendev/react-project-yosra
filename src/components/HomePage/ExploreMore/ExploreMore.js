@@ -14,24 +14,64 @@ const ExploreMore = () => {
   const navigate= useNavigate();
   const [lotData, setLotData] = useState([]);
  
-  useEffect(() => {
-    const headers = {
-      'apiKey': `${API_KEY}`,
-    };
 
-    fetch(API_URL, { method: 'GET', mode: 'cors', headers })
-      .then(response => response.json())
-      .then(data => {
-        setLotData(data.data.lots);
-        console.log(data.data.lots);
-      })
-      .catch(error => {
-        console.error('Erreur lors de la récupération des données :', error);
-      });
-  }, [API_URL, API_KEY]);
  
+  const fetchAllPages = async () => {
+    let allData = [];
+    
+    let totalPages = 0; // Initialisez totalPages à 0
   
+    for (let page = 1; ; page++) {
+      try {
+        const headers = {
+          'apiKey': `${API_KEY}`,
+        };
   
+        const response = await fetch(`${API_URL}?page=${page}`, {
+          method: 'GET',
+          mode: 'cors',
+          headers,
+        });
+  
+        const responseData = await response.json();
+        console.log(responseData);
+        
+        if (responseData && responseData.data && responseData.data.lots) {
+          const newLotData = responseData.data.lots.data;
+          allData = [...allData, ...newLotData];
+  
+          // Mise à jour du nombre total de pages depuis la réponse de l'API
+          totalPages = responseData.data.lots.last_page;
+        } else {
+          console.error('Données inattendues de l\'API :', responseData);
+          break; // Arrête la récupération en cas d'erreur
+        }
+  
+        // Si la page actuelle est la dernière, sortez de la boucle
+        if (page >= totalPages) {
+          break;
+        }
+      } catch (error) {
+        console.error('Erreur lors de la récupération des données :', error);
+        break; // Arrête la récupération en cas d'erreur
+      }
+    }
+    
+    return allData;
+  };
+
+useEffect(() => {
+  const fetchData = async () => {
+    const totalData = await fetchAllPages();
+    setLotData(totalData);
+  };
+
+  fetchData();
+}, []);
+
+ console.log(lotData)
+
+  console.log(lotData)
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 1200 },
@@ -51,30 +91,23 @@ const ExploreMore = () => {
     }
   };
  
-  
+ 
   const handleClick = (city) => {
     const searchParams = new URLSearchParams({ city }).toString();
+    console.log(city)
     const url = `/search-cities?${searchParams}`;
     navigate(url);
   };
-  
-  const city = ExploreCitiesTable.map(city => {
-    
-      // Trouvez le nombre de chambres correspondant à la ville actuelle
+    const city = ExploreCitiesTable.map(city => {
       const filteredRooms = lotData.filter(room => {
         if (room.apartment && room.apartment.building && room.apartment.building.city) {
           return room.apartment.building.city.toLowerCase() === city.city.toLowerCase();
-        
         }
-       
-        return false; // Retourner false si les données ne sont pas disponibles
+        return false;
       });
       return <City src={city.src} city={city.city} count={filteredRooms.length} handleClick={() => handleClick(city.city)}/>;
     });
-    
-   
-
-
+  
   const carouselRef = useRef(null);
 
   const [isPrevActive, setIsPrevActive] = useState(true); // Initialement actif

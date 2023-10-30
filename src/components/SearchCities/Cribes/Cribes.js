@@ -10,11 +10,10 @@ import CribMap from '../MapContainer/CribMap';
 const Cribes = () => {
   const [cribsData, setCribsData] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
   const [staticCoordinates, setStaticCoordinates] = useState([]);
   const [itemsToDisplay, setItemsToDisplay] = useState(9);
-  const [dataLoaded,setDataLoaded]=useState(false)
- 
+  const [dataLoaded, setDataLoaded] = useState(false);
+
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
   const API_URL = 'http://dev.niceroom.sofis-info.com/api/lots/list';
   const API_URL2 = 'http://dev.niceroom.sofis-info.com/api/lots/search';
@@ -30,195 +29,172 @@ const Cribes = () => {
   const sortByParam = searchParams.get('sortBy');
   const searchParamsExist = cityParam || dateParam || priceMinParam || priceMaxParam || sortByParam;
   const itemsPerPage = 9;
-
-
+  const [lastPage, setLastPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
   const fetchDataFromAPI = async () => {
     try {
       const headers = {
         'apiKey': `${API_KEY}`,
       };
-
-      const response = await fetch(`${API_URL}`, {
+      const response = await fetch(`${API_URL}?page=${currentPage}`, {
         method: 'GET',
         mode: 'cors',
-        headers
+        headers,
       });
 
       const data = await response.json();
       console.log(data);
 
-      if (data && data.data && data.data.lots) {
-        if (data.data.lots.length > 0) {
-          setCribsData(data.data.lots);
-          setDataLoaded(true);
-          console.log(dataLoaded);
-        }
-        
-        const extractedCoordinates = data.data.lots.map(crib => {
-          const latitude = crib.apartment.building.latitude;
-          const longitude = crib.apartment.building.longitude;
-          return [latitude, longitude];
-        });
-      
-
-        setStaticCoordinates(extractedCoordinates);
+      if (currentPage === 1) {
+        // Si c'est la première page, réinitialisez les données
+        setCribsData(data.data.lots.data);
+        // Mettez à jour lastPage avec la valeur de la dernière page
+        setLastPage(data.data.lots.last_page);
+      } else {
+        // Sinon, ajoutez les nouvelles données
+        setCribsData((prevData) => [...prevData, ...data.data.lots.data]);
       }
+      setDataLoaded(true);
     } catch (error) {
       console.error('Erreur lors de la récupération des données :', error);
     }
   };
 
   useEffect(() => {
-    const fetchDataFromAPI2 = async () => {
-      if (searchParamsExist) {
-        const formData = {
-          city: cityParam,
-          date: dateParam,
-          price_min: priceMinParam,
-          price_max: priceMaxParam,
-          sort_by: sortByParam,
-        };
-  
-        try {
-          const response = await fetch(`${API_URL2}`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'apiKey': API_KEY,
-            },
-            body: JSON.stringify(formData),
-          });
-  
-          if (response.ok) {
-            const data = await response.json();
-  
-            // Mettre à jour searchResult
-            setSearchResult(data.data.lots);
-            setDataLoaded(true);
-            console.log(dataLoaded);
-  
-            const extractedCoordinates = data.data.lots.map(crib => {
-              const latitude = crib.apartment.building.latitude;
-              const longitude = crib.apartment.building.longitude;
-              return [latitude, longitude];
-            });
-  
-            // Mettre à jour staticCoordinates
-            setStaticCoordinates(extractedCoordinates);
-          } else {
-            console.error('Erreur lors de la requête POST');
-          }
-        } catch (error) {
-          console.error('Erreur lors de la récupération des données :', error);
-        }
-      }
-    };
-  
-    // Appeler fetchDataFromAPI2 lorsque searchParamsExist est vrai
-    if (searchParamsExist) {
-      fetchDataFromAPI2();
-    }
-  }, [searchParamsExist, cityParam, dateParam, priceMinParam, priceMaxParam, sortByParam]);
-  
-  useEffect(() => {
     if (!searchParamsExist) {
+      // Réinitialisez la page lorsque les paramètres de recherche changent
+      setCurrentPage(1);
+      setItemsToDisplay(9); // Réinitialisez le nombre d'éléments à afficher
       navigate('/search-cities');
-    
-        fetchDataFromAPI();
-        console.log(cribsData);
-      
+      fetchDataFromAPI();
     }
   }, [searchParamsExist]);
-  
-  
-   console.log(searchResult)
 
-  
+  useEffect(() => {
+    // Mettez à jour la page lorsque vous atteignez la fin des données
+    if (itemsToDisplay >= (searchParamsExist ? searchResult.length : cribsData.length)) {
+      // Vérifiez si vous avez encore des pages à charger
+      if (currentPage < lastPage) {
+        // Si oui, augmentez la page actuelle et chargez les données
+        fetchDataFromAPI();
+      }
+    }
+  }, [itemsToDisplay, currentPage, lastPage]);
 
+  const fetchNextPage = async () => {
+    if (currentPage <= lastPage) {
+      setCurrentPage((prevPage) => prevPage + 1);
+     
+    }
+  };
 
+  const fetchDataFromAPI2 = async (page) => {
+    if (searchParamsExist) {
+      const formData = {
+        city: cityParam,
+        date: dateParam,
+        price_min: priceMinParam,
+        price_max: priceMaxParam,
+        sort_by: sortByParam,
+      };
 
+      try {
+        const response = await fetch(`${API_URL2}?page=${page}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apiKey': API_KEY,
+          },
+          body: JSON.stringify(formData),
+        });
 
+        if (response.ok) {
+          const data = await response.json();
+          console.log(data);
 
-  console.log(staticCoordinates);
-  const validStaticCoordinates = staticCoordinates.filter(coord => coord !== null && Array.isArray(coord) && coord.length === 2);
+          if (page === 1) {
+            // Si c'est la première page, réinitialisez les données de recherche
+            setSearchResult(data.lots.data);
+          } else {
+            // Sinon, ajoutez les nouvelles données de recherche
+            setSearchResult((prevData) => [...prevData, ...data.lots.data]);
+          }
 
-  const dataDisplayedCount = currentPage * itemsPerPage;
+          const extractedCoordinates = data.lots.data.map(crib => {
+            const latitude = crib.apartment.building.latitude;
+            const longitude = crib.apartment.building.longitude;
+            return [latitude, longitude];
+          });
 
+          setStaticCoordinates(extractedCoordinates);
+        } else {
+          console.error('Erreur lors de la requête POST');
+        }
+      } catch (error) {
+        console.error('Erreur lors de la récupération des données :', error);
+      }
+    }
+  };
 
-  console.log(dataDisplayedCount);
 
   return (
     <div className='Cribes-container container-fluid'>
-    {searchResult.length > 0 && (
-  <h2>
-    {searchParamsExist
-      ? `Our cribs in ${searchResult[0].apartment.building.city}`
-      : 'All our cribs'}
-  </h2>
-)}
+      {searchResult.length > 0 && (
+        <h2>
+          {searchParamsExist
+            ? `Our cribs in ${searchResult[0].apartment.building.city}`
+            : 'All our cribs'}
+        </h2>
+      )}
 
-  
-{!dataLoaded && (
-
- 
-  <p>
-  Loading ...
-  </p>
-
-  )}
+      {!dataLoaded && (
+        <p>
+          Loading ...
+        </p>
+      )}
 
       <div className='content-page'>
         <div className='row row-cribes'>
           <div className='col-lg-7'>
           <InfiniteScroll
-  dataLength={itemsToDisplay}
-  next={() => setItemsToDisplay(prevItems => prevItems + itemsPerPage)}
-  hasMore={itemsToDisplay < (searchParamsExist ? searchResult.length : cribsData.length)}
-  loader={null}
-  style={{ overflowX: 'hidden' }}
->
-  {searchParamsExist && dataLoaded ? (
-    searchResult.length > 0 ? (
-      <Crib cribs={searchResult.slice(0, itemsToDisplay)} />
-    ) : (
-      <div className='container'>
-        <div className='No-rooms-content'>
-          <div className='left d-flex '>
-            <img className='ImageNoRooms' src={noRooms} alt='no rooms icon' />
-            <span>No rooms available</span>
-            <button className='button'>Show first availabilities</button>
-          </div>
-        </div>
-      </div>
-    )
-  ) : (
-    dataLoaded && (
-      <Crib cribs={cribsData.slice(0, itemsToDisplay)} />
-    )
-  )}
-</InfiniteScroll>
-
-
-
-
-
-
-
+              dataLength={itemsToDisplay}
+              next={fetchNextPage} // Chargez davantage d'éléments
+              hasMore={currentPage <= lastPage}
+              loader={<p>Loading ...</p>} // Affichez un indicateur de chargement
+              style={{ overflowX: 'hidden' }}
+            >
+              {searchParamsExist && dataLoaded ? (
+                searchResult.length > 0 ? (
+                  <Crib cribs={searchResult} />
+                ) : (
+                  <div className='container'>
+                    <div className='No-rooms-content'>
+                      <div className='left d-flex '>
+                        <img className='ImageNoRooms' src={noRooms} alt='no rooms icon' />
+                        <span>No rooms available</span>
+                        <button className='button'>Show first availabilities</button>
+                      </div>
+                    </div>
+                  </div>
+                )
+              ) : (
+                dataLoaded && (
+                  <Crib cribs={cribsData} />
+                )
+              )}
+            </InfiniteScroll>
           </div>
 
-         
-            <div className='Maps col-lg-5'>
-              <div className={`maps-block`}>
+          <div className='Maps col-lg-5'>
+            <div className={`maps-block`}>
               <CribMap
-  coordinates={validStaticCoordinates}
-  showPopup={true}
-  data={searchParamsExist ? searchResult : cribsData}
-  price={searchParamsExist ? (searchResult[0] ? searchResult[0].loyer_hc : null) : (cribsData[0] ? cribsData[0].loyer_hc : null)}
-/>
-
-              </div>
+                coordinates={staticCoordinates}
+                showPopup={true}
+                data={searchParamsExist ? searchResult : cribsData}
+                price={searchParamsExist ? (searchResult[0] ? searchResult[0].loyer_hc : null) : (cribsData[0] ? cribsData[0].loyer_hc : null)}
+              />
             </div>
-         
+          </div>
         </div>
       </div>
       <AlertCribes className='alert' />
