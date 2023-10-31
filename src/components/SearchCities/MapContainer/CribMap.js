@@ -1,5 +1,5 @@
-import React from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import React, { useEffect, useState } from 'react';
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import LazyLoad from 'react-lazyload';
 import { Link } from 'react-router-dom';
@@ -8,10 +8,30 @@ import locationIcon from '../../../assets/pin 2.svg';
 import promoImage from '../../../assets/Group 104.svg';
 import { Badge } from 'react-bootstrap';
 import imageParDefaut from '../../../assets/room/Group 116.svg';
+import { useRef } from 'react';
 
+const CribMap = ({ coordinates, showPopup, data, city }) => {
+  const [cityCoordinates, setCityCoordinates] = useState(null);
+  const mapRef = useRef(null);
+  const [mapLoaded, setMapLoaded] = useState(false);
 
+  useEffect(() => {
+    // Utilisez un service de géocodage pour obtenir les coordonnées de la ville
+    fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${city}`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.length > 0) {
+          const latitude = parseFloat(data[0].lat);
+          const longitude = parseFloat(data[0].lon);
+  
+          setTimeout(() => {
+            setCityCoordinates([latitude, longitude]);
+          }, 0);
+        }
+      });
+  }, [city]);
+  
 
-const CribMap = ({ coordinates, showPopup, data}) => {
   const customIcon = (item) => {
     const price = item.loyer_hc + item.charges;
     return new L.divIcon({
@@ -19,11 +39,14 @@ const CribMap = ({ coordinates, showPopup, data}) => {
       html: price ? `<div class="marker-label">${price}€</div>` : '',
     });
   };
+
   return (
     <MapContainer
-      center={[43.70328975790311, 7.1704107912588055]}
+      ref={mapRef}
+      center={cityCoordinates ? cityCoordinates : [43.70328975790311, 7.1704107912588055]} // Coordonnées de départ quelconques
       zoom={12}
       style={{ height: '765px', width: '100%' }}
+
     >
       <TileLayer
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
@@ -36,6 +59,7 @@ const CribMap = ({ coordinates, showPopup, data}) => {
 
       if (!isNaN(latitude) && !isNaN(longitude) && latitude !== null && longitude !== null) {
         return (
+         
           <Marker
             key={id}
             position={[latitude, longitude]}

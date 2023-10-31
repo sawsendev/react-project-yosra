@@ -208,10 +208,9 @@ const Cribes = () => {
   }, [currentPage, lastPage, setCurrentPage]);
  
   
-  const [selectedLot, setSelectedLot] = useState(null); // Déclarer selectedLot
 
   console.log(searchResult)
-  
+  console.log(cityParam)
 
   return (
     <div className='Cribes-container container-fluid'>
@@ -257,8 +256,9 @@ const Cribes = () => {
   coordinates={coordinates}
   showPopup={true}
   data={searchParamsExist ? searchResult : cribsData}
+  city={cityParam}
 
- 
+
 />
             </div>
           </div>
