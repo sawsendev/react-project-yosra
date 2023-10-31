@@ -5,11 +5,11 @@ import Crib from '../../Crib/Crib';
 import { useLocation, useNavigate } from 'react-router-dom';
 import noRooms from "../../../assets/Group 24.svg";
 import CribMap from '../MapContainer/CribMap';
-
+import loading from '../../../assets/loading.gif'
 const Cribes = () => {
   const [cribsData, setCribsData] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
-  const [staticCoordinates, setStaticCoordinates] = useState([]);
+  const [coordinates, setCoordinates] = useState([]);
   const [dataLoaded, setDataLoaded] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
@@ -28,7 +28,28 @@ const Cribes = () => {
   const priceMaxParam = searchParams.get('priceMax');
   const sortByParam = searchParams.get('sortBy');
   const searchParamsExist = cityParam || dateParam || priceMinParam || priceMaxParam || sortByParam;
-  const itemsPerPage = 9;
+  const removeDuplicateCoordinates = (coordinates) => {
+  const uniqueCoordinates = {};
+  const result = [];
+
+  for (const [id, longitude, latitude] of coordinates) {
+    const key = `${longitude}-${latitude}`;
+
+    if (!(key in uniqueCoordinates) || id < uniqueCoordinates[key].id) {
+      uniqueCoordinates[key] = { id, longitude, latitude };
+    }
+  }
+
+  for (const key in uniqueCoordinates) {
+    result.push([
+      uniqueCoordinates[key].id,
+      uniqueCoordinates[key].longitude,
+      uniqueCoordinates[key].latitude,
+    ]);
+  }
+
+  return result;
+};
 
   const fetchDataFromAPI = async (page) => {
     try {
@@ -45,57 +66,111 @@ const Cribes = () => {
 
       setLastPage(data.data.lots.last_page);
       
+      
       if (currentPage === 1) {
         // Si c'est la première page, réinitialisez les données
         setCribsData(data.data.lots.data);
+          const newCoordinatesData = data.data.lots.data.map(item => [
+            item.id,  // Ajoutez l'ID du lot
+            item.apartment.building.longitude,
+            item.apartment.building.latitude,
+          ]);
+
+          // Mettez à jour la variable d'état coordinates
+          setCoordinates(newCoordinatesData);
       } else {
         // Sinon, ajoutez les nouvelles données
         setCribsData((prevData) => [...prevData, ...data.data.lots.data]);
-      }
+         const newCoordinatesData = data.data.lots.data.map(item => [
+      item.id,  // Ajoutez l'ID du lot
+      item.apartment.building.longitude,
+      item.apartment.building.latitude,
+    ]);
+
+    // Nettoyez les doublons en conservant l'ID le plus petit
+    const cleanedCoordinates = removeDuplicateCoordinates([
+      ...coordinates,
+      ...newCoordinatesData,
+    ]);
+
+    // Mettez à jour la variable d'état coordinates en ajoutant les nouvelles coordonnées nettoyées
+    setCoordinates(cleanedCoordinates);
+  }
+      
       setDataLoaded(true);
     } catch (error) {
       console.error('Erreur lors de la récupération des données :', error);
     }
   };
+ 
+
   const fetchDataFromAPI2 = async (page) => {
-    if (searchParamsExist) {
-      const formData = {
-        city: cityParam,
-        date: dateParam,
-        price_min: priceMinParam,
-        price_max: priceMaxParam,
-        sort_by: sortByParam,
-      };
+  if (searchParamsExist) {
+    const formData = {
+      city: cityParam,
+      date: dateParam,
+      price_min: priceMinParam,
+      price_max: priceMaxParam,
+      sort_by: sortByParam,
+    };
 
-      try {
-        const response = await fetch(`${API_URL2}?page=${page}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'apiKey': API_KEY,
-          },
-          body: JSON.stringify(formData),
-        });
+    try {
+      const response = await fetch(`${API_URL2}?page=${page}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apiKey': API_KEY,
+        },
+        body: JSON.stringify(formData),
+      });
 
-        if (response.ok) {
-          const data = await response.json();
-          setLastPage(data.data.lots.last_page);
+      if (response.ok) {
+        const data = await response.json();
+        setLastPage(data.data.lots.last_page);
 
-          if (currentPage === 1) {
-            // Si c'est la première page, réinitialisez les données de recherche
-            setSearchResult(data.data.lots.data);
-          } else {
-            // Sinon, ajoutez les nouvelles données de recherche
-            setSearchResult((prevData) => [...prevData, ...data.data.lots.data]);
-          }
+        if (currentPage === 1) {
+          // Si c'est la première page, réinitialisez les données de recherche
+          setSearchResult(data.data.lots.data);
 
-        }
-         setDataLoaded(true);
-        }catch (error) {
-        console.error('Erreur lors de la récupération des données :', error);
+          // Créez un tableau de coordonnées avec l'ID du lot
+          const newCoordinatesData = data.data.lots.data.map(item => [
+            item.id,  // Ajoutez l'ID du lot
+            item.apartment.building.longitude,
+            item.apartment.building.latitude,
+          ]);
+
+          // Mettez à jour la variable d'état coordinates
+          setCoordinates(newCoordinatesData);
+        } else {
+          // Sinon, ajoutez les nouvelles données de recherche
+          setSearchResult((prevData) => [...prevData, ...data.data.lots.data]);
+
+          // Ajoutez les nouvelles coordonnées au tableau existant avec l'ID du lot
+         const newCoordinatesData = data.data.lots.data.map(item => [
+      item.id,  // Ajoutez l'ID du lot
+      item.apartment.building.longitude,
+      item.apartment.building.latitude,
+    ]);
+
+    // Nettoyez les doublons en conservant l'ID le plus petit
+    const cleanedCoordinates = removeDuplicateCoordinates([
+      ...coordinates,
+      ...newCoordinatesData,
+    ]);
+
+    // Mettez à jour la variable d'état coordinates en ajoutant les nouvelles coordonnées nettoyées
+    setCoordinates(cleanedCoordinates);
+  }
+        
+        setDataLoaded(true);
       }
+    } catch (error) {
+      console.error('Erreur lors de la récupération des données :', error);
     }
-  };
+  }
+};
+
+  console.log(coordinates)
 
   const handleScroll = (currentPage, lastPage, setCurrentPage) => {
     if (
@@ -116,7 +191,7 @@ const Cribes = () => {
       fetchDataFromAPI(currentPage);
     }
     else{
-      fetchDataFromAPI2(currentPage)
+      fetchDataFromAPI2(currentPage);
     }
   }, [currentPage,searchParamsExist]);
 
@@ -131,6 +206,12 @@ const Cribes = () => {
       window.removeEventListener('scroll', onScroll);
     };
   }, [currentPage, lastPage, setCurrentPage]);
+ 
+  
+  const [selectedLot, setSelectedLot] = useState(null); // Déclarer selectedLot
+
+  console.log(searchResult)
+  
 
   return (
     <div className='Cribes-container container-fluid'>
@@ -143,11 +224,9 @@ const Cribes = () => {
       )}
 
       {!dataLoaded && (
-        <p>
-          Loading ...
-        </p>
+        <img src={loading} alt="Loading" className="img-fluid"/>
      ) }
-
+ 
       <div className='content-page'>
         <div className='row row-cribes'>
           <div className='col-lg-7'>
@@ -174,12 +253,13 @@ const Cribes = () => {
 
           <div className='Maps col-lg-5'>
             <div className={`maps-block`}>
-              <CribMap
-                coordinates={staticCoordinates}
-                showPopup={true}
-                data={searchParamsExist ? searchResult : cribsData}
-                price={searchParamsExist ? (searchResult[0] ? searchResult[0].loyer_hc : null) : (cribsData[0] ? cribsData[0].loyer_hc : null)}
-              />
+            <CribMap
+  coordinates={coordinates}
+  showPopup={true}
+  data={searchParamsExist ? searchResult : cribsData}
+
+ 
+/>
             </div>
           </div>
         </div>

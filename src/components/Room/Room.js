@@ -123,7 +123,7 @@ const Room = () => {
         console.log(data.data.lot.rent_status);
         const latitude = data.data.lot.apartment.building.latitude;
         const longitude = data.data.lot.apartment.building.longitude;
-        setPrice(data.data.lot.loyer_hc)
+        setPrice(data.data.lot.loyer_hc+data.data.lot.charges)
         if (!isNaN(latitude) && !isNaN(longitude)) {
           const newCoordinates = [[latitude, longitude]];
           setStaticCoordinates(newCoordinates);
@@ -415,8 +415,8 @@ const Room = () => {
                     <p className='head-widgett'><img src={check2} alt="Available"/> Not available</p>
                     )}
                   <hr/>
-                  {lotData.loyer_hc ? (
-                  <p className='text-center price'>{lotData.loyer_hc} € /<small>month</small></p>
+                  {lotData.loyer_hc && lotData.charges ? (
+                  <p className='text-center price'>{lotData.loyer_hc+lotData.charges} € /<small>month</small></p>
                   ) : null}
                   {lotData.max_benefit ? (
                   <div className='text-center assistance'>
