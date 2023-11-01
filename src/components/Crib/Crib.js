@@ -10,7 +10,7 @@ import promoImage from '../../assets/Group 104.svg';
 import imageParDefaut from '../../assets/room/Group 116.svg'
 const Crib = ({ cribs }) => {
   if (!cribs || cribs.length === 0) {
-    return <p>No cribs available</p>;
+    return null;
   }
 
   return (

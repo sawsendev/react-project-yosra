@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import LazyLoad from 'react-lazyload';
@@ -8,30 +7,9 @@ import locationIcon from '../../../assets/pin 2.svg';
 import promoImage from '../../../assets/Group 104.svg';
 import { Badge } from 'react-bootstrap';
 import imageParDefaut from '../../../assets/room/Group 116.svg';
-import { useRef } from 'react';
 
-const CribMap = ({ coordinates, showPopup, data, city }) => {
-  const [cityCoordinates, setCityCoordinates] = useState(null);
-  const mapRef = useRef(null);
-  const [mapLoaded, setMapLoaded] = useState(false);
-
-  useEffect(() => {
-    // Utilisez un service de géocodage pour obtenir les coordonnées de la ville
-    fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${city}`)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.length > 0) {
-          const latitude = parseFloat(data[0].lat);
-          const longitude = parseFloat(data[0].lon);
+const CribMap = ({ coordinates, showPopup, data ,latitude,longitude  }) => {
   
-          setTimeout(() => {
-            setCityCoordinates([latitude, longitude]);
-          }, 0);
-        }
-      });
-  }, [city]);
-   
-
   const customIcon = (item) => {
     const price = item.loyer_hc + item.charges;
     return new L.divIcon({
@@ -39,11 +17,11 @@ const CribMap = ({ coordinates, showPopup, data, city }) => {
       html: price ? `<div class="marker-label">${price}€</div>` : '',
     });
   };
-
+ 
+    
   return (
     <MapContainer
-      ref={mapRef}
-      center={cityCoordinates ? cityCoordinates : [43.70328975790311, 7.1704107912588055]} // Coordonnées de départ quelconques
+      center={[latitude,longitude]} 
       zoom={12}
       style={{ height: '765px', width: '100%' }}
 
@@ -56,7 +34,7 @@ const CribMap = ({ coordinates, showPopup, data, city }) => {
     if (Array.isArray(coordArray) && coordArray.length === 3) {
       const [id, longitude, latitude] = coordArray;
       const item = Array.isArray(data) ? data.find((dataItem) => dataItem.id === id) : data;
-       console.log(item)
+       
       if (!isNaN(latitude) && !isNaN(longitude) && latitude !== null && longitude !== null) {
         return (
          

@@ -188,6 +188,7 @@ const Search = () => {
               <label htmlFor="countries">City</label>
               <div className='input-select'>
               <SelectCity onChange={(selectedValue) => setCity(selectedValue.value)} />
+                 <input type="hidden" name="city" value={city} />
               </div>
             </div>
 

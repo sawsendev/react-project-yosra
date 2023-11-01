@@ -61,6 +61,9 @@ const Room = () => {
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
   const API_URL = `http://dev.niceroom.sofis-info.com/api/lot/${id}`;
   const API_URL2 = 'http://dev.niceroom.sofis-info.com/api/lots/list';
+  const [latitude,setLatitude]=useState(null)
+  const [longitude,setLongitude]=useState(null)
+
   const navigate= useNavigate();
   const [price,setPrice]=useState('')
 
@@ -122,7 +125,9 @@ const Room = () => {
         console.log(data.data.lot);     
         console.log(data.data.lot.rent_status);
         const latitude = data.data.lot.apartment.building.latitude;
+        setLatitude(latitude)
         const longitude = data.data.lot.apartment.building.longitude;
+        setLongitude(longitude)
         const id =data.data.lot.id
         setPrice(data.data.lot.loyer_hc+data.data.lot.charges)
         if (!isNaN(latitude) && !isNaN(longitude)) {
@@ -369,7 +374,7 @@ const Room = () => {
             <button type='button' className='btn-visit' onClick={()=>{navigate(`../room/${locataire.id}`)}}>Visit</button>
           )}
 
-     <p>
+     <p style={{display:'block', width:'100%'}} > 
   {locataire.locataire_info && locataire.locataire_info.name && (
     <span>{locataire.locataire_info.name}  </span>
   )}
@@ -393,7 +398,10 @@ const Room = () => {
               <div className='map-local mt-3 mb-3 pb-3'>
                 <h2 className='mb-3'>Where is the accommodation located</h2>
                 <div className='map'>
-                <CribMap coordinates={staticCoordinates} showPopup={false} data={lotData} /> 
+                {longitude && latitude && (
+                <CribMap coordinates={staticCoordinates} showPopup={false} data={lotData} latitude={latitude}
+                  longitude={longitude}
+                 /> )}
                 </div>
               </div>
               <div className='local-desc mt-3 mb-4 pb-3'>
