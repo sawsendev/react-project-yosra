@@ -30,7 +30,7 @@ const CribMap = ({ coordinates, showPopup, data, city }) => {
         }
       });
   }, [city]);
-  
+   
 
   const customIcon = (item) => {
     const price = item.loyer_hc + item.charges;
@@ -55,8 +55,8 @@ const CribMap = ({ coordinates, showPopup, data, city }) => {
     {coordinates.map((coordArray, index) => {
     if (Array.isArray(coordArray) && coordArray.length === 3) {
       const [id, longitude, latitude] = coordArray;
-      const item = data.find((item) => item.id === id);
-
+      const item = Array.isArray(data) ? data.find((dataItem) => dataItem.id === id) : data;
+       console.log(item)
       if (!isNaN(latitude) && !isNaN(longitude) && latitude !== null && longitude !== null) {
         return (
          

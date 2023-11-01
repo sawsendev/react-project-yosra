@@ -123,9 +123,10 @@ const Room = () => {
         console.log(data.data.lot.rent_status);
         const latitude = data.data.lot.apartment.building.latitude;
         const longitude = data.data.lot.apartment.building.longitude;
+        const id =data.data.lot.id
         setPrice(data.data.lot.loyer_hc+data.data.lot.charges)
         if (!isNaN(latitude) && !isNaN(longitude)) {
-          const newCoordinates = [[latitude, longitude]];
+          const newCoordinates = [[id,longitude, latitude]];
           setStaticCoordinates(newCoordinates);
         }   
       })
@@ -258,7 +259,7 @@ const Room = () => {
                 {lotData.description && (
                   <div>
                     <h2>The crib</h2>
-                    <p>{lotData.description}</p>
+                    <div dangerouslySetInnerHTML={{ __html: lotData.description }} />
                   </div>)}
               </div>
               <div className='amenities'>
@@ -283,8 +284,8 @@ const Room = () => {
                  ))}
                  </div>
                  )}
-
-                 <h3>Apartment level</h3>
+                 {lotData.apartment &&lotData.apartment.options && Object.keys(lotData.apartment.options).length > 0 &&(
+                 <h3>Apartment level</h3>)}
                  {lotData.apartment && lotData.apartment.options && (
                  <div className='characteristics pieces mb-4'>
                  {[
@@ -392,14 +393,14 @@ const Room = () => {
               <div className='map-local mt-3 mb-3 pb-3'>
                 <h2 className='mb-3'>Where is the accommodation located</h2>
                 <div className='map'>
-                <CribMap coordinates={staticCoordinates} showPopup={false} price={price} /> 
+                <CribMap coordinates={staticCoordinates} showPopup={false} data={lotData} /> 
                 </div>
               </div>
               <div className='local-desc mt-3 mb-4 pb-3'>
                 {lotData.description_quartier && (
                   <div>
                     <h2>Neighborhood description</h2>
-                    <p>{lotData.description_quartier}</p>
+                    <div dangerouslySetInnerHTML={{ __html: lotData.description_quartier }} />
                   </div>)}
               </div>
               <div className='recommandation mt-3 mb-lg-5 pb-4 d-md-block d-none'>

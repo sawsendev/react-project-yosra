@@ -4,9 +4,7 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { BsArrowRight, BsArrowLeft } from 'react-icons/bs';
 import { useParams } from 'react-router-dom';
-// import default_img from '../../assets/room/default_image.jpg';
 import default_img from '../../assets/noimage-197x197.svg';
-
 
 const CarrouselImages = () => {
   const { id } = useParams();
@@ -29,7 +27,7 @@ const CarrouselImages = () => {
         console.error('Erreur lors de la récupération des données :', error);
       });
 
-  }, [API_URL, API_KEY])
+  }, [API_URL, API_KEY]);
 
   const responsive = {
     superLargeDesktop: {
@@ -56,17 +54,24 @@ const CarrouselImages = () => {
 
   const onClickPrev = () => {
     if (carouselRef.current) {
-      setIsPrevActive(true);
-      setIsNextActive(false);
+      setIsNextActive(true); // Réactive la flèche "next"
       carouselRef.current.previous();
+      if (carouselRef.current.state.currentSlide === 3) {
+        setIsPrevActive(false); // Désactive la flèche "précédent"
+      }
     }
   };
 
   const onClickNext = () => {
     if (carouselRef.current) {
-      setIsPrevActive(false);
-      setIsNextActive(true);
       carouselRef.current.next();
+      const filteredImages = lotData.media.filter((image) =>
+        image.mime_type.startsWith('image') && image.collection_name !== 'floorpan'
+      );
+      if (carouselRef.current.state.currentSlide === filteredImages.length ) {
+        setIsNextActive(false);
+      }
+      setIsPrevActive(true);
     }
   };
 
@@ -76,52 +81,49 @@ const CarrouselImages = () => {
   };
 
   return (
-  <div className='img-items'>
-  {lotData.media && lotData.media.length > 0 ? (
-    <Carousel
-      ref={carouselRef}
-      responsive={responsive}
-      infinite={true}
-      containerClass="carousel-container"
-    >
-      {lotData.media.map((image, index) => (
-  
-  (image.mime_type.startsWith('image') && image.collection_name !== 'floorpan') && (
-    <div key={index} className='item-img'>
-    <LazyLoad height={500} offset={900}>
-      <img src={image.original_url} alt={image.name} className="img-fluid" />
-      </LazyLoad>
-    </div>
-  
-  )
-))}
+    <div className='img-items'>
+      {lotData.media && lotData.media.length > 0 ? (
+        <Carousel
+          ref={carouselRef}
+          responsive={responsive}
+          infinite={true}
+          containerClass="carousel-container"
+        >
+          {lotData.media.map((image, index) => (
+            (image.mime_type.startsWith('image') && image.collection_name !== 'floorpan') && (
+              <div key={index} className='item-img'>
+                <LazyLoad height={500} offset={900}>
+                  <img src={image.original_url} alt={image.name} className="img-fluid" />
+                </LazyLoad>
+              </div>
+            )
+          ))}
+        </Carousel>
+      ) : (
+        <div className='default-img'>
+          <img src={default_img} alt="default" className="img-fluid" />
+        </div>
+      )}
 
-    </Carousel>
-  ) : (
-    <div className='default-img'>
-      <img src={default_img} alt="default" className="img-fluid" />
+      {lotData.media && lotData.media.length > 1 && (
+        <div className="button-container">
+          <div
+            onClick={onClickPrev}
+            onMouseUp={onMouseUp}
+            className={`custom-prev-arrow ${isPrevActive ? '' : 'disabled'}`}
+          >
+            <BsArrowLeft className="arrow-icon" />
+          </div>
+          <div
+            onClick={onClickNext}
+            onMouseUp={onMouseUp}
+            className={`custom-next-arrow ${isNextActive ? '' : 'disabled'}`}
+          >
+            <BsArrowRight className="arrow-icon" />
+          </div>
+        </div>
+      )}
     </div>
-  )}
-
-  {lotData.media && lotData.media.length > 1 && (
-    <div className="button-container">
-      <div
-        onClick={onClickPrev}
-        onMouseUp={onMouseUp}
-        className={`custom-prev-arrow ${isPrevActive ? '' : 'disabled'}`}
-      >
-        <BsArrowLeft className="arrow-icon" />
-      </div>
-      <div
-        onClick={onClickNext}
-        onMouseUp={onMouseUp}
-        className={`custom-next-arrow ${isNextActive ? '' : 'disabled'}`}
-      >
-        <BsArrowRight className="arrow-icon" />
-      </div>
-    </div>
-  )}
-</div>
   );
 };
 
