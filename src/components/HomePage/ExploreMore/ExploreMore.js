@@ -10,28 +10,47 @@ import { useNavigate } from 'react-router-dom';
 
 const ExploreMore = () => {
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
-  const API_URL = 'http://dev.niceroom.sofis-info.com/api/lots/list';
+  const API_URL = 'http://dev.niceroom.sofis-info.com/api/lots/city';
   const navigate= useNavigate();
   const [lotData, setLotData] = useState([]);
  
-  useEffect(() => {
-    const headers = {
-      'apiKey': `${API_KEY}`,
-    };
 
-    fetch(API_URL, { method: 'GET', mode: 'cors', headers })
-      .then(response => response.json())
-      .then(data => {
-        setLotData(data.data.lots);
-        console.log(data.data.lots);
-      })
-      .catch(error => {
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const headers = {
+          'apiKey': `${API_KEY}`,
+        };
+  
+        const response = await fetch(`${API_URL}`, {
+          method: 'GET',
+          mode: 'cors',
+          headers,
+        });
+  
+        const responseData = await response.json();
+       
+  
+        if (responseData) {
+          setLotData(responseData);
+        } else {
+          console.error('Données inattendues de l\'API :', responseData);
+          setLotData([]); // En cas d'erreur, affectez un tableau vide
+        }
+      } catch (error) {
         console.error('Erreur lors de la récupération des données :', error);
-      });
-  }, [API_URL, API_KEY]);
- 
+        setLotData([]); // En cas d'erreur, affectez un tableau vide
+      }
+    };
+  
+    fetchData();
+  }, []);
   
   
+
+ console.log(lotData)
+
+
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 1200 },
@@ -51,30 +70,30 @@ const ExploreMore = () => {
     }
   };
  
-  
+ 
   const handleClick = (city) => {
     const searchParams = new URLSearchParams({ city }).toString();
+    console.log(city)
     const url = `/search-cities?${searchParams}`;
     navigate(url);
   };
+  const cityData = lotData.data && lotData.data.cities ? lotData.data.cities : [];
+
+  const cities = ExploreCitiesTable.map(city => {
+    const cityInfo = cityData.find(cityInfo => cityInfo.city_country.toLowerCase().startsWith(city.city.toLowerCase()));
+    const count = cityInfo ? cityInfo.count_lots : 0;
   
-  const city = ExploreCitiesTable.map(city => {
-    
-      // Trouvez le nombre de chambres correspondant à la ville actuelle
-      const filteredRooms = lotData.filter(room => {
-        if (room.apartment && room.apartment.building && room.apartment.building.city) {
-          return room.apartment.building.city.toLowerCase() === city.city.toLowerCase();
-        
-        }
-       
-        return false; // Retourner false si les données ne sont pas disponibles
-      });
-      return <City src={city.src} city={city.city} count={filteredRooms.length} handleClick={() => handleClick(city.city)}/>;
-    });
-    
-   
-
-
+    return (
+      <City
+        src={city.src}
+        city={city.city}
+        count={count}
+        handleClick={() => handleClick(city.city)}
+      />
+    );
+  });
+  
+  
   const carouselRef = useRef(null);
 
   const [isPrevActive, setIsPrevActive] = useState(true); // Initialement actif
@@ -112,7 +131,7 @@ const ExploreMore = () => {
           infinite={true}
           containerClass="carousel-container"
         >
-          {city}
+          {cities}
         </Carousel>
         <div className="button-container">
           <div

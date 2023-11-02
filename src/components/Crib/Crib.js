@@ -10,7 +10,7 @@ import promoImage from '../../assets/Group 104.svg';
 import imageParDefaut from '../../assets/room/Group 116.svg'
 const Crib = ({ cribs }) => {
   if (!cribs || cribs.length === 0) {
-    return <p>No cribs available</p>;
+    return null;
   }
 
   return (
@@ -79,7 +79,7 @@ const Crib = ({ cribs }) => {
                   <img src={locationIcon} alt="location icon"/>
                   <p>{crib.apartment.building.address}</p>
                 </div>
-                <span><span className='price_loyer'>{crib.loyer_hc} €</span> /month</span>
+                <span>{crib.loyer_hc+crib.charges} € /month</span>
               </div>
             </div>
           </li>

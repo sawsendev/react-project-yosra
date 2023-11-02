@@ -89,7 +89,7 @@ const Search = () => {
 
         const data = await response.json();
         setLotData(data.data.lots);
-        console.log(data.data.lots)
+       
       } catch (error) {
         console.error('Erreur lors de la récupération des données :', error);
       }
@@ -188,6 +188,7 @@ const Search = () => {
               <label htmlFor="countries">City</label>
               <div className='input-select'>
               <SelectCity onChange={(selectedValue) => setCity(selectedValue.value)} />
+                 <input type="hidden" name="city" value={city} />
               </div>
             </div>
 
