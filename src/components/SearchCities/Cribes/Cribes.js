@@ -14,7 +14,7 @@ const Cribes = () => {
   const [dataLoaded, setDataLoaded] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
-
+  const [loading, setLoading] = useState(false)
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
   const API_URL = 'http://dev.niceroom.sofis-info.com/api/lots/list';
   const API_URL2 = 'http://dev.niceroom.sofis-info.com/api/lots/search';
@@ -188,6 +188,7 @@ const Cribes = () => {
       currentPage < lastPage
     ) {
       setCurrentPage(currentPage + 1);
+      setLoading(true)
     }
   };
   
@@ -285,6 +286,13 @@ const Cribes = () => {
           )
         )
       ) : null}
+      {loading && (
+    <div className="container">
+    <div className='left d-flex '>
+        <img src={loading} alt="Loading" style={{width:"100px", height:"100px",  margin: "0 auto"}}/>
+        </div>
+        </div>
+     ) }
     </div>
 
 
