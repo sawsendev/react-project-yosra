@@ -182,14 +182,12 @@ const Cribes = () => {
 
   console.log(coordinates)
 
-  const handleScroll = (currentPage, lastPage, setCurrentPage) => {
+  const handleScroll = () => {
     if (
-      window.innerHeight + document.documentElement.scrollTop ===
-      document.documentElement.offsetHeight
+      window.innerHeight + window.scrollY + 200 >= document.documentElement.offsetHeight &&
+      currentPage < lastPage
     ) {
-      if (currentPage < lastPage) {
-        setCurrentPage(currentPage + 1);
-      }
+      setCurrentPage(currentPage + 1);
     }
   };
   
@@ -206,27 +204,14 @@ const Cribes = () => {
   }, [currentPage,searchParamsExist]);
 
   useEffect(() => {
-    const onScroll = () => {
-      const scrollHeight = window.scrollY; // Obtenez la position verticale du défilement
-  
-      // Spécifiez la hauteur à partir du haut de la page à partir de laquelle vous souhaitez détecter le scroll (200 pixels dans cet exemple)
-      const scrollHeightThreshold = 50;
-  
-      if (scrollHeight >= scrollHeightThreshold) {
-        // Le scroll a atteint ou dépassé la hauteur de 200 pixels
-        handleScroll(currentPage, lastPage, setCurrentPage);
-      }
-    };
-  
     // Attachez le gestionnaire d'événements de scroll à la fenêtre
-    window.addEventListener('scroll', onScroll);
-  
+    window.addEventListener('scroll', handleScroll);
+
+    // Assurez-vous de retirer l'écouteur lorsque le composant est démonté
     return () => {
-      // Assurez-vous de retirer l'écouteur lorsque le composant est démonté
-      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('scroll', handleScroll);
     };
-  }, [currentPage, lastPage, setCurrentPage]);
-  
+  }, [currentPage, lastPage]);
   
 
   console.log(searchResult)
@@ -277,7 +262,7 @@ const Cribes = () => {
     {!dataLoaded && (
     <div className="container">
     <div className='left d-flex '>
-        <img src={loading} alt="Loading" style={{width:"10%",margin: "0 auto"}}/>
+        <img src={loading} alt="Loading" style={{width:"100px", height:"100px",  margin: "0 auto"}}/>
         </div>
         </div>
      ) }
