@@ -5,7 +5,8 @@ import Crib from '../../Crib/Crib';
 import { useLocation, useNavigate } from 'react-router-dom';
 import noRooms from "../../../assets/Group 24.svg";
 import CribMap from '../MapContainer/CribMap';
-import loading from '../../../assets/loading.gif'
+import loading from '../../../assets/Fichier-1.gif'
+import axios from "axios";
 const Cribes = () => {
   const [cribsData, setCribsData] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
@@ -13,7 +14,7 @@ const Cribes = () => {
   const [dataLoaded, setDataLoaded] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
-
+  const [loading, setLoading] = useState(false)
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
   const API_URL = 'http://dev.niceroom.sofis-info.com/api/lots/list';
   const API_URL2 = 'http://dev.niceroom.sofis-info.com/api/lots/search';
@@ -105,81 +106,89 @@ const Cribes = () => {
  
 
   const fetchDataFromAPI2 = async (page) => {
-  if (searchParamsExist) {
-    const formData = {
-      city: cityParam,
-      date: dateParam,
-      price_min: priceMinParam,
-      price_max: priceMaxParam,
-      sort_by: sortByParam,
-    };
-
-    try {
-      const response = await fetch(`${API_URL2}?page=${page}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'apiKey': API_KEY,
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setLastPage(data.data.lots.last_page);
-
-        if (currentPage === 1) {
-          // Si c'est la première page, réinitialisez les données de recherche
-          setSearchResult(data.data.lots.data);
-
-          // Créez un tableau de coordonnées avec l'ID du lot
-          const newCoordinatesData = data.data.lots.data.map(item => [
-            item.id,  // Ajoutez l'ID du lot
-            item.apartment.building.longitude,
-            item.apartment.building.latitude,
-          ]);
-
-          // Mettez à jour la variable d'état coordinates
-          setCoordinates(newCoordinatesData);
-        } else {
-          // Sinon, ajoutez les nouvelles données de recherche
-          setSearchResult((prevData) => [...prevData, ...data.data.lots.data]);
-
-          // Ajoutez les nouvelles coordonnées au tableau existant avec l'ID du lot
-         const newCoordinatesData = data.data.lots.data.map(item => [
-      item.id,  // Ajoutez l'ID du lot
-      item.apartment.building.longitude,
-      item.apartment.building.latitude,
-    ]);
-
-    // Nettoyez les doublons en conservant l'ID le plus petit
-    const cleanedCoordinates = removeDuplicateCoordinates([
-      ...coordinates,
-      ...newCoordinatesData,
-    ]);
-
-    // Mettez à jour la variable d'état coordinates en ajoutant les nouvelles coordonnées nettoyées
-    setCoordinates(cleanedCoordinates);
-  }
-        
-        setDataLoaded(true);
+    if (searchParamsExist) {
+      const formData = {
+        city: cityParam,
+        date: dateParam,
+        price_min: priceMinParam,
+        price_max: priceMaxParam,
+        sort_by: sortByParam,
+      };
+  
+      try {
+        const response = await fetch(`${API_URL2}?page=${page}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apiKey': API_KEY,
+          },
+          body: JSON.stringify(formData),
+        });
+  
+        if (response.ok) {
+          const data = await response.json();
+          setLastPage(data.data.lots.last_page);
+  
+          // Transformez data.data.lots.data en tableau si ce n'est pas déjà le cas
+          const dataArray = Array.isArray(data.data.lots.data)
+            ? data.data.lots.data
+            : Object.values(data.data.lots.data);
+  
+          if (currentPage === 1) {
+            // Si c'est la première page, réinitialisez les données de recherche
+            setSearchResult(dataArray);
+            console.log(dataArray);
+  
+            // Créez un tableau de coordonnées avec l'ID du lot
+            const newCoordinatesData = dataArray.map(item => [
+              item.id,  // Ajoutez l'ID du lot
+              item.apartment.building.longitude,
+              item.apartment.building.latitude,
+            ]);
+  
+            // Mettez à jour la variable d'état coordinates
+            setCoordinates(newCoordinatesData);
+          } else {
+            // Sinon, ajoutez les nouvelles données de recherche
+            setSearchResult((prevData) => [...prevData, ...dataArray]);
+            console.log(dataArray);
+  
+            // Ajoutez les nouvelles coordonnées au tableau existant avec l'ID du lot
+            const newCoordinatesData = dataArray.map(item => [
+              item.id,  // Ajoutez l'ID du lot
+              item.apartment.building.longitude,
+              item.apartment.building.latitude,
+            ]);
+  
+            // Nettoyez les doublons en conservant l'ID le plus petit
+            const cleanedCoordinates = removeDuplicateCoordinates([
+              ...coordinates,
+              ...newCoordinatesData,
+            ]);
+  
+            // Mettez à jour la variable d'état coordinates en ajoutant les nouvelles coordonnées nettoyées
+            setCoordinates(cleanedCoordinates);
+          }
+  
+          setDataLoaded(true);
+        }
+      } catch (error) {
+        console.error('Erreur lors de la récupération des données :', error);
       }
-    } catch (error) {
-      console.error('Erreur lors de la récupération des données :', error);
     }
-  }
-};
+  };
+  
+  
 
   console.log(coordinates)
 
-  const handleScroll = (currentPage, lastPage, setCurrentPage) => {
+  const handleScroll = () => {
     if (
-      window.innerHeight + document.documentElement.scrollTop ===
-      document.documentElement.offsetHeight
+      window.innerHeight + window.scrollY + 200 >= document.documentElement.offsetHeight &&
+      currentPage < lastPage
     ) {
-      if (currentPage < lastPage) {
-        setCurrentPage(currentPage + 1);
-      }
+      setCurrentPage(currentPage + 1);
+      setLoading(true)
     }
   };
   
@@ -196,22 +205,45 @@ const Cribes = () => {
   }, [currentPage,searchParamsExist]);
 
   useEffect(() => {
-    const onScroll = () => {
-      handleScroll(currentPage, lastPage, setCurrentPage);
-    };
-  
-    window.addEventListener('scroll', onScroll);
-  
+    // Attachez le gestionnaire d'événements de scroll à la fenêtre
+    window.addEventListener('scroll', handleScroll);
+
+    // Assurez-vous de retirer l'écouteur lorsque le composant est démonté
     return () => {
-      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('scroll', handleScroll);
     };
-  }, [currentPage, lastPage, setCurrentPage]);
- 
+  }, [currentPage, lastPage]);
   
 
   console.log(searchResult)
-  console.log(cityParam)
-
+  console.log(cityParam) 
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
+  const handleGetCoordinates = async (city) => {
+    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${city}`;
+  
+    try {
+      const response = await axios.get(url);
+      if (response.status === 200) {
+        const data = response.data;
+        console.log('API Response:', data); // Log the API response data
+        if (data && data.length > 0) {
+          setLatitude(parseFloat(data[0].lat));
+          setLongitude(parseFloat(data[0].lon));
+          console.log('Received coordinates:', data[0].lat, data[0].lon);
+        } else {
+          console.log('No data found for the city.');
+        }
+      } else {
+        console.log(`Request failed with status code ${response.status}.`);
+      }
+    } catch (error) {
+      console.error('Error fetching data from OpenStreetMap API:', error);
+    }
+  };
+  useEffect(() => {
+    handleGetCoordinates(cityParam);
+  }, [cityParam]);
   return (
     <div className='Cribes-container container-fluid'>
       {searchResult.length > 0 && (
@@ -222,44 +254,64 @@ const Cribes = () => {
         </h2>
       )}
 
-      {!dataLoaded && (
-        <img src={loading} alt="Loading" className="img-fluid"/>
-     ) }
+    
  
-      <div className='content-page'>
-        <div className='row row-cribes'>
-          <div className='col-lg-7'>
-            {dataLoaded ? (
-              searchParamsExist && searchResult.length > 0 ? (
-                <Crib cribs={searchResult} />
-              ) : (
-                <Crib cribs={cribsData} />
-              )
-            ) : null}
-
-            {dataLoaded && cribsData.length === 0 && searchResult.length === 0 && (
-              <div className='container'>
-                <div className='No-rooms-content'>
-                  <div className='left d-flex '>
-                    <img className='ImageNoRooms' src={noRooms} alt='no rooms icon' />
-                    <span>No rooms available</span>
-                    <button className='button'>Show first availabilities</button>
-                  </div>
+     <div  className='content-page'>
+  <div className='row row-cribes'>
+    <div className='col-lg-7'>
+  
+    {!dataLoaded && (
+    <div className="container">
+    <div className='left d-flex '>
+        <img src={loading} alt="Loading" style={{width:"100px", height:"100px",  margin: "0 auto"}}/>
+        </div>
+        </div>
+     ) }
+      {dataLoaded ? (
+        searchParamsExist && searchResult.length > 0 ? (
+          <Crib cribs={searchResult} />
+        ) : (
+          !searchParamsExist && cribsData.length > 0 ? (
+            <Crib cribs={cribsData} />
+          ) : (
+            <div className='container'>
+              <div className='No-rooms-content'>
+                <div className='left d-flex '>
+                  <img className='ImageNoRooms' src={noRooms} alt='no rooms icon' />
+                  <span>No rooms available</span>
+                  <button className='button'>Show first availabilities</button>
                 </div>
               </div>
-            )}
-          </div>
+            </div>
+          )
+        )
+      ) : null}
+      {loading && (
+    <div className="container">
+    <div className='left d-flex '>
+        <img src={loading} alt="Loading" style={{width:"100px", height:"100px",  margin: "0 auto"}}/>
+        </div>
+        </div>
+     ) }
+    </div>
+
+
+
 
           <div className='Maps col-lg-5'>
             <div className={`maps-block`}>
+            
+            {longitude && latitude && (
             <CribMap
   coordinates={coordinates}
   showPopup={true}
   data={searchParamsExist ? searchResult : cribsData}
-  city={cityParam}
+  longitude={longitude}
+  latitude={latitude}
 
 
-/>
+/>)}
+
             </div>
           </div>
         </div>
