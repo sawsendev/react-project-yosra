@@ -3,9 +3,11 @@ import "./BookingProcess.css"
 
 
 const BookingProcess = ({cribs}) => {
-  const firstImage = cribs.media.find(
-    (media) => media.mime_type.startsWith('image') && media.collection_name !== 'floorpan'
-  );
+  const firstImage = cribs && cribs.media
+  ? cribs.media.find(
+      (media) => media.mime_type.startsWith('image') && media.collection_name !== 'floorpan'
+    )
+  : null;
   
   const images = cribs && cribs.media ? cribs.media.filter(item => item.mime_type.startsWith('image')) : [];
   console.log("les images",images)
