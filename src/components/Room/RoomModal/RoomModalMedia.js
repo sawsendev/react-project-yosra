@@ -107,6 +107,7 @@ const RoomModalMedia = ({ isOpen, closeModal, activeTab, setActiveTab , lotData 
                               frameborder="0"
                               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                               allowfullscreen
+                              style={{width:"100%",height:"500px"}}
                               ></video>
 
                               </li>
@@ -130,12 +131,15 @@ const RoomModalMedia = ({ isOpen, closeModal, activeTab, setActiveTab , lotData 
       ></iframe>
     )}
     {lotData.video_360 && (
-      <iframe
-        title="Room360"
-        width='853'
-        height='480'
-        src={lotData.video_360}
-      ></iframe>
+      <video
+                              src={lotData.video_360}
+                              
+                              controls
+                              frameborder="0"
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                              allowfullscreen
+                              style={{width:"100%"}}
+                              ></video>
     )}
   </li>
 )}

@@ -26,6 +26,7 @@ const Crib = ({ cribs }) => {
       }
     }
   };
+  
 
   const onClickNext = () => {
     if (carouselRef.current) {
