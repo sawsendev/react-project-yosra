@@ -11,12 +11,20 @@ import imageParDefaut from '../../../assets/room/Group 116.svg';
 const CribMap = ({ coordinates, showPopup, data ,latitude,longitude  }) => {
   
   const customIcon = (item) => {
-    const price = item.loyer_hc + item.charges;
-    return new L.divIcon({
-      className: 'custom-icon',
-      html: price ? `<div class="marker-label">${price}€</div>` : '',
-    });
+    if (item && typeof item === 'object' && 'loyer_hc' in item) {
+      const price = item.loyer_hc + item.charges;
+      return new L.divIcon({
+        className: 'custom-icon',
+        html: price ? `<div class="marker-label">${price}€</div>` : '',
+      });
+    } else {
+      return new L.divIcon({
+        className: 'custom-icon',
+        html: '',
+      });
+    }
   };
+  
  
     
   return (
@@ -32,7 +40,7 @@ const CribMap = ({ coordinates, showPopup, data ,latitude,longitude  }) => {
       />
     {coordinates.map((coordArray, index) => {
     if (Array.isArray(coordArray) && coordArray.length === 3) {
-      const [id, longitude, latitude] = coordArray;
+      const [id, latitude, longitude] = coordArray;
       const item = Array.isArray(data) ? data.find((dataItem) => dataItem.id === id) : data;
        
       if (!isNaN(latitude) && !isNaN(longitude) && latitude !== null && longitude !== null) {

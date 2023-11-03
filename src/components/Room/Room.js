@@ -60,59 +60,15 @@ const Room = () => {
   const[lotData,setLotData]=useState({});
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
   const API_URL = `http://dev.niceroom.sofis-info.com/api/lot/${id}`;
-  const API_URL2 = 'http://dev.niceroom.sofis-info.com/api/lots/list';
+  const API_URL2 = 'http://dev.niceroom.sofis-info.com/api/lots/recommendation';
   const [latitude,setLatitude]=useState(null)
   const [longitude,setLongitude]=useState(null)
 
   const navigate= useNavigate();
   const [price,setPrice]=useState('')
+  const [city,setCity]=useState('')
 
   const [randomCribData, setRandomCribData] = useState([]);
-  function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-  }
-  
- 
-  useEffect(() => {
-    const headers = {
-      'apiKey': `${API_KEY}`,
-    };
-  
-    fetch(API_URL2, { method: 'GET', mode: 'cors', headers })
-      .then(response => response.json())
-      .then(data => {
-        const allCribs = data.data.lots;
-        
-        const cribsInSameCity = allCribs.filter(crib => 
-          lotData.apartment && lotData.apartment.building &&
-          crib.apartment && crib.apartment.building &&
-          crib.apartment.building.city === lotData.apartment.building.city
-        );
-        
-        // Utilisez la fonction de mélange pour mélanger les "cribs"
-        shuffleArray(cribsInSameCity);
-        
-        // Sélectionnez les 3 premiers "cribs" aléatoires (ou moins si la liste est plus courte)
-        const randomCribs = cribsInSameCity.slice(0, 3);
-        setRandomCribData(randomCribs);
-  
-        console.log('Random Cribs:', randomCribs);
-        console.log(randomCribData)
-       
-      })
-      .catch(error => {
-        console.error('Erreur lors de la récupération des données :', error);
-      });
-  }, [API_URL, API_KEY, lotData.apartment]);
-
-
-  const [staticCoordinates, setStaticCoordinates] = useState([]);
-  
-
   useEffect(() => {
     const headers = {
       'apiKey': `${API_KEY}`,
@@ -124,6 +80,7 @@ const Room = () => {
         setLotData(data.data.lot);
         console.log(data.data.lot);     
         console.log(data.data.lot.rent_status);
+        setCity(data.data.lot.apartment.building.city);
         const latitude = data.data.lot.apartment.building.latitude;
         setLatitude(latitude)
         const longitude = data.data.lot.apartment.building.longitude;
@@ -139,6 +96,50 @@ const Room = () => {
         console.error('Erreur lors de la récupération des données :', error);
       });
   }, [API_URL, API_KEY]);
+  
+  useEffect(() => {
+    const headers = {
+      'apiKey': `${API_KEY}`,
+      'Content-Type': 'application/json',
+    };
+    if (city && id) {
+      const requestBody = {
+        city: city,
+        lot_id:id
+      };
+  
+      fetch(API_URL2, {
+        method: 'POST',
+        mode: 'cors',
+        headers,
+        body: JSON.stringify(requestBody),
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data && data.data && data.data.lots) {
+            const allCribs = data.data.lots;
+  
+            const cribsArray = Object.values(allCribs);
+            setRandomCribData(cribsArray);
+          } else {
+            console.error('API response structure is not as expected:', data);
+          }
+        })
+        .catch(error => {
+          console.error('Erreur lors de la récupération des données:', error);
+        });
+    }
+  }, [API_URL2, API_KEY, city]); // Maintenant, city est une dépendance de ce useEffect
+  
+  
+  
+  
+
+
+  const [staticCoordinates, setStaticCoordinates] = useState([]);
+  
+
+ 
 
   
   const calculateAge=(dateOfBirth)=> {
@@ -329,22 +330,7 @@ const Room = () => {
               <div className='flatmates'>
                 <h2 className='mb-3'>Flatmates</h2>
                   <div className='row'>
-              {/* {lotData ? (
-  <div className='col-md-4'>
-    <div className='panel mb-3'>
-      <div className='icon'>
-        <img src={block} alt="Bedroom 1"/>
-      </div>
-      <div className='text'>
-        <p>{lotData.title &&lotData.title.replace('Room', 'Bedroom')}</p>
-       {lotData &&lotData.rent_status===false && (<button type='button' className='btn-visit'>Visit</button>)}
-       
-        {lotData &&lotData.rent_status===true &&(<span className='status'> Booked</span>)}
-       
-      </div>
-    </div>
-  </div>
-) : null} */}
+
 
                   {lotData &&
   lotData.apartment &&
@@ -359,7 +345,7 @@ const Room = () => {
     <img src={man} alt={index} />
   ) : locataire.locataire_info && locataire.locataire_info.genre === 1 ? (
     <img src={woman} alt={index} />
-  ) :((locataire.title && locataire.title === lotData.title) || locataire.rent_status === false) ? (
+  ) :((locataire.title && locataire.title === lotData.title && locataire.rent_status === false ) || locataire.rent_status === false) ? (
     <img src={block} alt={index} />
   ) : null}
 </div>
