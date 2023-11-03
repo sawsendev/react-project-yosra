@@ -158,8 +158,11 @@ button.link-video {
 button.link-video:hover {
     text-decoration: none;
 }
-.ReactModalPortal .ReactModal__Content.ReactModal__Content--after-open {
+.ReactModal__Content.ReactModal__Content--after-open.reactmodal-modal-video {
     background: rgba(0,0,0,0.5)!important;
+}
+.reactmodal-portal-modal-video .ReactModal__Overlay {
+    background-color: transparent!important;
 }
 .modal-video-content {
     max-width: 800px!important;
