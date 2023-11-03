@@ -68,8 +68,8 @@ const Faqspage = () => {
    
 
 
-return (
-    <div>
+return ( 
+    <div id='faq'>
      <Breadcrumbs/>
      <div className='container FaqpagesContainer'>
      <h1 className='text-center my-5'>Frequently asked questions</h1>

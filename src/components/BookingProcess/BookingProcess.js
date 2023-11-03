@@ -3,6 +3,9 @@ import "./BookingProcess.css"
 
 
 const BookingProcess = ({cribs}) => {
+  const firstImage = cribs.media.find(
+    (media) => media.mime_type.startsWith('image') && media.collection_name !== 'floorpan'
+  );
   
   const images = cribs && cribs.media ? cribs.media.filter(item => item.mime_type.startsWith('image')) : [];
   console.log("les images",images)
@@ -10,9 +13,13 @@ const BookingProcess = ({cribs}) => {
     <div className='Book-container d-flex container'>
        <div className='row'>
         <div className='col-xm-12'>
-        {images.length > 0 ? (
-            <img className='img-responsive w-100' src={images[0].original_url} alt="room processPic" />
-          ) : null}
+        {firstImage ? (
+  <img
+    className="img-responsive w-100"
+    src={firstImage.original_url}
+    alt="room processPic"
+  />
+) : null}
          <h3 className='Book-container-heading'>Booking process</h3>
          <div className='Progress-bar'>
         <div className='d-flex align-items-center justify-content-start Progress-paragraph'>
