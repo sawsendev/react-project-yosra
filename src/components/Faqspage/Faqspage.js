@@ -3,11 +3,16 @@ import "./Faqspage.css"
 import {FaqspageTableRenting, FaqspageTablePartnering} from "../../Data/Data"
 import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
 import {IoIosArrowDown, IoIosArrowUp} from 'react-icons/io'
-import {BsArrowRightShort} from 'react-icons/bs'
+import {BsArrowRightShort} from 'react-icons/bs';
+import { IoCloseOutline } from "react-icons/io5";
+import Modal from 'react-modal';
 
 const Faqspage = () => {
      const [toggleState, setToggleState] = useState(1);
      const [selected, setSelected] = useState(null);
+     const [isFrenchModalOpen, setFrenchModalOpen] = useState(false);
+     const [isEnglishModalOpen, setEnglishModalOpen] = useState(false);
+     const [isItalianModalOpen, setItalianModalOpen] = useState(false);
 
  
      const toggleTab = (index) => {
@@ -21,6 +26,45 @@ const Faqspage = () => {
          setSelected(index);
        }
      }
+   
+
+     
+   
+     const openFrench = () => {
+       setFrenchModalOpen(true);
+     };
+   
+     const openEnglish = () => {
+       setEnglishModalOpen(true);
+     };
+   
+     const openItalian = () => {
+       setItalianModalOpen(true);
+     };
+   
+     const closeModal = () => {
+       setFrenchModalOpen(false);
+       setEnglishModalOpen(false);
+       setItalianModalOpen(false);
+     };
+   
+     const frenchModalContent = (
+      <div className='modal-video-text'>
+         <iframe width="560" height="315" src="https://www.youtube.com/embed/5kXkEwThjL0?si=GHI5uXrSqMguyvDA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+       </div>
+     );
+   
+     const englishModalContent = (
+      <div className='modal-video-text'>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/dV9tu99oC1s?si=ufx_zRP_qwnySuzt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+       </div>
+     );
+   
+     const italianModalContent = (
+       <div className='modal-video-text'>
+         <iframe width="560" height="315" src="https://www.youtube.com/embed/WzafRrVUswQ?si=5_73XU4FgaTfz-pA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+       </div>
+     );
    
 
 
@@ -62,7 +106,19 @@ return (
                                              <div className='tab-content' id='v-pills-tabContent'>
                                                   {renting.subTitles ? (         
                                                        renting.subTitles.map((subTitle, subIndex) => (
-                                                            <div className={`tab-pane fade ${subIndex === 0 ? 'show active' : ''}`} id={`pills-${subIndex}${index}`} role="tabpanel" aria-labelledby="v-pills-home-tab"> <div dangerouslySetInnerHTML={{ __html: subTitle.answer }} /></div>
+                                                            <div className={`tab-pane fade ${subIndex === 0 ? 'show active' : ''}`} id={`pills-${subIndex}${index}`} role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                                                 {subTitle.title === 'How to sign the tenancy agreement?' ? (
+                                                                      <div>
+                                                                           <div dangerouslySetInnerHTML={{ __html: subTitle.answer }} />
+                                                                           <button className='link-video' onClick={openEnglish}>English</button>, <button className='link-video' onClick={openFrench}>French</button>,  <button className='link-video' onClick={openItalian}>Italian</button>
+                                                                      </div>
+                                                                      ) : (
+                                                                      <div>
+                                                                           <div dangerouslySetInnerHTML={{ __html: subTitle.answer }} />
+                                                                      </div>
+                                                                 )}
+                                                                  
+                                                            </div>
                                                        ))                                   
                                                   ) : (
                                                        <div>No subTitles available</div>
@@ -78,9 +134,16 @@ return (
                </div>
           {/* end tab-content renting Tab 1 */}
                <div  className={toggleState === 2 ? " active-content" : "content"} onClick={()=>toggleTab(2)}>
+
+
                     <div className='display-block '>
                          {FaqspageTablePartnering.map((renting, index) => (
-                                   <div className={` subAnswers `}>
+                              <div key={index} className='collapseRenting my-3'>
+                                   <div className='TitlesRenting px-3 py-2 align-items-center d-flex justify-content-between' onClick={() => toggleSubTabs(index)}>
+                                        <h2 className='mb-0'>{renting.title}</h2>
+                                        <span>{selected === index ? ( <IoIosArrowUp className='arrow'/> ) : ( <IoIosArrowDown className='arrow'/> )}</span>
+                                   </div>
+                                   <div className={`subAnswers active-content`} >
                                         
                                         <div className='d-flex align-items-stretch faq_tabspills'>
                                              <div className='nav flex-column nav-pills' id='v-pills-tab' role="tablist" aria-orientation="vertical">
@@ -102,9 +165,13 @@ return (
                                                   )}
                                              </div>
                                         </div>
+
                                    </div>
+                              </div>
                          ))}
                     </div>
+
+
 
                </div>
             
@@ -116,6 +183,23 @@ return (
 
         </div>
     </div>
+    
+     <Modal isOpen={isFrenchModalOpen || isEnglishModalOpen || isItalianModalOpen} onClose={closeModal}>
+          <div className='modal-video-overlay'>
+            <div className='modal-video-content'>
+               <div className='modal-video-head'>
+                    <div className='btn-flex'>
+                         <button onClick={closeModal} className='btn btn-close'>Close <IoCloseOutline/></button>
+                    </div>
+               </div>
+               <div className='modal-video-body'>
+                    {isFrenchModalOpen ? frenchModalContent : null}
+                    {isEnglishModalOpen ? englishModalContent : null}
+                    {isItalianModalOpen ? italianModalContent : null}
+               </div>
+            </div>
+          </div>
+     </Modal>
     </div>
     
   )
