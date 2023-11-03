@@ -133,7 +133,9 @@ const Search = () => {
     const sortByParam = searchParams.get('sortBy');
 
     // Mettez à jour l'état local avec les valeurs des paramètres de l'URL
-    setSelectedCountry(cityParam || "");
+    if (cityParam) {
+      setCity(cityParam);
+    }
     setDate(dateParam ? parse(dateParam, 'dd-MM-yyyy', new Date()) : "");
     setSortBy(sortByParam || "");
 
@@ -154,18 +156,24 @@ const Search = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const searchParams = new URLSearchParams();
-    searchParams.append('city', city);
+
+      searchParams.append('city', city);
+  
+  
     if (date) {
       searchParams.append('date', format(date, 'dd-MM-yyyy'));
     }
     searchParams.append('sortBy', sortBy);
-    searchParams.append('priceMin', priceRange[0]); // Ajout de priceMin
-    searchParams.append('priceMax', priceRange[1]); // Ajout de priceMax
+    searchParams.append('priceMin', priceRange[0]);
+    searchParams.append('priceMax', priceRange[1]);
   
     const url = `/search-cities?${searchParams.toString()}`;
     navigate(url);
     window.location.reload();
   };
+  
+  
+  
 
   const handleCustomInputInChange = (date) => {
     setDate(date);
@@ -188,8 +196,9 @@ const Search = () => {
             <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
               <label htmlFor="countries">City</label>
               <div className='input-select'>
-              <SelectCity onChange={(selectedValue) => setCity(selectedValue.value)} />
-                 <input type="hidden" name="city" value={city} />
+              <SelectCity onChange={(selectedValue) => { setCity(selectedValue.value); console.log(selectedValue.value); }} city={city} />
+
+                 <input type="hidden" name="city" value={city} id="city-input" />
               </div>
             </div>
 
