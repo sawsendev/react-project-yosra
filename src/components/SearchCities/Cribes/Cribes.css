@@ -54,7 +54,10 @@
     font-size: 14px;
     font-weight: 600;
 }
-
+.Rooms-content span span.price_loyer {
+    font-size: 24px;
+    line-height: 30px;
+}
 .Item-badge {
     position: relative;
     border-radius: 6px;
