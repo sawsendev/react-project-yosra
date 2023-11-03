@@ -49,7 +49,7 @@ const RoomModalMedia = ({ isOpen, closeModal, activeTab, setActiveTab , lotData 
       </span>
     </li>
   )}
- {lotData && lotData.image_360 &&(
+ {lotData && (lotData.image_360 || lotData.video_360)&&(
   <li
     className={activeTab === 'tab3' ? 'nav-item active' : 'nav-item'}
     onClick={() => setActiveTab('tab3')}
@@ -119,16 +119,27 @@ const RoomModalMedia = ({ isOpen, closeModal, activeTab, setActiveTab , lotData 
                     {activeTab === 'tab3' && (
     <div className='tab-panel'>
         <ul className='gallery-videos row m-0'>
-            {lotData && lotData.image_360 &&(
-                <li  className='itm-video col-md-12 p-0'>
-                
-                     <iframe
-                        title="Room360"
-                        width='853'
-                        height='480'
-                        src={lotData.image_360}
-                        ></iframe>
-                </li>)}
+        {lotData && (
+  <li className='itm-video col-md-12 p-0'>
+    {lotData.image_360 && (
+      <iframe
+        title="Room360"
+        width='853'
+        height='480'
+        src={lotData.image_360}
+      ></iframe>
+    )}
+    {lotData.video_360 && (
+      <iframe
+        title="Room360"
+        width='853'
+        height='480'
+        src={lotData.video_360}
+      ></iframe>
+    )}
+  </li>
+)}
+
             
         </ul>
     </div>

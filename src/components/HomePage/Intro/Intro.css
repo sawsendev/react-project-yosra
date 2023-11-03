@@ -67,6 +67,7 @@
     padding: 7px;
     border-radius: 7px;
     border-width: 1px;
+    line-height: 1;
 }
 
 input[type="date"]::before { 

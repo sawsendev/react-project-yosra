@@ -31,6 +31,7 @@
 }
 .city-item {
     margin-right: 20px;
+    cursor:pointer;
 }
 
 .Room-content{

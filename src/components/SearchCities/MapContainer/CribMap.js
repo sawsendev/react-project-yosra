@@ -8,7 +8,7 @@ import promoImage from '../../../assets/Group 104.svg';
 import { Badge } from 'react-bootstrap';
 import imageParDefaut from '../../../assets/room/Group 116.svg';
 
-const CribMap = ({ coordinates, showPopup, data ,latitude,longitude  }) => {
+const CribMap = ({ coordinates, showPopup, data ,latitude,longitude,zoom  }) => {
   
   const customIcon = (item) => {
     if (item && typeof item === 'object' && 'loyer_hc' in item) {
@@ -30,7 +30,7 @@ const CribMap = ({ coordinates, showPopup, data ,latitude,longitude  }) => {
   return (
     <MapContainer
       center={[latitude,longitude]} 
-      zoom={12}
+      zoom={zoom}
       style={{ height: '765px', width: '100%' }}
 
     >
