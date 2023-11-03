@@ -386,7 +386,7 @@ const Room = () => {
                 <div className='map'>
                 {longitude && latitude && (
                 <CribMap coordinates={staticCoordinates} showPopup={false} data={lotData} latitude={latitude}
-                  longitude={longitude}
+                  longitude={longitude} zoom={12}
                  /> )}
                 </div>
               </div>
