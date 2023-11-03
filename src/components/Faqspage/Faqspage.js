@@ -185,7 +185,7 @@ return (
         </div>
     </div>
     
-     <Modal isOpen={isFrenchModalOpen || isEnglishModalOpen || isItalianModalOpen} onClose={closeModal} className="reactmodal-modal-video" portalClassName="reactmodal-portal-modal-video">
+     <Modal isOpen={isFrenchModalOpen || isEnglishModalOpen || isItalianModalOpen} onClose={closeModal} className="reactmodal-modal-video" portalClassName="reactmodal-portal-modal-video ReactModalPortal">
           <div className='modal-video-overlay'>
             <div className='modal-video-content'>
                <div className='modal-video-head'>
