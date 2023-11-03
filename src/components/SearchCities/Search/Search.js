@@ -164,6 +164,7 @@ const Search = () => {
   
     const url = `/search-cities?${searchParams.toString()}`;
     navigate(url);
+    window.location.reload();
   };
 
   const handleCustomInputInChange = (date) => {

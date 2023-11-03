@@ -8,7 +8,43 @@ import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import promoImage from '../../assets/Group 104.svg';
 import imageParDefaut from '../../assets/room/Group 116.svg'
+import { useRef } from 'react';
+import { useState } from 'react';
+import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
+import './Crib.css';
 const Crib = ({ cribs }) => {
+  const [isPrevActive, setIsPrevActive] = useState(true);
+  const [isNextActive, setIsNextActive] = useState(true);
+  const carouselRef = useRef(null);
+
+  const onClickPrev = () => {
+    if (carouselRef.current) {
+      setIsNextActive(true); // Réactive la flèche "next"
+      carouselRef.current.previous();
+      if (carouselRef.current.state.currentSlide === 3) {
+        setIsPrevActive(false); // Désactive la flèche "précédent"
+      }
+    }
+  };
+
+  const onClickNext = () => {
+    if (carouselRef.current) {
+      carouselRef.current.next();
+      const filteredImages = cribs.media.filter((image) =>
+        image.mime_type.startsWith('image') && image.collection_name !== 'floorpan'
+      );
+      if (carouselRef.current.state.currentSlide === filteredImages.length ) {
+        setIsNextActive(false);
+      }
+      setIsPrevActive(true);
+    }
+  };
+
+  const onMouseUp = () => {
+    setIsPrevActive(true);
+    setIsNextActive(true);
+  };
+
   if (!cribs || cribs.length === 0) {
     return null;
   }
@@ -71,6 +107,23 @@ const Crib = ({ cribs }) => {
 
 
 </Carousel>
+ {cribs.media && cribs.media.length > 1 && (
+<div className="button-container">
+          <div
+            onClick={onClickPrev}
+            onMouseUp={onMouseUp}
+            className={`custom-prev-arrow ${isPrevActive ? '' : 'disabled'}`}
+          >
+            <BsArrowLeft className="arrow-icon" />
+          </div>
+          <div
+            onClick={onClickNext}
+            onMouseUp={onMouseUp}
+            className="custom-next-arrow"
+          >
+            <BsArrowRight className="arrow-icon" />
+          </div>
+        </div>)}
                 </div>
               </div>
               <div className='Rooms-content'>
