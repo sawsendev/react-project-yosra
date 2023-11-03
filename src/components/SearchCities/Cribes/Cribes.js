@@ -22,6 +22,7 @@ const Cribes = () => {
   const searchParams = new URLSearchParams(location.search);
   const navigate = useNavigate();
   const [mapData , setMapData]=useState({});
+  const [zoom,setZoom]=useState(12)
   const cityParam = searchParams.get('city');
   const dateParam = searchParams.get('date');
   const priceMinParam = searchParams.get('priceMin');
@@ -203,10 +204,16 @@ console.log(cribsData)
   console.log(cityParam) 
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
+
   const handleGetCoordinates = async (city) => {
+    if(!city){
+      city="Bastia"
+      setZoom(6)
+    }
     const url = `https://nominatim.openstreetmap.org/search?format=json&q=${city}`;
   
     try {
+     
       const response = await axios.get(url);
       if (response.status === 200) {
         const data = response.data;
@@ -226,7 +233,7 @@ console.log(cribsData)
     }
   };
   useEffect(() => {
-    handleGetCoordinates(cityParam);
+   handleGetCoordinates(cityParam);
   }, [cityParam]);
   
   useEffect(() => {
@@ -239,9 +246,9 @@ console.log(cribsData)
     <div className='Cribes-container container-fluid'>
       {searchResult.length > 0 && (
         <h2>
-          {searchParamsExist
+          {cityParam
             ? `Our cribs in ${searchResult[0].apartment.building.city}`
-            : 'All our cribs'}
+            : 'Our cribs'}
         </h2>
       )}
 
@@ -254,7 +261,7 @@ console.log(cribsData)
     {!dataLoaded && (
     <div className="container">
     <div className='left d-flex '>
-        <img src={loading1} alt="Loading" style={{width:"100px", height:"100px",  margin: "0 auto"}}/>
+        <img src={loading1} alt="Loading" style={{width:"70px", height:"70px",  margin: "120px auto"}}/>
         </div>
         </div>
      ) }
@@ -299,7 +306,7 @@ console.log(cribsData)
   data={searchParamsExist ? searchResult : cribsData}
   longitude={longitude}
   latitude={latitude}
-
+  zoom={zoom}
 
 />)}
 

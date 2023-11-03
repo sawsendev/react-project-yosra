@@ -25,7 +25,9 @@ const NavBar = () => {
     <>
       <nav className='NavBar-container d-flex
       container'>
-           <img src={logo} alt="company's logo" />
+          <a href="/">
+  <img src={logo} alt="company's logo" />
+</a>
 
            <div className={`menu-icon  ${showNav && 'active'}`} onClick={toggleNavItems}>
              <img className='open-nav' src={hamburger} alt="company's logo" />

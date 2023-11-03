@@ -88,7 +88,7 @@ const Room = () => {
         const id =data.data.lot.id
         setPrice(data.data.lot.loyer_hc+data.data.lot.charges)
         if (!isNaN(latitude) && !isNaN(longitude)) {
-          const newCoordinates = [[id,longitude, latitude]];
+          const newCoordinates = [[id,latitude, longitude]];
           setStaticCoordinates(newCoordinates);
         }   
       })
@@ -227,7 +227,7 @@ const Room = () => {
         <img src={iconvideos} alt="videos"/> video
     </button>
 )}
-                  {lotData && lotData.image_360 && (
+                  {lotData && (lotData.image_360 || lotData.video_360) && (
                   <button type='button' className='btn-media' onClick={openModalWithTab3} id="visit-btn">
                   <img src={iconvisit} alt="visit"/> 360° visit</button>)}
 

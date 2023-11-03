@@ -144,6 +144,9 @@ label{
     position: relative;
     width: 100%;
 }
+.react-datepicker-popper{
+    z-index:2;
+}
 .input-datepicker .form-control {
     position: relative;
     width: 100%!important;

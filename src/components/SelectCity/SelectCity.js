@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
-const SelectCity = ({ onChange }) => {
+const SelectCity = ({ onChange, city }) => {
   const [cities, setCities] = useState([]);
-  const [selectedCity, setSelectedCity] = useState('');
+  const [selectedCity, setSelectedCity] = useState(city); // Initialisez selectedCity avec la valeur de city
+
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
   const API_URL = 'http://dev.niceroom.sofis-info.com/api/building/cities';
 
@@ -16,6 +17,7 @@ const SelectCity = ({ onChange }) => {
 
     fetchDataFromAPI();
   }, []); 
+
 
   const fetchDataFromAPI = async () => {
     try {
@@ -46,11 +48,8 @@ const SelectCity = ({ onChange }) => {
     const selectedValue = event.target.value;
     setSelectedCity(selectedValue);
     onChange({ label: selectedValue, value: selectedValue });
+    console.log("Selected city:", selectedValue);
   };
-
-  useEffect(() => {
-    fetchDataFromAPI();
-  }, []);
 
   return (
     <select name="countries" className='Select-country-container w-100' onChange={handleCityChange} value={selectedCity}>
