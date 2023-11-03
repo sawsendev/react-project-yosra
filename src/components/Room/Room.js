@@ -410,24 +410,28 @@ const Room = () => {
                     <p className='head-widgett'><img src={check2} alt="Available"/> Not available</p>
                     )}
                   <hr/>
-                  {lotData.loyer_hc && lotData.charges ? (
+                  {/* {lotData.loyer_hc && lotData.charges ? (
                   <p className='text-center price'>{lotData.loyer_hc+lotData.charges} € /<small>month</small></p>
-                  ) : null}
+                  ) : null} */}
+                  {lotData.promo && lotData.promo === 1 && (
+                  <small className='mb-2 crib_promo d-flex align-items-baseline'><span class="me-auto">1° month rent</span><span className='price_loyer'>{lotData.tarif_promo} €</span> /month</small>
+                  )}
+                  <small className="d-flex align-items-baseline"><span class="me-auto">Monthly rent</span><span className='price_loyer'>{lotData.loyer_hc+lotData.charges} €</span> /month</small>
                   {lotData.max_benefit ? (
                   <div className='text-center assistance'>
                    CAF assistance <PiInfo className='info' />
                    <span className='green'>( up to -{lotData.max_benefit}€ )</span>
                    </div>
                   ) : null}
-                  <p className='h4 status'>Rent is all inclusive</p>
-                  {lotData.water !== 0 &&(<p className='status'><img src={water} alt="Water"/> Water</p>)}
+                  <p className='h4 status mt-3'>Rent is all inclusive</p>
+                  {lotData.water !== 0 &&(<p className='status mb-2'><img src={water} alt="Water"/> Water</p>)}
                   {electricityAndGas && (
-                  <p className='status'><img src={plug} alt="plug"/> {electricityAndGas}</p>
+                  <p className='status mb-2'><img src={plug} alt="plug"/> {electricityAndGas}</p>
                   )}
-                  {lotData.home_insurance !== 0 &&(<p className='status'><img src={insurance} alt="insurance"/> Housing insurance</p>)}
-                  {lotData.wi_fi !== 0 &&(<p className='status'><img src={wifi} alt="wifi"/> Wi - Fi</p>)}
-                  {lotData.cable_tv !== 0 &&(<p className='status'><img src={cable} alt="cable tv"/> Cable tv</p>)}
-                  {lotData.cleaning !== 0 &&(<p className='status'><img src={wipe} alt="wipe"/> Cleaning</p>)}
+                  {lotData.home_insurance !== 0 &&(<p className='status mb-2'><img src={insurance} alt="insurance"/> Housing insurance</p>)}
+                  {lotData.wi_fi !== 0 &&(<p className='status mb-2'><img src={wifi} alt="wifi"/> Wi - Fi</p>)}
+                  {lotData.cable_tv !== 0 &&(<p className='status mb-2'><img src={cable} alt="cable tv"/> Cable tv</p>)}
+                  {lotData.cleaning !== 0 &&(<p className='status mb-2'><img src={wipe} alt="wipe"/> Cleaning</p>)}
                   <button className='btn btn-submit' onClick={()=>{navigate(`/booking-enquiry/${id}`)}}>
 
                   Apply for this room</button>
