@@ -141,6 +141,77 @@
 .faq_tabspills .tab-content .tab-pane.active {
     background: #F5F5F5;
 }
+/**** video popup ****/
+button.link-video {
+    padding: 0!important;
+    border: none!important;
+    background: transparent!important;
+    color: #000!important;
+    margin: 0!important;
+    outline: 0!important;
+    box-shadow: none!important;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    text-decoration: underline;
+}
+button.link-video:hover {
+    text-decoration: none;
+}
+.ReactModalPortal .ReactModal__Content.ReactModal__Content--after-open {
+    background: rgba(0,0,0,0.5)!important;
+}
+.modal-video-content {
+    max-width: 800px!important;
+    width: 100%;
+    display: table;
+    margin: 1rem auto;
+    background: #fff;
+    padding: 1rem;
+    border-radius: 10px;
+}
+.modal-video-text iframe {
+    width: 100%;
+    border-radius: 6px;
+    height: 440px;
+}
+.modal-video-overlay {
+    padding: 1.5rem;
+}
+.modal-video-content .modal-video-head {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 0 0 16px;
+}
+.modal-video-content .modal-video-head .h2 {
+    color: #000;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 27px;
+    margin: 0;
+}
+.modal-video-content .btn-close {
+    background: transparent!important;
+    padding: 0;
+    width: auto;
+    height: auto;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 30px;
+    color: #000;
+    opacity: 1;
+    outline: 0!important;
+    border: none!important;
+    box-shadow: none!important;
+    margin: 0 0 0 auto;
+}
+.modal-video-content .btn-close svg {
+    width: 34px;
+    height: 30px;
+    margin-top: -2px;
+}
 /**** responsive ***/
 @media (max-width: 991px) {
 
@@ -168,6 +239,9 @@
     .subTitlesRenting h2{
         font-weight: bold;
     }
+    .modal-video-text iframe {
+        height: 400px;
+    }
   }
 
 @media (max-width: 768px) {
@@ -193,6 +267,10 @@
     .faq_tabspills .tab-content {
         width: 100%!important; 
     }
+    
+    .modal-video-text iframe {
+        height: 300px;
+    }
 }
 @media (max-width: 576px) {
     .faq_tabspills .nav-pills .nav-link {
@@ -200,5 +278,15 @@
 }
 .faq_tabspills .tab-content .tab-pane {
     padding: 12px 12px 16px 16px;
+}
+.modal-video-text iframe {
+    height: 300px;
+}
+.modal-video-overlay {
+    padding: 0 1rem;
+}
+.bloc-tabs > div {
+    flex: 0 0 100%;
+    width: 100%;
 }
 }

@@ -133,7 +133,11 @@ const Crib = ({ cribs }) => {
                   <img src={locationIcon} alt="location icon"/>
                   <p>{crib.apartment.building.address}</p>
                 </div>
-                <span><span className='price_loyer'>{crib.loyer_hc+crib.charges} €</span> /month</span>
+                {crib.promo && crib.promo === 1 ? (
+                  <span className='crib_promo'><span className='price_loyer'>{crib.tarif_promo} €</span> /month</span>
+                ) : (
+                  <span><span className='price_loyer'>{crib.loyer_hc+crib.charges} €</span> /month</span>
+                )}
               </div>
             </div>
           </li>
