@@ -106,8 +106,9 @@ return (
                                              <div className='tab-content' id='v-pills-tabContent'>
                                                   {renting.subTitles ? (         
                                                        renting.subTitles.map((subTitle, subIndex) => (
+                                                            
                                                             <div className={`tab-pane fade ${subIndex === 0 ? 'show active' : ''}`} id={`pills-${subIndex}${index}`} role="tabpanel" aria-labelledby="v-pills-home-tab">
-                                                                 {subTitle.title === 'How to sign the tenancy agreement?' ? (
+                                                                 { (subIndex === 5 && index === 0) || (subIndex === 0 && index === 1) ? (
                                                                       <div>
                                                                            <div dangerouslySetInnerHTML={{ __html: subTitle.answer }} />
                                                                            <button className='link-video' onClick={openEnglish}>English</button>, <button className='link-video' onClick={openFrench}>French</button>,  <button className='link-video' onClick={openItalian}>Italian</button>
@@ -149,7 +150,7 @@ return (
                                              <div className='nav flex-column nav-pills' id='v-pills-tab' role="tablist" aria-orientation="vertical">
                                                   {renting.subTitles ? (         
                                                        renting.subTitles.map((subTitle, subIndex) => (
-                                                            <button className={`nav-link ${subIndex === 0 ? 'active' : ''}`} id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target={`#pills-${subIndex}${index}`} type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">{subTitle.title}</button>
+                                                            <button className={`nav-link ${subIndex === 0 ? 'active' : ''}`} id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target={`#pills-2${subIndex}${index}`} type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">{subTitle.title}</button>
                                                        ))                                   
                                                   ) : (
                                                        <div>No subTitles available</div>
@@ -158,7 +159,7 @@ return (
                                              <div className='tab-content' id='v-pills-tabContent'>
                                                   {renting.subTitles ? (         
                                                        renting.subTitles.map((subTitle, subIndex) => (
-                                                            <div className={`tab-pane fade ${subIndex === 0 ? 'show active' : ''}`} id={`pills-${subIndex}${index}`} role="tabpanel" aria-labelledby="v-pills-home-tab"> <div dangerouslySetInnerHTML={{ __html: subTitle.answer }} /></div>
+                                                            <div className={`tab-pane fade ${subIndex === 0 ? 'show active' : ''}`} id={`pills-2${subIndex}${index}`} role="tabpanel" aria-labelledby="v-pills-home-tab"> <div dangerouslySetInnerHTML={{ __html: subTitle.answer }} /></div>
                                                        ))                                   
                                                   ) : (
                                                        <div>No subTitles available</div>
@@ -188,9 +189,12 @@ return (
           <div className='modal-video-overlay'>
             <div className='modal-video-content'>
                <div className='modal-video-head'>
-                    <div className='btn-flex'>
-                         <button onClick={closeModal} className='btn btn-close'>Close <IoCloseOutline/></button>
+                    <div className='h2'>The instructions in 
+                    {isFrenchModalOpen ? ' French' : null}
+                    {isEnglishModalOpen ? ' English' : null}
+                    {isItalianModalOpen ? ' Italian' : null}
                     </div>
+                    <button onClick={closeModal} className='btn btn-close'><IoCloseOutline/></button>
                </div>
                <div className='modal-video-body'>
                     {isFrenchModalOpen ? frenchModalContent : null}

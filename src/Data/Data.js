@@ -740,43 +740,50 @@ export const FaqspageTablePartnering = [
             {
             id:0,
             title:"Why should I trust Finecribs?",
-            answer:"<p>First because we are also landlords, as you are. We put the exact same care and attention into managing your property as we put into managing our own properties. Second, we are very selective when it comes to finding tenants. Third, because we have teams of qualified professionals who ensure ongoing maintenance of your apartment. Fourth, because you will receive a steady rental payment regardless of whether your apartment is rented or not.</p>",  
+            answer:`<p>There are several reasons why you should choose to partner with us: </p>
+            <ul style="list-style:none;margin:0;padding:0;"><li><strong>Our interests are aligned:</strong> We understand your perspective as a landlord because we are landlords ourselves. We manage your property with the same care and attention we give to our own investments.</li>
+            <li><strong>Steady Rental Payments:</strong> You rent your property to Fine Cribs. In exchange, we provide you with a steady rental payment, even if your apartment is temporarily unoccupied, offering you peace of mind and financial stability.<br/>
+            Our comprehensive approach aims to make property management hassle-free, profitable, and secure for you as a landlord. </li>
+            <li><strong>Tenant Selection:</strong> We have a rigorous tenant selection process, ensuring that only qualified and reliable tenants are chosen for your property.</li>
+            <li><strong>Professional Maintenance:</strong> Our teams of qualified professionals oversee ongoing maintenance for your apartment, ensuring it remains in top condition.</li>
+            </ul>`,  
             src:""
         },
         {
             id:1,
             title:"How long will Finecribs rent my property?", 
-            answer:"<p>In general, Finecribs is looking to sign a long-term lease with each of our individual property owners. We prefer to take possession of properties for at least 6 years, but we would ideally favor longer periods.</p>",  
+            answer:`<p>In general, Fine Cribs seeks to establish long-term lease agreements with individual property owners. We typically prefer to secure properties for a minimum of 7 years, and we ideally favor even longer lease periods. This long-term commitment allows for stability and mutually beneficial arrangements for both Fine Cribs and property owners.</p>`,  
             src:""
         },
         {
             id:2,
             title:"Who will stay in my apartment?",
-            answer:"<p>We provide quality accommodation to an audience of selected international tenants, mostly composed of young professionals. We carefully review the applications to make sure only the best profiles are accepted. Your interests are always aligned with our interests.</p>",  
+            answer:`<p>We take pride in offering high-quality accommodation to a discerning audience of carefully selected international tenants, primarily consisting of young professionals. Our thorough application review process ensures that only the most suitable profiles are accepted, maintaining the standards of our properties.</p>
+            <p>Our commitment to excellence means that your interests as a property owner are consistently aligned with our mission to provide exceptional housing options. This alignment results in a win-win scenario for both property owners and Fine Cribs.</p>`,  
             src:"" 
         },
         {
             id:3,
             title:"Should my apartment be furnished or unfurnished?",
-            answer:"<p>Typically, we would be looking for at least a kitchen to be installed. We prefer unfurnished lettings as they give our interior designers the opportunity to design the space in accordance with our standards, but a minimum level of furnishing is also accepted.</p>",  
+            answer:`<p>Typically, we aim to install at least a kitchen in our properties. We generally prefer unfurnished lettings because they provide our interior designers with the flexibility to design the space according to our standards. However, we also accept properties with a minimum level of furnishing, ensuring that the space meets our requirements and quality standards.</p>`,  
             src:""
         },
         {
             id:4,
             title:"What happens if Finecribs finds no tenants?",
-            answer:"<p>You will still receive a monthly rent from Finecribs, which means that there is no real change for you.</p>",  
+            answer:`<p>You will continue to receive a monthly rent from Fine Cribs, which means that there will be no significant change in your rental income. This consistency in rental payments provides you with financial stability and peace of mind as a property owner.</p>`,  
             src:""
         },
         {
             id:5,
             title:"What happens if a tenant damages the property?",
-            answer:"<p>Finecribs, as tenant, is liable to the property owner for any damage caused by a tenant. Of course, we also get insurance, and we request all our tenants to do the same.</p>",  
+            answer:`<p>Fine Cribs, as tenant, is liable to the property owner for any damage caused by a tenant. Of course, we also get insurance, and we request all our tenants to do the same.</p>`,  
             src:""
         },
         {
             id:6,
             title:"What do you mean by «smart refurbishment»?",
-            answer:"<p>In case your property needs some light refurbishment, e.g. repainting, renovating a bathroom or building a plastered wall, our teams can take care at no extra cost for you. The need for such initiatives will be considered in the offer that we will submit to you.</p>",  
+            answer:`<p>If your property requires minor refurbishments such as repainting, bathroom renovations, or the construction of a plastered wall, our teams can handle these tasks at no additional cost to you. Any necessary initiatives of this nature will be considered in the offer we provide to you, ensuring that your property is maintained and improved as needed without incurring extra expenses on your part.</p>`,  
             src:""
         },
         {
