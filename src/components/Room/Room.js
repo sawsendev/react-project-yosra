@@ -432,7 +432,7 @@ const Room = () => {
                   {lotData.wi_fi !== 0 &&(<p className='status mb-2'><img src={wifi} alt="wifi"/> Wi - Fi</p>)}
                   {lotData.cable_tv !== 0 &&(<p className='status mb-2'><img src={cable} alt="cable tv"/> Cable tv</p>)}
                   {lotData.cleaning !== 0 &&(<p className='status mb-2'><img src={wipe} alt="wipe"/> Cleaning</p>)}
-                  <button className='btn btn-submit' onClick={()=>{navigate(`/booking-enquiry/${id}`)}}>
+                  <button className='btn btn-submit mt-3' onClick={()=>{navigate(`/booking-enquiry/${id}`)}}>
 
                   Apply for this room</button>
                 </div>
