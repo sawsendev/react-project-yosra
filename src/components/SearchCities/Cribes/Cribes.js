@@ -22,7 +22,7 @@ const Cribes = () => {
   const searchParams = new URLSearchParams(location.search);
   const navigate = useNavigate();
   const [mapData , setMapData]=useState({});
-  const [zoom,setZoom]=useState(12)
+  const [zoom,setZoom]=useState(14)
   const cityParam = searchParams.get('city');
   const dateParam = searchParams.get('date');
   const priceMinParam = searchParams.get('priceMin');

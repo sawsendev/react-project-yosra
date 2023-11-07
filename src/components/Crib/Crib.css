@@ -23,3 +23,39 @@
 .crib_promo{
   color:#fc2947;
 }
+
+
+.room{
+  cursor:pointer;
+}
+ 
+.custom-prev-arrowc,
+.custom-next-arrowc {
+  width: 25px;
+  height: 25px;
+  margin: 0 6px;
+  cursor: pointer;
+  color: black;
+  border: none;
+  background-color: white;
+  border-radius: 50%;
+  transform-origin: center;
+  line-height: 25px;
+  text-align: center;
+  display: none;
+}
+
+.custom-prev-arrowc:hover,
+.custom-next-arrowc:hover {
+  background-color: white;
+ 
+}
+
+.custom-carousel-container:hover .custom-prev-arrowc,
+.custom-carousel-container:hover .custom-next-arrowc {
+  display: block;
+}
+p.promo{
+  color:#A0A9B2;
+  margin-left: 0;
+}

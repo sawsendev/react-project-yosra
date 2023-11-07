@@ -114,3 +114,11 @@
 }
 
 /* Vous pouvez ajouter d'autres styles personnalisés selon vos besoins */
+
+.attribution-element {
+  display: none;
+}
+.leaflet-control-attribution {
+  display:none;
+
+}

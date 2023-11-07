@@ -71,11 +71,12 @@ const ExploreMore = () => {
   };
  
  
-  const handleClick = (city) => {
+  const handleClick = (e,city) => {
+    e.preventDefault()
     const searchParams = new URLSearchParams({ city }).toString();
     console.log(city)
     const url = `/search-cities?${searchParams}`;
-    navigate(url);
+    window.location.href=url;
   };
   const cityData = lotData.data && lotData.data.cities ? lotData.data.cities : [];
 
@@ -88,7 +89,7 @@ const ExploreMore = () => {
         src={city.src}
         city={city.city}
         count={count}
-        handleClick={() => handleClick(city.city)}
+        handleClick={(e) => handleClick(e,city.city)}
       />
     );
   });

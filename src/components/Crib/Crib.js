@@ -1,150 +1,173 @@
-import React from 'react'
+import React, { useState } from 'react';
 import LazyLoad from 'react-lazyload';
 import { Badge } from 'react-bootstrap';
-import  locationIcon  from '../../assets/pin 2.svg';
+import locationIcon from '../../assets/pin 2.svg';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import { Link } from 'react-router-dom';
 import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import promoImage from '../../assets/Group 104.svg';
-import imageParDefaut from '../../assets/room/Group 116.svg'
-import { useRef } from 'react';
-import { useState } from 'react';
+import imageParDefaut from '../../assets/room/Group 116.svg';
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
+
 import './Crib.css';
+
 const Crib = ({ cribs }) => {
-  const [isPrevActive, setIsPrevActive] = useState(true);
-  const [isNextActive, setIsNextActive] = useState(true);
-  const carouselRef = useRef(null);
-
-  const onClickPrev = () => {
-    if (carouselRef.current) {
-      setIsNextActive(true); // Réactive la flèche "next"
-      carouselRef.current.previous();
-      if (carouselRef.current.state.currentSlide === 3) {
-        setIsPrevActive(false); // Désactive la flèche "précédent"
-      }
-    }
-  };
-  
-
-  const onClickNext = () => {
-    if (carouselRef.current) {
-      carouselRef.current.next();
-      const filteredImages = cribs.media.filter((image) =>
-        image.mime_type.startsWith('image') && image.collection_name !== 'floorpan'
-      );
-      if (carouselRef.current.state.currentSlide === filteredImages.length ) {
-        setIsNextActive(false);
-      }
-      setIsPrevActive(true);
-    }
-  };
-
-  const onMouseUp = () => {
-    setIsPrevActive(true);
-    setIsNextActive(true);
-  };
-
   if (!cribs || cribs.length === 0) {
     return null;
   }
+
+  const customArrowStyles = {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  };
 
   return (
     <div>
       <ul className='row Rooms-cribes'>
         {cribs.map((crib, index) => (
-          <li className='col-lg-4 col-md-6 col-12' key={index}>
-            <div className='item-cribe'>
-              <div className='Item-badge'>
-                { crib.rent_status === false && (<Badge className='notify-badge'>Available now</Badge>)}
-                {crib.promo && crib.promo === 1 && (
-                  <img src={promoImage} alt='Promo' className='promo-image' />
-                )}
-
-                <div className="custom-carousel-container">
-                <Carousel showStatus={false} showArrows={false} showThumbs={false} dynamicHeight={false} useKeyboardArrows={false}>
-                {
-  crib &&
-  crib.media &&
-  crib.media.some((media) => media.mime_type.startsWith('image')) ? (
-    // Filtrer les images qui satisfont les conditions
-    crib.media
-      .filter(
-        (media) =>
-          media.mime_type.startsWith('image') &&
-          media.collection_name !== 'floorpan'
-      )
-      .slice(0, 6) // Obtenir au maximum 4 images
-      .map((image, index) => (
-        <Link to={`/room/${crib.id}`} key={index}>
-          <div>
-            <LazyLoad height={200} offset={100}>
-              <img
-                className="img-fluid"
-                src={image.original_url}
-                alt={`Room ${index}`}
-              />
-            </LazyLoad>
-          </div>
-        </Link>
-      ))
-  ) : (
-    // Si aucune image ne satisfait les conditions, afficher une image par défaut
-    <Link to={`/room/${crib.id}`}>
-      <div>
-        <LazyLoad height={200} offset={100}>
-          <img
-            className="img-fluid"
-            src={imageParDefaut}
-            alt="Im"
-            
-          />
-        </LazyLoad>
-      </div>
-    </Link>
-  )
-}
-
-
-</Carousel>
- {cribs.media && cribs.media.length > 1 && (
-<div className="button-container">
-          <div
-            onClick={onClickPrev}
-            onMouseUp={onMouseUp}
-            className={`custom-prev-arrow ${isPrevActive ? '' : 'disabled'}`}
-          >
-            <BsArrowLeft className="arrow-icon" />
-          </div>
-          <div
-            onClick={onClickNext}
-            onMouseUp={onMouseUp}
-            className="custom-next-arrow"
-          >
-            <BsArrowRight className="arrow-icon" />
-          </div>
-        </div>)}
-                </div>
-              </div>
-              <div className='Rooms-content'>
-                <h3>{crib.apartment.title}-{crib.title}</h3>
-                <div className='d-flex mb-1'>
-                  <img src={locationIcon} alt="location icon"/>
-                  <p>{crib.apartment.building.address}</p>
-                </div>
-                {crib.promo && crib.promo === 1 ? (
-                  <span className='crib_promo'><span className='price_loyer'>{crib.tarif_promo} €</span> /month</span>
-                ) : (
-                  <span><span className='price_loyer'>{crib.loyer_hc+crib.charges} €</span> /month</span>
-                )}
-              </div>
-            </div>
-          </li>
+          <CribItem key={index} crib={crib} />
         ))}
       </ul>
     </div>
   );
-}
+};
+
+const CribItem = ({ crib }) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const totalImages = crib.media
+    ? crib.media
+        .filter((media) => media.mime_type.startsWith('image') && media.collection_name !== 'floorpan')
+        .slice(0, 6).length
+    : 0;
+
+  const goToPrevSlide = () => {
+    setActiveIndex((prevIndex) => (prevIndex === 0 ? totalImages - 1 : prevIndex - 1));
+  };
+
+  const goToNextSlide = () => {
+    setActiveIndex((prevIndex) => (prevIndex === totalImages - 1 ? 0 : prevIndex + 1));
+  };
+
+  const [showArrows, setShowArrows] = useState(false);
+
+  const handleMouseEnter = (show) => {
+    setShowArrows(show);
+  };
+  
+  
+  return (
+    <li className='col-lg-4 col-md-6 col-12'>
+      <div className='item-cribe'>
+        <div className='Item-badge'>
+          {crib.rent_status === false && (
+            <Badge className='notify-badge'>
+              {crib.availability_date && `Avail. on ${crib.availability_date.split('/')[0]}/${crib.availability_date.split('/')[1]}`}
+            </Badge>
+          )}
+          {crib.promo && crib.promo === 1 && (
+            <img src={promoImage} alt='Promo' className='promo-image' />
+          )}
+
+          <div className="custom-carousel-container">
+            <Carousel
+              showStatus={false}
+              showArrows={false}
+              showThumbs={false}
+              dynamicHeight={false}
+              useKeyboardArrows={false}
+              selectedItem={activeIndex}
+            >
+              {crib.media && crib.media.length > 0 ? (
+                crib.media
+                  .filter((media) => media.mime_type.startsWith('image') && media.collection_name !== 'floorpan')
+                  .slice(0, 6)
+                  .map((image, index) => (
+                    <div
+                      className='room'
+                      onClick={() => (window.location.href = `/room/${crib.id}`)}
+                    >
+                      <LazyLoad height={200} offset={100}>
+                        <img
+                          className="img-fluid"
+                          src={image.original_url}
+                          alt={`Room ${index}`}
+                        />
+                      </LazyLoad>
+                    </div>
+                  ))
+              ) : (
+                <div
+                  className='room'
+                  onClick={() => (window.location.href = `/room/${crib.id}`)}
+                >
+                  <LazyLoad height={200} offset={100}>
+                    <img className="img-fluid" src={imageParDefaut} alt="Im" />
+                  </LazyLoad>
+                </div>
+              )}
+            </Carousel>
+            <div
+  className={`custom-prev-arrowc ${showArrows ? '' : 'hidden-arrow'}`} // Commencez par masquer les flèches
+  onMouseEnter={() => handleMouseEnter(true)} // Affichez les flèches au survol
+  onMouseLeave={() => handleMouseEnter(false)} // Masquez les flèches lorsque le survol se termine
+  onClick={goToPrevSlide}
+  style={{
+    position: 'absolute',
+    top: '50%',
+    left: 0,
+    transform: 'translateY(-50%)',
+  }}
+>
+  <BsArrowLeft />
+</div>
+
+<div
+ className={`custom-next-arrowc ${showArrows ? '' : 'hidden-arrow'}`} // Commencez par masquer les flèches
+  onMouseEnter={() => handleMouseEnter(true)} // Affichez les flèches au survol
+  onMouseLeave={() => handleMouseEnter(false)} // Masquez les flèches lorsque le survol se termine
+  onClick={goToNextSlide}
+  style={{
+    position: 'absolute',
+    top: '50%',
+    right: 0,
+    transform: 'translateY(-50%)',
+  }}
+>
+  <BsArrowRight />
+</div>
+
+          </div>
+        </div>
+        <div className='Rooms-content'>
+          <h3>
+            {crib.apartment.title}-{crib.title}
+          </h3>
+          <div className='d-flex mb-1'>
+            <img src={locationIcon} alt="location icon" />
+            <p>{crib.apartment.building.address}</p>
+          </div>
+          {crib.promo && crib.promo === 1 ? (
+            <div >
+              <span className='crib_promo'>
+                <span className='price_loyer'>{crib.tarif_promo} €</span> /month
+              </span>
+             
+    <p className='promo'>1st month rent {crib.tarif_promo}€ then {crib.loyer_hc + crib.charges}€ </p>
+           
+            </div>
+          ) : (
+            <span>
+              <span className='price_loyer'>
+                {crib.loyer_hc + crib.charges} €
+              </span>{' '}
+              /month
+            </span>
+          )}
+        </div>
+      </div>
+    </li>
+  );
+};
 
 export default Crib;

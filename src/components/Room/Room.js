@@ -44,6 +44,7 @@ import water from '../../assets/room/widget/water.svg'
 import plug from '../../assets/room/widget/plug.svg'
 import insurance from '../../assets/room/widget/insurance.svg'
 import wifi from '../../assets/room/widget/wifi.svg'
+import heater from '../../assets/heater 1.png'
 import cable from '../../assets/room/widget/cable-tv.svg'
 import wipe from '../../assets/room/widget/wipe.svg'
 import { PiInfo } from "react-icons/pi";
@@ -181,7 +182,7 @@ const Room = () => {
     setModalIsOpen(false);
   };  
   const showElectricity = lotData.electricity !== 0;
-  const showGas = lotData.gaz !== 0;
+  const showGas = lotData.gas !== 0;
   let electricityAndGas = '';
 
   if (showElectricity && showGas) {
@@ -202,7 +203,12 @@ const Room = () => {
       return "th";
     }
   };
-  
+  const [showMore, setShowMore] = useState(false);
+
+  const description = lotData.description || '';
+  const lines = description.split('\n');
+  const firstTenLines = lines.slice(0, 10).join('\n');
+  const remainingLines = lines.slice(10).join('\n');
     return (
       <>
       {lotData && lotData.apartment && lotData.apartment.title && lotData.title && (
@@ -250,7 +256,8 @@ const Room = () => {
                 <h2>Private room in {lotData.apartment.building.city}</h2>)}
               </div>
               <div className='characteristics mt-3 mb-4'>
-                <div className='btn-char'><img src={plan} alt="plan"/>Apartement (76m2)</div>
+                {lotData&& lotData.apartment && lotData.apartment.m2 &&(
+                <div className='btn-char'><img src={plan} alt="plan"/>Apartement ({lotData.apartment.m2}m2)</div>)}
                 {lotData && lotData.area!==0 &&  (
                 <div className='btn-char'><img src={bedroom} alt="bedroom"/>Room ({lotData.area}m2)</div>)}
                 {lotData && lotData.apartment && lotData.apartment.rooms &&  (
@@ -262,11 +269,24 @@ const Room = () => {
                 <div className='btn-char'><img src={energy} alt="energy"/>{lotData.apartment.energy_rating}+++</div>)}
               </div>
               <div className='description pt-2 mb-4'>
-                {lotData.description && (
-                  <div>
-                    <h2>The crib</h2>
-                    <div dangerouslySetInnerHTML={{ __html: lotData.description }} />
-                  </div>)}
+              {description && (
+        <div>
+          <h2>The Crib</h2>
+          {showMore ? (
+            <div>
+              <div dangerouslySetInnerHTML={{ __html: description }} />
+              <div className='showmore' onClick={() => setShowMore(false)}>Read Less</div>
+            </div>
+          ) : (
+            <div>
+              <div dangerouslySetInnerHTML={{ __html: firstTenLines }} />
+              {lines.length > 10 && (
+                <div className='showmore' onClick={() => setShowMore(true)}>Read More</div>
+              )}
+            </div>
+          )}
+        </div>
+      )}
               </div>
               <div className='amenities'>
                 <h2>Amenities</h2>
@@ -314,6 +334,7 @@ const Room = () => {
                  { title: "Vacuum cleaner", icon: vacuum },
                  { title: "Ironing set", icon: ironing },
                  { title: "Cleaning tools", icon: tools },
+                 { title: "Heating" , icon : heater}
                  ].map((char) => (
                  lotData.apartment.options.some((option) => option.title_en === char.title) && (
                  <div className='btn-char' key={char.title}>
@@ -386,7 +407,7 @@ const Room = () => {
                 <div className='map'>
                 {longitude && latitude && (
                 <CribMap coordinates={staticCoordinates} showPopup={false} data={lotData} latitude={latitude}
-                  longitude={longitude} zoom={12}
+                  longitude={longitude} zoom={15}
                  /> )}
                 </div>
               </div>
@@ -405,7 +426,8 @@ const Room = () => {
             <div className='col-widget col-lg-4'>
                 <div className='widget mb-3'>
                 {lotData.rent_status===false ? (
-               <p className='head-widget'><img src={check} alt="Available"/> Available now</p>
+               <p className='head-widget'><img src={check} alt="Available"/>
+                {lotData.availability_date && `Available on ${lotData.availability_date.split('/')[0]}/${lotData.availability_date.split('/')[1]}`}</p>
                  ) : (
                     <p className='head-widgett'><img src={check2} alt="Available"/> Not available</p>
                     )}
@@ -432,6 +454,8 @@ const Room = () => {
                   {lotData.wi_fi !== 0 &&(<p className='status mb-2'><img src={wifi} alt="wifi"/> Wi - Fi</p>)}
                   {lotData.cable_tv !== 0 &&(<p className='status mb-2'><img src={cable} alt="cable tv"/> Cable tv</p>)}
                   {lotData.cleaning !== 0 &&(<p className='status mb-2'><img src={wipe} alt="wipe"/> Cleaning</p>)}
+                  {lotData.building_service_charge !== 0 &&(<p className='status mb-2'><img src={heater} alt="heater"/> Heating</p>)}
+
                   <button className='btn btn-submit mt-3' onClick={()=>{navigate(`/booking-enquiry/${id}`)}}>
 
                   Apply for this room</button>

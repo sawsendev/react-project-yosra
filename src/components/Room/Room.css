@@ -333,6 +333,11 @@
     width: auto;
     height: auto;
 }
+.showmore{
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: underline;
+}
 /****** Responsive ******/
 @media(max-width:1400px) {
     .panel {
