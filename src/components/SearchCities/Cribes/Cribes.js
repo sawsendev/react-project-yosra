@@ -14,7 +14,7 @@ const Cribes = () => {
   const [dataLoaded, setDataLoaded] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
   const API_URL2 = 'http://dev.niceroom.sofis-info.com/api/lots/search';
   const API_URL3 = " http://dev.niceroom.sofis-info.com/api/lots/maps"
@@ -61,8 +61,14 @@ const fetchDataFromAPI = async (page) => {
     }
 
     setDataLoaded(true);
+    
   } catch (error) {
     console.error('Erreur lors de la récupération des données :', error);
+  }
+   
+  if (currentPage === lastPage) {
+    // Mettez à jour loading1 lorsque toutes les données sont chargées
+    setLoading(false);
   }
 };
 
@@ -107,11 +113,17 @@ const fetchDataFromAPI = async (page) => {
           }
   
           setDataLoaded(true);
+          
         }
       } catch (error) {
         console.error('Erreur lors de la récupération des données :', error);
       }
     }
+      
+  if (currentPage === lastPage) {
+    // Mettez à jour loading1 lorsque toutes les données sont chargées
+    setLoading(false);
+  }
   };
   
   useEffect(() => {
@@ -171,6 +183,7 @@ const fetchDataFromAPI = async (page) => {
   const handleScroll = () => {
   if (window.innerHeight + window.scrollY < document.documentElement.offsetHeight && currentPage < lastPage) {
     setCurrentPage(currentPage + 1);
+    setLoading(true);
   }
 };
 
@@ -236,11 +249,18 @@ console.log(cribsData)
    handleGetCoordinates(cityParam);
   }, [cityParam]);
   
-  useEffect(() => {
-    if (currentPage === lastPage)
-    {setLoading(false);}
-  }, [currentPage,lastPage]);
+  // useEffect(() => {
+  //   if (currentPage === lastPage)
+  //   {setLoading(false);}
+  // }, [currentPage,lastPage]);
 
+  const redirect = () => {
+    let redirectTo = '/search-cities';
+    if (cityParam) {
+      redirectTo += `?city=${cityParam}`;
+    }
+    window.location.href=redirectTo ;
+  };
 
   return (
     <div className='Cribes-container container-fluid'>
@@ -284,13 +304,13 @@ console.log(cribsData)
           )
         )
       ) : null}
-      {loading && loading&&(
-    <div className="container">
-    <div className='left d-flex '>
-        <img src={loading1} alt="Loading" style={{width:"100px", height:"100px",  margin: "0 auto"}}/>
+       {loading && (
+        <div className="container">
+          <div className='left d-flex '>
+            <img src={loading1} alt="Loading" style={{ width: "70px", height: "70px", margin: "0 auto" }} />
+          </div>
         </div>
-        </div>
-     ) }
+      )}
     </div>
 
 

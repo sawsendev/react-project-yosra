@@ -35,14 +35,13 @@ const PopupAlert =  (props) => {
   const [country,setCountry]=useState('fr');
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
   const API_URL = 'http://dev.niceroom.sofis-info.com/api/alert_request/post';
-  const handleChangephone=(value)=>{
-    const input = value
-    setPhoneNumber(input)
-   
-   }
-  const handlePhoneCountryChange = (value) => {
-    setCountry(value);
-  };
+  const handlePhone = (value, data) => {
+    setPhoneNumber(value);
+
+    // Mettez à jour le pays en fonction du pays sélectionné dans le composant PhoneInput
+    setCountry(data.countryCode);
+};
+
   
 
 
@@ -100,7 +99,7 @@ const PopupAlert =  (props) => {
         //   draggable: true,
         // });
         
-        displayPopup('Error try again ' + error.message);
+        displayPopup('Error try again ' + error);
         setStatus('error');
 
       });
@@ -196,14 +195,13 @@ const PopupAlert =  (props) => {
                 <div className="form-outline">
                   <label htmlFor="phoneNumber" className='form-label'>Phone number</label>
                   <PhoneInput
-                    country={country}
-                    class="form-control"
-                    value={phoneNumber}
-                    onChange={handleChangephone}
-                    onChangeCountry={handlePhoneCountryChange}
-                    inputProps={{
-                      required: true,
-                    }}/>
+  country={country}
+  value={phoneNumber}
+  onChange={handlePhone}
+  inputProps={{
+    required: true,
+  }}
+/>
                 </div>
               </div>
             </div>

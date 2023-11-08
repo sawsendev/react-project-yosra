@@ -180,6 +180,8 @@ const validateEmail = (email) => {
         console.error('Error making the request:', error.message);
       });
       
+    } else{
+      window.scrollTo(0, 0);
     }
   };
       
@@ -225,13 +227,7 @@ const validateEmail = (email) => {
 
   // ***************
   const[phoneNumber, setPhoneNumber]=useState("")
-  // const[valid, setValid]=useState(true)
 
-  const handleChangephone=(value)=>{
-    const input = value
-    setPhoneNumber(input)
-   
-   }
 
   // const validatePhoneNumber=(phoneNumber)=>{
   //   const phoneNumberPattern= /^\d{10}$/
@@ -267,12 +263,12 @@ const validateEmail = (email) => {
       isValid = false;
     }
   
-    if (!format(moveInDate, 'yyyy-MM-dd').trim()) {
+    if (!moveInDate) {
       errors.moveInDate = 'Move In Date is required';
       isValid = false;
     }
   
-    if (!format(moveOutDate, 'yyyy-MM-dd').trim()) {
+    if (!moveOutDate) {
       errors.moveOutDate = 'Move Out Date is required';
       isValid = false;
     }
@@ -331,16 +327,21 @@ const validateEmail = (email) => {
       console.log(date) // Stockez la date telle quelle
     }
   };
-  const handlePhoneCountryChange = (value) => {
-    setCountry(value);
-  };
+  const handlePhone = (value, data) => {
+    setPhoneNumber(value);
 
+    // Mettez à jour le pays en fonction du pays sélectionné dans le composant PhoneInput
+    setCountry(data.countryCode);
+};
+  console.log(phoneNumber)
+  console.log(country)
   
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
   const mindate_moveout = new Date();
   mindate_moveout.setDate(mindate_moveout.getDate() + 2);
   
+  console.log(country)
   
 
   return (
@@ -452,14 +453,13 @@ const validateEmail = (email) => {
                 <div class="form-outline col-md-6 col-xs-12 mb-4">
                     <label class="form-label mb-1" for="phone">Phone</label>
                     <PhoneInput
-                    country={country}
-                    class="form-control"
-                    value={phoneNumber}
-                    onChange={handleChangephone}
-                    onChangeCountry={handlePhoneCountryChange}
-                    inputProps={{
-                      required: true,
-                    }}/>
+  country={country}
+  value={phoneNumber}
+  onChange={handlePhone}
+  inputProps={{
+    required: true,
+  }}
+/>
                   {/* {!valid && <p>Please enter a valid 10-digit phone number.</p>} */}
                 </div>
               </div>

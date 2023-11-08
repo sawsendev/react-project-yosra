@@ -56,9 +56,15 @@ const CribMap = ({ coordinates, showPopup, data ,latitude,longitude,zoom  }) => 
     <div className='popup_itemcribe'>
       <div className='item-cribe'>
         <div className='Item-badge'>
-          {item.rent_status === false && (
-            <Badge className='notify-badge'>Available now</Badge>
-          )}
+        {item.rent_status ? (
+  <Badge className='notify-badge'>
+    {item.availability_date ? `Avail. on ${item.availability_date.split('/')[0]}/${item.availability_date.split('/')[1]}` : 'Available Now'}
+  </Badge>
+) : (
+  <Badge className='notify-badge'>
+    Available Now
+  </Badge>
+)}
           {item.promo && item.promo === 1 && (
             <img src={promoImage} alt='Promo' className='promo-image' />
           )}
@@ -99,13 +105,31 @@ const CribMap = ({ coordinates, showPopup, data ,latitude,longitude,zoom  }) => 
           </div>
 
           <div className='Rooms-content'>
-            <h3>{item.apartment.title}-{item.title}</h3>
-            <div className='d-flex mb-1'>
-              <img src={locationIcon} alt="location icon" />
-              <p>{item.apartment.building.address}</p>
-            </div>
-            <span className='pricecrib'>{item.loyer_hc + item.charges} € /month</span>
+          <h3>
+            {item.apartment.title}-{item.title}
+          </h3>
+          <div className='d-flex mb-1'>
+            <img src={locationIcon} alt="location icon" />
+            <p>{item.apartment.building.address}</p>
           </div>
+          {item.promo && item.promo === 1 ? (
+            <div >
+              <span className='crib_promo'>
+                <span className='price_loyer'>{item.tarif_promo} €</span> /month
+              </span>
+             
+    <p className='promo'>1st month rent {item.tarif_promo}€ then {item.loyer_hc + item.charges}€ </p>
+           
+            </div>
+          ) : (
+            <span> 
+              <span className='price_loyer'>
+                {item.loyer_hc + item.charges} €
+              </span>{' '}
+              /month
+            </span>
+          )}
+        </div>
         </div>
       </div>
     </div>

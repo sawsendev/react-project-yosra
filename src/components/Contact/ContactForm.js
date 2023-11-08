@@ -17,11 +17,7 @@ const ContactForm = () => {
     const [emailValid, setEmailValid] = useState(true);
     const [country,setCountry]=useState('fr');
     const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
-    const handleChangephone=(value)=>{
-      const input = value
-      setPhoneNumber(input)
-     
-     }
+ 
     
       //popup msg alert
   const [showPopup, setShowPopup] = useState(false);
@@ -37,13 +33,7 @@ const ContactForm = () => {
     setPopupMessage(message);
     setShowPopup(true);
   };
-    // const validatePhoneNumber = (phoneNumber) => {
-    //     const phoneNumberPattern = /^\d{10}$/;
-    //     return phoneNumberPattern.test(phoneNumber);
-    // }
-    const handlePhoneCountryChange = (value) => {
-      setCountry(value);
-    };
+
     const handleFirstNameChange = (event) => {
         setFirstName(event.target.value);
     }
@@ -97,25 +87,22 @@ const ContactForm = () => {
   
             console.log("Requête effectuée avec succès");
     
-            // Réinitialisez les états du formulaire
-            setFirstName('');
-            setLastName('');
-            setEmail('');
-            setPhoneNumber('');
-            setCountry('fr');
-            setMessage('');
-            setEmailValid(true);
-            setValid(true);
+            // // Réinitialisez les états du formulaire
+            // setFirstName('');
+            // setLastName('');
+            // setEmail('');
+            // setPhoneNumber('');
+            // setCountry('fr');
+            // setMessage('');
+            // setEmailValid(true);
+            // setValid(true);
           } else {
             // Gérez les erreurs de la requête si nécessaire
             const errorData = await response.json();
 
-            console.error('Erreur de la requête vers l\'API :', errorData.message);
-    
- 
-            // alert('Erreur de la requête vers l\'API : ' + errorData.message);
+            console.error('Erreur de la requête vers l\'API :', errorData.data.message);
 
-            displayPopup('Erreur de la requête vers l\'API : ' + errorData.message );
+            displayPopup('Erreur de la requête vers l\'API : ' + errorData.data.message );
             setStatus('error');
 
           }
@@ -133,7 +120,14 @@ const ContactForm = () => {
         }
       }
     };
-    
+    const handlePhone = (value, data) => {
+      setPhoneNumber(value);
+
+      // Mettez à jour le pays en fonction du pays sélectionné dans le composant PhoneInput
+      setCountry(data.countryCode);
+  };
+    console.log(phoneNumber)
+    console.log(country)
       
     return (
   
@@ -169,14 +163,14 @@ const ContactForm = () => {
             <div className="form-outline col-lg-6 mb-4">
                   <label className="form-label" for="phone">Phone</label>
                   <PhoneInput
-                  country={country}
-                  class="form-control"
-                  value={phoneNumber}
-                  onChange={handleChangephone}
-                  onChangeCountry={handlePhoneCountryChange}
-                  inputProps={{
-                  required: true,
-                  }}/>
+  country={country}
+  value={phoneNumber}
+  onChange={handlePhone}
+  inputProps={{
+    required: true,
+  }}
+/>
+
                 {/* {!valid && <p>Please enter a valid 10-digit phone number.</p>} */}
             </div>
         </div>

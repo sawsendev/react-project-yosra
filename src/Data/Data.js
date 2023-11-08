@@ -36,11 +36,6 @@ import inVoice from "../assets/invoice.svg"
 // Navigation
 export const NavTable = [
     {
-        id: 0,
-        href: "",
-        name: "HOME"
-    },
-    {
         id: 1,
         href: "i-propose-an-apartment",
         name: "I PROPOSE AN APARTEMENT"

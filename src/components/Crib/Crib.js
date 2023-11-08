@@ -60,11 +60,16 @@ const CribItem = ({ crib }) => {
     <li className='col-lg-4 col-md-6 col-12'>
       <div className='item-cribe'>
         <div className='Item-badge'>
-          {crib.rent_status === false && (
-            <Badge className='notify-badge'>
-              {crib.availability_date && `Avail. on ${crib.availability_date.split('/')[0]}/${crib.availability_date.split('/')[1]}`}
-            </Badge>
-          )}
+        {crib.rent_status ? (
+  <Badge className='notify-badge'>
+    {crib.availability_date ? `Avail. on ${crib.availability_date.split('/')[0]}/${crib.availability_date.split('/')[1]}` : 'Available Now'}
+  </Badge>
+) : (
+  <Badge className='notify-badge'>
+    Available Now
+  </Badge>
+)}
+
           {crib.promo && crib.promo === 1 && (
             <img src={promoImage} alt='Promo' className='promo-image' />
           )}
@@ -157,7 +162,7 @@ const CribItem = ({ crib }) => {
            
             </div>
           ) : (
-            <span>
+            <span> 
               <span className='price_loyer'>
                 {crib.loyer_hc + crib.charges} €
               </span>{' '}

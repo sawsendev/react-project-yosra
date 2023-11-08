@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import "./Room.css"
 import CarrouselImages from "./RoomImages"
 import RoomModalMedia from "./RoomModal/RoomModalMedia"
@@ -23,6 +23,7 @@ import location from '../../assets/room/icons/pin.svg'
 import elevator1 from '../../assets/room/icons/elevator1.svg' 
 import view from '../../assets/room/icons/view.svg'
 import cleaning from '../../assets/room/icons/cleaning.svg'
+import group from '../../assets/room/icons/Group.svg'
 import fkitchen from '../../assets/room/icons/fkitchen.svg'
 import kitchenware from '../../assets/room/icons/kitchenware.svg'
 import dishes from '../../assets/room/icons/dishes.svg'
@@ -50,7 +51,7 @@ import wipe from '../../assets/room/widget/wipe.svg'
 import { PiInfo } from "react-icons/pi";
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import MapWithMarker from '../MapWithMarker/MapWithMarker'
+import MapWithMarker from '../MapWithMarker/MapWithMarker';
 import Crib from '../Crib/Crib'
 import CribMap from '../SearchCities/MapContainer/CribMap'
 
@@ -204,11 +205,22 @@ const Room = () => {
     }
   };
   const [showMore, setShowMore] = useState(false);
+  const [descriptionHeight, setDescriptionHeight] = useState('auto');
+  const descriptionRef = useRef(null);
+  useEffect(() => {
+    if (descriptionRef.current) {
+      const height = descriptionRef.current.clientHeight;
+      if (height > 200) {
+        setDescriptionHeight('170px');
+      } else {
+        setDescriptionHeight('auto');
+      }
+    }
+  }, [lotData.description]);
 
-  const description = lotData.description || '';
-  const lines = description.split('\n');
-  const firstTenLines = lines.slice(0, 10).join('\n');
-  const remainingLines = lines.slice(10).join('\n');
+  const handleShowMoreClick = () => {
+    setShowMore(!showMore);
+  };
     return (
       <>
       {lotData && lotData.apartment && lotData.apartment.title && lotData.title && (
@@ -269,25 +281,21 @@ const Room = () => {
                 <div className='btn-char'><img src={energy} alt="energy"/>{lotData.apartment.energy_rating}+++</div>)}
               </div>
               <div className='description pt-2 mb-4'>
-              {description && (
-        <div>
-          <h2>The Crib</h2>
-          {showMore ? (
-            <div>
-              <div dangerouslySetInnerHTML={{ __html: description }} />
-              <div className='showmore' onClick={() => setShowMore(false)}>Read Less</div>
-            </div>
-          ) : (
-            <div>
-              <div dangerouslySetInnerHTML={{ __html: firstTenLines }} />
-              {lines.length > 10 && (
-                <div className='showmore' onClick={() => setShowMore(true)}>Read More</div>
-              )}
-            </div>
-          )}
-        </div>
-      )}
-              </div>
+        {lotData.description && (
+          <div
+            ref={descriptionRef}
+            style={{ maxHeight: showMore ? 'none' : descriptionHeight, overflow: 'hidden' }}
+          >
+            <h2>The Crib</h2>
+            <div dangerouslySetInnerHTML={{ __html: lotData.description }} />
+          </div>
+        )}
+        {descriptionHeight === '170px' && (
+          <div className='showmore' onClick={handleShowMoreClick}>
+            {showMore ? 'Read Less' : 'Read More'}
+          </div>
+        )}
+      </div>
               <div className='amenities'>
                 <h2>Amenities</h2>
                 <h3>Room</h3>
@@ -425,11 +433,11 @@ const Room = () => {
             </div>
             <div className='col-widget col-lg-4'>
                 <div className='widget mb-3'>
-                {lotData.rent_status===false ? (
+                {lotData.rent_status ? (
                <p className='head-widget'><img src={check} alt="Available"/>
                 {lotData.availability_date && `Available on ${lotData.availability_date.split('/')[0]}/${lotData.availability_date.split('/')[1]}`}</p>
                  ) : (
-                    <p className='head-widgett'><img src={check2} alt="Available"/> Not available</p>
+                  <p className='head-widget'><img src={check} alt="Available"/>Available Now</p>
                     )}
                   <hr/>
                   {/* {lotData.loyer_hc && lotData.charges ? (
@@ -439,6 +447,7 @@ const Room = () => {
                   <small className='mb-2 crib_promo d-flex align-items-baseline'><span class="me-auto">1° month rent</span><span className='price_loyer'>{lotData.tarif_promo} €</span> /month</small>
                   )}
                   <small className="d-flex align-items-baseline"><span class="me-auto">Monthly rent</span><span className='price_loyer'>{lotData.loyer_hc+lotData.charges} €</span> /month</small>
+                  <br/>
                   {lotData.max_benefit ? (
                   <div className='text-center assistance'>
                    CAF assistance <PiInfo className='info' />
@@ -446,15 +455,18 @@ const Room = () => {
                    </div>
                   ) : null}
                   <p className='h4 status mt-3'>Rent is all inclusive</p>
-                  {lotData.water !== 0 &&(<p className='status mb-2'><img src={water} alt="Water"/> Water</p>)}
-                  {electricityAndGas && (
-                  <p className='status mb-2'><img src={plug} alt="plug"/> {electricityAndGas}</p>
+                  {lotData.water !== 0 &&(<p className='status mb-2'><img src={water} alt="Water" className='icon'/> Water</p>)}
+                  {lotData.electricity !==0 && (
+                  <p className='status mb-2'><img src={plug} className='icon' alt="plug"/> Electricity</p>
                   )}
-                  {lotData.home_insurance !== 0 &&(<p className='status mb-2'><img src={insurance} alt="insurance"/> Housing insurance</p>)}
-                  {lotData.wi_fi !== 0 &&(<p className='status mb-2'><img src={wifi} alt="wifi"/> Wi - Fi</p>)}
-                  {lotData.cable_tv !== 0 &&(<p className='status mb-2'><img src={cable} alt="cable tv"/> Cable tv</p>)}
-                  {lotData.cleaning !== 0 &&(<p className='status mb-2'><img src={wipe} alt="wipe"/> Cleaning</p>)}
-                  {lotData.building_service_charge !== 0 &&(<p className='status mb-2'><img src={heater} alt="heater"/> Heating</p>)}
+                   {lotData.gas !==0 && (
+                  <p className='status mb-2'><img src={group} className='icon' alt="plug"/> Gaz</p>
+                  )}
+                  {lotData.home_insurance !== 0 &&(<p className='status mb-2'><img src={insurance} className='icon' alt="insurance"/> Housing insurance</p>)}
+                  {lotData.wi_fi !== 0 &&(<p className='status mb-2'><img src={wifi} className='icon' alt="wifi"/> Wi - Fi</p>)}
+                  {lotData.cable_tv !== 0 &&(<p className='status mb-2'><img src={cable}  className='icon' alt="cable tv"/> Cable tv</p>)}
+                  {lotData.cleaning !== 0 &&(<p className='status mb-2'><img src={wipe} className='icon' alt="wipe"/> Cleaning</p>)}
+                 
 
                   <button className='btn btn-submit mt-3' onClick={()=>{navigate(`/booking-enquiry/${id}`)}}>
 

@@ -79,19 +79,20 @@ const RoomModalMedia = ({ isOpen, closeModal, activeTab, setActiveTab , lotData 
 
                     <div className="tab-content">
                     {activeTab === 'tab1' && (
-                      <div className='tab-panel'>
-                        <ul className='gallery-imgs row m-0'>
-                          {lotData && lotData.media && lotData.media
-                            .filter((media) => media.mime_type.startsWith('image')&& media.collection_name !== 'floorpan')
-                            .map((image, index) => (
-                              <li key={index} className='itm-img col-md-12 p-0'>
-                                <img src={image.original_url} alt={`Room ${index}`} className='img-fluid'/>
-                              </li>
-                            ))
-                          }
-                        </ul>
-                      </div>
-                    )}
+  <div className='tab-panel'>
+    <ul className='gallery-imgs row m-0'>
+      {lotData && lotData.media && lotData.media
+        .filter((media) => media.mime_type.startsWith('image') && media.collection_name !== 'floorpan')
+        .map((image, index) => (
+          <li key={index} className={`itm-img col-md-${index % 3 === 0 ? 12 : 6} p-0`}>
+            <img src={image.original_url} alt={`Room ${index}`} className='img-fluid' />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+)}
+
 
                     {activeTab === 'tab2' && (
                       <div className='tab-panel'>
@@ -99,7 +100,7 @@ const RoomModalMedia = ({ isOpen, closeModal, activeTab, setActiveTab , lotData 
                           {lotData && lotData.media && lotData.media
                             .filter((media) => media.mime_type.startsWith('video'))
                             .map((video, index) => (
-                              <li key={index} className='itm-video col-md-12 p-0'>
+                              <li key={index} className={`itm-img col-md-${index % 3 === 0 ? 12 : 6} p-0`}>
                               <video
                               src={video.original_url}
                               title={`Video ${index}`}

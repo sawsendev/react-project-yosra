@@ -249,14 +249,12 @@ const ProposeModal = ({ isOpen, closeModal }) => {
   };
   const [country, setCountry] = useState('fr');
   const[phoneNumber, setPhoneNumber]=useState("")
-  const handleChangephone=(value)=>{
-    const input = value
-    setPhoneNumber(input)
-   
-   }
-   const handlePhoneCountryChange = (value) => {
-    setCountry(value);
-  };
+  const handlePhone = (value, data) => {
+    setPhoneNumber(value);
+
+    // Mettez à jour le pays en fonction du pays sélectionné dans le composant PhoneInput
+    setCountry(data.countryCode);
+};
 
 
   const tomorrow = new Date();
@@ -301,16 +299,13 @@ const ProposeModal = ({ isOpen, closeModal }) => {
                 <div className='form-group'>
                     <label className='form-label'>Phone number *</label>
                     <PhoneInput
-                    country={country}
-                    class="form-control"
-                    value={phoneNumber}
-                    onChange={handleChangephone}
-                    onCountryChange={handlePhoneCountryChange}
-                    inputProps={{
-                      required: true,
-                    }}
-                   
-                    />
+  country={country}
+  value={phoneNumber}
+  onChange={handlePhone}
+  inputProps={{
+    required: true,
+  }}
+/>
                     
                 {validationErrors.phone && (
                   <div className="validation-error">{validationErrors.phone}</div>
