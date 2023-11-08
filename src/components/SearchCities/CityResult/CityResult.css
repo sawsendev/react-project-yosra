@@ -1,0 +1,46 @@
+.page-container-city {
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+    height: 350px;
+    position: relative;
+    padding-top: 175px;
+  }
+  
+  .content-container-city:after {
+    content: "";
+    position: absolute;
+    left:0;
+    top:0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.6);
+    z-index: 0;
+  } 
+  
+  .content-container-city {
+    padding: 24px 21px;
+    margin: -82px 0;
+    max-width: 843px;
+    height: auto;
+    position: relative;
+  }
+  
+  .content-container-city h1 {
+    font-size: 56px;
+    font-weight: 400;
+    color: black; 
+    position: relative;
+    z-index: 1;
+    margin: 0 0 4px;
+  }
+  
+  .content-container-city p {
+    font-size: 28px;
+    font-weight: 400;
+    color: black;
+    position: relative;
+    z-index: 1;
+    margin: 0;
+  }

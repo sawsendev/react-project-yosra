@@ -84,7 +84,8 @@ const RoomModalMedia = ({ isOpen, closeModal, activeTab, setActiveTab , lotData 
       {lotData && lotData.media && lotData.media
         .filter((media) => media.mime_type.startsWith('image') && media.collection_name !== 'floorpan')
         .map((image, index) => (
-          <li key={index} className={`itm-img col-md-${index % 3 === 0 ? 12 : 6} p-0`}>
+          // <li key={index} className={`itm-img col-md-${index % 3 === 0 ? 12 : 6} p-0`}>
+          <li key={index} className='col-md-12'>
             <img src={image.original_url} alt={`Room ${index}`} className='img-fluid' />
           </li>
         ))
@@ -100,7 +101,8 @@ const RoomModalMedia = ({ isOpen, closeModal, activeTab, setActiveTab , lotData 
                           {lotData && lotData.media && lotData.media
                             .filter((media) => media.mime_type.startsWith('video'))
                             .map((video, index) => (
-                              <li key={index} className={`itm-img col-md-${index % 3 === 0 ? 12 : 6} p-0`}>
+                              // <li key={index} className={`itm-img col-md-${index % 3 === 0 ? 12 : 6} p-0`}>
+                              <li key={index} className='col-md-12'>
                               <video
                               src={video.original_url}
                               title={`Video ${index}`}

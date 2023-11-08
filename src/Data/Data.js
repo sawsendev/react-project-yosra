@@ -156,18 +156,13 @@ export const ExploreCitiesTable = [
         city:"Nice",
         count: 12
     },
-    {
+   {
         id:1,
-        src: Paris,
-        city:"Paris",
-        count: 12
-    }, {
-        id:2,
         src: Florence,
         city:"Florence",
         count: 12
     }, {
-        id:3,
+        id:2,
         src: Bologna,
         city:"Bologna",
         count: 12

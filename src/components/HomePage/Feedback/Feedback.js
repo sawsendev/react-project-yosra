@@ -81,14 +81,14 @@ const Feedback = () => {
           <div
             onClick={onClickPrev}
             onMouseUp={onMouseUp}
-            className={`custom-prev-arrow ${isPrevActive ? '' : 'disabled'}`}
+            className={`custom-prev-arrow`}
           >
            <BsArrowLeft className="arrow-icon" />
           </div>
           <div
             onClick={onClickNext}
             onMouseUp={onMouseUp}
-            className={`custom-next-arrow ${isNextActive ? '' : 'disabled'}`}
+            className={`custom-next-arrow `}
           >
            <BsArrowRight className="arrow-icon" />
           </div>

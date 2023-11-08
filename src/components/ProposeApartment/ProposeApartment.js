@@ -54,7 +54,7 @@ const ProposeApartment =()=> {
           <h1>Rent your apartment to Finecribs</h1>
           <p>Finecribs provides landlords with secured rental income</p>
         </div>
-      </div>
+      </div> 
     </div>
 
     <section className='landlords pt-lg-5 pt-4 pb-4'>

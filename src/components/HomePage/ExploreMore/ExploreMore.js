@@ -54,7 +54,7 @@ const ExploreMore = () => {
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 1200 },
-      items: 4
+      items: 3
     },
     desktop: {
       breakpoint: { max: 1200, min: 992 },
@@ -62,11 +62,11 @@ const ExploreMore = () => {
     },
     tablet: {
       breakpoint: { max: 992, min: 576 },
-      items: 2.5
+      items: 2
     },
     mobile: {
       breakpoint: { max: 576, min: 0 },
-      items: 1.8
+      items: 1
     }
   };
  
@@ -102,16 +102,14 @@ const ExploreMore = () => {
 
   const onClickPrev = () => {
     if (carouselRef.current) {
-      setIsPrevActive(true); // active le bouton "Prev" lorsqu'il est cliqué
-      setIsNextActive(false); // désactive le bouton "Next"
+     
       carouselRef.current.previous();
     }
   };
 
   const onClickNext = () => {
     if (carouselRef.current) {
-      setIsPrevActive(false); // désactive le bouton "Prev"
-      setIsNextActive(true); // active le bouton "Next" lorsqu'il est cliqué
+      
       carouselRef.current.next();
     }
   };
@@ -138,14 +136,14 @@ const ExploreMore = () => {
           <div
             onClick={onClickPrev}
             onMouseUp={onMouseUp}
-            className={`custom-prev-arrow ${isPrevActive ? '' : 'disabled'}`}
+            className={`custom-prev-arrow `}
           >
             <BsArrowLeft className="arrow-icon" />
           </div>
           <div
             onClick={onClickNext}
             onMouseUp={onMouseUp}
-            className={`custom-next-arrow ${isNextActive ? '' : 'disabled'}`}
+            className={`custom-next-arrow`}
           >
             <BsArrowRight className="arrow-icon"/>
           </div>
