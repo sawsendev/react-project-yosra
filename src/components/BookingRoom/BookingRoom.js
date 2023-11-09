@@ -348,7 +348,16 @@ const validateEmail = (email) => {
     <>
    
     {lotData && lotData.apartment && lotData.apartment.title && lotData.title && (
-  <Breadcrumbs path={`/Booking enquiry/${lotData.apartment.title} - ${lotData.title}`}/>)}
+ <Breadcrumbs
+ path={`/`}
+ customRoutes={[
+   {
+     path: `/room/${lotData.id}`,
+     label: `${lotData.apartment.title} - ${lotData.title}`
+   }
+ ]}
+ lotData={lotData}
+/>)}
    <div className='container'>
     <div className="Booking-title mt-4 mb-5">
     {lotData && lotData.apartment && lotData.apartment.title && lotData.title && (
@@ -356,7 +365,7 @@ const validateEmail = (email) => {
                 )}
       <span>Private room in Nice</span>
     </div>
-
+ 
     {/* Contenu du formulaire */}
     {!formSubmitted ? (
       <div className='row'>

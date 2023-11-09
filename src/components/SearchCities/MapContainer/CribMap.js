@@ -1,6 +1,7 @@
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import LazyLoad from 'react-lazyload';
+import 'leaflet/dist/leaflet.css'
 import { Link } from 'react-router-dom';
 import { Carousel } from 'react-responsive-carousel';
 import locationIcon from '../../../assets/pin 2.svg';

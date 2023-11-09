@@ -42,7 +42,53 @@
   border-width: 8px 7px 0 7px;
   border-color: #000 transparent transparent transparent;
 }
-
+.marker-label {
+  background: #000;
+  display: block;
+  width: 44px;
+  height: 45px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 24px;
+  text-align: center;
+  color: #fff;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
+}
+.marker-label:before {
+  content: "";
+  position: absolute;
+  width: calc(100% + 12px);
+  height: calc(100% + 12px);
+  border: 2px solid #000;
+  left: -6px;
+  top: -6px;
+  border-radius: 50%;
+}
+.marker-label:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  margin-left: -6px;
+  bottom: -13px;
+  width: 5px;
+  height: 5px;
+  border-style: solid;
+  border-width: 8px 7px 0px 7px;
+  border-color: #000 transparent transparent transparent;
+  z-index: 1;
+}
+div.leaflet-marker-icon .custom-icon .leaflet-zoom-animated .leaflet-interactive:before{
+  display: none !important;
+}
+div.leaflet-marker-icon .custom-icon .leaflet-zoom-animated .leaflet-interactive{
+  display: none !important;
+}
 .popup_itemcribe {
   margin: 0;
   padding: 0;
@@ -113,12 +159,4 @@
   right: 24px;
 }
 
-/* Vous pouvez ajouter d'autres styles personnalisés selon vos besoins */
 
-.attribution-element {
-  display: none;
-}
-.leaflet-control-attribution {
-  display:none;
-
-}

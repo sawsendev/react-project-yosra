@@ -99,7 +99,7 @@ input[type="date"]:valid::before { display: none }
   padding: 8px 10px!important;
   height: 40px;
   color: #000;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 400;border-radius: 6px;
   border: 1px solid #DDD;
   background: transparent;

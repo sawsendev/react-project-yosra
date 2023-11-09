@@ -40,7 +40,6 @@ import block from '../../assets/room/icons/block.svg'
 import woman from '../../assets/room/icons/woman.svg'
 import man from '../../assets/room/icons/man.svg'
 import check from '../../assets/room/widget/check.svg'
-import check2 from '../../assets/room/widget/check2.svg'
 import water from '../../assets/room/widget/water.svg'
 import plug from '../../assets/room/widget/plug.svg'
 import insurance from '../../assets/room/widget/insurance.svg'
@@ -51,7 +50,7 @@ import wipe from '../../assets/room/widget/wipe.svg'
 import { PiInfo } from "react-icons/pi";
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import MapWithMarker from '../MapWithMarker/MapWithMarker';
+
 import Crib from '../Crib/Crib'
 import CribMap from '../SearchCities/MapContainer/CribMap'
 
@@ -182,17 +181,7 @@ const Room = () => {
   const closeModal = () => {
     setModalIsOpen(false);
   };  
-  const showElectricity = lotData.electricity !== 0;
-  const showGas = lotData.gas !== 0;
-  let electricityAndGas = '';
-
-  if (showElectricity && showGas) {
-    electricityAndGas = 'Electricity, Gas';
-  } else if (showElectricity) {
-    electricityAndGas = 'Electricity';
-  } else if (showGas) {
-    electricityAndGas = 'Gas';
-  }
+  
   const getFloorSuffix = (floorNumber) => {
     if (floorNumber === 1) {
       return "st";

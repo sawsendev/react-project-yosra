@@ -200,6 +200,14 @@
     border-color: #000 transparent transparent transparent;
     z-index: 1;
 }
+/* cribmap.css */
+div.leaflet-container .leaflet-attribution-flag {
+    display: none !important; /* Pour masquer l'attribution */
+  }
+  
+  div.leaflet-touch .leaflet-control-attribution{
+   display: none !important;
+  }
 .Cribes-container .Maps {
     position: relative;
 }

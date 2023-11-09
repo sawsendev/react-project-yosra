@@ -3,9 +3,9 @@ import { Link, useLocation } from 'react-router-dom';
 import './Breadcrumbs.css';
 import { VscHome, VscChevronRight } from 'react-icons/vsc';
 
-function Breadcrumbs({ path }) {
+function Breadcrumbs({ path, customRoutes = [], lotData }) {
   const location = useLocation();
-  const currentPath = path || location.pathname; // Utilisez le chemin spécifié s'il est fourni, sinon, utilisez le chemin de l'URL actuelle
+  const currentPath = path || location.pathname;
 
   const homeCrumb = (
     <div className="crumb" key="home">
@@ -26,6 +26,20 @@ function Breadcrumbs({ path }) {
         <div className="crumb">
           <Link to={currentPath} className="breadcrumb-link">
             {segment}
+          </Link>
+        </div>
+      </React.Fragment>
+    );
+  });
+
+  // Add custom routes dynamically
+  customRoutes.forEach((route, index) => {
+    breadcrumbElements.push(
+      <React.Fragment key={`customRoute${index}`}>
+        <VscChevronRight className="crumb-separator" />
+        <div className="crumb">
+          <Link to={route.path} className="breadcrumb-link">
+            {route.label}
           </Link>
         </div>
       </React.Fragment>
