@@ -50,7 +50,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
   const [validationErrors, setValidationErrors] = useState({});
 
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-  const phoneRegex = /^[\d-]{6,20}$/;
+
 
   const requiredFieldsByStep = {
     1: ['email', 'phone', 'quality'],
@@ -59,14 +59,56 @@ const ProposeModal = ({ isOpen, closeModal }) => {
     4: ['message'],
   };
   const [selectedFiles, setSelectedFiles] = useState([]);
+  const [country, setCountry] = useState('fr');
+  const[phoneNumber, setPhoneNumber]=useState("")
+ 
+  const [phoneNumberWithoutCode, setPhoneNumberWithoutCode] = useState('');
+  const[code,setCode]=useState()
+  const handlePhone = (value, data) => {
+    setPhoneNumber(value);
+    setCountry(data.countryCode);
+  
+    // Extraire le code de composition du numéro
+    
+    setCode(data.dialCode);
+  
+    // Vérifier si le numéro commence par le code de composition
+    if (value.startsWith(`+${code}`)) {
+      // Utiliser substring pour obtenir la partie après le code de composition
+      const phoneNumberWithoutCode = value.substring(`+${code}`.length).trim();
+      setPhoneNumberWithoutCode(phoneNumberWithoutCode);
+  
+      console.log('Code de composition:', code);
+      console.log('Numéro sans le code de pays:', phoneNumberWithoutCode);
+    } else if (value.startsWith(code)) {
+      // Utiliser substring pour obtenir la partie après le code de composition
+      const phoneNumberWithoutCode = value.substring(code.length).trim();
+      setPhoneNumberWithoutCode(phoneNumberWithoutCode);
+  
+      console.log('Code de composition:', code);
+      console.log('Numéro sans le code de pays:', phoneNumberWithoutCode);
+    } else {
+      // Le numéro ne commence ni par le code de composition ni par le code seul
+      setPhoneNumberWithoutCode(value.trim());
+  
+      console.log('Numéro sans le code de pays:', value.trim());
+    }
+  };
+  
+  
+  
+  
+  
+  
 
   const submitFormData = () => {
+    console.log(phoneNumberWithoutCode);
     const formDataToSend = new FormData();
     formDataToSend.append('first_name', formData.firstName);
     formDataToSend.append('last_name', formData.lastName);
     formDataToSend.append('email', formData.email);
     formDataToSend.append('city', formData.location);
-    formDataToSend.append('phone_number', phoneNumber);
+    formDataToSend.append('phone_number', phoneNumberWithoutCode);
     formDataToSend.append('phone_country_name', country);
     formDataToSend.append('surface', formData.surface);
     formDataToSend.append('are_you', formData.quality);
@@ -76,7 +118,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
       formDataToSend.append(`medias[${index}]`, file);
     });
     formDataToSend.append('other_informations', formData.message);
-  
+   
     fetch('http://dev.niceroom.sofis-info.com/api/apartment_request/post', {
       method: 'POST',
       headers: {
@@ -107,10 +149,10 @@ const ProposeModal = ({ isOpen, closeModal }) => {
       .then(() => {
         setStep(1);
         closeModal();
-        toast.success('Form successfully submitted!', {
-          position: toast.POSITION.TOP_CENTER,
-          autoClose: 5000,
-        });
+        // toast.success('Form successfully submitted!', {
+        //   position: toast.POSITION.TOP_CENTER,
+        //   autoClose: 5000,
+        // });
         displayPopup('Form successfully submitted!', {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 5000,
@@ -125,10 +167,10 @@ const ProposeModal = ({ isOpen, closeModal }) => {
             const errorMessage = JSON.parse(error.message);
             if (errorMessage.data && errorMessage.data.message) {
               const message = errorMessage.data.message;
-              toast.error(message, {
-                position: toast.POSITION.TOP_CENTER,
-                autoClose: 5000,
-              });
+              // toast.error(message, {
+              //   position: toast.POSITION.TOP_CENTER,
+              //   autoClose: 5000,
+              // });
               displayPopup(message, {
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 5000,
@@ -139,10 +181,10 @@ const ProposeModal = ({ isOpen, closeModal }) => {
             console.error('Erreur d\'analyse JSON :', parseError);
           }
         } else {
-          toast.error('Error, please try again', {
-            position: toast.POSITION.TOP_CENTER,
-            autoClose: 5000,
-          });
+          // toast.error('Error, please try again', {
+          //   position: toast.POSITION.TOP_CENTER,
+          //   autoClose: 5000,
+          // });
           displayPopup('Error, please try again', {
             position: toast.POSITION.TOP_CENTER,
             autoClose: 5000,
@@ -195,6 +237,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
           address: '',
           surface: '',
           message: '',
+          medias:''
         });
         setPhoneNumber('');
         setDate('');
@@ -247,15 +290,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
       setDate(date); // Stockez la date telle quelle
     }
   };
-  const [country, setCountry] = useState('fr');
-  const[phoneNumber, setPhoneNumber]=useState("")
-  const handlePhone = (value, data) => {
-    setPhoneNumber(value);
-
-    // Mettez à jour le pays en fonction du pays sélectionné dans le composant PhoneInput
-    setCountry(data.countryCode);
-};
-
+  
 
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
@@ -305,6 +340,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
   inputProps={{
     required: true,
   }}
+
 />
                     
                 {validationErrors.phone && (

@@ -35,20 +35,44 @@ const PopupAlert =  (props) => {
   const [country,setCountry]=useState('fr');
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
   const API_URL = 'http://dev.niceroom.sofis-info.com/api/alert_request/post';
+  const [phoneNumberWithoutCode, setPhoneNumberWithoutCode] = useState('');
+  const[code,setCode]=useState()
   const handlePhone = (value, data) => {
     setPhoneNumber(value);
-
-    // Mettez à jour le pays en fonction du pays sélectionné dans le composant PhoneInput
     setCountry(data.countryCode);
-};
-
+  
+    // Extraire le code de composition du numéro
+    
+    setCode(data.dialCode);
+  
+    // Vérifier si le numéro commence par le code de composition
+    if (value.startsWith(`+${code}`)) {
+      // Utiliser substring pour obtenir la partie après le code de composition
+      const phoneNumberWithoutCode = value.substring(`+${code}`.length).trim();
+      setPhoneNumberWithoutCode(phoneNumberWithoutCode);
+  
+      console.log('Code de composition:', code);
+      console.log('Numéro sans le code de pays:', phoneNumberWithoutCode);
+    } else if (value.startsWith(code)) {
+      // Utiliser substring pour obtenir la partie après le code de composition
+      const phoneNumberWithoutCode = value.substring(code.length).trim();
+      setPhoneNumberWithoutCode(phoneNumberWithoutCode);
+  
+      console.log('Code de composition:', code);
+      console.log('Numéro sans le code de pays:', phoneNumberWithoutCode);
+    } else {
+      // Le numéro ne commence ni par le code de composition ni par le code seul
+      setPhoneNumberWithoutCode(value.trim());
+  
+      console.log('Numéro sans le code de pays:', value.trim());
+    }
+  };
+  
   
 
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-  
-    // Créer un objet contenant les données du formulaire
     const formData = {
       first_name: firstName,
       last_name: lastName,
@@ -56,7 +80,7 @@ const PopupAlert =  (props) => {
       city: city,
       date: moveInDate,
       max_budget: parseInt(maxBudget),
-      phone_number: phoneNumber,
+      phone_number: phoneNumberWithoutCode,
       phone_country_name: country
     };
   
@@ -70,14 +94,14 @@ const PopupAlert =  (props) => {
     })
       .then((response) => {
         if (response.ok) {
-          return response.json(); // Vous pouvez gérer la réponse du serveur ici
+          return response.json();
         } else if (response.status === 422) {
           return response.json().then((errorData) => {
-            throw new Error(errorData.message); // Gérer le message d'erreur précis
+            throw new Error(errorData.message); 
           });
           
         } else {
-          throw new Error('Error, please try again'); // Gérer d'autres erreurs de réponse
+          throw new Error('Error, please try again');
         }
         
       })

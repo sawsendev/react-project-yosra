@@ -210,6 +210,14 @@ const Room = () => {
   const handleShowMoreClick = () => {
     setShowMore(!showMore);
   };
+  const dateAujourdhui = new Date();
+  const dateDemain = new Date(dateAujourdhui);
+  dateDemain.setDate(dateAujourdhui.getDate() + 1);
+  
+  const formattedDateAujourdhui = `${(dateAujourdhui.getDate() < 10 ? '0' : '')}${dateAujourdhui.getDate()}/${(dateAujourdhui.getMonth() < 9 ? '0' : '')}${dateAujourdhui.getMonth() + 1}/${dateAujourdhui.getFullYear()}`;
+  
+  const formattedDateDemain = `${(dateDemain.getDate() < 10 ? '0' : '')}${dateDemain.getDate()}/${(dateDemain.getMonth() < 9 ? '0' : '')}${dateDemain.getMonth() + 1}/${dateDemain.getFullYear()}`;
+  
     return (
       <>
       {lotData && lotData.apartment && lotData.apartment.title && lotData.title && (
@@ -422,12 +430,16 @@ const Room = () => {
             </div>
             <div className='col-widget col-lg-4'>
                 <div className='widget mb-3'>
-                {lotData.rent_status ? (
-               <p className='head-widget'><img src={check} alt="Available"/>
-                {lotData.availability_date && `Available on ${lotData.availability_date.split('/')[0]}/${lotData.availability_date.split('/')[1]}`}</p>
-                 ) : (
-                  <p className='head-widget'><img src={check} alt="Available"/>Available Now</p>
-                    )}
+              
+                <p className='head-widget'>
+  <img src={check} alt="Available"/>
+  {(lotData && lotData.availability_date && (lotData.availability_date === formattedDateAujourdhui || lotData.availability_date === formattedDateDemain)) ? 
+    'Available Now' : 
+    `Avail. on ${(lotData.availability_date && lotData.availability_date.split('/').length > 1) ? lotData.availability_date.split('/')[0] : ''}/${(lotData.availability_date && lotData.availability_date.split('/').length > 1) ? lotData.availability_date.split('/')[1] : ''}`
+  }
+</p>
+
+              
                   <hr/>
                   {/* {lotData.loyer_hc && lotData.charges ? (
                   <p className='text-center price'>{lotData.loyer_hc+lotData.charges} € /<small>month</small></p>

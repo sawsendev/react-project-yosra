@@ -109,7 +109,7 @@ const validateEmail = (email) => {
       formDataToSend.append('email', email);
       formDataToSend.append('start_date', format(moveInDate, 'dd-MM-yyyy'));
       formDataToSend.append('end_date', format(moveOutDate, 'dd-MM-yyyy'));
-      formDataToSend.append('phone_number', phoneNumber);
+      formDataToSend.append('phone_number', phoneNumberWithoutCode);
       formDataToSend.append('phone_country_name', country);
   
       if (mainFile) {
@@ -327,14 +327,39 @@ const validateEmail = (email) => {
       console.log(date) // Stockez la date telle quelle
     }
   };
+  const [phoneNumberWithoutCode, setPhoneNumberWithoutCode] = useState('');
+  const[code,setCode]=useState()
   const handlePhone = (value, data) => {
     setPhoneNumber(value);
-
-    // Mettez à jour le pays en fonction du pays sélectionné dans le composant PhoneInput
     setCountry(data.countryCode);
-};
-  console.log(phoneNumber)
-  console.log(country)
+  
+    // Extraire le code de composition du numéro
+    
+    setCode(data.dialCode);
+  
+    // Vérifier si le numéro commence par le code de composition
+    if (value.startsWith(`+${code}`)) {
+      // Utiliser substring pour obtenir la partie après le code de composition
+      const phoneNumberWithoutCode = value.substring(`+${code}`.length).trim();
+      setPhoneNumberWithoutCode(phoneNumberWithoutCode);
+  
+      console.log('Code de composition:', code);
+      console.log('Numéro sans le code de pays:', phoneNumberWithoutCode);
+    } else if (value.startsWith(code)) {
+      // Utiliser substring pour obtenir la partie après le code de composition
+      const phoneNumberWithoutCode = value.substring(code.length).trim();
+      setPhoneNumberWithoutCode(phoneNumberWithoutCode);
+  
+      console.log('Code de composition:', code);
+      console.log('Numéro sans le code de pays:', phoneNumberWithoutCode);
+    } else {
+      // Le numéro ne commence ni par le code de composition ni par le code seul
+      setPhoneNumberWithoutCode(value.trim());
+  
+      console.log('Numéro sans le code de pays:', value.trim());
+    }
+  };
+  
   
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);

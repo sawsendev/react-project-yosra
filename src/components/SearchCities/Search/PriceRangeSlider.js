@@ -30,7 +30,7 @@ const PriceRangeSlider = () => {
         <span>{value[0]}€</span>
         <span>{value[1]}€</span>
       </div>
-    </div>
+    </div> 
   );
 };
 

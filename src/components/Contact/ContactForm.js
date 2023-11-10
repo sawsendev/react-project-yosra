@@ -63,7 +63,7 @@ const ContactForm = () => {
         const data = {
           name: firstName + " " + lastName,
           email: email,
-          phone: phoneNumber,
+          phone: phoneNumberWithoutCode,
           phone_country_name: country,
           message: message,
           objet: "contact : " + firstName + " " + lastName
@@ -75,7 +75,7 @@ const ContactForm = () => {
             mode: 'cors',
             headers: {
               'Content-Type': 'application/json',
-              'apiKey': API_KEY, // Assurez-vous que votre clé API est correctement définie
+              'apiKey': API_KEY, 
             },
             body: JSON.stringify(data),
           });
@@ -120,14 +120,39 @@ const ContactForm = () => {
         }
       }
     };
+    const [phoneNumberWithoutCode, setPhoneNumberWithoutCode] = useState('');
+    const[code,setCode]=useState()
     const handlePhone = (value, data) => {
       setPhoneNumber(value);
-
-      // Mettez à jour le pays en fonction du pays sélectionné dans le composant PhoneInput
       setCountry(data.countryCode);
-  };
-    console.log(phoneNumber)
-    console.log(country)
+    
+      // Extraire le code de composition du numéro
+      
+      setCode(data.dialCode);
+    
+      // Vérifier si le numéro commence par le code de composition
+      if (value.startsWith(`+${code}`)) {
+        // Utiliser substring pour obtenir la partie après le code de composition
+        const phoneNumberWithoutCode = value.substring(`+${code}`.length).trim();
+        setPhoneNumberWithoutCode(phoneNumberWithoutCode);
+    
+        console.log('Code de composition:', code);
+        console.log('Numéro sans le code de pays:', phoneNumberWithoutCode);
+      } else if (value.startsWith(code)) {
+        // Utiliser substring pour obtenir la partie après le code de composition
+        const phoneNumberWithoutCode = value.substring(code.length).trim();
+        setPhoneNumberWithoutCode(phoneNumberWithoutCode);
+    
+        console.log('Code de composition:', code);
+        console.log('Numéro sans le code de pays:', phoneNumberWithoutCode);
+      } else {
+        // Le numéro ne commence ni par le code de composition ni par le code seul
+        setPhoneNumberWithoutCode(value.trim());
+    
+        console.log('Numéro sans le code de pays:', value.trim());
+      }
+    };
+    
       
     return (
   

@@ -17,7 +17,7 @@ import { parse } from 'date-fns';
 
 const Search = () => {
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
-  const API_URL = `http://dev.niceroom.sofis-info.com/api/lots/list`;
+  const API_URL = `http://dev.niceroom.sofis-info.com/api/lot/maxprice`;
   const[lotData,setLotData]=useState([]);
   const [selectedCountry, setSelectedCountry] = useState("");
  
@@ -27,9 +27,29 @@ const Search = () => {
   const location = useLocation();
   const [isSliderOpen,setIsSliderOpen]=useState(false)
   const[city,setCity]=useState("")
+  const [isSliderVisible, setIsSliderVisible] = useState(false);
 
- 
+  const handleSliderOpen = () => {
+    setIsSliderVisible(true);
+  };
+  
+  const handleSliderClose = () => {
+    if (isSliderVisible) {
+      setIsSliderVisible(false);
+    } else {
+      setIsSliderOpen(false);
+    }
+  };
+  
   const navigate=useNavigate()
+  // const handleSliderOpen = () => {
+  //   setIsSliderOpen(true);
+  // };
+  
+  // const handleSliderClose = () => {
+  //   setIsSliderOpen(false);
+  // };
+
 
   const customStyles = {
     control: (provided) => ({
@@ -62,7 +82,6 @@ const Search = () => {
         className='form-control' 
         placeholder='Move in date'
         value={value}
-       
         required
         readOnly
         onChange={onChange}
@@ -88,7 +107,9 @@ const Search = () => {
         }
 
         const data = await response.json();
-        setLotData(data.data.lots);
+        setLotData(data.data.lot);
+        console.log(data.data.lot);
+        
        
       } catch (error) {
         console.error('Erreur lors de la récupération des données :', error);
@@ -97,30 +118,18 @@ const Search = () => {
 
     fetchData();
   }, [API_URL, API_KEY]);
-  const [min,setMin]=useState(1)
-  const[max,setMax]=useState(1000)
-  
+ 
+  const[max,setMax]=useState(0)
   useEffect(() => {
-    if (lotData.length > 0) {
-      let minLoyerHC = lotData[0].loyer_hc;
-      let maxLoyerHC = lotData[0].loyer_hc;
-
-      for (let i = 1; i < lotData.length; i++) {
-        const currentLoyerHC = lotData[i].loyer_hc;
-        if (currentLoyerHC < minLoyerHC) {
-          minLoyerHC = currentLoyerHC;
-        }
-        if (currentLoyerHC > maxLoyerHC) {
-          maxLoyerHC = currentLoyerHC;
-        }
-      }
-
-      setMin(minLoyerHC);
-      setMax(maxLoyerHC);
-    }
+    // Calculer max après la récupération des données
+    const loyerHc = lotData && lotData.loyer_hc ? parseInt(lotData.loyer_hc, 10) : 0;
+    const charges = lotData && lotData.charges ? parseInt(lotData.charges, 10) : 0;
+    setMax (loyerHc + charges);
+  
+    // Mettre à jour priceRange avec la nouvelle valeur de max
+    setPriceRange([0, max]);
   }, [lotData]);
-  const [priceRange, setPriceRange] = useState([min, max]);
-
+  const [priceRange, setPriceRange] = useState([0, 1000]);
   
   useEffect(() => {
     // Parsez les paramètres de l'URL ici
@@ -142,6 +151,10 @@ const Search = () => {
  // Mise à jour de l'état priceRange si priceMinParam et priceMaxParam existent
     if (priceMinParam && priceMaxParam) {
       setPriceRange([parseInt(priceMinParam), parseInt(priceMaxParam)]);
+    }
+    if (priceMaxParam) {
+      const parsedMax = parseInt(priceMaxParam);
+      setPriceRange([0, parsedMax]);
     }
   }, [location.search]);
   const handlePriceRangeChange = (newValue) => {
@@ -186,7 +199,9 @@ const Search = () => {
 
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
-
+  console.log('Valeur de priceRange[0] :', priceRange[0]);
+  console.log('Valeur de priceRange[1] :', priceRange[1]);
+  
   return (
     <div className='Search-container'>
       <div className="container">
@@ -228,25 +243,25 @@ const Search = () => {
               
               <div className='select-wrapper'>
                 <div className='select-container'>
-                  <Select
-                    styles={customStyles}
-                    onMenuOpen={() => {setIsMenuOpen(true)
-                     setIsSliderOpen(true)}}
-                    onMenuClose={() =>{setIsMenuOpen(false)
-                    setIsSliderOpen(false)}}
-                    options={[]}
-                    onChange={() => {}}
-                    menuIsOpen={isMenuOpen}
-                    value={selectValue}
-                    isSearchable={false}
-                    placeholder="Select a price range" />
+                <Select
+  styles={customStyles}
+  onMenuOpen={handleSliderOpen}
+  onMenuClose={handleSliderClose}
+  options={[]}
+  onChange={() => {}}
+  menuIsOpen={isMenuOpen}
+  value={selectValue}
+  isSearchable={false}
+  placeholder="Select a price range"
+  setIsSliderVisible={setIsSliderVisible}
+/>
                 </div>
-                 { isSliderOpen===true &&  
+                 { isSliderVisible  &&  
                   <div className='slider-container container'>
                     <div className='price'>
                       <h5>Price per month</h5>
                       <Slider
-                        min={min} 
+                        min={0} 
                         max={max}
                         value={priceRange}
                         onChange={handlePriceRangeChange}

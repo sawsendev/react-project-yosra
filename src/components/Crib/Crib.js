@@ -54,21 +54,22 @@ const CribItem = ({ crib }) => {
   const handleMouseEnter = (show) => {
     setShowArrows(show);
   };
-  
-  
+  const dateAujourdhui = new Date();
+const dateDemain = new Date(dateAujourdhui);
+dateDemain.setDate(dateAujourdhui.getDate() + 1);
+
+const formattedDateAujourdhui = `${(dateAujourdhui.getDate() < 10 ? '0' : '')}${dateAujourdhui.getDate()}/${(dateAujourdhui.getMonth() < 9 ? '0' : '')}${dateAujourdhui.getMonth() + 1}/${dateAujourdhui.getFullYear()}`;
+
+const formattedDateDemain = `${(dateDemain.getDate() < 10 ? '0' : '')}${dateDemain.getDate()}/${(dateDemain.getMonth() < 9 ? '0' : '')}${dateDemain.getMonth() + 1}/${dateDemain.getFullYear()}`;
+
+   
   return (
     <li className='col-lg-4 col-md-6 col-12'>
       <div className='item-cribe'>
         <div className='Item-badge'>
-        {crib.rent_status ? (
-  <Badge className='notify-badge'>
-    {crib.availability_date ? `Avail. on ${crib.availability_date.split('/')[0]}/${crib.availability_date.split('/')[1]}` : 'Available Now'}
+        <Badge className='notify-badge'>
+    {(crib.availability_date===formattedDateAujourdhui||crib.availability_date===formattedDateDemain) ? 'Available Now' : `Avail. on ${crib.availability_date.split('/')[0]}/${crib.availability_date.split('/')[1]}`}
   </Badge>
-) : (
-  <Badge className='notify-badge'>
-    Available Now
-  </Badge>
-)}
 
           {crib.promo && crib.promo === 1 && (
             <img src={promoImage} alt='Promo' className='promo-image' />
