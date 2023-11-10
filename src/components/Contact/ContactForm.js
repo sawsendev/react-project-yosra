@@ -102,7 +102,7 @@ const ContactForm = () => {
 
             console.error('Erreur de la requête vers l\'API :', errorData.data.message);
 
-            displayPopup('Erreur de la requête vers l\'API : ' + errorData.data.message );
+            displayPopup( errorData.data.message );
             setStatus('error');
 
           }
