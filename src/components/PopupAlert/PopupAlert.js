@@ -92,43 +92,26 @@ const PopupAlert =  (props) => {
       },
       body: JSON.stringify(formData),
     })
-      .then((response) => {
+      .then(async (response) => {
         if (response.ok) {
           return response.json();
-        } else if (response.status === 422) {
-          return response.json().then((errorData) => {
-            throw new Error(errorData.message); 
-          });
-          
         } else {
-          throw new Error('Error, please try again');
+          const errorData = await response.json();
+          throw new Error(errorData.data.message);
         }
-        
       })
       .then((data) => {
         setIsSubmitted(true);
-        
         displayPopup('Thank you for your message! We will get in touch soon.');
         setStatus('success');
-
       })
       .catch((error) => {
-        console.error('Erreur lors de la soumission du formulaire:', error);
-        // toast.error('Error try again ' + error.message, {
-        //   position: "top-right",
-        //   autoClose: 3000,
-        //   hideProgressBar: false,
-        //   closeOnClick: true,
-        //   pauseOnHover: true,
-        //   draggable: true,
-        // });
-        
-        displayPopup('Error try again ' + error);
+        console.error('Error submitting the form:', error);
+        displayPopup('Error, please try again: ' + error.message);
         setStatus('error');
-
       });
-      
   };
+  
   
   
   useEffect(() => {

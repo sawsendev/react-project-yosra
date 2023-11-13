@@ -97,7 +97,7 @@ const validateEmail = (email) => {
     console.log(date)
   };
   
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
   
     if (validateForm()) {
@@ -109,8 +109,10 @@ const validateEmail = (email) => {
       formDataToSend.append('email', email);
       formDataToSend.append('start_date', format(moveInDate, 'dd-MM-yyyy'));
       formDataToSend.append('end_date', format(moveOutDate, 'dd-MM-yyyy'));
-      formDataToSend.append('phone_number', phoneNumberWithoutCode);
-      formDataToSend.append('phone_country_name', country);
+      if (phoneNumberWithoutCode) {
+        formDataToSend.append('phone_number', phoneNumberWithoutCode);
+        formDataToSend.append('phone_country_name', country);
+      }
   
       if (mainFile) {
         formDataToSend.append('identity', mainFile);
@@ -128,63 +130,63 @@ const validateEmail = (email) => {
         formDataToSend.append('professional_tax_declaration', newFile);
       }
   
-      fetch('http://dev.niceroom.sofis-info.com/api/rentatl_request/post', {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          'apiKey': API_KEY,
-        },
-        body: formDataToSend,
-      })
-      .then((response) => {
+      try {
+        const response = await fetch('http://dev.niceroom.sofis-info.com/api/rentatl_request/post', {
+          method: 'POST',
+          mode: 'cors',
+          headers: {
+            'apiKey': API_KEY,
+          },
+          body: formDataToSend,
+        });
+  
         if (response.ok) {
           setFormSubmitted(true);
           console.log("Request successfully sent. API Response:", response);
+  
         } else {
           if (response.status === 422) {
-            response.json()
-              .then((errorData) => {
-                if (errorData.errors) {
-                  // Si des erreurs spécifiques sont renvoyées par l'API, affichez-les
-                  Object.values(errorData.errors).forEach((error) => {
-                    toast.error(error, {
-                      position: toast.POSITION.TOP_CENTER,
-                      autoClose: 3000,
-                    });
-                  });
-                } else {
-                  // Sinon, affichez un message générique
-                  toast.error('Validation Error, please check your input', {
-                    position: toast.POSITION.TOP_CENTER,
-                    autoClose: 3000,
-                  });
-                }
-              })
-              .catch((error) => {
-                // En cas d'erreur de parsing JSON
-                console.error("Error parsing error response:", error);
-                toast.error('Validation Error, please check your input', {
+            const errorData = await response.json();
+            console.log(errorData.data);
+  
+            // Gérez les erreurs spécifiques de l'API
+            if (errorData) {
+            
+                toast.error(errorData.data.message, {
                   position: toast.POSITION.TOP_CENTER,
                   autoClose: 3000,
                 });
+             ;
+            } else {
+              // Sinon, affichez un message générique
+              toast.error('Validation Error, please check your input', {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 3000,
               });
+            }
           } else {
-            toast.error('Error, please try again', {
+            // Gérez d'autres erreurs de la requête
+            console.error('Error making the request. Status:', response.status);
+  
+            toast.error('Error making the request. Please try again.', {
               position: toast.POSITION.TOP_CENTER,
               autoClose: 3000,
             });
           }
         }
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error('Error making the request:', error.message);
-      });
-      
-    } else{
+  
+        toast.error('Error making the request. Please try again.', {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 3000,
+        });
+      }
+    } else {
       window.scrollTo(0, 0);
     }
   };
-      
+  
   
     
   
