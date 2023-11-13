@@ -70,7 +70,7 @@ const ContactForm = () => {
         };
     
         try {
-          const response = await fetch('http://dev.niceroom.sofis-info.com/api/contact', {
+          const response = await fetch('https://admin.finecribs.com/api/contact', {
             method: 'POST',
             mode: 'cors',
             headers: {

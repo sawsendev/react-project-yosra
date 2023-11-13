@@ -10,7 +10,7 @@ const CarrouselImages = () => {
   const { id } = useParams();
   const [lotData, setLotData] = useState({});
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
-  const API_URL = `http://dev.niceroom.sofis-info.com/api/lot/${id}`;
+  const API_URL = `https://admin.finecribs.com/api/lot/${id}`;
 
   useEffect(() => {
     const headers = {

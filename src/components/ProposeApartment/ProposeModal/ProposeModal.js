@@ -119,7 +119,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
     });
     formDataToSend.append('other_informations', formData.message);
    
-    fetch('http://dev.niceroom.sofis-info.com/api/apartment_request/post', {
+    fetch('https://admin.finecribs.com/api/apartment_request/post', {
       method: 'POST',
       headers: {
         'apiKey': API_KEY,

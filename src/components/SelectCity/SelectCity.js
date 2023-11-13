@@ -5,7 +5,7 @@ const SelectCity = ({ onChange, city }) => {
   const [selectedCity, setSelectedCity] = useState(city); // Initialisez selectedCity avec la valeur de city
 
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
-  const API_URL = 'http://dev.niceroom.sofis-info.com/api/building/cities';
+  const API_URL = 'https://admin.finecribs.com/api/building/cities';
 
   useEffect(() => {
     // Vous pouvez accéder à la valeur de l'URL ici et l'initialiser dans selectedCity

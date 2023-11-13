@@ -174,21 +174,51 @@ export const FeedbacksTable = [
     {
         id:0,
         src: f1,
-        name:"Nom et prenom",
-        content: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknownprinter "
+        name:"Aurélien",
+        content: "La chambre était vraiment cool. C'était tout brillant et neuf, et le décor était incroyable. J'avais l'impression que quelqu'un avec beaucoup de goût avait fait sa magie pour le rendre confortable et élégant. "
     },
      {
         id:1,
         src: f2,
-        name:"Nom et prenom",
-        content: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknownprinter "
+        name:"Laura",
+        content: "L'esthétique de la chambre était vraiment cool. On pouvait sentir que Fine cribs avait investi du temps et du soin dans la décoration de l'espace. J'ai beaucoup apprécié mon séjour."
     },
      {
         id:2,
         src: f3,
-        name:"Nom et prenom",
-        content: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknownprinter "
+        name:"Maria",
+        content: " Ils étaient super réactifs et sympathiques. Il est rare de trouver des gens qui se soucient vraiment de leurs invités, mais vous avez réussi. Vous avez rendu mon séjour agréable et sans tracas."
     },
+    {
+        id:3,
+        src: f1,
+        name:"Fabio",
+        content: "Je tenais à vous remercier toute l'équipe pour votre gentillesse, votre professionnalisme et pour la qualité du service que vous fournissez. J'ai fortement recommandé Fine berceaux à des amis à la recherche d'une chambre à Nice, et je continuerai à le faire. "
+    },
+    {
+        id:4,
+        src: f1,
+        name:"Matthew",
+        content: "Je tiens à remercier l'équipe car vous avez été très utiles au cours de la dernière année et demie. "
+    },
+    {
+        id:5,
+        src: f1,
+        name:"Megan",
+        content: "J'ai vraiment apprécié mon séjour dans cet établissement et je recommanderais votre service."
+    },
+    {
+        id:6,
+        src: f3,
+        name:"Francesca",
+        content: " Je voulais juste vous laisser un mot pour vous dire à quel point mon séjour dans l'une de vos chambres a été génial. Sérieusement, vous êtes géniaux ! La chambre était de premier ordre et le service de votre équipe était parfait."
+    },
+{
+   id:7,
+   src: f1,
+   name:"Jason",
+   content: "Chapeau bas à Fine Cribs pour avoir gardé l'appartement en parfait état, et un grand bravo à l'équipe pour en avoir fait une expérience mémorable. Je suis vraiment en train de faire passer le mot à votre sujet, et j'ai hâte d'être de retour pour un autre séjour."
+},
 ]
 
 

@@ -16,8 +16,8 @@ const Cribes = () => {
   const [lastPage, setLastPage] = useState(1);
   const [loading, setLoading] = useState(false)
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
-  const API_URL2 = 'http://dev.niceroom.sofis-info.com/api/lots/search';
-  const API_URL3 = " http://dev.niceroom.sofis-info.com/api/lots/maps"
+  const API_URL2 = 'https://admin.finecribs.com/api/lots/search';
+  const API_URL3 = " https://admin.finecribs.com/api/lots/maps"
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const navigate = useNavigate();
@@ -217,8 +217,8 @@ console.log(cribsData)
 
   console.log(searchResult)
   console.log(cityParam) 
-  const [latitude, setLatitude] = useState(null);
-  const [longitude, setLongitude] = useState(null);
+  const [latitude, setLatitude] = useState();
+  const [longitude, setLongitude] = useState();
 
   const handleGetCoordinates = async (city) => {
     if(!city){
@@ -250,11 +250,7 @@ console.log(cribsData)
   useEffect(() => {
    handleGetCoordinates(cityParam);
   }, [cityParam]);
-  
-  // useEffect(() => {
-  //   if (currentPage === lastPage)
-  //   {setLoading(false);}
-  // }, [currentPage,lastPage]);
+
 
   const redirect = () => {
     let redirectTo = '/search-cities';

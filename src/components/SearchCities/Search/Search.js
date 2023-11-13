@@ -17,7 +17,7 @@ import { parse } from 'date-fns';
 
 const Search = () => {
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
-  const API_URL = `http://dev.niceroom.sofis-info.com/api/lot/maxprice`;
+  const API_URL = `https://admin.finecribs.com/api/lot/maxprice`;
   const[lotData,setLotData]=useState([]);
   const [selectedCountry, setSelectedCountry] = useState("");
  
@@ -119,16 +119,21 @@ const Search = () => {
     fetchData();
   }, [API_URL, API_KEY]);
  
-  const[max,setMax]=useState(0)
+  const[max,setMax]=useState(1000)
   useEffect(() => {
     // Calculer max après la récupération des données
     const loyerHc = lotData && lotData.loyer_hc ? parseInt(lotData.loyer_hc, 10) : 0;
     const charges = lotData && lotData.charges ? parseInt(lotData.charges, 10) : 0;
-    setMax (loyerHc + charges);
+  
+    // Mettre à jour max seulement si le prix de l'API est supérieur à la valeur actuelle
+    if (loyerHc + charges > max) {
+      setMax(loyerHc + charges);
+    }
   
     // Mettre à jour priceRange avec la nouvelle valeur de max
-    setPriceRange([0, max]);
-  }, [lotData]);
+   
+  }, [lotData, max]);
+  
   const [priceRange, setPriceRange] = useState([0, 1000]);
   
   useEffect(() => {
@@ -267,8 +272,11 @@ const Search = () => {
                         onChange={handlePriceRangeChange}
                         range
                       />
-                      <span className='price-range-input'><label>{priceRange[0]}€</label> <label>{priceRange[1]}€</label></span>
+                      
                     </div>
+                    <div>
+                      <span className='price-range-input'><label>{priceRange[0]}€</label> <label>{priceRange[1]}€</label></span>
+                      </div>
                   </div>}
               </div>
 

@@ -34,7 +34,7 @@ const PopupAlert =  (props) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [country,setCountry]=useState('fr');
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
-  const API_URL = 'http://dev.niceroom.sofis-info.com/api/alert_request/post';
+  const API_URL = 'https://admin.finecribs.com/api/alert_request/post';
   const [phoneNumberWithoutCode, setPhoneNumberWithoutCode] = useState('');
   const[code,setCode]=useState()
   const handlePhone = (value, data) => {

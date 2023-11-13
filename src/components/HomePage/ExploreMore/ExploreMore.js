@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 
 const ExploreMore = () => {
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
-  const API_URL = 'http://dev.niceroom.sofis-info.com/api/lots/city';
+  const API_URL = 'https://admin.finecribs.com/api/lots/city';
   const navigate= useNavigate();
   const [lotData, setLotData] = useState([]);
  

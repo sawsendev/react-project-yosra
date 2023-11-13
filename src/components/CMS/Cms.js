@@ -9,7 +9,7 @@ const Cms =()=> {
   const [data, setData] = useState(null);
 
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
-  const API_URL = `http://dev.niceroom.sofis-info.com/api/cms/page/${slug}`; // Use the slug in the API URL
+  const API_URL = `https://admin.finecribs.com/api/cms/page/${slug}`; // Use the slug in the API URL
 
   useEffect(() => {
     // Define headers with the API key
