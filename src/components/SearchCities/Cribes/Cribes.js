@@ -30,102 +30,6 @@ const Cribes = () => {
   const sortByParam = searchParams.get('sortBy');
   const searchParamsExist = cityParam || dateParam || priceMinParam || priceMaxParam || sortByParam;
 
-const fetchDataFromAPI = async (page) => {
-  try {
-    const headers = {
-      'apiKey': `${API_KEY}`,
-    };
-    const response = await fetch(`${API_URL2}?page=${page}`, {
-      method: 'POST',
-      mode: 'cors',
-      headers,
-    });
-
-    const data = await response.json();
-
-    setLastPage(data.data.lots.last_page);
-
-    // Transformez data.data.lots.data en tableau si ce n'est pas déjà le cas
-    const dataArray = Array.isArray(data.data.lots.data)
-      ? data.data.lots.data
-      : Object.values(data.data.lots.data);
-
-    if (currentPage === 1) {
-      // Si c'est la première page, réinitialisez les données de recherche
-      setCribsData(dataArray);
-      console.log(dataArray);
-    } else {
-      // Sinon, ajoutez les nouvelles données de recherche
-      setCribsData((prevData) => [...prevData, ...dataArray]);
-      console.log(dataArray);
-    }
-
-    setDataLoaded(true);
-    
-  } catch (error) {
-    console.error('Erreur lors de la récupération des données :', error);
-  }
-   
-  if (currentPage === lastPage) {
-    // Mettez à jour loading1 lorsque toutes les données sont chargées
-    setLoading(false);
-  }
-};
-
-
-  const fetchDataFromAPI2 = async (page) => {
-    if (searchParamsExist) {
-      const formData = {
-        city: cityParam,
-        date: dateParam,
-        price_min: priceMinParam,
-        price_max: priceMaxParam,
-        sort_by: sortByParam,
-      };
-  
-      try {
-        const response = await fetch(`${API_URL2}?page=${page}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'apiKey': API_KEY,
-          },
-          body: JSON.stringify(formData),
-        });
-  
-        if (response.ok) {
-          const data = await response.json();
-          setLastPage(data.data.lots.last_page);
-  
-          // Transformez data.data.lots.data en tableau si ce n'est pas déjà le cas
-          const dataArray = Array.isArray(data.data.lots.data)
-            ? data.data.lots.data
-            : Object.values(data.data.lots.data);
-  
-          if (currentPage === 1) {
-            // Si c'est la première page, réinitialisez les données de recherche
-            setSearchResult(dataArray);
-            console.log(dataArray);
-          } else {
-            // Sinon, ajoutez les nouvelles données de recherche
-            setSearchResult((prevData) => [...prevData, ...dataArray]);
-            console.log(dataArray);
-          }
-  
-          setDataLoaded(true);
-          
-        }
-      } catch (error) {
-        console.error('Erreur lors de la récupération des données :', error);
-      }
-    }
-      
-  if (currentPage === lastPage) {
-    // Mettez à jour loading1 lorsque toutes les données sont chargées
-    setLoading(false);
-  }
-  };
-  
   useEffect(() => {
     const fetchMapData = async () => {
       const formData = {
@@ -175,9 +79,107 @@ const fetchDataFromAPI = async (page) => {
       }
     };
   
+    // Appelez la fonction sans attendre que le composant soit monté
     fetchMapData();
   }, [cityParam, dateParam, priceMinParam, priceMaxParam, sortByParam]);
   
+
+const fetchDataFromAPI = async (page) => {
+  try {
+    const headers = {
+      'apiKey': `${API_KEY}`,
+    };
+    const response = await fetch(`${API_URL2}?page=${page}`, {
+      method: 'POST',
+      mode: 'cors',
+      headers,
+    });
+
+    const data = await response.json();
+
+    setLastPage(data.data.lots.last_page);
+
+    // Transformez data.data.lots.data en tableau si ce n'est pas déjà le cas
+    const dataArray = Array.isArray(data.data.lots.data)
+      ? data.data.lots.data
+      : Object.values(data.data.lots.data);
+
+    if (currentPage === 1) {
+      // Si c'est la première page, réinitialisez les données de recherche
+      setCribsData(dataArray);
+      console.log(dataArray);
+    } else {
+      // Sinon, ajoutez les nouvelles données de recherche
+      setCribsData((prevData) => [...prevData, ...dataArray]);
+      console.log(dataArray);
+    }
+
+    setDataLoaded(true);
+    
+  } catch (error) {
+    console.error('Erreur lors de la récupération des données :', error);
+  }
+   
+  if (currentPage === lastPage) {
+    // Mettez à jour loading1 lorsque toutes les données sont chargées
+    setLoading(false);
+  }
+};
+
+
+const fetchDataFromAPI2 = async (page) => {
+  if (searchParamsExist) {
+    const formData = {
+      city: cityParam,
+      date: dateParam,
+      price_min: priceMinParam,
+      price_max: priceMaxParam,
+      sort_by: sortByParam,
+    };
+
+    try {
+      const response = await fetch(`${API_URL2}?page=${page}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apiKey': API_KEY,
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setLastPage(data.data.lots.last_page);
+
+        // Transformez data.data.lots.data en tableau si ce n'est pas déjà le cas
+        const dataArray = Array.isArray(data.data.lots.data)
+          ? data.data.lots.data
+          : Object.values(data.data.lots.data);
+
+        if (currentPage === 1) {
+          // Si c'est la première page, réinitialisez les données de recherche
+          setSearchResult(dataArray);
+        } else {
+          // Sinon, ajoutez les nouvelles données de recherche
+          setSearchResult((prevData) => [...prevData, ...dataArray]);
+        }
+      } else {
+        console.error('Erreur de réponse HTTP :', response.status);
+        throw new Error('La requête a échoué avec un statut différent de 200');
+      }
+    } catch (error) {
+      console.error('Erreur lors de la récupération des données :', error);
+    } finally {
+      // Mettez à jour loading1 lorsque toutes les données sont chargées
+      setLoading(false);
+      // Assurez-vous que setDataLoaded(true) est appelé ici, à l'extérieur de la condition if(response.ok)
+      setDataLoaded(true);
+    }
+  }
+};
+
+
+  console.log(dataLoaded)
   console.log(coordinates)
 
   const handleScroll = () => {
