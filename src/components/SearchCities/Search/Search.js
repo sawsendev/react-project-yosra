@@ -263,8 +263,9 @@ const Search = () => {
                 </div>
                  { isSliderVisible  &&  
                   <div className='slider-container container'>
-                    <div className='price'>
                       <h5>Price per month</h5>
+                    <div className='price'>
+                    
                       <Slider
                         min={0} 
                         max={max}
