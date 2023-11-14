@@ -29,6 +29,23 @@
 .react-datepicker-popper{
   z-index:2;
 }
+button.react-datepicker__navigation {
+  align-items: center;
+  background: none;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  position: absolute;
+  top: 2px;
+  padding: 0;
+  border: none;
+  z-index: 2;
+  height: 32px;
+  width: 32px;
+  text-indent: -999em;
+  overflow: hidden;
+}
 .input-datepicker .form-control {
   position: relative;
   width: 100%!important;
@@ -40,7 +57,9 @@
 .form-control::placeholder {
   color: #000;
 }
-
+.react-datepicker__navigation .react-datepicker__navigation--next{
+  z-index: 2;
+}
 .Content-container:after {
   content: "";
   position: absolute;

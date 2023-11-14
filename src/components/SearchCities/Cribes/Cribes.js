@@ -7,6 +7,7 @@ import noRooms from "../../../assets/Group 24.svg";
 import CribMap from '../MapContainer/CribMap';
 import loading1 from '../../../assets/Fichier-1.gif'
 import axios from "axios";
+import { format } from 'date-fns';
 const Cribes = () => {
   const [cribsData, setCribsData] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
@@ -29,12 +30,16 @@ const Cribes = () => {
   const priceMaxParam = searchParams.get('priceMax');
   const sortByParam = searchParams.get('sortBy');
   const searchParamsExist = cityParam || dateParam || priceMinParam || priceMaxParam || sortByParam;
-
+  function formatDate(dateParam) {
+    const dateObject = new Date(dateParam);
+    const formattedDate = `${dateObject.getDate()}-${(dateObject.getMonth() + 1).toString().padStart(2, '0')}-${dateObject.getFullYear()}`;
+    return formattedDate;
+  }
   useEffect(() => {
     const fetchMapData = async () => {
       const formData = {
         city: cityParam,
-        date: dateParam,
+        date: formatDate(dateParam),
         price_min: priceMinParam,
         price_max: priceMaxParam,
         sort_by: sortByParam,
@@ -79,7 +84,7 @@ const Cribes = () => {
       }
     };
   
-    // Appelez la fonction sans attendre que le composant soit monté
+   
     fetchMapData();
   }, [cityParam, dateParam, priceMinParam, priceMaxParam, sortByParam]);
   
@@ -170,9 +175,9 @@ const fetchDataFromAPI2 = async (page) => {
     } catch (error) {
       console.error('Erreur lors de la récupération des données :', error);
     } finally {
-      // Mettez à jour loading1 lorsque toutes les données sont chargées
+      
       setLoading(false);
-      // Assurez-vous que setDataLoaded(true) est appelé ici, à l'extérieur de la condition if(response.ok)
+     
       setDataLoaded(true);
     }
   }
