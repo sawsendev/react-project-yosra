@@ -150,7 +150,7 @@ const Search = () => {
     if (cityParam) {
       setCity(cityParam);
     }
-    setDate(dateParam ? parse(dateParam, 'dd-MM-yyyy', new Date()) : "");
+    setDate(dateParam ? parse(dateParam, 'yyyy-MM-dd', new Date()) : "");
     setSortBy(sortByParam || "");
 
  // Mise à jour de l'état priceRange si priceMinParam et priceMaxParam existent
@@ -179,7 +179,7 @@ const Search = () => {
   
   
     if (date) {
-      searchParams.append('date', format(date, 'dd-MM-yyyy'));
+      searchParams.append('date', format(date, 'yyyy-MM-dd'));
     }
     searchParams.append('sortBy', sortBy);
     searchParams.append('priceMin', priceRange[0]);

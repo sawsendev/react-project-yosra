@@ -50,7 +50,7 @@ import wipe from '../../assets/room/widget/wipe.svg'
 import { PiInfo } from "react-icons/pi";
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-
+import building from '../../assets/room/icons/payment.png'
 import Crib from '../Crib/Crib'
 import CribMap from '../SearchCities/MapContainer/CribMap'
 
@@ -339,7 +339,6 @@ const Room = () => {
                  { title: "Vacuum cleaner", icon: vacuum },
                  { title: "Ironing set", icon: ironing },
                  { title: "Cleaning tools", icon: tools },
-                 { title: "Heating" , icon : heater}
                  ].map((char) => (
                  lotData.apartment.options.some((option) => option.title_en === char.title) && (
                  <div className='btn-char' key={char.title}>
@@ -467,7 +466,8 @@ const Room = () => {
                   {lotData.wi_fi !== 0 &&(<p className='status mb-2'><img src={wifi} className='icon' alt="wifi"/> Wi - Fi</p>)}
                   {lotData.cable_tv !== 0 &&(<p className='status mb-2'><img src={cable}  className='icon' alt="cable tv"/> Cable tv</p>)}
                   {lotData.cleaning !== 0 &&(<p className='status mb-2'><img src={wipe} className='icon' alt="wipe"/> Cleaning</p>)}
-                 
+                  {lotData.heating !== 0 &&(<p className='status mb-2'><img src={heater} className='icon' alt="wipe"/> Heating</p>)}
+                  {lotData.building_service_charge !== 0 &&(<p className='status mb-2'><img src={building} className='icon' alt="wipe"/> Building Service Charge</p>)}
 
                   <button className='btn btn-submit mt-3' onClick={()=>{navigate(`/booking-enquiry/${id}`)}}>
 

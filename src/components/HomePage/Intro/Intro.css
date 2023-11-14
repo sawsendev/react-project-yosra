@@ -16,6 +16,30 @@
   text-align: center;
   position: relative;
 }
+.input-date:after {
+  z-index: 0;
+}
+.react-datepicker-wrapper {
+  width: 100%;
+}
+.input-datepicker {
+  position: relative;
+  width: 100%;
+}
+.react-datepicker-popper{
+  z-index:2;
+}
+.input-datepicker .form-control {
+  position: relative;
+  width: 100%!important;
+  background: #fff;
+}
+.input-datepicker .form-control::placeholder, .input-datepicker .form-control::-moz-placeholder, .input-datepicker .form-control::-webkit-input-placeholder {
+  color: #000;
+} 
+.form-control::placeholder {
+  color: #000;
+}
 
 .Content-container:after {
   content: "";
@@ -57,7 +81,7 @@
     background: #FFF;
 }
 .List-select{
-    position: relative;
+    position: relative; 
 }
 .form-date {
   position: relative;

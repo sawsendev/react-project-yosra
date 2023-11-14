@@ -176,6 +176,8 @@
     position: relative;
     z-index: 2;
     cursor: pointer;
+    top:-45px;
+    left:-22px; 
 }
 .marker-label:before {
     content: "";

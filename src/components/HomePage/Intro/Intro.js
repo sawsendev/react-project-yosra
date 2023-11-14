@@ -35,7 +35,7 @@ const Intro = () => {
       </span>
     </div>
   );
-
+ 
   const navigate=useNavigate()
   
    
@@ -47,7 +47,7 @@ const Intro = () => {
   };
   
   const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
+  tomorrow.setDate(tomorrow.getDate() + 1); 
 
   return (
     <div className='Intro-container d-block py-md-5 py-4 container-fluid mb-md-5 mb-4'>

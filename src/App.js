@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
+import React from 'react';
 import "./App.css"
 import Faq from "./components/HomePage/Faq/Faq";
 import Footer from "./components/Footer/Footer";
@@ -27,7 +28,7 @@ function App() {
       <Routes>
         <Route path='/' index element={<Homepage/>} /> 
         <Route path="/search-cities" element={<SearchCities/>} /> 
-        <Route path="/cms/page/:slug" element={<Cms/>} /> 
+        <Route path="/:slug" element={<Cms/>} /> 
         <Route path="/faq" element={<Faqspage/>} />     
         <Route path="*" element={<ErrorPage/>} /> 
         <Route path="/room/:id" element={<Room/>} /> 
