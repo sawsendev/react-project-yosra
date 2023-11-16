@@ -119,7 +119,7 @@ const Search = () => {
     fetchData();
   }, [API_URL, API_KEY]);
  
-  const[max,setMax]=useState(1000)
+  const[max,setMax]=useState(2000)
   useEffect(() => {
     // Calculer max après la récupération des données
     const loyerHc = lotData && lotData.loyer_hc ? parseInt(lotData.loyer_hc, 10) : 0;
@@ -291,8 +291,8 @@ const Search = () => {
               <div className='input-select'>
                 <select name="price" id="countries-id" className='form-control' onChange={handleChangeSortBy} value={sortBy}>
                   <option value="" disabled>Sorted by</option>
-                  <option value="descending">Descending price</option>
-                  <option value="ascending">Ascending price</option>
+                  <option value="desc">Descending price</option>
+                  <option value="asc">Ascending price</option>
                 </select>
               </div>
             </div>

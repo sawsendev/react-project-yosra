@@ -42,7 +42,7 @@ const Cribes = () => {
         date: formatDate(dateParam),
         price_min: priceMinParam,
         price_max: priceMaxParam,
-        sort_by: sortByParam,
+        sortBy: sortByParam,
       };
   
       try {
@@ -139,7 +139,7 @@ const fetchDataFromAPI2 = async (page) => {
       date: dateParam,
       price_min: priceMinParam,
       price_max: priceMaxParam,
-      sort_by: sortByParam,
+      sortBy: sortByParam,
     };
 
     try {
