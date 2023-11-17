@@ -399,7 +399,7 @@ const validateEmail = (email) => {
         <div className='Booking-content my-2 col-md-8 col-sm-12 pe-5'>
           <div className='d-flex justify-content-start align-items-center Booking-content-application mb-3'>
             <img className='me-2' src={sendImg} alt='send icon' />
-            <h3 className='m-0'>Send your application</h3>
+            <h3 className='m-0'>Submit your application</h3>
           </div>
           <form id="file-upload-form" onSubmit={handleSubmit} class="uploader">
               <div class="row mb-4">
@@ -504,7 +504,7 @@ const validateEmail = (email) => {
             <div className="input-section">
             {/* Main Input File */}
       <label className="file-label">
-        Looking to speed up the booking process? Save time by completing your file now{' '}
+        Looking to speed up the booking process? Save time by completing your application now{' '}
         <span className="comment d-block">(optional)</span>
       </label>
       <div className="input-container mb-2">

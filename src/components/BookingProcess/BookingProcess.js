@@ -110,13 +110,19 @@ const BookingProcess = ({cribs}) => {
            <div class="steps">
               <span class="font-weight-bold">3</span>
             </div>
+           
             <div className='Payments-steps px-2'>
-              <span>Before check-in</span>
-              {cribs && cribs.tarif_promo && 
-              <div className='Fee row justify-content-between'>
-                 <p className='col-auto mb-0'>1° month rent</p> 
-                 <span className='col-auto mb-0'>€{cribs.tarif_promo}</span>
-              </div>}
+              
+            <div>
+  <span>Before check-in</span>
+  {cribs && cribs.tarif_promo !== undefined && (
+    <div className='Fee row justify-content-between'>
+      <p className='col-auto mb-0'>1° month rent</p> 
+      <span className='col-auto mb-0'>€{String(cribs.tarif_promo)}</span>
+    </div>
+  )}
+</div>
+
               {cribs && cribs.garantie && 
               <div className='Fee row justify-content-between'>
                  <p className='col-auto mb-0'>Deposit</p> 

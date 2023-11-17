@@ -49,20 +49,29 @@ const Faqspage = () => {
      };
    
      const frenchModalContent = (
-      <div className='modal-video-text'>
-         <iframe width="560" height="315" src="https://www.youtube.com/embed/5kXkEwThjL0?si=GHI5uXrSqMguyvDA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-       </div>
+          <div className='modal-video-text'>
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/bGUGb5K_QLE"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </div>
+        
      );
    
      const englishModalContent = (
       <div className='modal-video-text'>
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/dV9tu99oC1s?si=ufx_zRP_qwnySuzt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          <iframe width="560" height="315" src="https://youtube.com/embed/w-SLM-4HSQA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
        </div>
      );
    
      const italianModalContent = (
        <div className='modal-video-text'>
-         <iframe width="560" height="315" src="https://www.youtube.com/embed/WzafRrVUswQ?si=5_73XU4FgaTfz-pA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+         <iframe width="560" height="315" src="https://youtube.com/embed/lz_VJ_t0FxU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
        </div>
      );
    

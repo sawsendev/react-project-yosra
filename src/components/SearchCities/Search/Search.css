@@ -270,3 +270,10 @@ span.price-range-input label {
 font-size: 16px;
 font-weight: 400;
 }
+
+.close-icon{
+    color: #A0A9B2;
+    width:15px;
+    height: 15px;
+
+}

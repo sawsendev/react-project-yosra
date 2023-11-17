@@ -199,8 +199,8 @@ const Room = () => {
   useEffect(() => {
     if (descriptionRef.current) {
       const height = descriptionRef.current.clientHeight;
-      if (height > 200) {
-        setDescriptionHeight('170px');
+      if (height > 400) {
+        setDescriptionHeight('350px');
       } else {
         setDescriptionHeight('auto');
       }
@@ -262,7 +262,7 @@ const Room = () => {
                <h1>{lotData.apartment.title} - {lotData.title}</h1>
                 )}
                 {lotData && lotData.apartment && lotData.apartment.building&&lotData.apartment.building.city&&(
-                <h2>Private room in {lotData.apartment.building.city}</h2>)}
+                <div className='prv'>Private room in {lotData.apartment.building.city}</div>)}
               </div>
               <div className='characteristics mt-3 mb-4'>
                 {lotData&& lotData.apartment && lotData.apartment.m2 &&(
@@ -287,15 +287,16 @@ const Room = () => {
             <div dangerouslySetInnerHTML={{ __html: lotData.description }} />
           </div>
         )}
-        {descriptionHeight === '170px' && (
+        {descriptionHeight === '350px' && (
           <div className='showmore' onClick={handleShowMoreClick}>
             {showMore ? 'Read Less' : 'Read More'}
           </div>
         )}
       </div>
               <div className='amenities'>
-                <h2>Amenities</h2>
-                <h3>Room</h3>
+              <h2>Amenities</h2>
+                {lotData &&lotData.options && Object.keys(lotData.options).length > 0 &&(
+                <h3>Room</h3>)}
                 {lotData.options && (
                <div className='characteristics pieces mb-4'>
                 {[
@@ -316,7 +317,7 @@ const Room = () => {
                  </div>
                  )}
                  {lotData.apartment &&lotData.apartment.options && Object.keys(lotData.apartment.options).length > 0 &&(
-                 <h3>Apartment level</h3>)}
+                 <h3>Apartment</h3>)}
                  {lotData.apartment && lotData.apartment.options && (
                  <div className='characteristics pieces mb-4'>
                  {[
@@ -407,7 +408,7 @@ const Room = () => {
               
 
               <div className='map-local mt-3 mb-3 pb-3'>
-                <h2 className='mb-3'>Where is the accommodation located</h2>
+                <h2 className='mb-3'>Neighborhood</h2>
                 <div className='map'>
                 {longitude && latitude && (
                 <CribMap coordinates={staticCoordinates} showPopup={false} data={lotData} latitude={latitude}
@@ -418,7 +419,7 @@ const Room = () => {
               <div className='local-desc mt-3 mb-4 pb-3'>
                 {lotData.description_quartier && (
                   <div>
-                    <h2>Neighborhood description</h2>
+                    
                     <div dangerouslySetInnerHTML={{ __html: lotData.description_quartier }} />
                   </div>)}
               </div>
@@ -434,7 +435,7 @@ const Room = () => {
   <img src={check} alt="Available"/>
   {(lotData && lotData.availability_date && (lotData.availability_date === formattedDateAujourdhui || lotData.availability_date === formattedDateDemain)) ? 
     'Available Now' : 
-    `Avail. on ${(lotData.availability_date && lotData.availability_date.split('/').length > 1) ? lotData.availability_date.split('/')[0] : ''}/${(lotData.availability_date && lotData.availability_date.split('/').length > 1) ? lotData.availability_date.split('/')[1] : ''}`
+    `Avail. on ${(lotData.availability_date && lotData.availability_date.split('/').length > 1) ? lotData.availability_date.split('/')[0] : ''} / ${(lotData.availability_date && lotData.availability_date.split('/').length > 1) ? lotData.availability_date.split('/')[1] : ''}`
   }
 </p>
 
@@ -451,7 +452,7 @@ const Room = () => {
                   {lotData.max_benefit ? (
                   <div className='text-center assistance'>
                    CAF assistance <PiInfo className='info' />
-                   <span className='green'>( up to -{lotData.max_benefit}€ )</span>
+                   <span className='green'> up to -{lotData.max_benefit}€ </span>
                    </div>
                   ) : null}
                   <p className='h4 status mt-3'>Rent is all inclusive</p>
@@ -475,10 +476,8 @@ const Room = () => {
                 </div>
                 <div className='widget-info mb-3'>
                   <h5>Fine cribs promise</h5>
-                  <p>Our teams have renovated, furnished, equipped
-                  and decorated this apartment to offer you an
-                  experience of design, comfort and uparallefled
-                  services.</p>
+                  <p>Our team has meticulously renovated, furnished and equipped this apartment 
+                    to provide you with an unparalleled experience of design, comfort, and exceptional services .</p>
                 </div>
                 <div className='recommandation mt-3 mb-lg-5 pb-4 d-md-none'>
                   <h2 className='mb-3'>You might also be interested in the following properties</h2>

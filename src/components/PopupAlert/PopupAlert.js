@@ -7,6 +7,7 @@ import { IoCloseOutline } from "react-icons/io5";
 import { ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Popup from '../Popupmsg/popup';
+import SelectCity from '../SelectCity/SelectCity';
 
 const PopupAlert =  (props) => {
   
@@ -217,14 +218,7 @@ const PopupAlert =  (props) => {
                 <div className="form-outline">
                   <label htmlFor="city" className='form-label'>City</label>
                   <div className='input-select'>
-                  <input
-                    type="text"
-                    id="city"
-                    className="form-control"
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                    required
-                  />
+                  <SelectCity text="City" onChange={(selectedValue) => setCity( selectedValue.value)} />
                   </div>
                 </div>
               </div>

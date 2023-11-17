@@ -97,6 +97,12 @@
     font-weight: 600;
     margin: 0 0 8px;
 }
+.prv{
+    color: #000;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0 0 8px;
+}
 .characteristics {
     display: flex;
     flex-wrap: wrap;
@@ -225,7 +231,7 @@
     margin: 0;
     color: #35CE92;
     font-size: 20px;
-    font-weight: 400;
+    font-weight: bold;
     padding: 13px 12px 0;
     text-align: center;
 }
@@ -268,6 +274,7 @@
 }
 .widget .assistance .green {
     color: #35CE92;
+    font-weight: bold;
 }
 .widget .h4.status {
     color: #000;

@@ -119,7 +119,7 @@ const CribMap = ({ coordinates, showPopup, data ,latitude,longitude,zoom  }) => 
                 <span className='price_loyer'>{item.tarif_promo} €</span> /month
               </span>
              
-    <p className='promo'>1st month rent {item.tarif_promo}€ then {item.loyer_hc + item.charges}€ </p>
+    <div className='promo'>1st month rent {item.tarif_promo}€ then {item.loyer_hc + item.charges}€ </div>
            
             </div>
           ) : (

@@ -11,7 +11,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { format } from 'date-fns';
 import { parse } from 'date-fns';
-
+import { AiOutlineClose } from 'react-icons/ai';
 
 
 
@@ -134,7 +134,7 @@ const Search = () => {
    
   }, [lotData, max]);
   
-  const [priceRange, setPriceRange] = useState([0, 1000]);
+  const [priceRange, setPriceRange] = useState([0, 2000]);
   
   useEffect(() => {
     // Parsez les paramètres de l'URL ici
@@ -190,7 +190,11 @@ const Search = () => {
     window.location.reload();
   };
   
-  
+  const handleIconClick = () => {
+
+    // Handle your close icon logic here
+    setIsSliderVisible(false);
+  };
   
 
   const handleCustomInputInChange = (date) => {
@@ -216,7 +220,7 @@ const Search = () => {
             <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
               <label htmlFor="countries">City</label>
               <div className='input-select'>
-              <SelectCity onChange={(selectedValue) => { setCity(selectedValue.value); console.log(selectedValue.value); }} city={city} />
+              <SelectCity text='Where will you go?' onChange={(selectedValue) => { setCity(selectedValue.value); console.log(selectedValue.value); }} city={city} />
 
                  <input type="hidden" name="city" value={city} id="city-input" />
               </div>
@@ -247,44 +251,49 @@ const Search = () => {
               <label htmlFor="price">Price range</label>
               
               <div className='select-wrapper'>
-                <div className='select-container'>
-                <Select
-  styles={customStyles}
-  onMenuOpen={handleSliderOpen}
-  onMenuClose={handleSliderClose}
-  options={[]}
-  onChange={() => {}}
-  menuIsOpen={isMenuOpen}
-  value={selectValue}
-  isSearchable={false}
-  placeholder="Select a price range"
-  setIsSliderVisible={setIsSliderVisible}
-/>
-                </div>
-                 { isSliderVisible  &&  
-                  <div className='slider-container container'>
-                      <h5>Price per month</h5>
-                    <div className='price'>
-                    
-                      <Slider
-                        min={0} 
-                        max={max}
-                        value={priceRange}
-                        onChange={handlePriceRangeChange}
-                        range
-                      />
-                      
-                    </div>
-                    <div>
-                      <span className='price-range-input'><label>{priceRange[0]}€</label> <label>{priceRange[1]}€</label></span>
-                      </div>
-                  </div>}
-              </div>
+  <div className='select-container'>
+    <Select
+      styles={customStyles}
+      onMenuOpen={handleSliderOpen}
+      onMenuClose={handleIconClick}
+      options={[]}
+      onChange={() => {}}
+      menuIsOpen={isMenuOpen}
+      value={selectValue}
+      isSearchable={false}
+      placeholder="Select a price range"
+      menuPortalTarget={document.body} // Render the menu outside of the normal DOM hierarchy
+      
+    />
+  </div>
 
+  {isSliderVisible && (
+    <div className='slider-container container'>
+      {/* Close icon */}
+      <div className='d-flex flex-row-reverse flex-wrap align-content-center justify-content-between'> 
+      <AiOutlineClose className='close-icon' onClick={() => setIsSliderVisible(false)} />
+      <h5>Price per month</h5>
+      </div>
+      <div className='price'>
+        <Slider
+          min={0} 
+          max={max}
+          value={priceRange}
+          onChange={handlePriceRangeChange}
+          range
+        />
+      </div>
 
-
-
-            </div>
+      <div>
+        <span className='price-range-input'>
+          <label>{priceRange[0]}€</label>
+          <label>{priceRange[1]}€</label>
+        </span>
+      </div>
+    </div>
+  )}
+</div>
+</div>
             
             <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
               <label htmlFor="price">Sort by</label>

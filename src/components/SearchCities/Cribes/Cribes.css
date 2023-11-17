@@ -259,7 +259,7 @@ div.leaflet-container .leaflet-attribution-flag {
     position: sticky;
     right: -40px;
     top: 20px;
-    height: calc(100vh - 40px);
+
     width: calc(100% + 40px);
 }
 .row.row-cribes {

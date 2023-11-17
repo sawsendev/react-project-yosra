@@ -13,7 +13,6 @@ import stepTwo from "../assets/Step 2.svg";
 import stepThree from "../assets/Step 3.svg";
 import stepFour from "../assets/Step 4.svg";
 import Nice from "../assets/niceH.png";
-import Paris from "../assets/paris.svg";
 import Florence from "../assets/florenceH.png";
 import Bologna from "../assets/bologneH.png";
 import f1 from "../assets/voyageurs-invites-pleins-smileys-2.png";
@@ -57,15 +56,15 @@ export const IconsTable = [
     {
         id: 0,
         src: smile,
-        count: "300+",
+        count: "500+",
         content: "Happy flatmates"
     },
     {
         id: 1,
         src: city,
-        count: "4",
+        count: "3",
         content: "cities"
-    },
+    }, 
     {
         id: 2,
         src: room,
@@ -98,19 +97,19 @@ export const ReasonsTable = [
         id: 2,
         src: application,
         count: "Quick application",
-        content: "Browse the availabilities, do a virtual viewing and instantly submit your application."
+        content: "Browse the availabilities, do a virtual viewing and instantly submit your application"
     },
     {
         id: 3,
         src: inclusive,
         count: "All inclusive",
-        content: "Rent includes cleaning of the communal areas, service charge and bills, so that you don’t have to deal with the paperwork."
+        content: "Rent includes service charge and bills so that you don’t have to deal with the paperwork and , in most cases , cleaning of the communal areas"
     },
     {
         id: 4,
         src: assistance,
         count: "Assistance",
-        content: "Any problem? At any point before or during your stay you can contact our service desk to report maintenance issues, ask general questions etc. "
+        content: "Any problem? At any point before or during your stay you can contact our service desk to report maintenance issues or request assistance "
     },
     {
         id: 5,
@@ -132,7 +131,7 @@ export const StepsTable = [
         id: 1,
         src: stepTwo,
         count: "Step 2",
-        content: "Send your booking request which will be reviewed by our team  "
+        content: "Submit your booking request which will be reviewed by our team  "
     },
     {
         id: 2,
@@ -174,50 +173,50 @@ export const FeedbacksTable = [
     {
         id:0,
         src: f1,
-        name:"Aurélien",
-        content: "La chambre était vraiment cool. C'était tout brillant et neuf, et le décor était incroyable. J'avais l'impression que quelqu'un avec beaucoup de goût avait fait sa magie pour le rendre confortable et élégant. "
+        name:"Aurelien",
+        content: "The room was seriously cool. It was all shiny and new, and the decor was amazing. It felt like someone with great taste had worked their magic to make it cosy and stylish. "
     },
      {
         id:1,
         src: f2,
         name:"Laura",
-        content: "L'esthétique de la chambre était vraiment cool. On pouvait sentir que Fine cribs avait investi du temps et du soin dans la décoration de l'espace. J'ai beaucoup apprécié mon séjour."
+        content: "The aesthetics of the room were truly cool. You could feel that Fine cribs had invested time and care into decorating the space. I did enjoy my stay very much."
     },
      {
         id:2,
         src: f3,
         name:"Maria",
-        content: " Ils étaient super réactifs et sympathiques. Il est rare de trouver des gens qui se soucient vraiment de leurs invités, mais vous avez réussi. Vous avez rendu mon séjour agréable et sans tracas."
+        content: "They were super responsive and friendly. It's rare to find folks who genuinely care about their guests, but you guys nailed it. You made my stay smooth and hassle-free."
     },
     {
         id:3,
         src: f1,
         name:"Fabio",
-        content: "Je tenais à vous remercier toute l'équipe pour votre gentillesse, votre professionnalisme et pour la qualité du service que vous fournissez. J'ai fortement recommandé Fine berceaux à des amis à la recherche d'une chambre à Nice, et je continuerai à le faire. "
+        content: "I wanted to thank you the whole team for your kindness, your professionalism and for the quality of the service you provide. I have strongly recommended Fine cribs to friends looking for a room in Nice, and I will continue to do so. "
     },
     {
         id:4,
         src: f1,
         name:"Matthew",
-        content: "Je tiens à remercier l'équipe car vous avez été très utiles au cours de la dernière année et demie. "
+        content: "I would like to say thank you to the team as you have been very helpful over the last year and a half. "
     },
     {
         id:5,
         src: f1,
         name:"Megan",
-        content: "J'ai vraiment apprécié mon séjour dans cet établissement et je recommanderais votre service."
+        content: "I have really enjoyed my time in this accommodation and would recommend your service."
     },
     {
         id:6,
         src: f3,
         name:"Francesca",
-        content: " Je voulais juste vous laisser un mot pour vous dire à quel point mon séjour dans l'une de vos chambres a été génial. Sérieusement, vous êtes géniaux ! La chambre était de premier ordre et le service de votre équipe était parfait."
+        content: "I just wanted to drop you a note to say how awesome my stay was in one of your rooms. Seriously, you guys rock! The room was top-notch, and the service from your team was spot-on."
     },
 {
    id:7,
    src: f1,
    name:"Jason",
-   content: "Chapeau bas à Fine Cribs pour avoir gardé l'appartement en parfait état, et un grand bravo à l'équipe pour en avoir fait une expérience mémorable. Je suis vraiment en train de faire passer le mot à votre sujet, et j'ai hâte d'être de retour pour un autre séjour."
+   content: "Hats off to Fine cribs for keeping the apartment in top shape, and a big shoutout to the team for making it a memorable experience. I'm definitely spreading the word about you guys, and I can't wait to be back for another stay."
 },
 ]
 
@@ -445,7 +444,7 @@ export const FaqspageTableRenting = [
         id:2,
         title:"Can I cancel a booking?",
         answer:`<p>You have the option to cancel your booking free of charge up to one month before your scheduled move-in date. However, if you decide to cancel with less than one month's notice, you will still be responsible for covering the cost of the first month.</p>
-        <p>Please note that, in case of cancellation, you will still be liable for 50% of the administration fee.</p>
+        <p>Please note that, in case of cancellation, you will still be liable for 50% of the application fee.</p>
         <p>If you made your booking through an external website such as Studapart or Housinganywhere, it's advisable to inquire with them about the possibility of receiving a refund for any fees you may have already paid. They can provide specific information regarding their refund policies.</p>`,  
         src:"" 
     },
@@ -515,7 +514,7 @@ export const FaqspageTableRenting = [
     },
     {
         id:3,
-        title:"When can I checkin or check-out)",
+        title:"When can I check-in or check-out?",
         answer:`<p>Check-ins and check-outs are scheduled from Monday to Friday, between 9 a.m. and 6 p.m., except for holiday days. We kindly request that you coordinate your travel plans to align with these hours for a smooth and convenient check-in or check-out process.</p>
         <p>In exceptional circumstances, we may be able to accommodate check-ins and check-outs beyond the standard hours for an additional cost of 50€. Please note that this service is subject to availability and should be arranged in advance to ensure a smooth and convenient experience for you.</p>`,  
         src:""

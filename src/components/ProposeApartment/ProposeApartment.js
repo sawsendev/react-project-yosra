@@ -51,30 +51,30 @@ const ProposeApartment =()=> {
     <div className='page-container'>
       <div className='container'>
         <div className='content-container'>
-          <h1>Rent your apartment to Finecribs</h1>
-          <p>Finecribs provides landlords with secured rental income</p>
+          <h1>Rent your apartment to Fine cribs</h1>
+          <p>Fine cribs provides landlords with secured rental income</p>
         </div>
       </div> 
     </div>
 
     <section className='landlords pt-lg-5 pt-4 pb-4'>
       <div className='container'>
-        <h2 class="mb-lg-4 pb-lg-3 mb-4">Why landlords partner with Finecribs </h2>
+        <h2 class="mb-lg-4 pb-lg-3 mb-4">Why landlords partner with Fine cribs </h2>
         <div className='row'>
           <div className='col-md-4'>
             <img src={image1} alt="Im1" className="img-fluid mb-3"/>
             <h3 className='mb-2'>We guarantee your rental income, without vacancies </h3>
-            <p>Renting your apartment to Finecribs means you can increase the rental income on your apartment. Finecribs will pay you monthly rent even when your apartment is empty, allowing you to passively increase your income.</p>
+            <p>Renting your apartment to Fine cribs means you can increase the rental income on your apartment. Fine cribs will pay you monthly rent even when your apartment is empty, allowing you to passively increase your income.</p>
           </div>
           <div className='col-md-4'>
             <img src={image2} alt="Im2" className="img-fluid mb-3"/>
             <h3 className='mb-2'> We increase the value of your property</h3>
-            <p>Finecribs increases the value of your apartment by executing smart renovations coordinated by our interior designers (at no cost for landlords) and converting vacant properties into nicely decorated, fully equipped homes.</p>
+            <p>Fine cribs increases the value of your apartment by executing smart renovations coordinated by our interior designers (at no cost for landlords) and converting vacant properties into nicely decorated, fully equipped homes.</p>
           </div>
           <div className='col-md-4'>
             <img src={image3} alt="Im3" className="img-fluid mb-3" />
             <h3 className='mb-2'> Fully managed professional maintenance</h3>
-            <p>Our property management team takes care of the ongoing maintenance of your apartment so that your property is high standard</p>
+            <p>Our property management team takes care of the ongoing maintenance of your apartment so that your property is high standard.</p>
           </div>
         </div>
       </div>
@@ -84,9 +84,9 @@ const ProposeApartment =()=> {
       <div className='container'>
         <div className='row justify-content-between'>
           <div className='col-lg-7 col-md-8'>
-            <h2 class="mb-3">The Finecribs guarantee</h2>
-            <p> We are a landlord, as you are. Finecribs’ expertise lies in purchasing, designing and renovating beautiful spaces
-             for communal living. When you rent your apartment to Finecribs, you are guaranteed the we will manage 
+            <h2 class="mb-3">The Fine cribs guarantee</h2>
+            <p> We are a landlord, as you are. Fine cribs expertise lies in purchasing, designing and renovating beautiful spaces
+             for communal living. When you rent your apartment to Fine cribs, you are guaranteed the we will manage 
             it with the same care that we put into managing our own apartments.</p>
           </div>
           <div className='col-md-4 d-flex justify-content-center align-items-center'>
@@ -107,7 +107,7 @@ const ProposeApartment =()=> {
                 <img src={process1} alt="process 1" className="img-fluid"/>
               </div>
               <div className='text'>
-                <h3>Rent your apartment to Finecribs</h3>
+                <h3>Rent your apartment to Fine cribs</h3>
                 <p>If your apartments meets our criteria, we will make you
                 an offer and explain the terms of the partnership</p>
               </div>
@@ -186,7 +186,7 @@ const ProposeApartment =()=> {
                 <img src={process1} alt="process 1" className="img-fluid"/>
               </div>
               <div className='text'>
-                <h3>Rent your apartment to Finecribs</h3>
+                <h3>Rent your apartment to Fine cribs</h3>
                 <p>If your apartments meets our criteria, we will make you
                 an offer and explain the terms of the partnership</p>
               </div>
@@ -239,7 +239,7 @@ const ProposeApartment =()=> {
     <section className='selection pt-lg-5 pt-md-4 pb-4 mb-lg-4'>
       <div className='container'>
         <div className='mb-md-5 mb-4'>
-          <h2 className='mt-1'> How Finecribs selects the apartments that we rent</h2>
+          <h2 className='mt-1'> How Fine cribs selects the apartments that we rent</h2>
           <p>When we rent an apartment, we look for 3 main things</p>
         </div>
         <div className='row'>
@@ -250,7 +250,7 @@ const ProposeApartment =()=> {
               </div>
               <div className='col'>
                 <h3>Central location</h3>
-                <p>Our tenants are looking for centrally located apartments in major European cities. Currently, we provide accommodation in 4 cities in France and Italy but we are constantly looking to expand our offer.</p>
+                <p>Our tenants are looking for centrally located apartments in major European cities. Currently, we provide accommodation in 3 cities in France and Italy but we are constantly looking to expand our offer.</p>
               </div>
             </div>
           </div>
@@ -308,13 +308,13 @@ const ProposeApartment =()=> {
         <div className='row before-after'>
           <div className='col-md-6'>
             <div className='image-left'>
-              <span class="badge badge-left">Before Finecribs</span>
+              <span class="badge badge-left">Before Fine cribs</span>
               <img src={before1} alt="Im8" className="img-fluid img"/>
             </div>
           </div>
           <div className='col-md-6'>
             <div className='image-right'>
-              <span class="badge badge-right">After Finecribs</span>
+              <span class="badge badge-right">After Fine cribs</span>
               <img src={after1} alt="Im9" className="img-fluid"/>
             </div>
           </div>
@@ -322,13 +322,13 @@ const ProposeApartment =()=> {
         <div className='row before-after'>
           <div className='col-md-6'>
             <div className='image-left'>
-              <span class="badge badge-left">Before Finecribs</span>
+              <span class="badge badge-left">Before Fine cribs</span>
               <img src={before2} alt="Im8" className="img-fluid img"/>
             </div>
           </div>
           <div className='col-md-6'>
             <div className='image-right'>
-              <span class="badge badge-right">After Finecribs</span>
+              <span class="badge badge-right">After Fine cribs</span>
               <img src={after2} alt="Im9" className="img-fluid"/>
             </div>
           </div>
@@ -336,13 +336,13 @@ const ProposeApartment =()=> {
         <div className='row before-after'>
           <div className='col-md-6'>
             <div className='image-left'>
-              <span class="badge badge-left">Before Finecribs</span>
+              <span class="badge badge-left">Before Fine cribs</span>
               <img src={before3} alt="Im8" className="img-fluid img"/>
             </div>
           </div>
           <div className='col-md-6'>
             <div className='image-right'>
-              <span class="badge badge-right">After Finecribs</span>
+              <span class="badge badge-right">After Fine cribs</span>
               <img src={after3} alt="Im9" className="img-fluid"/>
             </div>
           </div>
@@ -350,13 +350,13 @@ const ProposeApartment =()=> {
         <div className='row before-after'>
           <div className='col-md-6'>
             <div className='image-left'>
-              <span class="badge badge-left">Before Finecribs</span>
+              <span class="badge badge-left">Before Fine cribs</span>
               <img src={before4} alt="Im8" className="img-fluid img"/>
             </div>
           </div>
           <div className='col-md-6'>
             <div className='image-right'>
-              <span class="badge badge-right">After Finecribs</span>
+              <span class="badge badge-right">After Fine cribs</span>
               <img src={after4} alt="Im9" className="img-fluid"/>
             </div>
           </div>
@@ -364,13 +364,13 @@ const ProposeApartment =()=> {
         <div className='row before-after'>
           <div className='col-md-6'>
             <div className='image-left'>
-              <span class="badge badge-left">Before Finecribs</span>
+              <span class="badge badge-left">Before Fine cribs</span>
               <img src={before5} alt="Im8" className="img-fluid img"/>
             </div>
           </div>
           <div className='col-md-6'>
             <div className='image-right'>
-              <span class="badge badge-right">After Finecribs</span>
+              <span class="badge badge-right">After Fine cribs</span>
               <img src={after5} alt="Im9" className="img-fluid"/>
             </div>
           </div>
@@ -379,7 +379,7 @@ const ProposeApartment =()=> {
       </div>
     </section>
 
-      <Feedback/>
+     
 
 
   </>

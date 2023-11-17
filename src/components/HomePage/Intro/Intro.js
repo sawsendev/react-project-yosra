@@ -56,7 +56,7 @@ const Intro = () => {
         <h2>discover, share, and make new friends</h2>
         <div className='Input-container d-flex justify-content-between'>
           <div className='input-group input-country'>
-          <SelectCity onChange={(selectedValue) => setCity(selectedValue.value)} />
+         <SelectCity text='Where will you go?' onChange={(selectedValue) => setCity( selectedValue.value)} />
           </div>
           <div className='input-group'>
           <DatePicker
