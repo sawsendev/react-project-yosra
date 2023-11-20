@@ -82,7 +82,7 @@ const CarrouselImages = () => {
 
   return (
     <div className='img-items'>
-      {lotData.media && lotData.media.length > 0 ? (
+      {lotData && lotData.media && lotData.media.length > 0 ? (
         <Carousel
           ref={carouselRef}
           responsive={responsive}
@@ -105,7 +105,7 @@ const CarrouselImages = () => {
         </div>
       )}
 
-      {lotData.media && lotData.media.length > 1 && (
+      {lotData && lotData.media && lotData.media.length > 1 && (
         <div className="button-container">
           <div
             onClick={onClickPrev}

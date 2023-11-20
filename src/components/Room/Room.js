@@ -53,6 +53,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import building from '../../assets/room/icons/payment.png'
 import Crib from '../Crib/Crib'
 import CribMap from '../SearchCities/MapContainer/CribMap'
+import ErrorPage from '../404/ErrorPage'
 
 
 
@@ -132,8 +133,7 @@ const Room = () => {
     }
   }, [API_URL2, API_KEY, city]); // Maintenant, city est une dépendance de ce useEffect
   
-  
-  
+ 
   
 
 
@@ -205,7 +205,7 @@ const Room = () => {
         setDescriptionHeight('auto');
       }
     }
-  }, [lotData.description]);
+  }, [lotData?.description]);
 
   const handleShowMoreClick = () => {
     setShowMore(!showMore);
@@ -217,7 +217,11 @@ const Room = () => {
   const formattedDateAujourdhui = `${(dateAujourdhui.getDate() < 10 ? '0' : '')}${dateAujourdhui.getDate()}/${(dateAujourdhui.getMonth() < 9 ? '0' : '')}${dateAujourdhui.getMonth() + 1}/${dateAujourdhui.getFullYear()}`;
   
   const formattedDateDemain = `${(dateDemain.getDate() < 10 ? '0' : '')}${dateDemain.getDate()}/${(dateDemain.getMonth() < 9 ? '0' : '')}${dateDemain.getMonth() + 1}/${dateDemain.getFullYear()}`;
-  
+  if (!lotData) {
+    console.error('No lotData:', lotData); // Add this line for additional logging
+    return <ErrorPage />;
+  }
+
     return (
       <>
       {lotData && lotData.apartment && lotData.apartment.title && lotData.title && (
@@ -278,7 +282,7 @@ const Room = () => {
                 <div className='btn-char'><img src={energy} alt="energy"/>{lotData.apartment.energy_rating}+++</div>)}
               </div>
               <div className='description pt-2 mb-4'>
-        {lotData.description && (
+        {lotData&&lotData.description && (
           <div
             ref={descriptionRef}
             style={{ maxHeight: showMore ? 'none' : descriptionHeight, overflow: 'hidden' }}
@@ -301,11 +305,9 @@ const Room = () => {
                <div className='characteristics pieces mb-4'>
                 {[
                  { title: "Double bed", icon: doublebed },
-                 { title: "Workspace", icon: workspace },
                  { title: "Wardrobe", icon: wardrobe },
                  { title: "Sofa", icon: sofa },
-                 { title: "Terrace", icon: terrace },
-                 { title: "A/C", icon: airconditioner },
+              
                  ].map((option) => (
                  lotData.options.some((opt) => opt.title_en === option.title) && (
                  <div className='btn-char' key={option.title}>
@@ -383,7 +385,16 @@ const Room = () => {
       {locataire.rent_status === true ? (
             <span className='status'>Booked</span>
           ) : (
-            <button type='button' className='btn-visit' onClick={()=>{navigate(`../room/${locataire.id}`)}}>Visit</button>
+            <button
+            type='button'
+            className='btn-visit'
+            onClick={() => {
+              navigate(`../room/${locataire.id}`);
+              window.scrollTo(0, 0); // Scroll to the top of the page
+            }}
+          >
+            Visit
+          </button>
           )}
 
      <p style={{display:'block', width:'100%'}} > 
@@ -435,7 +446,7 @@ const Room = () => {
   <img src={check} alt="Available"/>
   {(lotData && lotData.availability_date && (lotData.availability_date === formattedDateAujourdhui || lotData.availability_date === formattedDateDemain)) ? 
     'Available Now' : 
-    `Avail. on ${(lotData.availability_date && lotData.availability_date.split('/').length > 1) ? lotData.availability_date.split('/')[0] : ''} / ${(lotData.availability_date && lotData.availability_date.split('/').length > 1) ? lotData.availability_date.split('/')[1] : ''}`
+    `Available on ${(lotData.availability_date && lotData.availability_date.split('/').length > 1) ? lotData.availability_date.split('/')[0] : ''} / ${(lotData.availability_date && lotData.availability_date.split('/').length > 1) ? lotData.availability_date.split('/')[1] : ''}`
   }
 </p>
 
@@ -470,7 +481,11 @@ const Room = () => {
                   {lotData.heating !== 0 &&(<p className='status mb-2'><img src={heater} className='icon' alt="wipe"/> Heating</p>)}
                   {lotData.building_service_charge !== 0 &&(<p className='status mb-2'><img src={building} className='icon' alt="wipe"/> Building Service Charge</p>)}
 
-                  <button className='btn btn-submit mt-3' onClick={()=>{navigate(`/booking-enquiry/${id}`)}}>
+                  <button className='btn btn-submit mt-3' 
+                  onClick={()=>{
+                    navigate(`/booking-enquiry/${id}`)
+                    window.scrollTo(0, 0);
+                    }}>
 
                   Apply for this room</button>
                 </div>

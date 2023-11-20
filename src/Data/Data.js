@@ -15,9 +15,14 @@ import stepFour from "../assets/Step 4.svg";
 import Nice from "../assets/niceH.png";
 import Florence from "../assets/florenceH.png";
 import Bologna from "../assets/bologneH.png";
-import f1 from "../assets/voyageurs-invites-pleins-smileys-2.png";
-import f2 from "../assets/voyageurs-invites-pleins-smileys-1.png";
-import f3 from "../assets/voyageurs-invites-pleins-smileys.png";
+import f1 from "../assets/flatmates/Groupe de masques 1.png";
+import f2 from "../assets/flatmates/Groupe de masques 3.png";
+import f3 from "../assets/flatmates/Groupe de masques 5.png";
+import f4 from "../assets/flatmates/Groupe de masques 2.png";
+import f5 from "../assets/flatmates/Groupe de masques 4.png";
+import f6 from "../assets/flatmates/Groupe de masques 7.png";
+import f7 from "../assets/flatmates/Groupe de masques 6.png";
+import f8 from "../assets/flatmates/Groupe de masques 8.png";
 import room_city from "../assets/bacdbb_723fc3ba38f34640b08464a29a8990c9_mv2-1.jpg"
 import upload from "../assets/image-gallery.svg"
 import payslip from "../assets/g2115.svg"
@@ -190,31 +195,31 @@ export const FeedbacksTable = [
     },
     {
         id:3,
-        src: f1,
+        src: f4,
         name:"Fabio",
         content: "I wanted to thank you the whole team for your kindness, your professionalism and for the quality of the service you provide. I have strongly recommended Fine cribs to friends looking for a room in Nice, and I will continue to do so. "
     },
     {
         id:4,
-        src: f1,
+        src: f5,
         name:"Matthew",
         content: "I would like to say thank you to the team as you have been very helpful over the last year and a half. "
     },
     {
         id:5,
-        src: f1,
+        src: f8,
         name:"Megan",
         content: "I have really enjoyed my time in this accommodation and would recommend your service."
     },
     {
         id:6,
-        src: f3,
+        src: f7,
         name:"Francesca",
         content: "I just wanted to drop you a note to say how awesome my stay was in one of your rooms. Seriously, you guys rock! The room was top-notch, and the service from your team was spot-on."
     },
 {
    id:7,
-   src: f1,
+   src: f6,
    name:"Jason",
    content: "Hats off to Fine cribs for keeping the apartment in top shape, and a big shoutout to the team for making it a memorable experience. I'm definitely spreading the word about you guys, and I can't wait to be back for another stay."
 },

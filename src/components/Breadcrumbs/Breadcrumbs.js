@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import './Breadcrumbs.css';
 import { VscHome, VscChevronRight } from 'react-icons/vsc';
 
-function Breadcrumbs({ path, customRoutes = [], lotData }) {
+function Breadcrumbs({ path, customRoutes = [] }) {
   const location = useLocation();
   const currentPath = path || location.pathname;
 

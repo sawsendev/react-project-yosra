@@ -22,7 +22,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
   const [status, setStatus] = useState('');
-  
+ 
   const handlePopupClose = () => {
     setShowPopup(false);
   };
@@ -158,6 +158,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
           autoClose: 5000,
         });
         setStatus('success');
+        setSelectedFiles([])
       })
       .catch((error) => {
         // Gérez ici les erreurs de promesse
@@ -257,17 +258,32 @@ const ProposeModal = ({ isOpen, closeModal }) => {
     setDate(date);
     console.log(date)
   };
+  const [fileVisibility, setFileVisibility] = useState([true]);
   const handleFileChange = (e) => {
     const files = e.target.files;
     if (files && files.length > 0) {
-      // Utilisez la méthode `FileList` pour convertir les fichiers en un tableau
-      const selectedFilesArray = Array.from(files);
-      setSelectedFiles(selectedFilesArray);
+      // Initialisez fileVisibility avec true pour chaque fichier
+      setFileVisibility(Array(files.length).fill(true));
+      setSelectedFiles(Array.from(files));
+      e.target.value = '';
     }
   };
   
+  
 
- 
+
+  const handleclick = (index) => {
+    // Créez une copie du tableau fileVisibility
+    const updatedFileVisibility = [...fileVisibility];
+    // Inversez la visibilité du fichier à l'index spécifié
+    updatedFileVisibility[index] = !updatedFileVisibility[index];
+    // Mettez à jour l'état avec le nouveau tableau
+    setFileVisibility(updatedFileVisibility);
+  };
+  console.log(fileVisibility)
+  
+  
+  
   const CustomInput = ({ value, onClick, onChange, name }) => (
     <div className="input-datepicker" onClick={onClick}>
       <input
@@ -451,17 +467,23 @@ const ProposeModal = ({ isOpen, closeModal }) => {
                              multiple/>
                         </button>
                     </div>
-                    {selectedFiles.length > 0 && (
-                      <div className="uploaded-file d-flex flex-wrap mb-3">
-                        {selectedFiles.map((file, index) => (
-                          <p key={index} className="uploaded-pdf mb-2">
-                            <img className='me-2' src={iconfile} alt='file icon'/>
-                            {file.name}
-                          </p>
-                          
-                        ))}
-                      </div>
-                    )}
+                    <div className="uploaded-file d-flex flex-wrap mb-3">
+                    {selectedFiles.map((file, index) => (
+  fileVisibility[index] && (
+    <p key={index} className="uploaded-pdf mb-2">
+      <img className='me-2' src={iconfile} alt='file icon'/>
+      {file.name}
+      <div className='close-file' onClick={() => handleclick(index)}>
+        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+          <path d="M0 0h24v24H0z" fill="none"/>
+          <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" fill="#FF4B55"/>
+        </svg>
+      </div>
+    </p>
+  )
+))}
+</div>
+
                     <button className='btn btn-accept' onClick={handleSubmit}>OK</button>
                 </div>
             </>

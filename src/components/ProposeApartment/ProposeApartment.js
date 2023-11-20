@@ -27,7 +27,6 @@ import process2 from '../../assets/process/process2.svg'
 import process3 from '../../assets/process/process3.svg'
 import process4 from '../../assets/process/process4.svg'
 import process5 from '../../assets/process/process5.svg'
-import Feedback from '../HomePage/Feedback/Feedback';
 import { LiaEnvelope } from "react-icons/lia";
 import { useNavigate } from 'react-router-dom';
 

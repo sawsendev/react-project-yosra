@@ -8,6 +8,10 @@ import { ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Popup from '../Popupmsg/popup';
 import SelectCity from '../SelectCity/SelectCity';
+import { format } from 'date-fns';
+import calendarIcon from '../../assets/calendar.svg'; 
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const PopupAlert =  (props) => {
   
@@ -79,7 +83,7 @@ const PopupAlert =  (props) => {
       last_name: lastName,
       email: email,
       city: city,
-      date: moveInDate,
+      date: format(moveInDate, 'dd-MM-yyyy'),
       max_budget: parseInt(maxBudget),
       phone_number: phoneNumberWithoutCode,
       phone_country_name: country
@@ -135,6 +139,39 @@ const PopupAlert =  (props) => {
       document.body.classList.remove('popup-open');
     }
   }, [props.isPopupOpen]);
+
+  const handleCustomInputChange = (date) => {
+    setMoveInDate(date);
+    console.log(date)
+  };
+
+  const CustomInput = ({ value, onClick, onChange, name }) => (
+    <div className="input-datepicker" onClick={onClick}>
+      <input
+        type="text"
+        name={name}
+        className="form-control"
+        value={value}
+        placeholder=""
+        required
+        readOnly
+        onChange={onChange}
+      />
+      <span className="calendar-icon">
+        <img src={calendarIcon} alt="Calendar" />
+      </span>
+    </div>
+  );
+  const handleMoveInDateChange = (date) => {
+    if (date) {
+      setMoveInDate(date); // Stockez la date telle quelle
+    }
+  };
+
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+
   return (
     <>
     
@@ -143,7 +180,7 @@ const PopupAlert =  (props) => {
     {showPopup && <Popup message={popupMessage} status={status} onClose={handlePopupClose} />}
       <div className="popup-content">
         <div className='popup-header'>
-          <div className="circle">
+          <div className="circle"> 
             <img src={icon} alt="im" className='img-fluid' />
           </div>
           <button className="close-button" onClick={handleClose}>
@@ -226,14 +263,20 @@ const PopupAlert =  (props) => {
                 <div className="form-outline">
                   <label htmlFor="moveInDate" className='form-label'>Move in date</label>
                   <div className='input-date'>
-                    <input
-                      type="date"
-                      id="moveInDate"
-                      className="form-control"
-                      value={moveInDate}
-                      onChange={(e) => setMoveInDate(e.target.value)}
-                      required
-                    />
+                  <DatePicker
+  selected={moveInDate}
+  name="moveInDate"
+  dateFormat="dd/MM/yyyy"
+  onChange={handleMoveInDateChange}
+  customInput={
+    <CustomInput
+      value={moveInDate}
+      onChange={handleCustomInputChange}
+      name="moveInDate"
+    />
+  }
+  minDate={tomorrow}
+/>
                   </div>
                 </div>
               </div>

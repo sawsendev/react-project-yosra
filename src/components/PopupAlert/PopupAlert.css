@@ -67,7 +67,7 @@ body.popup-open {
   font-size: 16px;
   margin-bottom: 20px;
 }
-.popupalert .popup-body button {
+.btn {
   background: black;
   color: white;
   border: none;
@@ -159,4 +159,7 @@ body.popup-open {
     font-size: 16px;
     margin: 0;
   }
+}
+.react-datepicker__navigation {
+  margin: 7px;
 }

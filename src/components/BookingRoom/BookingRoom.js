@@ -142,6 +142,7 @@ const validateEmail = (email) => {
   
         if (response.ok) {
           setFormSubmitted(true);
+          window.scrollTo(0, 0);
           console.log("Request successfully sent. API Response:", response);
   
         } else {
@@ -383,7 +384,7 @@ const validateEmail = (email) => {
      label: `${lotData.apartment.title} - ${lotData.title}`
    }
  ]}
- lotData={lotData}
+ 
 />)}
    <div className='container'>
     <div className="Booking-title mt-4 mb-5">

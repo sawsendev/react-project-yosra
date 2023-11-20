@@ -49,7 +49,14 @@ const Cms = () => {
         {/* Ajoutez d'autres balises meta selon vos besoins */}
       </Helmet>
 
-      <Breadcrumbs path={`/${slug}`} />
+      <Breadcrumbs 
+      path={`/`}
+      customRoutes={[
+        {
+          path:`/page/${slug}`,
+          label: `${slug}`
+        }
+      ]}/>
 
       <div className='Cms-container'>
         <div className='container'>

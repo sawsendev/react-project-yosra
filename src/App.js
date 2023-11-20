@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route} from 'react-router-dom';
+import { BrowserRouter, Routes, Route,Switch} from 'react-router-dom';
 import React from 'react';
 import "./App.css"
 import Faq from "./components/HomePage/Faq/Faq";
@@ -24,19 +24,20 @@ function App() {
       <BrowserRouter>
         <NavBar/>
     
-
+       
       <Routes>
+    
         <Route path='/' index element={<Homepage/>} /> 
         <Route path="/search-cities" element={<SearchCities/>} /> 
-        <Route path="/:slug" element={<Cms/>} /> 
+        <Route path="/page/:slug" element={<Cms/>} /> 
         <Route path="/faq" element={<Faqspage/>} />     
-        <Route path="*" element={<ErrorPage/>} /> 
         <Route path="/room/:id" element={<Room/>} /> 
         <Route path="/contact" element={<Contact/>} /> 
         <Route path="/booking-enquiry/:id" element={<BookingRoom/>} /> 
         <Route path="/i-propose-an-apartment" element={<ProposeApartment/>}/>
-       
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
+    
       <Faq/>
       <Footer/>
     
