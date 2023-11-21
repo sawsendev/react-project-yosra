@@ -119,8 +119,7 @@
     font-size: 15px;
 }
 .btn-char img {
-    height: 22px;
-    width: auto;
+    
     margin-right: 12px;
 }
 .amenities .btn-char img {
@@ -475,4 +474,8 @@
     width: 15px;
     height: 15px;
     margin-right: 10px; 
+}
+.opt-room-icons{
+    height:24px;
+    width:24px;
 }

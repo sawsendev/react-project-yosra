@@ -99,7 +99,9 @@ const PopupAlert =  (props) => {
     })
       .then(async (response) => {
         if (response.ok) {
-          return response.json();
+          const responseData = await response.json();
+          console.log('Réponse de l\'API en cas de succès:', responseData);
+          return responseData;
         } else {
           const errorData = await response.json();
           throw new Error(errorData.data.message);
@@ -107,15 +109,17 @@ const PopupAlert =  (props) => {
       })
       .then((data) => {
         setIsSubmitted(true);
+        console.log("Requête effectuée avec succès");
         displayPopup('Thank you for your message! We will get in touch soon.');
         setStatus('success');
       })
       .catch((error) => {
-        console.error('Error submitting the form:', error);
+        console.error('Erreur lors de la soumission du formulaire:', error);
         displayPopup('Error, please try again: ' + error.message);
         setStatus('error');
       });
   };
+  
   
   
   

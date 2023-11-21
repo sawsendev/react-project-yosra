@@ -54,6 +54,12 @@ import building from '../../assets/room/icons/payment.png'
 import Crib from '../Crib/Crib'
 import CribMap from '../SearchCities/MapContainer/CribMap'
 import ErrorPage from '../404/ErrorPage'
+import bathroom from "../../assets/room/icons/wash-basin (1).png"
+import desk from "../../assets/room/icons/working.png"
+import chair from "../../assets/room/icons/chair.png"
+import closet from "../../assets/room/icons/closet.png"
+import bed from "../../assets/room/icons/bed.png"
+import furniture from "../../assets/room/icons/living-room.png"
 
 
 
@@ -307,11 +313,18 @@ const Room = () => {
                  { title: "Double bed", icon: doublebed },
                  { title: "Wardrobe", icon: wardrobe },
                  { title: "Sofa", icon: sofa },
+                 { title: "Private bathroom", icon: bathroom },
+                 { title: "Desk", icon: desk },
+                 { title: "Chair", icon: chair },
+                 { title: "Closet", icon: closet },
+                 { title: "Bed", icon: bed },
+                 { title: "Room furniture", icon: furniture }
+
               
                  ].map((option) => (
                  lotData.options.some((opt) => opt.title_en === option.title) && (
                  <div className='btn-char' key={option.title}>
-                 <img src={option.icon} alt={option.title} />
+                 <img src={option.icon} alt={option.title} className='opt-room-icons'/>
                  {option.title}
                  </div>
                  )
@@ -345,7 +358,7 @@ const Room = () => {
                  ].map((char) => (
                  lotData.apartment.options.some((option) => option.title_en === char.title) && (
                  <div className='btn-char' key={char.title}>
-                 <img src={char.icon} alt={char.title} />
+                 <img src={char.icon} alt={char.title} className='opt-room-icons'/>
                  {char.title}
                  </div>
                  )
