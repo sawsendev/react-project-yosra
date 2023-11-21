@@ -206,7 +206,7 @@ const Room = () => {
     if (descriptionRef.current) {
       const height = descriptionRef.current.clientHeight;
       if (height > 400) {
-        setDescriptionHeight('350px');
+        setDescriptionHeight('355px');
       } else {
         setDescriptionHeight('auto');
       }
@@ -297,7 +297,7 @@ const Room = () => {
             <div dangerouslySetInnerHTML={{ __html: lotData.description }} />
           </div>
         )}
-        {descriptionHeight === '350px' && (
+        {descriptionHeight === '355px' && (
           <div className='showmore' onClick={handleShowMoreClick}>
             {showMore ? 'Read Less' : 'Read More'}
           </div>
@@ -305,8 +305,16 @@ const Room = () => {
       </div>
               <div className='amenities'>
               <h2>Amenities</h2>
-                {lotData &&lotData.options && Object.keys(lotData.options).length > 0 &&(
-                <h3>Room</h3>)}
+              {lotData && lotData.options && Object.keys(lotData.options).length > 0 && (
+  <>
+    {Object.keys(lotData.options).every((optionId) => {
+      const id = parseInt(optionId);
+      return (id !== 71 || id !== 74 || id !== 75 ||id !==73);
+    }) && Object.keys(lotData.options).length !== 4 && <h3>Room</h3>}
+  </>
+)}
+
+
                 {lotData.options && (
                <div className='characteristics pieces mb-4'>
                 {[

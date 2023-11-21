@@ -191,8 +191,6 @@ const Search = () => {
   };
   
   const handleIconClick = () => {
-
-    // Handle your close icon logic here
     setIsSliderVisible(false);
   };
   
@@ -210,6 +208,9 @@ const Search = () => {
   tomorrow.setDate(tomorrow.getDate() + 1);
   console.log('Valeur de priceRange[0] :', priceRange[0]);
   console.log('Valeur de priceRange[1] :', priceRange[1]);
+  const handleSliderClick = (e) => {
+    e.stopPropagation();
+  };
   
   return (
     <div className='Search-container'>
@@ -251,39 +252,36 @@ const Search = () => {
               <label htmlFor="price">Price range</label>
               
               <div className='select-wrapper'>
-  <div className='select-container'>
-    <Select
-      styles={customStyles}
-      onMenuOpen={handleSliderOpen}
-      onMenuClose={handleIconClick}
-      options={[]}
-      onChange={() => {}}
-      menuIsOpen={isMenuOpen}
-      value={selectValue}
-      isSearchable={false}
-      placeholder="Select a price range"
-      menuPortalTarget={document.body} // Render the menu outside of the normal DOM hierarchy
-      
-    />
-  </div>
+              <div className='select-container'>
+  <Select
+    styles={customStyles}
+    onMenuOpen={handleSliderOpen}
+    options={[]}
+    onChange={() => {}}
+    value={selectValue}
+    isSearchable={false}
+    placeholder="Select a price range"
+    closeMenuOnSelect={false}
+    isDisabled={isSliderVisible} // Désactive le Select lors de l'ouverture du slider
+  />
+</div>
 
-  {isSliderVisible && (
-    <div className='slider-container container'>
-      {/* Close icon */}
-      <div className='d-flex flex-row-reverse flex-wrap align-content-center justify-content-between'> 
+{isSliderVisible && (
+  <div className='slider-container container'>
+    {/* Close icon */}
+    <div className='d-flex flex-row-reverse flex-wrap align-content-center justify-content-between'> 
       <AiOutlineClose className='close-icon' onClick={() => setIsSliderVisible(false)} />
       <h5>Price per month</h5>
-      </div>
-      <div className='price'>
-        <Slider
-          min={0} 
-          max={max}
-          value={priceRange}
-          onChange={handlePriceRangeChange}
-          range
-        />
-      </div>
-
+    </div>
+    <div className='price'>
+      <Slider
+        min={0} 
+        max={max}
+        value={priceRange}
+        onChange={handlePriceRangeChange}
+        range
+      />
+    </div>
       <div>
         <span className='price-range-input'>
           <label>{priceRange[0]}€</label>
