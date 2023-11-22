@@ -5,9 +5,10 @@ import Crib from '../../Crib/Crib';
 import { useLocation, useNavigate } from 'react-router-dom';
 import noRooms from "../../../assets/Group 24.svg";
 import CribMap from '../MapContainer/CribMap';
-import loading1 from '../../../assets/Fichier-1.gif'
+import loading1 from '../../../assets/Fichier-1.gif';
 import axios from "axios";
 import { format } from 'date-fns';
+
 const Cribes = () => {
   const [cribsData, setCribsData] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
@@ -15,135 +16,41 @@ const Cribes = () => {
   const [dataLoaded, setDataLoaded] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
-  const [loading, setLoading] = useState(false)
-  const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
-  const API_URL2 = 'https://admin.finecribs.com/api/lots/search';
-  const API_URL3 = " https://admin.finecribs.com/api/lots/maps"
+  const [loading, setLoading] = useState(false);
+  const [API_KEY] = useState('a2b18f9cfb72eb93f3ce6b1c30372b59');
+  const [API_URL2] = useState('https://admin.finecribs.com/api/lots/search');
+  const [API_URL3] = useState('https://admin.finecribs.com/api/lots/maps');
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const navigate = useNavigate();
-  const [mapData , setMapData]=useState({});
-  const [zoom,setZoom]=useState(14)
+  const [mapData, setMapData] = useState({});
+  const [zoom, setZoom] = useState(14);
   const cityParam = searchParams.get('city');
   const dateParam = searchParams.get('date');
   const priceMinParam = searchParams.get('priceMin');
   const priceMaxParam = searchParams.get('priceMax');
   const sortByParam = searchParams.get('sortBy');
   const searchParamsExist = cityParam || dateParam || priceMinParam || priceMaxParam || sortByParam;
+   const [latitude, setLatitude] = useState(); // Added missing state declaration
+  const [longitude, setLongitude] = useState(); 
+
   function formatDate(dateParam) {
     const dateObject = new Date(dateParam);
     const formattedDate = `${dateObject.getDate()}-${(dateObject.getMonth() + 1).toString().padStart(2, '0')}-${dateObject.getFullYear()}`;
     return formattedDate;
   }
-  useEffect(() => {
-    const fetchMapData = async () => {
-      const formData = {
-        city: cityParam,
-        date: formatDate(dateParam),
-        price_min: priceMinParam,
-        price_max: priceMaxParam,
-        sortBy: sortByParam,
-      };
-  
-      try {
-        const response = await fetch(`${API_URL3}`, {
-          method: "POST",
-          headers: {
-            'Content-Type': 'application/json',
-            'apiKey': API_KEY,
-          },
-          body: JSON.stringify(formData),
-        });
-  
-        if (response.ok) {
-          const data = await response.json();
-          setMapData(data.data.lots);
-          console.log(data);
-  
-          const dataArray = Array.isArray(data.data.lots)
-            ? data.data.lots
-            : Object.values(data.data.lots);
-  
-          // Mapper dataArray pour obtenir un tableau de tableaux avec id, latitude et longitude
-          const coordinatesArray = dataArray.map(item => [
-            item.id,
-            item.apartment.building.latitude,
-            item.apartment.building.longitude
-          ]);
-  
-          console.log('Coordinates Array:', coordinatesArray);
-  
-          // Mettre à jour l'état des coordonnées
-          setCoordinates(coordinatesArray);
-        } else {
-          console.error('Erreur de réponse HTTP :', response.status);
-          throw new Error('La requête a échoué avec un statut différent de 200');
-        }
-      } catch (error) {
-        console.error('Erreur lors de la récupération des données :', error);
-      }
-    };
-  
-   
-    fetchMapData();
-  }, [cityParam, dateParam, priceMinParam, priceMaxParam, sortByParam]);
-  
 
-const fetchDataFromAPI = async (page) => {
-  try {
-    const headers = {
-      'apiKey': `${API_KEY}`,
-    };
-    const response = await fetch(`${API_URL2}?page=${page}`, {
-      method: 'POST',
-      mode: 'cors',
-      headers,
-    });
-
-    const data = await response.json();
-
-    setLastPage(data.data.lots.last_page);
-
-    // Transformez data.data.lots.data en tableau si ce n'est pas déjà le cas
-    const dataArray = Array.isArray(data.data.lots.data)
-      ? data.data.lots.data
-      : Object.values(data.data.lots.data);
-
-    if (currentPage === 1) {
-      // Si c'est la première page, réinitialisez les données de recherche
-      setCribsData(dataArray);
-      console.log(dataArray);
-    } else {
-      // Sinon, ajoutez les nouvelles données de recherche
-      setCribsData((prevData) => [...prevData, ...dataArray]);
-      console.log(dataArray);
-    }
-
-    setDataLoaded(true);
-    
-  } catch (error) {
-    console.error('Erreur lors de la récupération des données :', error);
-  }
-   
-  if (currentPage === lastPage) {
-    // Mettez à jour loading1 lorsque toutes les données sont chargées
-    setLoading(false);
-  }
-};
-
-
-const fetchDataFromAPI2 = async (page) => {
-  if (searchParamsExist) {
+  const fetchMapData = async () => {
     const formData = {
       city: cityParam,
-      date: dateParam,
+      date: formatDate(dateParam),
       price_min: priceMinParam,
       price_max: priceMaxParam,
       sortBy: sortByParam,
     };
 
     try {
-      const response = await fetch(`${API_URL2}?page=${page}`, {
+      const response = await fetch(`${API_URL3}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -154,19 +61,53 @@ const fetchDataFromAPI2 = async (page) => {
 
       if (response.ok) {
         const data = await response.json();
-        setLastPage(data.data.lots.last_page);
+        setMapData(data.data.lots);
 
-        // Transformez data.data.lots.data en tableau si ce n'est pas déjà le cas
+        const dataArray = Array.isArray(data.data.lots)
+          ? data.data.lots
+          : Object.values(data.data.lots);
+
+        const coordinatesArray = dataArray.map(item => [
+          item.id,
+          item.apartment.building.latitude,
+          item.apartment.building.longitude
+        ]);
+
+        setCoordinates(coordinatesArray);
+      } else {
+        console.error('Erreur de réponse HTTP :', response.status);
+        throw new Error('La requête a échoué avec un statut différent de 200');
+      }
+    } catch (error) {
+      console.error('Erreur lors de la récupération des données :', error);
+    }
+  };
+
+  const fetchDataFromAPI = async (page) => {
+    try {
+      const headers = {
+        'apiKey': `${API_KEY}`,
+      };
+  
+      const response = await fetch(`${API_URL2}?page=${page}`, {
+        method: 'POST',
+        mode: 'cors',
+        headers,
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+  
+        setLastPage(data.data.lots.last_page);
+  
         const dataArray = Array.isArray(data.data.lots.data)
           ? data.data.lots.data
           : Object.values(data.data.lots.data);
-
+  
         if (currentPage === 1) {
-          // Si c'est la première page, réinitialisez les données de recherche
-          setSearchResult(dataArray);
+          setCribsData(dataArray);
         } else {
-          // Sinon, ajoutez les nouvelles données de recherche
-          setSearchResult((prevData) => [...prevData, ...dataArray]);
+          setCribsData((prevData) => [...prevData, ...dataArray]);
         }
       } else {
         console.error('Erreur de réponse HTTP :', response.status);
@@ -175,73 +116,81 @@ const fetchDataFromAPI2 = async (page) => {
     } catch (error) {
       console.error('Erreur lors de la récupération des données :', error);
     } finally {
-      
       setLoading(false);
-     
       setDataLoaded(true);
     }
-  }
-};
+  };
+  
+  
+  console.log(cribsData)
 
+  const fetchDataFromAPI2 = async (page) => {
+    if (searchParamsExist) {
+      const formData = {
+        city: cityParam,
+        date: dateParam,
+        price_min: priceMinParam,
+        price_max: priceMaxParam,
+        sortBy: sortByParam,
+      };
 
-  console.log(dataLoaded)
-  console.log(coordinates)
+      try {
+        const response = await fetch(`${API_URL2}?page=${page}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apiKey': API_KEY,
+          },
+          body: JSON.stringify(formData),
+        });
 
+        if (response.ok) {
+          const data = await response.json();
+          setLastPage(data.data.lots.last_page);
+
+          const dataArray = Array.isArray(data.data.lots.data)
+            ? data.data.lots.data
+            : Object.values(data.data.lots.data);
+
+          if (currentPage === 1) {
+            setSearchResult(dataArray);
+          } else {
+            setSearchResult((prevData) => [...prevData, ...dataArray]);
+          }
+        } else {
+          console.error('Erreur de réponse HTTP :', response.status);
+          throw new Error('La requête a échoué avec un statut différent de 200');
+        }
+      } catch (error) {
+        console.error('Erreur lors de la récupération des données :', error);
+      } finally {
+        setLoading(false);
+        setDataLoaded(true);
+      }
+    }
+  };
+   console.log(searchResult)
   const handleScroll = () => {
-  if (window.innerHeight + window.scrollY < document.documentElement.offsetHeight && currentPage < lastPage) {
-    setCurrentPage(currentPage + 1);
-    setLoading(true);
-  }
-};
-
-
-console.log(cribsData)
-  
- console.log(currentPage)
- console.log(lastPage)
-  useEffect(() => {
-    if (!searchParamsExist) {
-      navigate('/search-cities');
-      fetchDataFromAPI(currentPage);
+    if (window.innerHeight + window.scrollY < document.documentElement.offsetHeight && currentPage < lastPage && !loading) {
+      setCurrentPage(currentPage + 1);
+      setLoading(true);
     }
-    else{
-      fetchDataFromAPI2(currentPage);
-    }
-  }, [currentPage,searchParamsExist]);
-
-  useEffect(() => {
-    // Attachez le gestionnaire d'événements de scroll à la fenêtre
-    window.addEventListener('scroll', handleScroll);
-
-    // Assurez-vous de retirer l'écouteur lorsque le composant est démonté
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [currentPage, lastPage]);
-  
-
-  console.log(searchResult)
-  console.log(cityParam) 
-  const [latitude, setLatitude] = useState();
-  const [longitude, setLongitude] = useState();
+  };
 
   const handleGetCoordinates = async (city) => {
-    if(!city){
-      city="Bastia"
-      setZoom(6)
+    if (!city) {
+      city = 'Bastia';
+      setZoom(6);
     }
     const url = `https://nominatim.openstreetmap.org/search?format=json&q=${city}`;
-  
+
     try {
-     
       const response = await axios.get(url);
       if (response.status === 200) {
         const data = response.data;
-        console.log('API Response:', data); // Log the API response data
         if (data && data.length > 0) {
           setLatitude(parseFloat(data[0].lat));
           setLongitude(parseFloat(data[0].lon));
-          console.log('Received coordinates:', data[0].lat, data[0].lon);
         } else {
           console.log('No data found for the city.');
         }
@@ -252,17 +201,38 @@ console.log(cribsData)
       console.error('Error fetching data from OpenStreetMap API:', error);
     }
   };
-  useEffect(() => {
-   handleGetCoordinates(cityParam);
-  }, [cityParam]);
 
+  useEffect(() => {
+    fetchMapData();
+  }, [cityParam, dateParam, priceMinParam, priceMaxParam, sortByParam]);
+
+  useEffect(() => {
+    if (!searchParamsExist) {
+      navigate('/search-cities');
+      fetchDataFromAPI(currentPage);
+    } else {
+      fetchDataFromAPI2(currentPage);
+    }
+  }, [currentPage, searchParamsExist]);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [currentPage, handleScroll, lastPage]);
+
+  useEffect(() => {
+    handleGetCoordinates(cityParam);
+  }, [cityParam]);
 
   const redirect = () => {
     let redirectTo = '/search-cities';
     if (cityParam) {
       redirectTo += `?city=${cityParam}`;
     }
-    window.location.href=redirectTo ;
+    window.location.href = redirectTo;
   };
 
   return (
@@ -275,65 +245,57 @@ console.log(cribsData)
         </h2>
       )}
 
-    
- 
-     <div  className='content-page'>
-  <div className='row row-cribes'>
-    <div className='col-lg-7'>
-  
-    {!dataLoaded && (
-    <div className="container">
-    <div className='left d-flex '>
-        <img src={loading1} alt="Loading" style={{width:"70px", height:"70px",  margin: "120px auto"}}/>
-        </div>
-        </div>
-     ) }
-      {dataLoaded ? (
-        searchParamsExist && searchResult.length > 0 ? (
-          <Crib cribs={searchResult} />
-        ) : (
-          !searchParamsExist && cribsData.length > 0 ? (
-            <Crib cribs={cribsData} />
-          ) : (
-            <div className='container'>
-              <div className='No-rooms-content'>
+      <div className='content-page'>
+        <div className='row row-cribes'>
+          <div className='col-lg-7'>
+            {!dataLoaded && (
+              <div className="container">
                 <div className='left d-flex '>
-                  <img className='ImageNoRooms' src={noRooms} alt='no rooms icon' />
-                  <span>No rooms available</span>
-                  {dateParam && (
-                  <button className='button'>Show first availabilities</button>)}
+                  <img src={loading1} alt="Loading" style={{ width: "70px", height: "70px", margin: "120px auto" }} />
                 </div>
               </div>
-            </div>
-          )
-        )
-      ) : null}
-       {loading && (
-        <div className="container">
-          <div className='left d-flex '>
-            <img src={loading1} alt="Loading" style={{ width: "70px", height: "70px", margin: "0 auto" }} />
+            )}
+            {dataLoaded ? (
+              searchParamsExist && searchResult.length > 0 ? (
+                <Crib cribs={searchResult} />
+              ) : (
+                !searchParamsExist && cribsData.length > 0 ? (
+                  <Crib cribs={cribsData} />
+                ) : (
+                  <div className='container'>
+                    <div className='No-rooms-content'>
+                      <div className='left d-flex '>
+                        <img className='ImageNoRooms' src={noRooms} alt='no rooms icon' />
+                        <span>No rooms available</span>
+                        {dateParam && (
+                          <button className='button'>Show first availabilities</button>)}
+                      </div>
+                    </div>
+                  </div>
+                )
+              )
+            ) : null}
+            {loading && (
+              <div className="container">
+                <div className='left d-flex '>
+                  <img src={loading1} alt="Loading" style={{ width: "70px", height: "70px", margin: "0 auto" }} />
+                </div>
+              </div>
+            )}
           </div>
-        </div>
-      )}
-    </div>
-
-
-
 
           <div className='Maps col-lg-5'>
             <div className={`maps-block`}>
-            
-            {longitude && latitude && (
-            <CribMap
-  coordinates={coordinates}
-  showPopup={true}
-  data={searchParamsExist ? searchResult : cribsData}
-  longitude={longitude}
-  latitude={latitude}
-  zoom={zoom}
-
-/>)}
-
+              {longitude && latitude && (
+                <CribMap
+                  coordinates={coordinates}
+                  showPopup={true}
+                  data={searchParamsExist ? searchResult : cribsData}
+                  longitude={longitude}
+                  latitude={latitude}
+                  zoom={zoom}
+                />
+              )}
             </div>
           </div>
         </div>
