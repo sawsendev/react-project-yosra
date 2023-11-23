@@ -6,6 +6,7 @@ import {IoIosArrowDown, IoIosArrowUp} from 'react-icons/io'
 import {BsArrowRightShort} from 'react-icons/bs';
 import { IoCloseOutline } from "react-icons/io5";
 import Modal from 'react-modal';
+import { Helmet } from 'react-helmet';
 
 const Faqspage = () => {
      const [toggleState, setToggleState] = useState(1);
@@ -79,6 +80,9 @@ const Faqspage = () => {
 
 return ( 
     <div id='faq'>
+     <Helmet>
+          <title>FAQ</title>
+     </Helmet>
      <Breadcrumbs/>
      <div className='container FaqpagesContainer'>
      <h1 className='text-center my-5'>Frequently asked questions</h1>

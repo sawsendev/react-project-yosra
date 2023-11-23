@@ -25,6 +25,7 @@ import { useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import calendarIcon from '../../assets/calendar.svg'; 
+import { Helmet } from 'react-helmet';
 
 const BookingRoom = () => {
 // ************************
@@ -374,6 +375,9 @@ const validateEmail = (email) => {
 
   return (
     <>
+    <Helmet>
+      <title>Booking Room</title>
+    </Helmet>
    
     {lotData && lotData.apartment && lotData.apartment.title && lotData.title && (
  <Breadcrumbs

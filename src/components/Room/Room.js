@@ -60,6 +60,7 @@ import chair from "../../assets/room/icons/chair.png"
 import closet from "../../assets/room/icons/closet.png"
 import bed from "../../assets/room/icons/bed.png"
 import furniture from "../../assets/room/icons/living-room.png"
+import { Helmet } from 'react-helmet'
 
 
 
@@ -230,6 +231,9 @@ const Room = () => {
 
     return (
       <>
+      <Helmet>
+        <title>Room</title>
+      </Helmet>
       {lotData && lotData.apartment && lotData.apartment.title && lotData.title && (
       <Breadcrumbs path={`/${lotData.apartment.title} - ${lotData.title}`}/> )}
       <div className='pageroom-container'>

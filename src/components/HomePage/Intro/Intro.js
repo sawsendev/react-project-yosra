@@ -40,7 +40,7 @@ const Intro = () => {
   
    
   const handleClick = () => {
-    const formattedDate = date ? format(new Date(date), 'dd-MM-yyyy') : '';
+    const formattedDate = date ? format(new Date(date), 'yyyy-MM-dd') : '';
     const searchParams = new URLSearchParams({ city, date: formattedDate }).toString();
     const url = `/search-cities?${searchParams}`;
     navigate(url);

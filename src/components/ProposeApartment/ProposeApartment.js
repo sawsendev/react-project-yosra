@@ -29,6 +29,7 @@ import process4 from '../../assets/process/process4.svg'
 import process5 from '../../assets/process/process5.svg'
 import { LiaEnvelope } from "react-icons/lia";
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 
 const ProposeApartment =()=> {
@@ -45,6 +46,9 @@ const ProposeApartment =()=> {
   const navigate=useNavigate();
   return (
     <>
+    <Helmet>
+      <title>I Propose An Apartment</title>
+    </Helmet>
     <Breadcrumbs />
 
     <div className='page-container'>
