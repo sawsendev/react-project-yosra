@@ -16,7 +16,7 @@ const SelectCity = ({ onChange, city ,text }) => {
     }
 
     fetchDataFromAPI();
-  }, []); 
+  }, [city]); 
 
 
   const fetchDataFromAPI = async () => {

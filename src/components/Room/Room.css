@@ -11,7 +11,7 @@
 .pageroom-container .carousel-images {
     position: relative;
 }
-.pageroom-container .carousel-images img {
+.pageroom-container .carousel-images .img {
     height: 503px;
     width: 100%;
     border-radius: 10px;

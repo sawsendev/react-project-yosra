@@ -339,9 +339,19 @@ const Room = () => {
                  <img src={option.icon} alt={option.title} className='opt-room-icons'/>
                  {option.title}
                  </div>
+                 
                  )
                  ))}
+                    {lotData.apartment.options.some((opt) => opt.title_en === "Blanket & Pillows") && (
+      <div className='btn-char' key="Blanket & Pillows">
+        {/* Ajouter l'icône appropriée */}
+        <img src={pillow} alt="Blanket & Pillows" className='opt-room-icons' />
+        Blanket & Pillows
+      </div>
+    )}
+  
                  </div>
+                 
                  )}
                  {lotData.apartment &&lotData.apartment.options && Object.keys(lotData.apartment.options).length > 0 &&(
                  <h3>Apartment</h3>)}
@@ -362,7 +372,6 @@ const Room = () => {
                  { title: "Microwave", icon: microwave },
                  { title: "Shower", icon: shower },
                  { title: "Washing machine", icon: washer },
-                 { title: "Blanket & Pillows", icon: pillow },
                  { title: "Dryer", icon: dryer },
                  { title: "Vacuum cleaner", icon: vacuum },
                  { title: "Ironing set", icon: ironing },

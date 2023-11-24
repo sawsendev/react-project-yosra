@@ -203,8 +203,14 @@ const Cribes = () => {
   };
 
   useEffect(() => {
+    if(searchParams)
     fetchMapData();
   }, [cityParam, dateParam, priceMinParam, priceMaxParam, sortByParam]);
+ 
+  useEffect(() => {
+    if(!searchParams)
+    fetchMapData();
+  }, []);
 
   useEffect(() => {
     if (!searchParamsExist) {

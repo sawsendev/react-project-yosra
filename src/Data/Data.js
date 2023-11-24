@@ -463,7 +463,7 @@ export const FaqspageTableRenting = [
         id:4,
         title:"Are there any costs related to my booking?",
         answer:`<p>All the rooms listed on Fine Cribs are managed directly by us, which means that Fine Cribs will be your primary point of contact. When you book directly on <a href='https://finecribs.com/' target='_blank'>finecribs.com</a> there are no additional agents involved. However, please note that partner websites like Studapart and Housinganywhere may apply their own fees if you choose to book through them.</p>
-        <p>Our only fee is an administration fee, which is intended to cover the costs associated with processing your application, preparing the tenancy agreement, facilitating your check-in, check-out, and inventory procedures, and providing administrative assistance throughout your stay. We aim to ensure a seamless and hassle-free experience for our tenants.</p>`,  
+        <p>Our only fee is an application fee, which is intended to cover the costs associated with processing your application, preparing the tenancy agreement, facilitating your check-in, check-out, and inventory procedures, and providing administrative assistance throughout your stay. We aim to ensure a seamless and hassle-free experience for our tenants.</p>`,  
         src:""
     },
     {
@@ -476,8 +476,8 @@ export const FaqspageTableRenting = [
     },
     {
         id:6,
-        title:"What does the administraiton fee cover?",
-        answer:`<p>The administration fee is intended to cover a variety of costs associated with the onboarding of prospective tenants and ensuring the efficient operation of our services. It encompasses:</p>
+        title:"What does the application fee  cover?",
+        answer:`<p>The application fee is intended to cover a variety of costs associated with the onboarding of prospective tenants and ensuring the efficient operation of our services. It encompasses:</p>
         <ol><li><strong>Tenants Onboarding:</strong> This includes processing applications, drafting the tenancy agreement, and covering third-party costs related to the digital signature of both the tenancy agreement and the inventory.</li>
         <li><strong>Check-in and Check-out:</strong> Our staff will contact you to organize both check-in and check-out. At check-in, you will be personally welcomed at the apartment by our staff.</li>
         <li><strong>Entry and Exit Inventory:</strong> You will conduct a detailed inventory of the apartment with a member of our staff both at check-in and check-out.</li>

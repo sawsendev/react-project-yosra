@@ -48,7 +48,7 @@ const Footer = () => {
           <div className='d-flex justify-content-between align-items-center gap-3'>
               <div className='First'>
                   <p><a href={`/search-cities?${searchParams.toString()}`}>Our apartments in Nice</a></p>
-                  <p><a href={`/search-cities?${searchParamsParis.toString()}`}>Our apartments in Paris</a></p>
+                  <p><a href={`/search-cities`}>All our apartments</a></p>
               </div>
               <div className='Second'>
                   <p><a href={`/search-cities?${searchParamsFlorence.toString()}`}>Our apartments in Florence</a></p>
@@ -97,7 +97,7 @@ const Footer = () => {
             <div className='Footer-content'>
               <div className='First'>
               <p><a href={`/search-cities?${searchParams.toString()}`}>Our apartments in Nice</a></p>
-              <p><a href={`/search-cities?${searchParamsParis.toString()}`}>Our apartments in Paris</a></p>
+              <p><a href={`/search-cities`}>All our apartments</a></p>
                 </div>
                 <div className='Second'>
                 <p><a href={`/search-cities?${searchParamsFlorence.toString()}`}>Our apartments in Florence</a></p>
@@ -151,7 +151,7 @@ const Footer = () => {
 
       {/* Horizontal Line and Copyright */}
       <div className='Copyright'>
-  <p className='m-0 text-center'>Copyright {new Date().getFullYear()} - Oxton Digital</p>
+  <p className='m-0 text-center'>Copyright {new Date().getFullYear()} </p>
     </div>
 
       {/* PopupAlert */}

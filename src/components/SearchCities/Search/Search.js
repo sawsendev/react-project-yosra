@@ -157,9 +157,10 @@ const Search = () => {
     if (priceMinParam && priceMaxParam) {
       setPriceRange([parseInt(priceMinParam), parseInt(priceMaxParam)]);
     }
-    if (priceMaxParam) {
+    if (priceMaxParam && priceMinParam) {
       const parsedMax = parseInt(priceMaxParam);
-      setPriceRange([0, parsedMax]);
+      const parcedMin=parseInt(priceMinParam)
+      setPriceRange([parcedMin, parsedMax]);
     }
   }, [location.search]);
   const handlePriceRangeChange = (newValue) => {

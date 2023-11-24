@@ -676,7 +676,7 @@ const validateEmail = (email) => {
     <div className='col-md-8 col-sm-12 thank'>
       <img src={image} alt="description" />
       <p className='text-center mt-3 px-3 mx-5'>
-        Thank you {formData.surname}, we have received your application. Our team is currently reviewing your file. We will get back to you shortly. Please check your email address {email}.
+        Thank you {formData.firstName}, we have received your application. Our team is currently reviewing your file. We will get back to you shortly. Please check your email address {email}.
       </p>
     </div>
     <div className='col-md-4 col-sm-12'>

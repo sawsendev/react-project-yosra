@@ -5,6 +5,7 @@ import 'react-multi-carousel/lib/styles.css';
 import { BsArrowRight, BsArrowLeft } from 'react-icons/bs';
 import { useParams } from 'react-router-dom';
 import default_img from '../../assets/noimage-197x197.svg';
+import promoImage from '../../assets/Group 104.svg';
 
 const CarrouselImages = () => {
   const { id } = useParams();
@@ -82,6 +83,11 @@ const CarrouselImages = () => {
 
   return (
     <div className='img-items'>
+        {lotData.promo && lotData.promo === 1 && (
+            <div className="promo-badge">
+              <img src={promoImage} alt='Promo' className='promo-image' />
+            </div>
+          )}
       {lotData && lotData.media && lotData.media.length > 0 ? (
         <Carousel
           ref={carouselRef}
@@ -93,7 +99,7 @@ const CarrouselImages = () => {
             (image.mime_type.startsWith('image') && image.collection_name !== 'floorpan') && (
               <div key={index} className='item-img'>
                 <LazyLoad height={500} offset={900}>
-                  <img src={image.original_url} alt={image.name} className="img-fluid" />
+                  <img src={image.original_url} alt={image.name} className="img-fluid img" />
                 </LazyLoad>
               </div>
             )
@@ -106,7 +112,8 @@ const CarrouselImages = () => {
       )}
 
       {lotData && lotData.media && lotData.media.length > 1 && (
-        <div className="button-container">
+        <div className="button-container" >
+        
           <div
             onClick={onClickPrev}
             onMouseUp={onMouseUp}

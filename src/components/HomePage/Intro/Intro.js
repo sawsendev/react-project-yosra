@@ -41,10 +41,17 @@ const Intro = () => {
    
   const handleClick = () => {
     const formattedDate = date ? format(new Date(date), 'yyyy-MM-dd') : '';
-    const searchParams = new URLSearchParams({ city, date: formattedDate }).toString();
-    const url = `/search-cities?${searchParams}`;
+    const searchParams = new URLSearchParams({ city });
+  
+    // Ajouter la date uniquement si elle n'est pas vide
+    if (formattedDate) {
+      searchParams.append('date', formattedDate);
+    }
+  
+    const url = `/search-cities?${searchParams.toString()}`;
     navigate(url);
   };
+  
   
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1); 
@@ -52,7 +59,7 @@ const Intro = () => {
   return (
     <div className='Intro-container d-block py-md-5 py-4 container-fluid mb-md-5 mb-4'>
       <div className='Content-container'>
-        <h1>we create beautiful spaces for communal living for you to</h1>
+        <h1>We create beautiful spaces designed for communal living where you can connect, explore and make new friends</h1>
         <h2>discover, share, and make new friends</h2>
         <div className='Input-container d-flex justify-content-between'>
           <div className='input-group input-country'>

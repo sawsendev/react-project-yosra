@@ -164,6 +164,9 @@ span.calendar-icon {
     top: 6px;
     z-index: 1;
 }
+div .css-1dimb5e-singleValue{
+    margin-top: -11px;
+}
 @media (min-width: 1400px) {
     .Form-city.col-lg-3 {
         width: 20.7%;
