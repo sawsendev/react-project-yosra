@@ -3,6 +3,7 @@ import Search from './Search/Search';
 import Cribes from './Cribes/Cribes';
 import CityResult from './CityResult/CityResult';
 import { useLocation } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const SearchCities = () => {
   // Obtenir l'URL actuelle
@@ -20,6 +21,9 @@ const SearchCities = () => {
     const city = cityParam.toLowerCase()
     return (
       <div>
+        <Helmet>
+          <title>Search Result Page</title>
+        </Helmet>
         <CityResult city={city} />
         <Search />
         <Cribes />

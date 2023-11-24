@@ -46,12 +46,12 @@ export const NavTable = [
     },
     {
         id: 2,
-        href: "Contact",
+        href: "contact",
         name: "CONTACT"
     },
     {
         id: 3,
-        href: "Faq",
+        href: "faq",
         name: "FAQ"
     },
 ]

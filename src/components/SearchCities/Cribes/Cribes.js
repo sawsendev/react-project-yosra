@@ -5,9 +5,9 @@ import Crib from '../../Crib/Crib';
 import { useLocation, useNavigate } from 'react-router-dom';
 import noRooms from "../../../assets/Group 24.svg";
 import CribMap from '../MapContainer/CribMap';
-import loading1 from '../../../assets/Fichier-1.gif';
+import loading1 from '../../../assets/load.gif';
 import axios from "axios";
-import { format } from 'date-fns';
+import { Helmet } from "react-helmet";
 
 const Cribes = () => {
   const [cribsData, setCribsData] = useState([]);
@@ -236,7 +236,11 @@ const Cribes = () => {
   };
 
   return (
+   
     <div className='Cribes-container container-fluid'>
+       <Helmet>
+        <title> Search Result Page </title>
+       </Helmet>
       {searchResult.length > 0 && (
         <h2>
           {cityParam
@@ -251,7 +255,7 @@ const Cribes = () => {
             {!dataLoaded && (
               <div className="container">
                 <div className='left d-flex '>
-                  <img src={loading1} alt="Loading" style={{ width: "70px", height: "70px", margin: "120px auto" }} />
+                  <img src={loading1} alt="Loading" style={{ width: "120px", height: "120px", margin: "120px auto" }} />
                 </div>
               </div>
             )}
@@ -278,7 +282,7 @@ const Cribes = () => {
             {loading && (
               <div className="container">
                 <div className='left d-flex '>
-                  <img src={loading1} alt="Loading" style={{ width: "70px", height: "70px", margin: "0 auto" }} />
+                  <img src={loading1} alt="Loading" style={{ width: "120px", height: "120px", margin: "0 auto" }} />
                 </div>
               </div>
             )}

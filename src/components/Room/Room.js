@@ -327,7 +327,7 @@ const Room = () => {
                  { title: "Sofa", icon: sofa },
                  { title: "Private bathroom", icon: bathroom },
                  { title: "Desk", icon: desk },
-                 { title: "Chair", icon: sofa },
+                 { title: "Armchair", icon: sofa },
                  { title: "Closet", icon: closet },
                  { title: "Bed", icon: bed },
                  { title: "Room furniture", icon: furniture }

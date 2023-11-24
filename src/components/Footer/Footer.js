@@ -64,8 +64,8 @@ const Footer = () => {
               <p><a href={'/contact'}>Contact us</a></p>
             </div>
             <div className='Second'>
-                <p><a href="/cms/page/cgu">Terms and conditions</a></p>
-                <p>Cookies alert</p>
+                <p><a href="/page/cgu">Terms and conditions</a></p>
+                <p><a href="/page/cookies-alert">Cookies alert</a></p>
             </div>
           </div>
         </div>
@@ -151,8 +151,9 @@ const Footer = () => {
 
       {/* Horizontal Line and Copyright */}
       <div className='Copyright'>
-        <p className='m-0 text-center'>Copyright 2022 - Oxton Digital</p>
-      </div>
+  <p className='m-0 text-center'>Copyright {new Date().getFullYear()} - Oxton Digital</p>
+    </div>
+
       {/* PopupAlert */}
 
       <PopupAlert isPopupOpen={isPopupOpen} onClose={closePopup}/>

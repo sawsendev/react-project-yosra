@@ -83,7 +83,7 @@ body.popup-open {
   border: 2px solid #000!important;
   transition: all .3s ease;
 }
-.popupalert .popup-body button:hover {
+.popupalert .popup-body .btn:hover {
   background: white;
   color: #000;
   font-weight: 600;
@@ -154,7 +154,7 @@ body.popup-open {
   .popupalert .popup-body {
     padding: 14px 6px 20px;
   }
-  .popupalert .popup-body button {
+  .popupalert .popup-body .btn {
     padding: 4px 40px;
     font-size: 16px;
     margin: 0;
