@@ -207,7 +207,7 @@ const Room = () => {
     if (descriptionRef.current) {
       const height = descriptionRef.current.clientHeight;
       if (height > 400) {
-        setDescriptionHeight('355px');
+        setDescriptionHeight('18.75rem');
       } else {
         setDescriptionHeight('auto');
       }
@@ -301,7 +301,7 @@ const Room = () => {
             <div dangerouslySetInnerHTML={{ __html: lotData.description }} />
           </div>
         )}
-        {descriptionHeight === '355px' && (
+        {descriptionHeight === '18.75rem' && (
           <div className='showmore' onClick={handleShowMoreClick}>
             {showMore ? 'Read Less' : 'Read More'}
           </div>
@@ -330,7 +330,8 @@ const Room = () => {
                  { title: "Armchair", icon: sofa },
                  { title: "Closet", icon: closet },
                  { title: "Bed", icon: bed },
-                 { title: "Room furniture", icon: furniture }
+                 { title: "Room furniture", icon: furniture },
+                 {title : "Blanket & Pillows" , icon:pillow}
 
               
                  ].map((option) => (
@@ -342,15 +343,7 @@ const Room = () => {
                  
                  )
                  ))}
-                    {lotData.apartment.options.some((opt) => opt.title_en === "Blanket & Pillows") && (
-      <div className='btn-char' key="Blanket & Pillows">
-        {/* Ajouter l'icône appropriée */}
-        <img src={pillow} alt="Blanket & Pillows" className='opt-room-icons' />
-        Blanket & Pillows
-      </div>
-    )}
-  
-                 </div>
+           </div>
                  
                  )}
                  {lotData.apartment &&lotData.apartment.options && Object.keys(lotData.apartment.options).length > 0 &&(

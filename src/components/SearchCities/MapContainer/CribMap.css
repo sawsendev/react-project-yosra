@@ -164,3 +164,7 @@ div.leaflet-marker-icon .custom-icon .leaflet-zoom-animated .leaflet-interactive
   color: #A0A9B2;
   margin-left: 0;
 }
+
+.room{
+  cursor:pointer;
+}

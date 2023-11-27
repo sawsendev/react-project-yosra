@@ -147,11 +147,11 @@ const Footer = () => {
             <img src={bell} alt='bell' />Create an alert
           </button>
         </div>
-      </div>
+      </div> 
 
       {/* Horizontal Line and Copyright */}
       <div className='Copyright'>
-  <p className='m-0 text-center'>Copyright {new Date().getFullYear()} </p>
+  <p className='m-0 text-center'>Copyright © {new Date().getFullYear()} Finecribs. Tous droits réservés Développé par <a href='https://oxton-digital.com/'>Oxton Digital</a></p>
     </div>
 
       {/* PopupAlert */}

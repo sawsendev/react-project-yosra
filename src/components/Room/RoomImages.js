@@ -83,7 +83,7 @@ const CarrouselImages = () => {
 
   return (
     <div className='img-items'>
-        {lotData.promo && lotData.promo === 1 && (
+        {lotData && lotData.promo && lotData.promo === 1 && (
             <div className="promo-badge">
               <img src={promoImage} alt='Promo' className='promo-image' />
             </div>

@@ -81,17 +81,17 @@ const CribMap = ({ coordinates, showPopup, data ,latitude,longitude,zoom  }) => 
                   )
                   .slice(0, 2)
                   .map((image, index) => (
-                    <Link to={`/room/${item.id}`} key={index}>
+                    <div className='room' onClick={() => (window.location.href =  `/room/${item.id}`)} key={index}>
                       <div>
                         <LazyLoad height={200} offset={100}>
                           <img className="img-fluid" src={image.original_url} alt="Im" />
                         </LazyLoad>
                       </div>
-                    </Link>
+                    </div>
                   ))}
               </Carousel>
             ) : (
-              <Link to={`/room/${item.id}`}>
+              <div className='room' onClick={() => (window.location.href =  `/room/${item.id}`)} key={index}>
                 <div>
                   <LazyLoad height={200} offset={100}>
                     <img
@@ -101,7 +101,7 @@ const CribMap = ({ coordinates, showPopup, data ,latitude,longitude,zoom  }) => 
                     />
                   </LazyLoad>
                 </div>
-              </Link>
+              </div>
             )}
           </div>
 
