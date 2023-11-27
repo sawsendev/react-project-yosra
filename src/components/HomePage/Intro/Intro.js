@@ -59,8 +59,8 @@ const Intro = () => {
   return (
     <div className='Intro-container d-block py-md-5 py-4 container-fluid mb-md-5 mb-4'>
       <div className='Content-container'>
-        <h1>We create beautiful spaces designed for communal living where you can connect, explore and make new friends</h1>
-        <h2>discover, share, and make new friends</h2>
+        <h1>We create beautiful spaces designed for communal living where you can </h1>
+        <h2>connect, explore and make new friends</h2>
         <div className='Input-container d-flex justify-content-between'>
           <div className='input-group input-country'>
          <SelectCity text='Where will you go?' onChange={(selectedValue) => setCity( selectedValue.value)} />
