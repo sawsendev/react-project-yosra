@@ -301,7 +301,7 @@ const Search = () => {
                   <option value="" disabled>Sorted by</option>
                   <option value="desc">Descending price</option>
                   <option value="asc">Ascending price</option>
-                  <option value="availability_date">Availability</option>
+                  <option value="av">Availability</option>
                 </select>
               </div>
             </div>
