@@ -65,8 +65,9 @@ const formatDate = (dateString) => {
   const date = new Date(dateString);
   const day = date.getDate();
   const month = date.getMonth() + 1; // Les mois commencent à 0
-  return `${day}/${month < 10 ? `0${month}` : month}`;
+  return `${day < 10 ? `0${day}` : day}/${month < 10 ? `0${month}` : month}`;
 };
+
    
   return (
     <li className='col-lg-4 col-md-6 col-12'>
