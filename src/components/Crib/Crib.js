@@ -63,8 +63,8 @@ const formattedDateAujourdhui = `${(dateAujourdhui.getDate() < 10 ? '0' : '')}${
 const formattedDateDemain = `${(dateDemain.getDate() < 10 ? '0' : '')}${dateDemain.getDate()}/${(dateDemain.getMonth() < 9 ? '0' : '')}${dateDemain.getMonth() + 1}/${dateDemain.getFullYear()}`;
 const formatDate = (dateString) => {
   const date = new Date(dateString);
-  const day = date.getDate();
-  const month = date.getMonth() + 1; // Les mois commencent à 0
+  const day = date.getUTCDate();
+  const month = date.getUTCMonth() + 1; // Les mois commencent à 0
   return `${day < 10 ? `0${day}` : day}/${month < 10 ? `0${month}` : month}`;
 };
 
@@ -74,12 +74,12 @@ const formatDate = (dateString) => {
       <div className='item-cribe'>
         <div className='Item-badge'>
         <Badge className='notify-badge'>
-        {
-  (crib.availability_date === formattedDateAujourdhui || crib.availability_date === formattedDateDemain)
-    ? 'Available Now'
-    : `Avail. on ${formatDate(crib.availability_date)}`
-}
-  </Badge>
+  {
+    (crib.availability_date === formattedDateAujourdhui || crib.availability_date === formattedDateDemain || new Date(crib.availability_date) < dateAujourdhui)
+      ? 'Available Now'
+      : `Avail. on ${formatDate(crib.availability_date)}`
+  }
+</Badge>
 
           {crib.promo && crib.promo === 1 && (
             <img src={promoImage} alt='Promo' className='promo-image' />

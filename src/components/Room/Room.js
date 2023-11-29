@@ -224,6 +224,13 @@ const Room = () => {
   const formattedDateAujourdhui = `${(dateAujourdhui.getDate() < 10 ? '0' : '')}${dateAujourdhui.getDate()}/${(dateAujourdhui.getMonth() < 9 ? '0' : '')}${dateAujourdhui.getMonth() + 1}/${dateAujourdhui.getFullYear()}`;
   
   const formattedDateDemain = `${(dateDemain.getDate() < 10 ? '0' : '')}${dateDemain.getDate()}/${(dateDemain.getMonth() < 9 ? '0' : '')}${dateDemain.getMonth() + 1}/${dateDemain.getFullYear()}`;
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getUTCDate();
+    const month = date.getUTCMonth() + 1; // Les mois commencent à 0
+    return `${day < 10 ? `0${day}` : day}/${month < 10 ? `0${month}` : month}`;
+  };
+  
   if (!lotData) {
     console.error('No lotData:', lotData); // Add this line for additional logging
     return <ErrorPage />;
@@ -471,9 +478,9 @@ const Room = () => {
               
                 <p className='head-widget'>
   <img src={check} alt="Available"/>
-  {(lotData && lotData.availability_date && (lotData.availability_date === formattedDateAujourdhui || lotData.availability_date === formattedDateDemain)) ? 
-    'Available Now' : 
-    `Available on ${(lotData.availability_date && lotData.availability_date.split('/').length > 1) ? lotData.availability_date.split('/')[0] : ''} / ${(lotData.availability_date && lotData.availability_date.split('/').length > 1) ? lotData.availability_date.split('/')[1] : ''}`
+  {(lotData && lotData.availability_date === formattedDateAujourdhui || lotData.availability_date === formattedDateDemain || new Date(lotData.availability_date) < dateAujourdhui)
+      ? 'Available Now'
+      : `Avail. on ${formatDate(lotData.availability_date)}`
   }
 </p>
 

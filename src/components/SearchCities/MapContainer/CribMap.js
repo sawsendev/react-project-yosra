@@ -30,8 +30,8 @@ const CribMap = ({ coordinates, showPopup, data ,latitude,longitude,zoom  }) => 
   dateDemain.setDate(dateAujourdhui.getDate() + 1);
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    const day = date.getDate();
-    const month = date.getMonth() + 1; // Les mois commencent à 0
+    const day = date.getUTCDate();
+    const month = date.getUTCMonth() + 1; // Les mois commencent à 0
     return `${day < 10 ? `0${day}` : day}/${month < 10 ? `0${month}` : month}`;
   };
   const formattedDateAujourdhui = `${(dateAujourdhui.getDate() < 10 ? '0' : '')}${dateAujourdhui.getDate()}/${(dateAujourdhui.getMonth() < 9 ? '0' : '')}${dateAujourdhui.getMonth() + 1}/${dateAujourdhui.getFullYear()}`;
@@ -70,7 +70,7 @@ const formattedDateDemain = `${(dateDemain.getDate() < 10 ? '0' : '')}${dateDema
         <div className='Item-badge'>
         <Badge className='notify-badge'>
         {
-  (item.availability_date === formattedDateAujourdhui || item.availability_date === formattedDateDemain)
+  (item.availability_date === formattedDateAujourdhui || item.availability_date === formattedDateDemain || new Date(item.availability_date) < dateAujourdhui)
     ? 'Available Now'
     : `Avail. on ${formatDate(item.availability_date)}`
 }
