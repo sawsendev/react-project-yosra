@@ -83,6 +83,7 @@ const Cribes = () => {
     }
   };
 
+  console.log(mapData)
   const fetchDataFromAPI = async (page) => {
     try {
       const headers = {

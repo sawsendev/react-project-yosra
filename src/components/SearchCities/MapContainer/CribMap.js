@@ -25,7 +25,18 @@ const CribMap = ({ coordinates, showPopup, data ,latitude,longitude,zoom  }) => 
       });
     }
   };
-  
+  const dateAujourdhui = new Date();
+  const dateDemain = new Date(dateAujourdhui);
+  dateDemain.setDate(dateAujourdhui.getDate() + 1);
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.getMonth() + 1; // Les mois commencent à 0
+    return `${day < 10 ? `0${day}` : day}/${month < 10 ? `0${month}` : month}`;
+  };
+  const formattedDateAujourdhui = `${(dateAujourdhui.getDate() < 10 ? '0' : '')}${dateAujourdhui.getDate()}/${(dateAujourdhui.getMonth() < 9 ? '0' : '')}${dateAujourdhui.getMonth() + 1}/${dateAujourdhui.getFullYear()}`;
+
+const formattedDateDemain = `${(dateDemain.getDate() < 10 ? '0' : '')}${dateDemain.getDate()}/${(dateDemain.getMonth() < 9 ? '0' : '')}${dateDemain.getMonth() + 1}/${dateDemain.getFullYear()}`;
  
     
   return (
@@ -57,15 +68,14 @@ const CribMap = ({ coordinates, showPopup, data ,latitude,longitude,zoom  }) => 
     <div className='popup_itemcribe'>
       <div className='item-cribe'>
         <div className='Item-badge'>
-        {item.rent_status ? (
-  <Badge className='notify-badge'>
-    {item.availability_date ? `Avail. on ${item.availability_date.split('/')[0]}/${item.availability_date.split('/')[1]}` : 'Available Now'}
+        <Badge className='notify-badge'>
+        {
+  (item.availability_date === formattedDateAujourdhui || item.availability_date === formattedDateDemain)
+    ? 'Available Now'
+    : `Avail. on ${formatDate(item.availability_date)}`
+}
   </Badge>
-) : (
-  <Badge className='notify-badge'>
-    Available Now
-  </Badge>
-)}
+
           {item.promo && item.promo === 1 && (
             <img src={promoImage} alt='Promo' className='promo-image' />
           )}
