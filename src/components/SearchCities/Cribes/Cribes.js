@@ -46,7 +46,7 @@ const Cribes = () => {
       date: formatDate(dateParam),
       price_min: priceMinParam,
       price_max: priceMaxParam,
-      sortBy: sortByParam,
+      
     };
 
     try {

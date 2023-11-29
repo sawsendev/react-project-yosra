@@ -500,7 +500,7 @@ export const FaqspageTableRenting = [
         <ol><li> Log into your Rentila space by following the link received in your inbox.</li>
         <li>Review and sign the tenancy agreement on Rentila.</li>
         <li>Upload your insurance certificate and provide your IBAN (which will be used for refunding your deposit).</li>
-        <li>Make payments for the 1st-month rent, the deposit, and the administration fee. If you've booked through a partner website, the 1st-month rent may have already been paid.</li>
+        <li>Make payments for the 1st-month rent, the deposit, and the application fee. If you've booked through a partner website, the 1st-month rent may have already been paid.</li>
         <li>Our staff will contact you to coordinate the check-in, which is possible from Monday to Friday between 9 a.m. and 6 p.m.</li>
         </ol><p class='p-video'>For more detailed instructions on how to view and sign the tenancy agreement, please refer to the video instructions in</p>`,  
         src:"" 
@@ -508,7 +508,7 @@ export const FaqspageTableRenting = [
     {
         id:1,
         title:"I have booked through an external website (e.g. Studapart, Housinganywhere. Do I still have to pay the first month at check-in?", 
-        answer:`<p>If you've booked through an external website, it's likely that you've already paid the first month's rent and, sometimes, also out administration fee. In this scenario, your responsibility before moving in is limited to paying the deposit and the administration fee. Please be aware that the external website will usually retain the first month's rent until your check-in. They will then transfer it to us, typically within 1-2 days after your check-in.</p>`,  
+        answer:`<p>If you've booked through an external website, it's likely that you've already paid the first month's rent and, sometimes, also out application fee. In this scenario, your responsibility before moving in is limited to paying the deposit and the application fee. Please be aware that the external website will usually retain the first month's rent until your check-in. They will then transfer it to us, typically within 1-2 days after your check-in.</p>`,  
         src:""
     },
     {

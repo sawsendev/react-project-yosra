@@ -411,7 +411,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
                     )}
                 </div> 
                 <div className='form-group'>
-                    <label className='form-label'>What is the surface? *</label>
+                    <label className='form-label'>What is the surface (m2) ? *</label>
                     <input className='form-control'
                         type="number"
                         name="surface"
@@ -455,7 +455,11 @@ const ProposeModal = ({ isOpen, closeModal }) => {
             <>
                 <div className='step3-form'>
                     <div className='form-group'>
-                        <label className='form-label'>Do you have photos, videos or a floorplan?</label>
+                        <label className='form-label'>Do you have photos, videos or a floorplan?
+                        <br/>
+                        We advise to attach recent photos of your property and ideally a floorplan to help us review your enquiry more efficiently
+                        </label>
+
                         <button type="button" className="box-input">
                             <img src={upload} alt='photos' />
                             <label>Choose files</label>
@@ -493,7 +497,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
               <>
                 <div className='step4-form'>
                     <div className='form-group message-form-group'>
-                        <label className='form-label'>Other information (e.g. condition, need for refurbishment) *</label>
+                        <label className='form-label'>Other useful information (e.g. property condition, special needs) *</label>
                         <div className='note'>Date of availability, desired rent, condition of the property, possible work to be planned….</div>
                         <textarea className='form-control'
                             type="text"
