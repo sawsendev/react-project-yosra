@@ -11,6 +11,7 @@
 .pageroom-container .carousel-images {
     position: relative;
 }
+
 .pageroom-container .carousel-images .img {
     height: 503px;
     width: 100%;
@@ -53,7 +54,14 @@
         top: 50%;
         transform: translateY(-50%);
     }
+   
 }
+@media(max-width:768px){
+.pageroom-container .carousel-images .img {
+    height: 100%;
+    width: 100%;
+
+}}
 .pageroom-container .btn-media img {
     width: auto;
     height: 28px!important;
@@ -392,7 +400,7 @@
         min-width: 112px;
     }
     .pageroom-container .carousel-images img {
-        height: 380px;
+        height: 43px;
     }
     .title h1 {
         font-size: 30px;

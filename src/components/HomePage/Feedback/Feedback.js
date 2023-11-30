@@ -27,10 +27,10 @@ const Feedback = () => {
   const feedbackItems = FeedbacksTable.map((feedback, index) => (
     <div key={index} className="feedback-icons-li d-flex gap-3 my-4">
       <div className="row  justify-content-between">
-        <div className="col-md-4">
+        <div className="col-sm-3 col-md-4 mb-3">
           <img src={feedback.src} alt="icons" className="" />
         </div>
-        <div className="feedback-icons-container col ps-1 pe-3">
+        <div className="feedback-icons-container col">
           <div className="feedback-icons-content">
             <span>{feedback.name}</span>
             <p>{feedback.content}</p>

@@ -35,18 +35,27 @@ const Cribes = () => {
   const [longitude, setLongitude] = useState(); 
 
   function formatDate(dateParam) {
+    if (!dateParam) {
+      return null; // Return null for null date
+    }
+  
     const dateObject = new Date(dateParam);
-    const formattedDate = `${dateObject.getDate()}-${(dateObject.getMonth() + 1).toString().padStart(2, '0')}-${dateObject.getFullYear()}`;
+  
+    const year = dateObject.getFullYear();
+    const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+    const day = dateObject.getDate().toString().padStart(2, '0');
+  
+    const formattedDate = `${year}-${month}-${day}`;
     return formattedDate;
   }
+  
 
   const fetchMapData = async () => {
     const formData = {
       city: cityParam,
-      date: formatDate(dateParam),
+      date: dateParam ? formatDate(dateParam) : null, 
       price_min: priceMinParam,
       price_max: priceMaxParam,
-      
     };
 
     try {
@@ -170,6 +179,7 @@ const Cribes = () => {
       }
     }
   };
+  console.log(coordinates)
    console.log(searchResult)
   const handleScroll = () => {
     if (window.innerHeight + window.scrollY < document.documentElement.offsetHeight && currentPage < lastPage && !loading) {
@@ -207,7 +217,7 @@ const Cribes = () => {
     if(searchParams)
     fetchMapData();
   }, [cityParam, dateParam, priceMinParam, priceMaxParam, sortByParam]);
- 
+ console.log(dateParam)
   useEffect(() => {
     if(!searchParams)
     fetchMapData();
@@ -301,7 +311,7 @@ const Cribes = () => {
                 <CribMap
                   coordinates={coordinates}
                   showPopup={true}
-                  data={searchParamsExist ? searchResult : cribsData}
+                  data={mapData}
                   longitude={longitude}
                   latitude={latitude}
                   zoom={zoom}

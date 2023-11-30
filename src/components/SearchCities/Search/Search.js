@@ -218,7 +218,7 @@ const Search = () => {
       <div className="container">
         <h2>Refine your search</h2>
         <div className='Form-cities'>
-          <form className='row justify-content-between gap-xl-3 gap-lg-2 gap-0 m-0 align-items-end' onSubmit={handleSubmit}>
+          <form className='row justify-content-between gap-lg-2 gap-0 m-0 align-items-end' onSubmit={handleSubmit}>
             <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
               <label htmlFor="countries">City</label>
               <div className='input-select'>
@@ -305,8 +305,8 @@ const Search = () => {
                 </select>
               </div>
             </div>
-
-            <div className='form-search-btn col-lg-2 col-md-6 col-sm-12 p-md-0'>
+            
+            <div className='form-search-btn col-lg-2 col-md-6 col-sm-12 p-md-0 '>
               <button className='Search-cribs-btn' type='submit'>Update results</button>
             </div>
           </form>

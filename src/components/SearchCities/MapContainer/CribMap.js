@@ -2,18 +2,17 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import LazyLoad from 'react-lazyload';
 import 'leaflet/dist/leaflet.css'
-import { Link } from 'react-router-dom';
 import { Carousel } from 'react-responsive-carousel';
 import locationIcon from '../../../assets/pin 2.svg';
 import promoImage from '../../../assets/Group 104.svg';
 import { Badge } from 'react-bootstrap';
 import imageParDefaut from '../../../assets/room/Group 116.svg';
 
-const CribMap = ({ coordinates, showPopup, data ,latitude,longitude,zoom  }) => {
+const CribMap = ({ coordinates, showPopup, data ,latitude,longitude,zoom }) => {
   
-  const customIcon = (item) => {
-    if (item && typeof item === 'object' && 'loyer_hc' in item) {
-      const price = item.loyer_hc + item.charges;
+  const customIcon = (it) => {
+    if (it && typeof it === 'object' && 'loyer_hc' in it) {
+      const price = it.loyer_hc + it.charges;
       return new L.divIcon({
         className: 'custom-icon',
         html: price ? `<div class="marker-label">${price}€</div>` : '',
@@ -38,123 +37,147 @@ const CribMap = ({ coordinates, showPopup, data ,latitude,longitude,zoom  }) => 
 
 const formattedDateDemain = `${(dateDemain.getDate() < 10 ? '0' : '')}${dateDemain.getDate()}/${(dateDemain.getMonth() < 9 ? '0' : '')}${dateDemain.getMonth() + 1}/${dateDemain.getFullYear()}`;
  
-    
-  return (
-    <MapContainer
-      center={[latitude,longitude]} 
-      zoom={zoom}
-      style={{ height: '765px', width: '100%' }}
-
-    >
-      <TileLayer
-        url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      />
+    console.log(data)
+return (
+  <MapContainer
+    center={[latitude, longitude]}
+    zoom={zoom}
+    style={{ height: '765px', width: '100%' }}
+  >
+    <TileLayer
+      url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+      attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    />
     {coordinates.map((coordArray, index) => {
-    if (Array.isArray(coordArray) && coordArray.length === 3) {
-      const [id, latitude, longitude] = coordArray;
-      const item = Array.isArray(data) ? data.find((dataItem) => dataItem.id === id) : data;
-       
-      if (!isNaN(latitude) && !isNaN(longitude) && latitude !== null && longitude !== null) {
-        return (
+        if (Array.isArray(coordArray) && coordArray.length === 3) {
+          const [externalId, latitude, longitude] = coordArray;
          
-          <Marker
-            key={id}
-            position={[latitude, longitude]}
-            icon={customIcon(item)} 
-          >
-   {showPopup && item ? (
-  <Popup>
-    <div className='popup_itemcribe'>
-      <div className='item-cribe'>
-        <div className='Item-badge'>
-        <Badge className='notify-badge'>
-        {
-  (item.availability_date === formattedDateAujourdhui || item.availability_date === formattedDateDemain || new Date(item.availability_date) < dateAujourdhui)
-    ? 'Available Now'
-    : `Avail. on ${formatDate(item.availability_date)}`
-}
-  </Badge>
+          let item;
 
-          {item.promo && item.promo === 1 && (
-            <img src={promoImage} alt='Promo' className='promo-image' />
-          )}
+          if (typeof data === 'object' && !Array.isArray(data) && data.hasOwnProperty('id')) {
+            // Si data a une propriété 'id', il est considéré comme un objet unique
+            console.log('Condition 1 :', data);
+            item = data;
+          } else {
+            // Sinon, on suppose que data est un objet contenant plusieurs objets, cherchez celui avec le bon ID
+            console.log('Condition 2 :', data);
+            const dataArray = Object.values(data);
+            item = dataArray.find((dataItem) => dataItem && dataItem.id === externalId);
+          }
+          
+          console.log('Item final :', item);
+          
+          
+          
+          
 
-          <div className="custom-carousel-container">
-            {item.media ? (
-              <Carousel showStatus={false} showArrows={false} showThumbs={false} dynamicHeight={false} useKeyboardArrows={false}>
-                {item.media
-                  .filter(
-                    (media) =>
-                      media.mime_type.startsWith('image') &&
-                      media.collection_name !== 'floorpan'
-                  )
-                  .slice(0, 2)
-                  .map((image, index) => (
-                    <div className='room' onClick={() => (window.location.href =  `/room/${item.id}`)} key={index}>
-                      <div>
-                        <LazyLoad height={200} offset={100}>
-                          <img className="img-fluid" src={image.original_url} alt="Im" />
-                        </LazyLoad>
+          
+          
+  
+        if (!isNaN(latitude) && !isNaN(longitude) && latitude !== null && longitude !== null && item) {
+          
+
+          return (
+            <Marker
+              key={externalId}
+              position={[latitude, longitude]}
+              icon={customIcon(item)}
+            >
+           
+             {showPopup && item ? (
+                <Popup>
+                  <div className='popup_itemcribe'>
+                    <div className='item-cribe'>
+                      <div className='Item-badge'>
+                        <Badge className='notify-badge'>
+                          {
+                            (item.availability_date === formattedDateAujourdhui ||
+                              item.availability_date === formattedDateDemain ||
+                              new Date(item.availability_date) < dateAujourdhui)
+                              ? 'Available Now'
+                              : `Avail. on ${formatDate(item.availability_date)}`
+                          }
+                        </Badge>
+
+                        {item.promo && item.promo === 1 && (
+                          <img src={promoImage} alt='Promo' className='promo-image' />
+                        )}
+
+                        <div className="custom-carousel-container">
+                          {item.media ? (
+                            <Carousel showStatus={false} showArrows={false} showThumbs={false} dynamicHeight={false} useKeyboardArrows={false}>
+                              {item.media
+                                .filter(
+                                  (media) =>
+                                    media.mime_type.startsWith('image') &&
+                                    media.collection_name !== 'floorpan'
+                                )
+                                .slice(0, 2)
+                                .map((image, index) => (
+                                  <div className='room' onClick={() => (window.location.href =  `/room/${item.id}`)} key={index}>
+                                    <div>
+                                      <LazyLoad height={200} offset={100}>
+                                        <img className="img-fluid" src={image.original_url} alt="Im" />
+                                      </LazyLoad>
+                                    </div>
+                                  </div>
+                                ))}
+                            </Carousel>
+                          ) : (
+                            <div className='room' onClick={() => (window.location.href =  `/room/${item.id}`)} key={index}>
+                              <div>
+                                <LazyLoad height={200} offset={100}>
+                                  <img
+                                    className="img-fluid"
+                                    src={imageParDefaut}
+                                    alt="Im"
+                                  />
+                                </LazyLoad>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+
+                        <div className='Rooms-content'>
+                          {item && item.title && <h3>
+                            {item.apartment.title}-{item.title}
+                          </h3>}
+                          <div className='d-flex mb-1'>
+                            <img src={locationIcon} alt="location icon" />
+                            {item && item.apartment && item.apartment.building && <p>{item.apartment.building.address}</p>}
+                          </div>
+                          {item.promo && item.promo === 1 ? (
+                            <div>
+                              <span className='crib_promo'>
+                                <span className='price_loyer'>{item.tarif_promo} €</span> /month
+                              </span>
+
+                              <div className='promo'>1st month rent {item.tarif_promo}€ then {item.loyer_hc + item.charges}€ </div>
+
+                            </div>
+                          ) : (
+                            <span>
+                              <span className='price_loyer'>
+                                {item.loyer_hc + item.charges} €
+                              </span>{' '}
+                              /month
+                            </span>
+                          )}
+                        </div>
                       </div>
                     </div>
-                  ))}
-              </Carousel>
-            ) : (
-              <div className='room' onClick={() => (window.location.href =  `/room/${item.id}`)} key={index}>
-                <div>
-                  <LazyLoad height={200} offset={100}>
-                    <img
-                      className="img-fluid"
-                      src={imageParDefaut}
-                      alt="Im"
-                    />
-                  </LazyLoad>
-                </div>
-              </div>
-            )}
-          </div>
+                  </div>
+                </Popup>
+              ) : null}
 
-          <div className='Rooms-content'>
-          <h3>
-            {item.apartment.title}-{item.title}
-          </h3>
-          <div className='d-flex mb-1'>
-            <img src={locationIcon} alt="location icon" />
-            <p>{item.apartment.building.address}</p>
-          </div>
-          {item.promo && item.promo === 1 ? (
-            <div >
-              <span className='crib_promo'>
-                <span className='price_loyer'>{item.tarif_promo} €</span> /month
-              </span>
-             
-    <div className='promo'>1st month rent {item.tarif_promo}€ then {item.loyer_hc + item.charges}€ </div>
-           
-            </div>
-          ) : (
-            <span> 
-              <span className='price_loyer'>
-                {item.loyer_hc + item.charges} €
-              </span>{' '}
-              /month
-            </span>
-          )}
-        </div>
-        </div>
-      </div>
-    </div>
-  </Popup>
-) : null}
-
-              </Marker>
-            );
-          }
+            </Marker>
+          );
         }
-        return null;
-      })}
-    </MapContainer>
-  );
+      }
+      return null;
+    })}
+  </MapContainer>
+);
 };
 
 export default CribMap;
