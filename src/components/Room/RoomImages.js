@@ -55,10 +55,10 @@ const CarrouselImages = () => {
 
   const onClickPrev = () => {
     if (carouselRef.current) {
-      setIsNextActive(true); // Réactive la flèche "next"
+      setIsNextActive(true);
       carouselRef.current.previous();
       if (carouselRef.current.state.currentSlide === 3) {
-        setIsPrevActive(false); // Désactive la flèche "précédent"
+        setIsPrevActive(false); 
       }
     }
   };
@@ -84,8 +84,8 @@ const CarrouselImages = () => {
   return (
     <div className='img-items'>
         {lotData && lotData.promo && lotData.promo === 1 && (
-            <div className="promo-badge">
-              <img src={promoImage} alt='Promo' className='promo-image' />
+            <div className="promo-badger">
+              <img src={promoImage} alt='Promo' className='promo-imager' />
             </div>
           )}
       {lotData && lotData.media && lotData.media.length > 0 ? (

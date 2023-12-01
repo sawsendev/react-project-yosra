@@ -102,7 +102,7 @@ label{
 .css-2ksxt2-control input {
     padding: 0!important;
 }
-.css-2ksxt2-control {
+/* .css-2ksxt2-control {
     border-radius: 6px;
     border: 1px solid #DDD;
     background: #FFF;
@@ -112,7 +112,29 @@ label{
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
+} */
+div.css-2ksxt2-control{
+    -webkit-box-align: center;
+    cursor: pointer;
+    display: flex;
+    flex-wrap: wrap;
+    -webkit-box-pack: justify;
+    justify-content: center;
+    min-height: 38px;
+    position: relative;
+    transition: all 100ms ease 0s;
+    background-color: rgb(255, 255, 255);
+    border-radius: 4px;
+    box-sizing: border-box;
+    border: 1px solid rgb(204, 204, 204);
+    margin: 0px;
+    padding: 0px;
+    outline: 0px !important;
+    align-content: space-between;
+    align-items: center;
+    flex-direction: column-reverse;
 }
+
 .select-wrapper {
     position: relative;
 }

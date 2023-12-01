@@ -214,6 +214,20 @@ const Cribes = () => {
   };
 
   useEffect(() => {
+    const handleResize = () => {
+      const newZoom = window.innerWidth < 768 ? 13 : 14;
+      setZoom(newZoom);
+    };
+    handleResize();
+  window.addEventListener('resize', handleResize);
+  
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+  
+
+  useEffect(() => {
     if(searchParams)
     fetchMapData();
   }, [cityParam, dateParam, priceMinParam, priceMaxParam, sortByParam]);
