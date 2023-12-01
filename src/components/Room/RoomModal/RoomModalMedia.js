@@ -1,6 +1,6 @@
 import "./RoomModalMedia.css"
 import { IoCloseOutline } from "react-icons/io5";
-import iconimgs from '../../../assets/room/icons/imgs.svg'
+
 import iconvideos from '../../../assets/room/icons/videos.svg'
 import iconvisit from '../../../assets/room/icons/visits.svg'
 import iconfloorplan from '../../../assets/room/icons/floorplan.svg'
@@ -9,7 +9,7 @@ import iconvideoshover from '../../../assets/room/icons/videos-hover.svg'
 import iconvisithover from '../../../assets/room/icons/visits-hover.svg'
 import Modal from 'react-modal';
 
-
+import iconimgs from '../../../assets/room/icons/bedroom.svg'
 
 
 Modal.setAppElement('#root');
@@ -35,7 +35,7 @@ const RoomModalMedia = ({ isOpen, closeModal, activeTab, setActiveTab , lotData 
     onClick={() => setActiveTab('tab1')}
   >
     <span className='nav-link'>
-      <img src={iconimgs} className='icon' alt="photos"/><img src={iconimgshover} className='icon-hover' alt="photos"/> photos
+      <img src={iconimgs} className='icon' alt="photos"/><img src={iconimgs} className='icon-hover' alt="photos"/> photos
     </span>
   </li> )}
 

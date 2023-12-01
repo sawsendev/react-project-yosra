@@ -207,7 +207,7 @@ const Room = () => {
     if (descriptionRef.current) {
       const height = descriptionRef.current.clientHeight;
       if (height > 400) {
-        setDescriptionHeight('12em');
+        setDescriptionHeight('25em');
       } else {
         setDescriptionHeight('auto');
       }
@@ -308,7 +308,7 @@ const Room = () => {
             <div dangerouslySetInnerHTML={{ __html: lotData.description }} />
           </div>
         )}
-        {descriptionHeight === '12em' && (
+        {descriptionHeight === '25em' && (
           <div className='showmore' onClick={handleShowMoreClick}>
             {showMore ? 'Read Less' : 'Read More'}
           </div>

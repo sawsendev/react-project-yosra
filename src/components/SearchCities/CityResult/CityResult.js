@@ -12,7 +12,7 @@ const cityTexts = {
 const cityDescription = cityTexts[city.toLowerCase()] || "";
 
   return (
-    <div className='page-container-city'  style={{ backgroundImage: `url(${backgroundImage})` }} >
+    <div className='page-container-city'  style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover' }}>
 
     <div className='container'>
       <div className='content-container-city'>

@@ -80,7 +80,7 @@ const CarrouselImages = () => {
     setIsPrevActive(true);
     setIsNextActive(true);
   };
-
+ 
   return (
     <div className='img-items'>
         {lotData && lotData.promo && lotData.promo === 1 && (
