@@ -44,3 +44,22 @@
     z-index: 1;
     margin: 0;
   }
+
+  @media(max-width:571px){
+    .content-container-city h1 {
+      font-size: 45px;
+      font-weight: 400;
+      color: black;
+      position: relative;
+      z-index: 1;
+      margin: 0 0 4px;
+    }
+      .content-container-city p {
+        font-size: 22px;
+        font-weight: 400;
+        color: black;
+        position: relative;
+        z-index: 1;
+        margin: 0;
+    }
+  }

@@ -306,7 +306,7 @@ const Search = () => {
               </div>
             </div>
             
-            <div className='form-search-btn col-lg-2 col-md-6 col-sm-12 p-md-0 d-flex flex-row-reverse"'>
+            <div className="form-search-btn col-lg-2 col-md-6 col-sm-12 p-md-0 d-flex flex-row-reverse">
               <button className='Search-cribs-btn' type='submit'>Update results</button>
             </div>
           </form>
