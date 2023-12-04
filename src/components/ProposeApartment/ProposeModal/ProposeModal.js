@@ -15,13 +15,14 @@ import { format } from 'date-fns';
 import PhoneInput from 'react-phone-input-2';
 import iconfile from "../../../assets/file.svg";
 import Popup from '../../Popupmsg/popup';
-
+import like from '../../../assets/like.png'
 
 const ProposeModal = ({ isOpen, closeModal }) => {
   
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
   const [status, setStatus] = useState('');
+  
  
   const handlePopupClose = () => {
     setShowPopup(false);
@@ -95,7 +96,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
     }
   };
   
-  
+  const [lastNameValue,setLastNameValue]=useState('')
   
   
   
@@ -118,6 +119,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
       formDataToSend.append(`medias[${index}]`, file);
     });
     formDataToSend.append('other_informations', formData.message);
+     setLastNameValue(formData.lastName)
    
     fetch('https://admin.finecribs.com/api/apartment_request/post', {
       method: 'POST',
@@ -161,7 +163,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
         setSelectedFiles([])
       })
       .catch((error) => {
-        // Gérez ici les erreurs de promesse
+         
         console.error('Erreur lors de la soumission du formulaire:', error);
         if (error && error.message) {
           try {
@@ -306,7 +308,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
       setDate(date); // Stockez la date telle quelle
     }
   };
-  
+  console.log(formData.lastName)
 
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
@@ -564,9 +566,50 @@ const ProposeModal = ({ isOpen, closeModal }) => {
         </div>
       </Modal>
       {/* <ToastContainer /> */}
-      {showPopup && <Popup message={popupMessage} status={status} onClose={handlePopupClose} />}
+      {showPopup && (
+        status==='success' ?(<div className="popup popup-msg-alert">
+      <div className="popup-contentpropose"> 
+        <div className='popup-body'>
+          <div className='icon-msg d-flex flex-row align-items-end justify-content-start'>
+           <img src={like} alt='like' className='img-fluid like'/>
+           <div className="message m-md-3">Thank you {lastNameValue}, we have received your enquiry</div>
+          </div>
+          <div className='d-flex flex-column align-items-start'>
+          <div className='mt-4' style={{fontWeight: "600",fontSize: "20px"}}>What happens next ?</div>
+          <div>
+           <img />
+           <div className='d-flex flex-column align-items-start'>
+           <h5 className='text-start'>Our team will review your information and get back to you shortly</h5>
+           <p className='text-start'>Our team will analyse the information you have provided, and get in touch with you to arrrange a viewing of the apartment</p>
+          </div>
+          </div>
+          <div>
+           <img />
+           <div className='d-flex flex-column align-items-start'>
+           <h5 className='text-start'>If your apartment makes the cut ,we will make you an offer in no time</h5>
+           <p className='text-start'>If your apartment meets our standards , we will make you an offer and explain the terms of the partnership with Fine cribs.
+           If your apartment needs a smart refurbishment(for example a bathroom),
+           we will explain the initiatives that we intend to realise to improve your 
+           property. </p>
+           </div>
+          </div>
+          <div>
+           <img />
+           <div className='d-flex flex-column align-items-start'>
+           <h5 className='text-start'>Start earning a rental income</h5>
+           <p className='text-start'>If accept our offer , you will start earning a rental income from the next day.
+           Fine cribs will be your tenant, you will just need to relax and cash rent every month.</p>
+           </div>
+
+          </div>
+          </div>
+          <button className="btn close-btn" onClick={handlePopupClose}>Close</button>
+        </div>
+      </div>
+    </div>):( <Popup message={popupMessage} status={status} onClose={handlePopupClose} />)
+    )}
       </>
-      )
+     ) 
     }
   
 export default ProposeModal;

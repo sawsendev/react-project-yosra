@@ -272,3 +272,36 @@ button.box-input img {
 .reactmodal-container .uploaded-pdf img {
     height: 16px;
 }
+.popup-msg-alert .popup-contentpropose {
+    background: white;
+    padding: 30px 20px 30px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 723px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+.like{
+    max-width: 13%;
+ }
+ h5{
+     font-weight: 600;
+ }
+
+@media(max-width:776px) and (min-width:576px){
+    .popup-msg-alert .popup-contentpropose{
+        max-width: 508px;
+    }
+
+}
+@media(max-width:577px){
+    .popup-msg-alert .popup-contentpropose{
+        max-width: 300px;
+    }
+    .like{
+    margin: 20px 4px 31px;
+}
+}
+
