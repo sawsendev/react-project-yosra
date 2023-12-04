@@ -95,10 +95,15 @@ const BookingProcess = ({cribs}) => {
             </div>
             <div className='Payments-steps px-2'>
               <span>Upon signing the tenancy agreement </span>
-              {cribs && cribs.admin_fee && (<div className='Fee row justify-content-between'>
-               <p className=' col-auto mb-0'>Application fee</p>
-                 <span className='col-auto mb-0'>€{cribs.admin_fee}</span> 
-              </div>)}
+              {cribs && cribs.admin_fee && (
+  <div className='Fee row justify-content-between'>
+    <p className='col-auto mb-0'>Application fee</p>
+    <span className='col-auto mb-0'>
+      €{cribs.promo === 1 ? cribs.administration_fees_promo : cribs.admin_fee}
+    </span>
+  </div>
+)}
+
           </div>
           </div>
 

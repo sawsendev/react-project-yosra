@@ -83,7 +83,7 @@ const Search = () => {
         placeholder='Move in date'
         value={value}
         required
-        readOnly
+        
         onChange={onChange}
       />
       <span className="calendar-icon">
@@ -197,11 +197,11 @@ const Search = () => {
   
 
   const handleCustomInputInChange = (date) => {
-    setDate(date);
+    setDate(date || null);
   };
   const handleMoveInDateChange = (date) => {
     if (date) {
-      setDate(date); 
+      setDate(date || null);
     }
   };
 
@@ -238,9 +238,10 @@ const Search = () => {
                onChange={handleMoveInDateChange}
                customInput={
                <CustomInput
-               value={date}
+               value={date ? format(date, 'dd/MM/yyyy') : ''}
                onChange={handleCustomInputInChange}
                name="date"
+              
                />
                }
                minDate={tomorrow}

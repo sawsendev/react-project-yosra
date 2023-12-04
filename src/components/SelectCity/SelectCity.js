@@ -53,7 +53,7 @@ const SelectCity = ({ onChange, city ,text }) => {
 
   return (
     <select name="countries" className='Select-country-container w-100' onChange={handleCityChange} value={selectedCity}>
-      <option value="" selected disabled hidden>{text}</option>
+      <option value="" disabled>{text}</option>
       {cities && cities.map((city, index) => (
         <option key={index} value={city}>
           {city}
