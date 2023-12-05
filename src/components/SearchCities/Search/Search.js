@@ -82,9 +82,7 @@ const Search = () => {
         className='form-control' 
         placeholder='Move in date'
         value={value}
-        required
-        
-        onChange={onChange}
+       onChange={onChange}
       />
       <span className="calendar-icon">
         <img src={calendarIcon} alt="Calendar" />
@@ -200,9 +198,9 @@ const Search = () => {
     setDate(date || null);
   };
   const handleMoveInDateChange = (date) => {
-    if (date) {
+  
       setDate(date || null);
-    }
+    
   };
 
   const tomorrow = new Date();
@@ -238,7 +236,7 @@ const Search = () => {
                onChange={handleMoveInDateChange}
                customInput={
                <CustomInput
-               value={date ? format(date, 'dd/MM/yyyy') : ''}
+               value={date}
                onChange={handleCustomInputInChange}
                name="date"
               
@@ -299,7 +297,7 @@ const Search = () => {
               <label htmlFor="price">Sort by</label>
               <div className='input-select'>
                 <select name="price" id="countries-id" className='form-control' onChange={handleChangeSortBy} value={sortBy}>
-                  <option value="" disabled>Sorted by</option>
+                  <option value="">Sorted by</option>
                   <option value="desc">Descending price</option>
                   <option value="asc">Ascending price</option>
                   <option value="av">Availability</option>

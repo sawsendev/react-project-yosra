@@ -122,7 +122,7 @@ const Footer = () => {
               
               <div className='Useful-links'>
               <p className='h3'>Useful links</p>
-              <div className='d-flex justify-content-start align-items-center gap-3'>
+              <div className='d-flex justify-content-between align-items-center gap-3'>
 
                 <div className='First'>
                 <p><a href={'/faq'}>FAQ</a></p>

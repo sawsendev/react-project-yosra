@@ -62,4 +62,34 @@
         z-index: 1;
         margin: 0;
     }
+    .page-container-city {
+      width: auto;
+    height: 235px;
+    }
+    .content-container-city {
+      padding: 19px 22px;
+      margin: -114px 0;
+      max-width: 772px;
+      height: auto;
+      position: relative;
+  }
+  }
+  @media(max-width:768px)and(min-width:572px){
+    .page-container-city {
+      width: auto;
+    height: 263px;
+    }
+    .content-container-city {
+      padding: 24px 21px;
+      margin: -115px 0;
+      max-width: 843px;
+      height: auto;
+      position: relative;
+  }
+  .content-container-city p {
+    font-size: 26px;}
+    .content-container-city h1 {
+      font-size: 54px;}
+
+
   }

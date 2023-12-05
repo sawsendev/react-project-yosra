@@ -12,6 +12,8 @@ const ExploreMoreLarge = () => {
   const [lotData, setLotData] = useState([]);
 
   useEffect(() => {
+    let isMounted = true;
+  
     const fetchData = async () => {
       try {
         const headers = {
@@ -24,23 +26,31 @@ const ExploreMoreLarge = () => {
           headers,
         });
   
+        if (!isMounted) return;
+  
         const responseData = await response.json();
-       
+  
         if (responseData) {
           setLotData(responseData);
         } else {
           console.error('Données inattendues de l\'API :', responseData);
-          setLotData([]); // En cas d'erreur, affectez un tableau vide
+          setLotData([]);
         }
       } catch (error) {
         console.error('Erreur lors de la récupération des données :', error);
-        setLotData([]); // En cas d'erreur, affectez un tableau vide
+        if (isMounted) {
+          setLotData([]);
+        }
       }
     };
   
     fetchData();
+  
+    return () => {
+      isMounted = false;
+    };
   }, []);
-
+  
   console.log(lotData);
 
   const handleClick = (e, city) => {
@@ -54,8 +64,8 @@ const ExploreMoreLarge = () => {
   const cityData = lotData.data && lotData.data.cities ? lotData.data.cities : [];
 
   const cities = ExploreCitiesTable.map(city => {
-    const cityInfo = cityData.find(cityInfo => cityInfo.city_country.toLowerCase().startsWith(city.city.toLowerCase()));
-    const count = cityInfo ? cityInfo.count_lots : 0;
+    const countInfo = cityData.find(cityInfo => cityInfo.city_country.toLowerCase().includes(city.city.toLowerCase()));
+    const count = countInfo ? countInfo.count_lots : null;
   
     return (
       <City
@@ -67,6 +77,7 @@ const ExploreMoreLarge = () => {
       />
     );
   });
+  
 
   return (
     <div className='Explore-container container'>

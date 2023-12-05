@@ -576,16 +576,20 @@ const ProposeModal = ({ isOpen, closeModal }) => {
           </div>
           <div className='d-flex flex-column align-items-start'>
           <div className='mt-4' style={{fontWeight: "600",fontSize: "20px"}}>What happens next ?</div>
-          <div>
-           <img />
-           <div className='d-flex flex-column align-items-start'>
+          
+          <div className='d-flex flex-row align-content-stretch flex-nowrap justify-content-space-evenly align-items-center'>
+           <span className='step'>Step1</span>
+           <div className=''>
+           <div className=''>
            <h5 className='text-start'>Our team will review your information and get back to you shortly</h5>
            <p className='text-start'>Our team will analyse the information you have provided, and get in touch with you to arrrange a viewing of the apartment</p>
           </div>
           </div>
-          <div>
-           <img />
-           <div className='d-flex flex-column align-items-start'>
+          </div>
+          <div className='d-flex flex-row align-content-stretch flex-nowrap justify-content-space-evenly align-items-center'>
+           <span className='step'>Step2</span>
+           <div className=''>
+           <div className=''>
            <h5 className='text-start'>If your apartment makes the cut ,we will make you an offer in no time</h5>
            <p className='text-start'>If your apartment meets our standards , we will make you an offer and explain the terms of the partnership with Fine cribs.
            If your apartment needs a smart refurbishment(for example a bathroom),
@@ -593,14 +597,16 @@ const ProposeModal = ({ isOpen, closeModal }) => {
            property. </p>
            </div>
           </div>
-          <div>
-           <img />
-           <div className='d-flex flex-column align-items-start'>
+          </div>
+          <div className='d-flex flex-row align-content-stretch flex-nowrap justify-content-space-evenly align-items-center'>
+           <span className='step'>Step3</span>
+           <div className=''>
+           <div className=''>
            <h5 className='text-start'>Start earning a rental income</h5>
            <p className='text-start'>If accept our offer , you will start earning a rental income from the next day.
            Fine cribs will be your tenant, you will just need to relax and cash rent every month.</p>
            </div>
-
+           </div>
           </div>
           </div>
           <button className="btn close-btn" onClick={handlePopupClose}>Close</button>

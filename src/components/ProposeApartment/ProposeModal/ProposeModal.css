@@ -305,3 +305,25 @@ button.box-input img {
 }
 }
 
+.step{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 79px;
+    height: 59px;
+    background-color: gray;
+    border-radius: 50%; /* Rend le span un cercle en utilisant le border-radius */
+    color: white; /* Couleur du texte, ajustez selon vos besoins */
+    font-weight: bold; /* Ajustez la police selon vos besoins */
+    margin-right: 15px; /* Marge à droite pour séparer du texte suivant */
+  }
+  .steps{
+display: flex;
+    flex-direction: row;
+    align-content: stretch;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+
+
+  }

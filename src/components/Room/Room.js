@@ -395,10 +395,16 @@ const Room = () => {
 
 
                   {lotData &&
-  lotData.apartment &&
-  lotData.apartment.flat_mates_infos &&
-  Array.isArray(lotData.apartment.flat_mates_infos) &&
-  lotData.apartment.flat_mates_infos
+    lotData.apartment &&
+    lotData.apartment.flat_mates_infos &&
+    Array.isArray(lotData.apartment.flat_mates_infos) &&
+    lotData.apartment.flat_mates_infos
+      .sort((a, b) => {
+        // Triez les chambres en fonction de leur numéro
+        const roomNumberA = parseInt(a.title.replace('Room', ''), 10);
+        const roomNumberB = parseInt(b.title.replace('Room', ''), 10);
+        return roomNumberA - roomNumberB;
+      })
 .map((locataire, index) => (
   <div className='col-md-4' key={index}>
     <div className='panel mb-3'>

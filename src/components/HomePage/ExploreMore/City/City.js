@@ -4,7 +4,7 @@ import "./City.css"
 
 
 
-const City = ({src,city,count,handleClick}) => {
+const City =React.memo(({ src, city, count, handleClick }) => {
 
   return (
 <div className='city-item' onClick={handleClick}>
@@ -23,8 +23,8 @@ const City = ({src,city,count,handleClick}) => {
     </div>
 </div> 
 
-                      
-  )
-}
+)                    
+  
+})
 
 export default City

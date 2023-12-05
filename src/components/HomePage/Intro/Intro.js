@@ -11,12 +11,12 @@ const Intro = () => {
   const[date,setDate]=useState('');
   
   const handleCustomInputInChange = (date) => {
-    setDate(date);
+    setDate(date||null);
   };
   const handleMoveInDateChange = (date) => {
-    if (date) {
-      setDate(date); // Stockez la date telle quelle
-    }
+ 
+      setDate(date||null); // Stockez la date telle quelle
+    
   };
   const CustomInput = ({ value, onClick, onChange, name }) => (
     <div className="input-datepicker" onClick={onClick}>
@@ -26,8 +26,7 @@ const Intro = () => {
         className='Select-country-container w-100'
         value={value}
         placeholder="Move in date"
-        required
-        readOnly
+       
         onChange={onChange}
       />
       <span className="calendar-icon">
