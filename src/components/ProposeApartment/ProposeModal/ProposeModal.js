@@ -96,7 +96,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
     }
   };
   
-  const [lastNameValue,setLastNameValue]=useState('')
+  const [firstNameValue,setFirstNameValue]=useState('')
   
   
   
@@ -119,7 +119,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
       formDataToSend.append(`medias[${index}]`, file);
     });
     formDataToSend.append('other_informations', formData.message);
-     setLastNameValue(formData.lastName)
+     setFirstNameValue(formData.firstName)
    
     fetch('https://admin.finecribs.com/api/apartment_request/post', {
       method: 'POST',
@@ -265,7 +265,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
     const files = e.target.files;
     if (files && files.length > 0) {
       // Initialisez fileVisibility avec true pour chaque fichier
-      setFileVisibility(Array(files.length).fill(true));
+      setFileVisibility(Array(files.length).fill(true)); 
       setSelectedFiles(Array.from(files));
       e.target.value = '';
     }
@@ -568,48 +568,55 @@ const ProposeModal = ({ isOpen, closeModal }) => {
       {/* <ToastContainer /> */}
       {showPopup && (
         status==='success' ?(<div className="popup popup-msg-alert">
+          <div className='close'>
+        <button className='closebtn' onClick={handlePopupClose}>
+                &times;
+              </button> 
+              </div>
       <div className="popup-contentpropose"> 
+      
         <div className='popup-body'>
-          <div className='icon-msg d-flex flex-row align-items-end justify-content-start'>
+          
+          <div className='icon-msg row align-items-end'>
            <img src={like} alt='like' className='img-fluid like'/>
-           <div className="message m-md-3">Thank you {lastNameValue}, we have received your enquiry</div>
+           <div className="message col">Thank you {firstNameValue}, we have received your enquiry</div>
           </div>
           <div className='d-flex flex-column align-items-start'>
           <div className='mt-4' style={{fontWeight: "600",fontSize: "20px"}}>What happens next ?</div>
           
-          <div className='d-flex flex-row align-content-stretch flex-nowrap justify-content-space-evenly align-items-center'>
+          <div className='row m-3'>
            <span className='step'>Step1</span>
-           <div className=''>
+           <div className='col'>
            <div className=''>
            <h5 className='text-start'>Our team will review your information and get back to you shortly</h5>
            <p className='text-start'>Our team will analyse the information you have provided, and get in touch with you to arrrange a viewing of the apartment</p>
           </div>
           </div>
           </div>
-          <div className='d-flex flex-row align-content-stretch flex-nowrap justify-content-space-evenly align-items-center'>
+          <div className='row m-3'>
            <span className='step'>Step2</span>
-           <div className=''>
-           <div className=''>
+           <div className='col'>
+           <div>
            <h5 className='text-start'>If your apartment makes the cut ,we will make you an offer in no time</h5>
            <p className='text-start'>If your apartment meets our standards , we will make you an offer and explain the terms of the partnership with Fine cribs.
            If your apartment needs a smart refurbishment(for example a bathroom),
            we will explain the initiatives that we intend to realise to improve your 
-           property. </p>
-           </div>
+           property.</p>
           </div>
           </div>
-          <div className='d-flex flex-row align-content-stretch flex-nowrap justify-content-space-evenly align-items-center'>
+          </div>
+          <div className='row m-3'>
            <span className='step'>Step3</span>
+           <div className='col'>
            <div className=''>
-           <div className=''>
-           <h5 className='text-start'>Start earning a rental income</h5>
+           <h5 className='text-start'>Start earning a rental incom</h5>
            <p className='text-start'>If accept our offer , you will start earning a rental income from the next day.
            Fine cribs will be your tenant, you will just need to relax and cash rent every month.</p>
-           </div>
-           </div>
           </div>
           </div>
-          <button className="btn close-btn" onClick={handlePopupClose}>Close</button>
+          </div>
+          </div>
+          
         </div>
       </div>
     </div>):( <Popup message={popupMessage} status={status} onClose={handlePopupClose} />)

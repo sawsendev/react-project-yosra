@@ -82,7 +82,7 @@ const ExploreMoreSmall = () => {
 
   const cities = ExploreCitiesTable.map(city => {
     const cityInfo = cityData.find(cityInfo => cityInfo.city_country.toLowerCase().startsWith(city.city.toLowerCase()));
-    const count = cityInfo ? cityInfo.count_lots : 0;
+    const count = cityInfo ? cityInfo.count_lots : null;
   
     return (
       <City

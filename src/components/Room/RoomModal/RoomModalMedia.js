@@ -4,7 +4,7 @@ import { IoCloseOutline } from "react-icons/io5";
 import iconvideos from '../../../assets/room/icons/videos.svg'
 import iconvisit from '../../../assets/room/icons/visits.svg'
 import iconfloorplan from '../../../assets/room/icons/floorplan.svg'
-import iconimgshover from '../../../assets/room/icons/imgs-hover.svg'
+import iconimgshover from '../../../assets/room/icons/imgs.svg'
 import iconvideoshover from '../../../assets/room/icons/videos-hover.svg'
 import iconvisithover from '../../../assets/room/icons/visits-hover.svg'
 import Modal from 'react-modal';
