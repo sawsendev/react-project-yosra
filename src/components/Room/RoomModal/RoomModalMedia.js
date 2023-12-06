@@ -35,7 +35,7 @@ const RoomModalMedia = ({ isOpen, closeModal, activeTab, setActiveTab , lotData 
     onClick={() => setActiveTab('tab1')}
   >
     <span className='nav-link'>
-      <img src={iconimgs} className='icon' alt="photos"/><img src={iconimgs} className='icon-hover' alt="photos"/> photos
+      <img src={iconimgshover} className='icon' alt="photos"/><img src={iconimgshover} className='icon-hover' alt="photos"/> photos
     </span>
   </li> )}
 

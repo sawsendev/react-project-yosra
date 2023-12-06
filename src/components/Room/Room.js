@@ -61,7 +61,7 @@ import closet from "../../assets/room/icons/closet.png"
 import bed from "../../assets/room/icons/bed.png"
 import furniture from "../../assets/room/icons/living-room.png"
 import { Helmet } from 'react-helmet'
-
+import iconimgshover from '../../assets/room/icons/gallery.png'
 
 
 const Room = () => {
@@ -257,7 +257,7 @@ const Room = () => {
                  .filter((media) => media.mime_type.startsWith('image')&&
                   media.collection_name !== 'floorpan').length >0 && (
                  <button type='button' className='btn-media' onClick={openModalWithTab1} id="photos-btn">
-                 <img src={iconimgs} alt="photos"/> photos</button>)}
+                 <img src={iconimgshover} alt="photos"/> photos</button>)}
                  {lotData && lotData.media && lotData.media.some((media) => media.mime_type.startsWith('video')) && (
     <button type='button' className='btn-media' onClick={openModalWithTab2} id="video-btn">
         <img src={iconvideos} alt="videos"/> video
@@ -486,7 +486,7 @@ const Room = () => {
   <img src={check} alt="Available"/>
   {(lotData && lotData.availability_date === formattedDateAujourdhui || lotData.availability_date === formattedDateDemain || new Date(lotData.availability_date) < dateAujourdhui)
       ? 'Available Now'
-      : `Avail. on ${formatDate(lotData.availability_date)}`
+      : `Available on ${formatDate(lotData.availability_date)}`
   }
 </p>
 

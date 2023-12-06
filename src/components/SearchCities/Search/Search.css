@@ -115,24 +115,23 @@ label{
 } */
 div.css-2ksxt2-control{
     -webkit-box-align: center;
-    cursor: pointer;
-    display: flex;
-    flex-wrap: wrap;
-    -webkit-box-pack: justify;
-    justify-content: center;
-    min-height: 38px;
-    position: relative;
-    transition: all 100ms ease 0s;
-    background-color: rgb(255, 255, 255);
+    align-content: center;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-    border: 1px solid rgb(204, 204, 204);
-    margin: 0px;
-    padding: 0px;
-    outline: 0px !important;
-    align-content: space-between;
-    align-items: center;
-    flex-direction: column-reverse;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0;
+    min-height: 38px;
+    outline: 0!important;
+    padding: 0;
+    position: relative;
+    transition: all .1s ease 0s;
 }
 
 .select-wrapper {
@@ -187,7 +186,7 @@ span.calendar-icon {
     z-index: 1;
 }
 div .css-1dimb5e-singleValue{
-    margin-top: -11px;
+    margin-top: -2px;
 }
 @media (min-width: 1400px) {
     .Form-city.col-lg-3 {
