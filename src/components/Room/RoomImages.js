@@ -7,28 +7,28 @@ import { useParams } from 'react-router-dom';
 import default_img from '../../assets/noimage-197x197.svg';
 import promoImage from '../../assets/Group 104.svg';
 
-const CarrouselImages = () => {
+const CarrouselImages = ({lotData}) => {
   const { id } = useParams();
-  const [lotData, setLotData] = useState({});
-  const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
-  const API_URL = `https://admin.finecribs.com/api/lot/${id}`;
+  // const [lotData, setLotData] = useState({});
+  // const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
+  // const API_URL = `https://admin.finecribs.com/api/lot/${id}`;
 
-  useEffect(() => {
-    const headers = {
-      'apiKey': `${API_KEY}`,
-    };
+  // useEffect(() => {
+  //   const headers = {
+  //     'apiKey': `${API_KEY}`,
+  //   };
 
-    fetch(API_URL, { method: 'GET', mode: 'cors', headers })
-      .then(response => response.json())
-      .then(data => {
-        setLotData(data.data.lot);
-        console.log(data.data.lot);
-      })
-      .catch(error => {
-        console.error('Erreur lors de la récupération des données :', error);
-      });
+  //   fetch(API_URL, { method: 'GET', mode: 'cors', headers })
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       setLotData(data.data.lot);
+  //       console.log(data.data.lot);
+  //     })
+  //     .catch(error => {
+  //       console.error('Erreur lors de la récupération des données :', error);
+  //     });
 
-  }, [API_URL, API_KEY]);
+  // }, [API_URL, API_KEY]);
 
   const responsive = {
     superLargeDesktop: {

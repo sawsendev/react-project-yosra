@@ -37,7 +37,7 @@ const CribMap = ({ coordinates, showPopup, data ,latitude,longitude,zoom }) => {
 
 const formattedDateDemain = `${(dateDemain.getDate() < 10 ? '0' : '')}${dateDemain.getDate()}/${(dateDemain.getMonth() < 9 ? '0' : '')}${dateDemain.getMonth() + 1}/${dateDemain.getFullYear()}`;
  
-    console.log(data)
+    
 return (
   <MapContainer
     center={[latitude, longitude]}
@@ -56,16 +56,16 @@ return (
 
           if (typeof data === 'object' && !Array.isArray(data) && data.hasOwnProperty('id')) {
             // Si data a une propriété 'id', il est considéré comme un objet unique
-            console.log('Condition 1 :', data);
+           
             item = data;
           } else {
             // Sinon, on suppose que data est un objet contenant plusieurs objets, cherchez celui avec le bon ID
-            console.log('Condition 2 :', data);
+         
             const dataArray = Object.values(data);
             item = dataArray.find((dataItem) => dataItem && dataItem.id === externalId);
           }
           
-          console.log('Item final :', item);
+          
           
           
           

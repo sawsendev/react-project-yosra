@@ -87,8 +87,6 @@ const Room = () => {
       .then(response => response.json())
       .then(data => {
         setLotData(data.data.lot);
-        console.log(data.data.lot);     
-        console.log(data.data.lot.rent_status);
         setCity(data.data.lot.apartment.building.city);
         const latitude = data.data.lot.apartment.building.latitude;
         setLatitude(latitude)
@@ -250,7 +248,7 @@ const Room = () => {
               <div className='carousel-images'>
                 {/* <img src={room} alt="room" className="img-fluid"/> */}
 
-                <CarrouselImages />
+                <CarrouselImages lotData={lotData}/>
                 
                 <div className='medias'>
                 {lotData && lotData.media && lotData.media

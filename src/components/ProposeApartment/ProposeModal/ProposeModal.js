@@ -577,25 +577,25 @@ const ProposeModal = ({ isOpen, closeModal }) => {
       
         <div className='popup-body'>
           
-          <div className='icon-msg row align-items-center'>
-           <img src={like} alt='like' className='img-fluid like'/>
+          <div className='icon-msg mt-2 row align-items-center'>
+           <img src={like} alt='like' className='img-fluid like mx-auto'/>
            <div className="message col">Thank you {firstNameValue}, we have received your enquiry</div>
           </div>
-          <div className='d-flex flex-column align-items-start'>
-          <div className='mt-4 qt'>What happens next ?</div>
+          <div className=''>
+          <div className='my-2 row mx-3 qt'>What happens next ?</div>
           
-          <div className='row m-3'>
-           <span className='step'>Step1</span>
-           <div className='col'>
+          <div className='row mx-2'>
+           <span className='step col-md-auto mx-2'>Step1</span>
+           <div className='col-md mt-2'>
            <div className=''>
            <h5 className='text-start'>Our team will review your information and get back to you shortly</h5>
            <p className='text-start'>Our team will analyse the information you have provided, and get in touch with you to arrrange a viewing of the apartment</p>
           </div>
           </div>
           </div>
-          <div className='row m-3'>
-           <span className='step'>Step2</span>
-           <div className='col'>
+          <div className='row mx-2'>
+           <span className='step col-md-auto mx-2'>Step2</span>
+           <div className='col-md mt-2'>
            <div>
            <h5 className='text-start'>If your apartment makes the cut ,we will make you an offer in no time</h5>
            <p className='text-start'>If your apartment meets our standards , we will make you an offer and explain the terms of the partnership with Fine cribs.
@@ -605,9 +605,9 @@ const ProposeModal = ({ isOpen, closeModal }) => {
           </div>
           </div>
           </div>
-          <div className='row m-3'>
-           <span className='step'>Step3</span>
-           <div className='col'>
+          <div className='row mx-2'>
+           <span className='step col-md-auto mx-2'>Step3</span>
+           <div className='col-md mt-2'>
            <div className=''>
            <h5 className='text-start'>Start earning a rental incom</h5>
            <p className='text-start'>If accept our offer , you will start earning a rental income from the next day.
