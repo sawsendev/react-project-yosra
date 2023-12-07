@@ -577,12 +577,12 @@ const ProposeModal = ({ isOpen, closeModal }) => {
       
         <div className='popup-body'>
           
-          <div className='icon-msg row align-items-end'>
+          <div className='icon-msg row align-items-center'>
            <img src={like} alt='like' className='img-fluid like'/>
            <div className="message col">Thank you {firstNameValue}, we have received your enquiry</div>
           </div>
           <div className='d-flex flex-column align-items-start'>
-          <div className='mt-4' style={{fontWeight: "600",fontSize: "20px"}}>What happens next ?</div>
+          <div className='mt-4 qt'>What happens next ?</div>
           
           <div className='row m-3'>
            <span className='step'>Step1</span>
