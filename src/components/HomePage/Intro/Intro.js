@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import "./Intro.css"
 import { useNavigate } from 'react-router-dom'
-import SelectCity from '../../SelectCity/SelectCity';
+import SelectCity from '../../SearchCities/Search/SelectCity/SelectCity';
 import calendarIcon from '../../../assets/calendar.svg'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -62,7 +62,7 @@ const Intro = () => {
         <h2>connect, explore and make new friends</h2>
         <div className='Input-container d-flex justify-content-between'>
           <div className='input-group input-country'>
-         <SelectCity text='Where will you go?' onChange={(selectedValue) => setCity( selectedValue.value)} />
+         <SelectCity text='Where will you go?' onChange={(selectedValue) => setCity( selectedValue.value)} alert={true}/>
           </div>
           <div className='input-group'>
           <DatePicker

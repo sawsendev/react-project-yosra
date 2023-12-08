@@ -8,47 +8,8 @@ import { BsArrowRight} from 'react-icons/bs';
 import { BsArrowLeft } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 
-const ExploreMoreSmall = () => {
-  const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
-  const API_URL = 'https://admin.finecribs.com/api/lots/city';
-  const navigate= useNavigate();
-  const [lotData, setLotData] = useState([]);
- 
+const ExploreMoreSmall = ({lotData}) => {
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const headers = {
-          'apiKey': `${API_KEY}`,
-        };
-  
-        const response = await fetch(`${API_URL}`, {
-          method: 'GET',
-          mode: 'cors',
-          headers,
-        });
-  
-        const responseData = await response.json();
-       
-  
-        if (responseData) {
-          setLotData(responseData);
-        } else {
-          console.error('Données inattendues de l\'API :', responseData);
-          setLotData([]); // En cas d'erreur, affectez un tableau vide
-        }
-      } catch (error) {
-        console.error('Erreur lors de la récupération des données :', error);
-        setLotData([]); // En cas d'erreur, affectez un tableau vide
-      }
-    };
-  
-    fetchData();
-  }, []);
-  
-  
-
- console.log(lotData)
 
 
   const responsive = {

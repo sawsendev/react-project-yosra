@@ -3,15 +3,15 @@ import { useMediaQuery } from 'react-responsive';
 import ExploreMoreSmall from './ExploreMoreSmall';
 import ExploreMoreLarge from './ExploreMoreLarge';
 
-const ExploreMore= () => {
+const ExploreMore= ({lotData}) => {
   const isLargeScreen = useMediaQuery({ minWidth: 768 });
 
   return (
     <>
       {isLargeScreen ? (
-        <ExploreMoreLarge/>
+        <ExploreMoreLarge lotData={lotData}/>
       ) : (
-        <ExploreMoreSmall />
+        <ExploreMoreSmall lotData={lotData}/>
       )}
     </>
   );

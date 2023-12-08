@@ -92,7 +92,7 @@ const Cribes = () => {
     }
   };
 
-  console.log(mapData)
+ 
   const fetchDataFromAPI = async (page) => {
     try {
       const headers = {
@@ -131,8 +131,7 @@ const Cribes = () => {
     }
   };
   
-  
-  console.log(cribsData)
+ 
 
   const fetchDataFromAPI2 = async (page) => {
     if (searchParamsExist) {
@@ -179,8 +178,7 @@ const Cribes = () => {
       }
     }
   };
-  console.log(coordinates)
-   console.log(searchResult)
+  
   const handleScroll = () => {
     if (window.innerHeight + window.scrollY < document.documentElement.offsetHeight && currentPage < lastPage && !loading) {
       setCurrentPage(currentPage + 1);
@@ -231,7 +229,7 @@ const Cribes = () => {
     if(searchParams)
     fetchMapData();
   }, [cityParam, dateParam, priceMinParam, priceMaxParam, sortByParam]);
- console.log(dateParam)
+ 
   useEffect(() => {
     if(!searchParams)
     fetchMapData();

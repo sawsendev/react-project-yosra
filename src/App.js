@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route,Switch} from 'react-router-dom';
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import React from 'react';
 import "./App.css"
 import Faq from "./components/HomePage/Faq/Faq";

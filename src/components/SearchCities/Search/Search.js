@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import SelectCity from '../../SelectCity/SelectCity';
+import SelectCity from './SelectCity/SelectCity';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { format } from 'date-fns';
@@ -42,13 +42,7 @@ const Search = () => {
   };
   
   const navigate=useNavigate()
-  // const handleSliderOpen = () => {
-  //   setIsSliderOpen(true);
-  // };
-  
-  // const handleSliderClose = () => {
-  //   setIsSliderOpen(false);
-  // };
+ 
 
 
   const customStyles = {
@@ -106,7 +100,7 @@ const Search = () => {
 
         const data = await response.json();
         setLotData(data.data.lot);
-        console.log(data.data.lot);
+  
         
        
       } catch (error) {
@@ -205,8 +199,7 @@ const Search = () => {
 
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
-  console.log('Valeur de priceRange[0] :', priceRange[0]);
-  console.log('Valeur de priceRange[1] :', priceRange[1]);
+ 
   const handleSliderClick = (e) => {
     e.stopPropagation();
   };
@@ -220,7 +213,7 @@ const Search = () => {
             <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
               <label htmlFor="countries">City</label>
               <div className='input-select'>
-              <SelectCity text='Where will you go?' onChange={(selectedValue) => { setCity(selectedValue.value); console.log(selectedValue.value); }} city={city} />
+              <SelectCity text='Where will you go?' onChange={(selectedValue) => { setCity(selectedValue.value); }} city={city} alert={true} />
 
                  <input type="hidden" name="city" value={city} id="city-input" />
               </div>
