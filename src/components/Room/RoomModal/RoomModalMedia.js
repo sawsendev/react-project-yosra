@@ -134,15 +134,14 @@ const RoomModalMedia = ({ isOpen, closeModal, activeTab, setActiveTab , lotData 
       ></iframe>
     )}
     {lotData.video_360 && (
-      <video
-                              src={lotData.video_360}
-                              
-                              controls
-                              frameborder="0"
-                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                              allowfullscreen
-                              style={{width:"100%"}}
-                              ></video>
+       <iframe
+       title="YouTube Video"
+       width="853"
+       height="480" 
+       src={`https://www.youtube.com/embed/${lotData.video_360.split('/').pop()}`}
+       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+       allowFullScreen
+     ></iframe>
     )}
   </li>
 )}
