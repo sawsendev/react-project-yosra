@@ -238,6 +238,10 @@ const Room = () => {
       <>
       <Helmet>
         <title>Room</title>
+        <meta
+          name="description"
+          content="Fine Cribs, beautiful flatshares designed for communal living"
+          />
       </Helmet>
       {lotData && lotData.apartment && lotData.apartment.title && lotData.title && (
       <Breadcrumbs path={`/${lotData.apartment.title} - ${lotData.title}`}/> )}

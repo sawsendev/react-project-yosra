@@ -82,6 +82,10 @@ return (
     <div id='faq'>
      <Helmet>
           <title>FAQ</title>
+          <meta
+          name="description"
+          content="Fine Cribs, beautiful flatshares designed for communal living"
+          />
      </Helmet>
      <Breadcrumbs/>
      <div className='container FaqpagesContainer'>

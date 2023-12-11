@@ -377,6 +377,10 @@ const validateEmail = (email) => {
     <>
     <Helmet>
       <title>Booking Room</title>
+      <meta
+          name="description"
+          content="Fine Cribs, beautiful flatshares designed for communal living"
+          />
     </Helmet>
    
     {lotData && lotData.apartment && lotData.apartment.title && lotData.title && (

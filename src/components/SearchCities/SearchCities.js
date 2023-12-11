@@ -17,6 +17,10 @@ const SearchCities = () => {
       <div>
         <Helmet>
           <title>Search Result Page</title>
+          <meta
+          name="description"
+          content="Fine Cribs, beautiful flatshares designed for communal living"
+          />
         </Helmet>
         <CityResult city={city} />
         <Search />

@@ -8,6 +8,7 @@ import ExploreMore from './ExploreMore/ExploreMore';
 import './Homepage.css'
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 
 const Homepage = () => {
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
@@ -58,6 +59,13 @@ const Homepage = () => {
   console.log(lotData);
   return (
     <div id='Home' className='homepage-container'>
+      <Helmet>
+          <title>Fine cribs</title>
+          <meta
+          name="description"
+          content="Fine Cribs, beautiful flatshares designed for communal living"
+          />
+        </Helmet>
         <Intro/>
         <Reactions></Reactions>
         <ExploreMore lotData={lotData}/>

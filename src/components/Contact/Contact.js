@@ -9,6 +9,10 @@ const Contact = () => {
     <>
     <Helmet>
       <title>Contact</title>
+      <meta
+          name="description"
+          content="Fine Cribs, beautiful flatshares designed for communal living"
+          />
     </Helmet>
     <Breadcrumbs/>
     <div className='Contact-container row m-0'>
