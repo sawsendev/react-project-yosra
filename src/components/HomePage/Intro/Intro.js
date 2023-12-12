@@ -6,9 +6,9 @@ import calendarIcon from '../../../assets/calendar.svg'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { format } from 'date-fns';
-const Intro = () => {
+const Intro = ({backgroundImage}) => {
   const[city,setCity]=useState('');
-  const[date,setDate]=useState('');
+  const[date,setDate]=useState(''); 
   
   const handleCustomInputInChange = (date) => {
     setDate(date||null);
@@ -56,7 +56,7 @@ const Intro = () => {
   tomorrow.setDate(tomorrow.getDate() + 1); 
 
   return (
-    <div className='Intro-container d-block py-md-5 py-4 container-fluid mb-md-5 mb-4'>
+    <div className='Intro-container d-block py-md-5 py-4 container-fluid mb-md-5 mb-4'  style={{ backgroundImage: `url(${backgroundImage})` }}>
       <div className='Content-container'>
         <h1>We create beautiful spaces designed for communal living where you can </h1>
         <h2>connect, explore and make new friends</h2>
@@ -64,7 +64,7 @@ const Intro = () => {
           <div className='input-group input-country'>
          <SelectCity text='Where will you go?' onChange={(selectedValue) => setCity( selectedValue.value)} alert={true}/>
           </div>
-          <div className='input-group'>
+          <div className='input-group'> 
           <DatePicker
   selected={date}
   name="date"

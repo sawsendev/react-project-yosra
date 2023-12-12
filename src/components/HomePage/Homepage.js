@@ -15,6 +15,8 @@ const Homepage = () => {
   const API_URL = 'https://admin.finecribs.com/api/lots/city';
   
   const [lotData, setLotData] = useState([]);
+  const [data, setData] = useState(null);
+
 
   useEffect(() => {
     let isMounted = true;
@@ -56,7 +58,43 @@ const Homepage = () => {
     };
   }, []);
   
-  console.log(lotData);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const headers = {
+          'apiKey': `${API_KEY}`,
+        };
+  
+        const response = await fetch('https://admin.finecribs.com/api/homepage',{
+          method: 'GET',
+          mode: 'cors',
+          headers,
+        });
+        
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const result = await response.json();
+        if (
+          result &&
+          result.data &&
+          result.data.page &&
+          result.data.page.media &&
+          result.data.page.media.length > 0
+        ) {
+          const originalUrl = result.data.page.media[0].original_url;
+          setData(originalUrl);}
+       
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
   return (
     <div id='Home' className='homepage-container'>
       <Helmet>
@@ -66,7 +104,7 @@ const Homepage = () => {
           content="Fine Cribs, beautiful flatshares designed for communal living"
           />
         </Helmet>
-        <Intro/>
+        <Intro backgroundImage={data}/>
         <Reactions></Reactions>
         <ExploreMore lotData={lotData}/>
         <ReasonToRent/>

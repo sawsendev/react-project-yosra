@@ -55,6 +55,7 @@ const BookingRoom = () => {
       [name]: value,
     });
     console.log(value)
+    setFormErrors((prevErrors) => ({ ...prevErrors, [name]: '' }));
   };
   
   
@@ -62,6 +63,7 @@ const BookingRoom = () => {
     const emailValue = event.target.value;
     setEmail(emailValue);
     setEmailValid(validateEmail(emailValue));
+    setFormErrors((prevErrors) => ({ ...prevErrors, email: '' }));
 }
 const validateEmail = (email) => {
   const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
@@ -95,7 +97,6 @@ const validateEmail = (email) => {
   
   const handleCustomInputOutChange = (date) => {
     setMoveOutDate(date);
-    console.log(date)
   };
   
   const handleSubmit = async (e) => {
@@ -321,14 +322,16 @@ const validateEmail = (email) => {
   );
   const handleMoveInDateChange = (date) => {
     if (date) {
-      setMoveInDate(date); // Stockez la date telle quelle
+      setMoveInDate(date); 
+      setFormErrors((prevErrors) => ({ ...prevErrors, moveInDate: '' }));// Stockez la date telle quelle
     }
+
   };
   
   const handleMoveOutDateChange = (date) => {
     if (date) {
       setMoveOutDate(date);
-      console.log(date) // Stockez la date telle quelle
+      setFormErrors((prevErrors) => ({ ...prevErrors, moveOutDate: '' }));
     }
   };
   const [phoneNumberWithoutCode, setPhoneNumberWithoutCode] = useState('');
@@ -491,10 +494,10 @@ const validateEmail = (email) => {
                     name='email'
                     placeholder="exemple@gmail.com"
                     onChange={handleEmailChange}
-                    required
+                 
                   />
-                  {!emailValid && <p>Please enter a valid email address.</p>}
-                  {/* {formErrors.email !== '' && <div className="error-message">{formErrors.email}</div>} */}
+                  {!emailValid && <div className='error-message'>Please enter a valid email address.</div>}
+                  {formErrors.email !== '' && <div className="error-message">{formErrors.email}</div>}
                 </div>
 
 

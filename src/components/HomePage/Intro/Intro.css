@@ -1,5 +1,5 @@
 .Intro-container{
-    background-image: url("../../../assets/banner.svg");
+    
     background-repeat: no-repeat;
     background-position: center top;
     background-size: cover;
@@ -10,7 +10,7 @@
   padding: 30px 50px 40px;
   margin: 110px auto;
   border-radius: 4px;
-  display: block;
+  display: block; 
   max-width: 900px;
   width: 90%;
   text-align: center;

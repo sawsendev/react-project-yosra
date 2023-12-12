@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
-import React from 'react';
+import React, { useEffect } from 'react';
 import "./App.css"
 import Faq from "./components/HomePage/Faq/Faq";
 import Footer from "./components/Footer/Footer";
@@ -13,11 +13,16 @@ import Room from './components/Room/Room';
 import Contact from './components/Contact/Contact';
 import BookingRoom from './components/BookingRoom/BookingRoom';
 import ProposeApartment from './components/ProposeApartment/ProposeApartment';
-
+import ReactGA from "react-ga"
 
 
 
 function App() {
+  useEffect(() => {
+    const TRACKING_ID = "G-1K58YXV1ZE"
+    ReactGA.initialize(TRACKING_ID)
+    ReactGA.pageview(window.location.pathname + window.location.search)
+  }, [])
 
   return (
     <div>

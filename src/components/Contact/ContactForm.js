@@ -73,16 +73,19 @@ const ContactForm = () => {
 
     const handleFirstNameChange = (event) => {
         setFirstName(event.target.value);
+        setFormErrors((prevErrors) => ({ ...prevErrors, firstName: '' }));
     }
 
     const handleLastNameChange = (event) => {
         setLastName(event.target.value);
+        setFormErrors((prevErrors) => ({ ...prevErrors, lastName: '' }));
     }
 
     const handleEmailChange = (event) => {
       const emailValue = event.target.value;
       setEmail(emailValue);
       setEmailValid(validateEmail(emailValue));
+      setFormErrors((prevErrors) => ({ ...prevErrors, email: '' }));
   }
 
   const validateEmail = (email) => {
@@ -92,6 +95,7 @@ const ContactForm = () => {
 
     const handleMessageChange = (event) => {
         setMessage(event.target.value);
+        setFormErrors((prevErrors) => ({ ...prevErrors, message: '' }));
     }
     const handleSubmit = async (event) => {
       event.preventDefault();
@@ -168,6 +172,7 @@ const ContactForm = () => {
       // Extraire le code de composition du numéro
       
       setCode(data.dialCode);
+      setFormErrors((prevErrors) => ({ ...prevErrors, phoneNumber: '' }));
     
       // Vérifier si le numéro commence par le code de composition
       if (value.startsWith(`+${code}`)) {
@@ -204,7 +209,7 @@ const ContactForm = () => {
             <div class="row mb-8">
                 <div class="col-lg-6">
                     <div class="form-outline">
-                        <label class="form-label" for="form6Example1">First name</label>
+                        <label class="form-label" for="form6Example1">First name*</label>
                         <input type="text" id="form6Example1" class="form-control" value={firstName} onChange={handleFirstNameChange} />
                         {formErrors.firstName !==''&&
                       <div className="error-message">{formErrors.firstName}</div>}
@@ -212,7 +217,7 @@ const ContactForm = () => {
                 </div>
                 <div className="col-lg-6">
                     <div className="form-outline">
-                        <label className="form-label" for="form6Example2">Last name</label>
+                        <label className="form-label" for="form6Example2">Last name*</label>
                         <input type="text" id="form6Example2" className="form-control" value={lastName} onChange={handleLastNameChange} />
                         {formErrors.lastName !==''&&
                       <div className="error-message">{formErrors.lastName}</div>}
@@ -224,14 +229,14 @@ const ContactForm = () => {
                 <div className="form-outline col-lg-6 mb-4">
                     <label className="form-label" for="form6Example3">Email*</label>
                     <input type="email" id="form6Example3" class="form-control" value={email} onChange={handleEmailChange} />
-                    {!emailValid && <p>Please enter a valid email address.</p>}
+                    {!emailValid && <div className='error-message'>Please enter a valid email address.</div>}
                     {formErrors.email !==''&&
                       <div className="error-message">{formErrors.email}</div>}
                 </div>
 
                
             <div className="form-outline col-lg-6 mb-4">
-                  <label className="form-label" for="phone">Phone</label>
+                  <label className="form-label" for="phone">Phone*</label>
                   <PhoneInput
   country={country}
   value={phoneNumber}
@@ -250,7 +255,7 @@ const ContactForm = () => {
         
 
             <div class="form-outline mb-4">
-                <label className="form-label" for="form6Example7">Type here</label>
+                <label className="form-label" for="form6Example7">Type here*</label>
                 <textarea className="form-control" id="form6Example7" rows="2" value={message} onChange={handleMessageChange}></textarea>
                 {formErrors.message !==''&&
                       <div className="error-message">{formErrors.message}</div>}

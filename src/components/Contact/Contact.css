@@ -7,6 +7,12 @@
     z-index: -9999;
   
 }
+.error-message{
+    font-size: 13px;
+    font-weight: 400;
+    color: red;
+}
+
  @media (max-width: 992px){
     .Contact-container{
         background-position: 35% center; 
@@ -21,7 +27,7 @@
     color: #000;
 }
 .Contact-container form {
-    /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+   
     padding: 32px 64px 28px 45px;
     background-color: white;
     border-radius: 6px;
