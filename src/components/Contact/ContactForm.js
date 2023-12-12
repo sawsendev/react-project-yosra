@@ -51,6 +51,10 @@ const ContactForm = () => {
       errors.message = 'Message is required';
       isValid = false;
     }
+    if (!phoneNumber.trim()) {
+      errors.phoneNumber = 'Phone number is required';
+      isValid = false;
+    }
   
     setFormErrors(errors);
     return isValid;
@@ -236,6 +240,8 @@ const ContactForm = () => {
     required: true,
   }}
 />
+{formErrors.phoneNumber !==''&&
+                      <div className="error-message">{formErrors.phoneNumber}</div>}
 
                
             </div>
