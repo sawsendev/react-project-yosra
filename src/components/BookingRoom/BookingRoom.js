@@ -383,10 +383,14 @@ const validateEmail = (email) => {
           />
     </Helmet>
    
-    {lotData && lotData.apartment && lotData.apartment.title && lotData.title && (
+    {lotData && lotData.apartment && lotData.apartment.title && lotData.title && lotData.apartment.building &&lotData.apartment.building.city&&(
  <Breadcrumbs
  path={`/`}
  customRoutes={[
+  {
+    path: `/search-cities?city=${lotData.apartment.building.city}`,
+    label: `${lotData.apartment.building.city}`
+  },
    {
      path: `/room/${lotData.id}`,
      label: `${lotData.apartment.title} - ${lotData.title}`

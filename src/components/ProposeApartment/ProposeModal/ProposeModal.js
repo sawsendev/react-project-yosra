@@ -567,7 +567,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
       </Modal>
       {/* <ToastContainer /> */}
       {showPopup && (
-        status==='success' ?(<div className="popup popup-msg-alert">
+        status==='success' ?(<div className="popupp popup-msg-alertp">
           <div className='close'>
         <button className='closebtn' onClick={handlePopupClose}>
                 &times;

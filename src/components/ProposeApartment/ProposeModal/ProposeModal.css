@@ -284,7 +284,17 @@ button.box-input img {
     right: calc(50% - 400px);
     top: 56px;
 }
-.popup-msg-alert .popup-contentpropose {
+.popupp.popup-msg-alertp {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 10;
+    overflow-y: auto;
+  }
+.popup-msg-alertp .popup-contentpropose {
     background: white;
     padding: 30px 20px 30px;
     border-radius: 10px;
@@ -343,9 +353,20 @@ display: flex;
     position: relative;
     text-align: right;
 }
+.popup-msg-alertp .message {
+    color: #000;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 30px;
+    margin: 16px 0;}
+    .popup-msg-alertp .icon-msg {
+        color: #000;
+        font-size: 42px;
+        line-height: 42px;
+    }
   
 @media(max-width:830px) and (min-width:777px) {
-    .popup-msg-alert .popup-contentpropose{
+    .popup-msg-alertp .popup-contentpropose{
         max-width: 632px;
         left: calc(50% - 300px);
     }
@@ -356,7 +377,7 @@ display: flex;
     }
 }
 @media(max-width:776px) and (min-width:577px) {
-    .popup-msg-alert .popup-contentpropose{
+    .popup-msg-alertp .popup-contentpropose{
         max-width: 500px;
         left: calc(50% - 250px);
     }
@@ -367,7 +388,7 @@ display: flex;
     }
 }
 @media(max-width:576px) and (min-width:486px){
-    .popup-msg-alert .popup-contentpropose{
+    .popup-msg-alertp .popup-contentpropose{
         max-width: 400px;
         left: calc(50% - 200px);
     }
@@ -379,7 +400,7 @@ display: flex;
 
 }
 @media(max-width:576px) and (min-width:486px){
-    .popup-msg-alert .popup-contentpropose{
+    .popup-msg-alertp .popup-contentpropose{
         max-width: 400px;
         left: calc(50% - 200px);
     }
@@ -391,7 +412,7 @@ display: flex;
 
 }
 @media(max-width:485px) and (min-width:400px){
-    .popup-msg-alert .popup-contentpropose{
+    .popup-msg-alertp .popup-contentpropose{
         max-width: 350px;
         left: calc(50% - 175px);
     }
@@ -403,7 +424,7 @@ display: flex;
 
 }
 @media(max-width:400px){
-    .popup-msg-alert .popup-contentpropose{
+    .popup-msg-alertp .popup-contentpropose{
         max-width: 260px;
         left: calc(50% - 130px);
     }
@@ -416,7 +437,7 @@ display: flex;
 }
 
 @media(max-width:576px){
-    .popup-msg-alert .message {
+    .popup-msg-alertp .message {
         font-size: 16px;
     }
     .like {

@@ -112,6 +112,8 @@ const Search = () => {
   }, [API_URL, API_KEY]);
  
   const[max,setMax]=useState(2000)
+  const [priceRange, setPriceRange] = useState([0, max]);
+  
   useEffect(() => {
     // Calculer max après la récupération des données
     const loyerHc = lotData && lotData.loyer_hc ? parseInt(lotData.loyer_hc, 10) : 0;
@@ -120,13 +122,23 @@ const Search = () => {
     // Mettre à jour max seulement si le prix de l'API est supérieur à la valeur actuelle
     if (loyerHc + charges > max) {
       setMax(loyerHc + charges);
+      
     }
   
     // Mettre à jour priceRange avec la nouvelle valeur de max
    
   }, [lotData, max]);
+
   
-  const [priceRange, setPriceRange] = useState([0, 2000]);
+   
+
+   useEffect(() => {
+    // Mettre à jour priceRange avec la nouvelle valeur de max
+    setPriceRange([0, max]);
+  }, [max]);
+ 
+
+ 
   
   useEffect(() => {
     // Parsez les paramètres de l'URL ici
@@ -261,7 +273,6 @@ const Search = () => {
 
 {isSliderVisible && (
   <div className='slider-container container'>
-    {/* Close icon */}
     <div className='d-flex flex-row-reverse flex-wrap align-content-center justify-content-between'> 
       <AiOutlineClose className='close-icon' onClick={() => setIsSliderVisible(false)} />
       <h5>Price per month</h5>

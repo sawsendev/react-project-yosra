@@ -23,6 +23,39 @@ const ContactForm = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
   const [status, setStatus] = useState('');
+  const [formErrors, setFormErrors] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    message: '',
+  });
+  const validateForm = () => {
+    const errors = {};
+    let isValid = true;
+  
+    if (!firstName.trim()) {
+      errors.firstName = 'First name is required';
+      isValid = false;
+    }
+  
+    if (!lastName.trim()) {
+      errors.lastName = 'Last name is required';
+      isValid = false;
+    }
+  
+    if (!email.trim()) {
+      errors.email = 'Email is required';
+      isValid = false;
+    }
+    if (!message.trim()) {
+      errors.message = 'Message is required';
+      isValid = false;
+    }
+  
+    setFormErrors(errors);
+    return isValid;
+  };
+ 
   
   const handlePopupClose = () => {
     setShowPopup(false);
@@ -59,15 +92,17 @@ const ContactForm = () => {
     const handleSubmit = async (event) => {
       event.preventDefault();
     
-      if (firstName && lastName && emailValid && valid && message) {
+      if (validateForm() && emailValid && valid && message) {
         const data = {
           name: firstName + " " + lastName,
           email: email,
-          phone: phoneNumberWithoutCode,
-          phone_country_name: country,
           message: message,
           objet: "contact : " + firstName + " " + lastName
         };
+        if (phoneNumberWithoutCode) {
+          data.phone = phoneNumberWithoutCode;
+          data.phone_country_name = country;
+        }
     
         try {
           const response = await fetch('https://admin.finecribs.com/api/contact', {
@@ -167,12 +202,16 @@ const ContactForm = () => {
                     <div class="form-outline">
                         <label class="form-label" for="form6Example1">First name</label>
                         <input type="text" id="form6Example1" class="form-control" value={firstName} onChange={handleFirstNameChange} />
+                        {formErrors.firstName !==''&&
+                      <div className="error-message">{formErrors.firstName}</div>}
                     </div>
                 </div>
                 <div className="col-lg-6">
                     <div className="form-outline">
                         <label className="form-label" for="form6Example2">Last name</label>
                         <input type="text" id="form6Example2" className="form-control" value={lastName} onChange={handleLastNameChange} />
+                        {formErrors.lastName !==''&&
+                      <div className="error-message">{formErrors.lastName}</div>}
                     </div>
                 </div>
             </div>
@@ -182,6 +221,8 @@ const ContactForm = () => {
                     <label className="form-label" for="form6Example3">Email*</label>
                     <input type="email" id="form6Example3" class="form-control" value={email} onChange={handleEmailChange} />
                     {!emailValid && <p>Please enter a valid email address.</p>}
+                    {formErrors.email !==''&&
+                      <div className="error-message">{formErrors.email}</div>}
                 </div>
 
                
@@ -196,7 +237,7 @@ const ContactForm = () => {
   }}
 />
 
-                {/* {!valid && <p>Please enter a valid 10-digit phone number.</p>} */}
+               
             </div>
         </div>
 
@@ -205,6 +246,8 @@ const ContactForm = () => {
             <div class="form-outline mb-4">
                 <label className="form-label" for="form6Example7">Type here</label>
                 <textarea className="form-control" id="form6Example7" rows="2" value={message} onChange={handleMessageChange}></textarea>
+                {formErrors.message !==''&&
+                      <div className="error-message">{formErrors.message}</div>}
             </div>
 
             <button type="submit" className="btn btn-primary btn-block float-end custom-button ">Send message</button>

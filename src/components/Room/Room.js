@@ -243,9 +243,22 @@ const Room = () => {
           content="Fine Cribs, beautiful flatshares designed for communal living"
           />
       </Helmet>
-      {lotData && lotData.apartment && lotData.apartment.title && lotData.title && (
-      <Breadcrumbs path={`/${lotData.apartment.title} - ${lotData.title}`}/> )}
-      <div className='pageroom-container'>
+      {lotData && lotData.apartment && lotData.apartment.building &&lotData.apartment.building.city&& (
+     <Breadcrumbs
+     path={`/`}
+     customRoutes={[
+       {
+         path: `/search-cities?city=${lotData.apartment.building.city}`,
+         label: `${lotData.apartment.building.city}`
+       }
+     ]}
+      
+      /> )}
+      
+      
+      
+      
+      <div className='pageroom-container'> 
         <div className='container'>
           <div className='row'>
             <div className='col-large col-lg-8'>

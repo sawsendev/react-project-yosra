@@ -17,7 +17,7 @@ const SelectCity = ({ onChange, city ,text ,alert }) => {
     }
     if(alert){
   fetchDataFromAPI();}
-  console.log('run')
+  
   }, [alert]); 
   
 

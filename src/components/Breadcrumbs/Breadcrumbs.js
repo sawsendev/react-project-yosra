@@ -30,7 +30,7 @@ function Breadcrumbs({ path, customRoutes = [] }) {
         </div>
       </React.Fragment>
     );
-  });
+  }); 
 
   // Add custom routes dynamically
   customRoutes.forEach((route, index) => {

@@ -151,7 +151,7 @@ const Footer = () => {
 
       {/* Horizontal Line and Copyright */}
       <div className='Copyright'>
-  <p className='m-0 text-center'>Copyright © {new Date().getFullYear()} Finecribs. Tous droits réservés Développé par <a href='https://oxton-digital.com/'>Oxton Digital</a></p>
+  <p className='m-0 text-center'>Copyright © {new Date().getFullYear()} Finecribs. All rights reserved. Developed by <a href='https://oxton-digital.com/' target='_blank' rel='noopener noreferrer'>Oxton Digital.</a></p>
     </div>
 
       {/* PopupAlert */}
