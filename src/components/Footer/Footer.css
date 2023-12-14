@@ -98,9 +98,7 @@
   .Apartements .h3, .Useful-links .h3, .Create-alert .h3 {
     margin: 0 0 12px;
   }
-  .Create-alert .h3 {
-    margin: 0 0 18px;
-}
+
 }
 
 @media (max-width: 767px) {

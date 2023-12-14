@@ -42,7 +42,7 @@
     border: none;
     background: rgba(255, 255, 255, .6);
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.16);
-    line-height: 30px;
+    line-height: 37px;
 }
 .pageroom-container .carousel-images .custom-next-arrow:hover, .pageroom-container .carousel-images .custom-prev-arrow:hover {
     color: black;
@@ -114,7 +114,7 @@
     color: #000;
     font-size: 18px;
     font-weight: 600;
-    margin: 0 0 8px;
+    margin: 0 0 4px;
 }
 .prv{
     color: #000;
@@ -435,7 +435,7 @@
         top: inherit;
         bottom: 63px;
     }
-    .pageroom-container .btn-media {
+    /* .pageroom-container .btn-media {
         height: 40px;
         width: 40px;
         font-size: 0;
@@ -443,7 +443,7 @@
         border-radius: 6px;
         background: #FFF;
         min-width: inherit;
-    }
+    } */
     .pageroom-container .btn-media img {
         height: 28px!important;
     }
@@ -521,7 +521,7 @@
         border-radius: 8px;
         color: white;
         margin: 0 auto;
-        width: 116.33%;
+        width: 86.33%;
         display: inline-block;
         box-sizing: border-box;
         padding: 10px;

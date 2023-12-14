@@ -402,7 +402,7 @@ const validateEmail = (email) => {
  
 />)}
    <div className='container'>
-    <div className="Booking-title mt-4 mb-5">
+    <div className="Booking-title mt-4 mb-3">
     {lotData && lotData.apartment && lotData.apartment.title && lotData.title && (
                <h2>{lotData.apartment.title} - {lotData.title}</h2>
                 )}
@@ -686,7 +686,7 @@ const validateEmail = (email) => {
   <div className='row'>
     <div className='col-md-8 col-sm-12 thank'>
       <img src={image} alt="description" />
-      <p className='text-center mt-3 px-3 mx-5'>
+      <p className='text-center mt-3  px-2 mx-md-3'>
         Thank you {formData.firstName}, we have received your application. Our team is currently reviewing your file. We will get back to you shortly. Please check your email address {email}.
       </p>
     </div>

@@ -24,10 +24,12 @@ const Footer = () => {
 
   const toggleApartments = () => {
     setShowApartments(!showApartments);
+   
   };
 
   const toggleUsefulLinks = () => {
     setShowUsefulLinks(!showUsefulLinks);
+    
   };
 
   const openPopup = () => {
@@ -37,7 +39,26 @@ const Footer = () => {
   const closePopup = () => {
     setIsPopupOpen(false);
   };
-  
+  const [rotateDegree, setRotateDegree] = useState(90);
+  const [rotateDegree1, setRotateDegree1] = useState(90);
+
+
+  const toggleRotation = () => {
+    setRotateDegree((prevDegree) => (prevDegree === 90 ? 270 : 90));
+  };
+  const toggleRotation1 = () => {
+    setRotateDegree1((prevDegree) => (prevDegree === 90 ? 270 : 90));
+  };
+  const handleClick = () => {
+    
+    toggleApartments();
+    toggleRotation();
+  };
+  const handleClick1 = () => {
+    
+    toggleUsefulLinks();
+    toggleRotation1();
+  };
   return (
     <>
     <div className='Footer-container mb-4 pb-3 pt-3 mt-5'>
@@ -87,7 +108,7 @@ const Footer = () => {
         <div className='Apartements container'>
           <div className='d-flex justify-content-between align-items-center'>
             <p className='h3'>Our apartments</p>
-            <img src={arrow} alt='arrow' onClick={toggleApartments} />
+            <img src={arrow} alt='arrow'  style={{ transform: `rotate(${rotateDegree}deg)` }} onClick={handleClick}/>
           </div>
 
           {/* Footer Content */}
@@ -112,7 +133,7 @@ const Footer = () => {
         <div className='Useful-links container'>
           <div className='d-flex justify-content-between align-items-center'>
             <p className='h3'>Useful links</p>
-            <img src={arrow} alt='arrow' onClick={toggleUsefulLinks} />
+            <img src={arrow} alt='arrow' style={{ transform: `rotate(${rotateDegree1}deg)` }} onClick={handleClick1} />
           </div>
 
           {/* Footer Content */}
@@ -121,8 +142,8 @@ const Footer = () => {
               {/* Useful links content */}
               
               <div className='Useful-links'>
-              <p className='h3'>Useful links</p>
-              <div className='d-flex justify-content-between align-items-center gap-3'>
+              
+              <div className=''>
 
                 <div className='First'>
                 <p><a href={'/faq'}>FAQ</a></p>
@@ -130,8 +151,8 @@ const Footer = () => {
                 </div>
                 <div className='Second'>
                
-                <p><a href="/cms/page/cgu">Terms and conditions</a></p>
-                    <p>Cookies alert</p>
+                <p><a href="/page/cgu">Terms and conditions</a></p>
+                    <p><a href="/page/cookies-alert">Cookies alert</a></p>
                 </div>
                </div>
               </div>

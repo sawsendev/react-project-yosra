@@ -115,3 +115,8 @@ textarea.form-control {
       width: 100% !important;
     }
   }
+
+@media (max-width: 567px) {
+  .form-outline {
+    margin: 0 0 16px;
+}}

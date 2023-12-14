@@ -78,7 +78,7 @@ const Feedback = () => {
         >
           {feedbackItems}
         </Carousel>
-        <div className="button-container">
+        <div className="button-containerfeed">
           <div
             onClick={onClickPrev}
             onMouseUp={onMouseUp}

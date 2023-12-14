@@ -482,7 +482,7 @@ const Room = () => {
                  /> )}
                 </div>
               </div>
-              <div className='local-desc mt-3 mb-4 pb-3'>
+              <div className='local-desc mt-3 mb-md-4 pb-3'>
                 {lotData.description_quartier && (
                   <div>
                     

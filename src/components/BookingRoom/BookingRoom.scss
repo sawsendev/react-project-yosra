@@ -181,6 +181,7 @@ p.uploaded-pdf {
  justify-content: center;
  align-items: center;
 }
+
 .Booking-content .input-container label.file-label span {
  font-size: 16px;
  font-weight: 400;
@@ -218,4 +219,13 @@ p.uploaded-pdf {
 .thank p{
   font-size: 18px;
   font-weight: 400;
+  line-height: 1.5;
+}
+@media(max-width:576px){
+  .sub-inputs .input-container {
+    margin: 16px 0 0 0;
+  }
+  .submit-button {
+    width: 100%;
+  }
 }

@@ -13,6 +13,11 @@
     font-weight: 400;
     margin: 0;
 }
+.button-containerfeed {
+    display: flex;
+    justify-content: center;
+    
+  }
 
 
 /* for mobile screens */

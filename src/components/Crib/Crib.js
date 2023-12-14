@@ -70,8 +70,8 @@ const formatDate = (dateString) => {
 
    
   return (
-    <li className='col-lg-4 col-md-6 col-12'>
-      <div className='item-cribe'>
+    <li className='col-lg-4 col-md-6 col-12 mb-2'>
+      <div className='item-cribe '>
         <div className='Item-badge'>
         <Badge className='notify-badge'>
   {
@@ -159,7 +159,7 @@ const formatDate = (dateString) => {
           <h3>
             {crib.apartment.title}-{crib.title}
           </h3>
-          <div className='d-flex mb-1'>
+          <div className='d-flex '>
             <img src={locationIcon} alt="location icon" />
             <p>{crib.apartment.building.address}</p>
           </div>

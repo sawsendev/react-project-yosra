@@ -17,7 +17,7 @@ const BookingProcess = ({cribs}) => {
         <div className='col-xm-12'>
         {firstImage ? (
   <img
-    className="img-responsive w-100"
+    className="img-responsiveb w-100"
     src={firstImage.original_url}
     alt="room processPic"
   />
