@@ -53,6 +53,7 @@
     font-size: 18px;
     font-weight: 600;
     color: #000;
+    margin-bottom: 0px;
 }
 
 .react-tel-input .form-control {
@@ -119,4 +120,8 @@ textarea.form-control {
 @media (max-width: 567px) {
   .form-outline {
     margin: 0 0 16px;
-}}
+}
+.Contact-container form label {
+    font-size: 16px;
+}
+}

@@ -8,6 +8,7 @@ import CribMap from '../MapContainer/CribMap';
 import loading1 from '../../../assets/load.gif';
 import axios from "axios";
 import { Helmet } from "react-helmet";
+import {URL} from '../../Variables'
 
 const Cribes = () => {
   const [cribsData, setCribsData] = useState([]);
@@ -269,6 +270,11 @@ const Cribes = () => {
     <div className='Cribes-container container-fluid'>
        <Helmet>
         <title> Search Result Page </title>
+        <meta
+          name="description"
+          content="Fine Cribs, beautiful flatshares designed for communal living"
+          />
+        <link rel="canonical" href={`${URL}`} />
        </Helmet>
       {searchResult.length > 0 && (
         <h2>

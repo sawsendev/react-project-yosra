@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ContactForm from './ContactForm'
 import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
 import { Helmet } from 'react-helmet';
-
-
+import {URL} from '../Variables'
+import ReactGA from 'react-ga';
 const Contact = () => {
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
+  
   return (
     <>
     <Helmet>
@@ -13,6 +17,7 @@ const Contact = () => {
           name="description"
           content="Fine Cribs, beautiful flatshares designed for communal living"
           />
+          <link rel="canonical" href={`${URL}`} />
     </Helmet>
     <Breadcrumbs/>
     <div className='Contact-container row m-0'>

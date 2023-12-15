@@ -2,13 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
 import { Helmet } from 'react-helmet';
-
+import {URL} from '../Variables'
+import ReactGA from 'react-ga';
 const Cms = () => {
   const { slug } = useParams();
   const [data, setData] = useState(null);
 
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
   const API_URL = `https://admin.finecribs.com/api/cms/page/${slug}`;
+
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
+  
 
   useEffect(() => {
     const headers = {
@@ -46,7 +52,7 @@ const Cms = () => {
       <Helmet>
         <title>{titre}</title>
         <meta name="description" content={metaDescription} />
-        {/* Ajoutez d'autres balises meta selon vos besoins */}
+        <link rel="canonical" href={`${URL}`} />
       </Helmet>
 
       <Breadcrumbs 

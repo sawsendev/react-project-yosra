@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import error from "../../assets/Groupe 1152 1.svg"
 import "./ErrorPage.css"
 import { Helmet } from 'react-helmet'
+import {URL} from '../Variables'
+import ReactGA from 'react-ga';
 
 const ErrorPage = () => {
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
   return (
+  
     <>
     <Helmet>
         <title>Error page</title>
@@ -12,6 +18,8 @@ const ErrorPage = () => {
           name="description"
           content="Fine Cribs, beautiful flatshares designed for communal living"
           />
+          <link rel="canonical" href={`${URL}`} />
+          
       </Helmet>
     <div className='container'>
       <div className='row justify-content-center'>

@@ -18,21 +18,21 @@ import { AiOutlineClose } from 'react-icons/ai';
 const Search = () => {
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
   const API_URL = `https://admin.finecribs.com/api/lot/maxprice`;
-  const[lotData,setLotData]=useState([]);
+  const [lotData, setLotData] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState("");
- 
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [date, setDate] = useState("");
-  const [sortBy, setSortBy] = useState(""); 
+  const [sortBy, setSortBy] = useState("");
   const location = useLocation();
-  const [isSliderOpen,setIsSliderOpen]=useState(false)
-  const[city,setCity]=useState("")
+  const [isSliderOpen, setIsSliderOpen] = useState(false)
+  const [city, setCity] = useState("")
   const [isSliderVisible, setIsSliderVisible] = useState(false);
 
   const handleSliderOpen = () => {
     setIsSliderVisible(true);
   };
-  
+
   const handleSliderClose = () => {
     if (isSliderVisible) {
       setIsSliderVisible(false);
@@ -40,9 +40,9 @@ const Search = () => {
       setIsSliderOpen(false);
     }
   };
-  
-  const navigate=useNavigate()
- 
+
+  const navigate = useNavigate()
+
 
 
   const customStyles = {
@@ -52,7 +52,7 @@ const Search = () => {
       border: '1px solid #ccc',
       cursor: 'pointer',
       margin: '0',
-      padding: '0px',  
+      padding: '0px',
     }),
     indicatorSeparator: (provided) => ({
       ...provided,
@@ -73,10 +73,10 @@ const Search = () => {
       <input
         type="text"
         name={name}
-        className='form-control' 
+        className='form-control'
         placeholder='Move in date'
         value={value}
-       onChange={onChange}
+        onChange={onChange}
       />
       <span className="calendar-icon">
         <img src={calendarIcon} alt="Calendar" />
@@ -100,9 +100,9 @@ const Search = () => {
 
         const data = await response.json();
         setLotData(data.data.lot);
-  
-        
-       
+
+
+
       } catch (error) {
         console.error('Erreur lors de la récupération des données :', error);
       }
@@ -110,42 +110,42 @@ const Search = () => {
 
     fetchData();
   }, [API_URL, API_KEY]);
- 
-  const[max,setMax]=useState(2000)
+
+  const [max, setMax] = useState(2000)
   const [priceRange, setPriceRange] = useState([0, max]);
-  
+
   useEffect(() => {
     // Calculer max après la récupération des données
     const loyerHc = lotData && lotData.loyer_hc ? parseInt(lotData.loyer_hc, 10) : 0;
     const charges = lotData && lotData.charges ? parseInt(lotData.charges, 10) : 0;
-  
+
     // Mettre à jour max seulement si le prix de l'API est supérieur à la valeur actuelle
     if (loyerHc + charges > max) {
       setMax(loyerHc + charges);
-      
+
     }
-  
+
     // Mettre à jour priceRange avec la nouvelle valeur de max
-   
+
   }, [lotData, max]);
 
-  
-   
 
-   useEffect(() => {
+
+
+  useEffect(() => {
     // Mettre à jour priceRange avec la nouvelle valeur de max
     setPriceRange([0, max]);
   }, [max]);
- 
 
- 
-  
+
+
+
   useEffect(() => {
     // Parsez les paramètres de l'URL ici
     const searchParams = new URLSearchParams(location.search);
     const cityParam = searchParams.get('city');
     const dateParam = searchParams.get('date');
-    
+
     const priceMinParam = searchParams.get('priceMin');
     const priceMaxParam = searchParams.get('priceMax');
     const sortByParam = searchParams.get('sortBy');
@@ -157,13 +157,13 @@ const Search = () => {
     setDate(dateParam ? parse(dateParam, 'yyyy-MM-dd', new Date()) : "");
     setSortBy(sortByParam || "");
 
- // Mise à jour de l'état priceRange si priceMinParam et priceMaxParam existent
+    // Mise à jour de l'état priceRange si priceMinParam et priceMaxParam existent
     if (priceMinParam && priceMaxParam) {
       setPriceRange([parseInt(priceMinParam), parseInt(priceMaxParam)]);
     }
     if (priceMaxParam && priceMinParam) {
       const parsedMax = parseInt(priceMaxParam);
-      const parcedMin=parseInt(priceMinParam)
+      const parcedMin = parseInt(priceMinParam)
       setPriceRange([parcedMin, parsedMax]);
     }
   }, [location.search]);
@@ -180,42 +180,42 @@ const Search = () => {
     e.preventDefault();
     const searchParams = new URLSearchParams();
 
-      searchParams.append('city', city);
-  
-  
+    searchParams.append('city', city);
+
+
     if (date) {
       searchParams.append('date', format(date, 'yyyy-MM-dd'));
     }
     searchParams.append('sortBy', sortBy);
     searchParams.append('priceMin', priceRange[0]);
     searchParams.append('priceMax', priceRange[1]);
-  
+
     const url = `/search-cities?${searchParams.toString()}`;
     navigate(url);
     window.location.reload();
   };
-  
+
   const handleIconClick = () => {
     setIsSliderVisible(false);
   };
-  
+
 
   const handleCustomInputInChange = (date) => {
     setDate(date || null);
   };
   const handleMoveInDateChange = (date) => {
-  
-      setDate(date || null);
-    
+
+    setDate(date || null);
+
   };
 
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
- 
+
   const handleSliderClick = (e) => {
     e.stopPropagation();
   };
-  
+
   return (
     <div className='Search-container'>
       <div className="container">
@@ -225,78 +225,78 @@ const Search = () => {
             <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
               <label htmlFor="countries">City</label>
               <div className='input-select'>
-              <SelectCity text='Where will you go?' onChange={(selectedValue) => { setCity(selectedValue.value); }} city={city} alert={true} />
+                <SelectCity text='Where will you go?' onChange={(selectedValue) => { setCity(selectedValue.value); }} city={city} alert={true} />
 
-                 <input type="hidden" name="city" value={city} id="city-input" />
+                <input type="hidden" name="city" value={city} id="city-input" />
               </div>
             </div>
 
             <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
               <label htmlFor="cars">Move in date</label>
               <div className='input-date'>
-              <DatePicker
-               selected={date}
-               name="date"
-               dateFormat="dd/MM/yyyy"
-               onChange={handleMoveInDateChange}
-               customInput={
-               <CustomInput
-               value={date}
-               onChange={handleCustomInputInChange}
-               name="date"
-              
-               />
-               }
-               minDate={tomorrow}
-               />
+                <DatePicker
+                  selected={date}
+                  name="date"
+                  dateFormat="dd/MM/yyyy"
+                  onChange={handleMoveInDateChange}
+                  customInput={
+                    <CustomInput
+                      value={date}
+                      onChange={handleCustomInputInChange}
+                      name="date"
+
+                    />
+                  }
+                  minDate={tomorrow}
+                />
 
               </div>
             </div>
 
             <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
               <label htmlFor="price">Price range</label>
-              
-              <div className='select-wrapper'>
-              <div className='select-container'>
-  <Select
-    styles={customStyles}
-    onMenuOpen={handleSliderOpen}
-    options={[]}
-    onChange={() => {}}
-    value={selectValue}
-    isSearchable={false}
-    placeholder="Select a price range"
-    closeMenuOnSelect={false}
-    isDisabled={isSliderVisible} // Désactive le Select lors de l'ouverture du slider
-  />
-</div>
 
-{isSliderVisible && (
-  <div className='slider-container container'>
-    <div className='d-flex flex-row-reverse flex-wrap align-content-center justify-content-between'> 
-      <AiOutlineClose className='close-icon' onClick={() => setIsSliderVisible(false)} />
-      <h5>Price per month</h5>
-    </div>
-    <div className='price'>
-      <Slider
-        min={0} 
-        max={max}
-        value={priceRange}
-        onChange={handlePriceRangeChange}
-        range
-      />
-    </div>
-      <div>
-        <span className='price-range-input'>
-          <label>{priceRange[0]}€</label>
-          <label>{priceRange[1]}€</label>
-        </span>
-      </div>
-    </div>
-  )}
-</div>
-</div>
-            
+              <div className='select-wrapper'>
+                <div className='select-container'>
+                  <Select
+                    styles={customStyles}
+                    onMenuOpen={handleSliderOpen}
+                    options={[]}
+                    onChange={() => { }}
+                    value={selectValue}
+                    isSearchable={false}
+                    placeholder="Select a price range"
+                    closeMenuOnSelect={false}
+                    isDisabled={isSliderVisible} // Désactive le Select lors de l'ouverture du slider
+                  />
+                </div>
+
+                {isSliderVisible && (
+                  <div className='slider-container container'>
+                    <div className='d-flex flex-row-reverse flex-wrap align-content-center justify-content-between'>
+                      <AiOutlineClose className='close-icon' onClick={() => setIsSliderVisible(false)} />
+                      <h5>Price per month</h5>
+                    </div>
+                    <div className='price'>
+                      <Slider
+                        min={0}
+                        max={max}
+                        value={priceRange}
+                        onChange={handlePriceRangeChange}
+                        range
+                      />
+                    </div>
+                    <div>
+                      <span className='price-range-input'>
+                        <label>{priceRange[0]}€</label>
+                        <label>{priceRange[1]}€</label>
+                      </span>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+
             <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
               <label htmlFor="price">Sort by</label>
               <div className='input-select'>
@@ -308,7 +308,7 @@ const Search = () => {
                 </select>
               </div>
             </div>
-            
+
             <div className="form-search-btn col-lg-2 col-md-6 col-sm-12 p-md-0 d-flex flex-row-reverse">
               <button className='Search-cribs-btn' type='submit'>Update results</button>
             </div>

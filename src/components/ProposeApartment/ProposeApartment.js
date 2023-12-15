@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
 import './ProposeApartment.css'
 import ProposeModal from "./ProposeModal/ProposeModal"
@@ -30,7 +30,8 @@ import process5 from '../../assets/process/process5.svg'
 import { LiaEnvelope } from "react-icons/lia";
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-
+import {URL} from '../Variables'
+import ReactGA from 'react-ga';
 
 const ProposeApartment =()=> {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -42,6 +43,9 @@ const ProposeApartment =()=> {
   const closeModal = () => {
     setModalIsOpen(false);
   };
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
   
   const navigate=useNavigate();
   return (
@@ -52,6 +56,7 @@ const ProposeApartment =()=> {
           name="description"
           content="Fine Cribs, beautiful flatshares designed for communal living"
           />
+        <link rel="canonical" href={`${URL}`} />
     </Helmet>
     <Breadcrumbs />
 
@@ -69,19 +74,19 @@ const ProposeApartment =()=> {
         <h2 class="mb-lg-4 pb-lg-3 mb-4">Why landlords partner with Fine cribs </h2>
         <div className='row'>
           <div className='col-md-4'>
-            <img src={image1} alt="Im1" className="img-fluid mb-3"/>
+            <img src={image1} alt="Im1" className="img-fluid mb-1"/>
             <h3 className='mb-2'>We guarantee your rental income, without vacancies </h3>
             <p>Renting your apartment to Fine cribs means you can increase the rental income on your apartment. Fine cribs will pay you monthly rent even when your apartment is empty, allowing you to passively increase your income.</p>
           </div>
           <div className='col-md-4'>
-            <img src={image2} alt="Im2" className="img-fluid mb-3"/>
+            <img src={image2} alt="Im2" className="img-fluid mb-1"/>
             <h3 className='mb-2'> We increase the value of your property</h3>
             <p>Fine cribs increases the value of your apartment by executing smart renovations coordinated by our interior designers (at no cost for landlords) and converting vacant properties into nicely decorated, fully equipped homes.</p>
           </div>
           <div className='col-md-4'>
-            <img src={image3} alt="Im3" className="img-fluid mb-3" />
+            <img src={image3} alt="Im3" className="img-fluid mb-1" />
             <h3 className='mb-2'> Fully managed professional maintenance</h3>
-            <p>Our property management team takes care of the ongoing maintenance of your apartment so that your property is high standard.</p>
+            <p className='mb-0'>Our property management team takes care of the ongoing maintenance of your apartment so that your property is high standard.</p>
           </div>
         </div>
       </div>
@@ -91,7 +96,7 @@ const ProposeApartment =()=> {
       <div className='container'>
         <div className='row justify-content-between'>
           <div className='col-lg-7 col-md-8'>
-            <h2 class="mb-3">The Fine cribs guarantee</h2>
+            <h2 class="mb-2">The Fine cribs guarantee</h2>
             <p> We are a landlord, as you are. Fine cribs expertise lies in purchasing, designing and renovating beautiful spaces
              for communal living. When you rent your apartment to Fine cribs, you are guaranteed the we will manage 
             it with the same care that we put into managing our own apartments.</p>
@@ -105,7 +110,7 @@ const ProposeApartment =()=> {
 
     <section className='process pt-lg-5 pt-md-4 pb-md-5 pb-4'>
       <div className='container'>
-        <h2 className='mb-md-5 mb-4 pb-3'>Our process in a few simple steps</h2>
+        <h2 className='mb-md-5 mb-4'>Our process in a few simple steps</h2>
         <div className='process-content desktop'>
           <div className='col-left'> 
             <div className='box first'>
@@ -187,7 +192,7 @@ const ProposeApartment =()=> {
               </div>
             </div>
           </div>
-          <div className='col-left'> 
+          <div className='col-right'> 
             <div className='box first'>
               <div className='image'>
                 <img src={process1} alt="process 1" className="img-fluid"/>
@@ -212,7 +217,7 @@ const ProposeApartment =()=> {
               </div>
             </div>
           </div>
-          <div className='col-left'> 
+          <div className='col-right'> 
             <div className='box second'>
               <div className='image'>
                 <img src={process2} alt="process 2" className="img-fluid"/>

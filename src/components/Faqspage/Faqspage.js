@@ -7,7 +7,8 @@ import {BsArrowRightShort} from 'react-icons/bs';
 import { IoCloseOutline } from "react-icons/io5";
 import Modal from 'react-modal';
 import { Helmet } from 'react-helmet';
-
+import {URL} from '../Variables'
+import ReactGA from 'react-ga';
 const Faqspage = () => {
      const [toggleState, setToggleState] = useState(1);
      const [selected, setSelected] = useState(null);
@@ -75,6 +76,10 @@ const Faqspage = () => {
          <iframe width="560" height="315" src="https://youtube.com/embed/lz_VJ_t0FxU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
        </div>
      );
+     useEffect(() => {
+          ReactGA.pageview(window.location.pathname + window.location.search);
+        }, []);
+        
    
 
 
@@ -86,6 +91,7 @@ return (
           name="description"
           content="Fine Cribs, beautiful flatshares designed for communal living"
           />
+          <link rel="canonical" href={`${URL}`} />
      </Helmet>
      <Breadcrumbs/>
      <div className='container FaqpagesContainer'>

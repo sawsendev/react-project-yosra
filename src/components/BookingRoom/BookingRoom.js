@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import image from '../../assets/animation_500_lj4c3zmw 1.svg'
 import { format } from 'date-fns';
-
+import ReactGA from 'react-ga';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "./BookingRoom.scss"
@@ -26,6 +26,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import calendarIcon from '../../assets/calendar.svg'; 
 import { Helmet } from 'react-helmet';
+import {URL} from '../Variables'
 
 const BookingRoom = () => {
 // ************************
@@ -46,7 +47,9 @@ const BookingRoom = () => {
     surname: '',
    
   }); 
-  
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
   
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -384,6 +387,7 @@ const validateEmail = (email) => {
           name="description"
           content="Fine Cribs, beautiful flatshares designed for communal living"
           />
+          <link rel="canonical" href={`${URL}`} />
     </Helmet>
    
     {lotData && lotData.apartment && lotData.apartment.title && lotData.title && lotData.apartment.building &&lotData.apartment.building.city&&(

@@ -30,10 +30,10 @@
 }
 .pageroom-container .carousel-images .medias {
     position: absolute;
-    right: 12px;
+    right: 11px;
     bottom: 12px;
     display: flex;
-    gap: 10px;
+    gap: 8px;
 }
 .pageroom-container .carousel-images .button-container {
     margin: 20px 0 0!important;
@@ -220,7 +220,7 @@
     padding: 3px 10px 4px;
 }
 .flatmates .row {
-    margin: 0 -10px;
+    margin: 0 -21px;
 }
 .flatmates .row>* {
     padding: 0 10px;
@@ -370,7 +370,6 @@
         align-items: center;
     }
     .panel .text {
-        height: auto;
         font-size: 14px;
         padding: 8px 8px 8px 35px;
     }
@@ -407,9 +406,9 @@
     }
     .pageroom-container .btn-media {
         height: 34px;
-        font-size: 14px;
+        font-size: 11px;
         padding: 6px 8px;
-        min-width: 112px;
+        min-width: 10px;
     }
     .pageroom-container .carousel-images img {
         height: 43px;
@@ -433,7 +432,7 @@
     }
     .pageroom-container .carousel-images .medias {
         top: inherit;
-        bottom: 63px;
+        bottom: 69px;
     }
     /* .pageroom-container .btn-media {
         height: 40px;

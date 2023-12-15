@@ -151,6 +151,9 @@ body.ReactModal__Body--open {
 .num.done .check {
     display: block;
 }
+.step1-form{
+    margin: 24px;
+}
 .reactmodal-container {
     max-width: 720px;
     width: 100%;
@@ -164,7 +167,7 @@ body.ReactModal__Body--open {
     color: #000;
     font-size: 18px;
     font-weight: 600;
-    margin: 0 0 6px;
+    margin: 0 0 2px;
 }
 .btn-accept, .btn-send {
     color: #FFF;

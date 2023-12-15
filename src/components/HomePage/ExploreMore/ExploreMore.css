@@ -31,6 +31,7 @@
 }
 .city-item {
     margin-right: 30px;
+    
     cursor:pointer;
 }
 
@@ -55,14 +56,17 @@
 }
 @media(max-width:576px){
     .img-responsive {
-    max-width: 80%;
+    max-width: 100%;
     width: 100%;
     height: auto;
     }
     .Explore-more-countries-content{
     display: flex!important;
-    justify-content: space-around!important;}
-    
+    }
+    .city-item {
+        margin-right: auto;
+        margin-left:auto;
+    }
 
 }
 .react-multi-carousel-item {
@@ -78,7 +82,7 @@
 .button-container {
     display: flex;
     justify-content: center;
-    margin-top: 40px; 
+    margin-top: 20px; 
   }
   /* Styles pour un bouton désactivé */
 .disabled {
