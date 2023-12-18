@@ -55,7 +55,7 @@ const RoomModalMedia = ({ isOpen, closeModal, activeTab, setActiveTab , lotData 
     onClick={() => setActiveTab('tab3')}
   >
     <span className='nav-link'>
-      <img src={iconvisit} className='icon' alt="Visit"/><img src={iconvisithover} className='icon-hover' alt="Visit"/> 360° visit
+      <img src={iconvisit} className='icon' alt="Visit"/><img src={iconvisithover} className='icon-hover' alt="Visit"/> 360° virtual tour
     </span>
   </li>
   )}

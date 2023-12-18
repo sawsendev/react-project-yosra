@@ -64,6 +64,8 @@ import { Helmet } from 'react-helmet'
 import iconimgshover from '../../assets/room/icons/gallery.png'
 import { URL } from '../Variables'
 import ReactGA from 'react-ga';
+import instagram from '../../assets/Group 128.svg';
+import whatsapp from '../../assets/Group 127.svg';
 
 
 const Room = () => {
@@ -241,6 +243,19 @@ const Room = () => {
     return <ErrorPage />;
   }
   console.log(lotData)
+  const handleWhatsAppShare = () => {
+      const whatsappLink = `https://api.whatsapp.com/send?text=${encodeURIComponent(
+      `Check out this room: https://finecribs.com/room/${id}`
+    )}`;
+    window.open(whatsappLink, '_blank');
+  };
+
+  const handleInstagramShare = () => {
+    // const instagramLink = `https://www.instagram.com/messages/t/${id}`;
+    const instagramLink = `https://www.instagram.com/direct/t/${id}`;
+    window.open(instagramLink, '_blank');
+  };
+  
 
   return (
     <>
@@ -266,13 +281,30 @@ const Room = () => {
 
 
 
-
+      
       <div className='pageroom-container'>
         <div className='container'>
           <div className='row'>
             <div className='col-large col-lg-8'>
+              <div className='d-flex justify-content-end mb-2 gap-2'>
+                <span>Share on : </span>
+                <div className='d-flex gap-2'>
+                <a  href="#"
+                  onClick={handleWhatsAppShare}
+                   title="Share on WhatsApp"
+                  >
+                <img src={whatsapp} alt='whatsapp' className='img-fluid social-media'/></a>
+                <a
+                href="#"
+                onClick={handleInstagramShare}
+                title="Share on Instagram">
+                <img src={instagram} alt='instagram' className='img-fluid social-media'/>
+                </a>
+                </div>
+              </div>
+
               <div className='carousel-images'>
-                {/* <img src={room} alt="room" className="img-fluid"/> */}
+        
 
                 <CarrouselImages lotData={lotData} />
 
@@ -289,7 +321,7 @@ const Room = () => {
                   )}
                   {lotData && (lotData.image_360 || lotData.video_360) && (
                     <button type='button' className='btn-media' onClick={openModalWithTab3} id="visit-btn">
-                      <img src={iconvisit} alt="visit" className='m-1' /> 360° visit</button>)}
+                      <img src={iconvisit} alt="visit" className='m-1' /> 360° virtual tour</button>)}
 
                   {lotData && lotData.media && lotData.media
                     .filter((media) => media.collection_name === 'floorpan').length > 0 && (
