@@ -21,6 +21,7 @@ const Cribes = () => {
   const [API_KEY] = useState('a2b18f9cfb72eb93f3ce6b1c30372b59');
   const [API_URL2] = useState('https://admin.finecribs.com/api/lots/search');
   const [API_URL3] = useState('https://admin.finecribs.com/api/lots/maps');
+  const API_URL4 = 'https://admin.finecribs.com/api/lots/searchkeyword'
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const navigate = useNavigate();
@@ -31,6 +32,7 @@ const Cribes = () => {
   const priceMinParam = searchParams.get('priceMin');
   const priceMaxParam = searchParams.get('priceMax');
   const sortByParam = searchParams.get('sortBy');
+  const keyWordParam=searchParams.get('keyword')
   const searchParamsExist = cityParam || dateParam || priceMinParam || priceMaxParam || sortByParam;
    const [latitude, setLatitude] = useState(); // Added missing state declaration
   const [longitude, setLongitude] = useState(); 
@@ -179,6 +181,46 @@ const Cribes = () => {
       }
     }
   };
+  const fetchData = async (page)=>{
+    if (keyWordParam) {
+      const formData = {
+        keyword: keyWordParam,
+      };
+      try {
+        const response = await fetch(`${API_URL4}?page=${page}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apiKey': API_KEY,
+          },
+          body: JSON.stringify(formData),
+        });
+        if (response.ok) {
+          const data = await response.json();
+    
+          setLastPage(data.data.lots.last_page);
+    
+          const dataArray = Array.isArray(data.data.lots.data)
+            ? data.data.lots.data
+            : Object.values(data.data.lots.data);
+    
+          if (currentPage === 1) {
+            setCribsData(dataArray);
+          } else {
+            setCribsData((prevData) => [...prevData, ...dataArray]);
+          }
+        } else {
+          console.error('Erreur de réponse HTTP :', response.status);
+          throw new Error('La requête a échoué avec un statut différent de 200');
+        }
+      } catch (error) {
+        console.error('Erreur lors de la récupération des données :', error);
+      } finally {
+        setLoading(false);
+        setDataLoaded(true);
+      }
+    }};
+
   
   const handleScroll = () => {
     if (window.innerHeight + window.scrollY < document.documentElement.offsetHeight && currentPage < lastPage && !loading) {
@@ -234,10 +276,17 @@ const Cribes = () => {
   useEffect(() => {
     if(!searchParams)
     fetchMapData();
+
   }, []);
+  useEffect(() => {
+    if ((!searchParamsExist)&&(keyWordParam)){
+    fetchData(currentPage);
+  }
+  console.log(cribsData)
+  }, [searchParamsExist,keyWordParam,currentPage]);
 
   useEffect(() => {
-    if (!searchParamsExist) {
+    if ((!searchParamsExist) &&(!keyWordParam)){
       navigate('/search-cities');
       fetchDataFromAPI(currentPage);
     } else {

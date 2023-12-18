@@ -13,7 +13,7 @@
 
 .Form-city .form-control {
     width: 100%;
-    padding: 8px 10px;
+    padding: 8px 38px 8px 8px;
     border-radius: 6px;
     border: 1px solid #DDD;
     background: transparent;
@@ -161,6 +161,7 @@ div.css-2ksxt2-control{
 .react-datepicker-wrapper {
     width: 100%;
 }
+
 .input-datepicker {
     position: relative;
     width: 100%;
@@ -185,6 +186,18 @@ span.calendar-icon {
     top: 6px;
     z-index: 1;
 }
+.loop{
+    width: 21px;
+    height: 22px;
+}
+.input-keyword{
+    position: relative;
+    background-color: #fff;
+    border-radius: 6px;
+}
+.disabled {
+    background-color:#F1F2F4;
+  }
 div .css-1dimb5e-singleValue{
     margin-top: -2px;
 }
@@ -302,3 +315,15 @@ font-weight: 400;
     cursor:pointer;
 
 }
+.vertical-line {
+    border-left: 1px solid #ccc;
+    height: 100%;
+    margin-right: 10px;
+    position: absolute;
+    height: 77%;
+    margin-right: 12px;
+    right: 33px;
+    margin: 0px 4px 0px 1px;
+    top: 5px;
+  }
+  

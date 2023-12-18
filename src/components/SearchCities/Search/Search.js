@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import "./Search.css";
 import Select from 'react-select';
 import calendarIcon from '../../../assets/calendar.svg'
+import loop from '../../../assets/Vector.svg'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import Slider from 'rc-slider';
@@ -28,6 +29,9 @@ const Search = () => {
   const [isSliderOpen, setIsSliderOpen] = useState(false)
   const [city, setCity] = useState("")
   const [isSliderVisible, setIsSliderVisible] = useState(false);
+  const [keyWord, setKeyWord] = useState("")
+  const [active, setActive] = useState(true)
+
 
   const handleSliderOpen = () => {
     setIsSliderVisible(true);
@@ -86,6 +90,17 @@ const Search = () => {
   const handleChangeSortBy = (e) => {
     setSortBy(e.target.value);
   };
+  const handleKeyWordChange = (e) => {
+    const newKeyword = e.target.value;
+    setKeyWord(newKeyword);
+
+    if (newKeyword.trim() === '') {
+      setActive(true);
+    } else {
+      setActive(false);
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -145,11 +160,14 @@ const Search = () => {
     const searchParams = new URLSearchParams(location.search);
     const cityParam = searchParams.get('city');
     const dateParam = searchParams.get('date');
-
     const priceMinParam = searchParams.get('priceMin');
     const priceMaxParam = searchParams.get('priceMax');
     const sortByParam = searchParams.get('sortBy');
+    const keyWordParam = searchParams.get('keyWord')
 
+    if (keyWord) {
+      setCity(keyWordParam);
+    }
     // Mettez à jour l'état local avec les valeurs des paramètres de l'URL
     if (cityParam) {
       setCity(cityParam);
@@ -190,10 +208,23 @@ const Search = () => {
     searchParams.append('priceMin', priceRange[0]);
     searchParams.append('priceMax', priceRange[1]);
 
+
     const url = `/search-cities?${searchParams.toString()}`;
     navigate(url);
     window.location.reload();
   };
+  const handleSubmit2 = (e) => {
+    e.preventDefault();
+    const searchParams = new URLSearchParams();
+    if (keyWord) {
+      searchParams.append('keyword', keyWord)
+    }
+
+    const url = `/search-cities?${searchParams.toString()}`;
+    navigate(url);
+    window.location.reload();
+
+  }
 
   const handleIconClick = () => {
     setIsSliderVisible(false);
@@ -221,97 +252,124 @@ const Search = () => {
       <div className="container">
         <h2>Refine your search</h2>
         <div className='Form-cities'>
-          <form className='row justify-content-between gap-lg-2 gap-0 m-0 align-items-end' onSubmit={handleSubmit}>
-            <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
-              <label htmlFor="countries">City</label>
-              <div className='input-select'>
-                <SelectCity text='Where will you go?' onChange={(selectedValue) => { setCity(selectedValue.value); }} city={city} alert={true} />
+          <form className='' onSubmit={handleSubmit}>
+            <div className={`row justify-content-between gap-lg-2 gap-0 m-0 align-items-end ${!active ? 'disabled' : ''}`}>
+              <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
+                <label htmlFor="countries">City</label>
+                <div className='input-select'>
+                  <SelectCity text='Where will you go?'
+                    onChange={(selectedValue) => { setCity(selectedValue.value); }}
+                    city={city}
+                    alert={true}
 
-                <input type="hidden" name="city" value={city} id="city-input" />
-              </div>
-            </div>
-
-            <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
-              <label htmlFor="cars">Move in date</label>
-              <div className='input-date'>
-                <DatePicker
-                  selected={date}
-                  name="date"
-                  dateFormat="dd/MM/yyyy"
-                  onChange={handleMoveInDateChange}
-                  customInput={
-                    <CustomInput
-                      value={date}
-                      onChange={handleCustomInputInChange}
-                      name="date"
-
-                    />
-                  }
-                  minDate={tomorrow}
-                />
-
-              </div>
-            </div>
-
-            <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
-              <label htmlFor="price">Price range</label>
-
-              <div className='select-wrapper'>
-                <div className='select-container'>
-                  <Select
-                    styles={customStyles}
-                    onMenuOpen={handleSliderOpen}
-                    options={[]}
-                    onChange={() => { }}
-                    value={selectValue}
-                    isSearchable={false}
-                    placeholder="Select a price range"
-                    closeMenuOnSelect={false}
-                    isDisabled={isSliderVisible} // Désactive le Select lors de l'ouverture du slider
                   />
+
+                  <input type="hidden" name="city" value={city} id="city-input" />
                 </div>
+              </div>
 
-                {isSliderVisible && (
-                  <div className='slider-container container'>
-                    <div className='d-flex flex-row-reverse flex-wrap align-content-center justify-content-between'>
-                      <AiOutlineClose className='close-icon' onClick={() => setIsSliderVisible(false)} />
-                      <h5>Price per month</h5>
-                    </div>
-                    <div className='price'>
-                      <Slider
-                        min={0}
-                        max={max}
-                        value={priceRange}
-                        onChange={handlePriceRangeChange}
-                        range
+              <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
+                <label htmlFor="cars">Move in date</label>
+                <div className='input-date'>
+                  <DatePicker
+                    selected={date}
+                    name="date"
+                    dateFormat="dd/MM/yyyy"
+                    onChange={handleMoveInDateChange}
+                    customInput={
+                      <CustomInput
+                        value={date}
+                        onChange={handleCustomInputInChange}
+                        name="date"
+
                       />
-                    </div>
-                    <div>
-                      <span className='price-range-input'>
-                        <label>{priceRange[0]}€</label>
-                        <label>{priceRange[1]}€</label>
-                      </span>
-                    </div>
+                    }
+                    minDate={tomorrow}
+                  />
+
+                </div>
+              </div>
+
+              <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
+                <label htmlFor="price">Price range</label>
+
+                <div className='select-wrapper'>
+                  <div className='select-container'>
+                    <Select
+                      styles={customStyles}
+                      onMenuOpen={handleSliderOpen}
+                      options={[]}
+                      onChange={() => { }}
+                      value={selectValue}
+                      isSearchable={false}
+                      placeholder="Select a price range"
+                      closeMenuOnSelect={false}
+                      isDisabled={isSliderVisible} // Désactive le Select lors de l'ouverture du slider
+                    />
                   </div>
-                )}
+
+                  {isSliderVisible && (
+                    <div className='slider-container container'>
+                      <div className='d-flex flex-row-reverse flex-wrap align-content-center justify-content-between'>
+                        <AiOutlineClose className='close-icon' onClick={() => setIsSliderVisible(false)} />
+                        <h5>Price per month</h5>
+                      </div>
+                      <div className='price'>
+                        <Slider
+                          min={0}
+                          max={max}
+                          value={priceRange}
+                          onChange={handlePriceRangeChange}
+                          range
+                        />
+                      </div>
+                      <div>
+                        <span className='price-range-input'>
+                          <label>{priceRange[0]}€</label>
+                          <label>{priceRange[1]}€</label>
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
+                <label htmlFor="price">Sort by</label>
+                <div className='input-select'>
+                  <select name="price" id="countries-id" className='form-control' onChange={handleChangeSortBy} value={sortBy} disabled={!active}>
+                    <option value="">Sorted by</option>
+                    <option value="desc">Descending price</option>
+                    <option value="asc">Ascending price</option>
+                    <option value="av">Availability</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="form-search-btn col-lg-2 col-md-6 col-sm-12 p-md-0 d-flex flex-row-reverse">
+                <button className='Search-cribs-btn' type='submit'>Update results</button>
+              </div>
+            </div>
+            <div className='Form-city mt-4'>
+              <div className='d-md-flex flex-row align-items-center justify-content-start gap-2'>
+                <label>Keyword Search</label>
+                <div className='input-keyword'>
+                  <input
+                    type="text"
+                    name="KeyWord"
+                    value={keyWord}
+                    className='form-control'
+                    placeholder='Keyword'
+                    onChange={handleKeyWordChange}
+                  />
+                  <span className='vertical-line'></span>
+                  <span className="calendar-icon" onClick={handleSubmit2}>
+                    <img src={loop} alt="loop" className='loop' />
+                  </span>
+                </div>
               </div>
             </div>
 
-            <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
-              <label htmlFor="price">Sort by</label>
-              <div className='input-select'>
-                <select name="price" id="countries-id" className='form-control' onChange={handleChangeSortBy} value={sortBy}>
-                  <option value="">Sorted by</option>
-                  <option value="desc">Descending price</option>
-                  <option value="asc">Ascending price</option>
-                  <option value="av">Availability</option>
-                </select>
-              </div>
-            </div>
-
-            <div className="form-search-btn col-lg-2 col-md-6 col-sm-12 p-md-0 d-flex flex-row-reverse">
-              <button className='Search-cribs-btn' type='submit'>Update results</button>
-            </div>
           </form>
         </div>
       </div>
