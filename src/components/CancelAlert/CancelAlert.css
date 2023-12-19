@@ -1,0 +1,109 @@
+.cancelAlert-container{
+    text-align: center;
+    padding: 156px;
+}
+.cancelAlert-container h1{
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 26px;
+    color: black;
+}
+
+.cancel{
+    font-size: 18px;
+    line-height: 30px;
+}
+.b-confirmer{
+    outline: none;
+    border: none;
+    padding: 8px;
+    color: black;
+    background-color: #E8E8E8;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: 400;
+    height: 40px;
+    width: 15%;
+    cursor: pointer; 
+
+}
+
+.b-annuler{
+    outline: none;
+    border: none;
+    padding: 8px;
+    color: white;
+    background-color: black;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: 400;
+    height: 40px;
+    width: 15%;
+    cursor: pointer; 
+}
+
+.btn-hp{
+    outline: none;
+    border: none;
+    padding: 8px;
+    color: white;
+    background-color: black;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: 400;
+    height: 40px;
+    width: 22%;
+}
+
+@media (max-width:1399px) and (min-width:1200px) {
+    .btn-hp{
+        width: 26%;
+    }
+}
+@media (max-width: 1200px) and (min-width: 992px) {
+    .btn-hp {
+        width: 35%;
+    }
+}
+@media (max-width: 992px) and (min-width: 768px) {
+    .btn-hp {
+        width: 53%;
+        font-size: 16px;
+    }
+}
+@media (max-width: 768px) {
+    .btn-hp {
+        width: 97%;
+        font-size: 16px;
+    }
+}
+@media (max-width:1399px) and (min-width:992px) {
+    .cancelAlert-container{
+        padding: 111px;
+}
+}
+
+@media (max-width:992px) and (min-width:567px) {
+    .cancelAlert-container{
+        padding: 63px;
+}
+.b-confirmer ,
+.b-annuler{
+    width: 29%;
+}
+}
+@media (max-width:567px){
+    .cancelAlert-container{
+        padding: 51px;
+}
+.b-confirmer ,
+.b-annuler{
+    width: 49%;
+}
+.cancel {
+    font-size: 16px;
+}
+.cancelAlert-container label{
+    font-size: 16px;
+}
+}

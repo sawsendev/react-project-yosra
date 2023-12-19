@@ -163,12 +163,13 @@ const Search = () => {
     const priceMinParam = searchParams.get('priceMin');
     const priceMaxParam = searchParams.get('priceMax');
     const sortByParam = searchParams.get('sortBy');
-    const keyWordParam = searchParams.get('keyWord')
+    const keyWordParam = searchParams.get('keyword')
 
-    if (keyWord) {
-      setCity(keyWordParam);
+    if (keyWordParam) {
+      setKeyWord(keyWordParam);
+      setActive(false);
     }
-    // Mettez à jour l'état local avec les valeurs des paramètres de l'URL
+   
     if (cityParam) {
       setCity(cityParam);
     }
@@ -354,17 +355,18 @@ const Search = () => {
               <div className='d-md-flex flex-row align-items-center justify-content-start gap-2'>
                 <label>Keyword Search</label>
                 <div className='input-keyword'>
-                  <input
-                    type="text"
-                    name="KeyWord"
-                    value={keyWord}
-                    className='form-control'
-                    placeholder='Keyword'
-                    onChange={handleKeyWordChange}
-                  />
+                <input
+              type="text"
+              name="KeyWord"
+              value={keyWord}
+              className='form-control'
+              placeholder='Keyword'
+              onChange={handleKeyWordChange}
+            />
                   <span className='vertical-line'></span>
                   <span className="calendar-icon" onClick={handleSubmit2}>
                     <img src={loop} alt="loop" className='loop' />
+
                   </span>
                 </div>
               </div>

@@ -332,6 +332,13 @@ const Cribes = () => {
             : 'Our cribs'}
         </h2>
       )}
+      {cribsData.length > 0 && (
+  <h2>
+    {keyWordParam && `Result of search "${keyWordParam}"`}
+  </h2>
+)}
+
+
 
       <div className='content-page'>
         <div className='row row-cribes'>

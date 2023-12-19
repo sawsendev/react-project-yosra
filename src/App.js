@@ -14,6 +14,7 @@ import Contact from './components/Contact/Contact';
 import BookingRoom from './components/BookingRoom/BookingRoom';
 import ProposeApartment from './components/ProposeApartment/ProposeApartment';
 import ReactGA from "react-ga"
+import CancelAlert from './components/CancelAlert/CancelAlert';
 
 
 
@@ -30,7 +31,7 @@ function App() {
         <NavBar/>
     
        
-      <Routes>
+       <Routes>
     
         <Route path='/' index element={<Homepage/>} /> 
         <Route path="/search-cities" element={<SearchCities/>} /> 
@@ -41,6 +42,7 @@ function App() {
         <Route path="/booking-enquiry/:id" element={<BookingRoom/>} /> 
         <Route path="/i-propose-an-apartment" element={<ProposeApartment/>}/>
         <Route path="*" element={<ErrorPage />} />
+        <Route path="/cancel-alert" element={<CancelAlert/>} />
       </Routes>
     
       <Faq/>

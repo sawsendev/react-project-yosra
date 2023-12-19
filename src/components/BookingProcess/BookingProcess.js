@@ -120,10 +120,10 @@ const BookingProcess = ({cribs}) => {
               
             <div>
   <span>Before check-in</span>
-  {cribs && cribs.tarif_promo !== undefined && (
+  {cribs && cribs.tarif_promo !== 0 && (
     <div className='Fee row justify-content-between'>
       <p className='col-auto mb-0'>1° month rent</p> 
-      <span className='col-auto mb-0'>€{String(cribs.tarif_promo)}</span>
+      <span className='col-auto mb-0'>€{cribs.tarif_promo}</span>
     </div>
   )}
 </div>
