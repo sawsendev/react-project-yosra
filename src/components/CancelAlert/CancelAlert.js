@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import './CancelAlert.css';
 import arrow from '../../assets/right-arrow.svg'
 import check from '../../assets/check.svg'
-import { useLocation } from 'react-router-dom';
-import { id } from 'date-fns/locale';
+
 
 const CancelAlert = () => {
 
@@ -11,12 +10,16 @@ const CancelAlert = () => {
   const [checkboxValue, setCheckboxValue] = useState(0);
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
 
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const email = queryParams.get('email');
-  const id = queryParams.get('id');
+//   const location = useLocation();
+//   const queryParams = new URLSearchParams(location.search);
+//   const email = queryParams.get('email');
+//   const id = queryParams.get('id');
+  const encodedStringFromURL = window.location.search.substring(1); 
+  const decodedString = atob(encodedStringFromURL);
+  
+  const [email, id] = decodedString.split('_');
 
-
+  
   const handleConfirmation = () => {
     
     const apiUrl = 'https://admin.finecribs.com/api/alert_request/confirm-cancel-alert';
