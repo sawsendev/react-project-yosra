@@ -171,7 +171,6 @@ const validateEmail = (email) => {
               });
             }
           } else {
-            // Gérez d'autres erreurs de la requête
             console.error('Error making the request. Status:', response.status);
   
             toast.error('Error making the request. Please try again.', {
