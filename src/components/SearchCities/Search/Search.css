@@ -27,6 +27,10 @@
     appearance: none;
 }
 
+#keyword::placeholder{
+    color: #7d7979;
+}
+
 label{
     display: block;
     margin-bottom: 2px;
@@ -187,8 +191,8 @@ span.calendar-icon {
     z-index: 1;
 }
 .loop{
-    width: 21px;
-    height: 22px;
+    width: 18px;
+    height: auto;
 }
 .input-keyword{
     position: relative;
@@ -322,7 +326,7 @@ font-weight: 400;
     position: absolute;
     height: 77%;
     margin-right: 12px;
-    right: 33px;
+    right: 31px;
     margin: 0px 4px 0px 1px;
     top: 5px;
   }

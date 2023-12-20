@@ -144,7 +144,7 @@ const Room = () => {
           console.error('Erreur lors de la récupération des données:', error);
         });
     }
-  }, [API_URL2, API_KEY, city]); // Maintenant, city est une dépendance de ce useEffect
+  }, [API_URL2, API_KEY, city]); 
 
 
 
@@ -251,8 +251,8 @@ const Room = () => {
   };
 
   const handleInstagramShare = () => {
-    // const instagramLink = `https://www.instagram.com/messages/t/${id}`;
-    const instagramLink = `https://www.instagram.com/direct/t/${id}`;
+    const instagramLink = `https://www.instagram.com/direct/inbox/`;
+   
     window.open(instagramLink, '_blank');
   };
   

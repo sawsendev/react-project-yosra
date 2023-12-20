@@ -236,9 +236,7 @@ const Search = () => {
     setDate(date || null);
   };
   const handleMoveInDateChange = (date) => {
-
     setDate(date || null);
-
   };
 
   const tomorrow = new Date();
@@ -356,6 +354,7 @@ const Search = () => {
                 <label>Keyword Search</label>
                 <div className='input-keyword'>
                 <input
+              id='keyword'
               type="text"
               name="KeyWord"
               value={keyWord}
