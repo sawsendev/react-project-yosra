@@ -338,6 +338,13 @@ div.leaflet-container .leaflet-attribution-flag {
 .maps-block .leaflet-popup .item-cribe .promo-image {
     right: 24px;
 }
+.map-error{
+font-size: 16px;
+font-weight: 600;
+line-height: 20px;
+text-align: left;
+
+}
 /******/
 @media (max-width: 992px) {
 .maps-block {

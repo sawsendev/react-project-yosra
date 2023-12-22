@@ -9,7 +9,7 @@ import loading1 from '../../../assets/load.gif';
 import axios from "axios";
 import { Helmet } from "react-helmet";
 import {URL} from '../../Variables'
-
+import nomap from '../../../assets/connection-error (1) 1.svg'
 const Cribes = () => {
   const [cribsData, setCribsData] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
@@ -34,12 +34,12 @@ const Cribes = () => {
   const sortByParam = searchParams.get('sortBy');
   const keyWordParam=searchParams.get('keyword')
   const searchParamsExist = cityParam || dateParam || priceMinParam || priceMaxParam || sortByParam;
-   const [latitude, setLatitude] = useState(); // Added missing state declaration
+   const [latitude, setLatitude] = useState(); 
   const [longitude, setLongitude] = useState(); 
 
   function formatDate(dateParam) {
     if (!dateParam) {
-      return null; // Return null for null date
+      return null; 
     }
   
     const dateObject = new Date(dateParam);
@@ -381,16 +381,21 @@ const Cribes = () => {
 
           <div className='Maps col-lg-5'>
             <div className={`maps-block`}>
-              {longitude && latitude && (
-                <CribMap
-                  coordinates={coordinates}
-                  showPopup={true}
-                  data={mapData}
-                  longitude={longitude}
-                  latitude={latitude}
-                  zoom={zoom}
-                />
-              )}
+            {longitude && latitude ? (
+  <CribMap
+    coordinates={coordinates}
+    showPopup={true}
+    data={mapData}
+    longitude={longitude}
+    latitude={latitude}
+    zoom={zoom}
+  />
+) : (
+  <div className="d-flex flex-column align-items-center m-5">
+  <img src={nomap} alt="nomap" className=""/>
+  <p className="map-error mt-3"> Unable to load the Map !</p>
+  </div>
+)}
             </div>
           </div>
         </div>

@@ -66,7 +66,8 @@ import { URL } from '../Variables'
 import ReactGA from 'react-ga';
 import instagram from '../../assets/Group 128.svg';
 import whatsapp from '../../assets/Group 127.svg';
-
+import email from '../../assets/Group 139.svg';
+import { FacebookShareButton, EmailShareButton, EmailIcon ,WhatsappShareButton } from 'react-share';
 
 const Room = () => {
   const { id } = useParams();
@@ -76,6 +77,7 @@ const Room = () => {
   const API_URL2 = 'https://admin.finecribs.com/api/lots/recommendation';
   const [latitude, setLatitude] = useState(null)
   const [longitude, setLongitude] = useState(null)
+  const shareUrl = `https://finecribs.com/room/${id}`; 
 
   const navigate = useNavigate();
   const [price, setPrice] = useState('')
@@ -122,6 +124,7 @@ const Room = () => {
         city: city,
         lot_id: id
       };
+      
 
       fetch(API_URL2, {
         method: 'POST',
@@ -239,16 +242,10 @@ const Room = () => {
   };
 
   if (!lotData) {
-    console.error('No lotData:', lotData); // Add this line for additional logging
     return <ErrorPage />;
   }
-  console.log(lotData)
-  const handleWhatsAppShare = () => {
-      const whatsappLink = `https://api.whatsapp.com/send?text=${encodeURIComponent(
-      `Check out this room: https://finecribs.com/room/${id}`
-    )}`;
-    window.open(whatsappLink, '_blank');
-  };
+
+
 
   const handleInstagramShare = () => {
     const instagramLink = `https://www.instagram.com/direct/inbox/`;
@@ -289,17 +286,20 @@ const Room = () => {
               <div className='d-flex justify-content-end mb-2 gap-2'>
                 <span>Share on : </span>
                 <div className='d-flex gap-2'>
-                <a  href="#"
-                  onClick={handleWhatsAppShare}
-                   title="Share on WhatsApp"
-                  >
-                <img src={whatsapp} alt='whatsapp' className='img-fluid social-media'/></a>
+                <WhatsappShareButton url={shareUrl} >
+                <img src={whatsapp} alt='whatsapp' className='img-fluid social-media'/>
+                 </WhatsappShareButton>
                 <a
                 href="#"
                 onClick={handleInstagramShare}
                 title="Share on Instagram">
                 <img src={instagram} alt='instagram' className='img-fluid social-media'/>
                 </a>
+                
+                 <EmailShareButton body={`Check out this room : ${shareUrl}`} >
+                 <img src={email} alt='email' className='img-fluid social-media'/>
+                 </EmailShareButton>
+  
                 </div>
               </div>
 
@@ -540,10 +540,16 @@ const Room = () => {
 
                 <p className='head-widget'>
                   <img src={check} alt="Available" />
-                  {(lotData && lotData.availability_date === formattedDateAujourdhui || lotData.availability_date === formattedDateDemain || new Date(lotData.availability_date) < dateAujourdhui)
-                    ? 'Available Now'
-                    : `Available on ${formatDate(lotData.availability_date)}`
-                  }
+                  {(lotData && lotData.availability_date &&
+  (lotData.availability_date === formattedDateAujourdhui || 
+   lotData.availability_date === formattedDateDemain || 
+   new Date(lotData.availability_date) < dateAujourdhui)
+)
+  ? 'Available Now'
+  : (lotData && lotData.availability_date)
+    ? `Available on ${formatDate(lotData.availability_date)}`
+    : 'Available on'
+}
                 </p>
 
 
@@ -592,7 +598,7 @@ const Room = () => {
               </div>
               <div className='recommandation mt-3 mb-lg-5 pb-4 d-md-none'>
                 <h2 className='mb-3'>You might also be interested in the following properties</h2>
-                {randomCribData && <Crib cribs={randomCribData} />}
+                {/* {randomCribData && <Crib cribs={randomCribData} />} */}
               </div>
 
 

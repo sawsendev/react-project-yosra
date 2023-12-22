@@ -168,13 +168,13 @@ return (
                     </div>
                   </div>
                 </Popup>
-              ) : null}
+              ) : <p> no map</p>}
 
             </Marker>
           );
         }
       }
-      return null;
+      return <p> no map</p>;
     })}
   </MapContainer>
 );
