@@ -74,7 +74,7 @@ const Room = () => {
   const [lotData, setLotData] = useState({});
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
   const API_URL = `https://admin.finecribs.com/api/lot/${id}`;
-  const API_URL2 = 'http://dev.niceroom.sofis-info.com/api/lots/recommendation';
+  const API_URL2 = 'https://admin.finecribs.com/api/lots/recommendation';
   const [latitude, setLatitude] = useState(null)
   const [longitude, setLongitude] = useState(null)
   const shareUrl = `https://finecribs.com/room/${id}`; 
