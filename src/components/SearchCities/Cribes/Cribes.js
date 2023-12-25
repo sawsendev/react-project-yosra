@@ -81,8 +81,8 @@ const Cribes = () => {
 
         const coordinatesArray = dataArray.map(item => [
           item.id,
-          item.apartment.building.latitude,
-          item.apartment.building.longitude
+          item.apartment_building_latitude,
+          item.apartment_building_longitude
         ]);
 
         setCoordinates(coordinatesArray);
@@ -282,7 +282,7 @@ const Cribes = () => {
     if ((!searchParamsExist)&&(keyWordParam)){
     fetchData(currentPage);
   }
-  console.log(cribsData)
+ 
   }, [searchParamsExist,keyWordParam,currentPage]);
 
   useEffect(() => {
@@ -328,7 +328,7 @@ const Cribes = () => {
       {searchResult.length > 0 && (
         <h2>
           {cityParam
-            ? `Our cribs in ${searchResult[0].apartment.building.city}`
+            ? `Our cribs in ${cityParam}`
             : 'Our cribs'}
         </h2>
       )}

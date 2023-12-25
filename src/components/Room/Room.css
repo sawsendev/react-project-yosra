@@ -309,7 +309,7 @@
     font-size: 16px;
     font-weight: 400;
 }
-.widget .btn-submit {
+.widget .btn-submit { 
     margin: 5px 0 0;
     width: 100%;
     height: 40px;
@@ -533,4 +533,8 @@
     .social-media{
         width:21px;
     }
+}
+.email-icon{
+    width: 23px;
+    height: 24px;
 }

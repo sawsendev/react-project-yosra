@@ -68,16 +68,30 @@ const formatDate = (dateString) => {
   return `${day < 10 ? `0${day}` : day}/${month < 10 ? `0${month}` : month}`;
 };
 
-   
+const isoFormattedDateAujourdhui = formattedDateAujourdhui.split('/').reverse().join('-');
+const isoFormattedDateDemain = formattedDateDemain.split('/').reverse().join('-');
+
+const availabilityDatePart = crib.availability_date.split('T')[0];
+
+const availabilityText =
+  (availabilityDatePart === isoFormattedDateAujourdhui || 
+   availabilityDatePart === isoFormattedDateDemain || 
+   new Date(crib.availability_date) < new Date())
+    ? 'Available Now'
+    : `Avail. on ${formatDate(crib.availability_date)}`;
+
+// Utilisez availabilityText là où vous avez besoin de cette valeur.}`;
+  
+  console.log(availabilityDatePart)
+  console.log(isoFormattedDateAujourdhui)
+  
   return (
     <li className='col-lg-4 col-md-6 col-12 mb-2'>
       <div className='item-cribe '>
         <div className='Item-badge'>
         <Badge className='notify-badge'>
   {
-    (crib.availability_date === formattedDateAujourdhui || crib.availability_date === formattedDateDemain || new Date(crib.availability_date) < dateAujourdhui)
-      ? 'Available Now'
-      : `Avail. on ${formatDate(crib.availability_date)}`
+   availabilityText
   }
 </Badge>
 
@@ -95,10 +109,7 @@ const formatDate = (dateString) => {
               selectedItem={activeIndex}
             >
               {crib.media && crib.media.length > 0 ? (
-                crib.media
-                  .filter((media) => media.mime_type.startsWith('image') && media.collection_name !== 'floorpan')
-                  .slice(0, 6)
-                  .map((image, index) => (
+                crib.media.map((image, index) => (
                     <div
                       className='room'
                       onClick={() => (window.location.href = `/room/${crib.id}`)}
@@ -157,11 +168,11 @@ const formatDate = (dateString) => {
         </div>
         <div className='Rooms-content'>
           <h3>
-            {crib.apartment.title}-{crib.title}
+            {crib.apartment_title}-{crib.title}
           </h3>
           <div className='d-flex '>
             <img src={locationIcon} alt="location icon" />
-            <p>{crib.apartment.building.address}</p>
+            <p>{crib.apartment_building_address}</p>
           </div>
           {crib.promo && crib.promo === 1 ? (
             <div >

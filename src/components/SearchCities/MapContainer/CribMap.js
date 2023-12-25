@@ -13,6 +13,7 @@ const CribMap = ({ coordinates, showPopup, data ,latitude,longitude,zoom }) => {
   const customIcon = (it) => {
     if (it && typeof it === 'object' && 'loyer_hc' in it) {
       const price = it.loyer_hc + it.charges;
+      console.log(price)
       return new L.divIcon({
         className: 'custom-icon',
         html: price ? `<div class="marker-label">${price}€</div>` : '',
@@ -140,11 +141,11 @@ return (
 
                         <div className='Rooms-content'>
                           {item && item.title && <h3>
-                            {item.apartment.title}-{item.title}
+                            {item.apartment_title}-{item.title}
                           </h3>}
                           <div className='d-flex mb-1'>
                             <img src={locationIcon} alt="location icon" />
-                            {item && item.apartment && item.apartment.building && <p>{item.apartment.building.address}</p>}
+                            {item && item.apartment_building_address && <p>{item.apartment_building_address}</p>}
                           </div>
                           {item.promo && item.promo === 1 ? (
                             <div>

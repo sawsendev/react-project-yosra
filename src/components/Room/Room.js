@@ -67,14 +67,14 @@ import ReactGA from 'react-ga';
 import instagram from '../../assets/Group 128.svg';
 import whatsapp from '../../assets/Group 127.svg';
 import email from '../../assets/Group 139.svg';
-import { FacebookShareButton, EmailShareButton, EmailIcon ,WhatsappShareButton } from 'react-share';
+import { EmailShareButton ,WhatsappShareButton } from 'react-share';
 
 const Room = () => {
   const { id } = useParams();
   const [lotData, setLotData] = useState({});
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
   const API_URL = `https://admin.finecribs.com/api/lot/${id}`;
-  const API_URL2 = 'https://admin.finecribs.com/api/lots/recommendation';
+  const API_URL2 = 'http://dev.niceroom.sofis-info.com/api/lots/recommendation';
   const [latitude, setLatitude] = useState(null)
   const [longitude, setLongitude] = useState(null)
   const shareUrl = `https://finecribs.com/room/${id}`; 
@@ -115,25 +115,28 @@ const Room = () => {
   }, [API_URL, API_KEY]);
 
   useEffect(() => {
-    const headers = {
-      'apiKey': `${API_KEY}`,
-      'Content-Type': 'application/json',
-    };
-    if (city && id) {
-      const requestBody = {
-        city: city,
-        lot_id: id
+    const fetchData = async () => {
+      const headers = {
+        'apiKey': `${API_KEY}`,
+        'Content-Type': 'application/json',
       };
-      
 
-      fetch(API_URL2, {
-        method: 'POST',
-        mode: 'cors',
-        headers,
-        body: JSON.stringify(requestBody),
-      })
-        .then(response => response.json())
-        .then(data => {
+      if (city && id) {
+        const requestBody = {
+          city: city,
+          lot_id: id
+        };
+
+        try {
+          const response = await fetch(API_URL2, {
+            method: 'POST',
+            mode: 'cors',
+            headers,
+            body: JSON.stringify(requestBody),
+          });
+
+          const data = await response.json();
+
           if (data && data.data && data.data.lots) {
             const allCribs = data.data.lots;
 
@@ -142,11 +145,15 @@ const Room = () => {
           } else {
             console.error('API response structure is not as expected:', data);
           }
-        })
-        .catch(error => {
+        } catch (error) {
           console.error('Erreur lors de la récupération des données:', error);
-        });
-    }
+        }
+      }
+    };
+
+
+      fetchData();
+
   }, [API_URL2, API_KEY, city]); 
 
 
@@ -286,18 +293,12 @@ const Room = () => {
               <div className='d-flex justify-content-end mb-2 gap-2'>
                 <span>Share on : </span>
                 <div className='d-flex gap-2'>
+
                 <WhatsappShareButton url={shareUrl} >
                 <img src={whatsapp} alt='whatsapp' className='img-fluid social-media'/>
                  </WhatsappShareButton>
-                <a
-                href="#"
-                onClick={handleInstagramShare}
-                title="Share on Instagram">
-                <img src={instagram} alt='instagram' className='img-fluid social-media'/>
-                </a>
-                
                  <EmailShareButton body={`Check out this room : ${shareUrl}`} >
-                 <img src={email} alt='email' className='img-fluid social-media'/>
+                 <img src={email} alt='email' className='social-media email-icon'/>
                  </EmailShareButton>
   
                 </div>
