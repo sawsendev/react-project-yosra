@@ -6,8 +6,12 @@ import { BsArrowRight, BsArrowLeft } from 'react-icons/bs';
 import { useParams } from 'react-router-dom';
 import default_img from '../../assets/noimage-197x197.svg';
 import promoImage from '../../assets/Group 104.svg';
-
-const CarrouselImages = ({lotData}) => {
+import iconimgs from '../../assets/room/icons/bedroom.svg'
+import iconvideos from '../../assets/room/icons/videos.svg'
+import iconvisit from '../../assets/room/icons/visits.svg'
+import iconfloorplan from '../../assets/room/icons/floorplan.svg'
+import iconimgshover from '../../assets/room/icons/gallery.png'
+const CarrouselImages = ({lotData,openModalWithTab1,openModalWithTab2,openModalWithTab3,openModalWithTab4}) => {
   const { id } = useParams();
   // const [lotData, setLotData] = useState({});
   // const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
@@ -110,6 +114,29 @@ const CarrouselImages = ({lotData}) => {
           <img src={default_img} alt="default" className="img-fluid" />
         </div>
       )}
+
+
+<div className='medias'>
+                  {lotData && lotData.media && lotData.media
+                    .filter((media) => media.mime_type.startsWith('image') &&
+                      media.collection_name !== 'floorpan').length > 0 && (
+                      <button type='button' className='btn-media' onClick={openModalWithTab1} id="photos-btn">
+                        <img src={iconimgshover} alt="photos" className='m-1' /> photos</button>)}
+                  {lotData && lotData.media && lotData.media.some((media) => media.mime_type.startsWith('video')) && (
+                    <button type='button' className='btn-media' onClick={openModalWithTab2} id="video-btn">
+                      <img src={iconvideos} alt="videos" className='m-1' /> video
+                    </button>
+                  )}
+                  {lotData && (lotData.image_360 || lotData.video_360) && (
+                    <button type='button' className='btn-media' onClick={openModalWithTab3} id="visit-btn">
+                      <img src={iconvisit} alt="visit" className='m-1' /> 360° virtual tour</button>)}
+
+                  {lotData && lotData.media && lotData.media
+                    .filter((media) => media.collection_name === 'floorpan').length > 0 && (
+                      <button type='button' className='btn-media' onClick={openModalWithTab4} id="floorplan-btn">
+                        <img src={iconfloorplan} alt="floorplan" className='m-1' /> flooplan</button>)}
+                  {/* <button type='button' className='btn-media' onClick={openModal} id="media-btn"><img src={iconimgs} alt="media"/> Medias</button> */}
+                </div>
 
       {lotData && lotData.media && lotData.media.length > 1 && (
         <div className="button-container" >

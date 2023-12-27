@@ -195,6 +195,9 @@ const ProposeModal = ({ isOpen, closeModal }) => {
           setStatus('error');
         }
         
+      })
+      .finally(() => {
+        setSelectedFiles([]); 
       });
   };
   

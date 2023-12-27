@@ -136,7 +136,7 @@ const validateEmail = (email) => {
       }
   
       try {
-        const response = await fetch('https://admin.finecribs.com/api/rentatl_request/post', {
+        const response = await fetch('https://admin.finecribs.com/api/rental_request/post', {
           method: 'POST',
           mode: 'cors',
           headers: {
@@ -325,7 +325,7 @@ const validateEmail = (email) => {
   const handleMoveInDateChange = (date) => {
     if (date) {
       setMoveInDate(date); 
-      setFormErrors((prevErrors) => ({ ...prevErrors, moveInDate: '' }));// Stockez la date telle quelle
+      setFormErrors((prevErrors) => ({ ...prevErrors, moveInDate: '' }));
     }
 
   };
@@ -368,14 +368,39 @@ const validateEmail = (email) => {
       console.log('Numéro sans le code de pays:', value.trim());
     }
   };
+  const moment = require('moment');
+
+  function formatToExactDate(dateString) {
+    const date = moment(dateString);
   
+    // Vérifier si la date est valide
+    if (!date.isValid()) {
+      return "Invalid Date";
+    }
+  
+    // Formater la date dans le format exact
+    const formattedDate = date.format("ddd MMM DD YYYY HH:mm:ss [GMT]ZZ (ZZZ)");
+  
+    return formattedDate;
+  }
+
+  let formattedDate;
+
+  if (lotData && lotData.availability_date) {
+    const formattedDate = formatToExactDate(lotData.availability_date);
+    console.log(formattedDate);
+  } else {
+    console.log("availibility_date is undefined or lotData is not defined.");
+  }
+
   
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
   const mindate_moveout = new Date();
   mindate_moveout.setDate(mindate_moveout.getDate() + 2);
-  
-  console.log(country)
+  console.log(tomorrow)
+ 
+
   
 
   return (

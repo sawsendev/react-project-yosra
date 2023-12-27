@@ -91,6 +91,7 @@
     justify-content: space-around;
     border: none!important;
     outline: 0!important;
+    box-shadow: 0 0 4px #cdcdcd;
 }
 .title h1 {
     color: #000;
@@ -535,6 +536,5 @@
     }
 }
 .email-icon{
-    width: 23px;
     height: 24px;
 }

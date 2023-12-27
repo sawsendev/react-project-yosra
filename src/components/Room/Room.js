@@ -64,9 +64,8 @@ import { Helmet } from 'react-helmet'
 import iconimgshover from '../../assets/room/icons/gallery.png'
 import { URL } from '../Variables'
 import ReactGA from 'react-ga';
-import instagram from '../../assets/Group 128.svg';
 import whatsapp from '../../assets/Group 127.svg';
-import email from '../../assets/Group 139.svg';
+import email from '../../assets/mail (2).png';
 import { EmailShareButton ,WhatsappShareButton } from 'react-share';
 
 const Room = () => {
@@ -235,30 +234,49 @@ const Room = () => {
     setShowMore(!showMore);
   };
   const dateAujourdhui = new Date();
-  const dateDemain = new Date(dateAujourdhui);
-  dateDemain.setDate(dateAujourdhui.getDate() + 1);
+    const dateDemain = new Date(dateAujourdhui);
+    dateDemain.setDate(dateAujourdhui.getDate() + 1);
+  
+    const formattedDateAujourdhui = `${(dateAujourdhui.getDate() < 10 ? '0' : '')}${dateAujourdhui.getDate()}/${(dateAujourdhui.getMonth() < 9 ? '0' : '')}${dateAujourdhui.getMonth() + 1}/${dateAujourdhui.getFullYear()}`;
+  
+    const formattedDateDemain = `${(dateDemain.getDate() < 10 ? '0' : '')}${dateDemain.getDate()}/${(dateDemain.getMonth() < 9 ? '0' : '')}${dateDemain.getMonth() + 1}/${dateDemain.getFullYear()}`;
+    const formatDate = (dateString) => {
+      const date = new Date(dateString);
+      const day = date.getUTCDate();
+      const month = date.getUTCMonth() + 1;
+      return `${day < 10 ? `0${day}` : day}/${month < 10 ? `0${month}` : month}`;
+    };
 
-  const formattedDateAujourdhui = `${(dateAujourdhui.getDate() < 10 ? '0' : '')}${dateAujourdhui.getDate()}/${(dateAujourdhui.getMonth() < 9 ? '0' : '')}${dateAujourdhui.getMonth() + 1}/${dateAujourdhui.getFullYear()}`;
+    const isoFormattedDateAujourdhui = formattedDateAujourdhui.split('/').reverse().join('-');
+    const isoFormattedDateDemain = formattedDateDemain.split('/').reverse().join('-');
+  
+    const availabilityDatePart = lotData.availability_date ? lotData.availability_date.split('T')[0] : '';
+  
 
-  const formattedDateDemain = `${(dateDemain.getDate() < 10 ? '0' : '')}${dateDemain.getDate()}/${(dateDemain.getMonth() < 9 ? '0' : '')}${dateDemain.getMonth() + 1}/${dateDemain.getFullYear()}`;
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const day = date.getUTCDate();
-    const month = date.getUTCMonth() + 1; // Les mois commencent à 0
-    return `${day < 10 ? `0${day}` : day}/${month < 10 ? `0${month}` : month}`;
+  const calculateRent = (lotData) => {
+    const isoFormattedDateAujourdhui = formattedDateAujourdhui.split('/').reverse().join('-');
+    const isoFormattedDateDemain = formattedDateDemain.split('/').reverse().join('-');
+  
+    const availabilityDatePart = lotData.availability_date ? lotData.availability_date.split('T')[0] : '';
+    return availabilityDatePart > isoFormattedDateAujourdhui ;
   };
+  
+ 
+  const rent = calculateRent(lotData);
+  console.log(rent) //si c true loué 
 
   if (!lotData) {
     return <ErrorPage />;
   }
+  
+  function oneYearFromToday() {
+    var today = new Date();
+    var lastYear = new Date(today);
+    lastYear.setFullYear(today.getFullYear() + 1);
+    return lastYear;
+}
 
-
-
-  const handleInstagramShare = () => {
-    const instagramLink = `https://www.instagram.com/direct/inbox/`;
-   
-    window.open(instagramLink, '_blank');
-  };
+console.log(oneYearFromToday())
   
 
   return (
@@ -282,11 +300,7 @@ const Room = () => {
           ]}
 
         />)}
-
-
-
-      
-      <div className='pageroom-container'>
+        <div className='pageroom-container'>
         <div className='container'>
           <div className='row'>
             <div className='col-large col-lg-8'>
@@ -295,7 +309,7 @@ const Room = () => {
                 <div className='d-flex gap-2'>
 
                 <WhatsappShareButton url={shareUrl} >
-                <img src={whatsapp} alt='whatsapp' className='img-fluid social-media'/>
+                <img src={whatsapp} alt='whatsapp' className='social-media'/>
                  </WhatsappShareButton>
                  <EmailShareButton body={`Check out this room : ${shareUrl}`} >
                  <img src={email} alt='email' className='social-media email-icon'/>
@@ -305,31 +319,12 @@ const Room = () => {
               </div>
 
               <div className='carousel-images'>
-        
+                <CarrouselImages lotData={lotData} openModalWithTab1={openModalWithTab1} openModalWithTab2={openModalWithTab2}
+                openModalWithTab3={openModalWithTab3} openModalWithTab4={openModalWithTab4}
+                
+                />
 
-                <CarrouselImages lotData={lotData} />
-
-                <div className='medias'>
-                  {lotData && lotData.media && lotData.media
-                    .filter((media) => media.mime_type.startsWith('image') &&
-                      media.collection_name !== 'floorpan').length > 0 && (
-                      <button type='button' className='btn-media' onClick={openModalWithTab1} id="photos-btn">
-                        <img src={iconimgshover} alt="photos" className='m-1' /> photos</button>)}
-                  {lotData && lotData.media && lotData.media.some((media) => media.mime_type.startsWith('video')) && (
-                    <button type='button' className='btn-media' onClick={openModalWithTab2} id="video-btn">
-                      <img src={iconvideos} alt="videos" className='m-1' /> video
-                    </button>
-                  )}
-                  {lotData && (lotData.image_360 || lotData.video_360) && (
-                    <button type='button' className='btn-media' onClick={openModalWithTab3} id="visit-btn">
-                      <img src={iconvisit} alt="visit" className='m-1' /> 360° virtual tour</button>)}
-
-                  {lotData && lotData.media && lotData.media
-                    .filter((media) => media.collection_name === 'floorpan').length > 0 && (
-                      <button type='button' className='btn-media' onClick={openModalWithTab4} id="floorplan-btn">
-                        <img src={iconfloorplan} alt="floorplan" className='m-1' /> flooplan</button>)}
-                  {/* <button type='button' className='btn-media' onClick={openModal} id="media-btn"><img src={iconimgs} alt="media"/> Medias</button> */}
-                </div>
+                
 
               </div>
 
@@ -448,7 +443,7 @@ const Room = () => {
               </div>
               <div className='flatmates'>
                 <h2 className='mb-3'>Flatmates</h2>
-                <div className='row'>
+                <div className='row '>
 
 
                   {lotData &&
@@ -470,7 +465,7 @@ const Room = () => {
                                 <img src={man} alt={index} />
                               ) : locataire.locataire_info && locataire.locataire_info.genre === 1 ? (
                                 <img src={woman} alt={index} />
-                              ) : ((locataire.title && locataire.title === lotData.title && locataire.rent_status === false) || locataire.rent_status === false) ? (
+                              ) : ((locataire.locataire_info === null)) ? (
                                 <img src={block} alt={index} />
                               ) : null}
                             </div>
@@ -479,15 +474,15 @@ const Room = () => {
                               {locataire.title && locataire.title.replace('Room', 'Bedroom')}
 
 
-                              {locataire.rent_status === true ? (
+                              {((calculateRent(locataire) === true ))? (
                                 <span className='status'>Booked</span>
                               ) : (
-                                <button
+                                <button 
                                   type='button'
                                   className='btn-visit'
                                   onClick={() => {
                                     navigate(`../room/${locataire.id}`);
-                                    window.scrollTo(0, 0); // Scroll to the top of the page
+                                    window.scrollTo(0, 0); 
                                   }}
                                 >
                                   Visit
@@ -540,17 +535,27 @@ const Room = () => {
               <div className='widget mb-3'>
 
                 <p className='head-widget'>
-                  <img src={check} alt="Available" />
-                  {(lotData && lotData.availability_date &&
-  (lotData.availability_date === formattedDateAujourdhui || 
-   lotData.availability_date === formattedDateDemain || 
-   new Date(lotData.availability_date) < dateAujourdhui)
-)
-  ? 'Available Now'
-  : (lotData && lotData.availability_date)
-    ? `Available on ${formatDate(lotData.availability_date)}`
-    : 'Available on'
-}
+                <div>
+    {lotData && lotData.availability_date && (
+        <>
+            <img src={check} alt="Available" />
+            {(
+                availabilityDatePart === isoFormattedDateAujourdhui ||
+                availabilityDatePart === isoFormattedDateDemain
+            ) ? (
+                <span>Available Now</span>
+            ) : (
+                new Date(lotData.availability_date) <= oneYearFromToday() ? (
+                    <span>Available on {formatDate(lotData.availability_date)}</span>
+                ) : (
+                    <span>Not Available</span>
+                )
+            )}
+        </>
+    )}
+</div>
+
+
                 </p>
 
 
