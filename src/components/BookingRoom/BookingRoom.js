@@ -370,35 +370,28 @@ const validateEmail = (email) => {
   };
   const moment = require('moment');
 
-  function formatToExactDate(dateString) {
-    const date = moment(dateString);
-  
-    // Vérifier si la date est valide
-    if (!date.isValid()) {
-      return "Invalid Date";
+
+  function convertAvailabilityDateToDateObject(availabilityDate) {
+    const availabilityMoment = moment(availabilityDate);
+    if (!availabilityMoment.isValid()) {
+      return null; 
     }
+    const dateObject = availabilityMoment.toDate();
   
-    // Formater la date dans le format exact
-    const formattedDate = date.format("ddd MMM DD YYYY HH:mm:ss [GMT]ZZ (ZZZ)");
-  
-    return formattedDate;
+    return dateObject;
   }
 
-  let formattedDate;
 
-  if (lotData && lotData.availability_date) {
-    const formattedDate = formatToExactDate(lotData.availability_date);
-    console.log(formattedDate);
-  } else {
-    console.log("availibility_date is undefined or lotData is not defined.");
-  }
-
+ 
+const formattedDate = lotData && lotData.availability_date ? convertAvailabilityDateToDateObject(lotData.availability_date) : null;
+// console.log(formattedDate);
+// console.log(lotData.availability_date)
   
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  const mindate_moveout = new Date();
-  mindate_moveout.setDate(mindate_moveout.getDate() + 2);
-  console.log(tomorrow)
+  // const tomorrow = new Date();
+  // tomorrow.setDate(tomorrow.getDate() + 1);
+  // const mindate_moveout = new Date();
+  // mindate_moveout.setDate(mindate_moveout.getDate() + 2);
+
  
 
   
@@ -480,13 +473,15 @@ const validateEmail = (email) => {
                             name="moveInDate"
                             dateFormat="dd/MM/yyyy"
                             onChange={handleMoveInDateChange}
+                            minDate={formattedDate-1}
                             customInput={
                               <CustomInputIn
                                 value={moveInDate}
                                 onChange={handleCustomInputInChange}
                                 name="moveInDate"
                               />
-                            } minDate={tomorrow} />
+                            } 
+                            />
                         {formErrors.moveInDate !=='' && <div className="error-message">{formErrors.moveInDate}</div>}
                       </div>
                     </div>
@@ -498,13 +493,14 @@ const validateEmail = (email) => {
                             name="moveOutDate"
                             dateFormat="dd/MM/yyyy"
                             onChange={handleMoveOutDateChange}
+                            minDate={formattedDate}
                             customInput={
                               <CustomInputOut
                                 value={moveOutDate}
                                 onChange={handleCustomInputOutChange}
                                 name="moveOutDate"
                               />
-                            } minDate={mindate_moveout}/>
+                            }  />
                         {formErrors.moveOutDate !=='' && <div className="error-message">{formErrors.moveOutDate}</div>}
                       </div>
                     </div>
