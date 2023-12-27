@@ -306,13 +306,7 @@ const Cribes = () => {
     handleGetCoordinates(cityParam);
   }, [cityParam]);
 
-  const redirect = () => {
-    let redirectTo = '/search-cities';
-    if (cityParam) {
-      redirectTo += `?city=${cityParam}`;
-    }
-    window.location.href = redirectTo;
-  };
+  
 
   return (
    

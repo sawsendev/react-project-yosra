@@ -4,17 +4,12 @@ import CarrouselImages from "./RoomImages"
 import RoomModalMedia from "./RoomModal/RoomModalMedia"
 import "../SearchCities/Cribes/Cribes.css"
 import Breadcrumbs from '../Breadcrumbs/Breadcrumbs'
-import iconimgs from '../../assets/room/icons/bedroom.svg'
-import iconvideos from '../../assets/room/icons/videos.svg'
-import iconvisit from '../../assets/room/icons/visits.svg'
-import iconfloorplan from '../../assets/room/icons/floorplan.svg'
 import plan from '../../assets/room/icons/plan.svg'
 import bedroom from '../../assets/room/icons/bedroom.svg'
 import roomies from '../../assets/room/icons/roomies.svg'
 import elevator from '../../assets/room/icons/elevator.svg'
 import energy from '../../assets/room/icons/energy.svg'
 import doublebed from '../../assets/room/icons/doublebed.svg'
-import workspace from '../../assets/room/icons/workspace.svg'
 import wardrobe from '../../assets/room/icons/wardrobe.svg'
 import sofa from '../../assets/room/icons/sofa.svg'
 import terrace from '../../assets/room/icons/terrace.svg'
@@ -56,17 +51,17 @@ import CribMap from '../SearchCities/MapContainer/CribMap'
 import ErrorPage from '../404/ErrorPage'
 import bathroom from "../../assets/room/icons/wash-basin (1).png"
 import desk from "../../assets/room/icons/working.png"
-import chair from "../../assets/room/icons/chair.png"
 import closet from "../../assets/room/icons/closet.png"
 import bed from "../../assets/room/icons/bed.png"
 import furniture from "../../assets/room/icons/living-room.png"
 import { Helmet } from 'react-helmet'
-import iconimgshover from '../../assets/room/icons/gallery.png'
-import { URL } from '../Variables'
+import { URL } from '../Variables';
 import ReactGA from 'react-ga';
 import whatsapp from '../../assets/Group 127.svg';
 import email from '../../assets/mail (2).png';
+import icon from '../../assets/delete.png';
 import { EmailShareButton ,WhatsappShareButton } from 'react-share';
+
 
 const Room = () => {
   const { id } = useParams();
@@ -119,52 +114,43 @@ const Room = () => {
         'apiKey': `${API_KEY}`,
         'Content-Type': 'application/json',
       };
-
+  
       if (city && id) {
         const requestBody = {
           city: city,
           lot_id: id
         };
-
+  
         try {
-          const response = await fetch(API_URL2, {
-            method: 'POST',
-            mode: 'cors',
-            headers,
-            body: JSON.stringify(requestBody),
-          });
-
-          const data = await response.json();
-
-          if (data && data.data && data.data.lots) {
-            const allCribs = data.data.lots;
-
-            const cribsArray = Object.values(allCribs);
-            setRandomCribData(cribsArray);
-          } else {
-            console.error('API response structure is not as expected:', data);
-          }
+          setTimeout(async () => {
+            const response = await fetch(API_URL2, {
+              method: 'POST',
+              mode: 'cors',
+              headers,
+              body: JSON.stringify(requestBody),
+            });
+  
+            const data = await response.json();
+  
+            if (data && data.data && data.data.lots) {
+              const allCribs = data.data.lots;
+  
+              const cribsArray = Object.values(allCribs);
+              setRandomCribData(cribsArray);
+            } else {
+              console.error('API response structure is not as expected:', data);
+            }
+          }, 1000);
         } catch (error) {
           console.error('Erreur lors de la récupération des données:', error);
         }
       }
     };
-
-
-      fetchData();
-
-  }, [API_URL2, API_KEY, city]); 
-
-
-
-
-
+  
+    fetchData();
+  }, [API_URL2, API_KEY, city]);
+  
   const [staticCoordinates, setStaticCoordinates] = useState([]);
-
-
-
-
-
   const calculateAge = (dateOfBirth) => {
     const dob = new Date(dateOfBirth);
     const today = new Date();
@@ -173,9 +159,6 @@ const Room = () => {
 
     return Math.abs(ageDate.getUTCFullYear() - 1970);
   }
-
-
-
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('tab1');
 
@@ -215,10 +198,10 @@ const Room = () => {
       return "th";
     }
   };
-
   const [showMore, setShowMore] = useState(false);
   const [descriptionHeight, setDescriptionHeight] = useState('auto');
   const descriptionRef = useRef(null);
+  
   useEffect(() => {
     if (descriptionRef.current) {
       const height = descriptionRef.current.clientHeight;
@@ -255,7 +238,6 @@ const Room = () => {
 
   const calculateRent = (lotData) => {
     const isoFormattedDateAujourdhui = formattedDateAujourdhui.split('/').reverse().join('-');
-    const isoFormattedDateDemain = formattedDateDemain.split('/').reverse().join('-');
   
     const availabilityDatePart = lotData.availability_date ? lotData.availability_date.split('T')[0] : '';
     return availabilityDatePart > isoFormattedDateAujourdhui ;
@@ -287,7 +269,7 @@ console.log(oneYearFromToday())
           name="description"
           content="Fine Cribs, beautiful flatshares designed for communal living"
         />
-        <link rel="canonical" href={`${URL}`} />
+        <link rel="canonical" href={`${URL}/room/${id}`} />
       </Helmet>
       {lotData && lotData.apartment && lotData.apartment.building && lotData.apartment.building.city && (
         <Breadcrumbs
@@ -538,17 +520,27 @@ console.log(oneYearFromToday())
                 <div>
     {lotData && lotData.availability_date && (
         <>
-            <img src={check} alt="Available" />
+            
             {(
                 availabilityDatePart === isoFormattedDateAujourdhui ||
                 availabilityDatePart === isoFormattedDateDemain
             ) ? (
+              <div>
+              <img src={check} alt="Available" />
                 <span>Available Now</span>
+                </div>
             ) : (
                 new Date(lotData.availability_date) <= oneYearFromToday() ? (
+                  <div>
+                  <img src={check} alt="Available" />
                     <span>Available on {formatDate(lotData.availability_date)}</span>
+                    </div>
                 ) : (
-                    <span>Not Available</span>
+                    
+                  <div>
+                  <img src={icon} alt="not Available" />
+                    <span className='not_avail_text'>Not Available</span>
+                    </div>
                 )
             )}
         </>

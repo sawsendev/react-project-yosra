@@ -20,9 +20,6 @@ const Search = () => {
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
   const API_URL = `https://admin.finecribs.com/api/lot/maxprice`;
   const [lotData, setLotData] = useState([]);
-  const [selectedCountry, setSelectedCountry] = useState("");
-
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [date, setDate] = useState("");
   const [sortBy, setSortBy] = useState("");
   const location = useLocation();
@@ -36,19 +33,7 @@ const Search = () => {
   const handleSliderOpen = () => {
     setIsSliderVisible(true);
   };
-
-  const handleSliderClose = () => {
-    if (isSliderVisible) {
-      setIsSliderVisible(false);
-    } else {
-      setIsSliderOpen(false);
-    }
-  };
-
   const navigate = useNavigate()
-
-
-
   const customStyles = {
     control: (provided) => ({
       ...provided,
@@ -227,11 +212,6 @@ const Search = () => {
 
   }
 
-  const handleIconClick = () => {
-    setIsSliderVisible(false);
-  };
-
-
   const handleCustomInputInChange = (date) => {
     setDate(date || null);
   };
@@ -241,10 +221,6 @@ const Search = () => {
 
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
-
-  const handleSliderClick = (e) => {
-    e.stopPropagation();
-  };
 
   return (
     <div className='Search-container'>

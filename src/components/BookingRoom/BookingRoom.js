@@ -5,17 +5,13 @@ import ReactGA from 'react-ga';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "./BookingRoom.scss"
-//import {UploadArray} from "../../Data/Data"
-
 import sendImg from "../../assets/send 1.svg"
 import upload from "../../assets/image-gallery.svg"
 import payslip from "../../assets/g2115.svg"
 import certificate from "../../assets/certificate.svg"
 import groupId from "../../assets/Groupe 1178.svg"
 import inVoice from "../../assets/invoice.svg"
-
 import file from "../../assets/file.svg"
-
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import BookingProcess from '../BookingProcess/BookingProcess';
@@ -154,8 +150,6 @@ const validateEmail = (email) => {
           if (response.status === 422) {
             const errorData = await response.json();
             console.log(errorData.data);
-  
-            // Gérez les erreurs spécifiques de l'API
             if (errorData) {
             
                 toast.error(errorData.data.message, {
@@ -230,19 +224,9 @@ const validateEmail = (email) => {
     e.target.value = '';
   };
 
-
-
-  // ***************
+// ***************
   const[phoneNumber, setPhoneNumber]=useState("")
-
-
-  // const validatePhoneNumber=(phoneNumber)=>{
-  //   const phoneNumberPattern= /^\d{10}$/
-  //   return phoneNumberPattern.test(phoneNumber);
-  // }
   const [country, setCountry] = useState('fr');
-
-
   const [formErrors, setFormErrors] = useState({
     firstName: '',
     surname: '',
@@ -343,7 +327,6 @@ const validateEmail = (email) => {
     setCountry(data.countryCode);
   
     // Extraire le code de composition du numéro
-    
     setCode(data.dialCode);
   
     // Vérifier si le numéro commence par le code de composition
@@ -370,7 +353,6 @@ const validateEmail = (email) => {
   };
   const moment = require('moment');
 
-
   function convertAvailabilityDateToDateObject(availabilityDate) {
     const availabilityMoment = moment(availabilityDate);
     if (!availabilityMoment.isValid()) {
@@ -384,15 +366,9 @@ const validateEmail = (email) => {
 
  
 const formattedDate = lotData && lotData.availability_date ? convertAvailabilityDateToDateObject(lotData.availability_date) : null;
-// console.log(formattedDate);
-// console.log(lotData.availability_date)
-  
-  // const tomorrow = new Date();
-  // tomorrow.setDate(tomorrow.getDate() + 1);
-  // const mindate_moveout = new Date();
-  // mindate_moveout.setDate(mindate_moveout.getDate() + 2);
 
- 
+  const minDate = new Date(formattedDate);
+  minDate.setDate(minDate.getDate() + 1);
 
   
 
@@ -493,7 +469,7 @@ const formattedDate = lotData && lotData.availability_date ? convertAvailability
                             name="moveOutDate"
                             dateFormat="dd/MM/yyyy"
                             onChange={handleMoveOutDateChange}
-                            minDate={formattedDate}
+                            minDate={minDate}
                             customInput={
                               <CustomInputOut
                                 value={moveOutDate}

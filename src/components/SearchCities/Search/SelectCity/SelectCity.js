@@ -6,7 +6,7 @@ const SelectCity = ({ onChange, city ,text ,alert }) => {
 
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
   const API_URL = 'https://admin.finecribs.com/api/building/cities';
-  const [hasEffectRun, setHasEffectRun] = useState(false);
+
   
   useEffect(() => {
     // Vous pouvez accéder à la valeur de l'URL ici et l'initialiser dans selectedCity

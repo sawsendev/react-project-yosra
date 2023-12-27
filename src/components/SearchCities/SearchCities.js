@@ -25,7 +25,7 @@ const SearchCities = () => {
             name="description"
             content="Fine Cribs, beautiful flatshares designed for communal living"
           />
-          <link rel="canonical" href={`${URL}`} />
+          <link rel="canonical" href={`${URL}/search-cities`} />
           <script type="application/ld+json">
             {`
     {

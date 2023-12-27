@@ -65,20 +65,8 @@ return (
             const dataArray = Object.values(data);
             item = dataArray.find((dataItem) => dataItem && dataItem.id === externalId);
           }
-          
-          
-          
-          
-          
-          
-
-          
-          
-  
-        if (!isNaN(latitude) && !isNaN(longitude) && latitude !== null && longitude !== null && item) {
-          
-
-          return (
+       if (!isNaN(latitude) && !isNaN(longitude) && latitude !== null && longitude !== null && item) {
+        return (
             <Marker
               key={externalId}
               position={[latitude, longitude]}

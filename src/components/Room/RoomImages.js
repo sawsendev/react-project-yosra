@@ -116,7 +116,7 @@ const CarrouselImages = ({lotData,openModalWithTab1,openModalWithTab2,openModalW
       )}
 
 
-<div className='medias'>
+              <div className='medias'>
                   {lotData && lotData.media && lotData.media
                     .filter((media) => media.mime_type.startsWith('image') &&
                       media.collection_name !== 'floorpan').length > 0 && (
