@@ -177,7 +177,7 @@ const Footer = () => {
 
       {/* PopupAlert */}
 
-      <PopupAlert isPopupOpen={isPopupOpen} onClose={closePopup} />
+      <PopupAlert isPopupOpen={isPopupOpen} onClose={closePopup} id="popupAlert1" />
 
     </>
   );

@@ -22,7 +22,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
   const [status, setStatus] = useState('');
-  
+  const [fileError,setFileError]=useState('')
  
   const handlePopupClose = () => {
     setShowPopup(false);
@@ -170,10 +170,6 @@ const ProposeModal = ({ isOpen, closeModal }) => {
             const errorMessage = JSON.parse(error.message);
             if (errorMessage.data && errorMessage.data.message) {
               const message = errorMessage.data.message;
-              // toast.error(message, {
-              //   position: toast.POSITION.TOP_CENTER,
-              //   autoClose: 5000,
-              // });
               displayPopup(message, {
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 5000,
@@ -184,11 +180,8 @@ const ProposeModal = ({ isOpen, closeModal }) => {
             console.error('Erreur d\'analyse JSON :', parseError);
           }
         } else {
-          // toast.error('Error, please try again', {
-          //   position: toast.POSITION.TOP_CENTER,
-          //   autoClose: 5000,
-          // });
-          displayPopup('Error, please try again', {
+         
+        displayPopup('Error, please try again', {
             position: toast.POSITION.TOP_CENTER,
             autoClose: 5000,
           });
@@ -266,13 +259,27 @@ const ProposeModal = ({ isOpen, closeModal }) => {
   const [fileVisibility, setFileVisibility] = useState([true]);
   const handleFileChange = (e) => {
     const files = e.target.files;
+  
     if (files && files.length > 0) {
-      // Initialisez fileVisibility avec true pour chaque fichier
+      const maxSizeInMegabits = 10; // 10 mégabits
+      const maxSizeInBytes = maxSizeInMegabits * 1024 * 1024 / 8;
+  
+      const selectedFiles = Array.from(files);
+      const invalidFiles = selectedFiles.filter(file => file.size > maxSizeInBytes);
+      if (invalidFiles.length > 0) {
+        const fileNames = invalidFiles.map(file => file.name).join(', ');
+        setFileError(`The following files are too large: ${fileNames}. Please select files with a maximum size of 10 megabits.`);
+        e.target.value = '';
+        setSelectedFiles([]); 
+        return;
+      }
+      setFileError('')
       setFileVisibility(Array(files.length).fill(true)); 
-      setSelectedFiles(Array.from(files));
+      setSelectedFiles(selectedFiles);
       e.target.value = '';
     }
   };
+  
   
   
 
@@ -491,6 +498,9 @@ const ProposeModal = ({ isOpen, closeModal }) => {
     </p>
   )
 ))}
+{fileError && (
+                      <div className="validation-error">{fileError}</div>
+                    )}
 </div>
 
                     <button className='btn btn-accept' onClick={handleSubmit}>OK</button>

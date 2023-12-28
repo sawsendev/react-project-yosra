@@ -75,7 +75,7 @@ const handleCheckboxChange = (event) => {
         ) : (
           <div className='container'>
            <h1> Unsubscribe from Our Alert </h1>
-          <div className='d-flex flex-column align-items-start justify-content-space-evenly'>
+          <div className='d-flex flex-column justify-content-space-evenly'>
           <p className='cancel'>
           Ready to opt out of alerts? Simply check the box below to confirm your unsubscribe request.
            We hope you've found the perfect room! If you need anything, drop us a message at <a href="mailto:contact@finecribs.com">contact@finecribs.com</a> – we're here to help!

@@ -25,43 +25,43 @@ const BookingProcess = ({cribs}) => {
          <h3 className='Book-container-heading'>Booking process</h3>
          <div className='Progress-bar'>
         <div className='d-flex align-items-center justify-content-start Progress-paragraph'>
-          <div class="steps done">
+          <div className="steps done">
             <span>
             <svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 22 22" width="22"><path d="M0 0h24v24H0z" fill="none"/><path style={{color:'#fff',fill:'#fff'}} d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" fill="#fff"/></svg>
-              {/* <i class="fa fa-check">&#10004;</i> */}
+              {/* <i className="fa fa-check">&#10004;</i> */}
             </span>
           </div>
           <p className='mx-2'>Find your room</p>
         </div>
 
 
-         <span class="line"></span>
+         <span className="line"></span>
             
 
           <div className='d-flex align-items-center justify-content-start Progress-paragraph'>
-            <div class="steps current">
-              <span class="font-weight-bold">2</span>
+            <div className="steps current">
+              <span className="font-weight-bold">2</span>
             </div>
             <p className='mx-2'>Submit your application</p>
           </div>
 
 
 
-            <span class="line"></span>
+            <span className="line"></span>
 
           <div className='d-flex align-items-center justify-content-start Progress-paragraph'>
-           <div class="steps">
-              <span class="font-weight-bold">3</span>
+           <div className="steps">
+              <span className="font-weight-bold">3</span>
             </div>
             <p className='mx-2'>Sign the tenancy agreement</p>
 
           </div>
-          <span class="line"></span>
+          <span className="line"></span>
 
 
           <div className='d-flex align-items-center justify-content-start Progress-paragraph'>
-          <div class="steps">
-              <span class="font-weight-bold">4</span>
+          <div className="steps">
+              <span className="font-weight-bold">4</span>
             </div>
             <p className='mx-2'>Move in</p>
           </div>
@@ -76,8 +76,8 @@ const BookingProcess = ({cribs}) => {
          <h3 className='Book-container-heading'>Payments</h3>
          <div className='Progress-bar'>
         <div className='d-flex align-items-start justify-content-start'>
-          <div class="steps current">
-            <span class="font-weight-bold">1</span>
+          <div className="steps current">
+            <span className="font-weight-bold">1</span>
           </div>
           <div className='Payments-steps px-2'>
             <span className='mb-0'>Now</span>
@@ -86,12 +86,12 @@ const BookingProcess = ({cribs}) => {
         </div>
 
 
-         <span class="line line-1"></span>
+         <span className="line line-1"></span>
             
 
           <div className='d-flex align-items-start justify-content-start'>
-            <div class="steps">
-              <span class="font-weight-bold">2</span>
+            <div className="steps">
+              <span className="font-weight-bold">2</span>
             </div>
             <div className='Payments-steps px-2'>
               <span>Upon signing the tenancy agreement </span>
@@ -109,11 +109,11 @@ const BookingProcess = ({cribs}) => {
 
 
 
-            <span class="line line-2"></span>
+            <span className="line line-2"></span>
 
           <div className='d-flex align-items-start justify-content-start'>
-           <div class="steps">
-              <span class="font-weight-bold">3</span>
+           <div className="steps">
+              <span className="font-weight-bold">3</span>
             </div>
            
             <div className='Payments-steps px-2'>
@@ -140,12 +140,12 @@ const BookingProcess = ({cribs}) => {
             </div>
 
           </div>
-          <span class="line line-3"></span>
+          <span className="line line-3"></span>
 
 
           <div className='d-flex align-items-start justify-content-start'>
-          <div class="steps">
-              <span class="font-weight-bold">4</span>
+          <div className="steps">
+              <span className="font-weight-bold">4</span>
             </div>
             <div className='Payments-steps px-2'>
               <span>During your stay</span>
@@ -157,12 +157,12 @@ const BookingProcess = ({cribs}) => {
             </div>
           </div>
 
-          <span class="line line-4"></span>
+          <span className="line line-4"></span>
 
 
           <div className='d-flex align-items-start justify-content-start'>
-          <div class="steps">
-              <span class="font-weight-bold">5</span>
+          <div className="steps">
+              <span className="font-weight-bold">5</span>
             </div>
             <div className='Payments-steps px-2'>
               <span>After your stay</span>

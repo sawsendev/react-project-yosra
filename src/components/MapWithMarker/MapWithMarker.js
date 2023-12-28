@@ -19,7 +19,7 @@ const MapWithMarker = ({ coordinates }) => {
       }).addTo(map);
       // Créez une icône personnalisée
       const customIcon = L.divIcon({
-      className: 'custom-icon', // Classe CSS personnalisée
+      className=: 'custom-icon', // Classe CSS personnalisée
       html: '<div></div>', // Contenu HTML vide
       iconSize: [32, 32], // Taille de l'icône
       });

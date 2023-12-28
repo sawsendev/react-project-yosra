@@ -56,7 +56,7 @@ const ProposeApartment =()=> {
           name="description"
           content="Fine Cribs, beautiful flatshares designed for communal living"
           />
-        <link rel="canonical" href={`${URL}`} />
+        <link rel="canonical" href={`${URL}/i-propose-an-apartment`} />
     </Helmet>
     <Breadcrumbs />
 
@@ -71,7 +71,7 @@ const ProposeApartment =()=> {
 
     <section className='landlords pt-lg-5 pt-4 pb-4'>
       <div className='container'>
-        <h2 class="mb-lg-4 pb-lg-3 mb-4">Why landlords partner with Fine cribs </h2>
+        <h2 className="mb-lg-4 pb-lg-3 mb-4">Why landlords partner with Fine cribs </h2>
         <div className='row'>
           <div className='col-md-4'>
             <img src={image1} alt="Im1" className="img-fluid mb-1"/>
@@ -96,7 +96,7 @@ const ProposeApartment =()=> {
       <div className='container'>
         <div className='row justify-content-between'>
           <div className='col-lg-7 col-md-8'>
-            <h2 class="mb-2">The Fine cribs guarantee</h2>
+            <h2 className="mb-2">The Fine cribs guarantee</h2>
             <p> We are a landlord, as you are. Fine cribs expertise lies in purchasing, designing and renovating beautiful spaces
              for communal living. When you rent your apartment to Fine cribs, you are guaranteed the we will manage 
             it with the same care that we put into managing our own apartments.</p>
@@ -320,13 +320,13 @@ const ProposeApartment =()=> {
         <div className='row before-after'>
           <div className='col-md-6'>
             <div className='image-left'>
-              <span class="badge badge-left">Before Fine cribs</span>
+              <span className="badge badge-left">Before Fine cribs</span>
               <img src={before1} alt="Im8" className="img-fluid img"/>
             </div>
           </div>
           <div className='col-md-6'>
             <div className='image-right'>
-              <span class="badge badge-right">After Fine cribs</span>
+              <span className="badge badge-right">After Fine cribs</span>
               <img src={after1} alt="Im9" className="img-fluid"/>
             </div>
           </div>
@@ -334,13 +334,13 @@ const ProposeApartment =()=> {
         <div className='row before-after'>
           <div className='col-md-6'>
             <div className='image-left'>
-              <span class="badge badge-left">Before Fine cribs</span>
+              <span className="badge badge-left">Before Fine cribs</span>
               <img src={before2} alt="Im8" className="img-fluid img"/>
             </div>
           </div>
           <div className='col-md-6'>
             <div className='image-right'>
-              <span class="badge badge-right">After Fine cribs</span>
+              <span className="badge badge-right">After Fine cribs</span>
               <img src={after2} alt="Im9" className="img-fluid"/>
             </div>
           </div>
@@ -348,13 +348,13 @@ const ProposeApartment =()=> {
         <div className='row before-after'>
           <div className='col-md-6'>
             <div className='image-left'>
-              <span class="badge badge-left">Before Fine cribs</span>
+              <span className="badge badge-left">Before Fine cribs</span>
               <img src={before3} alt="Im8" className="img-fluid img"/>
             </div>
           </div>
           <div className='col-md-6'>
             <div className='image-right'>
-              <span class="badge badge-right">After Fine cribs</span>
+              <span className="badge badge-right">After Fine cribs</span>
               <img src={after3} alt="Im9" className="img-fluid"/>
             </div>
           </div>
@@ -362,13 +362,13 @@ const ProposeApartment =()=> {
         <div className='row before-after'>
           <div className='col-md-6'>
             <div className='image-left'>
-              <span class="badge badge-left">Before Fine cribs</span>
+              <span className="badge badge-left">Before Fine cribs</span>
               <img src={before4} alt="Im8" className="img-fluid img"/>
             </div>
           </div>
           <div className='col-md-6'>
             <div className='image-right'>
-              <span class="badge badge-right">After Fine cribs</span>
+              <span className="badge badge-right">After Fine cribs</span>
               <img src={after4} alt="Im9" className="img-fluid"/>
             </div>
           </div>
@@ -376,13 +376,13 @@ const ProposeApartment =()=> {
         <div className='row before-after'>
           <div className='col-md-6'>
             <div className='image-left'>
-              <span class="badge badge-left">Before Fine cribs</span>
+              <span className="badge badge-left">Before Fine cribs</span>
               <img src={before5} alt="Im8" className="img-fluid img"/>
             </div>
           </div>
           <div className='col-md-6'>
             <div className='image-right'>
-              <span class="badge badge-right">After Fine cribs</span>
+              <span className="badge badge-right">After Fine cribs</span>
               <img src={after5} alt="Im9" className="img-fluid"/>
             </div>
           </div>

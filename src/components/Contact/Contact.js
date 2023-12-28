@@ -17,7 +17,7 @@ const Contact = () => {
           name="description"
           content="Fine Cribs, beautiful flatshares designed for communal living"
           />
-          <link rel="canonical" href={`${URL}`} />
+          <link rel="canonical" href={`${URL}/contact`} />
     </Helmet>
     <Breadcrumbs/>
     <div className='Contact-container row m-0'>

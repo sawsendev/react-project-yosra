@@ -4,7 +4,6 @@ import PhoneInput from 'react-phone-input-2';
 import logo_popup from '../../assets/img-logo-popupalert.png';
 import icon from '../../assets/alert-bull.svg';
 import { IoCloseOutline } from "react-icons/io5";
-import { ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Popup from '../Popupmsg/popup';
 import SelectCity from '../SearchCities/Search/SelectCity/SelectCity';
@@ -18,6 +17,15 @@ const PopupAlert =  (props) => {
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
   const [status, setStatus] = useState('');
+
+  const uniqueId = (suffix) => {
+    return `${props.id}-${suffix}`;
+  };
+
+  const inputFirstNameId = uniqueId('firstName');
+  const inputLastNameId = uniqueId('lastName');
+  const inputEmailId = uniqueId('email');
+  const inputMaxBudget=uniqueId('maxBudget')
   
   const handlePopupClose = () => {
     setShowPopup(false);
@@ -204,7 +212,7 @@ const PopupAlert =  (props) => {
                   <label htmlFor="firstName" className='form-label'>Name</label>
                   <input
                     type="text"
-                    id="firstName"
+                    id={inputFirstNameId}
                     className="form-control"
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
@@ -217,7 +225,7 @@ const PopupAlert =  (props) => {
                   <label htmlFor="lastName" className='form-label'>Surname</label>
                   <input
                     type="text"
-                    id="lastName"
+                    id={inputLastNameId}
                     className="form-control"
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
@@ -232,7 +240,7 @@ const PopupAlert =  (props) => {
                   <label htmlFor="email" className='form-label'>Email address</label>
                   <input
                     type="email"
-                    id="email"
+                    id={inputEmailId}
                     className="form-control"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -292,7 +300,7 @@ const PopupAlert =  (props) => {
                   <div className='input-price'>
                     <input
                       type="text"
-                      id="maxBudget"
+                      id={inputMaxBudget}
                       className="form-control"
                       value={maxBudget}
                       onChange={(e) => setMaxBudget(e.target.value)}

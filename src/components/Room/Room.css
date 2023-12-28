@@ -537,6 +537,9 @@
     .social-media{
         width:21px;
     }
+    .pageroom-container .carousel-images .medias {
+        right: 6px;
+    }
 }
 .email-icon{
     height: 24px;

@@ -206,11 +206,11 @@ const ContactForm = () => {
         <h2>We are here to help</h2>
         <h3 className='contact-heading'>Leave a message</h3>
           
-            <div class="row mb-8">
-                <div class="col-lg-6">
-                    <div class="form-outline">
-                        <label class="form-label" for="form6Example1">First name*</label>
-                        <input type="text" id="form6Example1" class="form-control" value={firstName} onChange={handleFirstNameChange} />
+            <div className="row mb-8">
+                <div className="col-lg-6">
+                    <div className="form-outline">
+                        <label className="form-label" for="form6Example1">First name*</label>
+                        <input type="text" id="form6Example1" className="form-control" value={firstName} onChange={handleFirstNameChange} />
                         {formErrors.firstName !==''&&
                       <div className="error-message">{formErrors.firstName}</div>}
                     </div>
@@ -228,7 +228,7 @@ const ContactForm = () => {
             <div className='row'>
                 <div className="form-outline col-lg-6 mb-4">
                     <label className="form-label" for="form6Example3">Email*</label>
-                    <input type="email" id="form6Example3" class="form-control" value={email} onChange={handleEmailChange} />
+                    <input type="email" id="form6Example3" className="form-control" value={email} onChange={handleEmailChange} />
                     {!emailValid && <div className='error-message'>Please enter a valid email address.</div>}
                     {formErrors.email !==''&&
                       <div className="error-message">{formErrors.email}</div>}
@@ -254,7 +254,7 @@ const ContactForm = () => {
 
         
 
-            <div class="form-outline mb-4">
+            <div className="form-outline mb-4">
                 <label className="form-label" for="form6Example7">Type here*</label>
                 <textarea className="form-control" id="form6Example7" rows="2" value={message} onChange={handleMessageChange}></textarea>
                 {formErrors.message !==''&&

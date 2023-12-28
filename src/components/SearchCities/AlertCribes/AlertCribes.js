@@ -22,7 +22,7 @@ const AlertCribes = () => {
         <img src={bell} alt='bell' />Create an alert
       </button>
     </div>
-  <PopupAlert isPopupOpen={isPopupOpen} onClose={closePopup}/>
+  <PopupAlert isPopupOpen={isPopupOpen} onClose={closePopup} id="popupAlert2"/>
   </div>
   )
 }

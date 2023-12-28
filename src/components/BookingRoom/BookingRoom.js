@@ -23,7 +23,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import calendarIcon from '../../assets/calendar.svg'; 
 import { Helmet } from 'react-helmet';
 import {URL} from '../Variables'
-
+import { URL_Back } from '../Variables';
 const BookingRoom = () => {
 // ************************
 
@@ -154,14 +154,14 @@ const validateEmail = (email) => {
             
                 toast.error(errorData.data.message, {
                   position: toast.POSITION.TOP_CENTER,
-                  autoClose: 3000,
+                  autoClose: 6000,
                 });
              ;
             } else {
               // Sinon, affichez un message générique
               toast.error('Validation Error, please check your input', {
                 position: toast.POSITION.TOP_CENTER,
-                autoClose: 3000,
+                autoClose: 6000,
               });
             }
           } else {
@@ -169,7 +169,7 @@ const validateEmail = (email) => {
   
             toast.error('Error making the request. Please try again.', {
               position: toast.POSITION.TOP_CENTER,
-              autoClose: 3000,
+              autoClose: 6000,
             });
           }
         }
@@ -178,7 +178,7 @@ const validateEmail = (email) => {
   
         toast.error('Error making the request. Please try again.', {
           position: toast.POSITION.TOP_CENTER,
-          autoClose: 3000,
+          autoClose: 6000,
         });
       }
     } else {
@@ -380,7 +380,7 @@ const formattedDate = lotData && lotData.availability_date ? convertAvailability
           name="description"
           content="Fine Cribs, beautiful flatshares designed for communal living"
           />
-          <link rel="canonical" href={`${URL}`} />
+          <link rel="canonical" href={`${URL}/booking-enquiry/${id}`} />
     </Helmet>
    
     {lotData && lotData.apartment && lotData.apartment.title && lotData.title && lotData.apartment.building &&lotData.apartment.building.city&&(
@@ -414,36 +414,36 @@ const formattedDate = lotData && lotData.availability_date ? convertAvailability
             <img className='me-2' src={sendImg} alt='send icon' />
             <h3 className='m-0'>Submit your application</h3>
           </div>
-          <form id="file-upload-form" onSubmit={handleSubmit} class="uploader">
-              <div class="row mb-4">
-                <div class="col-md-6 col-12">
+          <form id="file-upload-form" onSubmit={handleSubmit} className="uploader">
+              <div className="row mb-4">
+                <div className="col-md-6 col-12">
                   {lotData && lotData.apartment && lotData.apartment.title && lotData.title && (
                   <input type='text' value={`Room[${lotData.apartment.title} - ${lotData.title}]`}
                                               disabled className='w-100 Input-disabled'/>)}
                 </div>
               </div>
-              <div class="row">
-                <div class="col-md-6 col-12">
-                  <div class="form-outline">
-                      <label class="form-label mb-1" for="firstname" >First name *</label>
-                      <input type="text"  name='firstName' class="form-control" placeholder='First name' onChange={handleChange}/>
+              <div className="row">
+                <div className="col-md-6 col-12">
+                  <div className="form-outline">
+                      <label className="form-label mb-1" for="firstname" >First name *</label>
+                      <input type="text"  name='firstName' className="form-control" placeholder='First name' onChange={handleChange}/>
                       {formErrors.firstName !==''&&
                       <div className="error-message">{formErrors.firstName}</div>}
                   </div>
                 </div>
-                <div class="col-md-6 col-12">
-                  <div class="form-outline">
-                      <label class="form-label mb-1" for="surname" >Surname *</label>
-                      <input type="text"  class="form-control" name='surname' placeholder='Surname' onChange={handleChange}/>
+                <div className="col-md-6 col-12">
+                  <div className="form-outline">
+                      <label className="form-label mb-1" for="surname" >Surname *</label>
+                      <input type="text"  className="form-control" name='surname' placeholder='Surname' onChange={handleChange}/>
                       {formErrors.surname !=='' && <div className="error-message">{formErrors.surname}</div>}
                   </div>
                 </div>
               </div>
 
-                  <div class="row">
-                    <div class="col-md-6 col-12">
-                      <div class="form-outline">
-                        <label class="form-label mb-1" for="datein">Move in date *</label>
+                  <div className="row">
+                    <div className="col-md-6 col-12">
+                      <div className="form-outline">
+                        <label className="form-label mb-1" for="datein">Move in date *</label>
                           <DatePicker
                             selected={moveInDate}
                             name="moveInDate"
@@ -461,9 +461,9 @@ const formattedDate = lotData && lotData.availability_date ? convertAvailability
                         {formErrors.moveInDate !=='' && <div className="error-message">{formErrors.moveInDate}</div>}
                       </div>
                     </div>
-                    <div class="col-md-6 col-12">
-                      <div class="form-outline">
-                        <label class="form-label mb-1" for="dateout">Move out date *</label>
+                    <div className="col-md-6 col-12">
+                      <div className="form-outline">
+                        <label className="form-label mb-1" for="dateout">Move out date *</label>
                           <DatePicker
                             selected={moveOutDate}
                             name="moveOutDate"
@@ -484,13 +484,13 @@ const formattedDate = lotData && lotData.availability_date ? convertAvailability
                 
 <div></div>
               <div className='row mb-4'>
-                <div class="form-outline col-md-6 col-xs-12 mb-4">
-                  <label class="form-label mb-1" for="form6Example3">Email*</label>
+                <div className="form-outline col-md-6 col-xs-12 mb-4">
+                  <label className="form-label mb-1" for="form6Example3">Email*</label>
                   <input
                     type="email"
                     id="form6Example3"
                     value={email}
-                    class="form-control"
+                    className="form-control"
                     name='email'
                     placeholder="exemple@gmail.com"
                     onChange={handleEmailChange}
@@ -502,8 +502,8 @@ const formattedDate = lotData && lotData.availability_date ? convertAvailability
 
 
 
-                <div class="form-outline col-md-6 col-xs-12 mb-4">
-                    <label class="form-label mb-1" for="phone">Phone</label>
+                <div className="form-outline col-md-6 col-xs-12 mb-4">
+                    <label className="form-label mb-1" for="phone">Phone</label>
                     <PhoneInput
   country={country}
   value={phoneNumber}
@@ -673,7 +673,7 @@ const formattedDate = lotData && lotData.availability_date ? convertAvailability
             </div>
 
            {/* ******************* */}
-           <button type="submit" class="btn btn-primary float-end submit-button">Apply</button>
+           <button type="submit" className="btn btn-primary float-end submit-button">Apply</button>
             </form>
           
         </div>

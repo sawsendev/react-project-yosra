@@ -59,9 +59,8 @@ import { URL } from '../Variables';
 import ReactGA from 'react-ga';
 import whatsapp from '../../assets/Group 127.svg';
 import email from '../../assets/mail (2).png';
-import icon from '../../assets/delete.png';
 import { EmailShareButton ,WhatsappShareButton } from 'react-share';
-
+import loading1 from '../../assets/load.gif';
 
 const Room = () => {
   const { id } = useParams();
@@ -72,6 +71,7 @@ const Room = () => {
   const [latitude, setLatitude] = useState(null)
   const [longitude, setLongitude] = useState(null)
   const shareUrl = `https://finecribs.com/room/${id}`; 
+  const [isLoading, setIsLoading] = useState(true);
 
   const navigate = useNavigate();
   const [price, setPrice] = useState('')
@@ -82,6 +82,7 @@ const Room = () => {
     ReactGA.pageview(window.location.pathname + window.location.search);
   }, []);
   useEffect(() => {
+    setIsLoading(true);
     const headers = {
       'apiKey': `${API_KEY}`,
     };
@@ -105,6 +106,9 @@ const Room = () => {
       })
       .catch(error => {
         console.error('Erreur lors de la récupération des données :', error);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, [API_URL, API_KEY]);
 
@@ -227,19 +231,25 @@ const Room = () => {
       const date = new Date(dateString);
       const day = date.getUTCDate();
       const month = date.getUTCMonth() + 1;
-      return `${day < 10 ? `0${day}` : day}/${month < 10 ? `0${month}` : month}`;
+      const year = date.getUTCFullYear();
+    
+      return `${day < 10 ? `0${day}` : day}/${month < 10 ? `0${month}` : month}/${year}`;
     };
+    
 
     const isoFormattedDateAujourdhui = formattedDateAujourdhui.split('/').reverse().join('-');
     const isoFormattedDateDemain = formattedDateDemain.split('/').reverse().join('-');
   
-    const availabilityDatePart = lotData.availability_date ? lotData.availability_date.split('T')[0] : '';
-  
+    const availabilityDatePart = lotData && lotData.availability_date ? lotData.availability_date.split('T')[0] : '';
+
 
   const calculateRent = (lotData) => {
     const isoFormattedDateAujourdhui = formattedDateAujourdhui.split('/').reverse().join('-');
   
-    const availabilityDatePart = lotData.availability_date ? lotData.availability_date.split('T')[0] : '';
+    const availabilityDatePart = lotData && lotData.availability_date
+    ? (lotData.availability_date.split('T')[0] || '')
+    : '';
+  
     return availabilityDatePart > isoFormattedDateAujourdhui ;
   };
   
@@ -247,18 +257,27 @@ const Room = () => {
   const rent = calculateRent(lotData);
   console.log(rent) //si c true loué 
 
+  if (isLoading) {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <img src={loading1} alt="Loading" style={{ width: '120px', height: '120px' }} />
+      </div>
+    );
+  }
+  
+
   if (!lotData) {
     return <ErrorPage />;
   }
   
-  function oneYearFromToday() {
-    var today = new Date();
-    var lastYear = new Date(today);
-    lastYear.setFullYear(today.getFullYear() + 1);
-    return lastYear;
-}
+//   function oneYearFromToday() {
+//     var today = new Date();
+//     var lastYear = new Date(today);
+//     lastYear.setFullYear(today.getFullYear() + 1);
+//     return lastYear;
+// }
 
-console.log(oneYearFromToday())
+
   
 
   return (
@@ -294,7 +313,7 @@ console.log(oneYearFromToday())
                 <img src={whatsapp} alt='whatsapp' className='social-media'/>
                  </WhatsappShareButton>
                  <EmailShareButton body={`Check out this room : ${shareUrl}`} >
-                 <img src={email} alt='email' className='social-media email-icon'/>
+                 <img src={email} alt='email' className= 'email-icon'/>
                  </EmailShareButton>
   
                 </div>
@@ -530,18 +549,12 @@ console.log(oneYearFromToday())
                 <span>Available Now</span>
                 </div>
             ) : (
-                new Date(lotData.availability_date) <= oneYearFromToday() ? (
+               
                   <div>
                   <img src={check} alt="Available" />
                     <span>Available on {formatDate(lotData.availability_date)}</span>
                     </div>
-                ) : (
-                    
-                  <div>
-                  <img src={icon} alt="not Available" />
-                    <span className='not_avail_text'>Not Available</span>
-                    </div>
-                )
+                
             )}
         </>
     )}
@@ -556,9 +569,9 @@ console.log(oneYearFromToday())
                   <p className='text-center price'>{lotData.loyer_hc+lotData.charges} € /<small>month</small></p>
                   ) : null} */}
                 {lotData.promo && lotData.promo === 1 && (
-                  <small className='mb-2 crib_promo d-flex align-items-baseline'><span class="me-auto">1° month rent</span><span className='price_loyer'>{lotData.tarif_promo} €</span> /month</small>
+                  <small className='mb-2 crib_promo d-flex align-items-baseline'><span className="me-auto">1° month rent</span><span className='price_loyer'>{lotData.tarif_promo} €</span> /month</small>
                 )}
-                <small className="d-flex align-items-baseline"><span class="me-auto">Monthly rent</span><span className='price_loyer'>{lotData.loyer_hc + lotData.charges} €</span> /month</small>
+                <small className="d-flex align-items-baseline"><span className="me-auto">Monthly rent</span><span className='price_loyer'>{lotData.loyer_hc + lotData.charges} €</span> /month</small>
                 <br />
                 {lotData.max_benefit ? (
                   <div className='text-center assistance'>
