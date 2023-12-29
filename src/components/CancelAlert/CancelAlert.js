@@ -18,7 +18,8 @@ const CancelAlert = () => {
   const decodedString = atob(encodedStringFromURL);
   
   const [email, id] = decodedString.split('_');
-
+ console.log(id)
+ console.log(email)
   
   const handleConfirmation = () => {
     
@@ -53,12 +54,92 @@ const CancelAlert = () => {
         console.error('Erreur fetch :', error);
       });
   };
+  const handleConfirmation2 = () => {
+    
+    const apiUrl = 'https://admin.finecribs.com/api/alert_request/confirm-cancel-alert';
+     const requestData = {
+           email:email,
+           check:0,
+           id:id
+        };
+     const headers = {
+        'apiKey': `${API_KEY}`,
+        'Content-Type': 'application/json',
+       };
+    const requestOptions = {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify(requestData),
+    };
+    fetch(apiUrl, requestOptions)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Erreur lors de la requête');
+        }
+       
+        return response.json();
+      })
+      .then(data => {
+        console.log('Réponse du serveur :', data);
+        setConfirmation(true);
+      })
+      .catch(error => {
+        console.error('Erreur fetch :', error);
+      });
+  };
   
 const handleCheckboxChange = (event) => {
     setCheckboxValue(event.target.checked ? 1 : 0);
 
   };
-  console.log(checkboxValue)
+  if (email==='0' && id === '0') {
+    return (
+      <div className='container cancelAlert-container'>
+        <div className='d-flex flex-column align-items-start justify-content-space-evenly'>
+          <div className='container'>
+            {/* <div className='d-flex justify-content-center flex-row gap-3 mb-4'>
+              <img src={check} alt='check' />
+              <h1>Success</h1>
+            </div> */}
+            <p>Hey, you don’t seem to have any active alert. If you need anything, drop us a message at <a href="mailto:contact@finecribs.com">contact@finecribs.com</a>. we’re here to help!</p>
+            <button className='btn-hp mt-4' onClick={() => window.location.href='/'}>Go to the home page  <img src={arrow} alt='arrow'/></button>
+          </div>
+        </div>
+      </div>
+    );
+  } else if (id === '0' && email !== '0') {
+    return (
+      <div className='container cancelAlert-container'>
+        <div className='d-flex flex-column align-items-start justify-content-space-evenly'>
+        {confirmation ? (
+            <div className='container'>
+            <div className='d-flex justify-content-center flex-row gap-3 mb-4'>
+            <img src={check} alt='check' />
+            <h1>Success</h1>
+            </div>
+          <p>Got it! Your unsubscribe request has been confirmed. You won't receive any more alerts from now on. Need further assistance? Feel free to reach out to us at <a href="mailto:contact@finecribs.com">contact@finecribs.com</a>.</p>
+          <button className='btn-hp mt-4' onClick={()=>window.location.href='/'}>Go to the home page  <img src={arrow} alt='arrow'/></button>
+          </div>
+        ) : (
+            <div className='container'>
+              <h1> Unsubscribe from Our Alert </h1>
+              <div className='d-flex flex-column justify-content-space-evenly'>
+                <p className='cancel'>
+                  This alert has already been canceled
+                </p>
+              </div>
+              {/* <div className='d-flex justify-content-center gap-4 mt-4'>
+                <button onClick={handleConfirmation2} className='b-confirmer'>Confirmer</button>
+                <button className='b-annuler' onClick={() => window.location.href='/'}>Annuler</button>
+              </div> */}
+               <button className='btn-hp mt-4' onClick={()=>window.location.href='/'}>Go to the home page  <img src={arrow} alt='arrow'/></button>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+  
   return (
     <div className='container cancelAlert-container'>
     

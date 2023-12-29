@@ -108,8 +108,8 @@ const validateEmail = (email) => {
       formDataToSend.append('first_name', formData.firstName);
       formDataToSend.append('last_name', formData.surname);
       formDataToSend.append('email', email);
-      formDataToSend.append('start_date', format(moveInDate, 'dd-MM-yyyy'));
-      formDataToSend.append('end_date', format(moveOutDate, 'dd-MM-yyyy'));
+      formDataToSend.append('start_date', format(moveInDate, 'yyyy-MM-dd'));
+      formDataToSend.append('end_date', format(moveOutDate, 'yyyy-MM-dd'));
       if (phoneNumberWithoutCode) {
         formDataToSend.append('phone_number', phoneNumberWithoutCode);
         formDataToSend.append('phone_country_name', country);

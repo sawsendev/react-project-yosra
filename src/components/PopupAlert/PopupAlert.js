@@ -17,7 +17,8 @@ const PopupAlert =  (props) => {
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
   const [status, setStatus] = useState('');
-
+  const [showPopupAlert,setShowPopupAlert]=useState(true)
+ 
   const uniqueId = (suffix) => {
     return `${props.id}-${suffix}`;
   };
@@ -29,12 +30,15 @@ const PopupAlert =  (props) => {
   
   const handlePopupClose = () => {
     setShowPopup(false);
+   
+  
   };
 
   const displayPopup = (message) => {
     setStatus(status);
     setPopupMessage(message);
     setShowPopup(true);
+    
   };
 
   const [firstName, setFirstName] = useState('');
@@ -50,6 +54,7 @@ const PopupAlert =  (props) => {
   const API_URL = 'https://admin.finecribs.com/api/alert_request/post';
   const [phoneNumberWithoutCode, setPhoneNumberWithoutCode] = useState('');
   const[code,setCode]=useState()
+
   const handlePhone = (value, data) => {
     setPhoneNumber(value);
     setCountry(data.countryCode);
@@ -80,7 +85,17 @@ const PopupAlert =  (props) => {
       console.log('Numéro sans le code de pays:', value.trim());
     }
   };
-  
+  const resetForm = () => {
+    setFirstName('');
+    setLastName('');
+    setEmail('');
+    setPhoneNumber('');
+    setCountry('fr');
+    setCity('');
+    setMaxBudget('');
+    setMoveInDate('');
+    setIsSubmitted(false);
+  };
   
 
 
@@ -91,7 +106,7 @@ const PopupAlert =  (props) => {
       last_name: lastName,
       email: email,
       city: city,
-      date: format(moveInDate, 'dd-MM-yyyy'),
+      date: format(moveInDate, 'yyyy-MM-dd'),
       max_budget: parseInt(maxBudget),
       phone_number: phoneNumberWithoutCode,
       phone_country_name: country
@@ -119,38 +134,29 @@ const PopupAlert =  (props) => {
         setIsSubmitted(true);
         console.log("Requête effectuée avec succès");
         displayPopup('Thank you for your message! We will get in touch soon.');
+        setIsSubmitted(true);
         setStatus('success');
+        resetForm();
       })
       .catch((error) => {
         console.error('Erreur lors de la soumission du formulaire:', error);
         displayPopup('Error, please try again: ' + error.message);
+        setIsSubmitted(false);
         setStatus('error');
       });
   };
   
-  
-  
-  
-  useEffect(() => {
-    if (isSubmitted) {
-      setTimeout(() => {
-        setIsSubmitted(false);
-        props.onClose();
-      }, 2000);
-    }
-  }, [isSubmitted, props]);
-
-  const handleClose = () => {
+   const handleClose = () => {
     props.onClose();
   };
 
-  useEffect(() => {
-    if (props.isPopupOpen) {
-      document.body.classList.add('popup-open');
-    } else {
-      document.body.classList.remove('popup-open');
-    }
-  }, [props.isPopupOpen]);
+  // useEffect(() => {
+  //   if (props.isPopupOpen) {
+  //     document.body.classList.add('popup-open');
+  //   } else {
+  //     document.body.classList.remove('popup-open');
+  //   }
+  // }, [props.isPopupOpen]);
 
   const handleCustomInputChange = (date) => {
     setMoveInDate(date);
@@ -186,10 +192,11 @@ const PopupAlert =  (props) => {
 
   return (
     <>
-    
+     {showPopupAlert && (
     <div className={`popup-container popupalert ${props.isPopupOpen ? 'open' : 'closed'}`}>
      {/* <ToastContainer/> */}
     {showPopup && <Popup message={popupMessage} status={status} onClose={handlePopupClose} />}
+
       <div className="popup-content">
         <div className='popup-header'>
           <div className="circle"> 
@@ -200,11 +207,9 @@ const PopupAlert =  (props) => {
           </button>
           <h2>Create an alert</h2>
         </div>
-        
+       
         <div className='popup-body'>
-          {isSubmitted ? (
-            <p className='alert alert-success'>Form submitted successfully! Popup will close in a moment.</p>
-          ) : (
+       
           <form onSubmit={handleFormSubmit}>
             <div className='row'>
               <div className='col-md-6'>
@@ -314,13 +319,13 @@ const PopupAlert =  (props) => {
               <button type="submit" className='btn'>Send message</button>
             </div>
           </form>
-        )}
+        
         <div className="text-right img-right">
           <img src={logo_popup} alt="fine-cribes" className='img-fluid' />
         </div>
         </div>
       </div>
-    </div>
+    </div>)}
     </>
   );
 };
