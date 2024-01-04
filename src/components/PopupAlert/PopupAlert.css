@@ -43,7 +43,7 @@ body.popup-open {
   border-bottom: 1px solid #DDDDDD;
 }
 .popupalert .popup-body {
-  padding: 20px 6px 28px;
+  padding: 20px 6px 20px;
 }
 .popupalert .popup-content h2 {
   font-size: 22px;
@@ -119,6 +119,10 @@ body.popup-open {
   border-radius: 0 6px 6px 0;
   color: #A0A9B2;
   font-weight: 500;
+}
+.hidden {
+  opacity: 0;
+ 
 }
 .popupalert .circle {
   width: 80px;

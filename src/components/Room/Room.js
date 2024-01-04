@@ -59,8 +59,15 @@ import { URL } from '../Variables';
 import ReactGA from 'react-ga';
 import whatsapp from '../../assets/Group 127.svg';
 import email from '../../assets/mail (2).png';
-import { EmailShareButton ,WhatsappShareButton } from 'react-share';
+import info from '../../assets/info.png';
+import { EmailShareButton, WhatsappShareButton } from 'react-share';
 import loading1 from '../../assets/load.gif';
+
+
+const CustomTooltip = ({ content }) => {
+  return <div className="custom-tooltip">{content}</div>;
+};
+
 
 const Room = () => {
   const { id } = useParams();
@@ -70,12 +77,32 @@ const Room = () => {
   const API_URL2 = 'https://admin.finecribs.com/api/lots/recommendation';
   const [latitude, setLatitude] = useState(null)
   const [longitude, setLongitude] = useState(null)
-  const shareUrl = `https://finecribs.com/room/${id}`; 
+  const shareUrl = `https://finecribs.com/room/${id}`;
   const [isLoading, setIsLoading] = useState(true);
 
   const navigate = useNavigate();
   const [price, setPrice] = useState('')
   const [city, setCity] = useState('')
+  const [tooltipActive, setTooltipActive] = useState(false);
+  const [tooltipActive1, setTooltipActive1] = useState(false);
+
+
+  const handleInfoHover = () => {
+    setTooltipActive(true);
+  };
+
+  const handleInfoLeave = () => {
+    setTooltipActive(false);
+  };
+
+  const handleInfoHover1 = () => {
+    setTooltipActive1(true);
+  };
+
+  const handleInfoLeave1 = () => {
+    setTooltipActive1(false);
+  };
+
 
   const [randomCribData, setRandomCribData] = useState([]);
   useEffect(() => {
@@ -118,13 +145,13 @@ const Room = () => {
         'apiKey': `${API_KEY}`,
         'Content-Type': 'application/json',
       };
-  
+
       if (city && id) {
         const requestBody = {
           city: city,
           lot_id: id
         };
-  
+
         try {
           setTimeout(async () => {
             const response = await fetch(API_URL2, {
@@ -133,12 +160,12 @@ const Room = () => {
               headers,
               body: JSON.stringify(requestBody),
             });
-  
+
             const data = await response.json();
-  
+
             if (data && data.data && data.data.lots) {
               const allCribs = data.data.lots;
-  
+
               const cribsArray = Object.values(allCribs);
               setRandomCribData(cribsArray);
             } else {
@@ -150,10 +177,10 @@ const Room = () => {
         }
       }
     };
-  
+
     fetchData();
   }, [API_URL2, API_KEY, city]);
-  
+
   const [staticCoordinates, setStaticCoordinates] = useState([]);
   const calculateAge = (dateOfBirth) => {
     const dob = new Date(dateOfBirth);
@@ -205,7 +232,7 @@ const Room = () => {
   const [showMore, setShowMore] = useState(false);
   const [descriptionHeight, setDescriptionHeight] = useState('auto');
   const descriptionRef = useRef(null);
-  
+
   useEffect(() => {
     if (descriptionRef.current) {
       const height = descriptionRef.current.clientHeight;
@@ -221,39 +248,39 @@ const Room = () => {
     setShowMore(!showMore);
   };
   const dateAujourdhui = new Date();
-    const dateDemain = new Date(dateAujourdhui);
-    dateDemain.setDate(dateAujourdhui.getDate() + 1);
-  
-    const formattedDateAujourdhui = `${(dateAujourdhui.getDate() < 10 ? '0' : '')}${dateAujourdhui.getDate()}/${(dateAujourdhui.getMonth() < 9 ? '0' : '')}${dateAujourdhui.getMonth() + 1}/${dateAujourdhui.getFullYear()}`;
-  
-    const formattedDateDemain = `${(dateDemain.getDate() < 10 ? '0' : '')}${dateDemain.getDate()}/${(dateDemain.getMonth() < 9 ? '0' : '')}${dateDemain.getMonth() + 1}/${dateDemain.getFullYear()}`;
-    const formatDate = (dateString) => {
-      const date = new Date(dateString);
-      const day = date.getUTCDate();
-      const month = date.getUTCMonth() + 1;
-      const year = date.getUTCFullYear();
-    
-      return `${day < 10 ? `0${day}` : day}/${month < 10 ? `0${month}` : month}/${year}`;
-    };
-    
+  const dateDemain = new Date(dateAujourdhui);
+  dateDemain.setDate(dateAujourdhui.getDate() + 1);
 
-    const isoFormattedDateAujourdhui = formattedDateAujourdhui.split('/').reverse().join('-');
-    const isoFormattedDateDemain = formattedDateDemain.split('/').reverse().join('-');
-  
-    const availabilityDatePart = lotData && lotData.availability_date ? lotData.availability_date.split('T')[0] : '';
+  const formattedDateAujourdhui = `${(dateAujourdhui.getDate() < 10 ? '0' : '')}${dateAujourdhui.getDate()}/${(dateAujourdhui.getMonth() < 9 ? '0' : '')}${dateAujourdhui.getMonth() + 1}/${dateAujourdhui.getFullYear()}`;
+
+  const formattedDateDemain = `${(dateDemain.getDate() < 10 ? '0' : '')}${dateDemain.getDate()}/${(dateDemain.getMonth() < 9 ? '0' : '')}${dateDemain.getMonth() + 1}/${dateDemain.getFullYear()}`;
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getUTCDate();
+    const month = date.getUTCMonth() + 1;
+    const year = date.getUTCFullYear();
+
+    return `${day < 10 ? `0${day}` : day}/${month < 10 ? `0${month}` : month}/${year}`;
+  };
+
+
+  const isoFormattedDateAujourdhui = formattedDateAujourdhui.split('/').reverse().join('-');
+  const isoFormattedDateDemain = formattedDateDemain.split('/').reverse().join('-');
+
+  const availabilityDatePart = lotData && lotData.availability_date ? lotData.availability_date.split('T')[0] : '';
 
 
   const calculateRent = (lotData) => {
     const isoFormattedDateAujourdhui = formattedDateAujourdhui.split('/').reverse().join('-');
-  
+
     const availabilityDatePart = lotData && lotData.availability_date
-    ? (lotData.availability_date.split('T')[0] || '')
-    : '';
-  
-    return availabilityDatePart > isoFormattedDateAujourdhui ;
+      ? (lotData.availability_date.split('T')[0] || '')
+      : '';
+
+    return availabilityDatePart > isoFormattedDateAujourdhui;
   };
-  
- 
+
+
   const rent = calculateRent(lotData);
   console.log(rent) //si c true loué 
 
@@ -264,21 +291,19 @@ const Room = () => {
       </div>
     );
   }
-  
+
 
   if (!lotData) {
     return <ErrorPage />;
   }
-  
-//   function oneYearFromToday() {
-//     var today = new Date();
-//     var lastYear = new Date(today);
-//     lastYear.setFullYear(today.getFullYear() + 1);
-//     return lastYear;
-// }
 
+  //   function oneYearFromToday() {
+  //     var today = new Date();
+  //     var lastYear = new Date(today);
+  //     lastYear.setFullYear(today.getFullYear() + 1);
+  //     return lastYear;
+  // }
 
-  
 
   return (
     <>
@@ -301,7 +326,7 @@ const Room = () => {
           ]}
 
         />)}
-        <div className='pageroom-container'>
+      <div className='pageroom-container'>
         <div className='container'>
           <div className='row'>
             <div className='col-large col-lg-8'>
@@ -309,23 +334,21 @@ const Room = () => {
                 <span>Share on : </span>
                 <div className='d-flex gap-2'>
 
-                <WhatsappShareButton url={shareUrl} >
-                <img src={whatsapp} alt='whatsapp' className='social-media'/>
-                 </WhatsappShareButton>
-                 <EmailShareButton body={`Check out this room : ${shareUrl}`} >
-                 <img src={email} alt='email' className= 'email-icon'/>
-                 </EmailShareButton>
-  
+                  <WhatsappShareButton url={shareUrl} >
+                    <img src={whatsapp} alt='whatsapp' className='social-media' />
+                  </WhatsappShareButton>
+                  <EmailShareButton body={`Check out this room : `} url={shareUrl}>
+                    <img src={email} alt='email' className='email-icon' />
+                  </EmailShareButton>
+
                 </div>
               </div>
 
               <div className='carousel-images'>
                 <CarrouselImages lotData={lotData} openModalWithTab1={openModalWithTab1} openModalWithTab2={openModalWithTab2}
-                openModalWithTab3={openModalWithTab3} openModalWithTab4={openModalWithTab4}
-                
-                />
+                  openModalWithTab3={openModalWithTab3} openModalWithTab4={openModalWithTab4} />
 
-                
+
 
               </div>
 
@@ -475,15 +498,15 @@ const Room = () => {
                               {locataire.title && locataire.title.replace('Room', 'Bedroom')}
 
 
-                              {((calculateRent(locataire) === true ))? (
+                              {((calculateRent(locataire) === true)) ? (
                                 <span className='status'>Booked</span>
                               ) : (
-                                <button 
+                                <button
                                   type='button'
                                   className='btn-visit'
                                   onClick={() => {
                                     navigate(`../room/${locataire.id}`);
-                                    window.scrollTo(0, 0); 
+                                    window.scrollTo(0, 0);
                                   }}
                                 >
                                   Visit
@@ -536,29 +559,29 @@ const Room = () => {
               <div className='widget mb-3'>
 
                 <p className='head-widget'>
-                <div>
-    {lotData && lotData.availability_date && (
-        <>
-            
-            {(
-                availabilityDatePart === isoFormattedDateAujourdhui ||
-                availabilityDatePart === isoFormattedDateDemain
-            ) ? (
-              <div>
-              <img src={check} alt="Available" />
-                <span>Available Now</span>
-                </div>
-            ) : (
-               
                   <div>
-                  <img src={check} alt="Available" />
-                    <span>Available on {formatDate(lotData.availability_date)}</span>
-                    </div>
-                
-            )}
-        </>
-    )}
-</div>
+                    {lotData && lotData.availability_date && (
+                      <>
+
+                        {(
+                          availabilityDatePart === isoFormattedDateAujourdhui ||
+                          availabilityDatePart === isoFormattedDateDemain
+                        ) ? (
+                          <div>
+                            <img src={check} alt="Available" />
+                            <span>Available Now</span>
+                          </div>
+                        ) : (
+
+                          <div>
+                            <img src={check} alt="Available" />
+                            <span>Available on {formatDate(lotData.availability_date)}</span>
+                          </div>
+
+                        )}
+                      </>
+                    )}
+                  </div>
 
 
                 </p>
@@ -582,10 +605,50 @@ const Room = () => {
                 <p className='h4 status mt-3'>Rent is all inclusive</p>
                 {lotData.water !== 0 && (<p className='status mb-2'><img src={water} alt="Water" className='icon' /> Water</p>)}
                 {lotData.electricity !== 0 && (
-                  <p className='status mb-2'><img src={plug} className='icon' alt="plug" /> Electricity</p>
+                  <div>
+                    <p className='status mb-2'>
+                      <img src={plug} className='icon' alt="plug" />
+                      <span className='me-3'>
+                      Electricity
+                      </span>
+                      <img
+                        src={info}
+                        className='img-fluid'
+                        alt='info'
+                        onMouseEnter={handleInfoHover}
+                        onMouseLeave={handleInfoLeave}
+                      />
+                    </p>
+                    {tooltipActive && (
+                      <CustomTooltip content='Inclusive of estimated usage for an apartment of similar size and number of flatmates. The final balance will be calculated based on the actual consumption recorded during the entire tenancy period.'>
+                      </CustomTooltip>
+                    )}
+                  </div>
                 )}
+
+
+
                 {lotData.gas !== 0 && (
-                  <p className='status mb-2'><img src={group} className='icon' alt="plug" /> Gaz</p>
+                  <div>
+                    <p className='status mb-2'>
+                      <img src={group} className='icon' alt="plug" />
+                      <span className='me-3'>
+                        Gaz
+                      </span>
+                      <img
+                        src={info}
+                        className='img-fluid'
+                        alt='info'
+                        onMouseEnter={handleInfoHover1}
+                        onMouseLeave={handleInfoLeave1}
+                      />
+                    </p>
+                    {tooltipActive1 && (
+                      <CustomTooltip content='Inclusive of estimated usage for an apartment of similar size and number of flatmates. The final balance will be calculated based on the actual consumption recorded during the entire tenancy period.'>
+                      </CustomTooltip>
+                    )}
+
+                  </div>
                 )}
                 {lotData.home_insurance !== 0 && (<p className='status mb-2'><img src={insurance} className='icon' alt="insurance" /> Housing insurance</p>)}
                 {lotData.wi_fi !== 0 && (<p className='status mb-2'><img src={wifi} className='icon' alt="wifi" /> Wi - Fi</p>)}

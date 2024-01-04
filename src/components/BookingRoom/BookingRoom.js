@@ -23,6 +23,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import calendarIcon from '../../assets/calendar.svg'; 
 import { Helmet } from 'react-helmet';
 import {URL} from '../Variables'
+import loading1 from '../../assets/load.gif'
 import { URL_Back } from '../Variables';
 const BookingRoom = () => {
 // ************************
@@ -36,6 +37,7 @@ const BookingRoom = () => {
   const{id}=useParams();
   const[lotData,setLotData]=useState({});
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
+  const [isLoading, setIsLoading] = useState(false);
   const API_URL = `https://admin.finecribs.com/api/lot/${id}`;
   const [email,setEmail]=useState('')
   const [formData, setFormData] = useState({
@@ -100,6 +102,7 @@ const validateEmail = (email) => {
   
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
   
     if (validateForm()) {
       const formDataToSend = new FormData();
@@ -181,9 +184,13 @@ const validateEmail = (email) => {
           autoClose: 6000,
         });
       }
+      finally{
+        setIsLoading(false)
+      }
     } else {
       window.scrollTo(0, 0);
-    }
+    } 
+
   };
   
   
@@ -673,7 +680,14 @@ const formattedDate = lotData && lotData.availability_date ? convertAvailability
             </div>
 
            {/* ******************* */}
-           <button type="submit" className="btn btn-primary float-end submit-button">Apply</button>
+           <button type="submit" className="btn float-end submit-button" disabled={isLoading}>
+            
+           {isLoading ? (
+                      <span><img src={loading1} alt="Loading" style={{ width: '50px', height: '50px'}} /></span>
+                    ) : (
+                      <span>Apply</span>
+                    )}
+                    </button>
             </form>
           
         </div>

@@ -5,7 +5,7 @@ import "./Contact.css"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Popup from '../Popupmsg/popup';
-
+import loading1 from '../../assets/loaderbtn.gif'
 
 const ContactForm = () => {
     const [phoneNumber, setPhoneNumber] = useState("");
@@ -16,6 +16,7 @@ const ContactForm = () => {
     const [message, setMessage] = useState('');
     const [emailValid, setEmailValid] = useState(true);
     const [country,setCountry]=useState('fr');
+    const [isLoading, setIsLoading] = useState(false);
     const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
  
     
@@ -99,8 +100,10 @@ const ContactForm = () => {
     }
     const handleSubmit = async (event) => {
       event.preventDefault();
+     
     
       if (validateForm() && emailValid && valid && message) {
+        setIsLoading(true);
         const data = {
           name: firstName + " " + lastName,
           email: email,
@@ -160,6 +163,8 @@ const ContactForm = () => {
           displayPopup('Erreur lors de la requête vers l\'API. Veuillez réessayer.');
           setStatus('error');
 
+        } finally{
+          setIsLoading(false);
         }
       }
     };
@@ -261,7 +266,13 @@ const ContactForm = () => {
                       <div className="error-message">{formErrors.message}</div>}
             </div>
 
-            <button type="submit" className="btn btn-primary btn-block float-end custom-button ">Send message</button>
+            <button type="submit" className="btn btn-primary btn-block float-end custom-button " disabled={isLoading} >
+            {isLoading ? (
+                      <span><img src={loading1} alt="Loading" style={{ width: '30px', height: '30px'}} /></span>
+                    ) : (
+                      <div>Send message</div>
+                    )}
+              </button>
 
         </form>
         
