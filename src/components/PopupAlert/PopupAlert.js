@@ -118,7 +118,7 @@ const PopupAlert = (props) => {
       last_name: lastName,
       email: email,
       city: city,
-      date: format(moveInDate, 'yyyy-MM-dd'),
+      date: moveInDate ? format(moveInDate, 'yyyy-MM-dd') : null, 
       max_budget: parseInt(maxBudget),
       phone_number: phoneNumberWithoutCode,
       phone_country_name: country

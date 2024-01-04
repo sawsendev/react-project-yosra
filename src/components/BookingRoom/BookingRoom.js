@@ -23,7 +23,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import calendarIcon from '../../assets/calendar.svg'; 
 import { Helmet } from 'react-helmet';
 import {URL} from '../Variables'
-import loading1 from '../../assets/load.gif'
+import loading1 from '../../assets/loaderbtn.gif'
 import { URL_Back } from '../Variables';
 const BookingRoom = () => {
 // ************************
@@ -102,9 +102,10 @@ const validateEmail = (email) => {
   
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
+  
   
     if (validateForm()) {
+      setIsLoading(true);
       const formDataToSend = new FormData();
   
       formDataToSend.append('lot_id', id);
@@ -683,7 +684,7 @@ const formattedDate = lotData && lotData.availability_date ? convertAvailability
            <button type="submit" className="btn float-end submit-button" disabled={isLoading}>
             
            {isLoading ? (
-                      <span><img src={loading1} alt="Loading" style={{ width: '50px', height: '50px'}} /></span>
+                      <span><img src={loading1} alt="Loading" style={{ width: '40px', height: '40px'}} /></span>
                     ) : (
                       <span>Apply</span>
                     )}
