@@ -53,7 +53,7 @@ const PopupAlert = (props) => {
   
   };
 
-  console.log(showPopupAlert);
+ 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -178,10 +178,9 @@ const PopupAlert = (props) => {
 
   const handleCustomInputChange = (date) => {
     setMoveInDate(date);
-    console.log(date)
+    
   };
 
-  console.log(props.isPopupOpen)
   const CustomInput = ({ value, onClick, onChange, name }) => (
     <div className="input-datepicker" onClick={onClick}>
       <input
@@ -208,7 +207,7 @@ const PopupAlert = (props) => {
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
 
-  console.log(submit)
+
   return (
     <>
       {showPopupAlert && (

@@ -78,21 +78,13 @@ const ProposeModal = ({ isOpen, closeModal }) => {
       // Utiliser substring pour obtenir la partie après le code de composition
       const phoneNumberWithoutCode = value.substring(`+${code}`.length).trim();
       setPhoneNumberWithoutCode(phoneNumberWithoutCode);
-  
-      console.log('Code de composition:', code);
-      console.log('Numéro sans le code de pays:', phoneNumberWithoutCode);
     } else if (value.startsWith(code)) {
-      // Utiliser substring pour obtenir la partie après le code de composition
+     
       const phoneNumberWithoutCode = value.substring(code.length).trim();
       setPhoneNumberWithoutCode(phoneNumberWithoutCode);
-  
-      console.log('Code de composition:', code);
-      console.log('Numéro sans le code de pays:', phoneNumberWithoutCode);
     } else {
       // Le numéro ne commence ni par le code de composition ni par le code seul
       setPhoneNumberWithoutCode(value.trim());
-  
-      console.log('Numéro sans le code de pays:', value.trim());
     }
   };
   
@@ -103,7 +95,6 @@ const ProposeModal = ({ isOpen, closeModal }) => {
   
 
   const submitFormData = () => {
-    console.log(phoneNumberWithoutCode);
     const formDataToSend = new FormData();
     formDataToSend.append('first_name', formData.firstName);
     formDataToSend.append('last_name', formData.lastName);
@@ -254,7 +245,6 @@ const ProposeModal = ({ isOpen, closeModal }) => {
   };
   const handleCustomInputChange = (date) => {
     setDate(date);
-    console.log(date)
   };
   const [fileVisibility, setFileVisibility] = useState([true]);
   const handleFileChange = (e) => {
@@ -292,7 +282,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
     // Mettez à jour l'état avec le nouveau tableau
     setFileVisibility(updatedFileVisibility);
   };
-  console.log(fileVisibility)
+
   
   
   
@@ -318,7 +308,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
       setDate(date); // Stockez la date telle quelle
     }
   };
-  console.log(formData.lastName)
+
 
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);

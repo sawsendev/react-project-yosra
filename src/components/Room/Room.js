@@ -60,6 +60,8 @@ import ReactGA from 'react-ga';
 import whatsapp from '../../assets/Group 127.svg';
 import email from '../../assets/mail (2).png';
 import info from '../../assets/info.png';
+import salon from '../../assets/room/icons/living-room.png'
+import tv from '../../assets/room/icons/television.png'
 import { EmailShareButton, WhatsappShareButton } from 'react-share';
 import loading1 from '../../assets/load.gif';
 
@@ -282,7 +284,7 @@ const Room = () => {
 
 
   const rent = calculateRent(lotData);
-  console.log(rent) //si c true loué 
+ 
 
   if (isLoading) {
     return (
@@ -413,6 +415,7 @@ const Room = () => {
                       { title: "Armchair", icon: sofa },
                       { title: "Closet", icon: closet },
                       { title: "Bed", icon: bed },
+                      { title: "A/C", icon: airconditioner },
                       { title: "Room furniture", icon: furniture },
                       { title: "Blanket & Pillows", icon: pillow }
 
@@ -436,7 +439,7 @@ const Room = () => {
                     {[
                       { title: "Central location", icon: location },
                       { title: "Fully furnished", icon: sofa },
-                      { title: " A/C", icon: airconditioner },
+                      { title: "A/C", icon: airconditioner },
                       { title: "Elevator", icon: elevator1 },
                       { title: "Beautiful view", icon: view },
                       { title: "Cleaning", icon: cleaning },
@@ -450,6 +453,8 @@ const Room = () => {
                       { title: "Washing machine", icon: washer },
                       { title: "Dryer", icon: dryer },
                       { title: "Vacuum cleaner", icon: vacuum },
+                      { title: "Living room", icon: salon },
+                      { title: "TV", icon: tv },
                       { title: "Ironing set", icon: ironing },
                       { title: "Cleaning tools", icon: tools },
                     ].map((char) => (

@@ -1,4 +1,3 @@
-import React, { useEffect, useRef, useState } from 'react';
 import City from "./City/City";
 import { ExploreCitiesTable } from "../../../Data/Data";
 import "./ExploreMore.css";

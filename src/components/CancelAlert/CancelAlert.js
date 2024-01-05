@@ -19,8 +19,7 @@ const CancelAlert = () => {
   const decodedString = atob(encodedStringFromURL);
   
   const [email, id] = decodedString.split('_');
- console.log(id)
- console.log(email)
+ 
   
   const handleConfirmation = () => {
     

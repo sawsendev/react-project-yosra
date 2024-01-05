@@ -10,7 +10,7 @@ const BookingProcess = ({cribs}) => {
   : null;
   
   const images = cribs && cribs.media ? cribs.media.filter(item => item.mime_type.startsWith('image')) : [];
-  console.log("les images",images)
+
   return (
     <div className='Book-container d-flex container'>
        <div className='row'>

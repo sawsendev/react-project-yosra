@@ -55,7 +55,7 @@ const BookingRoom = () => {
       ...formData,
       [name]: value,
     });
-    console.log(value)
+   
     setFormErrors((prevErrors) => ({ ...prevErrors, [name]: '' }));
   };
   
@@ -82,7 +82,7 @@ const validateEmail = (email) => {
         .then(data => {
         
             setLotData(data.data.lot);
-            console.log(data.data.lot);      
+              
         })
         .catch(error => {
           console.error('Erreur lors de la récupération des données :', error);
@@ -198,9 +198,9 @@ const validateEmail = (email) => {
     
   
   
-  useEffect(() => {
-    console.log("formSubmitted mis à jour :", formSubmitted);
-  }, [formSubmitted]);
+  // useEffect(() => {
+  //   console.log("formSubmitted mis à jour :", formSubmitted);
+  // }, [formSubmitted]);
   
 
   
@@ -342,21 +342,13 @@ const validateEmail = (email) => {
       // Utiliser substring pour obtenir la partie après le code de composition
       const phoneNumberWithoutCode = value.substring(`+${code}`.length).trim();
       setPhoneNumberWithoutCode(phoneNumberWithoutCode);
-  
-      console.log('Code de composition:', code);
-      console.log('Numéro sans le code de pays:', phoneNumberWithoutCode);
     } else if (value.startsWith(code)) {
       // Utiliser substring pour obtenir la partie après le code de composition
       const phoneNumberWithoutCode = value.substring(code.length).trim();
       setPhoneNumberWithoutCode(phoneNumberWithoutCode);
-  
-      console.log('Code de composition:', code);
-      console.log('Numéro sans le code de pays:', phoneNumberWithoutCode);
     } else {
       // Le numéro ne commence ni par le code de composition ni par le code seul
       setPhoneNumberWithoutCode(value.trim());
-  
-      console.log('Numéro sans le code de pays:', value.trim());
     }
   };
   const moment = require('moment');

@@ -82,8 +82,7 @@ const availabilityText =
 
 // Utilisez availabilityText là où vous avez besoin de cette valeur.}`;
   
-  console.log(availabilityDatePart)
-  console.log(isoFormattedDateAujourdhui)
+ 
   
   return (
     <li className='col-lg-4 col-md-6 col-12 mb-2'>
@@ -113,6 +112,7 @@ const availabilityText =
                     <div
                       className='room'
                       onClick={() => (window.location.href = `/room/${crib.id}`)}
+                      key={index}
                     >
                       <LazyLoad height={200} offset={100}>
                         <img
@@ -127,6 +127,7 @@ const availabilityText =
                 <div
                   className='room'
                   onClick={() => (window.location.href = `/room/${crib.id}`)}
+                  
                 >
                   <LazyLoad height={200} offset={100}>
                     <img className="img-fluid" src={imageParDefaut} alt="Im" />
