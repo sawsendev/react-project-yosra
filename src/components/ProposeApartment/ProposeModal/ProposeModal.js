@@ -310,8 +310,9 @@ const ProposeModal = ({ isOpen, closeModal }) => {
           <>
             <div className='step1-form'>
               <div className='form-group'>
-                <label className='form-label'>First name</label>
+                <label className='form-label' htmlFor='firstname'>First name</label>
                 <input className='form-control'
+                  id='firstname'
                   type="text"
                   name="firstName"
                   value={formData.firstName}
@@ -319,8 +320,9 @@ const ProposeModal = ({ isOpen, closeModal }) => {
                 />
               </div>
               <div className='form-group'>
-                <label className='form-label'>Surname</label>
+                <label className='form-label' htmlFor='surname'>Surname</label>
                 <input className='form-control'
+                  id='surname'
                   type="text"
                   name="lastName"
                   value={formData.lastName}
@@ -328,8 +330,9 @@ const ProposeModal = ({ isOpen, closeModal }) => {
                 />
               </div>
               <div className='form-group'>
-                <label className='form-label'>Email *</label>
+                <label className='form-label' htmlFor='email'>Email *</label>
                 <input className='form-control'
+                  id='email'
                   type="email"
                   name="email"
                   value={formData.email}

@@ -173,7 +173,7 @@ const Room = () => {
             } else {
               console.error('API response structure is not as expected:', data);
             }
-          }, 1000);
+          }, 500);
         } catch (error) {
           console.error('Erreur lors de la récupération des données:', error);
         }
