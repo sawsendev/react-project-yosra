@@ -15,15 +15,16 @@ import BookingRoom from './components/BookingRoom/BookingRoom';
 import ProposeApartment from './components/ProposeApartment/ProposeApartment';
 import ReactGA from "react-ga"
 import CancelAlert from './components/CancelAlert/CancelAlert';
-
+import reactga from 'react-ga';
+reactga.initialize('G-1K58YXV1ZE');
 
 
 function App() {
-  useEffect(() => {
-    const TRACKING_ID = "G-1K58YXV1ZE"
-    ReactGA.initialize(TRACKING_ID);
-    ReactGA.pageview(window.location.pathname + window.location.search)
-  }, [])
+  // useEffect(() => {
+  //   const TRACKING_ID = "G-1K58YXV1ZE"
+  //   ReactGA.initialize(TRACKING_ID);
+    
+  // }, [])
 
   return (
     <div>
