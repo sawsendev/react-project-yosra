@@ -154,7 +154,7 @@ const Search = () => {
       setKeyWord(keyWordParam);
       setActive(false);
     }
-   
+
     if (cityParam) {
       setCity(cityParam);
     }
@@ -232,14 +232,17 @@ const Search = () => {
               <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
                 <label htmlFor="countries">City</label>
                 <div className='input-select'>
-                  <SelectCity text='Where will you go?'
+                  <SelectCity
+                    id='countries'
+                    text='Where will you go?'
                     onChange={(selectedValue) => { setCity(selectedValue.value); }}
                     city={city}
                     alert={true}
-
                   />
 
-                  <input type="hidden" name="city" value={city} id="city-input" />
+                  <input type="hidden" name="city" value={city} id="hidden-city" />
+
+
                 </div>
               </div>
 
@@ -247,6 +250,7 @@ const Search = () => {
                 <label htmlFor="cars">Move in date</label>
                 <div className='input-date'>
                   <DatePicker
+                    id='cars'
                     selected={date}
                     name="date"
                     dateFormat="dd/MM/yyyy"
@@ -266,11 +270,12 @@ const Search = () => {
               </div>
 
               <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
-                <label htmlFor="price">Price range</label>
+                <label htmlFor="priceRange">Price range</label>
 
                 <div className='select-wrapper'>
                   <div className='select-container'>
                     <Select
+                      id='priceRange'
                       styles={customStyles}
                       onMenuOpen={handleSliderOpen}
                       options={[]}
@@ -312,7 +317,7 @@ const Search = () => {
               <div className='Form-city col-lg-3 col-md-6 col-sm-12 p-0'>
                 <label htmlFor="price">Sort by</label>
                 <div className='input-select'>
-                  <select name="price" id="countries-id" className='form-control' onChange={handleChangeSortBy} value={sortBy} disabled={!active}>
+                  <select name="price" id="price" className='form-control' onChange={handleChangeSortBy} value={sortBy} disabled={!active}>
                     <option value="">Sorted by</option>
                     <option value="desc">Descending price</option>
                     <option value="asc">Ascending price</option>
@@ -329,15 +334,15 @@ const Search = () => {
               <div className='d-md-flex flex-row align-items-center justify-content-start gap-2'>
                 <label>Keyword Search</label>
                 <div className='input-keyword'>
-                <input
-              id='keyword'
-              type="text"
-              name="KeyWord"
-              value={keyWord}
-              className='form-control'
-              placeholder='Keyword'
-              onChange={handleKeyWordChange}
-            />
+                  <input
+                    id='keyword'
+                    type="text"
+                    name="KeyWord"
+                    value={keyWord}
+                    className='form-control'
+                    placeholder='Keyword'
+                    onChange={handleKeyWordChange}
+                  />
                   <span className='vertical-line'></span>
                   <span className="calendar-icon" onClick={handleSubmit2}>
                     <img src={loop} alt="loop" className='loop' />

@@ -31,6 +31,9 @@ const PopupAlert = (props) => {
   const inputLastNameId = uniqueId('lastName');
   const inputEmailId = uniqueId('email');
   const inputMaxBudget = uniqueId('maxBudget')
+  const inputMoveInDate=uniqueId('moveInDate')
+  const inputPhoneNumber=uniqueId('phoneNumber')
+  const inputCity=uniqueId('city')
 
   const handlePopupClose = () => {
     setShowPopup(false);
@@ -241,7 +244,7 @@ const PopupAlert = (props) => {
                 <div className='row'>
                   <div className='col-md-6'>
                     <div className="form-outline">
-                      <label htmlFor="firstName" className='form-label'>Name</label>
+                      <label htmlFor={inputFirstNameId} className='form-label'>Name</label>
                       <input
                         type="text"
                         id={inputFirstNameId}
@@ -254,7 +257,7 @@ const PopupAlert = (props) => {
                   </div>
                   <div className='col-md-6'>
                     <div className="form-outline">
-                      <label htmlFor="lastName" className='form-label'>Surname</label>
+                      <label htmlFor={inputLastNameId} className='form-label'>Surname</label>
                       <input
                         type="text"
                         id={inputLastNameId}
@@ -269,7 +272,7 @@ const PopupAlert = (props) => {
                 <div className='row'>
                   <div className='col-md-6'>
                     <div className="form-outline">
-                      <label htmlFor="email" className='form-label'>Email address</label>
+                      <label htmlFor={inputEmailId} className='form-label'>Email address</label>
                       <input
                         type="email"
                         id={inputEmailId}
@@ -282,12 +285,13 @@ const PopupAlert = (props) => {
                   </div>
                   <div className='col-md-6'>
                     <div className="form-outline">
-                      <label htmlFor="phoneNumber" className='form-label'>Phone number</label>
+                      <label htmlFor={inputPhoneNumber} className='form-label'>Phone number</label>
                       <PhoneInput
                         country={country}
                         value={phoneNumber}
                         onChange={handlePhone}
                         inputProps={{
+                          id:{inputPhoneNumber},
                           required: true,
                         }}
                       />
@@ -297,17 +301,18 @@ const PopupAlert = (props) => {
                 <div className='row'>
                   <div className='col-md-6'>
                     <div className="form-outline">
-                      <label htmlFor="city" className='form-label'>City</label>
+                      <label htmlFor={inputCity} className='form-label'>City</label>
                       <div className='input-select'>
-                        <SelectCity text="City" onChange={(selectedValue) => setCity(selectedValue.value)} alert={props.isPopupOpen} />
+                        <SelectCity id={inputCity} text="City" onChange={(selectedValue) => setCity(selectedValue.value)} alert={props.isPopupOpen} />
                       </div>
                     </div>
                   </div>
                   <div className='col-md-6'>
                     <div className="form-outline">
-                      <label htmlFor="moveInDate" className='form-label'>Move in date</label>
+                      <label htmlFor={inputMoveInDate} className='form-label'>Move in date</label>
                       <div className='input-date'>
                         <DatePicker
+                          id={inputMoveInDate}
                           selected={moveInDate}
                           name="moveInDate"
                           dateFormat="dd/MM/yyyy"
@@ -328,7 +333,7 @@ const PopupAlert = (props) => {
                 <div className='row'>
                   <div className='col-md-6'>
                     <div className="form-outline">
-                      <label htmlFor="maxBudget" className='form-label'>Max budget</label>
+                      <label htmlFor={inputMaxBudget} className='form-label'>Max budget</label>
                       <div className='input-price'>
                         <input
                           type="text"

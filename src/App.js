@@ -21,7 +21,7 @@ import CancelAlert from './components/CancelAlert/CancelAlert';
 function App() {
   useEffect(() => {
     const TRACKING_ID = "G-1K58YXV1ZE"
-    ReactGA.initialize(TRACKING_ID)
+    ReactGA.initialize(TRACKING_ID);
     ReactGA.pageview(window.location.pathname + window.location.search)
   }, [])
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const SelectCity = ({ onChange, city ,text ,alert }) => {
+const SelectCity = ({ onChange, city ,text ,alert , id }) => {
   const [cities, setCities] = useState([]);
   const [selectedCity, setSelectedCity] = useState(city); // Initialisez selectedCity avec la valeur de city
 
@@ -54,7 +54,7 @@ const SelectCity = ({ onChange, city ,text ,alert }) => {
   };
 
   return (
-    <select name="countries" className='Select-country-container w-100' onChange={handleCityChange} value={selectedCity}>
+    <select id={id} name="countries" className='Select-country-container w-100' onChange={handleCityChange} value={selectedCity}>
       <option value="" >{text}</option>
       {cities && cities.map((city, index) => (
         <option key={index} value={city}>
