@@ -111,6 +111,7 @@ const Homepage = () => {
           name="description"
           content="Fine Cribs, beautiful flatshares designed for communal living"
         />
+        
         <link rel="canonical" href={`${URL}`} />
         <script type="application/ld+json">
           {`

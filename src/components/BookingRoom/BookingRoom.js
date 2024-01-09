@@ -23,7 +23,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import calendarIcon from '../../assets/calendar.svg';
 import { Helmet } from 'react-helmet';
 import { URL } from '../Variables'
-import loading1 from '../../assets/loaderbtn.gif'
+import loading1 from '../../assets/loadwithoutbg.gif'
 import { URL_Back } from '../Variables';
 const BookingRoom = () => {
   // ************************
@@ -687,7 +687,7 @@ const BookingRoom = () => {
                 <button type="submit" className="btn float-end submit-button" disabled={isLoading}>
 
                   {isLoading ? (
-                    <span><img src={loading1} alt="Loading" style={{ width: '40px', height: '40px' }} /></span>
+                    <span><img src={loading1} alt="Loading" style={{ width: '30px', height: '30px' }} /></span>
                   ) : (
                     <span>Apply</span>
                   )}

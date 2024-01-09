@@ -88,9 +88,19 @@
       position: relative;
   }
   .content-container-city p {
-    font-size: 26px;}
+    font-size: 26px;
+  }
     .content-container-city h1 {
       font-size: 54px;}
 
 
   }
+  @media (max-width:362px){
+.content-container-city {
+    padding: 19px 22px;
+    margin: -155px 0;
+    max-width: 772px;
+    height: auto;
+    position: relative;
+}
+}

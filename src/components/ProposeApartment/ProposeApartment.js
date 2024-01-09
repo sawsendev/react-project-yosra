@@ -309,7 +309,7 @@ const ProposeApartment =()=> {
           <p>We are constantly looking for apartments to buy and transform into beautiful 
           spaces for communal living. If you are uncertain about renting or selling your 
             apartment, it’s worth having a chat.</p>
-          <button className='btn btn-primary button-black' onClick={()=>{navigate(`/contact`)}}><LiaEnvelope className='icon-envelop'/>  I would like to get in touch</button>
+          <button className='btn btn-primary button-black' onClick={()=>{navigate(`/contact`);window.scrollTo({ top: 0, behavior: 'smooth' });}}><LiaEnvelope className='icon-envelop'/>  I would like to get in touch</button>
         </div>
       </div>
     </section>

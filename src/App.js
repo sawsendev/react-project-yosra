@@ -13,7 +13,6 @@ import Room from './components/Room/Room';
 import Contact from './components/Contact/Contact';
 import BookingRoom from './components/BookingRoom/BookingRoom';
 import ProposeApartment from './components/ProposeApartment/ProposeApartment';
-import ReactGA from "react-ga"
 import CancelAlert from './components/CancelAlert/CancelAlert';
 import reactga from 'react-ga';
 reactga.initialize('G-1K58YXV1ZE');

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './PopupAlert.css';
 import PhoneInput from 'react-phone-input-2';
 import logo_popup from '../../assets/img-logo-popupalert.png';
@@ -71,6 +71,7 @@ const PopupAlert = (props) => {
   const [phoneNumberWithoutCode, setPhoneNumberWithoutCode] = useState('');
   const [code, setCode] = useState()
   const [isLoading, setIsLoading] = useState(false);
+  const phoneInputRef = useRef(null);
 
 
   const handlePhone = (value, data) => {
@@ -287,12 +288,14 @@ const PopupAlert = (props) => {
                     <div className="form-outline">
                       <label htmlFor={inputPhoneNumber} className='form-label'>Phone number</label>
                       <PhoneInput
+                        ref={phoneInputRef}
                         country={country}
                         value={phoneNumber}
                         onChange={handlePhone}
                         inputProps={{
                           id:{inputPhoneNumber},
                           required: true,
+                          placeholder:''
                         }}
                       />
                     </div>

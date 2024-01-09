@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
 import { Helmet } from 'react-helmet';
-import {URL} from '../Variables'
+import { URL } from '../Variables'
 import ReactGA from 'react-ga';
+import loading1 from '../../assets/load.gif';
 const Cms = () => {
   const { slug } = useParams();
   const [data, setData] = useState(null);
@@ -14,7 +15,7 @@ const Cms = () => {
   useEffect(() => {
     ReactGA.pageview(window.location.pathname + window.location.search);
   }, []);
-  
+
 
   useEffect(() => {
     const headers = {
@@ -55,17 +56,17 @@ const Cms = () => {
         <link rel="canonical" href={`${URL}`} />
       </Helmet>
 
-      <Breadcrumbs 
-      path={`/`}
-      customRoutes={[
-        {
-          path:`/page/${slug}`,
-          label: `${slug}`
-        }
-      ]}/>
+      <Breadcrumbs
+        path={`/`}
+        customRoutes={[
+          {
+            path: `/page/${slug}`,
+            label: `${slug}`
+          }
+        ]} />
 
       <div className='Cms-container'>
-        <div className='container'>
+        <div className='container pb-5'>
           {titre ? (
             <>
               <h1 className='Cms-header'>{titre}</h1>
@@ -73,12 +74,16 @@ const Cms = () => {
                 {data.data && data.data.page && data.data.page.description ? (
                   <div dangerouslySetInnerHTML={{ __html: data.data.page.description }}></div>
                 ) : (
-                  <div>Loading data...</div>
+                  <div style={{ display: 'flex', justifyContent: 'center', alignItems:  'center', height: '100vh' }}>
+                    <img src={loading1} alt="Loading" style={{ width: '120px', height: '120px' }} />
+                  </div>
                 )}
               </div>
             </>
           ) : (
-            <p>Loading data...</p>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+              <img src={loading1} alt="Loading" style={{ width: '120px', height: '120px' }} />
+            </div>
           )}
         </div>
       </div>

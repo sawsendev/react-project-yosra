@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './CancelAlert.css';
 import arrow from '../../assets/right-arrow.svg'
 import check from '../../assets/check.svg'
-
+import loading1 from '../../assets/loadwithoutbg.gif'
 
 const CancelAlert = () => {
 
@@ -10,6 +10,7 @@ const CancelAlert = () => {
   const [checkboxValue, setCheckboxValue] = useState(0);
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
   const [errorMessage, setErrorMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
 //   const location = useLocation();
 //   const queryParams = new URLSearchParams(location.search);
@@ -22,7 +23,7 @@ const CancelAlert = () => {
  
   
   const handleConfirmation = () => {
-    
+    setIsLoading(true);
     const apiUrl = 'https://admin.finecribs.com/api/alert_request/confirm-cancel-alert';
      const requestData = {
            email:email,
@@ -52,6 +53,9 @@ const CancelAlert = () => {
       })
       .catch(error => {
         console.error('Erreur fetch :', error);
+      })
+      .finally(()=>{
+        setIsLoading(false);
       });
   };
   const handleConfirmation2 = () => {
@@ -116,8 +120,14 @@ const handleCheckboxChange = (event) => {
                 <button onClick={handleConfirmation2} className='b-confirmer'>Confirmer</button>
                 <button className='b-annuler' onClick={() => window.location.href='/'}>Annuler</button>
               </div> */}
-              <div className='d-flex flex-column align-items-center mt-4'>
-                <button onClick={handleConfirmation2} className='b-confirmer'>Confirmer</button>
+              <div className=' mt-4'>
+                <button onClick={handleConfirmation2} className='b-confirmer me-3' disabled={isLoading} >
+          {isLoading ? (
+            <span><img src={loading1} alt="Loading" style={{ width: '30px', height: '30px' }} /></span>
+          ) : (
+            <div> Confirmer </div>
+          )}
+        </button>
                <button className='btn-hp mt-4' onClick={()=>window.location.href='/'}>Go to the home page  <img src={arrow} alt='arrow'/></button>
                </div>
             </div>
@@ -155,7 +165,13 @@ const handleCheckboxChange = (event) => {
         </div>
         </div>
       <div className='d-flex justify-content-center gap-4 mt-4'>
-        <button onClick={handleConfirmation} className='b-confirmer'>Confirmer</button>
+      <button onClick={handleConfirmation} className='b-confirmer' disabled={isLoading} >
+          {isLoading ? (
+            <span><img src={loading1} alt="Loading" style={{ width: '30px', height: '30px' }} /></span>
+          ) : (
+            <div> Confirmer </div>
+          )}
+        </button>
         <button className='b-annuler' onClick={()=>window.location.href='/'}>Annuler</button>
       </div>
      
