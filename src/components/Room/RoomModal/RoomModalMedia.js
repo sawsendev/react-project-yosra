@@ -158,7 +158,7 @@ const RoomModalMedia = ({ isOpen, closeModal, activeTab, setActiveTab , lotData 
                             .filter((media) =>media.collection_name === 'floorpan')
                             .map((image, index) => (
                               <li key={index} className='itm-video col-md-12 p-0'>
-                              <img src={image.original_url} alt={`Room ${index}`} className='img-fluid' />
+                              <img src={image.original_url} alt={`Room ${index}`} className='img-fluid mx-auto d-block' />
 
                               </li>
                             ))
