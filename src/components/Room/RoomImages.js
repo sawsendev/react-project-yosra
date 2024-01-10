@@ -134,7 +134,7 @@ const CarrouselImages = ({lotData,openModalWithTab1,openModalWithTab2,openModalW
                   {lotData && lotData.media && lotData.media
                     .filter((media) => media.collection_name === 'floorpan').length > 0 && (
                       <button type='button' className='btn-media' onClick={openModalWithTab4} id="floorplan-btn">
-                        <img src={iconfloorplan} alt="floorplan" className='m-1' /> flooplan</button>)}
+                        <img src={iconfloorplan} alt="floorplan" className='m-1' /> floorplan</button>)}
                   {/* <button type='button' className='btn-media' onClick={openModal} id="media-btn"><img src={iconimgs} alt="media"/> Medias</button> */}
                 </div>
 

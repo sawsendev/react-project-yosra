@@ -170,6 +170,7 @@ const ContactForm = () => {
   };
   const [phoneNumberWithoutCode, setPhoneNumberWithoutCode] = useState('');
   const [code, setCode] = useState()
+  
   const handlePhone = (value, data) => {
     setPhoneNumber(value);
     setCountry(data.countryCode);
@@ -184,21 +185,15 @@ const ContactForm = () => {
       // Utiliser substring pour obtenir la partie après le code de composition
       const phoneNumberWithoutCode = value.substring(`+${code}`.length).trim();
       setPhoneNumberWithoutCode(phoneNumberWithoutCode);
-
-      console.log('Code de composition:', code);
-      console.log('Numéro sans le code de pays:', phoneNumberWithoutCode);
     } else if (value.startsWith(code)) {
       // Utiliser substring pour obtenir la partie après le code de composition
       const phoneNumberWithoutCode = value.substring(code.length).trim();
       setPhoneNumberWithoutCode(phoneNumberWithoutCode);
-
-      console.log('Code de composition:', code);
-      console.log('Numéro sans le code de pays:', phoneNumberWithoutCode);
     } else {
       // Le numéro ne commence ni par le code de composition ni par le code seul
       setPhoneNumberWithoutCode(value.trim());
 
-      console.log('Numéro sans le code de pays:', value.trim());
+
     }
   };
 
