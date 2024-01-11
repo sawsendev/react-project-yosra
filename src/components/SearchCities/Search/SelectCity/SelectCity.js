@@ -1,25 +1,29 @@
 import React, { useEffect, useState } from 'react';
 
-const SelectCity = ({ onChange, city ,text ,alert , id }) => {
+const SelectCity = ({ onChange, city ,text ,alert , id,name }) => {
   const [cities, setCities] = useState([]);
-  const [selectedCity, setSelectedCity] = useState(city); // Initialisez selectedCity avec la valeur de city
+  const [selectedCity, setSelectedCity] = useState(''); // Initialisez selectedCity avec la valeur de city
 
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
   const API_URL = 'https://admin.finecribs.com/api/building/cities';
 
   
   useEffect(() => {
+    if (name !== 'cityalert'){
     // Vous pouvez accéder à la valeur de l'URL ici et l'initialiser dans selectedCity
     const searchParams = new URLSearchParams(window.location.search);
     const cityParam = searchParams.get('city');
     if (cityParam) {
       setSelectedCity(cityParam);
-    }
+    }}
     if(alert){
   fetchDataFromAPI();}
   
   }, [alert]); 
   
+  useEffect(() => {
+    setSelectedCity(city);
+  }, [city]);
 
   const fetchDataFromAPI = async () => {
     try {

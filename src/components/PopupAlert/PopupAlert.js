@@ -201,7 +201,7 @@ const PopupAlert = (props) => {
         .then((data) => {
           setIsSubmitted(true);
           console.log("Requête effectuée avec succès");
-          displayPopup('Thank you for your message! We will get in touch soon.');
+          displayPopup('Thanks for creating an alert. We will get in touch soon as soon as we will have rooms matching your criteria.');
           setIsSubmitted(true);
           setStatus('success');
           setSubmit(true);
@@ -355,7 +355,6 @@ const PopupAlert = (props) => {
                         onChange={handlePhone}
                         inputProps={{
                           id: { inputPhoneNumber },
-                          required: true,
                           placeholder: ''
                         }}
                       />
@@ -369,7 +368,7 @@ const PopupAlert = (props) => {
                     <div className="form-outline">
                       <label htmlFor={inputCity} className='form-label'>City*</label>
                       <div className='input-select'>
-                        <SelectCity id={inputCity} text="City" onChange={(selectedValue) =>{ setCity(selectedValue.value);setFormErrors((prevErrors) => ({ ...prevErrors, city: '' }));}} alert={props.isPopupOpen} />
+                        <SelectCity id={inputCity} city={city} text="City" onChange={(selectedValue) =>{ setCity(selectedValue.value);setFormErrors((prevErrors) => ({ ...prevErrors, city: '' }));}} alert={props.isPopupOpen} name='cityalert'/>
                         {formErrors.city !== '' &&
                           <div className="error-message">{formErrors.city}</div>}
                       </div>
@@ -410,7 +409,7 @@ const PopupAlert = (props) => {
                           id={inputMaxBudget}
                           className="form-control"
                           value={maxBudget}
-                          onChange={(e) => {setMaxBudget(e.target.value);setFormErrors((prevErrors) => ({ ...prevErrors, firstName: '' }));}}
+                          onChange={(e) => {setMaxBudget(e.target.value);setFormErrors((prevErrors) => ({ ...prevErrors, budget: '' }));}}
 
                         />
                         {formErrors.budget !== '' &&
