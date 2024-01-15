@@ -671,13 +671,13 @@ const Room = () => {
                   Apply for this room</button>
               </div>
               <div className='widget-info mb-3'>
-                <h5>Fine cribs promise</h5>
+                <h4>Fine cribs promise</h4>
                 <p>Our team has meticulously renovated, furnished and equipped this apartment
                   to provide you with an unparalleled experience of design, comfort, and exceptional services .</p>
               </div>
               <div className='recommandation mt-3 mb-lg-5 pb-4 d-md-none'>
                 <h2 className='mb-3'>You might also be interested in the following properties</h2>
-                {/* {randomCribData && <Crib cribs={randomCribData} />} */}
+                {randomCribData && <Crib cribs={randomCribData} />} 
               </div>
 
 
