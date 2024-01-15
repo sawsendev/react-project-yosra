@@ -12,17 +12,17 @@ import stepOne from "../assets/Step 1.svg";
 import stepTwo from "../assets/Step 2.svg";
 import stepThree from "../assets/Step 3.svg";
 import stepFour from "../assets/Step 4.svg";
-import Nice from "../assets/niceH.avif";
-import Florence from "../assets/florenceH.avif";
-import Bologna from "../assets/bologneH.avif";
-import f1 from "../assets/flatmates/Groupe de masques 1.avif";
-import f2 from "../assets/flatmates/Groupe-de-masques-3-imageonline.co-9980148.avif";
-import f3 from "../assets/flatmates/Groupe-de-masques-5-imageonline.co-7329505.avif";
-import f4 from "../assets/flatmates/Groupe de masques 2.avif";
-import f5 from "../assets/flatmates/Groupe-de-masques-4-imageonline.co-2759619.avif";
-import f6 from "../assets/flatmates/Groupe-de-masques-7-imageonline.co-9061517.avif";
-import f7 from "../assets/flatmates/Groupe-de-masques-6-imageonline.co-9953414.avif";
-import f8 from "../assets/flatmates/Groupe-de-masques-8-imageonline.co-3327605.avif";
+import Nice from "../assets/niceH.png";
+import Florence from "../assets/florenceH.png";
+import Bologna from "../assets/bologneH.png";
+import f1 from "../assets/flatmates/Groupe de masques 1.png";
+import f2 from "../assets/flatmates/Groupe de masques 3.png";
+import f3 from "../assets/flatmates/Groupe de masques 5.png";
+import f4 from "../assets/flatmates/Groupe de masques 2.png";
+import f5 from "../assets/flatmates/Groupe de masques 4.png";
+import f6 from "../assets/flatmates/Groupe de masques 7.png";
+import f7 from "../assets/flatmates/Groupe de masques 6.png";
+import f8 from "../assets/flatmates/Groupe de masques 8.png";
 import room_city from "../assets/bacdbb_723fc3ba38f34640b08464a29a8990c9_mv2-1.jpg"
 import upload from "../assets/image-gallery.svg"
 import payslip from "../assets/g2115.svg"

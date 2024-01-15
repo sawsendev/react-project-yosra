@@ -1,6 +1,6 @@
 import React from 'react'
 import "./BookingProcess.css"
-import { NULL } from 'sass';
+
 
 
 const BookingProcess = ({cribs}) => {

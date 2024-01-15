@@ -2,7 +2,7 @@ import React from 'react';
 import './CityResult.css'
 const CityResult = ({city}) => {
 const capitalizedCity = city.charAt(0).toUpperCase() + city.slice(1);
-const backgroundImage = require(`../../../assets/${city}.avif`);
+const backgroundImage = require(`../../../assets/${city}.png`);
 
 const cityTexts = {
   nice: "Sunny boulevards, international allure, and Riviera charm",
