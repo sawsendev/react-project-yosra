@@ -1,5 +1,6 @@
 import React from 'react'
 import "./BookingProcess.css"
+import { NULL } from 'sass';
 
 
 const BookingProcess = ({cribs}) => {
@@ -121,11 +122,11 @@ const BookingProcess = ({cribs}) => {
             <div>
   <span>Before check-in</span>
 
-  {cribs && (
+  {cribs && (cribs.tarif_promo || cribs.loyer_hc) && (
     <div className='Fee row justify-content-between'>
       <p className='col-auto mb-0'>1° month rent</p> 
       <span className='col-auto mb-0'>
-        €{cribs.tarif_promo !== 0 ? cribs.tarif_promo : cribs.loyer_hc+cribs.charges}
+        €{cribs.promo=== 1 ? cribs.tarif_promo : cribs.loyer_hc+cribs.charges}
       </span>
     </div>
   )}
