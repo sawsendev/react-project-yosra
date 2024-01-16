@@ -11,6 +11,12 @@
 .pageroom-container .carousel-images {
     position: relative;
 }
+.pageroom-container h4{
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 28px;
+
+}
 
 .pageroom-container .carousel-images .img {
     height: 503px;
