@@ -25,7 +25,6 @@ const PopupAlert = (props) => {
   const uniqueId = (suffix) => {
     return `${props.id}-${suffix}`;
   };
-
   const inputFirstNameId = uniqueId('firstName');
   const inputLastNameId = uniqueId('lastName');
   const inputEmailId = uniqueId('email');
@@ -33,14 +32,11 @@ const PopupAlert = (props) => {
   const inputMoveInDate = uniqueId('moveInDate')
   const inputPhoneNumber = uniqueId('phoneNumber')
   const inputCity = uniqueId('city')
-
   const handlePopupClose = () => {
     setShowPopup(false);
     setShowPopupAlert(true);
 
   };
-
-
   const displayPopup = (message) => {
     setStatus(status);
     setPopupMessage(message);
@@ -53,8 +49,6 @@ const PopupAlert = (props) => {
     props.onClose();
     setSubmit(false);
   };
-
-
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -70,7 +64,6 @@ const PopupAlert = (props) => {
   const [code, setCode] = useState()
   const [isLoading, setIsLoading] = useState(false);
   const phoneInputRef = useRef(null);
-
   const [formErrors, setFormErrors] = useState({
     firstName: '',
     lastName: '',
@@ -83,17 +76,14 @@ const PopupAlert = (props) => {
   const validateForm = () => {
     const errors = {};
     let isValid = true;
-
     if (!firstName.trim()) {
       errors.firstName = 'First name is required';
       isValid = false;
     }
-
     if (!lastName.trim()) {
       errors.lastName = 'Last name is required';
       isValid = false;
     }
-
     if (!email.trim()) {
       errors.email = 'Email is required';
       isValid = false;
@@ -114,36 +104,22 @@ const PopupAlert = (props) => {
       errors.budget = 'Max budget is required';
       isValid = false;
     }
-    
-
-
     setFormErrors(errors);
     return isValid;
   };
-
-
-
   const handlePhone = (value, data) => {
     setPhoneNumber(value);
     setCountry(data.countryCode);
-
-    // Extraire le code de composition du numéro
-
     setCode(data.dialCode);
-
     // Vérifier si le numéro commence par le code de composition
     if (value.startsWith(`+${code}`)) {
       // Utiliser substring pour obtenir la partie après le code de composition
       const phoneNumberWithoutCode = value.substring(`+${code}`.length).trim();
       setPhoneNumberWithoutCode(phoneNumberWithoutCode);
-
-
     } else if (value.startsWith(code)) {
       // Utiliser substring pour obtenir la partie après le code de composition
       const phoneNumberWithoutCode = value.substring(code.length).trim();
       setPhoneNumberWithoutCode(phoneNumberWithoutCode);
-
-
     } else {
       // Le numéro ne commence ni par le code de composition ni par le code seul
       setPhoneNumberWithoutCode(value.trim());
@@ -161,9 +137,6 @@ const PopupAlert = (props) => {
     setMoveInDate('');
     setIsSubmitted(false);
   };
-
-
-
   const handleFormSubmit = (event) => {
     event.preventDefault();
     if (validateForm()) {
@@ -179,7 +152,6 @@ const PopupAlert = (props) => {
         phone_number: phoneNumberWithoutCode,
         phone_country_name: country
       };
-
       fetch(`${API_URL}`, {
         method: 'POST',
         headers: {
@@ -191,7 +163,7 @@ const PopupAlert = (props) => {
         .then(async (response) => {
           if (response.ok) {
             const responseData = await response.json();
-            console.log('Réponse de l\'API en cas de succès:', responseData);
+
             return responseData;
           } else {
             const errorData = await response.json();
@@ -200,12 +172,11 @@ const PopupAlert = (props) => {
         })
         .then((data) => {
           setIsSubmitted(true);
-          console.log("Requête effectuée avec succès");
+
           displayPopup('Thanks for creating an alert. We will get in touch soon as soon as we will have rooms matching your criteria.');
           setIsSubmitted(true);
           setStatus('success');
           setSubmit(true);
-
         })
         .catch((error) => {
           console.error('Erreur lors de la soumission du formulaire:', error);
@@ -215,29 +186,17 @@ const PopupAlert = (props) => {
           setSubmit(true);
         }).finally(() => {
           setIsLoading(false);
-
           resetForm();
         })
     }
   };
-
   const handleClose = () => {
     props.onClose();
   };
-
-  // useEffect(() => {
-  //   if (props.isPopupOpen) {
-  //     document.body.classList.add('popup-open');
-  //   } else {
-  //     document.body.classList.remove('popup-open');
-  //   }
-  // }, [props.isPopupOpen]);
-
   const handleCustomInputChange = (date) => {
     setMoveInDate(date);
 
   };
-
   const CustomInput = ({ value, onClick, onChange, name }) => (
     <div className="input-datepicker" onClick={onClick}>
       <input
@@ -294,7 +253,6 @@ const PopupAlert = (props) => {
             </div>
 
             <div className='popup-body'>
-
               <form onSubmit={handleFormSubmit}>
                 <div className='row'>
                   <div className='col-md-6'>
@@ -305,7 +263,7 @@ const PopupAlert = (props) => {
                         id={inputFirstNameId}
                         className="form-control"
                         value={firstName}
-                        onChange={(e) => {setFirstName(e.target.value); setFormErrors((prevErrors) => ({ ...prevErrors, firstName: '' }));}}
+                        onChange={(e) => { setFirstName(e.target.value); setFormErrors((prevErrors) => ({ ...prevErrors, firstName: '' })); }}
 
                       />
                       {formErrors.firstName !== '' &&
@@ -321,7 +279,7 @@ const PopupAlert = (props) => {
                         id={inputLastNameId}
                         className="form-control"
                         value={lastName}
-                        onChange={(e) => {setLastName(e.target.value); setFormErrors((prevErrors) => ({ ...prevErrors, lastName: '' }));}}
+                        onChange={(e) => { setLastName(e.target.value); setFormErrors((prevErrors) => ({ ...prevErrors, lastName: '' })); }}
 
                       />
                       {formErrors.lastName !== '' &&
@@ -338,7 +296,7 @@ const PopupAlert = (props) => {
                         id={inputEmailId}
                         className="form-control"
                         value={email}
-                        onChange={(e) => {setEmail(e.target.value); setFormErrors((prevErrors) => ({ ...prevErrors, email: '' }));}}
+                        onChange={(e) => { setEmail(e.target.value); setFormErrors((prevErrors) => ({ ...prevErrors, email: '' })); }}
 
                       />
                       {formErrors.email !== '' &&
@@ -368,7 +326,7 @@ const PopupAlert = (props) => {
                     <div className="form-outline">
                       <label htmlFor={inputCity} className='form-label'>City*</label>
                       <div className='input-select'>
-                        <SelectCity id={inputCity} city={city} text="City" onChange={(selectedValue) =>{ setCity(selectedValue.value);setFormErrors((prevErrors) => ({ ...prevErrors, city: '' }));}} alert={props.isPopupOpen} name='cityalert'/>
+                        <SelectCity id={inputCity} city={city} text="City" onChange={(selectedValue) => { setCity(selectedValue.value); setFormErrors((prevErrors) => ({ ...prevErrors, city: '' })); }} alert={props.isPopupOpen} name='cityalert' />
                         {formErrors.city !== '' &&
                           <div className="error-message">{formErrors.city}</div>}
                       </div>
@@ -409,7 +367,7 @@ const PopupAlert = (props) => {
                           id={inputMaxBudget}
                           className="form-control"
                           value={maxBudget}
-                          onChange={(e) => {setMaxBudget(e.target.value);setFormErrors((prevErrors) => ({ ...prevErrors, budget: '' }));}}
+                          onChange={(e) => { setMaxBudget(e.target.value); setFormErrors((prevErrors) => ({ ...prevErrors, budget: '' })); }}
 
                         />
                         {formErrors.budget !== '' &&
@@ -426,10 +384,8 @@ const PopupAlert = (props) => {
                       <span>Send message</span>
                     )}
                   </button>
-
                 </div>
               </form>
-
               <div className="text-right img-right">
                 <img src={logo_popup} alt="fine-cribes" className='img-fluid' />
               </div>

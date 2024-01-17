@@ -4,14 +4,11 @@ import 'react-multi-carousel/lib/styles.css';
 import City from "./City/City";
 import { ExploreCitiesTable } from "../../../Data/Data";
 import "./ExploreMore.css";
-import { BsArrowRight} from 'react-icons/bs';
+import { BsArrowRight } from 'react-icons/bs';
 import { BsArrowLeft } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 
-const ExploreMoreSmall = ({lotData}) => {
-
-
-
+const ExploreMoreSmall = ({ lotData }) => {
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 1200 },
@@ -30,51 +27,39 @@ const ExploreMoreSmall = ({lotData}) => {
       items: 1
     }
   };
- 
- 
-  const handleClick = (e,city) => {
+  const handleClick = (e, city) => {
     e.preventDefault()
     const searchParams = new URLSearchParams({ city }).toString();
-    console.log(city)
+
     const url = `/search-cities?${searchParams}`;
-    window.location.href=url;
+    window.location.href = url;
   };
   const cityData = lotData.data && lotData.data.cities ? lotData.data.cities : [];
-
   const cities = ExploreCitiesTable.map(city => {
     const cityInfo = cityData.find(cityInfo => cityInfo.city_country.toLowerCase().startsWith(city.city.toLowerCase()));
     const count = cityInfo ? cityInfo.count_lots : null;
-  
     return (
       <City
         src={city.src}
         city={city.city}
         count={count}
-        handleClick={(e) => handleClick(e,city.city)}
+        handleClick={(e) => handleClick(e, city.city)}
       />
     );
   });
-  
-  
   const carouselRef = useRef(null);
-
   const [isPrevActive, setIsPrevActive] = useState(true);
-  const [isNextActive, setIsNextActive] = useState(true); 
-
+  const [isNextActive, setIsNextActive] = useState(true);
   const onClickPrev = () => {
     if (carouselRef.current) {
-     
       carouselRef.current.previous();
     }
   };
-
   const onClickNext = () => {
     if (carouselRef.current) {
-      
       carouselRef.current.next();
     }
   };
-
   const onMouseUp = () => {
     setIsPrevActive(true); // Réactive les deux boutons lorsque vous relâchez le clic
     setIsNextActive(true);
@@ -87,7 +72,7 @@ const ExploreMoreSmall = ({lotData}) => {
       <div>
         <Carousel
           ref={carouselRef}
-          responsive={responsive} 
+          responsive={responsive}
           infinite={true}
           containerClass="carousel-container"
         >
@@ -106,7 +91,7 @@ const ExploreMoreSmall = ({lotData}) => {
             onMouseUp={onMouseUp}
             className={`custom-next-arrow`}
           >
-            <BsArrowRight className="arrow-icon"/>
+            <BsArrowRight className="arrow-icon" />
           </div>
         </div>
       </div>

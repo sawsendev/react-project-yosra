@@ -8,7 +8,7 @@ import CribMap from '../MapContainer/CribMap';
 import loading1 from '../../../assets/load.gif';
 import axios from "axios";
 import { Helmet } from "react-helmet";
-import {URL} from '../../Variables'
+import { URL } from '../../Variables'
 import nomap from '../../../assets/connection-error (1) 1.svg'
 const Cribes = () => {
   const [cribsData, setCribsData] = useState([]);
@@ -32,35 +32,32 @@ const Cribes = () => {
   const priceMinParam = searchParams.get('priceMin');
   const priceMaxParam = searchParams.get('priceMax');
   const sortByParam = searchParams.get('sortBy');
-  const keyWordParam=searchParams.get('keyword')
+  const keyWordParam = searchParams.get('keyword')
   const searchParamsExist = cityParam || dateParam || priceMinParam || priceMaxParam || sortByParam;
-   const [latitude, setLatitude] = useState(); 
-  const [longitude, setLongitude] = useState(); 
+  const [latitude, setLatitude] = useState();
+  const [longitude, setLongitude] = useState();
 
   function formatDate(dateParam) {
     if (!dateParam) {
-      return null; 
+      return null;
     }
-  
+
     const dateObject = new Date(dateParam);
-  
+
     const year = dateObject.getFullYear();
     const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
     const day = dateObject.getDate().toString().padStart(2, '0');
-  
+
     const formattedDate = `${year}-${month}-${day}`;
     return formattedDate;
   }
-  
-
   const fetchMapData = async () => {
     const formData = {
       city: cityParam,
-      date: dateParam ? formatDate(dateParam) : null, 
+      date: dateParam ? formatDate(dateParam) : null,
       price_min: priceMinParam,
       price_max: priceMaxParam,
     };
-
     try {
       const response = await fetch(`${API_URL3}`, {
         method: 'POST',
@@ -70,7 +67,6 @@ const Cribes = () => {
         },
         body: JSON.stringify(formData),
       });
-
       if (response.ok) {
         const data = await response.json();
         setMapData(data.data.lots);
@@ -84,7 +80,6 @@ const Cribes = () => {
           item.apartment_building_latitude,
           item.apartment_building_longitude
         ]);
-
         setCoordinates(coordinatesArray);
       } else {
         console.error('Erreur de réponse HTTP :', response.status);
@@ -94,29 +89,25 @@ const Cribes = () => {
       console.error('Erreur lors de la récupération des données :', error);
     }
   };
-
- 
   const fetchDataFromAPI = async (page) => {
     try {
       const headers = {
         'apiKey': `${API_KEY}`,
       };
-  
       const response = await fetch(`${API_URL2}?page=${page}`, {
         method: 'POST',
         mode: 'cors',
         headers,
       });
-  
       if (response.ok) {
         const data = await response.json();
-  
+
         setLastPage(data.data.lots.last_page);
-  
+
         const dataArray = Array.isArray(data.data.lots.data)
           ? data.data.lots.data
           : Object.values(data.data.lots.data);
-  
+
         if (currentPage === 1) {
           setCribsData(dataArray);
         } else {
@@ -133,9 +124,6 @@ const Cribes = () => {
       setDataLoaded(true);
     }
   };
-  
- 
-
   const fetchDataFromAPI2 = async (page) => {
     if (searchParamsExist) {
       const formData = {
@@ -145,7 +133,6 @@ const Cribes = () => {
         price_max: priceMaxParam,
         sortBy: sortByParam,
       };
-
       try {
         const response = await fetch(`${API_URL2}?page=${page}`, {
           method: 'POST',
@@ -155,7 +142,6 @@ const Cribes = () => {
           },
           body: JSON.stringify(formData),
         });
-
         if (response.ok) {
           const data = await response.json();
           setLastPage(data.data.lots.last_page);
@@ -181,7 +167,7 @@ const Cribes = () => {
       }
     }
   };
-  const fetchData = async (page)=>{
+  const fetchData = async (page) => {
     if (keyWordParam) {
       const formData = {
         keyword: keyWordParam,
@@ -197,13 +183,11 @@ const Cribes = () => {
         });
         if (response.ok) {
           const data = await response.json();
-    
           setLastPage(data.data.lots.last_page);
-    
           const dataArray = Array.isArray(data.data.lots.data)
             ? data.data.lots.data
             : Object.values(data.data.lots.data);
-    
+
           if (currentPage === 1) {
             setCribsData(dataArray);
           } else {
@@ -219,23 +203,20 @@ const Cribes = () => {
         setLoading(false);
         setDataLoaded(true);
       }
-    }};
-
-  
+    }
+  };
   const handleScroll = () => {
     if (window.innerHeight + window.scrollY < document.documentElement.offsetHeight && currentPage < lastPage && !loading) {
       setCurrentPage(currentPage + 1);
       setLoading(true);
     }
   };
-
   const handleGetCoordinates = async (city) => {
     if (!city) {
       city = 'Bastia';
       setZoom(6);
     }
     const url = `https://nominatim.openstreetmap.org/search?format=json&q=${city}`;
-
     try {
       const response = await axios.get(url);
       if (response.status === 200) {
@@ -244,10 +225,10 @@ const Cribes = () => {
           setLatitude(parseFloat(data[0].lat));
           setLongitude(parseFloat(data[0].lon));
         } else {
-          console.log('No data found for the city.');
+
         }
       } else {
-        console.log(`Request failed with status code ${response.status}.`);
+
       }
     } catch (error) {
       console.error('Error fetching data from OpenStreetMap API:', error);
@@ -260,33 +241,31 @@ const Cribes = () => {
       setZoom(newZoom);
     };
     handleResize();
-  window.addEventListener('resize', handleResize);
-  
+    window.addEventListener('resize', handleResize);
+
     return () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
-  
 
   useEffect(() => {
-    if(searchParams)
-    fetchMapData();
+    if (searchParams)
+      fetchMapData();
   }, [cityParam, dateParam, priceMinParam, priceMaxParam, sortByParam]);
- 
-  useEffect(() => {
-    if(!searchParams)
-    fetchMapData();
 
+  useEffect(() => {
+    if (!searchParams)
+      fetchMapData();
   }, []);
   useEffect(() => {
-    if ((!searchParamsExist)&&(keyWordParam)){
-    fetchData(currentPage);
-  }
- 
-  }, [searchParamsExist,keyWordParam,currentPage]);
+    if ((!searchParamsExist) && (keyWordParam)) {
+      fetchData(currentPage);
+    }
+
+  }, [searchParamsExist, keyWordParam, currentPage]);
 
   useEffect(() => {
-    if ((!searchParamsExist) &&(!keyWordParam)){
+    if ((!searchParamsExist) && (!keyWordParam)) {
       navigate('/search-cities');
       fetchDataFromAPI(currentPage);
     } else {
@@ -306,19 +285,18 @@ const Cribes = () => {
     handleGetCoordinates(cityParam);
   }, [cityParam]);
 
-  
+
 
   return (
-   
     <div className='Cribes-container container-fluid'>
-       <Helmet>
+      <Helmet>
         <title> Search Result Page </title>
         <meta
           name="description"
           content="Fine Cribs, beautiful flatshares designed for communal living"
-          />
+        />
         <link rel="canonical" href={`${URL}`} />
-       </Helmet>
+      </Helmet>
       {searchResult.length > 0 && (
         <h2>
           {cityParam
@@ -327,13 +305,10 @@ const Cribes = () => {
         </h2>
       )}
       {cribsData.length > 0 && (
-  <h2>
-    {keyWordParam && `Result of search "${keyWordParam}"`}
-  </h2>
-)}
-
-
-
+        <h2>
+          {keyWordParam && `Result of search "${keyWordParam}"`}
+        </h2>
+      )}
       <div className='content-page'>
         <div className='row row-cribes'>
           <div className='col-lg-7'>
@@ -372,24 +347,23 @@ const Cribes = () => {
               </div>
             )}
           </div>
-
           <div className='Maps col-lg-5'>
             <div className={`maps-block`}>
-            {longitude && latitude ? (
-  <CribMap
-    coordinates={coordinates}
-    showPopup={true}
-    data={mapData}
-    longitude={longitude}
-    latitude={latitude}
-    zoom={zoom}
-  />
-) : (
-  <div className="d-flex flex-column align-items-center m-5">
-  <img src={nomap} alt="nomap" className=""/>
-  <p className="map-error mt-3"> Unable to load the Map !</p>
-  </div>
-)}
+              {longitude && latitude ? (
+                <CribMap
+                  coordinates={coordinates}
+                  showPopup={true}
+                  data={mapData}
+                  longitude={longitude}
+                  latitude={latitude}
+                  zoom={zoom}
+                />
+              ) : (
+                <div className="d-flex flex-column align-items-center m-5">
+                  <img src={nomap} alt="nomap" className="" />
+                  <p className="map-error mt-3"> Unable to load the Map !</p>
+                </div>
+              )}
             </div>
           </div>
         </div>

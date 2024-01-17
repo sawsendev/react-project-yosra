@@ -23,8 +23,6 @@ const Homepage = () => {
     ReactGA.pageview(window.location.pathname + window.location.search);
   }, []);
   
-
-
   useEffect(() => {
     let isMounted = true;
 
@@ -118,9 +116,9 @@ const Homepage = () => {
     {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": "Nom de l'organisation",
-      "url": "URL_de_l'organisation",
-      "logo": "URL_du_logo"
+      "name": "Fine Cribs",
+      "url": "https://finecribs.com/",
+      "logo": "/src/assets/logo.svg"
     }
   `}
         </script>

@@ -9,7 +9,7 @@ const Popup = ({ message, status, onClose }) => {
       <div className="popup-content">
         <div className='popup-body'>
           <div className='icon-msg'>{icon}</div>
-          <div className="message">{message}</div>
+          <div className="message text-center">{message}</div>
           <button className="btn close-btn" onClick={onClose}>Close</button>
         </div>
       </div>

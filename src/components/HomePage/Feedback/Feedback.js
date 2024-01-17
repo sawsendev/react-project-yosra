@@ -23,7 +23,6 @@ const Feedback = () => {
       items: 1
     }
   };
-
   const feedbackItems = FeedbacksTable.map((feedback, index) => (
     <div key={index} className="feedback-icons-li d-flex gap-3 my-4">
       <div className="row  justify-content-between">
@@ -39,8 +38,6 @@ const Feedback = () => {
       </div>
     </div>
   ));
-  
-
   const [isPrevActive, setIsPrevActive] = useState(true);
   const [isNextActive, setIsNextActive] = useState(true);
   const carouselRef = useRef(null);

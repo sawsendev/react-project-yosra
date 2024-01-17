@@ -5,7 +5,6 @@ import ExploreMoreLarge from './ExploreMoreLarge';
 
 const ExploreMore= ({lotData}) => {
   const isLargeScreen = useMediaQuery({ minWidth: 768 });
-
   return (
     <>
       {isLargeScreen ? (

@@ -54,7 +54,7 @@ const SelectCity = ({ onChange, city ,text ,alert , id,name }) => {
     const selectedValue = event.target.value;
     setSelectedCity(selectedValue);
     onChange({ label: selectedValue, value: selectedValue });
-    console.log("Selected city:", selectedValue);
+
   };
 
   return (

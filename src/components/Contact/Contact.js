@@ -18,6 +18,17 @@ const Contact = () => {
           content="Fine Cribs, beautiful flatshares designed for communal living"
           />
           <link rel="canonical" href={`${URL}/contact`} />
+          <script type="application/ld+json">
+            {`
+ {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Contact",
+  "url": "${URL}/contact",
+  "description": "page de contact"
+}
+`}
+          </script>
     </Helmet>
     <Breadcrumbs/>
     <div className='Contact-container row m-0'>
@@ -27,5 +38,4 @@ const Contact = () => {
     </>
   )
 }
-
 export default Contact

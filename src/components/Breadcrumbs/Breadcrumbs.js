@@ -31,8 +31,6 @@ function Breadcrumbs({ path, customRoutes = [] }) {
       </React.Fragment>
     );
   }); 
-
-  // Add custom routes dynamically
   customRoutes.forEach((route, index) => {
     breadcrumbElements.push(
       <React.Fragment key={`customRoute${index}`}>
@@ -53,5 +51,4 @@ function Breadcrumbs({ path, customRoutes = [] }) {
     </div>
   );
 }
-
 export default Breadcrumbs;

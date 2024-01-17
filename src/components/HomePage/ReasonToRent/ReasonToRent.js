@@ -9,8 +9,7 @@ const ReasonToRent = () => {
       <h2>Why to rent a room in one of our apartments</h2>
       <p>Moving to a new city should be all about new experiences. To make your life easy, we create beautiful spaces that feel just 
         like home so that you can just drop your suitcases and have a great time. Simple, as it should be.</p>
-        
-          <div className="row">
+        <div className="row">
             {ReasonsTable.map((icon, index) => {
               return (
                 <>

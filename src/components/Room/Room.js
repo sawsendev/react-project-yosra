@@ -65,12 +65,9 @@ import tv from '../../assets/room/icons/television.png'
 import { EmailShareButton, WhatsappShareButton } from 'react-share';
 import loading1 from '../../assets/load.gif';
 
-
 const CustomTooltip = ({ content }) => {
   return <div className="custom-tooltip">{content}</div>;
 };
-
-
 const Room = () => {
   const { id } = useParams();
   const [lotData, setLotData] = useState({});
@@ -88,7 +85,6 @@ const Room = () => {
   const [tooltipActive, setTooltipActive] = useState(false);
   const [tooltipActive1, setTooltipActive1] = useState(false);
 
-
   const handleInfoHover = () => {
     setTooltipActive(true);
   };
@@ -104,8 +100,6 @@ const Room = () => {
   const handleInfoLeave1 = () => {
     setTooltipActive1(false);
   };
-
-
   const [randomCribData, setRandomCribData] = useState([]);
   useEffect(() => {
     ReactGA.pageview(window.location.pathname + window.location.search);
@@ -115,8 +109,6 @@ const Room = () => {
     const headers = {
       'apiKey': `${API_KEY}`,
     };
-
-
     fetch(API_URL, { method: 'GET', mode: 'cors', headers })
       .then(response => response.json())
       .then(data => {
@@ -264,28 +256,18 @@ const Room = () => {
 
     return `${day < 10 ? `0${day}` : day}/${month < 10 ? `0${month}` : month}/${year}`;
   };
-
-
   const isoFormattedDateAujourdhui = formattedDateAujourdhui.split('/').reverse().join('-');
   const isoFormattedDateDemain = formattedDateDemain.split('/').reverse().join('-');
-
   const availabilityDatePart = lotData && lotData.availability_date ? lotData.availability_date.split('T')[0] : '';
-
-
   const calculateRent = (lotData) => {
     const isoFormattedDateAujourdhui = formattedDateAujourdhui.split('/').reverse().join('-');
-
     const availabilityDatePart = lotData && lotData.availability_date
       ? (lotData.availability_date.split('T')[0] || '')
       : '';
-
     return availabilityDatePart > isoFormattedDateAujourdhui;
   };
 
-
   const rent = calculateRent(lotData);
- 
-
   if (isLoading) {
     return (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
@@ -293,20 +275,9 @@ const Room = () => {
       </div>
     );
   }
-
-
   if (!lotData) {
     return <ErrorPage />;
   }
-
-  //   function oneYearFromToday() {
-  //     var today = new Date();
-  //     var lastYear = new Date(today);
-  //     lastYear.setFullYear(today.getFullYear() + 1);
-  //     return lastYear;
-  // }
-
-
   return (
     <>
       <Helmet>
@@ -316,6 +287,19 @@ const Room = () => {
           content="Fine Cribs, beautiful flatshares designed for communal living"
         />
         <link rel="canonical" href={`${URL}/room/${id}`} />
+        <script type="application/ld+json">
+            {`
+ {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Search Result Page",
+  "url": "${URL}/room/${id}",
+  "description": "page détailles de chambre"
+}
+
+  
+  `}
+          </script>
       </Helmet>
       {lotData && lotData.apartment && lotData.apartment.building && lotData.apartment.building.city && (
         <Breadcrumbs
@@ -349,13 +333,8 @@ const Room = () => {
               <div className='carousel-images'>
                 <CarrouselImages lotData={lotData} openModalWithTab1={openModalWithTab1} openModalWithTab2={openModalWithTab2}
                   openModalWithTab3={openModalWithTab3} openModalWithTab4={openModalWithTab4} />
-
-
-
               </div>
-
               <RoomModalMedia isOpen={modalIsOpen} closeModal={closeModal} activeTab={activeTab} setActiveTab={setActiveTab} lotData={lotData} />
-
               <div className='title mt-4'>
                 {lotData && lotData.apartment && lotData.apartment.title && lotData.title && (
                   <h1>{lotData.apartment.title} - {lotData.title}</h1>
@@ -402,8 +381,6 @@ const Room = () => {
                     }) && Object.keys(lotData.options).length !== 4 && <h3>Room</h3>}
                   </>
                 )}
-
-
                 {lotData.options && lotData.options.length > 0 && (
                   <div className='characteristics pieces mb-2'>
                     {[
@@ -426,7 +403,6 @@ const Room = () => {
                           <img src={option.icon} alt={option.title} className='opt-room-icons' />
                           {option.title}
                         </div>
-
                       )
                     ))}
                   </div>
@@ -467,14 +443,10 @@ const Room = () => {
                     ))}
                   </div>
                 )}
-
-
               </div>
               <div className='flatmates'>
                 <h2 className='mb-3'>Flatmates</h2>
                 <div className='row '>
-
-
                   {lotData &&
                     lotData.apartment &&
                     lotData.apartment.flat_mates_infos &&
@@ -526,19 +498,12 @@ const Room = () => {
                                   <span> | {calculateAge(locataire.locataire_info.date_of_birth)} yrs.</span>
                                 )}
                               </p>
-
-
-
                             </div>
                           </div>
                         </div>
                       ))}
-
                 </div>
               </div>
-
-
-
               <div className='map-local mt-3 mb-3 pb-3'>
                 <h2 className='mb-3'>Neighborhood</h2>
                 <div className='map'>
@@ -551,7 +516,6 @@ const Room = () => {
               <div className='local-desc mt-3 mb-md-4 pb-3'>
                 {lotData.description_quartier && (
                   <div>
-
                     <div dangerouslySetInnerHTML={{ __html: lotData.description_quartier }} />
                   </div>)}
               </div>
@@ -562,7 +526,6 @@ const Room = () => {
             </div>
             <div className='col-widget col-lg-4'>
               <div className='widget mb-3'>
-
                 <p className='head-widget'>
                   <div>
                     {lotData && lotData.availability_date && (
@@ -587,15 +550,8 @@ const Room = () => {
                       </>
                     )}
                   </div>
-
-
                 </p>
-
-
                 <hr />
-                {/* {lotData.loyer_hc && lotData.charges ? (
-                  <p className='text-center price'>{lotData.loyer_hc+lotData.charges} € /<small>month</small></p>
-                  ) : null} */}
                 {lotData.promo && lotData.promo === 1 && (
                   <small className='mb-2 crib_promo d-flex align-items-baseline'><span className="me-auto">1° month rent</span><span className='price_loyer'>{lotData.tarif_promo} €</span> /month</small>
                 )}
@@ -614,7 +570,7 @@ const Room = () => {
                     <p className='status mb-2'>
                       <img src={plug} className='icon' alt="plug" />
                       <span className='me-3'>
-                      Electricity
+                        Electricity
                       </span>
                       <img
                         src={info}
@@ -630,9 +586,6 @@ const Room = () => {
                     )}
                   </div>
                 )}
-
-
-
                 {lotData.gas !== 0 && (
                   <div>
                     <p className='status mb-2'>
@@ -677,14 +630,10 @@ const Room = () => {
               </div>
               <div className='recommandation mt-3 mb-lg-5 pb-4 d-md-none'>
                 <h2 className='mb-3'>You might also be interested in the following properties</h2>
-                {randomCribData && <Crib cribs={randomCribData} />} 
+                {randomCribData && <Crib cribs={randomCribData} />}
               </div>
-
-
             </div>
           </div>
-
-
         </div>
       </div>
     </>

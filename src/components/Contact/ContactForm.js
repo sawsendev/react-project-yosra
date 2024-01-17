@@ -18,9 +18,6 @@ const ContactForm = () => {
   const [country, setCountry] = useState('fr');
   const [isLoading, setIsLoading] = useState(false);
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
-
-
-  //popup msg alert
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
   const [status, setStatus] = useState('');
@@ -100,8 +97,6 @@ const ContactForm = () => {
   }
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-
     if (validateForm() && emailValid && valid && message) {
       setIsLoading(true);
       const data = {
@@ -114,7 +109,6 @@ const ContactForm = () => {
         data.phone = phoneNumberWithoutCode;
         data.phone_country_name = country;
       }
-
       try {
         const response = await fetch('https://admin.finecribs.com/api/contact', {
           method: 'POST',
@@ -130,39 +124,16 @@ const ContactForm = () => {
 
           displayPopup('Thank you for your message! We will get in touch soon.');
           setStatus('success');
-
-          console.log("Requête effectuée avec succès");
-
-          // // Réinitialisez les états du formulaire
-          // setFirstName('');
-          // setLastName('');
-          // setEmail('');
-          // setPhoneNumber('');
-          // setCountry('fr');
-          // setMessage('');
-          // setEmailValid(true);
-          // setValid(true);
         } else {
-          // Gérez les erreurs de la requête si nécessaire
           const errorData = await response.json();
-
           console.error('Erreur de la requête vers l\'API :', errorData.data.message);
-
           displayPopup(errorData.data.message);
           setStatus('error');
-
         }
       } catch (error) {
         console.error('Erreur lors de la requête vers l\'API :', error);
-
-        // toast.error('Erreur lors de la requête vers l\'API. Veuillez réessayer.', {
-        //   position: toast.POSITION.TOP_CENTER,
-        //   autoClose: 3000, 
-        // });
-
         displayPopup('Erreur lors de la requête vers l\'API. Veuillez réessayer.');
         setStatus('error');
-
       } finally {
         setIsLoading(false);
       }
@@ -170,16 +141,12 @@ const ContactForm = () => {
   };
   const [phoneNumberWithoutCode, setPhoneNumberWithoutCode] = useState('');
   const [code, setCode] = useState()
-  
   const handlePhone = (value, data) => {
     setPhoneNumber(value);
     setCountry(data.countryCode);
-
     // Extraire le code de composition du numéro
-
     setCode(data.dialCode);
     setFormErrors((prevErrors) => ({ ...prevErrors, phoneNumber: '' }));
-
     // Vérifier si le numéro commence par le code de composition
     if (value.startsWith(`+${code}`)) {
       // Utiliser substring pour obtenir la partie après le code de composition
@@ -192,20 +159,14 @@ const ContactForm = () => {
     } else {
       // Le numéro ne commence ni par le code de composition ni par le code seul
       setPhoneNumberWithoutCode(value.trim());
-
-
     }
   };
-
-
   return (
-
     <>
       <form className='col-md-6 col-10 mx-auto offset-md-6 ' onSubmit={handleSubmit}>
         <ToastContainer />
         <h2>We are here to help</h2>
         <h3 className='contact-heading'>Leave a message</h3>
-
         <div className="row mb-8">
           <div className="col-lg-6">
             <div className="form-outline">
@@ -224,7 +185,6 @@ const ContactForm = () => {
             </div>
           </div>
         </div>
-
         <div className='row'>
           <div className="form-outline col-lg-6 mb-4">
             <label className="form-label" for="form6Example3">Email*</label>
@@ -233,8 +193,6 @@ const ContactForm = () => {
             {formErrors.email !== '' &&
               <div className="error-message">{formErrors.email}</div>}
           </div>
-
-
           <div className="form-outline col-lg-6 mb-4">
             <label className="form-label" for="phone">Phone*</label>
             <PhoneInput
@@ -247,20 +205,14 @@ const ContactForm = () => {
             />
             {formErrors.phoneNumber !== '' &&
               <div className="error-message">{formErrors.phoneNumber}</div>}
-
-
           </div>
         </div>
-
-
-
         <div className="form-outline mb-4">
           <label className="form-label" for="form6Example7">Type here*</label>
           <textarea className="form-control" id="form6Example7" rows="2" value={message} onChange={handleMessageChange}></textarea>
           {formErrors.message !== '' &&
             <div className="error-message">{formErrors.message}</div>}
         </div>
-
         <button type="submit" className="btn btn-primary btn-block float-end custom-button " disabled={isLoading} >
           {isLoading ? (
             <span><img src={loading1} alt="Loading" style={{ width: '30px', height: '30px' }} /></span>
@@ -268,12 +220,9 @@ const ContactForm = () => {
             <div>Send message</div>
           )}
         </button>
-
       </form>
-
       {showPopup && <Popup message={popupMessage} status={status} onClose={handlePopupClose} />}
     </>
   )
 }
-
 export default ContactForm;

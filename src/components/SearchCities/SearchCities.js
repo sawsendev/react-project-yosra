@@ -12,8 +12,8 @@ const SearchCities = () => {
     ReactGA.pageview(window.location.pathname + window.location.search);
   }, []);
   const location = useLocation();
-  const searchParams = new URLSearchParams(location.search); 
- 
+  const searchParams = new URLSearchParams(location.search);
+
   const cityParam = searchParams.get('city');
   if (cityParam) {
     const city = cityParam.toLowerCase()
@@ -25,23 +25,18 @@ const SearchCities = () => {
             name="description"
             content="Fine Cribs, beautiful flatshares designed for communal living"
           />
-          
+
           <link rel="canonical" href={`${URL}/search-cities`} />
           <script type="application/ld+json">
             {`
-    {
-      "@context": "https://schema.org",
-      "@type": "Product",
-      "name": "Nom du produit",
-      "description": "Description du produit",
-      "brand": "Marque du produit",
-      "offers": {
-        "@type": "Offer",
-        "price": "Prix du produit",
-        "priceCurrency": "Devise du prix",
-        "availability": "Disponibilité du produit"
-      }
-    }
+          {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Search Result Page",
+    "url": "https://finecribs.com/search-cities",
+    "description": "page de recherche par ville "
+  }
+  
   `}
           </script>
         </Helmet>

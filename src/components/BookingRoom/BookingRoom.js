@@ -27,7 +27,6 @@ import loading1 from '../../assets/loadwithoutbg.gif'
 import { URL_Back } from '../Variables';
 const BookingRoom = () => {
   // ************************
-
   const [mainFile, setMainFile] = useState(null);
   const [subFiles, setSubFiles] = useState([null, null, null]);
   const [newFile, setNewFile] = useState(null);
@@ -45,194 +44,6 @@ const BookingRoom = () => {
     surname: '',
 
   });
-  useEffect(() => {
-    ReactGA.pageview(window.location.pathname + window.location.search);
-  }, []);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-
-    setFormErrors((prevErrors) => ({ ...prevErrors, [name]: '' }));
-  };
-
-
-  const handleEmailChange = (event) => {
-    const emailValue = event.target.value;
-    setEmail(emailValue);
-    setEmailValid(validateEmail(emailValue));
-    setFormErrors((prevErrors) => ({ ...prevErrors, email: '' }));
-  }
-  const validateEmail = (email) => {
-    const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
-    return emailPattern.test(email);
-  };
-
-  useEffect(() => {
-
-    const headers = {
-      'apiKey': `${API_KEY}`,
-    };
-
-    fetch(API_URL, { method: 'GET', mode: 'cors', headers })
-      .then(response => response.json())
-      .then(data => {
-
-        setLotData(data.data.lot);
-
-      })
-      .catch(error => {
-        console.error('Erreur lors de la récupération des données :', error);
-      });
-
-  }, [API_URL, API_KEY])
-
-
-
-  const handleCustomInputInChange = (date) => {
-    setMoveInDate(date);
-  };
-
-  const handleCustomInputOutChange = (date) => {
-    setMoveOutDate(date);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-
-    if (validateForm()) {
-      setIsLoading(true);
-      const formDataToSend = new FormData();
-
-      formDataToSend.append('lot_id', id);
-      formDataToSend.append('first_name', formData.firstName);
-      formDataToSend.append('last_name', formData.surname);
-      formDataToSend.append('email', email);
-      formDataToSend.append('start_date', format(moveInDate, 'yyyy-MM-dd'));
-      formDataToSend.append('end_date', format(moveOutDate, 'yyyy-MM-dd'));
-      if (phoneNumberWithoutCode) {
-        formDataToSend.append('phone_number', phoneNumberWithoutCode);
-        formDataToSend.append('phone_country_name', country);
-      }
-
-      if (mainFile) {
-        formDataToSend.append('identity', mainFile);
-      }
-      if (subFiles[0]) {
-        formDataToSend.append('school_certificate', subFiles[0]);
-      }
-      if (subFiles[1]) {
-        formDataToSend.append('guarantor_id', subFiles[1]);
-      }
-      if (subFiles[2]) {
-        formDataToSend.append('guarantor_tax_declaration', subFiles[2]);
-      }
-      if (newFile) {
-        formDataToSend.append('professional_tax_declaration', newFile);
-      }
-
-      try {
-        const response = await fetch('https://admin.finecribs.com/api/rental_request/post', {
-          method: 'POST',
-          mode: 'cors',
-          headers: {
-            'apiKey': API_KEY,
-          },
-          body: formDataToSend,
-        });
-
-        if (response.ok) {
-          setFormSubmitted(true);
-          window.scrollTo(0, 0);
-          console.log("Request successfully sent. API Response:", response);
-
-        } else {
-          if (response.status === 422) {
-            const errorData = await response.json();
-            console.log(errorData.data);
-            if (errorData) {
-
-              toast.error(errorData.data.message, {
-                position: toast.POSITION.TOP_CENTER,
-                autoClose: 6000,
-              });
-              ;
-            } else {
-              // Sinon, affichez un message générique
-              toast.error('Validation Error, please check your input', {
-                position: toast.POSITION.TOP_CENTER,
-                autoClose: 6000,
-              });
-            }
-          } else {
-            console.error('Error making the request. Status:', response.status);
-
-            toast.error('Error making the request. Please try again.', {
-              position: toast.POSITION.TOP_CENTER,
-              autoClose: 6000,
-            });
-          }
-        }
-      } catch (error) {
-        console.error('Error making the request:', error.message);
-
-        toast.error('Error making the request. Please try again.', {
-          position: toast.POSITION.TOP_CENTER,
-          autoClose: 6000,
-        });
-      }
-      finally {
-        setIsLoading(false)
-      }
-    } else {
-      window.scrollTo(0, 0);
-    }
-
-  };
-
-
-
-
-
-  // useEffect(() => {
-  //   console.log("formSubmitted mis à jour :", formSubmitted);
-  // }, [formSubmitted]);
-
-
-
-  const handleclick = (index) => {
-    const updatedFileVisible = [...fileVisible];
-    updatedFileVisible[index] = !updatedFileVisible[index];
-    setFileVisible(updatedFileVisible);
-  };
-
-  const handleFileChange = (e, index) => {
-    const file = e.target.files[0];
-    const updatedFileVisible = [...fileVisible];
-
-    if (index === 0) {
-      setMainFile(file);
-      updatedFileVisible[0] = true;
-    } else if (index <= 3) {
-      const newSubFiles = [...subFiles];
-      newSubFiles[index - 1] = file;
-      setSubFiles(newSubFiles);
-      updatedFileVisible[index] = true;
-    } else if (index === 4) {
-      setNewFile(file);
-      updatedFileVisible[4] = true;
-    }
-    // Mettez à jour l'état fileVisible avec la nouvelle copie mise à jour
-    setFileVisible(updatedFileVisible);
-    // Réinitialiser l'input file
-    e.target.value = '';
-  };
-
-  // ***************
   const [phoneNumber, setPhoneNumber] = useState("")
   const [country, setCountry] = useState('fr');
   const [formErrors, setFormErrors] = useState({
@@ -242,41 +53,6 @@ const BookingRoom = () => {
     moveInDate: '',
     moveOutDate: '',
   });
-
-  const validateForm = () => {
-    const errors = {};
-    let isValid = true;
-
-    if (!formData.firstName.trim()) {
-      errors.firstName = 'First name is required';
-      isValid = false;
-    }
-
-    if (!formData.surname.trim()) {
-      errors.surname = 'Surname is required';
-      isValid = false;
-    }
-
-    if (!email.trim()) {
-      errors.email = 'Email is required';
-      isValid = false;
-    }
-
-    if (!moveInDate) {
-      errors.moveInDate = 'Move In Date is required';
-      isValid = false;
-    }
-
-    if (!moveOutDate) {
-      errors.moveOutDate = 'Move Out Date is required';
-      isValid = false;
-    }
-
-    setFormErrors(errors);
-    return isValid;
-  };
-
-
   const [moveInDate, setMoveInDate] = useState(null);
   const [moveOutDate, setMoveOutDate] = useState(null);
   const CustomInputIn = ({ value, onClick, onChange, name }) => (
@@ -314,29 +90,198 @@ const BookingRoom = () => {
       </span>
     </div>
   );
+  const [phoneNumberWithoutCode, setPhoneNumberWithoutCode] = useState('');
+  const [code, setCode] = useState()
+
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+    setFormErrors((prevErrors) => ({ ...prevErrors, [name]: '' }));
+  };
+  const handleEmailChange = (event) => {
+    const emailValue = event.target.value;
+    setEmail(emailValue);
+    setEmailValid(validateEmail(emailValue));
+    setFormErrors((prevErrors) => ({ ...prevErrors, email: '' }));
+  }
+  const validateEmail = (email) => {
+    const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
+    return emailPattern.test(email);
+  };
+
+  useEffect(() => {
+    const headers = {
+      'apiKey': `${API_KEY}`,
+    };
+    fetch(API_URL, { method: 'GET', mode: 'cors', headers })
+      .then(response => response.json())
+      .then(data => {
+        setLotData(data.data.lot);
+      })
+      .catch(error => {
+        console.error('Erreur lors de la récupération des données :', error);
+      });
+  }, [API_URL, API_KEY])
+
+  const handleCustomInputInChange = (date) => {
+    setMoveInDate(date);
+  };
+  const handleCustomInputOutChange = (date) => {
+    setMoveOutDate(date);
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (validateForm()) {
+      setIsLoading(true);
+      const formDataToSend = new FormData();
+      formDataToSend.append('lot_id', id);
+      formDataToSend.append('first_name', formData.firstName);
+      formDataToSend.append('last_name', formData.surname);
+      formDataToSend.append('email', email);
+      formDataToSend.append('start_date', format(moveInDate, 'yyyy-MM-dd'));
+      formDataToSend.append('end_date', format(moveOutDate, 'yyyy-MM-dd'));
+      if (phoneNumberWithoutCode) {
+        formDataToSend.append('phone_number', phoneNumberWithoutCode);
+        formDataToSend.append('phone_country_name', country);
+      }
+      if (mainFile) {
+        formDataToSend.append('identity', mainFile);
+      }
+      if (subFiles[0]) {
+        formDataToSend.append('school_certificate', subFiles[0]);
+      }
+      if (subFiles[1]) {
+        formDataToSend.append('guarantor_id', subFiles[1]);
+      }
+      if (subFiles[2]) {
+        formDataToSend.append('guarantor_tax_declaration', subFiles[2]);
+      }
+      if (newFile) {
+        formDataToSend.append('professional_tax_declaration', newFile);
+      }
+      try {
+        const response = await fetch('https://admin.finecribs.com/api/rental_request/post', {
+          method: 'POST',
+          mode: 'cors',
+          headers: {
+            'apiKey': API_KEY,
+          },
+          body: formDataToSend,
+        });
+
+        if (response.ok) {
+          setFormSubmitted(true);
+          window.scrollTo(0, 0);
+        } else {
+          if (response.status === 422) {
+            const errorData = await response.json();
+            if (errorData) {
+              toast.error(errorData.data.message, {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 6000,
+              });
+            } else {
+              toast.error('Validation Error, please check your input', {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 6000,
+              });
+            }
+          } else {
+            console.error('Error making the request. Status:', response.status);
+            toast.error('Error making the request. Please try again.', {
+              position: toast.POSITION.TOP_CENTER,
+              autoClose: 6000,
+            });
+          }
+        }
+      } catch (error) {
+        console.error('Error making the request:', error.message);
+        toast.error('Error making the request. Please try again.', {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 6000,
+        });
+      }
+      finally {
+        setIsLoading(false)
+      }
+    } else {
+      window.scrollTo(0, 0);
+    }
+  };
+  const handleclick = (index) => {
+    const updatedFileVisible = [...fileVisible];
+    updatedFileVisible[index] = !updatedFileVisible[index];
+    setFileVisible(updatedFileVisible);
+  };
+  const handleFileChange = (e, index) => {
+    const file = e.target.files[0];
+    const updatedFileVisible = [...fileVisible];
+    if (index === 0) {
+      setMainFile(file);
+      updatedFileVisible[0] = true;
+    } else if (index <= 3) {
+      const newSubFiles = [...subFiles];
+      newSubFiles[index - 1] = file;
+      setSubFiles(newSubFiles);
+      updatedFileVisible[index] = true;
+    } else if (index === 4) {
+      setNewFile(file);
+      updatedFileVisible[4] = true;
+    }
+    setFileVisible(updatedFileVisible);
+    e.target.value = '';
+  };
+
+  // ***************
+  const validateForm = () => {
+    const errors = {};
+    let isValid = true;
+    if (!formData.firstName.trim()) {
+      errors.firstName = 'First name is required';
+      isValid = false;
+    }
+    if (!formData.surname.trim()) {
+      errors.surname = 'Surname is required';
+      isValid = false;
+    }
+    if (!email.trim()) {
+      errors.email = 'Email is required';
+      isValid = false;
+    }
+    if (!moveInDate) {
+      errors.moveInDate = 'Move In Date is required';
+      isValid = false;
+    }
+    if (!moveOutDate) {
+      errors.moveOutDate = 'Move Out Date is required';
+      isValid = false;
+    }
+    setFormErrors(errors);
+    return isValid;
+  };
   const handleMoveInDateChange = (date) => {
     if (date) {
       setMoveInDate(date);
       setFormErrors((prevErrors) => ({ ...prevErrors, moveInDate: '' }));
     }
-
   };
-
   const handleMoveOutDateChange = (date) => {
     if (date) {
       setMoveOutDate(date);
       setFormErrors((prevErrors) => ({ ...prevErrors, moveOutDate: '' }));
     }
   };
-  const [phoneNumberWithoutCode, setPhoneNumberWithoutCode] = useState('');
-  const [code, setCode] = useState()
   const handlePhone = (value, data) => {
     setPhoneNumber(value);
     setCountry(data.countryCode);
-
     // Extraire le code de composition du numéro
     setCode(data.dialCode);
-
     // Vérifier si le numéro commence par le code de composition
     if (value.startsWith(`+${code}`)) {
       // Utiliser substring pour obtenir la partie après le code de composition
@@ -352,27 +297,18 @@ const BookingRoom = () => {
     }
   };
   const moment = require('moment');
-
   function convertAvailabilityDateToDateObject(availabilityDate) {
     const availabilityMoment = moment(availabilityDate);
     if (!availabilityMoment.isValid()) {
       return null;
     }
     const dateObject = availabilityMoment.toDate();
-
     return dateObject;
   }
-
-
-
   const formattedDate = lotData && lotData.availability_date ? convertAvailabilityDateToDateObject(lotData.availability_date) : null;
-
   const minDate = new Date(formattedDate);
   minDate.setDate(minDate.getDate() + 1);
-
-
-
-  return (
+ return (
     <>
       <Helmet>
         <title>Booking Room</title>
@@ -381,6 +317,19 @@ const BookingRoom = () => {
           content="Fine Cribs, beautiful flatshares designed for communal living"
         />
         <link rel="canonical" href={`${URL}/booking-enquiry/${id}`} />
+        <script type="application/ld+json">
+            {`
+ {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Booking Room",
+  "url": "${URL}/booking-enquiry/${id}",
+  "description": "page apply for a room"
+}
+
+  
+  `}
+          </script>
       </Helmet>
 
       {lotData && lotData.apartment && lotData.apartment.title && lotData.title && lotData.apartment.building && lotData.apartment.building.city && (
@@ -405,7 +354,6 @@ const BookingRoom = () => {
           )}
           <span>Private room in Nice</span>
         </div>
-
         {/* Contenu du formulaire */}
         {!formSubmitted ? (
           <div className='row'>
@@ -439,7 +387,6 @@ const BookingRoom = () => {
                     </div>
                   </div>
                 </div>
-
                 <div className="row">
                   <div className="col-md-6 col-12">
                     <div className="form-outline">
@@ -461,7 +408,8 @@ const BookingRoom = () => {
                         slotProps={{
                           textField: {
                             id: 'datein',
-                          }}}
+                          }
+                        }}
                       />
                       {formErrors.moveInDate !== '' && <div className="error-message">{formErrors.moveInDate}</div>}
                     </div>
@@ -482,17 +430,16 @@ const BookingRoom = () => {
                             onChange={handleCustomInputOutChange}
                             name="moveOutDate"
                           />}
-                          slotProps={{
-                            textField: {
-                              id: 'dateout',
-                            }}}
-                         />
+                        slotProps={{
+                          textField: {
+                            id: 'dateout',
+                          }
+                        }}
+                      />
                       {formErrors.moveOutDate !== '' && <div className="error-message">{formErrors.moveOutDate}</div>}
                     </div>
                   </div>
                 </div>
-
-                <div></div>
                 <div className='row mb-4'>
                   <div className="form-outline col-md-6 col-xs-12 mb-4">
                     <label className="form-label mb-1" htmlFor="email">Email*</label>
@@ -509,9 +456,6 @@ const BookingRoom = () => {
                     {!emailValid && <div className='error-message'>Please enter a valid email address.</div>}
                     {formErrors.email !== '' && <div className="error-message">{formErrors.email}</div>}
                   </div>
-
-
-
                   <div className="form-outline col-md-6 col-xs-12 mb-4">
                     <label className="form-label mb-1" htmlFor="phone">Phone</label>
                     <PhoneInput
@@ -523,7 +467,6 @@ const BookingRoom = () => {
                         required: true,
                       }}
                     />
-                    {/* {!valid && <p>Please enter a valid 10-digit phone number.</p>} */}
                   </div>
                 </div>
 
@@ -547,12 +490,6 @@ const BookingRoom = () => {
                     />
                   </div>
                   <div className={fileVisible[0] ? "file-input" : "file-input hidden"}>
-
-                    {/* <img
-                        src={URL.createObjectURL(mainFile)}
-                        alt="Main File"
-                        className="uploaded-image"
-                      /> */}
                     {mainFile && (
                       <div className="uploaded-file">
                         {mainFile.type.startsWith('image/') ? (
@@ -639,10 +576,6 @@ const BookingRoom = () => {
                       </div>
                     ))}
                   </div>
-
-
-
-
                   {/* Last Input File */}
                   <label className="file-label mt-4">Are you a professional ?</label>
                   <div className="input-container">
@@ -682,10 +615,8 @@ const BookingRoom = () => {
                     )}
                   </div>
                 </div>
-
                 {/* ******************* */}
                 <button type="submit" className="btn float-end submit-button" disabled={isLoading}>
-
                   {isLoading ? (
                     <span><img src={loading1} alt="Loading" style={{ width: '30px', height: '30px' }} /></span>
                   ) : (
@@ -693,15 +624,13 @@ const BookingRoom = () => {
                   )}
                 </button>
               </form>
-
-            </div>
+              </div>
             <div className='col-md-4 col-sm-12'>
               <BookingProcess cribs={lotData} />
             </div>
           </div>
         ) : (
-
-          <div className='row'>
+        <div className='row'>
             <div className='col-md-8 col-sm-12 thank'>
               <img src={image} alt="description" />
               <p className='text-center mt-3  px-2 mx-md-3'>
@@ -716,8 +645,6 @@ const BookingRoom = () => {
       </div>
       <ToastContainer />
     </>
-
-  )
+    )
 }
-
 export default BookingRoom

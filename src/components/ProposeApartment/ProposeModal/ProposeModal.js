@@ -24,17 +24,14 @@ const ProposeModal = ({ isOpen, closeModal }) => {
   const [status, setStatus] = useState('');
   const [fileError, setFileError] = useState('')
   const [isLoading,setIsLoading]=useState(false);
-
   const handlePopupClose = () => {
     setShowPopup(false);
   };
-
   const displayPopup = (message) => {
     setStatus(status);
     setPopupMessage(message);
     setShowPopup(true);
   };
-
   const [step, setStep] = useState(1);
   const [date, setDate] = useState('')
   const [formData, setFormData] = useState({
@@ -50,10 +47,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
   });
   const API_KEY = 'a2b18f9cfb72eb93f3ce6b1c30372b59';
   const [validationErrors, setValidationErrors] = useState({});
-
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-
-
   const requiredFieldsByStep = {
     1: ['email', 'phone', 'quality'],
     2: ['address', 'surface', 'date'],
@@ -63,11 +57,8 @@ const ProposeModal = ({ isOpen, closeModal }) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [country, setCountry] = useState('fr');
   const [phoneNumber, setPhoneNumber] = useState("")
-
   const [phoneNumberWithoutCode, setPhoneNumberWithoutCode] = useState('');
   const [code, setCode] = useState()
-  
-  
   const handlePhone = (value, data) => {
     setPhoneNumber(value);
     setCountry(data.countryCode);
@@ -76,7 +67,6 @@ const ProposeModal = ({ isOpen, closeModal }) => {
       const phoneNumberWithoutCode = value.substring(`+${code}`.length).trim();
       setPhoneNumberWithoutCode(phoneNumberWithoutCode);
     } else if (value.startsWith(code)) {
-
       const phoneNumberWithoutCode = value.substring(code.length).trim();
       setPhoneNumberWithoutCode(phoneNumberWithoutCode);
     } else {
@@ -85,11 +75,6 @@ const ProposeModal = ({ isOpen, closeModal }) => {
   };
 
   const [firstNameValue, setFirstNameValue] = useState('')
-
-
-
-
-
   const submitFormData = () => {
     setIsLoading(true);
     const formDataToSend = new FormData();
@@ -144,7 +129,6 @@ const ProposeModal = ({ isOpen, closeModal }) => {
         setSelectedFiles([])
       })
       .catch((error) => {
-
         console.error('Erreur lors de la soumission du formulaire:', error);
         if (error && error.message) {
           try {
@@ -168,7 +152,6 @@ const ProposeModal = ({ isOpen, closeModal }) => {
           });
           setStatus('error');
         }
-
       })
       .finally(() => {
         setSelectedFiles([]);
@@ -179,7 +162,6 @@ const ProposeModal = ({ isOpen, closeModal }) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
   const handleSubmit = () => {
     const currentStepRequiredFields = requiredFieldsByStep[step];
     const errors = {};
@@ -217,7 +199,6 @@ const ProposeModal = ({ isOpen, closeModal }) => {
         });
         setPhoneNumber('');
         setDate('');
-  
         setStep(1);
         if(isLoading){
         closeModal();
@@ -227,9 +208,7 @@ const ProposeModal = ({ isOpen, closeModal }) => {
       setFileError('')
     } else {
       setValidationErrors(errors);
-    }
-
-  };
+    }};
 
   const prevStep = () => {
     setStep(step - 1);
@@ -238,15 +217,11 @@ const ProposeModal = ({ isOpen, closeModal }) => {
     setDate(date);
   };
   const [fileVisibility, setFileVisibility] = useState([true]);
-  
-  
   const handleFileChange = (e) => {
     const files = e.target.files;
-
     if (files && files.length > 0) {
       const maxSizeInMegabits = 10; // 10 mégabits
       const maxSizeInBytes = maxSizeInMegabits * 1024 * 1024 / 8;
-
       const selectedFiles = Array.from(files);
       const invalidFiles = selectedFiles.filter(file => file.size > maxSizeInBytes);
       if (invalidFiles.length > 0) {
@@ -262,20 +237,11 @@ const ProposeModal = ({ isOpen, closeModal }) => {
       e.target.value = '';
     }
   };
-
-
-
-
-
   const handleclick = (index) => {
     const updatedFileVisibility = [...fileVisibility];
     updatedFileVisibility[index] = !updatedFileVisibility[index];
     setFileVisibility(updatedFileVisibility);
   };
-
-
-
-
   const CustomInput = ({ value, onClick, onChange, name }) => (
     <div className="input-datepicker" onClick={onClick}>
       <input
@@ -298,11 +264,8 @@ const ProposeModal = ({ isOpen, closeModal }) => {
       setDate(date); 
     }
   };
-
-
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
-
   const renderStep = () => {
     switch (step) {
       case 1:
@@ -524,8 +487,6 @@ const ProposeModal = ({ isOpen, closeModal }) => {
         return null;
     }
   };
-
-
   return (
     <>
       <Modal
@@ -581,13 +542,8 @@ const ProposeModal = ({ isOpen, closeModal }) => {
                   </div>
                 </div>
               </div>
-
-
-
-
               <div className=''>
                 <div className='my-2 row mx-3 qt'>What happens next ?</div>
-
                 <div className='row mx-2'>
                   <span className='step col-md-auto mx-2'>Step1</span>
                   <div className='col-md mt-2'>
