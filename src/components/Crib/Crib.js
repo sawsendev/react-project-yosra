@@ -54,8 +54,10 @@ const CribItem = ({ crib }) => {
     const date = new Date(dateString);
     const day = date.getUTCDate();
     const month = date.getUTCMonth() + 1; // Les mois commencent à 0
-    return `${day < 10 ? `0${day}` : day}/${month < 10 ? `0${month}` : month}`;
-  };
+    const year = date.getUTCFullYear().toString().slice(-2); // Les deux derniers chiffres de l'année
+    return `${day < 10 ? `0${day}` : day}/${month < 10 ? `0${month}` : month}/${year}`;
+};
+
   const isoFormattedDateAujourdhui = formattedDateAujourdhui.split('/').reverse().join('-');
   const isoFormattedDateDemain = formattedDateDemain.split('/').reverse().join('-');
   const availabilityDatePart = crib.availability_date.split('T')[0];
