@@ -32,8 +32,10 @@ const CribMap = ({ coordinates, showPopup, data, latitude, longitude, zoom }) =>
     const date = new Date(dateString);
     const day = date.getUTCDate();
     const month = date.getUTCMonth() + 1; // Les mois commencent à 0
-    return `${day < 10 ? `0${day}` : day}/${month < 10 ? `0${month}` : month}`;
-  };
+    const year = date.getUTCFullYear().toString().slice(-2); // Les deux derniers chiffres de l'année
+    return `${day < 10 ? `0${day}` : day}/${month < 10 ? `0${month}` : month}/${year}`;
+};
+
   const formattedDateAujourdhui = `${(dateAujourdhui.getDate() < 10 ? '0' : '')}${dateAujourdhui.getDate()}/${(dateAujourdhui.getMonth() < 9 ? '0' : '')}${dateAujourdhui.getMonth() + 1}/${dateAujourdhui.getFullYear()}`;
 
   const formattedDateDemain = `${(dateDemain.getDate() < 10 ? '0' : '')}${dateDemain.getDate()}/${(dateDemain.getMonth() < 9 ? '0' : '')}${dateDemain.getMonth() + 1}/${dateDemain.getFullYear()}`;
