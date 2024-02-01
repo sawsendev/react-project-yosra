@@ -288,7 +288,7 @@ const Room = () => {
         />
         <link rel="canonical" href={`${URL}/room/${id}`} />
         <script type="application/ld+json">
-            {`
+          {`
  {
   "@context": "https://schema.org",
   "@type": "WebPage",
@@ -299,7 +299,7 @@ const Room = () => {
 
   
   `}
-          </script>
+        </script>
       </Helmet>
       {lotData && lotData.apartment && lotData.apartment.building && lotData.apartment.building.city && (
         <Breadcrumbs
@@ -565,7 +565,7 @@ const Room = () => {
                 ) : null}
                 <p className='h4 status mt-3'>Rent is all inclusive</p>
                 {lotData.water !== 0 && (<p className='status mb-2'><img src={water} alt="Water" className='icon' /> Water</p>)}
-                {lotData.electricity !== 0 && (
+                {lotData.electricity && lotData.electricity !== 0 && (
                   <div>
                     <p className='status mb-2'>
                       <img src={plug} className='icon' alt="plug" />
@@ -586,7 +586,7 @@ const Room = () => {
                     )}
                   </div>
                 )}
-                {lotData.gas !== 0 && (
+                {lotData.apartment && lotData.apartment.options && lotData.apartment.options.some(option => option.title.toLowerCase() === 'gas') && (
                   <div>
                     <p className='status mb-2'>
                       <img src={group} className='icon' alt="plug" />
